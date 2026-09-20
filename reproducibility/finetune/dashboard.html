@@ -73,6 +73,14 @@
           max-height:230px;overflow-y:auto;color:var(--ink2);white-space:pre-wrap}
   .err{color:var(--warn);font-family:var(--mono);font-size:.76rem;white-space:pre-wrap}
   footer{font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+  .tabs{display:flex;gap:.4rem;margin-top:.7rem;flex-wrap:wrap}
+  .tab{font-family:var(--mono);font-size:.72rem;font-weight:600;letter-spacing:.04em;
+       padding:.42rem .8rem;border:1px solid var(--rule);border-radius:3px;cursor:pointer;
+       background:var(--panel);color:var(--ink2)}
+  .tab:hover{border-color:var(--accent)}
+  .tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+  .tab:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .tabnote{font-size:.82rem;color:var(--muted);margin-top:.15rem}
   @media (max-width:560px){ .row{gap:1rem} h1{font-size:1.3rem} }
 </style>
 </head>
@@ -84,6 +92,11 @@
     <h1>Frozen vs fine-tuned MolFormer</h1>
     <div class="sub">Expert binary labels against quantitative MIC, with every evaluation
       molecule held out of all training sources.</div>
+    <div class="tabs" role="tablist">
+      <button class="tab active" id="tab-repr" role="tab" aria-selected="true">Representation quality</button>
+      <button class="tab" id="tab-direct" role="tab" aria-selected="false">Direct inference</button>
+    </div>
+    <div class="sub tabnote" id="tabnote"></div>
   </header>
 
   <div class="panel">
@@ -103,13 +116,13 @@
   </div>
 
   <div class="panel">
-    <h2>Results — R² by representation and target</h2>
+    <h2 id="restitle">Results — R² by representation and target</h2>
     <div class="tw"><table>
       <thead><tr><th>Representation</th><th>Protocol</th>
         <th class="n">QAC-105</th><th class="n">Q-HERO</th><th class="n">OOD-17</th></tr></thead>
       <tbody id="tbody"><tr><td colspan="5" class="neg">waiting for first results…</td></tr></tbody>
     </table></div>
-    <div class="sub" style="margin-top:.7rem;font-size:.8rem;color:var(--muted)">
+    <div class="sub" style="margin-top:.7rem;font-size:.8rem;color:var(--muted)" id="resnote">
       Mean ± sd over seeds. QAC-105 and Q-HERO use scaffold-grouped 5-fold CV;
       OOD-17 is predicted from a model trained on QAC-105.
     </div>
@@ -124,12 +137,38 @@
 </div>
 
 <script>
-const ORDER = ['predict-the-mean','6 descriptors','MolFormer frozen',
-               'FT expert-binary','FT quant-molecule','FT quant-record'];
+const VIEWS = {
+  repr: {
+    file:'progress.json', metric:'R2', fmt:3,
+    title:'Results — R² by representation and target',
+    note:'Mean ± sd over seeds. A fresh CatBoost is fitted on target-domain data over each '
+       + 'representation: QAC-105 and Q-HERO under scaffold-grouped 5-fold CV, OOD-17 predicted '
+       + 'from a model trained on QAC-105. This measures representation quality, not inference.',
+    tabnote:'Fine-tuned model used as a feature extractor; a downstream head is fitted on the target.',
+    order:['predict-the-mean','6 descriptors','MolFormer frozen',
+           'FT expert-binary','FT quant-molecule','FT quant-record'],
+    proto:{'predict-the-mean':'null baseline','6 descriptors':'null baseline',
+           'MolFormer frozen':'frozen','FT expert-binary':'fine-tuned · 740 binary',
+           'FT quant-molecule':'fine-tuned · 1153 values','FT quant-record':'fine-tuned · 9338 values'},
+    key:r=>r.representation
+  },
+  direct: {
+    file:'progress_direct.json', metric:'rank_agreement', fmt:3,
+    title:'Results — rank agreement with true log₂ MIC',
+    note:'Spearman ρ between the prediction and the true MIC, signed so that positive is correct '
+       + 'for both arms (the expert head emits a Good/Bad logit, where high should mean low MIC). '
+       + 'Nothing is fitted on the target — this is zero-shot inference by the fine-tuned head itself.',
+    tabnote:'Fine-tuned head predicts the targets directly. Nothing is fitted on the target domain.',
+    order:['predict source mean · quant-molecule','predict source mean · quant-record',
+           'frozen MolFormer + CatBoost · quant-molecule','frozen MolFormer + CatBoost · quant-record',
+           'FT expert-binary (direct) · expert-binary',
+           'FT quant-molecule (direct) · quant-molecule',
+           'FT quant-record (direct) · quant-record'],
+    proto:{}, key:r=>r.representation+' · '+r.source
+  }
+};
 const TARGETS = ['QAC-105','Q-HERO','OOD-17'];
-const PROTO = {'predict-the-mean':'null baseline','6 descriptors':'null baseline',
-               'MolFormer frozen':'frozen','FT expert-binary':'fine-tuned · 740 binary',
-               'FT quant-molecule':'fine-tuned · 1153 values','FT quant-record':'fine-tuned · 9338 values'};
+let view = 'repr';
 
 function hhmm(s){
   if(s===null||s===undefined||!isFinite(s)) return '—';
@@ -137,31 +176,22 @@ function hhmm(s){
   const h=Math.floor(s/3600), m=Math.floor(s%3600/60), x=s%60;
   return h? `${h}h ${m}m` : (m? `${m}m ${x}s` : `${x}s`);
 }
-function agg(rows){
-  const m={};
-  for(const r of rows){
-    const k=r.representation+'||'+r.target;
-    (m[k]=m[k]||[]).push(r.R2);
-  }
-  return m;
-}
 function render(p){
+  const V = VIEWS[view];
   document.getElementById('stage').textContent = p.stage ?? '—';
-  document.getElementById('cells').innerHTML =
-    `${p.done ?? 0}<small> / ${p.total ?? 0}</small>`;
-  const el = p.started ? (Date.now()/1000 - p.started) : null;
-  document.getElementById('elapsed').textContent = hhmm(el);
+  document.getElementById('cells').innerHTML = `${p.done ?? 0}<small> / ${p.total ?? 0}</small>`;
+  document.getElementById('elapsed').textContent = hhmm(p.started ? (Date.now()/1000 - p.started) : null);
   document.getElementById('eta').textContent = p.finished ? '—' : hhmm(p.eta_s);
 
   const pct = p.total ? (p.done/p.total*100) : 0;
   const bar = document.getElementById('bar');
   bar.style.width = pct.toFixed(1)+'%';
   bar.classList.toggle('done', !!p.finished);
-  const epct = (p.epoch && p.epochs) ? (p.epoch/p.epochs*100) : 0;
-  document.getElementById('ebar').style.width = epct.toFixed(1)+'%';
-
+  document.getElementById('ebar').style.width =
+    ((p.epoch && p.epochs) ? (p.epoch/p.epochs*100) : 0).toFixed(1)+'%';
   document.getElementById('current').textContent =
-    p.current ? `${p.current}${p.epoch? `  ·  epoch ${p.epoch}/${p.epochs}` : ''}` : (p.finished? 'run complete' : '—');
+    p.current ? `${p.current}${p.epoch? `  ·  epoch ${p.epoch}/${p.epochs}` : ''}`
+              : (p.finished? 'run complete' : '—');
 
   const st = document.getElementById('status');
   const stale = p.updated && (Date.now()/1000 - p.updated) > 180;
@@ -170,45 +200,68 @@ function render(p){
 
   const err = document.getElementById('error');
   if(p.error){ err.hidden=false; err.textContent = p.error; } else err.hidden=true;
-
   document.getElementById('log').textContent = (p.log||[]).join('\n') || '—';
 
-  const A = agg(p.results||[]);
-  const present = ORDER.filter(r => TARGETS.some(t => A[r+'||'+t]));
-  const bestPer = {};
+  document.getElementById('restitle').textContent = V.title;
+  document.getElementById('resnote').textContent = V.note;
+  document.getElementById('tabnote').textContent = V.tabnote;
+
+  const A = {};
+  for(const r of (p.results||[])){
+    const v = r[V.metric];
+    if(v===null||v===undefined) continue;
+    (A[V.key(r)+'||'+r.target] = A[V.key(r)+'||'+r.target] || []).push(v);
+  }
+  const seen = new Set(Object.keys(A).map(k=>k.split('||')[0]));
+  const present = V.order.filter(r=>seen.has(r)).concat([...seen].filter(r=>!V.order.includes(r)));
+  const best = {};
   for(const t of TARGETS){
     let b=-Infinity;
-    for(const r of present){ const v=A[r+'||'+t]; if(v){ const mu=v.reduce((a,c)=>a+c,0)/v.length; if(mu>b) b=mu; } }
-    bestPer[t]=b;
+    for(const r of present){ const v=A[r+'||'+t];
+      if(v){ const mu=v.reduce((a,c)=>a+c,0)/v.length; if(mu>b) b=mu; } }
+    best[t]=b;
   }
   const tb=document.getElementById('tbody');
-  if(!present.length){ tb.innerHTML='<tr><td colspan="5" class="neg">waiting for first results…</td></tr>'; return; }
+  if(!present.length){
+    tb.innerHTML='<tr><td colspan="5" class="neg">waiting for first results…</td></tr>'; return; }
   tb.innerHTML = present.map(r=>{
     const cells = TARGETS.map(t=>{
       const v=A[r+'||'+t];
       if(!v) return '<td class="n neg">·</td>';
       const mu=v.reduce((a,c)=>a+c,0)/v.length;
       const sd=Math.sqrt(v.reduce((a,c)=>a+(c-mu)**2,0)/v.length);
-      const isBest = Math.abs(mu-bestPer[t])<1e-9;
+      const isBest = Math.abs(mu-best[t])<1e-9;
       const sdTxt = v.length>1 ? ` <span class="neg">± ${sd.toFixed(2)}</span>` : '';
-      return `<td class="n${isBest?' best':''}">${mu.toFixed(3)}${sdTxt}</td>`;
+      return `<td class="n${isBest?' best':''}">${mu.toFixed(V.fmt)}${sdTxt}</td>`;
     }).join('');
-    return `<tr><td>${r}</td><td class="neg">${PROTO[r]||''}</td>${cells}</tr>`;
+    return `<tr><td>${r}</td><td class="neg">${V.proto[r]||''}</td>${cells}</tr>`;
   }).join('');
 }
 async function tick(){
+  const V = VIEWS[view];
   try{
-    const r = await fetch('progress.json?t='+Date.now(), {cache:'no-store'});
-    if(!r.ok) throw new Error(r.status);
+    const r = await fetch(V.file+'?t='+Date.now(), {cache:'no-store'});
+    if(!r.ok) throw new Error('HTTP '+r.status);
     render(await r.json());
     document.getElementById('foot').textContent =
-      'polling progress.json every 3 s · last read ' + new Date().toLocaleTimeString();
+      `polling ${V.file} every 3 s · last read ` + new Date().toLocaleTimeString();
   }catch(e){
     const st=document.getElementById('status');
     st.className='pill stale'; st.textContent='no data';
-    document.getElementById('foot').textContent =
-      'cannot read progress.json — serve this folder over http (see README) · ' + e;
+    document.getElementById('tbody').innerHTML =
+      '<tr><td colspan="5" class="neg">this run has not started yet</td></tr>';
+    document.getElementById('foot').textContent = `cannot read ${V.file} — ${e}`;
   }
+}
+for(const [id,name] of [['tab-repr','repr'],['tab-direct','direct']]){
+  document.getElementById(id).addEventListener('click',()=>{
+    view=name;
+    for(const b of document.querySelectorAll('.tab')){
+      const on = b.id===id;
+      b.classList.toggle('active',on); b.setAttribute('aria-selected',String(on));
+    }
+    tick();
+  });
 }
 tick(); setInterval(tick, 3000);
 </script>
