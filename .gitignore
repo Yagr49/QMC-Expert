@@ -27,3 +27,8 @@ reproducibility/finetune/progress.json*
 reproducibility/finetune/train.log
 reproducibility/finetune/.server.log
 reproducibility/finetune/data/*.npy
+reproducibility/finetune/progress_direct.json*
+reproducibility/finetune/direct.log
+reproducibility/finetune/chain.log
+reproducibility/finetune/checkpoints/
+reproducibility/finetune/__pycache__/
