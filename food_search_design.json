@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Подсистема поиска доставки еды",
+    "quality_profile": "showcase",
+    "viewBox": [1250, 800]
+  },
+  "components": [
+    { "id": "client", "type": "frontend", "label": "Мобильное приложение / Web", "sublabel": "геолокация, поиск, debounce", "pos": [36, 322], "size": [164, 78] },
+    { "id": "gateway", "type": "backend", "label": "API Gateway", "sublabel": "auth, rate limit, маршрутизация", "pos": [250, 322], "size": [164, 78] },
+    { "id": "discovery", "type": "backend", "label": "Discovery Service", "sublabel": "ближайшие рестораны + радиус", "pos": [472, 192], "size": [190, 78] },
+    { "id": "search", "type": "backend", "label": "Search Suggest Service", "sublabel": "автодополнение блюд и ресторанов", "pos": [472, 462], "size": [190, 78] },
+    { "id": "redis", "type": "database", "label": "Redis Cluster", "sublabel": "кэш выдачи, popular prefixes", "pos": [720, 322], "size": [178, 78] },
+    { "id": "geo", "type": "database", "label": "Geo index: H3", "sublabel": "restaurant_id по H3-ячейкам", "pos": [842, 174], "size": [184, 78] },
+    { "id": "prefix", "type": "database", "label": "Prefix index / FST", "sublabel": "нормализованные названия + веса", "pos": [842, 462], "size": [184, 78] },
+    { "id": "catalog", "type": "database", "label": "PostgreSQL primary", "sublabel": "рестораны, меню, статусы, координаты", "pos": [1052, 322], "size": [184, 86] },
+    { "id": "outbox", "type": "messagebus", "label": "Kafka", "sublabel": "catalog.changed (outbox / CDC)", "pos": [38, 650], "size": [176, 72] },
+    { "id": "geoWorker", "type": "backend", "label": "Geo Indexer", "sublabel": "H3: insert / delete / reindex", "pos": [842, 638], "size": [184, 72] },
+    { "id": "suggestWorker", "type": "backend", "label": "Suggest Indexer", "sublabel": "токены, FST, ranking weights", "pos": [1052, 638], "size": [184, 72] }
+  ],
+  "connections": [
+    { "id": "client-gateway", "from": "client", "to": "gateway", "label": "HTTPS: nearby / suggest", "variant": "emphasis", "labelDy": -34 },
+    { "id": "gateway-discovery", "from": "gateway", "to": "discovery", "label": "nearby(lat, lon, radius)", "labelAt": [430, 286] },
+    { "id": "gateway-search", "from": "gateway", "to": "search", "label": "suggest(prefix)", "labelAt": [430, 482] },
+    { "id": "discovery-redis", "from": "discovery", "to": "redis", "label": "read-through cache", "labelAt": [700, 286] },
+    { "id": "search-redis", "from": "search", "to": "redis", "label": "prefix cache", "labelAt": [700, 450] },
+    { "id": "discovery-geo", "from": "discovery", "to": "geo", "label": "k-ring + точная дистанция", "labelDy": -28 },
+    { "id": "search-prefix", "from": "search", "to": "prefix", "label": "top-N подсказок", "labelDy": 28 }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Онлайн-путь", "items": ["GET /nearby: H3 candidates → точная дистанция → top 15", "GET /suggest: FST/prefix index → top-N; запросы после debounce 150–250 мс"] },
+    { "dot": "amber", "title": "Поток обновлений", "items": ["PostgreSQL outbox / CDC → Kafka catalog.changed → Geo Indexer (H3) и Suggest Indexer (FST, atomic swap)", "Шардинг H3/FST, consumer groups Kafka, реплики чтения; деградация на кэш/последний индекс"] }
+  ]
+}
