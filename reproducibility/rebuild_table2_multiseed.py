@@ -25,9 +25,16 @@ def run(emb,mode,split,seed):
     m.fit(X[tr],y[tr]);pr=m.predict(X[te])
     return {ep:r2_score(y[te][P.ep.values[te]==ep],pr[P.ep.values[te]==ep]) for ep in ['S. aureus MIC','S. aureus MBC','E. coli MIC','E. coli MBC']}
 EPS=['S. aureus MIC','S. aureus MBC','E. coli MIC','E. coli MBC']
+import os; os.makedirs('reproducibility/table2',exist_ok=True); _rows=[]
 for split in ['pairs','mol']:
     print(f'\n===== +MW/LogP, multitask, split={split}, mean R2 over 10 seeds =====')
     print(f'{"embeddings":20s}'+''.join(f'{e:>18s}' for e in EPS))
     for name,emb in E.items():
         R=np.array([[run(emb,'multitask',split,s)[ep] for ep in EPS] for s in range(10)])
         print(f'{name:20s}'+''.join(f'{R[:,j].mean():10.2f}±{R[:,j].std():5.2f}' for j in range(4)))
+        for j,ep in enumerate(EPS):
+            _rows.append(dict(split=split,representation=name,endpoint=ep,
+                              R2_mean=R[:,j].mean(),R2_sd=R[:,j].std()))
+
+pd.DataFrame(_rows).to_csv('reproducibility/table2/table2_rebuild.csv',index=False)
+print('wrote reproducibility/table2/table2_rebuild.csv')
