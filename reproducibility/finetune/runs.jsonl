@@ -1,0 +1,6 @@
+{"representation": "predict-the-mean", "seed": 0, "target": "QAC-105", "protocol": "scaffold 5-fold CV", "n": 105, "R2": 0.0, "RMSE": 1.9298190373415138}
+{"representation": "6 descriptors", "seed": 0, "target": "QAC-105", "protocol": "scaffold 5-fold CV", "n": 105, "R2": -0.30988211359707885, "RMSE": 2.1981367764921607}
+{"representation": "predict-the-mean", "seed": 0, "target": "Q-HERO", "protocol": "scaffold 5-fold CV", "n": 411, "R2": 0.0, "RMSE": 1.722249733520941}
+{"representation": "6 descriptors", "seed": 0, "target": "Q-HERO", "protocol": "scaffold 5-fold CV", "n": 411, "R2": 0.057356464224462056, "RMSE": 1.6700939027463573}
+{"representation": "predict-the-mean", "seed": 0, "target": "OOD-17", "protocol": "train on QAC-105", "n": 17, "R2": -0.05817487506360042, "RMSE": 1.6911641768193089}
+{"representation": "6 descriptors", "seed": 0, "target": "OOD-17", "protocol": "train on QAC-105", "n": 17, "R2": -0.4859854026951087, "RMSE": 2.0040766104445886}

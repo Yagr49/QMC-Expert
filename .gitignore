@@ -21,3 +21,9 @@ venv/
 *.key
 secrets.*
 .git_broken_backup_mathcom/
+
+# fine-tuning run artifacts (transient)
+reproducibility/finetune/progress.json*
+reproducibility/finetune/train.log
+reproducibility/finetune/.server.log
+reproducibility/finetune/data/*.npy

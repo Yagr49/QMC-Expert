@@ -1,0 +1,35 @@
+{
+ "expert-binary": {
+  "rows": 740,
+  "removed": 326,
+  "molecules": 740,
+  "task": "binary",
+  "scaffolds": 113
+ },
+ "quant-molecule": {
+  "rows": 1153,
+  "removed": 352,
+  "molecules": 1153,
+  "task": "reg",
+  "scaffolds": 232
+ },
+ "quant-record": {
+  "rows": 9338,
+  "removed": 2678,
+  "molecules": 1153,
+  "task": "reg",
+  "scaffolds": 232
+ },
+ "eval:QAC-105": {
+  "rows": 105,
+  "scaffolds": 29
+ },
+ "eval:Q-HERO": {
+  "rows": 411,
+  "scaffolds": 29
+ },
+ "eval:OOD-17": {
+  "rows": 17,
+  "scaffolds": 4
+ }
+}
