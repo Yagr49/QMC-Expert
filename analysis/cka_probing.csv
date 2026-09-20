@@ -1,0 +1,7 @@
+metric,split,value
+linear_CKA,in_domain,0.9332431272815784
+linear_CKA,ood,0.9455585759592194
+probe_R2_mf_to_emb_mean,in_domain,0.8909192677538623
+probe_R2_mf_to_emb_std,in_domain,0.03677336194150152
+probe_R2_emb_to_mf_mean,in_domain,0.8440767622480957
+probe_R2_emb_to_mf_std,in_domain,0.060385316275664305

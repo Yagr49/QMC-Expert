@@ -1,0 +1,23 @@
+# Unrelated vendored codebase (COMA generative model, 737 MB)
+COMA_new/
+
+# Large benchmark archives (>20 MB, not used by this paper)
+data/*.tar.gz
+*.tar.gz
+
+# Office lock files
+~$*
+
+# OS / tooling
+.DS_Store
+catboost_info/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+venv/
+.env
+
+# Secrets
+*.key
+secrets.*
+.git_broken_backup_mathcom/
