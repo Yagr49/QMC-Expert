@@ -1,0 +1,17 @@
+2026-05-23 23:44:10 | DEBUG   | embedding_interpretability | Лог-файл: /Users/egorilin/Desktop/COMA/interpretability_results/embedding_analysis_full/run.log
+2026-05-23 23:44:14 | INFO    | embedding_interpretability | ▶ Загрузка classification-данных для энкодера
+2026-05-23 23:44:17 | INFO    | embedding_interpretability |   MoLFormer X: (1103, 768) | метки Good/Bad: {0: 859, 1: 244}
+2026-05-23 23:44:17 | INFO    | embedding_interpretability | ✓ Загрузка classification-данных для энкодера — готово за 3.4 с
+2026-05-23 23:44:17 | INFO    | embedding_interpretability | ▶ Загрузка сохранённого энкодера (path=/Users/egorilin/Desktop/COMA/encoder_256_final.pth)
+2026-05-23 23:44:17 | INFO    | embedding_interpretability |   device=cpu, latent=256, input_dim=768
+2026-05-23 23:44:17 | INFO    | embedding_interpretability | ✓ Загрузка сохранённого энкодера — готово за 0.0 с
+2026-05-23 23:44:20 | DEBUG   | embedding_interpretability |   extract_emb [classification]: 1103 samples, 5 batches
+2026-05-23 23:44:20 | DEBUG   | embedding_interpretability |     batch 1/5
+2026-05-23 23:44:20 | DEBUG   | embedding_interpretability |     batch 2/5
+2026-05-23 23:44:20 | DEBUG   | embedding_interpretability |     batch 3/5
+2026-05-23 23:44:20 | DEBUG   | embedding_interpretability |     batch 4/5
+2026-05-23 23:44:20 | DEBUG   | embedding_interpretability |     batch 5/5
+2026-05-23 23:44:20 | DEBUG   | embedding_interpretability |   extract_emb [classification]: output shape (1103, 256)
+2026-05-23 23:44:21 | DEBUG   | embedding_interpretability |   extract_emb [biocides]: 108 samples, 1 batches
+2026-05-23 23:44:21 | DEBUG   | embedding_interpretability |     batch 1/1
+2026-05-23 23:44:21 | DEBUG   | embedding_interpretability |   extract_emb [biocides]: output shape (108, 256)
