@@ -34,3 +34,9 @@
 {"representation": "FT quant-record", "seed": 0, "target": "QAC-105", "protocol": "scaffold 5-fold CV", "n": 105, "R2": 0.11960093096600288, "RMSE": 1.8020979547118972}
 {"representation": "FT quant-record", "seed": 0, "target": "Q-HERO", "protocol": "scaffold 5-fold CV", "n": 411, "R2": 0.3090788962012735, "RMSE": 1.429820016945851}
 {"representation": "FT quant-record", "seed": 0, "target": "OOD-17", "protocol": "train on QAC-105", "n": 17, "R2": -0.07756678362203062, "RMSE": 1.7065898000919195}
+{"representation": "FT quant-record", "seed": 1, "target": "QAC-105", "protocol": "scaffold 5-fold CV", "n": 105, "R2": 0.03495552109630817, "RMSE": 1.8867409332555538}
+{"representation": "FT quant-record", "seed": 1, "target": "Q-HERO", "protocol": "scaffold 5-fold CV", "n": 411, "R2": 0.3332750077645724, "RMSE": 1.4045606953910363}
+{"representation": "FT quant-record", "seed": 1, "target": "OOD-17", "protocol": "train on QAC-105", "n": 17, "R2": 0.07935128424757765, "RMSE": 1.5774442655543537}
+{"representation": "FT quant-record", "seed": 2, "target": "QAC-105", "protocol": "scaffold 5-fold CV", "n": 105, "R2": -0.011338162102019433, "RMSE": 1.9314648282931486}
+{"representation": "FT quant-record", "seed": 2, "target": "Q-HERO", "protocol": "scaffold 5-fold CV", "n": 411, "R2": 0.2814525880953689, "RMSE": 1.458125343274596}
+{"representation": "FT quant-record", "seed": 2, "target": "OOD-17", "protocol": "train on QAC-105", "n": 17, "R2": -0.08148116060263311, "RMSE": 1.7096866755041102}
