@@ -27,6 +27,75 @@ def fig(num, name, caption):
 # ---------------------------------------------------------------- tables
 qh = pd.read_csv(f'{R}/qhero/qhero_metrics.csv')
 REPS = ['expert (Good/Bad)', 'multi-regression', 'MolFormer (raw)']
+import json as _json
+FT = f'{R}/finetune'
+ft1 = pd.DataFrame([_json.loads(l) for l in open(f'{FT}/runs.jsonl')])
+ft2 = pd.DataFrame([_json.loads(l) for l in open(f'{FT}/runs_direct.jsonl')])
+rcal = pd.read_csv(f'{FT}/recalibration.csv')
+TG = ['QAC-105', 'Q-HERO', 'OOD-17']
+
+
+def ft_table1():
+    order = [('predict-the-mean', 'null baseline'), ('6 descriptors', 'null baseline'),
+             ('MolFormer frozen', 'no fine-tuning'),
+             ('FT expert-binary', 'fine-tuned \u00b7 740 binary labels'),
+             ('FT quant-molecule', 'fine-tuned \u00b7 1153 MIC values'),
+             ('FT quant-record', 'fine-tuned \u00b7 9338 MIC values')]
+    best = {t: ft1[ft1.target == t].groupby('representation').R2.mean().max() for t in TG}
+    rows = []
+    for name, proto in order:
+        cells = ''
+        for t in TG:
+            sub = ft1[(ft1.representation == name) & (ft1.target == t)]
+            if not len(sub):
+                cells += '<td class="num">\u00b7</td>'; continue
+            m = sub.R2.mean(); sd = sub.R2.std() if len(sub) > 1 else float('nan')
+            mk = ' class="best"' if abs(m - best[t]) < 1e-9 else ' class="num"'
+            sdt = '' if pd.isna(sd) else f' <span class="sd">\u00b1 {sd:.2f}</span>'
+            cells += f'<td class="num"{mk.replace(chr(34)+"num"+chr(34), chr(34)+"num best"+chr(34)) if "best" in mk else ""}>{m:+.3f}{sdt}</td>' if False else f'<td class="num{" best" if "best" in mk else ""}">{m:+.3f}{sdt}</td>'
+        rows.append(f'<tr><td>{name}</td><td>{proto}</td>{cells}</tr>')
+    return '\n'.join(rows)
+
+
+def ft_table2(metric, d=3):
+    lbl = {'FT expert-binary (direct)': ('740 binary expert labels', 0),
+           'FT quant-molecule (direct)': ('1153 MIC values', 1),
+           'FT quant-record (direct)': ('9338 MIC values', 2),
+           'frozen MolFormer + CatBoost': ('not fine-tuned', 3),
+           'predict source mean': ('null baseline', 4)}
+    sub = ft2[ft2[metric].notna()]
+    keys = sorted(sub.groupby(['representation', 'source']).groups.keys(),
+                  key=lambda k: (lbl.get(k[0], ('', 9))[1], k[1]))
+    best = {t: sub[sub.target == t].groupby(['representation', 'source'])[metric].mean().max() for t in TG}
+    rows = []
+    for rep, src in keys:
+        cells = ''
+        for t in TG:
+            q = sub[(sub.representation == rep) & (sub.source == src) & (sub.target == t)]
+            if not len(q):
+                cells += '<td class="num">\u00b7</td>'; continue
+            m = q[metric].mean(); sd = q[metric].std() if len(q) > 1 else float('nan')
+            isb = abs(m - best[t]) < 1e-9
+            sdt = '' if pd.isna(sd) else f' <span class="sd">\u00b1 {sd:.2f}</span>'
+            cells += f'<td class="num{" best" if isb else ""}">{m:+.{d}f}{sdt}</td>'
+        note = lbl.get(rep, ('', 9))[0]
+        if rep in ('frozen MolFormer + CatBoost', 'predict source mean'):
+            note = f'{note} \u00b7 {src}'
+        rows.append(f'<tr><td>{rep.replace(" (direct)", "")}</td><td>{note}</td>{cells}</tr>')
+    return '\n'.join(rows)
+
+
+def ft_table3():
+    g = rcal[rcal.source == 'quant-record'].groupby('target')[
+        ['raw_R2', 'recal_R2', 'pearson', 'slope', 'pred_mean', 'true_mean']].mean().reindex(TG)
+    rows = []
+    for t in TG:
+        r = g.loc[t]; off = r.pred_mean - r.true_mean
+        rows.append(f'<tr><td>{t}</td><td class="num">{r.raw_R2:+.2f}</td>'
+                    f'<td class="num best">{r.recal_R2:+.2f}</td><td class="num">{r.pearson:.2f}</td>'
+                    f'<td class="num">{r.slope:.2f}</td><td class="num">{off:+.2f}</td>'
+                    f'<td class="num">{2**off:.1f}\u00d7</td></tr>')
+    return '\n'.join(rows)
 
 
 def qhero_table():
@@ -294,7 +363,7 @@ PAGE = f'''<title>Expert Supervision Supplement</title>
       <span><b>Expert set</b> 1103 compounds</span>
       <span><b>Quantitative corpus</b> 13 404 records</span>
       <span><b>External benchmark</b> Q-HERO, 411 structures</span>
-      <span><b>Out-of-domain</b> 17 compounds</span>
+      <span><b>Out-of-domain</b> 17 compounds</span>\n      <span><b>Fine-tuning</b> 3 seeds \u00d7 3 sources</span>
     </div>
   </header>
 
@@ -524,8 +593,158 @@ PAGE = f'''<title>Expert Supervision Supplement</title>
       256-dimensional embedding block.</p>
   </section>
 
+
   <section id="s7">
-    <h2><span class="sn">S7</span> Data and code</h2>
+    <h2><span class="sn">S7</span> Frozen versus fine-tuned representations</h2>
+    <p>The encoder used in the main text adapts a frozen backbone: MolFormer weights are held
+      fixed and only a contrastive head is trained. That caps what any supervision signal can
+      express, because the head can only recombine features the frozen model already computes.
+      To separate the effect of the bottleneck from the effect of the supervision, MolFormer-XL
+      was fine-tuned end-to-end on each source in turn.</p>
+
+    <h3>Protocol</h3>
+    <ul>
+      <li><strong>Held out.</strong> Every molecule belonging to any evaluation set — QAC-105,
+        Q-HERO and the 17 newly synthesised compounds, 532 structures in total — was removed
+        from all three training sources. No representation has seen a test compound under any
+        form of supervision.</li>
+      <li><strong>Sources after hold-out.</strong> 740 expert-annotated molecules;
+        1153 molecule-level MIC values; 9338 MIC records over the same 1153 molecules — a
+        12.6-fold difference between the binary and the quantitative arms.</li>
+      <li><strong>Training.</strong> Embeddings and the lowest four encoder layers frozen
+        (16.0 of 44.4 M parameters), one-cycle schedule at peak learning rate 3&#215;10<sup>-5</sup>,
+        weight decay 0.01, gradient clipping at 1.0, early stopping with patience 6 on a
+        validation split disjoint by Bemis–Murcko scaffold. Three seeds.</li>
+      <li><strong>Evaluation.</strong> Gradient-boosted regressors on the resulting embeddings,
+        under scaffold-grouped five-fold cross-validation for QAC-105 and Q-HERO; the
+        out-of-domain compounds are predicted from a model trained on QAC-105.</li>
+    </ul>
+
+    {fig(7, 'figS7_representation_quality',
+         'Variance explained by each representation, mean \u00b1 sd over three seeds. Every '
+         'fine-tuned model beats the frozen encoder on every target, and both null baselines sit '
+         'at or below zero. Absolute values remain low: Q-HERO is the only target on which any '
+         'representation clears R\u00b2 = 0.1.')}
+
+    <div class="tbl-wrap">
+    <table>
+      <caption><span class="fig-n">Table S5.</span> Representation quality, R\u00b2 (mean \u00b1 sd,
+        3 seeds). Best per target marked.</caption>
+      <thead><tr><th>Representation</th><th>Supervision</th>
+        <th class="num">QAC-105</th><th class="num">Q-HERO</th><th class="num">OOD-17</th></tr></thead>
+      <tbody>
+{ft_table1()}
+      </tbody>
+    </table>
+    </div>
+
+    <div class="flag">
+      <span class="flag-h">Correction to the frozen-encoder comparison</span>
+      Section S3 reports that on Q-HERO neither contrastive encoder outperforms raw MolFormer.
+      That holds for the frozen configuration and does not generalise: once the backbone is free
+      to move, Q-HERO rises from R\u00b2 = 0.134 to 0.27–0.31, QAC-105 from \u22120.105 to
+      approximately +0.05, and OOD-17 from \u22120.289 to \u22120.027. The frozen setup was
+      suppressing what every supervision source contributed, and comparisons made through it
+      understate all of them equally.
+    </div>
+
+    <p>Under this setup the central comparison of the manuscript survives, and on data from which
+      every test compound has been removed. Embeddings learned from 740 binary expert judgements
+      match those learned from 9338 quantitative measurements: the expert arm leads on QAC-105
+      (0.053 against 0.048), the quantitative arms lead on Q-HERO (0.312 against 0.269) and on the
+      out-of-domain set (\u22120.027 against \u22120.174), and no difference exceeds roughly one
+      standard deviation across seeds.</p>
+  </section>
+
+  <section id="s8">
+    <h2><span class="sn">S8</span> Zero-shot inference and calibration</h2>
+    <p>Section S7 fits a fresh downstream model on target-domain data, so it measures the quality
+      of the representation rather than the ability to predict. Here the fine-tuned head predicts
+      the evaluation sets itself, with nothing fitted on the target. The quantitative sources and
+      all three targets are log\u2082 MIC in µM, so regression transfers directly; the expert head
+      emits a Good/Bad logit instead, so both arms are scored on rank agreement with the measured
+      MIC (Spearman, signed so that positive is correct for either) and on ROC-AUC against MIC
+      split at each target&#8217;s median.</p>
+
+    {fig(8, 'figS8_zeroshot',
+         'Zero-shot transfer. <strong>Left:</strong> rank agreement with the measured MIC is '
+         'strong and grows with the amount of supervision, reaching \u03c1 = 0.75 on the '
+         'out-of-domain compounds for the model trained on 9338 values. <strong>Right:</strong> '
+         'the coefficient of determination of those same predictions is negative on every target.')}
+
+    <div class="tbl-wrap">
+    <table>
+      <caption><span class="fig-n">Table S6.</span> Rank agreement with measured log\u2082 MIC
+        (Spearman \u03c1, signed so positive is correct for both arms).</caption>
+      <thead><tr><th>Model</th><th>Supervision</th>
+        <th class="num">QAC-105</th><th class="num">Q-HERO</th><th class="num">OOD-17</th></tr></thead>
+      <tbody>
+{ft_table2('rank_agreement')}
+      </tbody>
+    </table>
+    </div>
+
+    <div class="tbl-wrap">
+    <table>
+      <caption><span class="fig-n">Table S7.</span> ROC-AUC against MIC binarised at each
+        target&#8217;s median. Chance is 0.500.</caption>
+      <thead><tr><th>Model</th><th>Supervision</th>
+        <th class="num">QAC-105</th><th class="num">Q-HERO</th><th class="num">OOD-17</th></tr></thead>
+      <tbody>
+{ft_table2('AUC')}
+      </tbody>
+    </table>
+    </div>
+
+    <div class="flag">
+      <span class="flag-h">A model that never saw a concentration</span>
+      The expert arm was fine-tuned only on Good/Bad judgements and has no notion of a
+      concentration. It nonetheless ranks unseen compounds by their measured MIC at
+      \u03c1 = 0.22 / 0.40 / 0.30 and separates above- from below-median actives at
+      AUC 0.64 / 0.69 / 0.60 against a chance value of 0.50. This is direct evidence that a
+      coarse human call carries quantitatively relevant information, which is the claim
+      §2.5 of the main text argues for on interpretability grounds alone.
+    </div>
+
+    <h3>Where the error lives</h3>
+    <p>A model can rank well and still score R\u00b2 = \u22122.9. Refitting a single affine map,
+      <em>a</em> + <em>b</em>&#183;prediction, on each target separates the two failures: two
+      parameters cannot create rank information, so whatever is recovered was already present in
+      the ordering and was lost to scale and offset alone.</p>
+
+    {fig(9, 'figS9_calibration',
+         'The model fine-tuned on 9338 literature MIC values, applied to two independently '
+         'measured collections. <strong>Left and centre:</strong> predicted against measured '
+         'log\u2082 MIC, identity dashed and the fitted line solid; almost every compound sits '
+         'above identity. <strong>Right:</strong> R\u00b2 as predicted, and after refitting an '
+         'intercept and a slope.')}
+
+    <div class="tbl-wrap">
+    <table>
+      <caption><span class="fig-n">Table S8.</span> Calibration of the model fine-tuned on 9338
+        MIC values, averaged over three seeds.</caption>
+      <thead><tr><th>Target</th><th class="num">R\u00b2 raw</th><th class="num">R\u00b2 recalibrated</th>
+        <th class="num">Pearson r</th><th class="num">Slope</th>
+        <th class="num">Offset, log\u2082</th><th class="num">Fold error</th></tr></thead>
+      <tbody>
+{ft_table3()}
+      </tbody>
+    </table>
+    </div>
+
+    <p>On the out-of-domain compounds the fitted slope is 0.98 — the scale is already correct —
+      and the whole error is an offset of +2.8 log\u2082 units, a seven-fold systematic
+      overestimate of MIC; recalibration lifts R\u00b2 from \u22122.92 to +0.49. On Q-HERO the
+      slope is 0.47, so the model additionally compresses the range, and recalibration gives
+      +0.36 in place of \u22121.62. A model trained on literature MIC pooled across hundreds of
+      strains and dozens of protocols learns the correct ordering of compounds and the wrong
+      absolute scale for any single new assay. QAC-105 is the exception: rank agreement there is
+      weak (\u03c1 \u2248 0.18) and recalibration recovers almost nothing, consistent with it
+      being the narrowest and most structurally homogeneous of the three sets.</p>
+  </section>
+
+  <section id="s9">
+    <h2><span class="sn">S9</span> Data and code</h2>
     <p>The quantitative corpus is deposited as <strong>QAC-AMR</strong> at Zenodo,
       <a href="https://doi.org/10.5281/zenodo.22286669">10.5281/zenodo.22286669</a> (CC BY 4.0): 13 404 activity
       records over 1515 canonical structures and 371 normalised strains, compiled from 103 publications spanning
@@ -541,13 +760,17 @@ PAGE = f'''<title>Expert Supervision Supplement</title>
       <li><code>reproducibility/qhero_benchmark.py</code> — external benchmark (§S3, Figures S3–S4, Table S1).</li>
       <li><code>reproducibility/causal_check.py</code> — out-of-domain residuals and equivalence tests (§S4, Figure S5, Table S2).</li>
       <li><code>reproducibility/rebuild_table2_multiseed.py</code> — in-domain split comparison (§S5).</li>
-      <li><code>reproducibility/make_si_figures.py</code> — all figures in this document.</li>
+      <li><code>reproducibility/finetune/data_prep.py</code> — builds the fine-tuning sources with every evaluation molecule held out (§S7).</li>
+      <li><code>reproducibility/finetune/run_matrix.py</code> — representation quality (§S7, Figure S7, Table S5).</li>
+      <li><code>reproducibility/finetune/direct_inference.py</code> — zero-shot inference (§S8, Figure S8, Tables S6–S7).</li>
+      <li><code>reproducibility/finetune/recalibrate.py</code> — calibration analysis (§S8, Figure S9, Table S8).</li>
+      <li><code>reproducibility/make_si_figures.py</code>, <code>make_ft_figures.py</code> — all figures in this document.</li>
     </ul>
   </section>
 
   <footer>
     Figures rendered from the released result files; every value in this document is reproducible from the
-    scripts listed in §S7. Vector versions of all figures are in <code>reproducibility/figures/</code> as SVG
+    scripts listed in §S9. Vector versions of all figures are in <code>reproducibility/figures/</code> as SVG
     and PDF.
   </footer>
 
