@@ -1,0 +1,721 @@
+seed,arm,panel,endpoint,rmse
+0,intuition,in-domain test,S. aureus MIC,1.5966648060195967
+0,intuition,in-domain test,S. aureus MBC,1.928059112276415
+0,intuition,in-domain test,E. coli MIC,1.9558874752698967
+0,intuition,in-domain test,E. coli MBC,1.91681568087236
+0,mean baseline,in-domain test,S. aureus MIC,1.553834505993663
+0,mean baseline,in-domain test,S. aureus MBC,1.6677573733275723
+0,mean baseline,in-domain test,E. coli MIC,2.006974847691816
+0,mean baseline,in-domain test,E. coli MBC,2.0785093211171266
+0,intuition,out-of-domain zero-shot,S. aureus MIC,1.659990648152925
+0,intuition,out-of-domain zero-shot,S. aureus MBC,2.1454080398305813
+0,intuition,out-of-domain zero-shot,E. coli MIC,2.4285228737344227
+0,intuition,out-of-domain zero-shot,E. coli MBC,2.70907213226121
+0,mean baseline,out-of-domain zero-shot,S. aureus MIC,1.7698054802113212
+0,mean baseline,out-of-domain zero-shot,S. aureus MBC,2.1281712971464852
+0,mean baseline,out-of-domain zero-shot,E. coli MIC,2.6085332729571977
+0,mean baseline,out-of-domain zero-shot,E. coli MBC,2.773441149733768
+0,intuition,out-of-domain post-trained,S. aureus MIC,1.6892576410472682
+0,intuition,out-of-domain post-trained,S. aureus MBC,2.1884994058163034
+0,intuition,out-of-domain post-trained,E. coli MIC,2.016910975313818
+0,intuition,out-of-domain post-trained,E. coli MBC,2.046723508591349
+0,mean baseline,out-of-domain post-trained,S. aureus MIC,1.863893339095639
+0,mean baseline,out-of-domain post-trained,S. aureus MBC,2.2990825376315
+0,mean baseline,out-of-domain post-trained,E. coli MIC,2.7286525426511203
+0,mean baseline,out-of-domain post-trained,E. coli MBC,2.4629898749395016
+0,data,in-domain test,S. aureus MIC,1.48932910213973
+0,data,in-domain test,S. aureus MBC,1.771135612769884
+0,data,in-domain test,E. coli MIC,1.8864617050662442
+0,data,in-domain test,E. coli MBC,1.9624961663494338
+0,data,out-of-domain zero-shot,S. aureus MIC,1.5860791187089442
+0,data,out-of-domain zero-shot,S. aureus MBC,2.3062822838046904
+0,data,out-of-domain zero-shot,E. coli MIC,2.8457614830300257
+0,data,out-of-domain zero-shot,E. coli MBC,3.114935206852218
+0,data,out-of-domain post-trained,S. aureus MIC,1.6870312375665883
+0,data,out-of-domain post-trained,S. aureus MBC,2.1919430605958388
+0,data,out-of-domain post-trained,E. coli MIC,2.0748901036814615
+0,data,out-of-domain post-trained,E. coli MBC,2.196893944712729
+1,intuition,in-domain test,S. aureus MIC,1.4485945491390644
+1,intuition,in-domain test,S. aureus MBC,1.6756323622161085
+1,intuition,in-domain test,E. coli MIC,1.850215593330234
+1,intuition,in-domain test,E. coli MBC,2.011931231739606
+1,mean baseline,in-domain test,S. aureus MIC,1.5668715131802358
+1,mean baseline,in-domain test,S. aureus MBC,1.854701306699193
+1,mean baseline,in-domain test,E. coli MIC,2.0277915018207344
+1,mean baseline,in-domain test,E. coli MBC,2.2484812689464624
+1,intuition,out-of-domain zero-shot,S. aureus MIC,1.91401475988493
+1,intuition,out-of-domain zero-shot,S. aureus MBC,2.239068038500609
+1,intuition,out-of-domain zero-shot,E. coli MIC,2.2786375100392036
+1,intuition,out-of-domain zero-shot,E. coli MBC,2.5055551734681054
+1,mean baseline,out-of-domain zero-shot,S. aureus MIC,1.8139506992400536
+1,mean baseline,out-of-domain zero-shot,S. aureus MBC,2.120554768749908
+1,mean baseline,out-of-domain zero-shot,E. coli MIC,2.350826464071835
+1,mean baseline,out-of-domain zero-shot,E. coli MBC,2.542681787136126
+1,intuition,out-of-domain post-trained,S. aureus MIC,1.3185519113504471
+1,intuition,out-of-domain post-trained,S. aureus MBC,1.9206958766453506
+1,intuition,out-of-domain post-trained,E. coli MIC,1.3821445387493065
+1,intuition,out-of-domain post-trained,E. coli MBC,1.8318755076850053
+1,mean baseline,out-of-domain post-trained,S. aureus MIC,1.714328256049389
+1,mean baseline,out-of-domain post-trained,S. aureus MBC,1.995820437052613
+1,mean baseline,out-of-domain post-trained,E. coli MIC,1.885097339784472
+1,mean baseline,out-of-domain post-trained,E. coli MBC,2.2024825331629625
+1,data,in-domain test,S. aureus MIC,1.3470606010175319
+1,data,in-domain test,S. aureus MBC,1.5881147800656157
+1,data,in-domain test,E. coli MIC,1.7303583184273907
+1,data,in-domain test,E. coli MBC,1.9717171853879392
+1,data,out-of-domain zero-shot,S. aureus MIC,1.7363954727094233
+1,data,out-of-domain zero-shot,S. aureus MBC,2.1759157364001833
+1,data,out-of-domain zero-shot,E. coli MIC,2.3305714953937495
+1,data,out-of-domain zero-shot,E. coli MBC,2.623532260318235
+1,data,out-of-domain post-trained,S. aureus MIC,1.3773113129202754
+1,data,out-of-domain post-trained,S. aureus MBC,2.0752409274522527
+1,data,out-of-domain post-trained,E. coli MIC,1.5540333871412695
+1,data,out-of-domain post-trained,E. coli MBC,2.0579077546314144
+2,intuition,in-domain test,S. aureus MIC,1.9785297704888054
+2,intuition,in-domain test,S. aureus MBC,2.0472390946112173
+2,intuition,in-domain test,E. coli MIC,1.6567159415655506
+2,intuition,in-domain test,E. coli MBC,1.8102713928397498
+2,mean baseline,in-domain test,S. aureus MIC,2.095416890156533
+2,mean baseline,in-domain test,S. aureus MBC,1.9652106224101062
+2,mean baseline,in-domain test,E. coli MIC,1.6437239859600776
+2,mean baseline,in-domain test,E. coli MBC,1.778925758606511
+2,intuition,out-of-domain zero-shot,S. aureus MIC,1.7519521138406284
+2,intuition,out-of-domain zero-shot,S. aureus MBC,2.0805963646970933
+2,intuition,out-of-domain zero-shot,E. coli MIC,2.2696567492441018
+2,intuition,out-of-domain zero-shot,E. coli MBC,2.5481241205016842
+2,mean baseline,out-of-domain zero-shot,S. aureus MIC,1.7581913494600472
+2,mean baseline,out-of-domain zero-shot,S. aureus MBC,2.149354191542186
+2,mean baseline,out-of-domain zero-shot,E. coli MIC,2.5351013389111907
+2,mean baseline,out-of-domain zero-shot,E. coli MBC,2.677725444025871
+2,intuition,out-of-domain post-trained,S. aureus MIC,1.6335364944909092
+2,intuition,out-of-domain post-trained,S. aureus MBC,2.0848625848068374
+2,intuition,out-of-domain post-trained,E. coli MIC,2.4147715778433128
+2,intuition,out-of-domain post-trained,E. coli MBC,3.0589114682730787
+2,mean baseline,out-of-domain post-trained,S. aureus MIC,1.8168427415942259
+2,mean baseline,out-of-domain post-trained,S. aureus MBC,2.2655443862473468
+2,mean baseline,out-of-domain post-trained,E. coli MIC,2.710034574400878
+2,mean baseline,out-of-domain post-trained,E. coli MBC,3.050851785096751
+2,data,in-domain test,S. aureus MIC,1.7398768840237808
+2,data,in-domain test,S. aureus MBC,1.8918865817485297
+2,data,in-domain test,E. coli MIC,1.646392515112911
+2,data,in-domain test,E. coli MBC,1.8324558793222108
+2,data,out-of-domain zero-shot,S. aureus MIC,1.6617096162057448
+2,data,out-of-domain zero-shot,S. aureus MBC,2.341534363049603
+2,data,out-of-domain zero-shot,E. coli MIC,2.38529415570405
+2,data,out-of-domain zero-shot,E. coli MBC,2.7149885237400193
+2,data,out-of-domain post-trained,S. aureus MIC,1.8218893937030287
+2,data,out-of-domain post-trained,S. aureus MBC,2.6836439131295546
+2,data,out-of-domain post-trained,E. coli MIC,2.3680514508245905
+2,data,out-of-domain post-trained,E. coli MBC,2.9632163313048308
+3,intuition,in-domain test,S. aureus MIC,1.9258821397584374
+3,intuition,in-domain test,S. aureus MBC,1.9224277550387368
+3,intuition,in-domain test,E. coli MIC,1.7710182255818578
+3,intuition,in-domain test,E. coli MBC,2.0606144500660597
+3,mean baseline,in-domain test,S. aureus MIC,2.5328903790540154
+3,mean baseline,in-domain test,S. aureus MBC,2.2670237609218566
+3,mean baseline,in-domain test,E. coli MIC,2.2406092652098164
+3,mean baseline,in-domain test,E. coli MBC,2.4826115132239077
+3,intuition,out-of-domain zero-shot,S. aureus MIC,1.5411801934043439
+3,intuition,out-of-domain zero-shot,S. aureus MBC,2.1966996711103723
+3,intuition,out-of-domain zero-shot,E. coli MIC,2.3605822279775457
+3,intuition,out-of-domain zero-shot,E. coli MBC,2.5524203957070797
+3,mean baseline,out-of-domain zero-shot,S. aureus MIC,1.759510943012864
+3,mean baseline,out-of-domain zero-shot,S. aureus MBC,2.160425362651162
+3,mean baseline,out-of-domain zero-shot,E. coli MIC,2.5429297417404833
+3,mean baseline,out-of-domain zero-shot,E. coli MBC,2.7072906469372597
+3,intuition,out-of-domain post-trained,S. aureus MIC,1.5074804711130145
+3,intuition,out-of-domain post-trained,S. aureus MBC,2.2451830959973686
+3,intuition,out-of-domain post-trained,E. coli MIC,1.7596606062980806
+3,intuition,out-of-domain post-trained,E. coli MBC,2.4458067807391597
+3,mean baseline,out-of-domain post-trained,S. aureus MIC,1.585247694119662
+3,mean baseline,out-of-domain post-trained,S. aureus MBC,2.2457034421619166
+3,mean baseline,out-of-domain post-trained,E. coli MIC,2.7299601324928693
+3,mean baseline,out-of-domain post-trained,E. coli MBC,3.110361881502943
+3,data,in-domain test,S. aureus MIC,1.8675723739635437
+3,data,in-domain test,S. aureus MBC,1.864370036250359
+3,data,in-domain test,E. coli MIC,1.5157054597118615
+3,data,in-domain test,E. coli MBC,1.894234939792334
+3,data,out-of-domain zero-shot,S. aureus MIC,1.6565045674899528
+3,data,out-of-domain zero-shot,S. aureus MBC,2.33582050822128
+3,data,out-of-domain zero-shot,E. coli MIC,2.531736357795139
+3,data,out-of-domain zero-shot,E. coli MBC,2.7419078437652242
+3,data,out-of-domain post-trained,S. aureus MIC,1.4659105678178135
+3,data,out-of-domain post-trained,S. aureus MBC,2.298376014716052
+3,data,out-of-domain post-trained,E. coli MIC,2.025512376153316
+3,data,out-of-domain post-trained,E. coli MBC,2.7139518894763475
+4,intuition,in-domain test,S. aureus MIC,2.130009852907515
+4,intuition,in-domain test,S. aureus MBC,2.5047646304437814
+4,intuition,in-domain test,E. coli MIC,2.051304717824879
+4,intuition,in-domain test,E. coli MBC,2.0611788557283948
+4,mean baseline,in-domain test,S. aureus MIC,2.256834095660367
+4,mean baseline,in-domain test,S. aureus MBC,2.4977105091121543
+4,mean baseline,in-domain test,E. coli MIC,2.1228091143619725
+4,mean baseline,in-domain test,E. coli MBC,2.100919806096009
+4,intuition,out-of-domain zero-shot,S. aureus MIC,1.5754402408371568
+4,intuition,out-of-domain zero-shot,S. aureus MBC,2.1495430650258722
+4,intuition,out-of-domain zero-shot,E. coli MIC,2.2321550074424064
+4,intuition,out-of-domain zero-shot,E. coli MBC,2.503723460398533
+4,mean baseline,out-of-domain zero-shot,S. aureus MIC,1.7572223930779072
+4,mean baseline,out-of-domain zero-shot,S. aureus MBC,2.147524343532405
+4,mean baseline,out-of-domain zero-shot,E. coli MIC,2.55816527430398
+4,mean baseline,out-of-domain zero-shot,E. coli MBC,2.7558583242713435
+4,intuition,out-of-domain post-trained,S. aureus MIC,1.4259143191138042
+4,intuition,out-of-domain post-trained,S. aureus MBC,2.3863983953316463
+4,intuition,out-of-domain post-trained,E. coli MIC,1.9329594157393486
+4,intuition,out-of-domain post-trained,E. coli MBC,2.485172339265583
+4,mean baseline,out-of-domain post-trained,S. aureus MIC,1.898791036111366
+4,mean baseline,out-of-domain post-trained,S. aureus MBC,2.294801154115371
+4,mean baseline,out-of-domain post-trained,E. coli MIC,1.9393772802443394
+4,mean baseline,out-of-domain post-trained,E. coli MBC,2.448697238771353
+4,data,in-domain test,S. aureus MIC,1.9679939332936394
+4,data,in-domain test,S. aureus MBC,2.418100600008509
+4,data,in-domain test,E. coli MIC,1.955258256932264
+4,data,in-domain test,E. coli MBC,1.9767969014481939
+4,data,out-of-domain zero-shot,S. aureus MIC,1.7725630045895964
+4,data,out-of-domain zero-shot,S. aureus MBC,2.2000935593165716
+4,data,out-of-domain zero-shot,E. coli MIC,2.7056778685532277
+4,data,out-of-domain zero-shot,E. coli MBC,3.1222989034485717
+4,data,out-of-domain post-trained,S. aureus MIC,1.6393250990332962
+4,data,out-of-domain post-trained,S. aureus MBC,2.484841307523604
+4,data,out-of-domain post-trained,E. coli MIC,1.89692580613425
+4,data,out-of-domain post-trained,E. coli MBC,2.557512912485157
+5,intuition,in-domain test,S. aureus MIC,2.159412502877026
+5,intuition,in-domain test,S. aureus MBC,2.099353868192711
+5,intuition,in-domain test,E. coli MIC,1.9124977435806774
+5,intuition,in-domain test,E. coli MBC,2.044700160683209
+5,mean baseline,in-domain test,S. aureus MIC,1.9588219527111723
+5,mean baseline,in-domain test,S. aureus MBC,2.141622810152938
+5,mean baseline,in-domain test,E. coli MIC,1.9281841984064112
+5,mean baseline,in-domain test,E. coli MBC,1.9850385515863636
+5,intuition,out-of-domain zero-shot,S. aureus MIC,1.8377600873499298
+5,intuition,out-of-domain zero-shot,S. aureus MBC,2.0921492963536235
+5,intuition,out-of-domain zero-shot,E. coli MIC,2.081192210153684
+5,intuition,out-of-domain zero-shot,E. coli MBC,2.4560763482125925
+5,mean baseline,out-of-domain zero-shot,S. aureus MIC,1.7752520661531062
+5,mean baseline,out-of-domain zero-shot,S. aureus MBC,2.122816061404997
+5,mean baseline,out-of-domain zero-shot,E. coli MIC,2.457592648362653
+5,mean baseline,out-of-domain zero-shot,E. coli MBC,2.6635763068042384
+5,intuition,out-of-domain post-trained,S. aureus MIC,1.6163116181437158
+5,intuition,out-of-domain post-trained,S. aureus MBC,2.463484971645162
+5,intuition,out-of-domain post-trained,E. coli MIC,2.0058615101873896
+5,intuition,out-of-domain post-trained,E. coli MBC,2.5284896415864564
+5,mean baseline,out-of-domain post-trained,S. aureus MIC,2.0383881142145204
+5,mean baseline,out-of-domain post-trained,S. aureus MBC,2.4236179964565276
+5,mean baseline,out-of-domain post-trained,E. coli MIC,2.671263327383772
+5,mean baseline,out-of-domain post-trained,E. coli MBC,2.9517482838962654
+5,data,in-domain test,S. aureus MIC,2.0323854646894284
+5,data,in-domain test,S. aureus MBC,1.9901000288690442
+5,data,in-domain test,E. coli MIC,1.8329663454088416
+5,data,in-domain test,E. coli MBC,1.8579083097915576
+5,data,out-of-domain zero-shot,S. aureus MIC,1.8959194641735997
+5,data,out-of-domain zero-shot,S. aureus MBC,2.3059814775208465
+5,data,out-of-domain zero-shot,E. coli MIC,2.476919054947025
+5,data,out-of-domain zero-shot,E. coli MBC,2.848103028984528
+5,data,out-of-domain post-trained,S. aureus MIC,1.8269324845122419
+5,data,out-of-domain post-trained,S. aureus MBC,2.4560272715367124
+5,data,out-of-domain post-trained,E. coli MIC,1.933565879781464
+5,data,out-of-domain post-trained,E. coli MBC,2.6594325965076036
+6,intuition,in-domain test,S. aureus MIC,1.353835673398852
+6,intuition,in-domain test,S. aureus MBC,1.5864009964399588
+6,intuition,in-domain test,E. coli MIC,1.8948527043165135
+6,intuition,in-domain test,E. coli MBC,1.9338737124819874
+6,mean baseline,in-domain test,S. aureus MIC,1.8505981649056127
+6,mean baseline,in-domain test,S. aureus MBC,1.6708978888666663
+6,mean baseline,in-domain test,E. coli MIC,1.5339242586985908
+6,mean baseline,in-domain test,E. coli MBC,1.695037544979231
+6,intuition,out-of-domain zero-shot,S. aureus MIC,1.8000255478988982
+6,intuition,out-of-domain zero-shot,S. aureus MBC,2.2112889531164317
+6,intuition,out-of-domain zero-shot,E. coli MIC,2.114524904538859
+6,intuition,out-of-domain zero-shot,E. coli MBC,2.386507185704149
+6,mean baseline,out-of-domain zero-shot,S. aureus MIC,1.7558875189283087
+6,mean baseline,out-of-domain zero-shot,S. aureus MBC,2.145427566357304
+6,mean baseline,out-of-domain zero-shot,E. coli MIC,2.469231162450814
+6,mean baseline,out-of-domain zero-shot,E. coli MBC,2.692786208137238
+6,intuition,out-of-domain post-trained,S. aureus MIC,1.55206446636434
+6,intuition,out-of-domain post-trained,S. aureus MBC,2.504372141164241
+6,intuition,out-of-domain post-trained,E. coli MIC,2.0159927097923136
+6,intuition,out-of-domain post-trained,E. coli MBC,2.4845461772438213
+6,mean baseline,out-of-domain post-trained,S. aureus MIC,1.735480049693398
+6,mean baseline,out-of-domain post-trained,S. aureus MBC,2.3233972411589976
+6,mean baseline,out-of-domain post-trained,E. coli MIC,2.508479074082502
+6,mean baseline,out-of-domain post-trained,E. coli MBC,2.3715164729024454
+6,data,in-domain test,S. aureus MIC,1.41225453688976
+6,data,in-domain test,S. aureus MBC,1.659408259079485
+6,data,in-domain test,E. coli MIC,1.7153764474315316
+6,data,in-domain test,E. coli MBC,1.7965284796076164
+6,data,out-of-domain zero-shot,S. aureus MIC,1.626880056263657
+6,data,out-of-domain zero-shot,S. aureus MBC,2.4532327407403067
+6,data,out-of-domain zero-shot,E. coli MIC,2.525423529591492
+6,data,out-of-domain zero-shot,E. coli MBC,2.853838013393498
+6,data,out-of-domain post-trained,S. aureus MIC,1.9004114414350124
+6,data,out-of-domain post-trained,S. aureus MBC,2.887023567021241
+6,data,out-of-domain post-trained,E. coli MIC,2.015824549130309
+6,data,out-of-domain post-trained,E. coli MBC,2.180707850819751
+7,intuition,in-domain test,S. aureus MIC,1.7741956023771437
+7,intuition,in-domain test,S. aureus MBC,1.8993537467028863
+7,intuition,in-domain test,E. coli MIC,1.9120915830676164
+7,intuition,in-domain test,E. coli MBC,2.1054861895855335
+7,mean baseline,in-domain test,S. aureus MIC,1.7840073050229963
+7,mean baseline,in-domain test,S. aureus MBC,1.8308155252484355
+7,mean baseline,in-domain test,E. coli MIC,1.9093366730486139
+7,mean baseline,in-domain test,E. coli MBC,1.8241968974483562
+7,intuition,out-of-domain zero-shot,S. aureus MIC,1.636199075850337
+7,intuition,out-of-domain zero-shot,S. aureus MBC,2.219559881973121
+7,intuition,out-of-domain zero-shot,E. coli MIC,2.2974073562593404
+7,intuition,out-of-domain zero-shot,E. coli MBC,2.5812626315519065
+7,mean baseline,out-of-domain zero-shot,S. aureus MIC,1.7766602610132844
+7,mean baseline,out-of-domain zero-shot,S. aureus MBC,2.129303235840187
+7,mean baseline,out-of-domain zero-shot,E. coli MIC,2.4935273501340363
+7,mean baseline,out-of-domain zero-shot,E. coli MBC,2.677980538367956
+7,intuition,out-of-domain post-trained,S. aureus MIC,2.249016641412401
+7,intuition,out-of-domain post-trained,S. aureus MBC,2.3183571637485785
+7,intuition,out-of-domain post-trained,E. coli MIC,1.7962463500587151
+7,intuition,out-of-domain post-trained,E. coli MBC,2.5760358489351747
+7,mean baseline,out-of-domain post-trained,S. aureus MIC,1.9475839778463195
+7,mean baseline,out-of-domain post-trained,S. aureus MBC,1.9304607600769168
+7,mean baseline,out-of-domain post-trained,E. coli MIC,2.2379632261816336
+7,mean baseline,out-of-domain post-trained,E. coli MBC,2.725348523766768
+7,data,in-domain test,S. aureus MIC,1.8698787278741964
+7,data,in-domain test,S. aureus MBC,1.92036314453372
+7,data,in-domain test,E. coli MIC,1.9729007278600965
+7,data,in-domain test,E. coli MBC,2.2008109572362486
+7,data,out-of-domain zero-shot,S. aureus MIC,1.7527049274499487
+7,data,out-of-domain zero-shot,S. aureus MBC,2.307226369620644
+7,data,out-of-domain zero-shot,E. coli MIC,2.7871806650835995
+7,data,out-of-domain zero-shot,E. coli MBC,3.0055609454774896
+7,data,out-of-domain post-trained,S. aureus MIC,2.1717316974159173
+7,data,out-of-domain post-trained,S. aureus MBC,2.1900677835967652
+7,data,out-of-domain post-trained,E. coli MIC,2.026762847594549
+7,data,out-of-domain post-trained,E. coli MBC,2.8233318054509833
+8,intuition,in-domain test,S. aureus MIC,1.4760189628410567
+8,intuition,in-domain test,S. aureus MBC,1.7750590308736354
+8,intuition,in-domain test,E. coli MIC,1.5915699479323528
+8,intuition,in-domain test,E. coli MBC,1.6770574482629281
+8,mean baseline,in-domain test,S. aureus MIC,1.727346692362934
+8,mean baseline,in-domain test,S. aureus MBC,1.8193967441665106
+8,mean baseline,in-domain test,E. coli MIC,1.7809287040788178
+8,mean baseline,in-domain test,E. coli MBC,1.7646711487263036
+8,intuition,out-of-domain zero-shot,S. aureus MIC,1.743617916359956
+8,intuition,out-of-domain zero-shot,S. aureus MBC,2.2551220908058136
+8,intuition,out-of-domain zero-shot,E. coli MIC,2.3266206984869937
+8,intuition,out-of-domain zero-shot,E. coli MBC,2.60179301322604
+8,mean baseline,out-of-domain zero-shot,S. aureus MIC,1.7706588903546039
+8,mean baseline,out-of-domain zero-shot,S. aureus MBC,2.1416290875335324
+8,mean baseline,out-of-domain zero-shot,E. coli MIC,2.5347201370142414
+8,mean baseline,out-of-domain zero-shot,E. coli MBC,2.670204019617804
+8,intuition,out-of-domain post-trained,S. aureus MIC,1.6363665577903543
+8,intuition,out-of-domain post-trained,S. aureus MBC,2.524367289002665
+8,intuition,out-of-domain post-trained,E. coli MIC,1.8090650201805125
+8,intuition,out-of-domain post-trained,E. coli MBC,2.531880290280017
+8,mean baseline,out-of-domain post-trained,S. aureus MIC,1.695547631003237
+8,mean baseline,out-of-domain post-trained,S. aureus MBC,2.5690107915235365
+8,mean baseline,out-of-domain post-trained,E. coli MIC,2.767972919278654
+8,mean baseline,out-of-domain post-trained,E. coli MBC,3.0976499356046916
+8,data,in-domain test,S. aureus MIC,1.5573574736879625
+8,data,in-domain test,S. aureus MBC,1.8205306791546212
+8,data,in-domain test,E. coli MIC,1.5281150553050251
+8,data,in-domain test,E. coli MBC,1.679408768684651
+8,data,out-of-domain zero-shot,S. aureus MIC,1.8345064328579874
+8,data,out-of-domain zero-shot,S. aureus MBC,2.4745403343483754
+8,data,out-of-domain zero-shot,E. coli MIC,2.66724861897342
+8,data,out-of-domain zero-shot,E. coli MBC,2.9349233624550854
+8,data,out-of-domain post-trained,S. aureus MIC,1.7930805769453633
+8,data,out-of-domain post-trained,S. aureus MBC,2.717131533288398
+8,data,out-of-domain post-trained,E. coli MIC,2.195137211348389
+8,data,out-of-domain post-trained,E. coli MBC,2.7878936737917637
+9,intuition,in-domain test,S. aureus MIC,1.7516953058467697
+9,intuition,in-domain test,S. aureus MBC,2.050539850690873
+9,intuition,in-domain test,E. coli MIC,1.954664151699882
+9,intuition,in-domain test,E. coli MBC,1.9694763699443791
+9,mean baseline,in-domain test,S. aureus MIC,2.083345290138554
+9,mean baseline,in-domain test,S. aureus MBC,2.2432588521048173
+9,mean baseline,in-domain test,E. coli MIC,2.1990458186590836
+9,mean baseline,in-domain test,E. coli MBC,2.282030501923039
+9,intuition,out-of-domain zero-shot,S. aureus MIC,1.8333422070002159
+9,intuition,out-of-domain zero-shot,S. aureus MBC,2.209018030038277
+9,intuition,out-of-domain zero-shot,E. coli MIC,2.0665337628285587
+9,intuition,out-of-domain zero-shot,E. coli MBC,2.423887038352232
+9,mean baseline,out-of-domain zero-shot,S. aureus MIC,1.7698054802113212
+9,mean baseline,out-of-domain zero-shot,S. aureus MBC,2.126893464814176
+9,mean baseline,out-of-domain zero-shot,E. coli MIC,2.46239790875565
+9,mean baseline,out-of-domain zero-shot,E. coli MBC,2.6795947057870118
+9,intuition,out-of-domain post-trained,S. aureus MIC,1.632144646207571
+9,intuition,out-of-domain post-trained,S. aureus MBC,2.305728367003152
+9,intuition,out-of-domain post-trained,E. coli MIC,1.640094996802784
+9,intuition,out-of-domain post-trained,E. coli MBC,2.421460615800412
+9,mean baseline,out-of-domain post-trained,S. aureus MIC,1.843013822316171
+9,mean baseline,out-of-domain post-trained,S. aureus MBC,2.110517700079597
+9,mean baseline,out-of-domain post-trained,E. coli MIC,2.2480636067314
+9,mean baseline,out-of-domain post-trained,E. coli MBC,2.758766646409237
+9,data,in-domain test,S. aureus MIC,1.6318720731684155
+9,data,in-domain test,S. aureus MBC,1.9859788238783314
+9,data,in-domain test,E. coli MIC,1.7868152376011828
+9,data,in-domain test,E. coli MBC,1.852849600920305
+9,data,out-of-domain zero-shot,S. aureus MIC,1.784174534614012
+9,data,out-of-domain zero-shot,S. aureus MBC,2.291660712133816
+9,data,out-of-domain zero-shot,E. coli MIC,2.408482285156027
+9,data,out-of-domain zero-shot,E. coli MBC,2.8584648184500447
+9,data,out-of-domain post-trained,S. aureus MIC,1.5183882382307856
+9,data,out-of-domain post-trained,S. aureus MBC,2.1054001735109504
+9,data,out-of-domain post-trained,E. coli MIC,1.7081372359172542
+9,data,out-of-domain post-trained,E. coli MBC,2.573120215655812
+10,intuition,in-domain test,S. aureus MIC,1.85592581007677
+10,intuition,in-domain test,S. aureus MBC,2.1744210893751075
+10,intuition,in-domain test,E. coli MIC,2.193517057606915
+10,intuition,in-domain test,E. coli MBC,2.273491850950632
+10,mean baseline,in-domain test,S. aureus MIC,1.917474283675039
+10,mean baseline,in-domain test,S. aureus MBC,2.280996409197376
+10,mean baseline,in-domain test,E. coli MIC,2.3246451167841085
+10,mean baseline,in-domain test,E. coli MBC,2.4380119404057945
+10,intuition,out-of-domain zero-shot,S. aureus MIC,1.756958742204788
+10,intuition,out-of-domain zero-shot,S. aureus MBC,2.203675593166184
+10,intuition,out-of-domain zero-shot,E. coli MIC,2.14855886765377
+10,intuition,out-of-domain zero-shot,E. coli MBC,2.4065246867861765
+10,mean baseline,out-of-domain zero-shot,S. aureus MIC,1.797267284956766
+10,mean baseline,out-of-domain zero-shot,S. aureus MBC,2.1198453983583483
+10,mean baseline,out-of-domain zero-shot,E. coli MIC,2.416839675589112
+10,mean baseline,out-of-domain zero-shot,E. coli MBC,2.555764726887798
+10,intuition,out-of-domain post-trained,S. aureus MIC,2.0592766454167712
+10,intuition,out-of-domain post-trained,S. aureus MBC,1.9274987643155148
+10,intuition,out-of-domain post-trained,E. coli MIC,1.6957570533832536
+10,intuition,out-of-domain post-trained,E. coli MBC,1.8881534600316563
+10,mean baseline,out-of-domain post-trained,S. aureus MIC,2.0331092704768783
+10,mean baseline,out-of-domain post-trained,S. aureus MBC,2.0145528527262027
+10,mean baseline,out-of-domain post-trained,E. coli MIC,1.9406218435924296
+10,mean baseline,out-of-domain post-trained,E. coli MBC,1.8871180300694652
+10,data,in-domain test,S. aureus MIC,1.7762400762978603
+10,data,in-domain test,S. aureus MBC,2.134405181210966
+10,data,in-domain test,E. coli MIC,2.1800695315663896
+10,data,in-domain test,E. coli MBC,2.2670327411045896
+10,data,out-of-domain zero-shot,S. aureus MIC,1.779872826079679
+10,data,out-of-domain zero-shot,S. aureus MBC,2.280912313392942
+10,data,out-of-domain zero-shot,E. coli MIC,2.539130126542953
+10,data,out-of-domain zero-shot,E. coli MBC,2.7937288238564064
+10,data,out-of-domain post-trained,S. aureus MIC,2.0927239050491835
+10,data,out-of-domain post-trained,S. aureus MBC,2.16482437712079
+10,data,out-of-domain post-trained,E. coli MIC,1.5435416429997808
+10,data,out-of-domain post-trained,E. coli MBC,1.7518026743293749
+11,intuition,in-domain test,S. aureus MIC,1.5357223684833965
+11,intuition,in-domain test,S. aureus MBC,1.7939358860580055
+11,intuition,in-domain test,E. coli MIC,1.7526878062447184
+11,intuition,in-domain test,E. coli MBC,1.9012249278769737
+11,mean baseline,in-domain test,S. aureus MIC,1.9948761130863957
+11,mean baseline,in-domain test,S. aureus MBC,1.9338454482179448
+11,mean baseline,in-domain test,E. coli MIC,2.044969957627838
+11,mean baseline,in-domain test,E. coli MBC,2.1969376453669116
+11,intuition,out-of-domain zero-shot,S. aureus MIC,1.6881725489946624
+11,intuition,out-of-domain zero-shot,S. aureus MBC,2.2028558014399358
+11,intuition,out-of-domain zero-shot,E. coli MIC,2.1734245859727075
+11,intuition,out-of-domain zero-shot,E. coli MBC,2.4691338446293245
+11,mean baseline,out-of-domain zero-shot,S. aureus MIC,1.7850776969427968
+11,mean baseline,out-of-domain zero-shot,S. aureus MBC,2.121972504504468
+11,mean baseline,out-of-domain zero-shot,E. coli MIC,2.381321950672685
+11,mean baseline,out-of-domain zero-shot,E. coli MBC,2.6198157146533885
+11,intuition,out-of-domain post-trained,S. aureus MIC,1.2607469805147478
+11,intuition,out-of-domain post-trained,S. aureus MBC,2.0538521235617444
+11,intuition,out-of-domain post-trained,E. coli MIC,1.7569801350571634
+11,intuition,out-of-domain post-trained,E. coli MBC,2.330482821685152
+11,mean baseline,out-of-domain post-trained,S. aureus MIC,1.6148699484939053
+11,mean baseline,out-of-domain post-trained,S. aureus MBC,2.0089606733115124
+11,mean baseline,out-of-domain post-trained,E. coli MIC,2.4236130785646166
+11,mean baseline,out-of-domain post-trained,E. coli MBC,2.792455171743441
+11,data,in-domain test,S. aureus MIC,1.503865589429662
+11,data,in-domain test,S. aureus MBC,1.7523566031085553
+11,data,in-domain test,E. coli MIC,1.859612287014926
+11,data,in-domain test,E. coli MBC,1.8674887714576174
+11,data,out-of-domain zero-shot,S. aureus MIC,1.8698547886990784
+11,data,out-of-domain zero-shot,S. aureus MBC,2.1767264509734834
+11,data,out-of-domain zero-shot,E. coli MIC,2.3896092416862125
+11,data,out-of-domain zero-shot,E. coli MBC,2.7750275534012765
+11,data,out-of-domain post-trained,S. aureus MIC,1.314940233657335
+11,data,out-of-domain post-trained,S. aureus MBC,2.4375654563214715
+11,data,out-of-domain post-trained,E. coli MIC,1.6010032745866971
+11,data,out-of-domain post-trained,E. coli MBC,2.120902406731599
+12,intuition,in-domain test,S. aureus MIC,1.8866506799787108
+12,intuition,in-domain test,S. aureus MBC,1.8815579532335784
+12,intuition,in-domain test,E. coli MIC,2.338838728075081
+12,intuition,in-domain test,E. coli MBC,2.1007386343569387
+12,mean baseline,in-domain test,S. aureus MIC,1.9275286885425948
+12,mean baseline,in-domain test,S. aureus MBC,1.8869008823029287
+12,mean baseline,in-domain test,E. coli MIC,2.4187932065249016
+12,mean baseline,in-domain test,E. coli MBC,2.2051448701098444
+12,intuition,out-of-domain zero-shot,S. aureus MIC,1.629545851404494
+12,intuition,out-of-domain zero-shot,S. aureus MBC,2.227207488895475
+12,intuition,out-of-domain zero-shot,E. coli MIC,2.3102990461294044
+12,intuition,out-of-domain zero-shot,E. coli MBC,2.590660719104581
+12,mean baseline,out-of-domain zero-shot,S. aureus MIC,1.7550033089096744
+12,mean baseline,out-of-domain zero-shot,S. aureus MBC,2.141837112977347
+12,mean baseline,out-of-domain zero-shot,E. coli MIC,2.609423699040798
+12,mean baseline,out-of-domain zero-shot,E. coli MBC,2.7553214009283535
+12,intuition,out-of-domain post-trained,S. aureus MIC,1.699123280766483
+12,intuition,out-of-domain post-trained,S. aureus MBC,2.6658514427582287
+12,intuition,out-of-domain post-trained,E. coli MIC,1.760442676846907
+12,intuition,out-of-domain post-trained,E. coli MBC,2.255494450698322
+12,mean baseline,out-of-domain post-trained,S. aureus MIC,1.7416690781104938
+12,mean baseline,out-of-domain post-trained,S. aureus MBC,2.457019490480215
+12,mean baseline,out-of-domain post-trained,E. coli MIC,2.511944914540466
+12,mean baseline,out-of-domain post-trained,E. coli MBC,2.619812088336596
+12,data,in-domain test,S. aureus MIC,1.7870537379067186
+12,data,in-domain test,S. aureus MBC,1.7969542738844162
+12,data,in-domain test,E. coli MIC,2.2401356691510217
+12,data,in-domain test,E. coli MBC,2.0336071056033718
+12,data,out-of-domain zero-shot,S. aureus MIC,1.791302861385444
+12,data,out-of-domain zero-shot,S. aureus MBC,2.3380889124156683
+12,data,out-of-domain zero-shot,E. coli MIC,2.5818254037797472
+12,data,out-of-domain zero-shot,E. coli MBC,3.0434761321804067
+12,data,out-of-domain post-trained,S. aureus MIC,1.739706307578285
+12,data,out-of-domain post-trained,S. aureus MBC,2.8139979232354873
+12,data,out-of-domain post-trained,E. coli MIC,1.8525060617645053
+12,data,out-of-domain post-trained,E. coli MBC,2.1716029113438555
+13,intuition,in-domain test,S. aureus MIC,1.307243164015891
+13,intuition,in-domain test,S. aureus MBC,1.6859125278457907
+13,intuition,in-domain test,E. coli MIC,2.021779428389435
+13,intuition,in-domain test,E. coli MBC,2.2045982106274877
+13,mean baseline,in-domain test,S. aureus MIC,1.8225927036817715
+13,mean baseline,in-domain test,S. aureus MBC,1.6799627826582977
+13,mean baseline,in-domain test,E. coli MIC,1.6823353554168354
+13,mean baseline,in-domain test,E. coli MBC,1.7714764074349123
+13,intuition,out-of-domain zero-shot,S. aureus MIC,1.5890359021480356
+13,intuition,out-of-domain zero-shot,S. aureus MBC,2.0863789141206173
+13,intuition,out-of-domain zero-shot,E. coli MIC,2.180485602502059
+13,intuition,out-of-domain zero-shot,E. coli MBC,2.469746365128473
+13,mean baseline,out-of-domain zero-shot,S. aureus MIC,1.7688180468222263
+13,mean baseline,out-of-domain zero-shot,S. aureus MBC,2.149377465308364
+13,mean baseline,out-of-domain zero-shot,E. coli MIC,2.477112595357753
+13,mean baseline,out-of-domain zero-shot,E. coli MBC,2.685197025768395
+13,intuition,out-of-domain post-trained,S. aureus MIC,1.5059050581233935
+13,intuition,out-of-domain post-trained,S. aureus MBC,2.2401949334182216
+13,intuition,out-of-domain post-trained,E. coli MIC,1.6833419858461696
+13,intuition,out-of-domain post-trained,E. coli MBC,2.112258307861061
+13,mean baseline,out-of-domain post-trained,S. aureus MIC,1.9038764531527363
+13,mean baseline,out-of-domain post-trained,S. aureus MBC,2.377444695791402
+13,mean baseline,out-of-domain post-trained,E. coli MIC,2.4533691301696794
+13,mean baseline,out-of-domain post-trained,E. coli MBC,2.5913112181344
+13,data,in-domain test,S. aureus MIC,1.3864920130398986
+13,data,in-domain test,S. aureus MBC,1.8265942914558424
+13,data,in-domain test,E. coli MIC,1.7886026449452443
+13,data,in-domain test,E. coli MBC,1.9336239341528756
+13,data,out-of-domain zero-shot,S. aureus MIC,1.8661235303575263
+13,data,out-of-domain zero-shot,S. aureus MBC,2.402515473009465
+13,data,out-of-domain zero-shot,E. coli MIC,2.3326510280313406
+13,data,out-of-domain zero-shot,E. coli MBC,2.5718896387274173
+13,data,out-of-domain post-trained,S. aureus MIC,1.6757604201392178
+13,data,out-of-domain post-trained,S. aureus MBC,2.2495413008999616
+13,data,out-of-domain post-trained,E. coli MIC,1.754424969345794
+13,data,out-of-domain post-trained,E. coli MBC,2.1750032209244368
+14,intuition,in-domain test,S. aureus MIC,1.624313711189123
+14,intuition,in-domain test,S. aureus MBC,1.9681840508884956
+14,intuition,in-domain test,E. coli MIC,1.4957109054887452
+14,intuition,in-domain test,E. coli MBC,1.7915804208950266
+14,mean baseline,in-domain test,S. aureus MIC,1.7716740171469025
+14,mean baseline,in-domain test,S. aureus MBC,1.9588995802597007
+14,mean baseline,in-domain test,E. coli MIC,1.7229315436553452
+14,mean baseline,in-domain test,E. coli MBC,2.0359956398429375
+14,intuition,out-of-domain zero-shot,S. aureus MIC,1.5785384421443662
+14,intuition,out-of-domain zero-shot,S. aureus MBC,2.140221248022547
+14,intuition,out-of-domain zero-shot,E. coli MIC,2.403832328872561
+14,intuition,out-of-domain zero-shot,E. coli MBC,2.6766536736213666
+14,mean baseline,out-of-domain zero-shot,S. aureus MIC,1.767499458343813
+14,mean baseline,out-of-domain zero-shot,S. aureus MBC,2.1350722691064603
+14,mean baseline,out-of-domain zero-shot,E. coli MIC,2.575468244562496
+14,mean baseline,out-of-domain zero-shot,E. coli MBC,2.724422912056292
+14,intuition,out-of-domain post-trained,S. aureus MIC,1.3782531908774527
+14,intuition,out-of-domain post-trained,S. aureus MBC,2.293339209139699
+14,intuition,out-of-domain post-trained,E. coli MIC,2.597994508439647
+14,intuition,out-of-domain post-trained,E. coli MBC,3.124945628042466
+14,mean baseline,out-of-domain post-trained,S. aureus MIC,1.6210014264748487
+14,mean baseline,out-of-domain post-trained,S. aureus MBC,2.0424258067970897
+14,mean baseline,out-of-domain post-trained,E. coli MIC,2.640829593275587
+14,mean baseline,out-of-domain post-trained,E. coli MBC,3.048927688608552
+14,data,in-domain test,S. aureus MIC,1.506298453497785
+14,data,in-domain test,S. aureus MBC,1.8397828031554573
+14,data,in-domain test,E. coli MIC,1.5011035973382716
+14,data,in-domain test,E. coli MBC,1.7955320841807518
+14,data,out-of-domain zero-shot,S. aureus MIC,1.7775398836436693
+14,data,out-of-domain zero-shot,S. aureus MBC,2.2230563480231558
+14,data,out-of-domain zero-shot,E. coli MIC,2.3910910469369018
+14,data,out-of-domain zero-shot,E. coli MBC,2.8438009716753836
+14,data,out-of-domain post-trained,S. aureus MIC,1.4667763937705376
+14,data,out-of-domain post-trained,S. aureus MBC,2.468585811443933
+14,data,out-of-domain post-trained,E. coli MIC,2.328111038673523
+14,data,out-of-domain post-trained,E. coli MBC,2.9606995261434914
+15,intuition,in-domain test,S. aureus MIC,1.9261836341615823
+15,intuition,in-domain test,S. aureus MBC,1.981762436922545
+15,intuition,in-domain test,E. coli MIC,1.9371798049590419
+15,intuition,in-domain test,E. coli MBC,1.850296558095313
+15,mean baseline,in-domain test,S. aureus MIC,2.17867706220585
+15,mean baseline,in-domain test,S. aureus MBC,2.11600462251136
+15,mean baseline,in-domain test,E. coli MIC,2.0015293922763977
+15,mean baseline,in-domain test,E. coli MBC,1.910973314084135
+15,intuition,out-of-domain zero-shot,S. aureus MIC,1.7226398301831682
+15,intuition,out-of-domain zero-shot,S. aureus MBC,2.1577050122055343
+15,intuition,out-of-domain zero-shot,E. coli MIC,2.218218767220698
+15,intuition,out-of-domain zero-shot,E. coli MBC,2.375461132796881
+15,mean baseline,out-of-domain zero-shot,S. aureus MIC,1.7569985034920002
+15,mean baseline,out-of-domain zero-shot,S. aureus MBC,2.138082378568385
+15,mean baseline,out-of-domain zero-shot,E. coli MIC,2.4524519328216257
+15,mean baseline,out-of-domain zero-shot,E. coli MBC,2.6263769454225527
+15,intuition,out-of-domain post-trained,S. aureus MIC,1.8346759542813407
+15,intuition,out-of-domain post-trained,S. aureus MBC,2.727654286205725
+15,intuition,out-of-domain post-trained,E. coli MIC,2.6454746962555973
+15,intuition,out-of-domain post-trained,E. coli MBC,2.7078946714243894
+15,mean baseline,out-of-domain post-trained,S. aureus MIC,1.8335418616325772
+15,mean baseline,out-of-domain post-trained,S. aureus MBC,2.1617283549592696
+15,mean baseline,out-of-domain post-trained,E. coli MIC,2.8216006996854386
+15,mean baseline,out-of-domain post-trained,E. coli MBC,2.7223913729059452
+15,data,in-domain test,S. aureus MIC,1.985411322061748
+15,data,in-domain test,S. aureus MBC,2.146734145150885
+15,data,in-domain test,E. coli MIC,2.17787918420505
+15,data,in-domain test,E. coli MBC,2.1807219246365723
+15,data,out-of-domain zero-shot,S. aureus MIC,1.7635216857271998
+15,data,out-of-domain zero-shot,S. aureus MBC,2.494442190843674
+15,data,out-of-domain zero-shot,E. coli MIC,2.546233940929158
+15,data,out-of-domain zero-shot,E. coli MBC,2.9055825945415337
+15,data,out-of-domain post-trained,S. aureus MIC,2.155420445568197
+15,data,out-of-domain post-trained,S. aureus MBC,3.2506696638331554
+15,data,out-of-domain post-trained,E. coli MIC,2.781729414359349
+15,data,out-of-domain post-trained,E. coli MBC,2.924126348715842
+16,intuition,in-domain test,S. aureus MIC,1.7284619977485103
+16,intuition,in-domain test,S. aureus MBC,1.778144200516768
+16,intuition,in-domain test,E. coli MIC,2.109864278078564
+16,intuition,in-domain test,E. coli MBC,2.13543616130063
+16,mean baseline,in-domain test,S. aureus MIC,1.7966862381094117
+16,mean baseline,in-domain test,S. aureus MBC,2.0730955535997913
+16,mean baseline,in-domain test,E. coli MIC,2.124341079220759
+16,mean baseline,in-domain test,E. coli MBC,2.2373505958927766
+16,intuition,out-of-domain zero-shot,S. aureus MIC,1.7250509015008018
+16,intuition,out-of-domain zero-shot,S. aureus MBC,2.152612241141246
+16,intuition,out-of-domain zero-shot,E. coli MIC,2.002833059773867
+16,intuition,out-of-domain zero-shot,E. coli MBC,2.2943892959700283
+16,mean baseline,out-of-domain zero-shot,S. aureus MIC,1.7611448152002833
+16,mean baseline,out-of-domain zero-shot,S. aureus MBC,2.151810984821589
+16,mean baseline,out-of-domain zero-shot,E. coli MIC,2.498704405147271
+16,mean baseline,out-of-domain zero-shot,E. coli MBC,2.663404324013623
+16,intuition,out-of-domain post-trained,S. aureus MIC,1.622321138199778
+16,intuition,out-of-domain post-trained,S. aureus MBC,2.16956200593459
+16,intuition,out-of-domain post-trained,E. coli MIC,1.6210011768468802
+16,intuition,out-of-domain post-trained,E. coli MBC,2.122098487553821
+16,mean baseline,out-of-domain post-trained,S. aureus MIC,1.6659794069592713
+16,mean baseline,out-of-domain post-trained,S. aureus MBC,1.952329272502511
+16,mean baseline,out-of-domain post-trained,E. coli MIC,1.8561264820952625
+16,mean baseline,out-of-domain post-trained,E. coli MBC,2.5071596997677896
+16,data,in-domain test,S. aureus MIC,1.7359135827897534
+16,data,in-domain test,S. aureus MBC,1.9026328306695401
+16,data,in-domain test,E. coli MIC,2.1561796827437187
+16,data,in-domain test,E. coli MBC,2.176876429258423
+16,data,out-of-domain zero-shot,S. aureus MIC,1.8193638963667231
+16,data,out-of-domain zero-shot,S. aureus MBC,2.1743508604131856
+16,data,out-of-domain zero-shot,E. coli MIC,2.3559263113206423
+16,data,out-of-domain zero-shot,E. coli MBC,2.802915507189871
+16,data,out-of-domain post-trained,S. aureus MIC,1.7249810388544784
+16,data,out-of-domain post-trained,S. aureus MBC,2.4451820270045523
+16,data,out-of-domain post-trained,E. coli MIC,1.5150163465236155
+16,data,out-of-domain post-trained,E. coli MBC,2.1700177122353654
+17,intuition,in-domain test,S. aureus MIC,2.086403925467265
+17,intuition,in-domain test,S. aureus MBC,2.3595193208227365
+17,intuition,in-domain test,E. coli MIC,2.2710173391129875
+17,intuition,in-domain test,E. coli MBC,2.565969161350377
+17,mean baseline,in-domain test,S. aureus MIC,2.423360665506282
+17,mean baseline,in-domain test,S. aureus MBC,2.4979535144751734
+17,mean baseline,in-domain test,E. coli MIC,2.1754549074650695
+17,mean baseline,in-domain test,E. coli MBC,2.3273392816891376
+17,intuition,out-of-domain zero-shot,S. aureus MIC,2.0849093076101273
+17,intuition,out-of-domain zero-shot,S. aureus MBC,2.217801524404264
+17,intuition,out-of-domain zero-shot,E. coli MIC,1.9530919399867086
+17,intuition,out-of-domain zero-shot,E. coli MBC,2.244702361967147
+17,mean baseline,out-of-domain zero-shot,S. aureus MIC,1.7788947087978246
+17,mean baseline,out-of-domain zero-shot,S. aureus MBC,2.1304922748063477
+17,mean baseline,out-of-domain zero-shot,E. coli MIC,2.4204016556183867
+17,mean baseline,out-of-domain zero-shot,E. coli MBC,2.569824770421935
+17,intuition,out-of-domain post-trained,S. aureus MIC,1.9827245975303556
+17,intuition,out-of-domain post-trained,S. aureus MBC,2.1729474026746853
+17,intuition,out-of-domain post-trained,E. coli MIC,2.6537883092591494
+17,intuition,out-of-domain post-trained,E. coli MBC,2.859757286884651
+17,mean baseline,out-of-domain post-trained,S. aureus MIC,1.9056840509945032
+17,mean baseline,out-of-domain post-trained,S. aureus MBC,2.215785354336105
+17,mean baseline,out-of-domain post-trained,E. coli MIC,2.618534570121263
+17,mean baseline,out-of-domain post-trained,E. coli MBC,2.814997819608344
+17,data,in-domain test,S. aureus MIC,1.9938290062351907
+17,data,in-domain test,S. aureus MBC,2.2561743037719375
+17,data,in-domain test,E. coli MIC,2.189592890877012
+17,data,in-domain test,E. coli MBC,2.441099316452405
+17,data,out-of-domain zero-shot,S. aureus MIC,1.67468045997777
+17,data,out-of-domain zero-shot,S. aureus MBC,2.3851322487092106
+17,data,out-of-domain zero-shot,E. coli MIC,2.215149197502671
+17,data,out-of-domain zero-shot,E. coli MBC,2.5941841569886672
+17,data,out-of-domain post-trained,S. aureus MIC,1.6992171051026455
+17,data,out-of-domain post-trained,S. aureus MBC,2.4820726252288328
+17,data,out-of-domain post-trained,E. coli MIC,2.2428543168135033
+17,data,out-of-domain post-trained,E. coli MBC,2.6610707585251094
+18,intuition,in-domain test,S. aureus MIC,1.9939827682667624
+18,intuition,in-domain test,S. aureus MBC,1.9457440749323827
+18,intuition,in-domain test,E. coli MIC,1.5434429580596352
+18,intuition,in-domain test,E. coli MBC,1.7024235719047163
+18,mean baseline,in-domain test,S. aureus MIC,2.36244277105806
+18,mean baseline,in-domain test,S. aureus MBC,1.974002519327556
+18,mean baseline,in-domain test,E. coli MIC,1.9281772157037707
+18,mean baseline,in-domain test,E. coli MBC,1.9890485873474257
+18,intuition,out-of-domain zero-shot,S. aureus MIC,1.8390923256489191
+18,intuition,out-of-domain zero-shot,S. aureus MBC,2.2022576829298486
+18,intuition,out-of-domain zero-shot,E. coli MIC,2.199464830940731
+18,intuition,out-of-domain zero-shot,E. coli MBC,2.53181395638344
+18,mean baseline,out-of-domain zero-shot,S. aureus MIC,1.7540651385154435
+18,mean baseline,out-of-domain zero-shot,S. aureus MBC,2.1612131792126474
+18,mean baseline,out-of-domain zero-shot,E. coli MIC,2.609921458910868
+18,mean baseline,out-of-domain zero-shot,E. coli MBC,2.7478173756842525
+18,intuition,out-of-domain post-trained,S. aureus MIC,1.4748298608170416
+18,intuition,out-of-domain post-trained,S. aureus MBC,1.8612023135959832
+18,intuition,out-of-domain post-trained,E. coli MIC,1.8567304471602784
+18,intuition,out-of-domain post-trained,E. coli MBC,2.4787694343092146
+18,mean baseline,out-of-domain post-trained,S. aureus MIC,1.6426200170079395
+18,mean baseline,out-of-domain post-trained,S. aureus MBC,1.8497289691938983
+18,mean baseline,out-of-domain post-trained,E. coli MIC,2.5337446004683435
+18,mean baseline,out-of-domain post-trained,E. coli MBC,2.831458836203554
+18,data,in-domain test,S. aureus MIC,1.7375092227385238
+18,data,in-domain test,S. aureus MBC,1.720329603091458
+18,data,in-domain test,E. coli MIC,1.3738447368863433
+18,data,in-domain test,E. coli MBC,1.6099277716825466
+18,data,out-of-domain zero-shot,S. aureus MIC,1.5767318678676758
+18,data,out-of-domain zero-shot,S. aureus MBC,2.2654700955563514
+18,data,out-of-domain zero-shot,E. coli MIC,2.515443598097478
+18,data,out-of-domain zero-shot,E. coli MBC,2.7785979152086715
+18,data,out-of-domain post-trained,S. aureus MIC,1.5283806468596048
+18,data,out-of-domain post-trained,S. aureus MBC,1.7042536520358873
+18,data,out-of-domain post-trained,E. coli MIC,1.7232496280031906
+18,data,out-of-domain post-trained,E. coli MBC,2.526903303722035
+19,intuition,in-domain test,S. aureus MIC,2.0477484952524536
+19,intuition,in-domain test,S. aureus MBC,2.375874718996063
+19,intuition,in-domain test,E. coli MIC,1.7852089659513426
+19,intuition,in-domain test,E. coli MBC,1.9186124089703924
+19,mean baseline,in-domain test,S. aureus MIC,2.0577039500491465
+19,mean baseline,in-domain test,S. aureus MBC,2.2718705433187516
+19,mean baseline,in-domain test,E. coli MIC,1.370249856541525
+19,mean baseline,in-domain test,E. coli MBC,1.3585316828395422
+19,intuition,out-of-domain zero-shot,S. aureus MIC,1.842732089625934
+19,intuition,out-of-domain zero-shot,S. aureus MBC,2.195088409861662
+19,intuition,out-of-domain zero-shot,E. coli MIC,2.1716763095465863
+19,intuition,out-of-domain zero-shot,E. coli MBC,2.4568851055381105
+19,mean baseline,out-of-domain zero-shot,S. aureus MIC,1.774580261961035
+19,mean baseline,out-of-domain zero-shot,S. aureus MBC,2.125737311061748
+19,mean baseline,out-of-domain zero-shot,E. coli MIC,2.4694162323358184
+19,mean baseline,out-of-domain zero-shot,E. coli MBC,2.6707099100606566
+19,intuition,out-of-domain post-trained,S. aureus MIC,1.726687245738296
+19,intuition,out-of-domain post-trained,S. aureus MBC,2.0352439975654115
+19,intuition,out-of-domain post-trained,E. coli MIC,1.8959623683457543
+19,intuition,out-of-domain post-trained,E. coli MBC,2.2289204615397256
+19,mean baseline,out-of-domain post-trained,S. aureus MIC,1.6574633210197744
+19,mean baseline,out-of-domain post-trained,S. aureus MBC,1.9851859033485608
+19,mean baseline,out-of-domain post-trained,E. coli MIC,2.197378148337906
+19,mean baseline,out-of-domain post-trained,E. coli MBC,2.65257337060037
+19,data,in-domain test,S. aureus MIC,1.9410945186531647
+19,data,in-domain test,S. aureus MBC,2.213192511259535
+19,data,in-domain test,E. coli MIC,1.6379739682524386
+19,data,in-domain test,E. coli MBC,1.8016041245846321
+19,data,out-of-domain zero-shot,S. aureus MIC,1.7415580079851085
+19,data,out-of-domain zero-shot,S. aureus MBC,2.3191735675375216
+19,data,out-of-domain zero-shot,E. coli MIC,2.723524511075406
+19,data,out-of-domain zero-shot,E. coli MBC,3.004993636426123
+19,data,out-of-domain post-trained,S. aureus MIC,1.8954314551355753
+19,data,out-of-domain post-trained,S. aureus MBC,2.52669659070565
+19,data,out-of-domain post-trained,E. coli MIC,1.8160057502923812
+19,data,out-of-domain post-trained,E. coli MBC,2.2287465004613636
