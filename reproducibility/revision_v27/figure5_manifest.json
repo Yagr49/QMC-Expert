@@ -1,0 +1,16 @@
+{
+  "source": "reproducibility/revision_v24/figure4_compact_error_values.csv",
+  "source_sha256": "aa5e79578a7a98c1ccd96029225f1db536a5389246457d95d70df30485b89e62",
+  "n_per_arm_and_scheme": 420,
+  "medians": {
+    "cation/human": 1.177,
+    "cation/human_shuffled": 1.143,
+    "cation/matched_raw": 1.176,
+    "cation/mic_continuous": 1.084,
+    "scaffold/human": 1.424,
+    "scaffold/human_shuffled": 1.297,
+    "scaffold/matched_raw": 1.376,
+    "scaffold/mic_continuous": 1.357
+  },
+  "replaces": "v26 Figures 5 and 6"
+}

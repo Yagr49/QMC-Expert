@@ -1,0 +1,44 @@
+== structure
+  + 2.2.1 Prediction on the reference QAC cohort
+  + 2.2.2 Generalisation beyond the reference cohort
+  - heading 2.3.5 (content moved to 2.2.2)
+  moved 3 + 7 blocks into 2.2.2 after the Q-HERO figure
+  2.3 renamed: Design and synthesis of the new QACs
+== figures
+  Figure 5 image replaced (4248x2516)
+  v26 Figure 6 removed (merged into Figure 5)
+  Figure 5 caption rewritten
+== renumbering and cross-references
+  edit [Fig6->5 text] 'The vertical violins in Figure 6 show the observed endpo' -> 'The violins in Figure 5 show the observed endpoint-error'
+  edit [QHERO ref] '(Figure 7)' -> '(Figure 6)'
+  edit [QHERO ref] 'compact encoders in Figures 5–6' -> 'compact encoders in Figure 5'
+  edit [QHERO caption] 'Figure 7.' -> 'Figure 6.'
+  edit [QHERO caption] 'differs from Figures 5–6' -> 'differs from Figure 5'
+  edit [classes ref] '(Figure 8)' -> '(Figure 7)'
+  edit [OOD intro] 'Their independent MIC/MBC measurements form the structur' -> 'Their independent MIC/MBC measurements form the structur'
+  edit [classes caption] 'Figure 8.' -> 'Figure 7.'
+  edit [OOD xref] 'from Section 2.2 provide' -> 'from Section 2.2.1 provide'
+  edit [OOD text] 'Figure 9 shows' -> 'Figure 8 shows'
+  edit [OOD caption] 'Figure 9.' -> 'Figure 8.'
+  edit [2.4 refs] '(Figures 6 and 9)' -> '(Figures 5 and 8)'
+  edit [2.4 refs] 'guidance (Section 2.2).' -> 'guidance (Section 2.2.2).'
+  edit [Fig4 caption] 'Section2.2' -> 'Section 2.2.1'
+== typography
+  edit [typo] 'bis-QAСs' -> 'bis-QACs'
+  edit [typo] 'MСR is a convenient' -> 'MCR is a convenient'
+  edit [typo] 'is problemating' -> 'is problematic'
+  edit [typo] 'dihydropyrans -based' -> 'dihydropyran-based'
+  edit [typo] 'GU-based mono-QACs' -> 'GU-based multi-QACs'
+== table of contents
+  edit [TOC] '2.3 Out of domain inference' -> '2.3 Design and synthesis of the new QACs'
+  TOC: 2.3.5 entry removed (its heading no longer exists)
+wrote 2026_10_14_Paper_2_edited-v27_section2_restructured.docx
+== SI cross-references
+  edit [SI] 'main Figures 5–6 uses categorical codes' -> 'main Figure 5 uses categorical codes'
+  edit [SI] 'grouped validation in main Figure 6.' -> 'grouped validation in main Figure 5.'
+  edit [SI] 'For main Figures 3 and 6,' -> 'For main Figures 3 and 5,'
+  edit [SI] 'The current main Section 2.3.5' -> 'The current main Section 2.2.2'
+  edit [SI] 'frozen OOD evaluation in main Figure 9.' -> 'frozen OOD evaluation in main Figure 8.'
+  edit [SI] 'main Section2.4' -> 'main Section 2.4'
+  edit [SI] 'main Section2.4' -> 'main Section 2.4'
+wrote Supplementary_Information_v27.docx
