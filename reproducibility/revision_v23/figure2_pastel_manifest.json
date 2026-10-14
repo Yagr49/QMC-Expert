@@ -1,0 +1,32 @@
+{
+  "source": "reproducibility/revision_v20/tsne_pdf_marker_coordinates.csv",
+  "source_sha256": "35a6d9acc903c06680d7e4b70c255f3a9d7283d1c59a4ac45322b0f22c83340c",
+  "points_per_panel": 221,
+  "classes": {
+    "Bad": 172,
+    "Good": 49
+  },
+  "geometry": "archived PDF marker centres, unchanged; no t-SNE recomputation",
+  "metrics": {
+    "before": {
+      "sil": "0.007"
+    },
+    "after": {
+      "sil": "0.107"
+    }
+  },
+  "metrics_source": "printed on the archived vector PDF",
+  "variant_check": {
+    "before": "coincides with manuscript v21 raster (median NN 0.023, identity)",
+    "after": "different t-SNE run from manuscript v21 raster (no orientation aligns; best 0.049)"
+  },
+  "note": "manuscript v21 text and raster state 0.108 for a run with no surviving vector source",
+  "font": "Futura",
+  "palette": {
+    "good": "#5FB39C",
+    "bad": "#ECC6AA",
+    "frame": "#C9BCDD",
+    "expert": "#8B6842",
+    "ink": "#141514"
+  }
+}
