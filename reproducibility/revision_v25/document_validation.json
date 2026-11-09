@@ -1,0 +1,28 @@
+{
+  "completed": true,
+  "documents": [
+    {
+      "path": "/Users/egorilin/Desktop/COMA/2026_10_14_Paper_2_edited-v25_correlations_and_split_figures.docx",
+      "figures": 10,
+      "sha256": "a9661f198997cceeada9ddf167cd68bb4954d604cef4d934eb80c7abcd851a0d",
+      "XML_relationships_and_styles_valid": true
+    },
+    {
+      "path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v25/Supplementary_Information_v25.docx",
+      "figures": 32,
+      "sha256": "661d2ec9c90e3c0e6e4ec51513919beeada02b3640f3ce0df80d18c6a9dbe59e",
+      "XML_relationships_and_styles_valid": true
+    }
+  ],
+  "original_v5_unmodified": true,
+  "source_media_and_Office_parts_preserved": true,
+  "original_correlation_raster_restored_byte_identical": true,
+  "Figure4_split_into_Figures5_and6": true,
+  "all_3360_error_values_and_summary_statistics_preserved": true,
+  "Figure1_count_and_source_specific_score_ranges_verified": true,
+  "original_SI_table_values_preserved": true,
+  "all_main_figure_captions_sequential": true,
+  "section2_1_no_OOD": true,
+  "later_scientific_text_unchanged_except_figure_references": true,
+  "no_new_model_fits": true
+}

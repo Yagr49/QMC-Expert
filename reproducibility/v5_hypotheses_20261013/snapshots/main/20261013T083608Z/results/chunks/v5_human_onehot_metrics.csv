@@ -1,0 +1,16 @@
+cohort,schema,task,n,RMSE,MAE,R2,name,encoding,arm,seed,provenance
+OOD17,full-QAC105,Sa_MIC,17,1.7163151481149779,1.4599659790703652,0.03697037134553949,v5_human,onehot,v5_human,-1,v5_archived_grouped_followup
+OOD17,full-QAC105,Sa_MBC,17,2.198425087639825,1.8029967874069737,-0.07810254640439784,v5_human,onehot,v5_human,-1,v5_archived_grouped_followup
+OOD17,full-QAC105,Ec_MIC,17,2.2740011257203157,1.8125012565920888,-0.5620784737850002,v5_human,onehot,v5_human,-1,v5_archived_grouped_followup
+OOD17,full-QAC105,Ec_MBC,16,2.2699002579224192,1.7867596300265336,-0.31712121686220773,v5_human,onehot,v5_human,-1,v5_archived_grouped_followup
+OOD17,full-QAC105,pooled,67,2.1251420087485235,1.7144931712329077,,v5_human,onehot,v5_human,-1,v5_archived_grouped_followup
+QAC105,cation,Sa_MIC,105,1.8024695055346558,1.4031676370039168,0.15389889299982762,v5_human,onehot,v5_human,-1,v5_archived_grouped_followup
+QAC105,cation,Sa_MBC,105,2.0148201178707548,1.5368499848087278,-0.05305500404577801,v5_human,onehot,v5_human,-1,v5_archived_grouped_followup
+QAC105,cation,Ec_MIC,105,1.8605452170642525,1.4155633363240727,0.10841428859628821,v5_human,onehot,v5_human,-1,v5_archived_grouped_followup
+QAC105,cation,Ec_MBC,105,1.9910773850043721,1.5862789391599623,0.09179911572732391,v5_human,onehot,v5_human,-1,v5_archived_grouped_followup
+QAC105,cation,pooled,420,1.919271612068989,1.48546497432417,,v5_human,onehot,v5_human,-1,v5_archived_grouped_followup
+QAC105,scaffold,Sa_MIC,105,2.016908016996487,1.5590010168965212,-0.05939665122013049,v5_human,onehot,v5_human,-1,v5_archived_grouped_followup
+QAC105,scaffold,Sa_MBC,105,2.145913297101623,1.5935104202922157,-0.1945458964219613,v5_human,onehot,v5_human,-1,v5_archived_grouped_followup
+QAC105,scaffold,Ec_MIC,105,2.0301601523369963,1.606810521630989,-0.06155680815330733,v5_human,onehot,v5_human,-1,v5_archived_grouped_followup
+QAC105,scaffold,Ec_MBC,105,2.0765440859632682,1.667751440901659,0.012156940590335674,v5_human,onehot,v5_human,-1,v5_archived_grouped_followup
+QAC105,scaffold,pooled,420,2.0679970631500098,1.6067683499303462,,v5_human,onehot,v5_human,-1,v5_archived_grouped_followup

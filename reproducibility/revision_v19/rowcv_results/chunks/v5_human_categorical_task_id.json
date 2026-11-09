@@ -1,0 +1,38 @@
+{
+  "completed": true,
+  "representation": "v5_human",
+  "encoding": "categorical_task_id",
+  "fits": 5,
+  "exposure": [
+    {
+      "fold": 0,
+      "unique_train_salts": 105,
+      "unique_test_salts": 64,
+      "test_salts_also_in_train": 64
+    },
+    {
+      "fold": 1,
+      "unique_train_salts": 105,
+      "unique_test_salts": 63,
+      "test_salts_also_in_train": 63
+    },
+    {
+      "fold": 2,
+      "unique_train_salts": 105,
+      "unique_test_salts": 61,
+      "test_salts_also_in_train": 61
+    },
+    {
+      "fold": 3,
+      "unique_train_salts": 104,
+      "unique_test_salts": 55,
+      "test_salts_also_in_train": 54
+    },
+    {
+      "fold": 4,
+      "unique_train_salts": 105,
+      "unique_test_salts": 56,
+      "test_salts_also_in_train": 56
+    }
+  ]
+}

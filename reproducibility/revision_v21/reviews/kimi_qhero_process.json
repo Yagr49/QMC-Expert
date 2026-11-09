@@ -1,0 +1,17 @@
+{
+  "reviewer": "actual Kimi CLI",
+  "execution": "local Mac",
+  "authorised": true,
+  "completed": true,
+  "started_utc": "2026-10-14T09:34:09.092899+00:00",
+  "prompt_sha256": "a4b3ff5d62b753305744300627e8e9bea81c753be841097986fe52b4e4bf149c",
+  "files": {
+    "/Users/egorilin/Desktop/COMA/reproducibility/qhero_author_comparison_20261014/input_manifest.json": "4c4cb7534b6cffbaf72b74a9cc4b32d860ee94483c632fff4e6a439eb04da2f5",
+    "/Users/egorilin/Desktop/COMA/reproducibility/qhero_author_comparison_20261014/results/completion.json": "f4d1f73f2ad7a732a064591ce0e821b94c84fd1a9693a6ecfee9dbaa92c18f1a",
+    "/Users/egorilin/Desktop/COMA/reproducibility/qhero_author_comparison_20261014/results/summary.csv": "8924ffdeef3a8daa36233c4e232cbc531285bb7153c90ee22f0a1dc417b48a3f",
+    "/Users/egorilin/Desktop/COMA/reproducibility/qhero_author_comparison_20261014/run_comparison.py": "38a2e303168e01b787c5c6afc9addabb2d2c7cb16c76ac4786774d6a2c047f09",
+    "/Users/egorilin/Desktop/COMA/reproducibility/qhero_author_comparison_20261014/summarize.py": "f61d64bc155396354f9a7114912043046e9edefbc7d75119fa45a2dc8ec5f4e4"
+  },
+  "returncode": 0,
+  "seconds": 179.80460596084595
+}

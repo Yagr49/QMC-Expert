@@ -1,0 +1,52 @@
+---
+
+## Scientific Figure & Typography Review — revision_v17
+
+---
+
+### Reference images (image1.png, image4.png)
+
+Both are legacy bar charts with saturated medium-purple and medium-green fills — noticeably bolder than the pastel lavender/mint palette used in the new figures. They are preserved for historical fidelity and should not be recoloured. Two issues exist that should inform **caption writing** for new figures:
+
+- **image1.png**: the string *"Error bars show ±1 std across 5-fold stratified cross-validation"* is typeset inside the plot canvas. The brief specifies statistical text belongs in captions, not in the image body. ✱ Confirmed bad pattern — do not replicate in new figures.
+- **image4.png**: two bar-value annotations show digit collision under magnification — *"0.11"* reads as a merged *"0.1 · 1"* and *"2.58"* reads as *"2.5 · 8"* because the number overlaps the error-bar cap. The "Before" bar for Silhouette (height ≈ 0.00) is nearly invisible at journal width. The sub-panel notes *"↑ higher = better"* and *"↓ lower = better"* are inside-image statistical context — caption material. ✱ Confirmed bad pattern.
+
+---
+
+### Font comparison — figureS26 (Aptos vs Segoe UI)
+
+**Preferred font: Aptos.**
+
+Both renders are visually clean and the data glyphs are identical. Aptos has a marginally more geometric, open aperture; its letterspacing is slightly looser, so two-word x-axis labels such as *"Continuous MIC"* and *"Binary MIC"* retain their word gap at ≈6 pt effective size. Segoe UI is humanist and slightly wider per glyph; at small sizes its strokes appear marginally darker relative to the light pastel fills, slightly fighting the "soft, calm" aesthetic. Aptos is the better match for the lavender-and-mint palette with thin gridlines.
+
+---
+
+### Figure-by-figure findings
+
+**figure1_supervision_and_transfer.png** — Clean schematic; pastel lavender/mint/peach boxes, gray arrows, good white space. The right-hand output box reads *"5 paired seeds"*; the brief states three paired seeds are used for mean-error and distribution statistics. **Correction**: verify this number reflects source-guidance context (five seeds) versus the three used downstream; if the distinction is real, add a sub-label or footnote, do not silently leave the number ambiguous.
+
+**figure2_QAC105_parity.png** — Twelve-panel 4 × 3 parity grid. Marker/colour scheme (lavender circles = Human, green squares = Continuous MIC, orange triangles = Binary MIC) is fully consistent with Figure 1 and the legends. Dashed identity lines are well-rendered. At a single journal column (~85 mm) each panel becomes ≈14 mm wide; the orange triangles (Binary MIC column) are already small and will approach the limit of legibility. **Correction**: increase triangle marker size by ~20 % or use a slightly bolder edge stroke on all markers so they survive CMYK halftone screening.
+
+**figure3_OOD_families_ACS1996.png** — RDKit ACS 1996 geometry is correct; bond angles, stereocentres and counterion placement are all legible. G4 (tetra-QAC) renders four Cl⁻ ions as a vertical stack at top centre — unusual layout but technically valid for the native renderer. The panel sub-labels correctly use CF₃ and subscripted numbers. No atom/bond collisions detected. No corrections needed.
+
+**figure4_paired_error_violins.png** — Lavender/mint violin pair with crosshair summary markers. OOD-17 panel (b) correctly overlays individual jittered dots (n = 67 total, displayed as paired endpoint subset), providing full data transparency. The dots in panel (b) partially obscure the crosshair arms for *Sa MBC* and *Ec MBC*. **Correction**: reduce jitter dot opacity to ≈0.35 or draw the crosshair in front (higher z-order) so median/IQR remain readable.
+
+**figure5_weight_rewind.png** — Connected dot plot with ΔRMSE and unadjusted confidence intervals. At the *Outer norm* position all three series (Human, Continuous MIC, Binary MIC) sit at ≈0.0 with no horizontal dodge, making them indistinguishable. **Correction**: apply a small categorical jitter (±0.06 x-units) between the three series at each x-tick, consistent across all three panels.
+
+**figureS28_decoder_error_violins.png** — 2 × 3 decoder comparison. The *Continuous* violin uses a noticeably darker teal compared with the lighter mint used in figures 4 and S26 for the same supervision label. **Correction**: harmonise the Continuous MIC fill colour to match the mint hex used in figure4 and figureS26. No legend panel is visible; x-axis tick labels carry identification, which is sufficient only if the caption explicitly maps each label to a colour.
+
+**figureS29_direct_adaptation.png** — Strip plot with seed scatter and mean segments; the OOD-17 panel correctly shows substantially higher and more dispersed RMSE than the CV panels. No colour legend is present; the x-axis label (Linear / MLP / LoRA / Partial / Full) identifies each condition directly. **Correction**: add a one-line caption statement confirming that each colour corresponds to one adaptation strategy as labelled on the x-axis, so a standalone reader does not search for a separate legend.
+
+---
+
+### Concrete correction list
+
+| File | Issue | Action |
+|---|---|---|
+| `figure1_supervision_and_transfer.png` | "5 paired seeds" may conflict with three-seed analysis | Verify / add clarifying sub-label |
+| `figure2_QAC105_parity.png` | Orange triangles too small at journal width | Increase marker size ~20 % or add edge stroke |
+| `figure4_paired_error_violins.png` | Jitter dots obscure crosshair in OOD-17 panel | Reduce dot opacity ≤0.35, raise crosshair z-order |
+| `figure5_weight_rewind.png` | Three markers overlap at Outer norm | Add ±0.06 horizontal dodge per series |
+| `figureS28_decoder_error_violins.png` | Continuous MIC teal darker than mint in other figures | Harmonise to shared mint hex value |
+| `figureS29_direct_adaptation.png` | No legend; colours not defined inside figure | Caption must explicitly map strategy → colour |
+| All new figures | No inside-image statistical annotation blocks | Statistical descriptions belong exclusively in captions ✓ (already clean in all new figures) |

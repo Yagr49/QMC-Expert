@@ -1,0 +1,71 @@
+{
+  "source": "/Users/egorilin/Desktop/COMA/2026_10_14_Paper_2_edited-v21_v5_intro_2_1_yellow.docx",
+  "source_sha256": "8eba72a98fc7a0a78021fccb28c0dad227f7bda06b38b49f3eccd214ffe559ac",
+  "output": "/Users/egorilin/Desktop/COMA/2026_10_14_Paper_2_edited-v22_pastel_adaptation_figures.docx",
+  "output_sha256": "da75123363daaad6b1664c34dc6696dc7b1c0ef49481365e28c9387ad0a246cb",
+  "replaced_body_nodes": [
+    {
+      "body_index": 38,
+      "text": "",
+      "replacement_sha256": "4c4844932c2979980dcc315d8715e4d64faa1811e1196cf9561d00d202a657af"
+    },
+    {
+      "body_index": 39,
+      "text": "Figure 2. Before (a) and after (b) expert-guided contrastive learning. All 221 marker positions and expert Good/Bad assignments per panel are retained from the archived vector PDF; typography and colours are updated. The PDF reports silhouette 0.007/0.107, whereas the original v5 raster reports 0.108 after training. Panel coordinates are independently scaled and are not aligned across embeddings. This display describes representation geometry, rather than quantitative predictive performance.",
+      "replacement_sha256": "c0286a78cb4a1ba7ae15bfcf439062900317bdd2c64e06f446fa10a8f7f99142"
+    },
+    {
+      "body_index": 37,
+      "text": "Figure 2 presents the archived t-SNE projections before and after contrastive refinement, preserving all display coordinates rather than rerunning the embedding. The vector source reports a silhouette score of 0.007 before and 0.107 after learning; the original manuscript raster reports 0.108 after learning. The original analysis also reports a Davies–Bouldin index of 6.54 versus 2.58 and a Calinski–Harabasz score of 3.60 versus 22.08. These summaries describe label-associated geometry and are not recomputed from the plotted coordinates or used as evidence of quantitative or causal performance.",
+      "replacement_sha256": "ebcfe6e378fd86b808d1fb862a5a2012116030de924295e9706a8657b0f75199"
+    },
+    {
+      "body_index": 52,
+      "text": "To clearly demonstrate the advantage of embeddings over descriptors in the multitask setting, we re-evaluated our previously reported approach while including the bacterial species and activity type as inputs. As Table 1 shows (Multitask MLP), multitask training outperforms the stacking approach, yet its metrics remain below those of the multitask embedding models. This indicates that the learned embeddings adapt better when task labels are supplied and, we believe, may generalize more readily to new bacterial species and activity types. Figure 4 illustrates this comparison in more detail. ",
+      "replacement_sha256": "4e281e9bc2de83dd8a30c8e2b72fe56ae0dc20f6701ed616d78cd819f86f618a"
+    },
+    {
+      "body_index": 54,
+      "text": "Figure 4. Correlation analysis of experimental versus predicted antimicrobial activities. Correlation plots for log₂(MIC, MBC) predictions across different labels: no labels mean using no information about classes, one-hot encoding labels means adding info about bacteria and activity one-hot, OpenAI embeddings labels means adding info about bacteria and activity with text embeddings. Purple lines represent linear regression fits, with performance metrics (R², RMSE, MAE) displayed for each model-dataset combination.",
+      "replacement_sha256": "da87c88c6f5d3ae7296b00cb80508634ac861edff4dc426a0aea0b9c1d6bc972"
+    },
+    {
+      "body_index": 65,
+      "text": "To rigorously evaluate the generalization capability of the embeddings, we assembled an out-of-distribution (OOD) test set of 17 newly synthesized QACs belonging to a previously unexplored structural subtype, measured under independent assay conditions. Both embedding types were subsequently benchmarked on this held-out set, alongside the in-domain quaternary ammonium compounds described above (Figure 5). ",
+      "replacement_sha256": "b3bfb7a80dca687e2feb3479721e610055316a5da526f2619c8942489065826c"
+    },
+    {
+      "body_index": 67,
+      "text": "Figure 5. Molecular classes represented in each dataset.",
+      "replacement_sha256": "b40f41c67d1b2c8c7caa10c907e062613de85ce3b6d86f2adb36caeea215a0ee"
+    },
+    {
+      "body_index": 92,
+      "text": "To verify out-of-domain performance, we compared three representations: human embeddings, vanilla MolFormer features, and the descriptor-based approach. As we showed in our previous work, the descriptor-based approach performs better when the task is reframed as classification, so we also report classification metrics here. In the label-free setting, human embeddings achieve the best performance among the three representations. When categorical labels are supplied as input features, human embeddings again perform best, while vanilla MolFormer reaches a comparably small but non-negligible R2. In terms of classification accuracy with labels, the descriptor-based approach performs well, and when accuracy is measured within one activity class (accuracy ±1), all three representations achieve good performance (Figure 6).",
+      "replacement_sha256": "c1d84676fd8f18b5c305c1cfd2735c0fd748150aba42a6897ca94c3726b48915"
+    },
+    {
+      "body_index": 95,
+      "text": "Figure 6. Model performance transitioning from zero-shot to few-shot learning modes. Zero-Shot means without training on out-of-domain set; few-shot means training on 40% of out-of-domain set. In classification translucent bars indicate accuracy within the range of 1 nearest class. ",
+      "replacement_sha256": "a722385108c3557826cc5d04d0da6e78b13ccd2d1949edaf3389b5ff8f36c270"
+    },
+    {
+      "body_index": 97,
+      "text": "For understanding how the resulting embeddings work, we turn to interpretable methods of machine learning. Our human embeddings are produced from the 768-dimensional MolFormer features by an encoder trained with a contrastive objective on the expert “Good/Bad” classification dataset. This raises two natural questions: does this training substantially reshape the pretrained representation, or does it mainly compress it; and is the expert classification dataset actually necessary, or would the regression data alone suffice? Figure 7 summarizes the information flow we set out to characterize — the encoder receives geometric information from MolFormer and a separate, task-relevant signal from the human labels, and we ask how much of the final embedding can be attributed to each source. We address these questions with three complementary analyses: a representational-similarity analysis, a feature-attribution analysis, and a controlled ablation in which a second encoder is trained without the expert dataset.",
+      "replacement_sha256": "5835fadc598e02bc2de4277f7d0edf74ddfead8a8f87cc021ee5a6da0091a17a"
+    },
+    {
+      "body_index": 99,
+      "text": "Figure 7. Information flow in the contrastive encoder. The encoder combines geometric structure inherited from the pretrained MolFormer representation with a task-relevant signal supplied by the expert “Good/Bad” classification dataset. The resulting human embedding can be viewed as the sum of a structural component, which preserves the MolFormer geometry, and a biological component, which carries activity-discriminating information induced by the human labels and contributes most to out-of-domain generalization on the harder Gram-negative endpoints.",
+      "replacement_sha256": "ffbb5677edeae160791473c269a0478744a2e0cc84c7961cf44979717fbd91fe"
+    }
+  ],
+  "new_figure": "Figure3, Section2.1",
+  "original_figure1_preserved": true,
+  "original_figures3_to6_renumbered_to4_to7": true,
+  "section2_2_and_later_scientific_content_unchanged": true,
+  "source_v5_unmodified": true,
+  "yellow_additions_retained": true,
+  "new_or_revised_caption_and_explanation_highlighted_yellow": true,
+  "no_new_training_or_QHERO_results_added": true
+}

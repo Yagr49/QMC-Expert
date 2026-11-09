@@ -1,0 +1,309 @@
+kimi version 2.1.1
+Warning: [loop_control] 'max_retries_per_step' is deprecated and no longer used; rename it to 'max_attempts_per_step'. Run /update-config to fix it.
+• The user is asking me to act as an independent read-only reviewer of a QAC molecular ML manuscript. They've explicitly said:
+
+  1. Do not use tools, execute commands, inspect additional files or invent measurements/annotation methods.
+  2. Give a concise scientific critique (under 800 words).
+  3. Prioritise concrete defects and fixes.
+  4. The authors are moving Q-HERO out of the main narrative AFTER inspecting earlier results — this selection must be disclosed.
+  5. Human annotation methods H1-H7 are reserved for coauthors.
+  6. Text-embedding-3-small embeds four strain/endpoint descriptions, not molecular activities.
+  7. No equivalence or biological causal claim should be inferred.
+  8. Historical encoders saw original-cohort structures; new matched-source encoders excluded all target cations.
+  9. Evaluate validity of molecule grouping, censored endpoints, task encoding, controls, and bounded conclusions.
+
+  There's also a system reminder about the superpowers plugin that says I MUST invoke skills if they might apply. Let me think about whether any skill applies here.
+
+  The task is: write a scientific critique/review of a manuscript. I'm told NOT to use tools, execute commands, or inspect files. All material is provided inline.
+
+  Looking at the available skills:
+  - brainstorming: for creative work — creating features, building components. Not applicable — this is a review task with clear instructions.
+  - dispatching-parallel-agents: for 2+ independent tasks. Not applicable.
+  - executing-plans, subagent-driven-development: not applicable.
+  - receiving-code-review / requesting-code-review: these are about code review in software development. This is a scientific manuscript review, not code review. The "receiving-code-review" skill is about receiving feedback on code before implementing suggestions. Not applicable.
+  - systematic-debugging: for bugs. Not applicable.
+  - test-driven-development: not applicable.
+  - using-git-worktrees: not applicable.
+  - verification-before-completion: "Use when about to claim work is complete, fixed, or passing" — this is about running verification commands before claiming completion. Here, the "work" is a review based on provided materials. The user explicitly says don't use tools or execute commands. The review itself doesn't involve making claims about code being fixed or passing. Hmm, but there's a 1% chance it could apply... Actually, this skill is about verifying code changes with commands. My task produces a written critique, not code changes. Verification here means checking my critique against the manuscript text — which I can do by re-reading the provided material, not by running commands. I think it doesn't genuinely apply, but the instructions say even 1% chance means invoke.
+
+  Actually, wait. The user's explicit instruction says "Do not use tools, execute commands, inspect additional files". Invoking the Skill tool would be using a tool. The plugin instructions say user instructions take precedence: "User's explicit instructions ... — highest priority". The user explicitly said do not use tools. So the user's instruction to not use tools overrides the skill-invocation mandate.
+
+  Hmm, but the Skill tool is how I access skills. The user said "Do not use tools" — in context, this means don't go inspecting the codebase/files, don't run analysis. It's about preserving the independence of the review (like a real external reviewer who only sees the manuscript). Reading a skill file would arguably violate "do not inspect additional files."
+
+  Given the explicit user instruction "Do not use tools, execute commands, inspect additional files", I should honor that as highest priority and simply write the review directly. The instruction priority in the plugin itself says user instructions are highest priority. The user's instruction is clear and direct: produce a critique from the material given, no tools.
+
+  Also note: "If you were dispatched as a subagent to execute a specific task, skip this skill." — I'm not a subagent here.
+
+  The most defensible reading: the user wants a pure text response, no tool calls. I'll comply with the explicit instruction and write the critique.
+
+  Now let me actually do the scientific review. Let me carefully analyze the manuscript.
+
+  Key task: Evaluate validity of:
+  1. Molecule grouping (cation-held-out vs scaffold-held-out)
+  2. Censored endpoints (IT505 >500 mg/L)
+  3. Task encoding (one-hot vs text-embedding-3-small)
+  4. Controls (shuffled labels, raw features)
+  5. Bounded conclusions (no equivalence, no causality)
+  6. Disclosure of post-hoc narrative selection (Q-HERO moved to SI after inspecting results)
+
+  Let me go through the manuscript in detail and find concrete defects.
+
+  **1. Post-hoc selection / HARKing (disclosure of narrative selection)**
+
+  The user says: "The authors are moving Q-HERO out of the main narrative AFTER inspecting earlier results and centring the original 105 molecules and their named 17-compound structural OOD. This selection must be disclosed."
+
+  The manuscript does disclose this in several places:
+  - Abstract: "This exploratory revision centres the original cohorts after inspection of earlier analyses and retains Q-HERO comparisons in Supporting Information."
+  - Section 1: "The earlier Q-HERO analyses (3) and additional backbone/context experiments (5–8) are retained as supplementary evidence; the present change of narrative follows inspection of those earlier results and is exploratory."
+  - Section 4.4: "The QAC-105/OOD-17 narrative was selected after inspecting earlier outcomes... Neither is a confirmatory preregistration. No new OOD families were selected by optimising these scores, and the prior Q-HERO outcomes remain available in Supporting Information rather than being discarded."
+
+  So disclosure is present. Good. But there's a subtlety: the scaffold-held-out sensitivity "was added after inspecting this extension and receiving protocol reviews" — post-hoc analysis, and the real-minus-shuffled interval is [-0.2591, -0.0001], "with its upper limit only just below zero. This boundary result is especially sensitive to the fixed folds, five seeds and unadjusted comparisons and is not an independent confirmation." This is appropriately hedged. Good.
+
+  However — a reviewer's concern: the narrative selection itself (centering QAC-105 + OOD-17) was made after seeing that Q-HERO results presumably were unfavorable or ambiguous. The manuscript says "after inspection of earlier analyses" — but it never says what was seen. The full Q-HERO results remain in SI, which mitigates. A concrete fix: state explicitly in the main text (not just 4.4) which prior results motivated the demotion (e.g., "Q-HERO comparisons showed X") so the reader can judge whether the demotion is cherry-picking. Actually the disclosure requirement is satisfied minimally; the review could ask for a sentence stating the direction/magnitude of the demoted results, since SI-only results may not get scrutinized.
+
+  Also: "No new OOD families were selected by optimising these scores" — that's about families, good. But the OOD-17 predictions: the final decoder is trained on all QAC-105, and the OOD evaluation is used as validation of conclusions. Since the narrative was chosen after inspecting earlier outcomes (which include presumably OOD-17 results), there's an implicit selection on the reported evaluation. The disclosure covers this partially.
+
+  **2. Molecule grouping**
+
+  Cation-held-out: 105 full salts / 103 cations, 5 folds of 21 salts. "Different counterion forms of the same cation remain together." But wait — if the grouping is by cation (103 cations in 105 salts), then folds of 21 salts... 105/5 = 21. So grouping unit is the salt? Or cation? "Cation-held-out GroupKFold supplies five folds of 21 salts each, grouping all four endpoints and all counterion variants." If 103 cations form 105 salts, then two cations appear as two salts each (different counterions). Grouping by cation would give 103 groups; 103/5 = 20.6, not 21. Hmm, "five folds of 21 salts each" — GroupKFold with 103 groups over 5 folds gives folds of ~20-21 groups, which would be ~21 salts only if each group is one salt. There's a slight inconsistency: 105 salts, 103 cations — so 2 cations have 2 salt forms each. If folds are "21 salts each" and grouping keeps counterion variants together, then each fold is 21 salts = 21 groups only if the two duplicated cations are in different folds. This is a minor presentation wrinkle; the grouping is by identity and keeps endpoints together — valid for interpolation-within-family testing. The manuscript itself acknowledges "Cation-held-out folds allow members of the same scaffold family in both training and test and assess interpolation to a new cation within the sampled chemistry." Good — they clearly state what the validation estimates.
+
+  Scaffold-held-out: 29 canonical cation Murcko scaffolds. Valid. But: "It was added after inspecting this extension and receiving protocol reviews" — post hoc, hedged. The human R² under scaffold holdout: 0.129, -0.017, 0.235, 0.236 — one endpoint negative R². Appropriately reported ("The complete source arms, adverse results and fold assignments are retained"). Good.
+
+  One concern about pooled metrics: pooled RMSE combines 4 endpoints over 420 values; endpoints may have different variances, so pooled RMSE is dominated by noisier endpoints. They acknowledge this for R² ("Pooled R² is not used to claim within-task accuracy because differences between species and MIC/MBC can inflate a pooled score") but then the main claims rest on pooled RMSE differences of ~0.02–0.12 log2 units. The contrasts are paired, which mitigates. But the claim "human-guided representations yield mean pooled RMSE 1.737 vs 1.715 continuous MIC" — human is *worse* than continuous MIC point estimate, and the interval includes zero. The honest framing ("practical proximity... without establishing statistical equivalence") is good.
+
+  **3. Censored endpoints**
+
+  OOD: IT505 E. coli MBC reported as >500 mg/L — right-censored. Handling: "excluded from exact-value metrics without removing its molecule or bound." That's a defensible approach (complete-case on exact values), but it discards information: the bound tells us the prediction error is at least (500 − prediction) — and indeed all five human-guided predictions (21.2–37.0 mg/L) lie far below the bound, an "explicit extrapolation failure retained in the named prediction table." Good that they report it. But a concrete defect: excluding the censored point from metrics means the OOD Ec_MBC metrics (n=16) are conditional on the censored compound being excluded; if other censored-prone compounds existed, metric bias. Also, better handling exists (treat as lower bound on error, or report bound-aware metrics). Fix: report a bound-aware score (e.g., error ≥ log2(500)−log2(pred)) for IT505, and discuss selection: compounds reported as ">X" often correspond to inactive compounds, so excluding them from MAE/RMSE biases OOD error downward — precisely the molecules where absolute prediction matters most. This is a real, concrete defect: censoring is informative (likely non-inactive vs inactive), and dropping the censored point removes the worst failure from the metric. They do report it qualitatively, but the headline pooled OOD numbers (67 exact pairs) exclude it. The claim "endpoint concentration accuracy remains limited" survives, but MAE 1.649 etc. is optimistic.
+
+  Also check: 67 exact pairs = 17×3 + 16 = 67. Yes.
+
+  Also in QAC-105: "All 420 QAC training values are numeric and uncensored in the supplied workbook." But historical data with MICs often contain bounds (e.g., "<" or ">"); the statement asserts uncensored in supplied workbook — reviewer can't verify but notes that if the historical workbook contained censored values converted to numbers, that would be a defect. They state it plainly; fine. But the duplicate rows (75/76) with conflicting values 0.25/0.5 etc. — median rule. Retained with named ID and sensitivity (QAC-104). OK. One more: the median of 0.25 and 0.5 in log2 scale vs raw scale? They say "full-salt median rule yields 0.375, 1.25, 5 and 2" — arithmetic mean-like median of two values in mg/L. If values were log-transformed first, the median would be the geometric mean (0.354, 1.0, 4.0, 2). They used raw-scale median (0.375, 1.25, 5). The median rule is "historical" so it's traceable; fine, but the sensitivity is only ±0.0044 log2 RMSE. Fine.
+
+  **4. Task encoding**
+
+  Text-embedding-3-small embeds four strain/endpoint descriptions; vectors identical for every molecule within a task (4×1536 array). So text encoding is just a different 4-level categorical encoding. The comparison is one-hot (4-dim) vs text (1536-dim, constant per task). Key confound: **dimensionality** differs; CatBoost with a 1536-dim constant-per-task feature vs 4 one-hot columns. Differences could be due to feature dimension/target partitioning, not semantics. The manuscript says exactly this: "Text coding can alter which task partitions CatBoost selects, but any difference here cannot by itself identify semantic understanding or biological information transfer." Good — bounded. ΔRMSE −0.015 [−0.051, +0.024] — no advantage. The title-level claim "fixed text embeddings provide no consistently resolved advantage over one-hot encoding" is supported. Defect: none major; perhaps note that text vectors introduce an external dependency (OpenRouter, versioned model) for zero benefit — using it at all is questionable but harmless since archived with SHA256. Actually one concrete fix: since text gives no advantage and adds dependence on a proprietary embedding endpoint, consider dropping or demoting to SI; but it's kept as a controlled comparison, fine.
+
+  Another subtle issue: the cached embeddings were "freshly reconstructed" — reproducibility depends on OpenAI not changing the model; they archived the cache with SHA256. Good practice. The claim "The request contains no measured activities or molecular structures" — good, prevents leakage claims.
+
+  **5. Controls**
+
+  - Shuffled labels within source training, preserving marginals. Good — this tests whether structure-label association matters.
+  - But note: shuffled controls exist only for human and binary/continuous MIC arms; "All primary real-label seeds and raw features use both encodings, while matched shuffled controls use one-hot." OK.
+  - Raw MolFormer reference: same pinned model, frozen. Good. But raw reference has a *single* run (one decoder run, seed 1729 fixed) — no uncertainty for raw. Bootstrap treats raw prediction as fixed across seed draws — they acknowledge "Raw-feature predictions repeat the same fixed prediction across seed draws." So human-vs-raw intervals reflect only trained-arm seed variation, not decoder seed variation. This underestimates uncertainty for contrasts involving raw. Concrete fix: run the raw decoder across multiple seeds/folds to get a proper comparison, or acknowledge that the human-vs-raw interval is one-sided (only source-seed uncertainty).
+  - Also the raw features could have been paired with the same CatBoost seed 1729 across folds — the fold structure is shared, but CatBoost's stochasticity within folds is fixed at one seed. The interval doesn't capture that.
+  - Another control issue: the binary MIC arm threshold "chosen to match human positive prevalence" — both binary arms contain 52 positive calls. Wait: binary MIC targets are derived from MIC values with a threshold matched to human prevalence? That means the binary MIC arm's labels depend on a threshold chosen to match the human arm — that's a matched design choice, fine, but the "binary MIC" arm then no longer represents "standard binary MIC supervision" (e.g., threshold at clinical breakpoint or median). It represents binary MIC balanced to human prevalence. This is disclosed. OK.
+  - More important: human labels are 52/377 positive (13.8%); binary MIC matched to same prevalence. But the binary MIC labels are derived from *source* MIC records (4,938 records repeating molecules — "Records repeat molecules and are not independent training compounds"). For the source training, continuous MIC pooled over records; repeated records of the same molecule create effective sample size smaller than 4,938. The matched panel is 681 molecules with 4,938 records — so each molecule has ~7 records on average. Using records as training samples weights molecules by record count — molecules with more assays get more weight. That's a real defect in the source supervision (though it's shared across arms? No — human arm uses 377 training calls (one per molecule?), while continuous MIC uses records). Hmm: "52 training calls are positive" — human arm = one call per molecule (377). Continuous MIC arm = records (how many training records?). The arms are matched on molecules but the effective sample sizes and weighting differ: human arm treats molecules equally; MIC arms weight by record multiplicity. This complicates "matched" claims — the number of gradient examples differs across arms. The manuscript says "matched eligible expert and quantitative records... the common panel contains 681 source molecules with 4,938 underlying MIC records and 96 positive human calls." And training: 377 molecules. For the continuous arm, is each record a training example, or records aggregated per molecule? It says "Records repeat molecules and are not independent training compounds (Table 1)" — this sentence acknowledges the unit issue but it's ambiguous whether training uses records or molecules. If continuous MIC trains on records, the comparison of "information efficiency" is confounded with effective sample size. This deserves flagging: state the training unit per arm explicitly (records vs per-molecule aggregation, e.g., mean log MIC).
+
+  Actually the design says "The relevant comparison holds source chemistry and learning conditions fixed" — source chemistry fixed (same 377 molecules), but supervision granularity differs (single call vs multiple records). It's fine as "supervision replacement within a specified algorithm" (they say exactly that), but the interpretation as "human calls vs MIC records information" is limited. The introduction explicitly disclaims information-efficiency claims. OK, bounded.
+
+  - Another control: "validation is diagnostic without early stopping" — final checkpoint after 30 epochs/360 updates. Fixed budget. Fine. But no model selection at all? "No upstream... target-based checkpoint selection occurs." Good.
+
+  - Batch size 32, 377 molecules → ~12 batches/epoch; 30 epochs = 360 updates. Yes consistent.
+
+  **6. Statistical issues**
+
+  - Intervals: "Ten thousand paired bootstrap draws sample the observed scaffold groups with replacement and the five source-seed indices with replacement." For OOD with only 4 scaffold groups, bootstrap over 4 groups is extremely unstable — they acknowledge: "OOD has only four groups... not confirmatory population bounds." Good. But note the OOD pooled expert-vs-continuous interval [-0.415, -0.004] barely excludes zero and is conditional on 4 groups; the abstract doesn't cite it. Fine.
+  - Multiple comparisons: unadjusted, acknowledged. Good.
+  - The shuffled controls are "diagnostic controls, not a calibrated permutation test" — acknowledged. But then real-vs-shuffled intervals are bootstrap CIs of a difference that never uses the label permutation distribution; a permutation test would be the natural calibrated control. They have 5 shuffled runs only. Fine as exploratory.
+
+  **7. Other concrete defects**
+
+  - Abstract numbers: "mean pooled RMSE is 1.737, 1.715 and 1.806" — matches summary.csv (1.7371221, 1.7146548, 1.8056930). Raw 1.8583946 → "1.858". OK consistent.
+  - Table 2 numbers match summary.csv. E.g., Sa MIC human 1.707 (1.7073433), R² 0.241 (0.2407). Continuous 1.669 vs csv 1.6689894 ✓. Ec MBC raw 1.939 (csv 1.9385569) ✓. Consistent.
+  - Table 4: human Sa MIC MAE 1.535 (csv 1.5352021) ✓; Ec MBC human 1.690 (csv 1.6904302) ✓; raw Sa MIC 1.610 (csv 1.6097348) ✓. Consistent.
+  - Pooled OOD human RMSE 2.054 (csv 2.0543631) ✓; MAE 1.649 (1.6491544) ✓; continuous RMSE 2.237 (2.2371966) ✓. Consistent. Good internal consistency.
+  - Inconsistency check: Section 2.4 says "Averaging across the 67 exact pairs gives human MAE 1.649 and RMSE 2.054, versus continuous-MIC MAE 1.744/RMSE 2.237, binary-MIC 1.706/2.099, and raw-feature 1.854/2.265." Check binary: csv 1.7055722/2.0993800 → "1.706/2.099" ✓. Raw: 1.8542055/2.2651876 ✓. Good.
+  - Table 2 raw R² Sa MBC 0.043 (csv 0.0427449) ✓.
+  - contrasts.csv: QAC105 pooled expert minus expert-shuffled -0.1202 [-0.2171, -0.0426] — manuscript says -0.120 [-0.217, -0.043] ✓. expert minus raw -0.1213 [-0.2140, -0.0435] — manuscript -0.121 [-0.214, -0.044] ✓. expert minus continuous +0.0225 [-0.0528, +0.1013] — manuscript +0.022 [-0.053, +0.101] ✓. expert minus binary -0.0686 [-0.1575, +0.0091] — manuscript -0.069 [-0.157, +0.009] ✓. All consistent. 
+  - Scaffold holdout: human 1.842, continuous 1.814, binary 1.856, raw 1.978 — these are in the manuscript but not in summary.csv provided (scaffold sensitivity is in scaffold_summary.csv which we don't have). Trust.
+  - Human-minus-raw scaffold -0.136 [-0.269, -0.019]; real-minus-shuffled [-0.2591, -0.0001]. OK.
+  - One numeric check: cation-held-out — "With cation-held-out validation and one-hot task metadata, mean pooled RMSE is 1.737, 1.715 and 1.806" — order in abstract: human, continuous, binary ✓.
+
+  - Section 2.2: "Human minus shuffled-human ΔRMSE is -0.120 [-0.217, -0.043]" ✓.
+
+  - The pooled R² in summary.csv for expert QAC105 onehot is 0.388 — but manuscript says "Pooled R² is not used to claim within-task accuracy" and "Pooled R² is retained only in machine-readable tables" — consistent.
+
+  - In Table 1: "Original QAC | Full salts / cations | 105 / 103 | 420 measured endpoints". 105×4 = 420 ✓. OOD: 17 molecules, 67 exact + 1 bound = 68 = 17×4 ✓.
+
+  - Figure 2 caption: "annotation boxes report mean seed-specific scores rather than ensemble scores" — good practice.
+
+  - Section 2.4: "The S. aureus MIC task-median reference has lower mean absolute error than the human-guided decoder." Check: task-median Sa MIC OOD MAE 1.4118 vs human 1.5352 ✓. Indeed a naive baseline beats the human decoder on Sa MIC OOD. This is honestly reported. But then the claim "Human representations have lower pooled error point estimates than the numerical and raw references" — pooled yes (1.649 vs 1.744/1.706/1.854), but a trivial baseline beats it on one endpoint. They do report it. Good bounded conclusion.
+
+  Wait — actually task-median pooled OOD MAE is 1.8307, human 1.649, so pooled human beats median. But per-endpoint Sa MIC median wins. Fine.
+
+  - Another issue: "Direct source-only scoring... mean OOD S. aureus MIC potency-rank agreement 0.667 ± 0.120 ... compared with 0.399 ± 0.192 for continuous MIC. The paired human-minus-continuous and human-minus-shuffled rank intervals include zero." OK, bounded.
+
+  - Abstract claim: "A scaffold-held-out follow-up retains a pooled-loss improvement over raw features, whereas 17 named compounds from four new scaffold families expose weak absolute concentration prediction." Supported.
+
+  **Now: what are the most important concrete defects?**
+
+  Priority list:
+
+  1. **Censoring handling on OOD** (Ec_MBC IT505 >500): excluding the censored observation from MAE/RMSE while reporting it qualitatively biases headline OOD metrics downward; censoring is informative (likely inactive compound). Fix: report bound-aware metrics (e.g., censored loss with hinge at the bound) or at least include IT505's guaranteed error in a worst-case metric; keep the qualitative report. Also: if the historical QAC workbook contains no censored values, state how bounds (if any in source literature) were handled.
+
+  2. **Narrative selection disclosure**: present but could be strengthened: state in the main text (Abstract/Results) what the inspected earlier results showed that motivated demoting Q-HERO (direction and magnitude), so readers need not dig into SI to detect cherry-picking; also disclose that the scaffold sensitivity was added post hoc alongside the borderline real-vs-shuffled result (done) and explicitly mark it as hypothesis-generating in the Conclusions (partially done).
+
+  3. **Uncertainty asymmetry for raw reference**: single decoder run for raw features; bootstrap intervals for human-vs-raw contrasts incorporate only trained-arm seed variability; decoder seed variability for raw (and for trained arms' CatBoost) is absent. Also, trained arms share one decoder seed (1729) — pairing is fine but the raw arm having n=1 means the "improvement over raw" claim has one-sided uncertainty. Fix: multiple decoder seeds for raw or explicit statement that intervals for contrasts with raw are conditional on a single decoder fit.
+
+  Actually more precisely: the trained arms also use CatBoost seed 1729 (fixed). So decoder seed is constant across arms; contrasts are paired at the decoder level, so decoder noise cancels in paired contrasts to first order. The remaining asymmetry: trained arms have 5 source seeds; raw has 1 (no source seed since frozen features). The bootstrap samples "the five source-seed indices with replacement" and applies "the same... seed indices... to both arms"; "Raw-feature predictions repeat the same fixed prediction across seed draws." So human-vs-raw intervals reflect resampling of the 5 trained seeds only — the raw arm contributes no variability. This is acknowledged but worth flagging as a limitation: the raw-vs-human interval is not a like-for-like uncertainty comparison. Also with n=5 seeds, bootstrap over 5 indices is coarse.
+
+  4. **Training-unit ambiguity in source arms**: human arm = 377 calls (one per molecule, 52 positive); continuous/binary MIC arms train on records (up to 4,938 records across 681 molecules; ~how many in the 377 training molecules?). If the continuous arm trains on repeated records, molecules with more records get more weight, and effective supervision differs across arms; "matched" then holds for chemistry but not for sample size/weighting. The manuscript's caveat "Records repeat molecules and are not independent training compounds" hints the unit issue but the text never states explicitly what a training example is in each arm. Fix: state per-arm training example counts and weighting (per-record vs per-molecule aggregation) in 4.2.
+
+  5. **Equivalence claims**: appropriately avoided. But "practical proximity" language with Δ+0.022 and CI [−0.053, +0.101] is fine; the manuscript explicitly says no equivalence margin specified. Good — commend.
+
+  6. **Task encoding confound**: text vs one-hot differs in dimensionality (1536 vs 4); any difference is attributable to feature geometry/target partitioning, not semantics. Manuscript acknowledges. Minor fix: describe the text condition as "high-dimensional constant task features" rather than "task descriptions" in figure titles to avoid reader over-interpretation; or add a random-embedding control (shuffled text vectors) to isolate dimensionality from content. Actually a random 1536-dim constant-per-task control would isolate content vs dimension — a concrete, cheap fix strengthening the negative result.
+
+  7. **Scaffold-held-out human R² negative on Sa MBC (−0.017)** — reported; fine. The pooled-loss benefit over raw persists; bounded. OK.
+
+  8. **Cation fold arithmetic**: 105 salts / 103 cations with folds of 21 salts — grouping "all four endpoints and all counterion variants" implies groups = cations = 103, which cannot give five folds of exactly 21 salts (103 isn't divisible by 5; and 2 salts share cations). If instead groups = salts, then the two salts of the same cation could land in different folds, contradicting "Different counterion forms of the same cation remain together." Fix: clarify the grouping key (cation vs salt) and the fold sizes. This is a small but concrete consistency defect in the protocol description.
+
+  Let me double check: 105 salts, 103 cations → two cations each appear in two salts. GroupKFold by cation → 103 groups → folds of 20–21 groups; a fold with 21 groups could contain 21–23 salts depending on whether the two duplicated cations fall in it. "five folds of 21 salts each" is only possible if grouping is by salt (105 = 5×21 exactly). So the text contradicts itself: either folds are 21 salts by salt-grouping (then counterion forms of the same cation are NOT kept together), or grouping is by cation (then folds aren't exactly 21 salts). Since 105/5 = 21 exactly, salt grouping fits the numbers; the cation-together claim fits chemistry. This is a genuine internal inconsistency worth flagging. Actually wait — maybe the two extra salts share cations with *two different* cations each having two counterion forms: 105 salts − 103 cations = 2 extra salts, i.e., two cations have 2 salt forms each. GroupKFold with 103 groups: fold sizes in groups would be 20 or 21 (103 = 5×20 + 3 → three folds of 21 groups, two of 20). If the two duplicated cations are in two of the 21-group folds, those folds have 22 salts. So "five folds of 21 salts each" cannot hold under cation grouping. Under salt grouping (105 groups), folds are exactly 21 salts, but then the two salts of one cation are separate groups and may split. So yes — flag as inconsistency; fix by stating the actual grouping key and per-fold composition, and reconcile with the "counterion forms remain together" claim. Maybe they group by cation and it happens that... no, 103/5 can't give all-21-salt folds. Unless some salts share... Actually hold on, maybe "105 full salts / 103 cations" and GroupKFold groups = cations, folds = 20–21 cations, and salts per fold = 21–22. The text "five folds of 21 salts each" would then be approximate. Either way, flag for clarification.
+
+  9. **OOD decoder training on all QAC-105** then evaluating on OOD-17: fine, disclosed. But note the OOD-17 was used (chronologically) as part of the earlier work; "No new OOD families were selected by optimising these scores" — trust. Also "Scaffold novelty is verified from supplied structures and does not establish an independently blinded prospective discovery trial" — good.
+
+  10. **H1–H7 placeholders**: the whole human-annotation provenance is unresolved (annotator count, blinding, whether MICs were visible during annotation). The manuscript is honest that these are reserved. But this is the single biggest scientific gap: if annotators saw the MIC measurements, the "human supervision" signal may partly encode the very measurements it is compared against — not leakage into the target task per se (targets are different compounds) but it changes the interpretation of "human judgement as independent supervision." Also "Whether annotators themselves saw numerical measurements is a separate provenance question" (Introduction) — flagged. The review should state: conclusions about human-vs-MIC supervision are provisional until H1–H7 are completed; and emphasize that the direction of any such bias cannot be signed ex ante. Also, since the same team produced annotations and the archive curation, curation bias is possible. Keep brief.
+
+  11. **The binary MIC threshold matched to human prevalence**: threshold is "chosen to match human positive prevalence" — data-dependent threshold on the *training* source only? If chosen on all source records including validation-source... it's source-side, "training-only threshold" — says "Binary MIC targets use a training-only threshold chosen to match human positive prevalence". OK good.
+
+  12. **Pooled-loss primary endpoint**: primary claims rest on pooled RMSE across 4 endpoints; endpoints have heterogeneous variance (Sa MBC RMSE ~1.9 vs Ec MIC ~1.6). Pooled RMSE weights endpoints by their error scale; a per-endpoint standardized analysis or per-endpoint contrasts with multiplicity control would be more robust. They do report per-endpoint tables and note why pooled R² is avoided; but for RMSE the same scale-heterogeneity caveat applies in milder form. Minor.
+
+  13. **"67 exact pairs" n vs 4 families**: OOD inference with 4 groups; acknowledged. Fine.
+
+  14. Figure 5 violin claim "Density shape and median similarity do not establish equivalence or independent significance" — good.
+
+  15. Reference 3 (Q-HERO, JCIM 2026) — listed as 2026, volume 66 — future-ish but today is 2026-10, fine.
+
+  16. The abstract's "versus 1.858 for raw MolFormer features; fixed text embeddings provide no consistently resolved advantage" — fine.
+
+  17. One more check — "the human-minus-shuffled rank intervals include zero" for direct source-only scoring, but earlier says rank agreement human 0.667 vs continuous 0.399; intervals include zero → bounded. Good.
+
+  18. Also: continuous arm slightly better than human on pooled QAC (1.715 vs 1.737) and scaffold (1.814 vs 1.842), and better on OOD? No — human better on OOD pooled (1.649 vs 1.744 MAE; 2.054 vs 2.237 RMSE). Interesting pattern: continuous better in-domain, human better OOD-point-estimate but not significant. The narrative "human supervision remains useful" is fair. The conclusion "Human Good/Bad calls can serve as molecular supervision" — supported within protocol.
+
+  19. **Legacy/historical encoders**: clearly separated ("legacy-overlapping-source" in csv; "Historical encoders were trained on archives overlapping the original target structures"). Good. But: the legacy results appear in the same summary.csv and SI; ensure the main text never mixes them — it doesn't.
+
+  20. **Abstract numeric precision**: fine.
+
+  Now, the review must be under 800 words. I need to prioritize. Structure:
+
+  - Brief overall assessment (1-2 sentences): transparent, well-controlled, appropriately bounded; main weaknesses X, Y, Z.
+  - Major issues (concrete defects + fixes):
+    1. Censoring: IT505 excluded from metrics; informative censoring biases OOD errors downward; fix with bound-aware scoring. (And confirm no censored values hidden in historical workbook.)
+    2. Annotation provenance unresolved (H1–H7): human-vs-MIC interpretation provisional; if annotators saw MICs, "independent supervision" interpretation weakens; must be completed before strong claims.
+    3. Post-hoc narrative selection: disclosed but strengthen — state in main text what earlier results motivated Q-HERO demotion; mark scaffold sensitivity as hypothesis-generating (borderline −0.0001).
+    4. Raw reference uncertainty asymmetry (n=1 decoder; intervals one-sided); bootstrap over 5 seeds coarse.
+    5. Training-unit ambiguity: records vs molecules per arm; effective sample size/weighting differs; state explicitly.
+    6. Cation-fold inconsistency: 103 cations vs "five folds of 21 salts"; clarify grouping key.
+  - Minor:
+    7. Text-vs-one-hot confounded by dimensionality; add random-embedding control or relabel.
+    8. Pooled RMSE across endpoints of different variance; consider standardized per-endpoint analysis.
+  - Validity confirmations (brief): grouping logic (cation vs scaffold) correctly delimits claims; censored bound reported qualitatively; shuffled-label and raw controls well-designed; equivalence/causality properly avoided; legacy encoders quarantined; text embedding scope correctly limited.
+
+  Word budget: aim ~700-780.
+
+  Also I should double-check the "no equivalence" and "no causality" handling: Section 2.5 explicitly: "Unresolved differences are not statistical equivalence; no equivalence margin or annotation-to-measurement exchange rate is specified." "Improved loss under real human labels therefore concerns the learning procedure under that assignment. It does not identify the causal effect of a chemical fragment..." Good. Commend.
+
+  Molecule grouping validity: cation-held-out = interpolation (new cation, same scaffold family possibly); scaffold-held-out = extrapolation; OOD-17 = new families. The claims match the grouping. One caveat: "29 canonical cation Murcko scaffolds" for 103 cations — average ~3.5 cations per scaffold; scaffold holdout with 29 groups is reasonable. Fold sizes would be ~21 scaffolds per fold → ~? salts. Not given but fine.
+
+  Also, "Cation-held-out validation permits scaffold overlap; a separate scaffold-held-out sensitivity uses all 105 salts." Fine.
+
+  One more potential defect: In 2.3, text encoding pooled human 1.723 vs one-hot 1.737 (Δ−0.015). But for OOD text is worse (2.108 vs 2.054 pooled RMSE). "no consistent text-coding advantage is established on OOD" — correct.
+
+  Also the claim in abstract "fixed text embeddings provide no consistently resolved advantage over one-hot encoding" — supported by Δ−0.015 [−0.051, +0.024]. Fine.
+
+  Also should I mention the pooled OOD R² for expert one-hot is 0.367 (positive!) while three of four endpoint R² negative — the manuscript says "three of four human endpoint R² means are negative" and doesn't use pooled R². Consistent with policy. Good.
+
+  Also, Table 4 human Ec_MBC SD is ±0.013 — tiny vs others; because Ec_MBC errors are dominated by... whatever; fine.
+
+  Let me also verify the abstract pooled numbers correspond to one-hot: yes (1.7371221...). 
+
+  Check "Human minus binary MIC is -0.069 [-0.157, +0.009]" — upper +0.009 slightly above zero; text says "Their intervals include zero, so the point estimates show practical proximity" — careful: for human vs binary, the interval [−0.157, +0.009] includes zero by 0.009; calling it "practical proximity" is okay-ish. But note the asymmetry: expert-vs-binary point estimate favors human (−0.069) while its CI barely includes zero; expert-vs-continuous point estimate favors continuous (+0.022) CI includes zero. The balanced reading: continuous ≈ human ≈ binary on QAC-105 pooled; only comparisons vs shuffled and vs raw are "resolved." The manuscript says exactly this. Good.
+
+  Hmm, one subtle statistical point: the real-vs-shuffled contrast supports "contribution from real label assignment" — but shuffled has only 5 runs, and intervals are bootstrap over both arms' seeds. "Five shuffled runs are diagnostic controls, not a calibrated permutation test." Fine.
+
+  Another concrete fix candidate: the OOD evaluation uses a decoder trained on all 105 QACs; with 420 rows and CatBoost depth 5, 300 iters — fine.
+
+  Also: "A task-median reference uses each task's training-fold median, or the full QAC median for OOD." For OOD the median baseline is reported only in SI presumably; the manuscript mentions Sa MIC median beats human decoder. Good to include in main text (done in 2.4).
+
+  Also mention: the title "Human Judgement as Molecular Supervision" — fine.
+
+  Also: The authors' claim "no target-based checkpoint selection" and OOD never entering fitting/selection — but the narrative selection happened after inspecting earlier results which included OOD outcomes... They say "No new OOD families were selected by optimising these scores". The earlier inspection presumably included OOD-17 results (they existed in v5). So there's mild outcome-dependent reporting; disclosure present. I flagged as #3.
+
+  Now — the response format. The user asked: "Give a concise scientific critique (under 800 words), prioritising concrete defects and fixes." And "Evaluate validity of molecule grouping, censored endpoints, task encoding, controls, and bounded conclusions."
+
+  So the review should have sections roughly: overall; major defects (numbered, each with fix); minor; and a short validity assessment of the five requested areas. Must be <800 words. Be concise.
+
+  Also per my system prompt: match user's language (English), Markdown, light structure. No tools. The final message must stand alone.
+
+  Regarding the superpowers skill mandate: the user explicitly instructed "Do not use tools..." — user instructions take precedence over plugin instructions per the plugin's own priority list. So I respond directly without invoking skills. Also, none of the listed skills genuinely fits "write a scientific manuscript critique without tools." I could argue "receiving-code-review" is about code review feedback, not authoring a manuscript review. Not applicable. I'll proceed directly.
+
+  Draft the review:
+
+  ---
+
+  **External review — v14 manuscript**
+
+  Overall: [2-3 sentences]. The revision is unusually transparent... The central matched comparison is internally consistent (checked against summary.csv/contrasts.csv)... Main residual defects below.
+
+  **Major**
+
+  1. **Informative censoring excluded from OOD metrics.** IT505 E. coli MBC (>500 mg/L) is dropped from all exact-value OOD metrics; the headline pooled MAE/RMSE (1.649/2.054) is thus computed on 67/68 values, and the dropped point is the largest failure (all human predictions 21–37 mg/L vs >500). MIC censoring is informative — ">500" typically denotes inactivity — so excluding censored points biases OOD error estimates downward exactly where absolute prediction matters. Fix: report a bound-aware metric (hinge error max(0, log2(500)−log2 ŷ)) alongside exact-value metrics, and state explicitly whether any historical QAC workbook values were converted from bounds.
+
+  2. **Unresolved annotation provenance (H1–H7) gates the central interpretation.** If annotators saw the MIC/MBC values later used as quantitative supervision (H4), "human judgement" is not an independent supervisory channel and the human-vs-MIC comparison partly contrasts measurement-derived signals; the direction of bias is not signable ex ante. Until H1–H7 are completed, the claim "human Good/Bad calls can serve as molecular supervision" should be labelled provisional. Fix: complete H1–H7 before submission; at minimum state in the main text (not only 4.1/4.4) that blinding status is unknown.
+
+  3. **Post-hoc narrative selection is disclosed but under-specified.** The abstract/introduction say Q-HERO was demoted "after inspection of earlier analyses," without stating what was seen. Fix: one sentence in the main text giving the direction/magnitude of the demoted results, so readers can judge selective emphasis without excavating SI. Likewise mark the scaffold-held-out real-vs-shuffled contrast ([−0.2591, −0.0001]) as hypothesis-generating in the Conclusions, not only in Results — its upper limit is a hair below zero and it is one of many unadjusted contrasts.
+
+  4. **Uncertainty is asymmetric for the raw reference.** Raw MolFormer has a single decoder run; bootstrap intervals for human-vs-raw contrasts resample only the five trained-arm seeds (raw prediction held fixed), and bootstrapping five seed indices is coarse. The "improvement over raw features" claim therefore carries one-sided uncertainty. Fix: run the raw decoder over matched seeds/folds, or state explicitly that raw-arm decoder variability is not represented.
+
+  5. **Training unit differs across arms and is never stated.** Human arm: one call per training molecule (377; 52 positive). MIC arms: records repeat molecules (4,938 records over 681 molecules). If continuous/binary arms train on records, molecules with more assays receive more gradient weight, and "matched source chemistry" no longer implies matched supervision size/weighting. Fix: state per-arm training-example counts and aggregation in 4.2 (per-record vs per-molecule mean log MIC).
+
+  6. **Internal inconsistency in cation-fold construction.** 105 salts/103 cations cannot yield "five folds of 21 salts each" under cation grouping (103 is not divisible by 5; duplicated cations inflate some folds), yet "counterion forms of the same cation remain together" requires cation grouping. 21-salt folds are exact only under salt grouping, which contradicts the cation-together claim. Fix: state the actual grouping key and per-fold salt counts.
+
+  **Minor**
+
+  7. Text-vs-one-hot confounds task-description content with feature dimensionality (4 vs 1,536, constant within task). A control with 1,536-d random constant-per-task vectors would isolate content from dimension; alternatively relabel the condition "high-dimensional task indicators" to deter semantic readings. (The text's own caution is appreciated.)
+  8. Primary inference rests on pooled RMSE across endpoints with heterogeneous variance (Sa MBC ≈1.9 vs Ec MIC ≈1.6 log2 units); pooled loss weights endpoints by their error scale. Consider per-endpoint standardized contrasts with multiplicity control as a sensitivity.
+
+  **Validity checks passed** [brief]:
+  - Grouping logic matches claims: cation-held-out = within-family interpolation (stated), scaffold-held-out delimits extrapolation, OOD-17 = new families; honest reporting of negative R² and median-baseline win.
+  - Controls well designed: marginal-preserving shuffle, frozen raw reference, paired seeds, objective-matched binary arm; legacy overlapping-source encoders correctly quarantined.
+  - Task encoding scope correctly limited (4 fixed strain/endpoint texts; no compound data); SHA256-pinned cache.
+  - Bounded conclusions: no equivalence margin, no causal language, unadjusted exploratory intervals labelled; abstract numbers match tables.
+
+  Word count check — need <800. Let me count roughly. I'll write it and trim.
+
+  Let me make sure the numbers I cite are right:
+  - human OOD pooled MAE 1.649, RMSE 2.054 ✓ (text + csv)
+  - IT505 predictions 21.2–37.0 mg/L below >500 ✓
+  - 67 exact pairs ✓
+  - expert-shuffled scaffold interval [−0.2591, −0.0001] ✓
+  - raw single run ✓ ("raw features have one fixed decoder run"; "Raw-feature predictions repeat the same fixed prediction across seed draws")
+  - 377 training molecules, 52 positive ✓
+  - 681 molecules / 4,938 records ✓
+  - 105 salts/103 cations, five folds of 21 salts ✓ (4.3)
+  - text Δ −0.015 [−0.051, +0.024] ✓
+  - Sa MBC RMSE ~1.83–1.98 vs Ec MIC ~1.62–1.80 — I'll say Sa MBC ≈1.9–2.0 vs Ec MIC ≈1.6–1.7.
+
+  One more consideration: should I flag that the OOD human-vs-continuous pooled ΔRMSE −0.183 [−0.415, −0.004] barely excludes zero and the text says "cannot resolve general OOD superiority"? Already bounded; no need.
+
+  Also the task-median baseline beating human on Sa MIC OOD — it's reported; could add to "passed" as honesty. Included.
+
+  Also H7/no inter-rater agreement — noted within #2.
+
+  Also: reference 2 is the authors' own Bioorganic Chemistry 2025 paper — self-citation fine.
+
+  Also check: "the fixed scaffold-disjoint source split contains 377 training and 304 validation molecules; 52 training calls are positive" — 52/377 = 13.8% positive prevalence. Binary MIC threshold matched to that. OK.
+
+  One more possible defect: **prevalence-matched binary MIC is not a natural binarisation** — a threshold fitted to match human positive rate means binary-MIC labels are, in part, calibrated to the human arm; the binary-vs-human comparison is objective-matched but the binary arm's information content is constrained by the human arm's prevalence. Disclosed in 4.2 ("training-only threshold chosen to match human positive prevalence"). I could fold this into #5 or leave. It's minor; maybe a half-sentence in #5 or minor list. Actually it's a design choice; fine as is. I'll skip to save words — or one clause.
+
+  Length control: aim ~720 words. Write final.
+
+  Format: headers minimal — maybe bolded section labels. The user wants concise. I'll produce:
+
+  - Overall assessment (short paragraph)
+  - Major defects (numbered 1–6, each: defect + fix)
+  - Minor (7–8)
+  - Validity confirmed (short bullets)
+
+  Count words carefully as I write. I'll keep each item tight.
+
+To resume this session: kimi -r session_76c6b079-2a71-46e2-a66c-3899e1c9fed0

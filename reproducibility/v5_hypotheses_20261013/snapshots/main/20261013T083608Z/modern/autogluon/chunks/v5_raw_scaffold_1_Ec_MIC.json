@@ -1,0 +1,19 @@
+{
+  "rep": "v5_raw",
+  "schema": "scaffold",
+  "fold": 1,
+  "task": "Ec_MIC",
+  "completed": true,
+  "n_train": 84,
+  "n_test": 21,
+  "seconds": 2.5047271251678467,
+  "model": "autogluon",
+  "info": {
+    "inner_train_n": 66,
+    "inner_val_n": 18,
+    "selected_model": "CatBoost",
+    "refitted_model": "CatBoost_FULL",
+    "selection_budget_s": 60,
+    "refit_extra_budget": true
+  }
+}

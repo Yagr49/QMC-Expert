@@ -1,0 +1,17 @@
+{
+  "original_SD_recovered": [
+    "Linear probe MolFormer\u2192human R\u00b2 0.891\u00b10.037",
+    "Linear probe human\u2192MolFormer R\u00b2 0.844\u00b10.060"
+  ],
+  "original_probe_SD": "Saved May cell5; np.std of 5 folds, ddof=0",
+  "strong_May_R2": "Single holdout; no matched saved CV SD identified for 0.7494/0.6752/0.5918/0.7708",
+  "grouped_fold_SD": "Unweighted mean \u00b1 population SD of five fold scores; numpy std ddof=0; not 95% CI",
+  "source_seed_SD": "Mean \u00b1 sample SD of five complete source-seed runs; ddof=1; not CV-fold SD",
+  "OOD": "No OOD CV folds; seed variability can be reported for multiple source runs, not one archived checkpoint",
+  "rowcv_completed": true,
+  "input_sha256": {
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v18/analysis/predictions.csv": "8d5096b4a447f48c132112ee10079d5954050df9a94a6399d74b1ee769e5099c",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v18/analysis/modern_predictions.csv": "77bddf81e5f4588e4d812197984f87447d459318be3daa78099a6e5de716e79e",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v18/analysis/metrics.csv": "3fc470a4a6fc6cd38f4ece09fc9875d5693a467e284ab4f202f59ee1dc775715"
+  }
+}

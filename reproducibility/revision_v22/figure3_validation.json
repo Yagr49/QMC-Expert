@@ -1,0 +1,28 @@
+{
+  "checked": true,
+  "n_seed_predictions": 13605,
+  "n_endpoint_summaries": 4535,
+  "n_routes": 5,
+  "n_regimes": 3,
+  "n_source_target_seeds": 3,
+  "frozen_human_mean_sample_SD_reverified": true,
+  "direct12_mean_sample_SD_match_to_1e_12": true,
+  "PNG_size": [
+    4251,
+    2078
+  ],
+  "600dpi_metadata": [
+    599.9988,
+    599.9988
+  ],
+  "axes_max": 8.05,
+  "actual_max": 7.338735116711139,
+  "all_tail_observations_preserved": true,
+  "original_DOCX_modified": false,
+  "final_output_sha256": {
+    "pdf": "5db5adc71eb6676424074ba80fa52f78849c53c3a661bd8054b09fab785c42dc",
+    "svg": "f97fe5e26639355b8087cf93f880d2ba9eb882696e2fde2703193193c1984803",
+    "png": "a9b665a5fd5dc4dacb9f2d91dc6a3ff2d3d78aca99c4509d8d4f4479cae92c6d"
+  },
+  "caption_EN_word_count": 141
+}

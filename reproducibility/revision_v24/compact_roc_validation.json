@@ -1,0 +1,81 @@
+{
+  "completed": true,
+  "compact_source_csv_files": 16,
+  "compact_source_predictions": 13440,
+  "derived_endpoint_values": 3360,
+  "endpoint_values_per_violin": 420,
+  "compact_seed_metrics": 32,
+  "RMSE_MAE_agree_with_saved_summary": true,
+  "ROC_metrics_agree_with_saved_summary": true,
+  "no_new_model_fits": true,
+  "no_OOD_in_compact_figure": true,
+  "figures_separate_architectures": true,
+  "captions_word_count": 137,
+  "files": {
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figures/figure4_human_quantitative_compact.png": {
+      "bytes": 929698,
+      "sha256": "90d1c9ba131c14c7c4c8e26426edd6252a056abb4f27932668e7e5e379613fa9"
+    },
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figures/figure4_human_quantitative_compact.pdf": {
+      "bytes": 87516,
+      "sha256": "ce4020ee3a7eb30e273fda7f1c1e165d0887770dfb84ad7c189d15501d28a150"
+    },
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figures/figure4_human_quantitative_compact.svg": {
+      "bytes": 437313,
+      "sha256": "ad1264ed5687736393b1261b5ad5d6eea655a990f89664006a19261a89eed8d3"
+    },
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figures/figure5_qhero_real_roc.png": {
+      "bytes": 297060,
+      "sha256": "abe23552dd4647cae45ff100f81747e5a1b0794b62ca3937c64e3309734c0a80"
+    },
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figures/figure5_qhero_real_roc.pdf": {
+      "bytes": 73441,
+      "sha256": "7f1a36daf75a72c12efc0bd95adecedb498c5916aaf72e089acbaa423468168f"
+    },
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figures/figure5_qhero_real_roc.svg": {
+      "bytes": 333932,
+      "sha256": "10d3ceb5d84b92c22c8e9f90fea23bdf802efb04489c9bbb603988cadb2a4296"
+    },
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figure4_compact_error_values.csv": {
+      "bytes": 254606,
+      "sha256": "aa5e79578a7a98c1ccd96029225f1db536a5389246457d95d70df30485b89e62"
+    },
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figure4_compact_seed_metrics.csv": {
+      "bytes": 2052,
+      "sha256": "cf32a9c3bba6d015f57a6eb18123b5113aa7eea70dce4fee6e5342c19ec54c49"
+    },
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figure4_caption_EN.txt": {
+      "bytes": 1037,
+      "sha256": "7709234f7e275466005f863de74c66006dc6e6fb6206614982df8b8d1f2ba37d"
+    },
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figure4_caption_RU.txt": {
+      "bytes": 1506,
+      "sha256": "48d9b2b26c6e44911542052b5c2e614392bfea6746f472f6eb68dc614ddd93bf"
+    },
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figure4_provenance.json": {
+      "bytes": 5934,
+      "sha256": "7a6a753e5d65d1251c15d1609ef5fc4a543c31ebb0a6cc1e3ca7da3da4accefc"
+    },
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figure5_roc_metrics.csv": {
+      "bytes": 738,
+      "sha256": "1315276fe133e568942cf9d3fdb7dfbf60c664abe553a5a77c1968c57389ff60"
+    },
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figure5_empirical_roc_points.csv": {
+      "bytes": 681556,
+      "sha256": "f6c89e4357d1eb85130857e620e94a1e5cd23b9c3f5815050734a441bf7346c1"
+    },
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figure5_mean_roc_points.csv": {
+      "bytes": 699500,
+      "sha256": "35a1b84b6a0a37dd6840ac9e221646e76d225b42df4b1c34e68ea7a79b9ebdae"
+    },
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figure5_caption_EN.txt": {
+      "bytes": 909,
+      "sha256": "c603ce460f9c41618fb91622a650ce6a1f4a49e01009b98958ba329256a3eec7"
+    },
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figure5_provenance.json": {
+      "bytes": 1054,
+      "sha256": "9921cab2d89a1d1a5c2005af6fb467d86105d64d05e1a94628175e0d9b54965e"
+    }
+  },
+  "docx_changed_by_this_agent": false
+}

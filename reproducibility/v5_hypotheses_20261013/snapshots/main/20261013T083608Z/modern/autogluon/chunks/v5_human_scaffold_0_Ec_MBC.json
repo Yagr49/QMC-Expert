@@ -1,0 +1,19 @@
+{
+  "rep": "v5_human",
+  "schema": "scaffold",
+  "fold": 0,
+  "task": "Ec_MBC",
+  "completed": true,
+  "n_train": 84,
+  "n_test": 21,
+  "seconds": 4.547925233840942,
+  "model": "autogluon",
+  "info": {
+    "inner_train_n": 67,
+    "inner_val_n": 17,
+    "selected_model": "ExtraTrees",
+    "refitted_model": "ExtraTrees_FULL",
+    "selection_budget_s": 60,
+    "refit_extra_budget": true
+  }
+}

@@ -1,0 +1,223 @@
+{
+  "font": "Times New Roman",
+  "ethalon": "/Users/egorilin/Desktop/COMA/Supplementary_Information.docx",
+  "SI": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v30/Supplementary_Information_v30.docx",
+  "aligned_main": "/Users/egorilin/Desktop/COMA/2026_10_14_Paper_2_edited-v30_SI_aligned.docx",
+  "source_hashes": {
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v27/Supplementary_Information_v27.docx": "b9eaf0189b25c4ecd75bd8947e21d6f48d7d1a400fdaf52335758b13e44df71c",
+    "/Users/egorilin/Desktop/COMA/2026_10_14_Paper_2_edited-v29_explainability_figure.docx": "4ae85860bc0b08e66e80f9089f8074f519d8ebe54957c7b551f3e3ac77e5a696",
+    "/Users/egorilin/Desktop/COMA/2026_07_09_Paper_2_edited-v5_NF_3.docx": "0dd55e7b9ef5125dd938fdb04e9c2d0a430cc4b86fc099b85e9f6e5e6d1c2bfb"
+  },
+  "inputs_sha256": {
+    "reproducibility/revision_v27/Supplementary_Information_v27.docx": "b9eaf0189b25c4ecd75bd8947e21d6f48d7d1a400fdaf52335758b13e44df71c",
+    "reproducibility/revision_v19/rowcv_results/summary.csv": "1a5ab580e0971687bcd73f589ee7367bf428bdd443dc25a1b27fca1766ae508f",
+    "reproducibility/revision_v19/analysis/seed_summary.csv": "6a970b83370f713d7ee6bcd5b2367c6a579fa037d871437752db01b9b701ca27",
+    "reproducibility/revision_v18/analysis/summary.csv": "eae9900b759d2d70bc54e7a61858a48601b543c24e5b9aa0beeed9a488974e2a",
+    "reproducibility/revision_v18/analysis/modern_metrics.csv": "bcc04e1d606cf0bbbeff4e452d376043afb628307395658ef82a851288b26cb7",
+    "reproducibility/qhero_author_comparison_20261014/results/summary.csv": "8924ffdeef3a8daa36233c4e232cbc531285bb7153c90ee22f0a1dc417b48a3f",
+    "reproducibility/revision_v18/analysis/predictions.csv": "8d5096b4a447f48c132112ee10079d5954050df9a94a6399d74b1ee769e5099c",
+    "analysis/cka_probing.csv": "b7c4e73b3c17ac6d369d186bb1a27181235dd4df087ffbf30d186f5937af137d",
+    "reproducibility/notebook_recovery_20261012/notebooks/2026-05-25_causal_final.ipynb": "f997c63e5a706315a44a4a0a5631aa980707c685cfdc485a296ef1114f90bdfa",
+    "reproducibility/revision_v26/interpretation_contrasts.csv": "9e01e1d959629f1eb04a0542b3696f1602f16773f03e3326a49f9887a05b58a2",
+    "reproducibility/revision_v27/figures/figure10_supervision_contrasts_futura.png": "95a962fc823d6385eef1e278738413391370343a8433d6935435ee30012e191f",
+    "reproducibility/revision_v27/figures/figure10_supervision_contrasts_futura.pdf": "c8ce6b84d3a64177438b9fc8bed0cf66d708420621d08c6ef70bfc6aea136f23",
+    "reproducibility/revision_v27/figures/figure10_supervision_contrasts_futura.svg": "1b42d61da72109a84b3ecb94885aabf708f6c576fa51848afb9bd54348a2fc70",
+    "reproducibility/v5_hypotheses_20261013/data/QAC105.csv": "8dc0d7fda41e6c147f49d13290e5676f90d5ea292fc5fb7f8790dc5d997fd0f6",
+    "reproducibility/v5_hypotheses_20261013/data/OOD17.csv": "b2abafad0bacfc66b3228141175ae2fb0e924cbf95645b5f4d6fa2a0d307d2b2",
+    "reproducibility/v5_hypotheses_20261013/data/endpoint_registry.csv": "8dc37da0240f9de1294d233542de4f4f7c179f2c080c39a5ef5dd4617dd4d129",
+    "reproducibility/revision_v18/analysis/contrasts.csv": "9e18452c44a6ef9a639fe86a54bf06523d91ff16a5bdd5ef29316828373f9830",
+    "reproducibility/revision_v24/analysis/FT_route_RMSE_mean_sample_SD.csv": "51ed64df29dd9d05fb09eabe7b2d7013a799cc30bbed87bf8466ccbbbd7930aa",
+    "reproducibility/qhero_author_comparison_20261014/results/paired_scaffold_contrasts.csv": "a566e518bc1c33973d0d3a211fddb136d459ca4ba95f23f16ea4a0f2411fd584",
+    "reproducibility/revision_v26/OOD_violin_values.csv": "704382db5d55e0fc359000e3dede6ebeeee35e656c480be929d82f3e1714d746",
+    "reproducibility/revision_v29/inserted_figure_contrasts.csv": "f2fcde6a06afe8d83a8c119f214fa9fe1f5a06683a1fe0de31756b797e2efe01",
+    "reproducibility/revision_v24/task_text_embedding_provenance.json": "b84316b3c9c9a3fc6a29193d2d876be2203875936ac6c06e7049f19500b475be",
+    "reproducibility/server_models_20261012/analysis/all_model_metrics.csv": "844711316fc5258f7e720302a3b9469438cb36d05cd83cebe08a8244c4f3e35b",
+    "reproducibility/revision_v14/figures/original_QAC105_structures.pdf": "c8bde5c683dc793b1832b2c5ce23e30952f8f73e5b4057fc65512e91e676acfd",
+    "reproducibility/revision_v14/figures/OOD17_structures.pdf": "673dc374e2eb5780f88d550a061c8f449e79d560194324a659ce5a20ea5680cb"
+  },
+  "table_map": {
+    "45": 1,
+    "46": 2,
+    "40": 3,
+    "35": 4,
+    "36": 5,
+    "41": 6,
+    "38": 7,
+    "42": 8,
+    "49": 9,
+    "47": 10,
+    "48": 11,
+    "50": 12
+  },
+  "tables": [
+    {
+      "number": 1,
+      "old": 45,
+      "caption": "Reference holdout metrics for the primary quantitative endpoints. The E. coli MIC cell printed as R² = 0.60 corresponds to R² = 0.5918; the strain header ATCC 4300 is the original table typo for ATCC 43300."
+    },
+    {
+      "number": 2,
+      "old": 46,
+      "caption": "Reference metrics for secondary quantitative comparisons. Author-reported values are retained."
+    },
+    {
+      "number": 3,
+      "old": 40,
+      "caption": "Five-fold row-CV reconstruction: mean ± fold SD (ddof = 0)."
+    },
+    {
+      "number": 4,
+      "old": 35,
+      "caption": "Holdout endpoint metrics reconstructed on the 108 worksheet records."
+    },
+    {
+      "number": 5,
+      "old": 36,
+      "caption": "Compact-control and representation configurations: seed-mean RMSE."
+    },
+    {
+      "number": 6,
+      "old": 41,
+      "caption": "Complete compact-arm results: mean ± sample SD across source runs (ddof = 1)."
+    },
+    {
+      "number": 7,
+      "old": 38,
+      "caption": "Modern decoder endpoint results on reference guided features. Each method fits separate endpoint predictors with train-only PCA-32."
+    },
+    {
+      "number": 8,
+      "old": 42,
+      "caption": "Grouped fold variability for guided-feature and modern-decoder procedures. Mean ± fold SD uses five folds and ddof = 0."
+    },
+    {
+      "number": 9,
+      "old": 49,
+      "caption": "OOD route scores on 67 exact endpoints. Repeated results are mean ± sample SD over the stated runs."
+    },
+    {
+      "number": 10,
+      "old": 47,
+      "caption": "Q-HERO405 classification. Mean ± sample SD over five paired source/decoder runs; fixed RF and raw references have one fit."
+    },
+    {
+      "number": 11,
+      "old": 48,
+      "caption": "Paired Q-HERO scaffold contrasts from 2,000 paired seed/scaffold bootstrap draws over fixed OOF predictions and 29 scaffolds."
+    },
+    {
+      "number": 12,
+      "old": 50,
+      "caption": "Scaffold-clustered label and weight intervention contrasts plotted in Figure S8."
+    },
+    {
+      "number": 13,
+      "old": "chemistry_optimisation",
+      "caption": "THP multicomponent-reaction optimisation corresponding to main Section 2.3.2 (placeholder for the original experimental record)."
+    }
+  ],
+  "figures": [
+    "figureS5_row_cv",
+    "figureS6_compact_seed_variability",
+    "figureS7_modern_decoders",
+    "figureS8_qhero_average_precision",
+    "figureS9_ood_endpoint_parity",
+    "figureS10_geometry_and_attribution",
+    "figureS11_figure9_interpretation_controls_futura",
+    "figureS12_figure10_supervision_contrasts_futura"
+  ],
+  "archival_raster_figures": [
+    1,
+    2,
+    3,
+    4,
+    9,
+    10
+  ],
+  "figure_map": {
+    "33": 9,
+    "34": 10,
+    "35": 8
+  },
+  "main_changes": [
+    {
+      "body_index": 26,
+      "before": "Figure 1. Conceptual expert-guidance pipeline and reference prediction workflows. The archive contains 1,103 final Good/Bad labels; the earlier collection-stage count of 1,500 remains subject to coauthor confirmation. Panel A distinguishes the descriptor-MLP reference range (R² 0.25–0.68, four endpoints) from stacking (R² 0.30–0.43, the three reported endpoints). Panel B uses recovered human/text holdout scores across four endpoints (R² 0.5918–0.7708, shown as 0.59–0.77). These are historical point-score ranges from Table S45, not CV uncertainty or a paired estimate from the new matched experiments. The upper curves are schematic. Representative bis-QAC scaffolds are drawn using ACS1996 styling; R denotes an unspecified substituent.",
+      "after": "Figure 1. Conceptual expert-guidance pipeline and reference prediction workflows. The archive contains 1,103 final Good/Bad labels; the earlier collection-stage count of 1,500 remains subject to coauthor confirmation. Panel A distinguishes the descriptor-MLP reference range (R² 0.25–0.68, four endpoints) from stacking (R² 0.30–0.43, the three reported endpoints). Panel B uses recovered human/text holdout scores across four endpoints (R² 0.5918–0.7708, shown as 0.59–0.77). These are historical point-score ranges from Table S1, not CV uncertainty or a paired estimate from the new matched experiments. The upper curves are schematic. Representative bis-QAC scaffolds are drawn using ACS1996 styling; R denotes an unspecified substituent."
+    },
+    {
+      "body_index": 34,
+      "before": "To identify the optimal descriptor for downstream expert-guided learning, we benchmarked four molecular representations under a unified 5-fold stratified cross-validation protocol: transformer-based embeddings (MolFormer, 768-dimensional; ChemBERTa) and classical fingerprints (Morgan, MACCS). MolFormer embeddings consistently outperformed all alternatives, achieving the highest mean F1-score of 0.655 (MLP with StandardScaler) and accuracy of 0.856, whereas Morgan, MACCS, and ChemBERTa exhibited near-random F1 scores (≤0.50) despite moderate accuracy (Figure SI 1-2). This accuracy–F1 divergence indicates that classical fingerprints and the smaller chemical language model capture majority-class bias rather than biocide-specific structural motifs, whereas MolFormer’s pre-trained chemical vocabulary already encodes the subtle physicochemical nuances relevant to membrane-targeting cationics. Detailed per-representation and per-scaler comparisons are provided in the Supporting Information. ",
+      "after": "To identify the optimal descriptor for downstream expert-guided learning, we benchmarked four molecular representations under a unified 5-fold stratified cross-validation protocol: transformer-based embeddings (MolFormer, 768-dimensional; ChemBERTa) and classical fingerprints (Morgan, MACCS). MolFormer embeddings consistently outperformed all alternatives, achieving the highest mean F1-score of 0.655 (MLP with StandardScaler) and accuracy of 0.856, whereas Morgan, MACCS, and ChemBERTa exhibited near-random F1 scores (≤0.50) despite moderate accuracy (Figures S1–S2). This accuracy–F1 divergence indicates that classical fingerprints and the smaller chemical language model capture majority-class bias rather than biocide-specific structural motifs, whereas MolFormer’s pre-trained chemical vocabulary already encodes the subtle physicochemical nuances relevant to membrane-targeting cationics. Detailed per-representation and per-scaler comparisons are provided in the Supporting Information. "
+    },
+    {
+      "body_index": 48,
+      "before": "Having obtained the embeddings, we next evaluated them on the MIC and MBC regression tasks for the 105 quaternary ammonium compounds introduced in our previous work. Each molecule is represented together with the bacterial species and activity type, allowing a shared CatBoost model to predict four quantitative endpoints. Expert Good/Bad labels train the representation; measured MIC/MBC values still train the downstream quantitative decoder. Complete reference results are provided in Tables S45–S46.",
+      "after": "Having obtained the embeddings, we next evaluated them on the MIC and MBC regression tasks for the 105 quaternary ammonium compounds introduced in our previous work. Each molecule is represented together with the bacterial species and activity type, allowing a shared CatBoost model to predict four quantitative endpoints. Expert Good/Bad labels train the representation; measured MIC/MBC values still train the downstream quantitative decoder. Complete reference results are provided in Tables S1–S2."
+    },
+    {
+      "body_index": 49,
+      "before": "The original reference comparison shows the value of this task-aware formulation. With human-guided molecular features and text-encoded task descriptions, the recovered endpoint R² values are 0.75, 0.68, 0.59 and 0.77 for S. aureus MIC, S. aureus MBC, E. coli MIC and E. coli MBC, respectively. One-hot and categorical task coding provide simpler alternatives. Text descriptions are encoded with OpenAI text-embedding-3-small, giving one fixed 1,536-dimensional vector for each of the four species–endpoint combinations; exact inputs and cache provenance are provided in SI Section S34. The original comparison also reports close point estimates for the expert-guided and full-corpus quantitative encoders (Table S46), suggesting that coarse expert supervision can produce useful molecular features. Similar scores do not by themselves establish equivalence of the two sources or demonstrate a unique semantic benefit of text task descriptions.",
+      "after": "The original reference comparison shows the value of this task-aware formulation. With human-guided molecular features and text-encoded task descriptions, the recovered endpoint R² values are 0.75, 0.68, 0.59 and 0.77 for S. aureus MIC, S. aureus MBC, E. coli MIC and E. coli MBC, respectively. One-hot and categorical task coding provide simpler alternatives. Text descriptions are encoded with OpenAI text-embedding-3-small, giving one fixed 1,536-dimensional vector for each of the four species–endpoint combinations; exact inputs and cache provenance are provided in SI Section S2. The original comparison also reports close point estimates for the expert-guided and full-corpus quantitative encoders (Table S2), suggesting that coarse expert supervision can produce useful molecular features. Similar scores do not by themselves establish equivalence of the two sources or demonstrate a unique semantic benefit of text task descriptions."
+    },
+    {
+      "body_index": 52,
+      "before": "Figure 4. Original v5 experimental-versus-predicted correlations for descriptor-based models and learned molecular embeddings, with no task labels, categorical/one-hot task labels and OpenAI text-embedded task descriptions. The original raster is retained without changing its points or printed pooled R²/RMSE/MAE values. These are archived reference plots, separate from the newly reconstructed row-CV and source-excluded cation/scaffold tests. Text task descriptions use text-embedding-3-small, as specified in Section 2.2.1 and SI S34.",
+      "after": "Figure 4. Original v5 experimental-versus-predicted correlations for descriptor-based models and learned molecular embeddings, with no task labels, categorical/one-hot task labels and OpenAI text-embedded task descriptions. The original raster is retained without changing its points or printed pooled R²/RMSE/MAE values. These are archived reference plots, separate from the newly reconstructed row-CV and source-excluded cation/scaffold tests. Text task descriptions use text-embedding-3-small, as specified in Section 2.2.1 and SI Section S2."
+    },
+    {
+      "body_index": 53,
+      "before": "To assess variability separately from these historical holdout results, we reconstructed five-fold row-wise cross-validation using the saved human-guided features and recovered decoder budget. Mean endpoint R² ranges from 0.449 to 0.717 with text task coding; complete mean ± fold SD values and raw-feature controls are in Table S40. This protocol predicts withheld task rows and may retain other measurements of the same molecule in training. Cation and scaffold holdouts address the different question of prediction for new molecular groups.",
+      "after": "To assess variability separately from these historical holdout results, we reconstructed five-fold row-wise cross-validation using the saved human-guided features and recovered decoder budget. Mean endpoint R² ranges from 0.449 to 0.717 with text task coding; complete mean ± fold SD values and raw-feature controls are in Table S3. This protocol predicts withheld task rows and may retain other measurements of the same molecule in training. Cation and scaffold holdouts address the different question of prediction for new molecular groups."
+    },
+    {
+      "body_index": 55,
+      "before": "The violins in Figure 5 show the observed endpoint-error distributions on the same 105 salts. Median absolute errors are 1.18, 1.08, 1.14 and 1.18 log₂ units for human, quantitative, shuffled-human and raw MolFormer features under cation holdout, and 1.42, 1.36, 1.30 and 1.38 under scaffold holdout. Human and quantitative guidance give similar pooled errors, with their ordering depending on the holdout scheme. Shuffled-human guidance remains competitive in this compact-encoder experiment, limiting claims that human-label meaning uniquely explains the result. Detailed seed statistics and controls are in Table S41. These comparisons assess representation-learning procedures; an expert label is not assumed to be informationally equivalent to an individual concentration measurement.",
+      "after": "The violins in Figure 5 show the observed endpoint-error distributions on the same 105 salts. Median absolute errors are 1.18, 1.08, 1.14 and 1.18 log₂ units for human, quantitative, shuffled-human and raw MolFormer features under cation holdout, and 1.42, 1.36, 1.30 and 1.38 under scaffold holdout. Human and quantitative guidance give similar pooled errors, with their ordering depending on the holdout scheme. Shuffled-human guidance remains competitive in this compact-encoder experiment, limiting claims that human-label meaning uniquely explains the result. Detailed seed statistics and controls are in Table S6. These comparisons assess representation-learning procedures; an expert label is not assumed to be informationally equivalent to an individual concentration measurement."
+    },
+    {
+      "body_index": 58,
+      "before": "Modern molecular and tabular models provide additional checks on the choice of decoder. Chemprop, TabPFN, TabFM and AutoGluon were evaluated on the same target registers. TabFM improves the separate-endpoint raw CatBoost pipeline in the grouped point comparisons, illustrating that the best procedure depends on both representation and decoder. Different PCA treatments and optimisation budgets make these practical pipeline comparisons. Full endpoint results and fold variability are provided in Tables S38 and S42.",
+      "after": "Modern molecular and tabular models provide additional checks on the choice of decoder. Chemprop, TabPFN, TabFM and AutoGluon were evaluated on the same target registers. TabFM improves the separate-endpoint raw CatBoost pipeline in the grouped point comparisons, illustrating that the best procedure depends on both representation and decoder. Different PCA treatments and optimisation budgets make these practical pipeline comparisons. Full endpoint results and fold variability are provided in Tables S7 and S8."
+    },
+    {
+      "body_index": 61,
+      "before": "On Q-HERO, human guidance also exceeds shuffled-human guidance (AUROC 0.567 ± 0.070). The paired difference is +0.108, with conditional 95% bootstrap interval [0.031, 0.237] over source/decoder seeds and scaffold clusters. The human−RF contrast is positive under scaffold evaluation (+0.110 [0.026, 0.201]), while its random-test interval includes zero [−0.066, 0.297]. This supports a contribution from label assignment in the stated procedure, without establishing a biological mechanism or superiority over quantitative guidance. The ± values denote sample SD of five complete runs. Since 360 of 405 molecules are active, precision–recall results are interpreted against the high positive-class prevalence. Full metrics, controls and provenance are in Tables S47–S48. The matched RF comparison concerns our cleaned cohort and scaffold protocol, rather than the authors’ original 421-row random test.",
+      "after": "On Q-HERO, human guidance also exceeds shuffled-human guidance (AUROC 0.567 ± 0.070). The paired difference is +0.108, with conditional 95% bootstrap interval [0.031, 0.237] over source/decoder seeds and scaffold clusters. The human−RF contrast is positive under scaffold evaluation (+0.110 [0.026, 0.201]), while its random-test interval includes zero [−0.066, 0.297]. This supports a contribution from label assignment in the stated procedure, without establishing a biological mechanism or superiority over quantitative guidance. The ± values denote sample SD of five complete runs. Since 360 of 405 molecules are active, precision–recall results are interpreted against the high positive-class prevalence. Full metrics, controls and provenance are in Tables S10–S11. The matched RF comparison concerns our cleaned cohort and scaffold protocol, rather than the authors’ original 421-row random test."
+    },
+    {
+      "body_index": 67,
+      "before": "The quantitative OOD comparison uses all 17 compounds and the four MIC/MBC endpoints against S. aureus and E. coli. Each target predictor is fitted on the original 105-QAC cohort before the new compounds are evaluated. Of the 68 endpoint records, 67 are exact and IT505 E. coli MBC is reported as >500 mg/L. We retain this bound separately and exclude it from exact-error scores, rather than treating 500 mg/L as a measured concentration. Errors are evaluated on the log₂(mg/L) scale. The strict source-matched follow-ups exclude target cations from encoder-training panels; their frozen-source prediction protocol is distinct from the historical few-shot analysis retained in Figure S33.",
+      "after": "The quantitative OOD comparison uses all 17 compounds and the four MIC/MBC endpoints against S. aureus and E. coli. Each target predictor is fitted on the original 105-QAC cohort before the new compounds are evaluated. Of the 68 endpoint records, 67 are exact and IT505 E. coli MBC is reported as >500 mg/L. We retain this bound separately and exclude it from exact-error scores, rather than treating 500 mg/L as a measured concentration. Errors are evaluated on the log₂(mg/L) scale. The strict source-matched follow-ups exclude target cations from encoder-training panels; their frozen-source prediction protocol is distinct from the historical few-shot analysis retained in Figure S9."
+    },
+    {
+      "body_index": 68,
+      "before": "For the archived v5 compact human encoder, the new fixed-feature decoder calculation gives pooled OOD RMSE 2.023 with text task codes, versus 2.245 for raw MolFormer under the same text-code decoder protocol. These are point estimates from one archived source checkpoint; no source-run SD is available. Historical source overlap with the original QAC targets distinguishes this reference from the source-excluded controls below. Full task-coding and endpoint results are in Tables S35–S36 and S49. The full-corpus quantitative checkpoint from the original Table S46 is not substituted by the available QAC-only ablation.",
+      "after": "For the archived v5 compact human encoder, the new fixed-feature decoder calculation gives pooled OOD RMSE 2.023 with text task codes, versus 2.245 for raw MolFormer under the same text-code decoder protocol. These are point estimates from one archived source checkpoint; no source-run SD is available. Historical source overlap with the original QAC targets distinguishes this reference from the source-excluded controls below. Full task-coding and endpoint results are in Tables S4–S5 and S9. The full-corpus quantitative checkpoint from the original Table S2 is not substituted by the available QAC-only ablation."
+    },
+    {
+      "body_index": 87,
+      "before": "However, despite the well-known nature of the method, we encountered several unexpected difficulties during the implementation of the process requiring optimization of the MCR synthesis conditions. First, the desired THP was produced in mixture with 4H-pyran as a result of a competitive process of intramolecular cyclization via the attack of carbonyl on the nitrile group after Michael addition (Scheme S1). The MCR conditions for a 3-pyridinecarboxaldehyde, malononitrile, methyl acetoacetate and ammonium acetate were optimized by varying the solvent, temperature, and the equivalents of ammonium acetate (Table S1). 4H-Pyran was the primary product during the reaction at room temperature, while at 64 ℃ and increased solvent load the quantity of the by-product slightly decreased (Table S1 entry 3). As the amount of NH4OAc increases to 4.0 mol. equiv., the reaction’s sole product is desired THP. Consequently, we attempted to conduct the reaction using ethanol, which is less hazardous to human health and is classified as a green solvent 70. Carrying out a similar reaction in ethanol at 78 ℃ resulted in 62% yield of the desired THP (Table S1 entry 7). Second, the Menshutkin reaction led to the formation of bis-QAC in the form of a pair of diastereoisomers (Scheme S2). In our previous study, we found that 4SR,6RS-THP convert to more stable epimers when heated in DMSO. Thus, we carried out additional epimerization step in order to obtain a more diastereoselectively pure product. The subsequent Menshutkin reaction yielded bis-pyridinium salts in the form of a single diastereomer.",
+      "after": "However, despite the well-known nature of the method, we encountered several unexpected difficulties during the implementation of the process requiring optimization of the MCR synthesis conditions. First, the desired THP was produced in mixture with 4H-pyran as a result of a competitive process of intramolecular cyclization via the attack of carbonyl on the nitrile group after Michael addition (Scheme S1). The MCR conditions for a 3-pyridinecarboxaldehyde, malononitrile, methyl acetoacetate and ammonium acetate were optimized by varying the solvent, temperature, and the equivalents of ammonium acetate (Table S13). 4H-Pyran was the primary product during the reaction at room temperature, while at 64 ℃ and increased solvent load the quantity of the by-product slightly decreased (Table S13 entry 3). As the amount of NH4OAc increases to 4.0 mol. equiv., the reaction’s sole product is desired THP. Consequently, we attempted to conduct the reaction using ethanol, which is less hazardous to human health and is classified as a green solvent 70. Carrying out a similar reaction in ethanol at 78 ℃ resulted in 62% yield of the desired THP (Table S13 entry 7). Second, the Menshutkin reaction led to the formation of bis-QAC in the form of a pair of diastereoisomers (Scheme S2). In our previous study, we found that 4SR,6RS-THP convert to more stable epimers when heated in DMSO. Thus, we carried out additional epimerization step in order to obtain a more diastereoselectively pure product. The subsequent Menshutkin reaction yielded bis-pyridinium salts in the form of a single diastereomer."
+    },
+    {
+      "body_index": 100,
+      "before": "In the archived concatenated-feature CatBoost model, summed mean absolute SHAP values on the 67 exact OOD endpoints are 2.930 for MolFormer features, 0.636 for human features and 0.761 for the task identifier. The human-to-MolFormer block ratio is 0.217. These attributions describe how that fitted model allocates prediction contributions among correlated feature blocks of different dimensions. They are neither fractions of biological variance nor evidence for a separate causal knowledge channel. Detailed archived geometry and attribution results remain in SI, together with the original conceptual diagram in Figure S34.",
+      "after": "In the archived concatenated-feature CatBoost model, summed mean absolute SHAP values on the 67 exact OOD endpoints are 2.930 for MolFormer features, 0.636 for human features and 0.761 for the task identifier. The human-to-MolFormer block ratio is 0.217. These attributions describe how that fitted model allocates prediction contributions among correlated feature blocks of different dimensions. They are neither fractions of biological variance nor evidence for a separate causal knowledge channel. Detailed archived geometry and attribution results remain in SI, together with the original conceptual diagram in Figure S10."
+    },
+    {
+      "body_index": 105,
+      "before": "Weight interventions provide a complementary check. Restoring source encoder weights in the partial-backbone experiment raises cation-held-out RMSE by +0.109, conditional interval [+0.037, +0.201], while scaffold and four-family OOD intervals include zero. The compact weight-reset experiment does not resolve a corresponding effect and retains BatchNorm state, so it is distinct from an entirely untrained encoder. Figure S35 and Table S50 show the full contrasts for both architectures. Such interventions address dependence of the prediction procedure on learned updates, rather than a causal effect of a molecular fragment on antibacterial activity.",
+      "after": "Weight interventions provide a complementary check. Restoring source encoder weights in the partial-backbone experiment raises cation-held-out RMSE by +0.109, conditional interval [+0.037, +0.201], while scaffold and four-family OOD intervals include zero. The compact weight-reset experiment does not resolve a corresponding effect and retains BatchNorm state, so it is distinct from an entirely untrained encoder. Figure S8 and Table S12 show the full contrasts for both architectures. Such interventions address dependence of the prediction procedure on learned updates, rather than a causal effect of a molecular fragment on antibacterial activity."
+    }
+  ],
+  "chemical_table": 13,
+  "model_training_performed": false,
+  "copied_numeric_cells_preserved": true,
+  "pending_author_material": [
+    "annotation logistics",
+    "THP optimisation table",
+    "Scheme S1 and Scheme S2",
+    "source NMR/HRMS/FT-IR spectra"
+  ]
+}

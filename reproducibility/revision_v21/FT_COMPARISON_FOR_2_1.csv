@@ -1,0 +1,16 @@
+route,schema,RMSE,SD,runs,unit,uncertainty
+Frozen pretrained / linear head,cation,2.013491335255327,0.0061637064176404,3,log2(mg/L),sample SD complete runs
+Frozen pretrained / linear head,full-QAC105,2.5603931216954323,0.2063135368975286,3,log2(mg/L),sample SD complete runs
+Frozen pretrained / linear head,scaffold,1.985593836575647,0.0026291358324026,3,log2(mg/L),sample SD complete runs
+Direct LoRA,cation,2.040296716968376,0.0494319914643457,3,log2(mg/L),sample SD complete runs
+Direct LoRA,full-QAC105,2.75568186103078,0.1715539786835175,3,log2(mg/L),sample SD complete runs
+Direct LoRA,scaffold,2.0888912394717685,0.0117706022979438,3,log2(mg/L),sample SD complete runs
+Direct full FT,cation,1.8630163023950288,0.0452784917928547,3,log2(mg/L),sample SD complete runs
+Direct full FT,full-QAC105,3.031600382823847,0.4081285229665843,3,log2(mg/L),sample SD complete runs
+Direct full FT,scaffold,1.970118043136149,0.0260333581668138,3,log2(mg/L),sample SD complete runs
+Human partial backbone / direct target FT,cation,1.7966471128163393,0.05656932238817,3,log2(mg/L),sample SD complete runs
+Human partial backbone / direct target FT,full-QAC105,2.411703972354278,0.0877331463565555,3,log2(mg/L),sample SD complete runs
+Human partial backbone / direct target FT,scaffold,1.8344265366845995,0.0576808859439385,3,log2(mg/L),sample SD complete runs
+Frozen human partial backbone / CatBoost,cation,1.742822166227841,0.030572207834920546,3,log2(mg/L),sample SD complete runs
+Frozen human partial backbone / CatBoost,full-QAC105,2.106199085904346,0.07096112650525102,3,log2(mg/L),sample SD complete runs
+Frozen human partial backbone / CatBoost,scaffold,1.8188011559271808,0.04368478638877195,3,log2(mg/L),sample SD complete runs

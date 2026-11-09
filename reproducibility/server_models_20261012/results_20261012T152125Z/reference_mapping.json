@@ -1,0 +1,46 @@
+{
+  "v14_cation": [
+    "references/v14_cation/predictions.csv",
+    "core_v14/results/predictions.csv"
+  ],
+  "v14_scaffold": [
+    "references/v14_scaffold/predictions.csv",
+    "core_v14/scaffold_sensitivity/results/predictions.csv"
+  ],
+  "ft": [
+    "references/ft/predictions.csv",
+    "core_ft/results/predictions.csv"
+  ],
+  "c3": [
+    "references/c3/predictions.csv",
+    "core_frozen/results_c3-molformer/predictions.csv"
+  ],
+  "chemfm": [
+    "references/chemfm/predictions.csv",
+    "core_frozen/results_chemfm1b/predictions.csv"
+  ],
+  "chemberta": [
+    "references/chemberta/predictions.csv",
+    "core_frozen/results_chemberta100m/predictions.csv"
+  ],
+  "molformer": [
+    "references/molformer/predictions.csv",
+    "core_frozen/results_molformer/predictions.csv"
+  ],
+  "binary_shuffle": [
+    "references/binary_shuffle/predictions.csv",
+    "core_frozen/results_molformer/predictions.csv"
+  ],
+  "context": [
+    "references/context/predictions.csv",
+    "core_frozen/results_context/predictions.csv"
+  ],
+  "v14_retrained_cation": [
+    "references/v14_cation/predictions.csv",
+    "retrained_v14/results/predictions.csv"
+  ],
+  "v14_retrained_scaffold": [
+    "references/v14_scaffold/predictions.csv",
+    "retrained_v14/scaffold_sensitivity/results/predictions.csv"
+  ]
+}

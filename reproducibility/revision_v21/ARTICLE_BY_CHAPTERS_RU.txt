@@ -1,0 +1,33 @@
+v21: ИСХОДНЫЙ v5 + ЖЁЛТЫЕ ДОПОЛНЕНИЯ
+
+1. ВВЕДЕНИЕ
+Исходный рассказ об AMR, ML, prior knowledge, человеческой экспертизе, transfer и QAC сохранён.
+Жёлтым добавлены: выбор supervision отдельно от выбора адаптации; frozen MolFormer (768) → внешний encoder (256) → количественный CatBoost; сопоставление fine-tuning и двух prediction routes.
+Тезис: в наших условиях надо проверять перенос и декодер. Нельзя объявлять весь fine-tuning плохим или маленький адаптер универсально лучшим.
+
+FIGURE 1
+Оригинал сохранён. Предложение: в панели B явно назвать backbone/encoder/decoder, сверить1500 examples и источникR² = 0.53–0.86. Композицию можно оставить.
+
+2.1. ОБУЧЕНИЕ GUIDANCE NN
+Исходные descriptor screen, MLP 512→384→256, Borderline SMOTE и t-SNE сохранены.
+Жёлтым: архив 1103 итоговых calls + место соавторам; StandardScaler и frozen-backbone механизм; завершённый отдельный backbone-эксперимент на 105 QAC и 17 OOD-молекулах; значенияRMSE и sample SD трёх запусков; компактный контроль с реальной и перемешанной source-разметкой.
+
+RMSE log2(mg/L); среднее ± sample SD трёх полных запусков:
+Процедура | Cation CV | Scaffold CV | OOD17
+Frozen pretrained / linear head | 2.013 ± 0.006 | 1.986 ± 0.003 | 2.560 ± 0.206
+Direct LoRA | 2.040 ± 0.049 | 2.089 ± 0.012 | 2.756 ± 0.172
+Direct full FT | 1.863 ± 0.045 | 1.970 ± 0.026 | 3.032 ± 0.408
+Human partial backbone / direct target FT | 1.797 ± 0.057 | 1.834 ± 0.058 | 2.412 ± 0.088
+Frozen human partial backbone / CatBoost | 1.743 ± 0.031 | 1.819 ± 0.044 | 2.106 ± 0.071
+
+Partial backbone — отдельный эксперимент, а не внешний MLP из v5. Только две human routes разделяют source checkpoints 0–2. OOD:67 точных endpoint-значений и одна сохранённая граница.
+Для компактного v5-архитектурного follow-up: human OOD RMSE 2.268 ± 0.077 против shuffled 2.172 ± 0.112, sample SD пяти source runs. Это не подтверждает semantic advantage в той процедуре.
+
+2.2. ПОКА ОБСУЖДАЕМ
+Предложение: сохранитьTables 1–2; отдельной строкой добавить новую CV с настоящими ±; разделить task-row и new-molecule/scaffold validation; коротко современные decoder-контроли, детали в SI. Полное предложение: DISCUSSION_2_2_RU.md.
+
+CLAUDE / KIMI
+Оба фактически отработали на Mac. Q-HERO завершён на обоих серверах и прошёл независимую проверку. Новые Q-HERO и Tiihonen цифры в основной текст не вставлены, отдельные отчёты сохранены.
+
+ПРОВЕРКА WORD
+Все 11 новых абзацев выделены жёлтым. После их удаления document.xml совпадает с исходным v5 побайтово; все остальные компоненты DOCX, включая Fig. 1, сохранены.

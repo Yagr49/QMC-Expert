@@ -1,0 +1,295 @@
+{
+  "inputs": {
+    "/Users/egorilin/Desktop/COMA/Data_and_models.zip": "1a9bd70689571aacf2ac007460b23dbc6b3fbc775a1600af4b7b2fc4ff3d3038",
+    "/private/tmp/coma_tiihonen_20261014/Data_and_models.zip": "1a9bd70689571aacf2ac007460b23dbc6b3fbc775a1600af4b7b2fc4ff3d3038",
+    "/Users/egorilin/Downloads/Data_and_models.zip": "1a9bd70689571aacf2ac007460b23dbc6b3fbc775a1600af4b7b2fc4ff3d3038",
+    "/Users/egorilin/Desktop/COMA/Data_and_models/Data/dataset_outliers_dropped.csv": "2a500015577f1038c611fce856494eb08d9ed7a5c542dcdf2aaeaf15dd863749",
+    "/Users/egorilin/Desktop/COMA/Data_and_models/Data/Reference_data_files/y_opt_train_seed3.csv": "0a331ddf84f5d7d38b6fc48d9981df4bb9af1bcfc5989368abe19eb1f26a870f",
+    "/Users/egorilin/Desktop/COMA/Data_and_models/Data/Reference_data_files/y_opt_test_seed3.csv": "4286487a0d3efc6c40b23420d1c48cc1c25966eb8dd6b66094e6572236bf001c",
+    "/Users/egorilin/Desktop/COMA/Data_and_models/Data/Reference_data_files/y_opt_newdata.csv": "fbb1a39f397fa6559e24a0fc00094924028c2a0e167cb7b105eaf7c0596ef4d3",
+    "/private/tmp/coma_tiihonen_20261014/Main_downselection.py": "b99afed9afcf9bcaa78acff313fb8fe1e42a8c73121e4da9af83a585174aba43",
+    "/private/tmp/coma_tiihonen_20261014/Functions_downselection_training_RF.py": "2ec48e26256eb41143cdbf5c72a496356ac5db50901b79f81333c5f274544766"
+  },
+  "archive_comparison": {
+    "matched_files": 57,
+    "different": [],
+    "missing": []
+  },
+  "version": {
+    "python": "3.8.20",
+    "sklearn": "1.3.2",
+    "rdkit": "2023.09.6"
+  },
+  "native_rf": {
+    "bootstrap": true,
+    "max_depth": 18,
+    "max_features": "log2",
+    "max_samples": 0.99,
+    "min_samples_leaf": 1,
+    "min_samples_split": 2,
+    "n_estimators": 236,
+    "random_state": 3,
+    "n_jobs": 4,
+    "criterion": "squared_error"
+  },
+  "features": [
+    "MSD",
+    "MaxDD",
+    "TI2_L",
+    "MATS4v",
+    "MATS4i",
+    "P_VSA_MR_5",
+    "P_VSA_MR_6",
+    "TDB06s",
+    "RDF040m",
+    "Mor20m",
+    "Mor25m",
+    "Mor31m",
+    "Mor10v",
+    "Mor20v",
+    "Mor25v",
+    "Mor26s",
+    "R7u",
+    "H-046",
+    "H-047",
+    "SHED_AL",
+    "ALOGP"
+  ],
+  "cohorts": {
+    "newdata": {
+      "n": 7,
+      "rdkit_valid": 7
+    },
+    "test": {
+      "n": 20,
+      "rdkit_valid": 20
+    },
+    "train": {
+      "n": 80,
+      "rdkit_valid": 78
+    }
+  },
+  "descriptor_source_rows": 114,
+  "target_alignment": {
+    "train": true,
+    "test": true,
+    "newdata": true
+  },
+  "smiles_train78_matches_valid_train80": true,
+  "invalid_train_indices": [
+    109,
+    108
+  ],
+  "source_overlap": [
+    {
+      "source": "expert1103",
+      "split": "newdata",
+      "n_unique_cations": 1016,
+      "n_target_overlap": 1,
+      "author_indices": [
+        136
+      ],
+      "names": [
+        "Amethyl"
+      ]
+    },
+    {
+      "source": "expert1103",
+      "split": "test",
+      "n_unique_cations": 1016,
+      "n_target_overlap": 0,
+      "author_indices": [],
+      "names": []
+    },
+    {
+      "source": "expert1103",
+      "split": "train",
+      "n_unique_cations": 1016,
+      "n_target_overlap": 2,
+      "author_indices": [
+        119,
+        118
+      ],
+      "names": [
+        "COE2-3C-C3A-HEXYL",
+        "COE2-3C-C3A-PROPYL"
+      ]
+    },
+    {
+      "source": "matched681",
+      "split": "newdata",
+      "n_unique_cations": 654,
+      "n_target_overlap": 1,
+      "author_indices": [
+        136
+      ],
+      "names": [
+        "Amethyl"
+      ]
+    },
+    {
+      "source": "matched681",
+      "split": "test",
+      "n_unique_cations": 654,
+      "n_target_overlap": 0,
+      "author_indices": [],
+      "names": []
+    },
+    {
+      "source": "matched681",
+      "split": "train",
+      "n_unique_cations": 654,
+      "n_target_overlap": 2,
+      "author_indices": [
+        119,
+        118
+      ],
+      "names": [
+        "COE2-3C-C3A-HEXYL",
+        "COE2-3C-C3A-PROPYL"
+      ]
+    },
+    {
+      "source": "previous_ft_expert-binary",
+      "split": "newdata",
+      "n_unique_cations": 708,
+      "n_target_overlap": 1,
+      "author_indices": [
+        136
+      ],
+      "names": [
+        "Amethyl"
+      ]
+    },
+    {
+      "source": "previous_ft_expert-binary",
+      "split": "test",
+      "n_unique_cations": 708,
+      "n_target_overlap": 0,
+      "author_indices": [],
+      "names": []
+    },
+    {
+      "source": "previous_ft_expert-binary",
+      "split": "train",
+      "n_unique_cations": 708,
+      "n_target_overlap": 2,
+      "author_indices": [
+        119,
+        118
+      ],
+      "names": [
+        "COE2-3C-C3A-HEXYL",
+        "COE2-3C-C3A-PROPYL"
+      ]
+    },
+    {
+      "source": "previous_ft_quant-molecule",
+      "split": "newdata",
+      "n_unique_cations": 1079,
+      "n_target_overlap": 1,
+      "author_indices": [
+        136
+      ],
+      "names": [
+        "Amethyl"
+      ]
+    },
+    {
+      "source": "previous_ft_quant-molecule",
+      "split": "test",
+      "n_unique_cations": 1079,
+      "n_target_overlap": 3,
+      "author_indices": [
+        84,
+        69,
+        79
+      ],
+      "names": [
+        "COE2-3C-C4hexyl",
+        "COE2-3C-C3propyl",
+        "COE2-3C-C4"
+      ]
+    },
+    {
+      "source": "previous_ft_quant-molecule",
+      "split": "train",
+      "n_unique_cations": 1079,
+      "n_target_overlap": 8,
+      "author_indices": [
+        55,
+        119,
+        80,
+        47,
+        81,
+        95,
+        118,
+        65
+      ],
+      "names": [
+        "COE2-3C-C3butyl",
+        "COE2-3C-C3A-HEXYL",
+        "COE2-3C-C4butyl",
+        "COE2-3C-C2butyl",
+        "COE2-3C-C4ethyl",
+        "COE2-3C-C4propyl",
+        "COE2-3C-C3A-PROPYL",
+        "COE2-3C-C3hexyl"
+      ]
+    },
+    {
+      "source": "previous_ft_quant-record",
+      "split": "newdata",
+      "n_unique_cations": 1079,
+      "n_target_overlap": 1,
+      "author_indices": [
+        136
+      ],
+      "names": [
+        "Amethyl"
+      ]
+    },
+    {
+      "source": "previous_ft_quant-record",
+      "split": "test",
+      "n_unique_cations": 1079,
+      "n_target_overlap": 3,
+      "author_indices": [
+        84,
+        69,
+        79
+      ],
+      "names": [
+        "COE2-3C-C4hexyl",
+        "COE2-3C-C3propyl",
+        "COE2-3C-C4"
+      ]
+    },
+    {
+      "source": "previous_ft_quant-record",
+      "split": "train",
+      "n_unique_cations": 1079,
+      "n_target_overlap": 8,
+      "author_indices": [
+        55,
+        119,
+        80,
+        47,
+        81,
+        95,
+        118,
+        65
+      ],
+      "names": [
+        "COE2-3C-C3butyl",
+        "COE2-3C-C3A-HEXYL",
+        "COE2-3C-C4butyl",
+        "COE2-3C-C2butyl",
+        "COE2-3C-C4ethyl",
+        "COE2-3C-C4propyl",
+        "COE2-3C-C3A-PROPYL",
+        "COE2-3C-C3hexyl"
+      ]
+    }
+  ]
+}

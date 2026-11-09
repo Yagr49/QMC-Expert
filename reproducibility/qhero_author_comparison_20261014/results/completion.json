@@ -1,0 +1,155 @@
+{
+  "completed": true,
+  "configurations": 18,
+  "sklearn": "1.7.2",
+  "catboost": "1.2.10",
+  "servers": [
+    "100.76.26.71",
+    "100.118.123.26"
+  ],
+  "primary_threads_per_fit": 2,
+  "secondary_threads_per_fit": 4,
+  "selection": [
+    {
+      "model": "CB_35_descriptors",
+      "seed": 0,
+      "source": "primary_results"
+    },
+    {
+      "model": "CB_human",
+      "seed": 0,
+      "source": "primary_results"
+    },
+    {
+      "model": "CB_human",
+      "seed": 1,
+      "source": "primary_results"
+    },
+    {
+      "model": "CB_human",
+      "seed": 2,
+      "source": "primary_results"
+    },
+    {
+      "model": "CB_human",
+      "seed": 3,
+      "source": "primary_results"
+    },
+    {
+      "model": "CB_human",
+      "seed": 4,
+      "source": "primary_results"
+    },
+    {
+      "model": "CB_quantitative",
+      "seed": 0,
+      "source": "primary_results"
+    },
+    {
+      "model": "CB_quantitative",
+      "seed": 1,
+      "source": "primary_results"
+    },
+    {
+      "model": "CB_quantitative",
+      "seed": 2,
+      "source": "primary_results"
+    },
+    {
+      "model": "CB_quantitative",
+      "seed": 3,
+      "source": "primary_results"
+    },
+    {
+      "model": "CB_quantitative",
+      "seed": 4,
+      "source": "primary_results"
+    },
+    {
+      "model": "CB_raw_MolFormer",
+      "seed": 0,
+      "source": "primary_results"
+    },
+    {
+      "model": "CB_shuffled_human",
+      "seed": 0,
+      "source": "primary_results"
+    },
+    {
+      "model": "CB_shuffled_human",
+      "seed": 1,
+      "source": "primary_results"
+    },
+    {
+      "model": "CB_shuffled_human",
+      "seed": 2,
+      "source": "primary_results"
+    },
+    {
+      "model": "CB_shuffled_human",
+      "seed": 3,
+      "source": "primary_results"
+    },
+    {
+      "model": "CB_shuffled_human",
+      "seed": 4,
+      "source": "primary_results"
+    },
+    {
+      "model": "RF_35_descriptors",
+      "seed": 0,
+      "source": "primary_results"
+    }
+  ],
+  "duplicate_checks": [
+    {
+      "model": "CB_quantitative",
+      "seed": 0,
+      "source1": "primary_results",
+      "source2": "secondary_results",
+      "max_prediction_difference": 0.0,
+      "max_metric_difference": 0.0
+    },
+    {
+      "model": "CB_quantitative",
+      "seed": 1,
+      "source1": "primary_results",
+      "source2": "secondary_results",
+      "max_prediction_difference": 0.0,
+      "max_metric_difference": 0.0
+    },
+    {
+      "model": "CB_quantitative",
+      "seed": 2,
+      "source1": "primary_results",
+      "source2": "secondary_results",
+      "max_prediction_difference": 0.0,
+      "max_metric_difference": 0.0
+    },
+    {
+      "model": "CB_quantitative",
+      "seed": 3,
+      "source1": "primary_results",
+      "source2": "secondary_results",
+      "max_prediction_difference": 0.0,
+      "max_metric_difference": 0.0
+    },
+    {
+      "model": "CB_quantitative",
+      "seed": 4,
+      "source1": "primary_results",
+      "source2": "secondary_results",
+      "max_prediction_difference": 0.0,
+      "max_metric_difference": 0.0
+    },
+    {
+      "model": "CB_shuffled_human",
+      "seed": 4,
+      "source1": "primary_results",
+      "source2": "secondary_results",
+      "max_prediction_difference": 0.0,
+      "max_metric_difference": 0.0
+    }
+  ],
+  "manuscript_changed": false
+}

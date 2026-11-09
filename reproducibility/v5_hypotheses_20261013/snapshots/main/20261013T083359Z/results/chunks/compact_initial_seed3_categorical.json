@@ -1,0 +1,11 @@
+{
+  "name": "compact_initial_seed3",
+  "encoding": "categorical",
+  "arm": "initial",
+  "seed": 3,
+  "provenance": "v5_architecture_weight_control",
+  "completed": true,
+  "fits": 11,
+  "seconds": 37.69382405281067,
+  "predictions": 908
+}

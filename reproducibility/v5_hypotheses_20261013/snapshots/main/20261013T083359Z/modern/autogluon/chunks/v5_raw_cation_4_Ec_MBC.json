@@ -1,0 +1,19 @@
+{
+  "rep": "v5_raw",
+  "schema": "cation",
+  "fold": 4,
+  "task": "Ec_MBC",
+  "completed": true,
+  "n_train": 84,
+  "n_test": 21,
+  "seconds": 4.129339694976807,
+  "model": "autogluon",
+  "info": {
+    "inner_train_n": 66,
+    "inner_val_n": 18,
+    "selected_model": "ExtraTrees",
+    "refitted_model": "ExtraTrees_FULL",
+    "selection_budget_s": 60,
+    "refit_extra_budget": true
+  }
+}

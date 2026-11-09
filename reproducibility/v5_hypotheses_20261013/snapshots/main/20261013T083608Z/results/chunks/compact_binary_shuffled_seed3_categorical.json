@@ -1,0 +1,11 @@
+{
+  "name": "compact_binary_shuffled_seed3",
+  "encoding": "categorical",
+  "arm": "binary_shuffled",
+  "seed": 3,
+  "provenance": "v5_architecture_matched_source",
+  "completed": true,
+  "fits": 11,
+  "seconds": 41.696173667907715,
+  "predictions": 908
+}

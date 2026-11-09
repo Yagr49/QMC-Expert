@@ -1,0 +1,22 @@
+[
+  {
+    "source_part": "word/media/image1.png",
+    "file": "reproducibility/revision_v17/sources/image1.png",
+    "sha256": "6c480e4618358a89527341c803e00dfd86113717625bd42bf2ef10bac022422c"
+  },
+  {
+    "source_part": "word/media/image2.png",
+    "file": "reproducibility/revision_v17/sources/image2.png",
+    "sha256": "cc0c8156ae764dc07ae1ce26ff33884a4972c9c22ac41fdcc281e2e954e821c2"
+  },
+  {
+    "source_part": "word/media/image3.png",
+    "file": "reproducibility/revision_v17/sources/image3.png",
+    "sha256": "6f2efe36e6f6625429956f050ac2718f5d2a13d75bc67229d8f30da5e67290fd"
+  },
+  {
+    "source_part": "word/media/image4.png",
+    "file": "reproducibility/revision_v17/sources/image4.png",
+    "sha256": "432a405c3cb9ba34bc66206e2e0a95eaec43201876d0b313be613e59f7fee66a"
+  }
+]

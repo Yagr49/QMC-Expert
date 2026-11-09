@@ -1,0 +1,16 @@
+cohort,schema,task,n,RMSE,MAE,R2,name,encoding,arm,seed,provenance
+OOD17,full-QAC105,Sa_MIC,17,2.0318498660362634,1.6401784373006665,-0.3496737678441708,matched_raw,onehot,matched_raw,-1,same_frozen_features_as_compact_controls
+OOD17,full-QAC105,Sa_MBC,17,2.2250314716608477,1.881627364849311,-0.1043558735715584,matched_raw,onehot,matched_raw,-1,same_frozen_features_as_compact_controls
+OOD17,full-QAC105,Ec_MIC,17,2.3035620627323565,1.9779787360338223,-0.6029550056181721,matched_raw,onehot,matched_raw,-1,same_frozen_features_as_compact_controls
+OOD17,full-QAC105,Ec_MBC,16,2.1726225934357384,1.8407510762443349,-0.2066485081244276,matched_raw,onehot,matched_raw,-1,same_frozen_features_as_compact_controls
+OOD17,full-QAC105,pooled,67,2.1857046874806336,1.8350500652094621,,matched_raw,onehot,matched_raw,-1,same_frozen_features_as_compact_controls
+QAC105,cation,Sa_MIC,105,1.7915104941834803,1.4128055391908916,0.16415620212338167,matched_raw,onehot,matched_raw,-1,same_frozen_features_as_compact_controls
+QAC105,cation,Sa_MBC,105,1.9152987605588878,1.4370225573998894,0.048406308582055746,matched_raw,onehot,matched_raw,-1,same_frozen_features_as_compact_controls
+QAC105,cation,Ec_MIC,105,1.8198051239956838,1.406445194055709,0.14703264803151705,matched_raw,onehot,matched_raw,-1,same_frozen_features_as_compact_controls
+QAC105,cation,Ec_MBC,105,1.9385558480969132,1.536465831000582,0.1390810337113323,matched_raw,onehot,matched_raw,-1,same_frozen_features_as_compact_controls
+QAC105,cation,pooled,420,1.8673221908979472,1.4481847804117682,,matched_raw,onehot,matched_raw,-1,same_frozen_features_as_compact_controls
+QAC105,scaffold,Sa_MIC,105,2.022482220853155,1.618603435767891,-0.0652605311672354,matched_raw,onehot,matched_raw,-1,same_frozen_features_as_compact_controls
+QAC105,scaffold,Sa_MBC,105,2.124494961991083,1.6133992515367954,-0.1708194004459962,matched_raw,onehot,matched_raw,-1,same_frozen_features_as_compact_controls
+QAC105,scaffold,Ec_MIC,105,2.0315977167239585,1.6111842761499335,-0.06306072553007325,matched_raw,onehot,matched_raw,-1,same_frozen_features_as_compact_controls
+QAC105,scaffold,Ec_MBC,105,2.071631824721233,1.6587802823612376,0.016825084774727217,matched_raw,onehot,matched_raw,-1,same_frozen_features_as_compact_controls
+QAC105,scaffold,pooled,420,2.0629445506961908,1.6254918114539643,,matched_raw,onehot,matched_raw,-1,same_frozen_features_as_compact_controls

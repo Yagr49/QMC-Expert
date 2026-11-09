@@ -1,0 +1,42 @@
+{
+  "device": "cpu",
+  "n_rows": 105,
+  "frozen": true,
+  "source_encoder": "archived v5 compact human",
+  "target_task": "E.coli K12 MIC",
+  "unit": "log2(mg/L), equal to author log2(\u00b5g/mL)",
+  "tokenisation": {
+    "smiles": "RDKit canonical full supplied graph",
+    "max_length": 202,
+    "padding": "max_length",
+    "max_tokens": 168,
+    "truncated": 0,
+    "truncated_indices": []
+  },
+  "catboost": {
+    "iterations": 500,
+    "depth": 6,
+    "learning_rate": 0.05,
+    "random_seed": 42,
+    "thread_count": 4
+  },
+  "inputs": {
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v9/runtime/molformer/model.safetensors": "0795977fe7192c4acdaf052f0e8464af57bc4bb59211271c5e61aaba2637b9c6",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v9/runtime/molformer/tokenization_molformer.py": "a816f7b6e540f27544e7aa924104d6fc0d5cedcc62117ec9d31d35d0cefbd2e2",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v9/runtime/molformer/tokenizer_config.json": "17e4fb4c6f77f2d9c482cf54fce528d97635e6bb9d0e2ab8b9638cc8a52e6fae",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v9/runtime/molformer/special_tokens_map.json": "f0bb97cedb7e5d9eb744a3b2e499a9c464659e1a363853bfd6056ba126f5c16c",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v9/runtime/molformer/config.json": "3ef9eaac8c7ca6282fd6256ed038d151bd4ff42a4ff855367e0d7197bbc1c284",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v9/runtime/molformer/configuration_molformer.py": "d48f6c133b27c3d6d9922acc554c2203aedf1a56d2061bd7aae72c11b7ec7aa5",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v9/runtime/molformer/tokenizer.json": "3df1f2219653c44fac9fa03b7f788b372eb2544ecc176737bb9aca8411b471a5",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v9/runtime/molformer/tokenization_molformer_fast.py": "1921cf245ceb613a19e9a30ba4aa33e02b328ac6fdbbf63080b775bd8b4c8bdb",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v9/runtime/molformer/vocab.json": "8592dced2879cb164332b9ec14e99164ba017949a6c05344cb64163d4839dbb2",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v9/runtime/molformer/modeling_molformer.py": "a3f6273bb44709e566ee02987c50372db727de21799c3d297f64b2437f9e32a8",
+    "/Users/egorilin/Desktop/Veresh_paper/scaler_classification.pkl": "a2e0c5261bd40507de551391696084400a98ee9eaae444c51c8407ce8baa372e",
+    "/Users/egorilin/Desktop/Veresh_paper/encoder_borderline_smote.pth": "05a54c4f1d49d7b4347cd7f200ba49e16557e7f43707fa7a6461092064cc0aed",
+    "/Users/egorilin/Desktop/COMA/reproducibility/tiihonen_author_comparison_20261014/endpoint_registry.csv": "6d235c5b24995a2723fbd5f3353dd9d5dae1d115f5cc72754f92a0d1e34bcd80"
+  },
+  "seconds": 8.74555230140686,
+  "canonical_smiles_sha256": "234345f31b9b9ba626ff694ae97783591f68b040fcbf2ce57d4babec85afdf25",
+  "source_overlap_note": "Full expert1103 source audit:0/20 test cations,2/78 train,1/7 newdata. Training membership within saved encoder not fully recovered. Newdata includes source-overlap and is not clean independent transfer.",
+  "test_tuning": false
+}

@@ -1,0 +1,11 @@
+{
+  "name": "v5_qac_ablation",
+  "encoding": "separate",
+  "arm": "v5_qac_ablation",
+  "seed": -1,
+  "provenance": "v5_archived_grouped_followup",
+  "completed": true,
+  "fits": 44,
+  "seconds": 96.98038673400879,
+  "predictions": 908
+}

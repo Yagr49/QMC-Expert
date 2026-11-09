@@ -1,0 +1,11 @@
+{
+  "name": "compact_continuous_shuffled_seed0",
+  "encoding": "categorical",
+  "arm": "continuous_shuffled",
+  "seed": 0,
+  "provenance": "v5_architecture_matched_source",
+  "completed": true,
+  "fits": 11,
+  "seconds": 25.764408111572266,
+  "predictions": 908
+}

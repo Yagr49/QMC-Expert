@@ -1,0 +1,56 @@
+{
+  "model": "tabpfn",
+  "started": 1791769604.3107634,
+  "completed": true,
+  "python": "3.11.16",
+  "packages": {
+    "numpy": "2.2.6",
+    "pandas": "2.2.3",
+    "scipy": "1.17.1",
+    "scikit-learn": "1.7.2",
+    "rdkit": "2026.3.6",
+    "torch": "2.6.0+cu124",
+    "chemprop": "2.3.1",
+    "autogluon.tabular": "1.6.3",
+    "tabpfn": "9.1.0",
+    "catboost": "1.2.10"
+  },
+  "smoke": true,
+  "script_sha256": "201176cb299627ff78ecaad834ce82b94df0759d4481a369566239537bd48c32",
+  "protocol_sha256": "ddace39f9ac8af5277fcee6b48118a687ecc39d53da515f023513603d61a52ba",
+  "input_sha256": {
+    "/home/yagr/coma_revision_v14_20261011/data/endpoint_registry.csv": "8dc37da0240f9de1294d233542de4f4f7c179f2c080c39a5ef5dd4617dd4d129",
+    "/home/yagr/coma_revision_v14_20261011/scaffold_sensitivity/data/endpoint_registry.csv": "56a084f809df9cd96276cca71393fba98bf84235858219920196fb34ce310d93",
+    "/home/yagr/coma_revision_v14_20261011/representations/raw-molformer_QAC105.npy": "6529575f14764fc446c7e5f690624a60d5838ef0eebaef5028a68d3d8adede75",
+    "/home/yagr/coma_revision_v14_20261011/representations/raw-molformer_OOD17.npy": "af4d569379c1d89050b890c75413eb9a2ad8ae261f8e8134a5d4dbb6a458030c",
+    "/home/yagr/coma_revision_v14_20261011/representations/expert_seed0_QAC105.npy": "61f639a3799731398d25a521bd6dd0bd821a6995bb2c47e281e685883c797d84",
+    "/home/yagr/coma_revision_v14_20261011/representations/expert_seed0_OOD17.npy": "9b4b8d61eb53100935ef338cbc15249d832a4e043bbcad361c3aab9a767227ef",
+    "/home/yagr/coma_revision_v14_20261011/representations/quant-continuous_seed0_QAC105.npy": "b420c6c79b398d58836a9632c740645c4c8da00943b3ef93bea7f30bfd584d46",
+    "/home/yagr/coma_revision_v14_20261011/representations/quant-continuous_seed0_OOD17.npy": "8280840d0efb7765dfe95e8b02cc33a3fc4c1e6dc82d75bf1b7f4ac82da9c558",
+    "/home/yagr/coma_revision_v14_20261011/representations/quant-binary_seed0_QAC105.npy": "7946d70c56d8af95d5816e2d35f83bade1f42a360931446cff826994d1ec7599",
+    "/home/yagr/coma_revision_v14_20261011/representations/quant-binary_seed0_OOD17.npy": "d90175621c77499d7f73a415c3eb6ca13d81ba6d44ce24c46006adc80efb9fdc"
+  },
+  "target": "log2(mg/L)",
+  "OOD_exact_n": 67,
+  "OOD_censored_n": 1,
+  "source_seed": 0,
+  "external_inference_API": false,
+  "finished": 1791769624.0191224,
+  "errors": [],
+  "fits": 4,
+  "model_identity": {
+    "tabpfn_identity": {
+      "constructor": {
+        "n_estimators": 4,
+        "device": "cuda",
+        "random_state": 1729,
+        "n_preprocessing_jobs": 1
+      },
+      "model_path": "/home/yagr/.cache/tabpfn/tabpfn-v2-regressor.ckpt",
+      "model_version": "v2",
+      "checkpoint_sha256": {
+        "/home/yagr/.cache/tabpfn/tabpfn-v2-regressor.ckpt": "2ab5a07d5c41dfe6db9aa7ae106fc6de898326c2765be66505a07e2868c10736"
+      }
+    }
+  }
+}

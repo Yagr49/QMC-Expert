@@ -1,0 +1,69 @@
+## Figure 4 Layout Proposal — `figure4_human_quantitative_compact`
+**Canvas:** 180 mm wide × ~140 mm tall, two rows, Aptos 8–9 pt, CMYK-safe pastels.
+
+---
+
+### ROW A — Architecture Schematic (≈45 mm tall, full width)
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│  frozen MolFormer  768-D embedding  [gray rounded rect]      │
+│          │                    │                              │
+│   ┌──────▼──────┐      ┌──────▼──────┐                      │
+│   │ Human       │      │ Quant       │  external compact    │
+│   │ encoder     │      │ encoder     │  encoders (trained)  │
+│   │ 768→512→    │      │ 768→512→    │                      │
+│   │ 384→256     │      │ 384→256     │                      │
+│   │ contrastive │      │ MSE on MIC  │  ← objective differs │
+│   │ Good/Bad    │      │ continuous  │                      │
+│   └──────┬──────┘      └──────┬──────┘                      │
+│          └──────────┬─────────┘                              │
+│             shared CatBoost decoder                          │
+│          CB500 / depth6 / lr.05 / seed42                     │
+│        105 QAC targets + 4 MIC-MBC tasks                     │
+│               ▼ quantitative endpoint labels ▼               │
+└──────────────────────────────────────────────────────────────┘
+```
+
+- Dual arms rendered as two slim vertical columns, same width, same height — visually emphasising parallel architecture.
+- A thin horizontal dashed line separates encoder zone from decoder zone; label it **"source guidance ends / target decoder begins"** in 7 pt italic gray.
+- MolFormer box carries a **padlock icon** (no gradient update). Encoders carry a **flame icon** (trained). Decoder carries a **Σ** (shared).
+- No performance numbers in schematic.
+
+---
+
+### ROW B — Vertical Violin Panels (≈75 mm tall, split 50/50)
+
+**Left violin group — Cation split | Right violin group — Scaffold split**
+
+Each group contains **three side-by-side violins**:
+
+| Position | Fill | Label |
+|---|---|---|
+| 1 | Lavender `#C8B8E8` | Human |
+| 2 | Mint `#B8E8CC` | Quant |
+| 3 | Silver-gray `#D0D0D0` | Shuffled† |
+
+- **Y-axis:** Mean absolute error per molecule×endpoint over 5 seeds (unit: MAE, same scale both panels). Range ~1.5–2.6, ticks at 1.6 / 1.8 / 2.0 / 2.2 / 2.4.
+- **X-axis labels:** Short upright, 8 pt: *Human / Quant / Shuffled* beneath each violin.
+- Violins classical (vertical KDE), mirrored. Overlay: median bar (1 pt black), IQR notch box (no whiskers beyond IQR). **No dot swarm** — density sufficient.
+- Panel titles: **"Cation"** and **"Scaffold"** centred above each group, 9 pt bold, no box.
+- Shuffled violin labeled with a **†** dagger, resolved in caption.
+
+---
+
+### Caption Distinctions (required text, ≤3 sentences)
+
+> **Figure 4. Human vs. quantitative source guidance on matched data.** Top: frozen MolFormer embeddings feed two independently trained external compact encoders (768→256); human encoder uses contrastive Good/Bad labels, quantitative encoder uses continuous MIC values (MSE); both share a native CatBoost decoder trained on the same 420 QAC endpoints and four MIC-MBC tasks; no MolFormer weights are updated. Bottom: violin densities show per-molecule×endpoint MAE aggregated over 5 paired seeds (681 molecules, 377 train/304 validation, 80 epochs, no SMOTE); this is the completed v5 matched follow-up experiment, distinct from the original full-quantitative multitarget model (higher R² reported in Table S2; that checkpoint is not replicated here). †Shuffled-human control (gray) indicates no significant semantic benefit from human label ordering at this sample size; result is unresolved and warrants larger-scale investigation.
+
+---
+
+### Design Risks / Scientific Guardrails
+
+| Risk | Guardrail |
+|---|---|
+| Readers infer violins are 5 independent RMSE points | Caption must state: density = MAE per molecule×endpoint, 5-seed aggregate |
+| Human ≈ Quant ≈ Shuffled read as equivalence claim | Do not add significance bars; shuffled null explicitly flagged unresolved |
+| Historical Table 2 metrics confused with these violins | Caption explicitly names SI table and states checkpoint not replicated |
+| "Human label = binary MIC assay" misread | Schematic arm label reads *contrastive Good/Bad* not *MIC binary* |
+| Legend overload | No legend box; colour identity via direct x-axis labels only |

@@ -1,0 +1,27 @@
+{
+  "completed": true,
+  "documents": [
+    {
+      "path": "/Users/egorilin/Desktop/COMA/2026_10_13_Paper_2_edited-v20_soft_contrastive_figure.docx",
+      "sha256": "ec04c62b29d7305a6c29711d2efe70780c663d04bc45d93d3389a08d27c27847",
+      "figures": 8,
+      "relationships_styles_valid": true
+    },
+    {
+      "path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v20/Supplementary_Information_v20.docx",
+      "sha256": "04f95ec9224f994c881c5d09c8f5036bbd607ffa1a28ec3c884a238c7d4af048",
+      "figures": 31,
+      "relationships_styles_valid": true
+    }
+  ],
+  "all_predictive_tables_unchanged": true,
+  "all_previous_SI_text_and_results_unchanged": true,
+  "original_media_and_Office_objects_byte_preserved": true,
+  "original_raster_visible_in_FigureS31": true,
+  "all_442_archived_PDF_markers_preserved": true,
+  "source_variant_silhouette_discrepancy_explicit": true,
+  "no_new_QHERO_results_added_to_documents": true,
+  "no_TSNE_recomputation": true,
+  "font": "Aptos",
+  "figure_palette": "muted peach / mint"
+}

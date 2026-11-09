@@ -1,0 +1,35 @@
+{
+  "completed": true,
+  "configurations": [
+    [
+      "CB_quantitative",
+      0
+    ],
+    [
+      "CB_shuffled_human",
+      4
+    ],
+    [
+      "CB_quantitative",
+      1
+    ],
+    [
+      "CB_quantitative",
+      2
+    ],
+    [
+      "CB_quantitative",
+      3
+    ],
+    [
+      "CB_quantitative",
+      4
+    ]
+  ],
+  "elapsed_seconds": 425.1852219104767,
+  "workers": 3,
+  "threads_per_fit": 4,
+  "sklearn": "1.7.2",
+  "catboost": "1.2.10",
+  "model_budget": "800 iterations / depth6 / lr0.05; unchanged"
+}

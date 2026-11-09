@@ -1,0 +1,13 @@
+{
+  "completed": true,
+  "configurations": 18,
+  "resumed_configurations": 4,
+  "workers": 8,
+  "elapsed_seconds": 1172.3846774101257,
+  "python": "3.11.16",
+  "sklearn": "1.7.2",
+  "catboost": "1.2.10",
+  "numpy": "2.2.6",
+  "protocol": "Fixed 800/depth6/lr0.05 CatBoostClassifier; no target-test selection",
+  "manuscript_changed": false
+}

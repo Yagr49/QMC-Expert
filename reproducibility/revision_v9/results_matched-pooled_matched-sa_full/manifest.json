@@ -1,0 +1,8 @@
+{
+  "device": "cpu",
+  "torch": "2.4.1",
+  "epochs": 80,
+  "seeds": 5,
+  "protocol_sha256": "c574b613d145cf5fa0d0db195ec0654efbaf8c9571d9e4691d5c1f13c6ec2849",
+  "features_sha256": "e04dca21e00b5b5f603f82753e36e10e38a30fc42df4ae3093cb506d84c5851e"
+}

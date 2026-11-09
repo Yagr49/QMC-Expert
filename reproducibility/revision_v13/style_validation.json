@@ -1,0 +1,23 @@
+{
+  "reference": "/Users/egorilin/Downloads/Telegram Desktop/Main_Article3_revised.docx",
+  "reference_sha256": "2c9d862f7a7a7a0a18d413cff679a114bca6cbefe09590537ba2e8ba350f718c",
+  "main_figures": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "new_SI_figures": [
+    17,
+    18,
+    19,
+    20,
+    21
+  ],
+  "appearance": "White background; muted consistent colours; light boxed axes; fine grid; regular panel labels; parity matrix.",
+  "molecular_preset": "RDKit MolToACS1996SVG (monochrome, native bond width 0.6, native fixed font size 10).",
+  "numerical_predictions_changed": false,
+  "archived_SI": "Historical supplementary images retained; newly rendered cohort structures use ACS 1996."
+}

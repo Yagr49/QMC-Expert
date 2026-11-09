@@ -1,0 +1,31 @@
+• # Editorial and Scientific Review (read-only)
+
+  ## (1) Concrete corrections
+
+  1. **"Practically competitive" is an evaluative claim without a criterion.** §3.1: "The expert and quantitative sources therefore produce practically competitive representations in this refitting protocol"; echoed in the Abstract and Conclusions ("produces practically competitive downstream Q-HERO representations"). No practical margin or equivalence test is defined, sources differ in size and update budget, and the intervals are exploratory with three seeds. *Correction:* report the contrast descriptively — expert supervision attains Q-HERO R² = 0.269 versus 0.312/0.308 under identical refitting — and either define the criterion for "competitive" or delete the term. Similarly, Conclusions' "direct expert scores track measured potency" should be "show positive rank agreement (Spearman 0.397) with measured potency."
+
+  2. **§3.1: "Human targets thus encode learnable potency-related information, while numerical supervision provides stronger direct ordering."** The 0.397 vs 0.547/0.612 comparison establishes weaker ordering, not learnability, and no shuffled/permutation null is reported for direct transfer. *Correction:* anchor the learnability claim in the matched human-vs-shuffled contrast of §3.2 — e.g., "direct expert scores show positive rank agreement (0.397), consistent with the label-assignment effect demonstrated under matched frozen-feature training."
+
+  3. **"Transfer" is used ambiguously.** Abstract: "pooled MIC also transfers better than exact *S. aureus* MIC"; §3.4 heading: "Quantitative context changes transfer on identical source chemistry." "Transfer" collides with the paper's term of art "direct transfer" (source-trained head, no refitting); the §3.4 contrast is frozen-feature supervision followed by downstream scaffold-CV refitting. *Correction:* "under matched frozen-feature training and downstream scaffold-CV refitting, pooled-MIC supervision yields lower Q-HERO RMSE (1.525) than exact *S. aureus* MIC (1.617)."
+
+  4. **Undefined comparator.** §3.1: "The six-descriptor reference reaches Q-HERO R² = 0.057" — no such baseline is defined in Methods. *Correction:* define it in §2.3 (descriptor set, fitting protocol) or remove it; results should not depend on an undefined comparator.
+
+  5. **Uncertainty for single-run arms is unexplained.** §2.6: bootstrap replicates "resample source initialisation seeds and whole target cation-scaffold groups," but Table 2 gives raw features as "one fixed decoder run" (untrained likewise). Seed resampling is degenerate for single-run arms, yet §3.2 reports expert-vs-raw intervals (+0.005 [−0.102, +0.115]). *Correction:* state explicitly that single-run-arm uncertainty comes from scaffold-group resampling only, or these paired intervals are ambiguous.
+
+  6. **Causal terminology needs tightening.** The bounded estimand in §2.6 ("change in predictive loss under a specified replacement of supervision within a fixed computational procedure") is appropriate, and the disclaimers (no mechanism, expert-status effect, or bias removal) are correct and should be retained verbatim. But the Abstract's "locate the causal interpretation in controlled changes to the training procedure" is vague, and real-vs-shuffled is more precisely a controlled label-assignment (abolition) intervention than a general "label intervention" (§1). *Correction:* "we restrict causal claims to controlled replacements of supervision within a fixed training procedure."
+
+  7. **Front-matter coherence.** Affiliation markers are fused to surnames ("Ilina," "Frolova," "Seferyana," "Sonc"), mismatching the Contributions ("Ilin," "Frolov," "Seferyan," "Son"); Medvedev carries "*" but no corresponding email is listed. Fix superscript rendering and complete corresponding-author details.
+
+  ## (2) Remaining limits
+
+  - Annotation provenance (H1–H7) is pending: with only final labels, inter-rater agreement is uncomputable, and whether annotators saw the MIC later used for quantitative supervision (H4) is unresolved — this bounds any reading of the labels as independent chemical intuition, as the draft itself notes (§1, §3.1).
+  - Three (partial fine-tuning) and five (frozen) source seeds; intervals conditional on fixed target folds; exploratory and multiplicity-unadjusted.
+  - The human-vs-shuffled contrast is an abolition control: it shows the procedure exploits the real mapping, but with the expert-minus-continuous interval spanning zero, human-specific information beyond MIC is unestablished. §3.2's separation of these questions is correct and should be preserved.
+  - Q-HERO lacks row-level strain/laboratory provenance; the replicate audit (38 strata) is selective and cannot support broad reproducibility claims in either direction.
+  - OOD-17 is 17 compounds with negative R²; external validity is minimal.
+  - The chemistry appendix lacks original spectra (reserved for coauthors); JCIM requires complete characterization data for synthesized compounds at submission.
+
+  ## (3) Positioning for JCIM
+
+  The genuine contribution is methodological — a clean separation of transferable signal, practical competition, and incremental value over pretrained features, with matched interventions and archived reproducibility — well suited to JCIM's methods audience. The explicit disclaimers (no equivalence, no preregistration, no denoising, no independent architectural replication) are strengths. Recommendations: (i) foreground the three-question design in the abstract rather than QAC-specific numbers; (ii) complete H1–H7 and D1–D2 before submission, since annotation protocol and data availability are review blockers; (iii) frame the QAC testbed as a case study for the evaluation framework, not a domain-general result; (iv) the §3.5 suggestion of a matched-molecule partial-fine-tuning experiment and richer annotation/assay metadata is appropriate future work — keep it clearly marked as motivation, not evidence.
+

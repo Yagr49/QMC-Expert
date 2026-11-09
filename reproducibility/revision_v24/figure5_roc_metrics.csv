@@ -1,0 +1,11 @@
+model,protocol,n,seeds,AUROC,AUROC_SD
+CB_human,random_heldout20,81,5,0.8320987654320987,0.048951629214393694
+CB_quantitative,random_heldout20,81,5,0.8438271604938272,0.022821773229381913
+CB_shuffled_human,random_heldout20,81,5,0.8447530864197532,0.029495097099924972
+CB_raw_MolFormer,random_heldout20,81,1,0.8225308641975309,
+RF_35_descriptors,random_heldout20,81,1,0.7268518518518519,
+CB_human,scaffold_CV_fold,405,5,0.6754938271604939,0.033193780807342976
+CB_quantitative,scaffold_CV_fold,405,5,0.7156172839506173,0.010268551451408639
+CB_shuffled_human,scaffold_CV_fold,405,5,0.5674074074074074,0.07027384000852863
+CB_raw_MolFormer,scaffold_CV_fold,405,1,0.5946913580246914,
+RF_35_descriptors,scaffold_CV_fold,405,1,0.5650617283950617,

@@ -1,0 +1,509 @@
+Provide a read-only scientific critique. Do not execute commands, access additional files, edit anything or send messages. All evidence is included below. The authors authorised this external internal review. Do not invent annotation votes, methods, agreement, numerical outcomes, equivalence, preregistration or chemical mechanisms. Give at most 700 words: concrete errors with quoted wording and a correction, then material limitations. Distinguish a factual error from an optional follow-up experiment.
+
+Audit source-target leakage, matching of initial weights/batches/updates/stochastic schedules, training-only label transformation and permutation, direct versus target-refit evaluation, and checkpoint reproducibility. Evaluate without inspecting results. A documented clarification preserves native MolFormer stochastic training and recovers final feature-map buffers; assess this separately from changes to training or outcomes.
+
+PROTOCOL.md
+# Matched partial MolFormer fine-tuning
+
+Written before this experiment's training and outcomes. This is an exploratory
+extension of inspected v9–v11 results, not a confirmatory preregistration.
+
+## Intervention and fixed conditions
+
+Use the archived matched-pooled panel: 681 molecules, 111 cation-scaffold groups,
+96 final human Good calls and 4,938 underlying MIC records. Use identical ordered
+canonical full-salt SMILES, cations and scaffolds for every supervision arm.
+Exclude every evaluation cation, including counterion variants, from source
+training and validation. Source and target scaffolds may overlap; the source
+validation split and the individual target CV folds are scaffold-disjoint.
+
+Reuse GroupShuffleSplit(test_size=0.15, random_state=1729), yielding 377 training
+and 304 validation molecules. Validation is diagnostic, without early stopping,
+checkpoint selection or hyperparameter selection. Do not train on its labels.
+Reuse v10 target_folds.csv exactly: QAC-104 and Q-HERO-405 scaffold 5-fold CV;
+OOD-17 uses a decoder trained on QAC-104. Target MIC enters only the training
+fold of a refitted decoder, never source representation training.
+
+Load ibm/MoLFormer-XL-both-10pct at revision
+7b12d946c181a37f6012b9dc3b002275de070314 with its pinned custom code. Retain the
+768-dimensional pooled representation and scalar linear head with dropout 0.1.
+Freeze embeddings and encoder layers 0–3; train layers 4–11, the pooler and
+scalar head. This is partial backbone fine-tuning, not full fine-tuning, LoRA or
+the frozen-feature MLP. Record actual trainable parameter counts and names.
+Use float32, deterministic feature maps, right padding to 202 tokens, and audit
+all source/target lengths without truncation before fitting.
+
+Six arms: human binary; continuous pooled log2 MIC; binary pooled MIC;
+shuffled human; shuffled continuous MIC; shuffled binary MIC. Binary MIC cutoff
+is the source-training MIC quantile corresponding to human training-positive
+prevalence; ties can change actual prevalence. Standardise continuous targets
+using only source training (population SD), invert scaling for direct predictions.
+Shuffle source-training labels only using RNG 100000 + seed, preserving their
+multiset. Keep diagnostic validation labels unshuffled.
+
+Five paired seeds 0–4. Within each seed, match backbone/scalar-head initial
+weights, minibatch permutations and stochastic seed across all six arms.
+AdamW lr 3e-5, weight decay 0.01; OneCycleLR maximum lr 3e-5, pct_start 0.1;
+batch size 32, gradient norm clip 1, 30 fixed epochs = 360 updates per arm.
+Use the final checkpoint. These matched budgets do not imply equally optimal
+hyperparameters for different objectives. Record all epoch losses, update counts,
+initialisation and minibatch hashes, transformed-label hashes, checkpoint hashes,
+dependencies, model revision and input/fold checksums.
+
+## Evaluation and controls
+
+Primary: Q-HERO-405 RMSE (log2 micromolar) with the same CatBoost decoder as
+v9/v10: 300 iterations, depth 5, lr 0.05, seed 1729, four CPU threads. Secondary
+R², QAC-104 and OOD-17. Compare real human vs shuffled human, human vs raw
+pretrained features, human vs continuous MIC, and human vs binary MIC. Include
+quantitative real-vs-shuffled and quantitative-vs-raw contrasts. Raw MolFormer is
+re-encoded in this environment and audited against archived features; retain both
+raw predictions if numerical differences are material. Also compare to the
+archived five-seed frozen-feature MLP on the same panel/folds, clearly identifying
+the different architecture and training schedule.
+
+Complementary direct transfer: keep each source-trained scalar head; no target
+fitting or recalibration. Report rank agreement with target log2 MIC (negative
+Spearman for Good logits, positive for numerical predictions), and target-median
+AUC as a secondary descriptive metric. Report raw R²/RMSE only for continuous
+MIC heads. Shuffled heads supply direct-transfer null controls. An untrained
+scalar head is not an activity predictor and has no meaningful concentration
+calibration; the raw representation is the downstream reference.
+
+Paired RMSE differences: 10,000 nested seed/scaffold bootstrap draws with RNG
+1729, resampling the same seeds and whole target scaffold groups in both arms.
+Retain fixed target folds. Repeat scaffold-only intervals and leave-one-scaffold
+contrasts as sensitivities. For raw predictions reuse the same prediction vector
+in each paired seed draw. Direct rank differences use paired seed/scaffold
+bootstrap with 10,000 draws. Intervals are exploratory, unadjusted and conditional
+on this dataset, fixed folds and five training seeds. They do not establish
+non-inferiority, equivalence, a molecular mechanism or human denoising.
+
+## Operational separation
+
+Smoke checks use a separate directory and one epoch; they verify execution and
+matching, and are not part of the scientific result. The final protocol remains
+fixed after the smoke check. A task-scoped dependency directory and model cache
+protect existing server environments. Store checkpoints on the provided server,
+download predictions, diagnostics, metadata and representations for local audit.
+Do not modify unrelated services or datasets. Preserve v9–v11 drafts and results,
+including their coauthor annotation-method fields.
+
+
+PROTOCOL_IMPLEMENTATION_NOTE.md
+# Implementation clarification during the run, 2026-10-11
+
+The original PROTOCOL.md remains immutable and its checksum remains in the run
+manifest. Inspection of the pinned MolFormer implementation during execution
+identified an imprecise description and a checkpoint-storage limitation:
+
+* `deterministic_eval=True` fixes attention feature maps **in evaluation**. Native
+  MolFormer refreshes the random orthogonal feature-map buffers on each training
+  forward pass even when the deterministic flag is true. The actual experiment
+  retains this native stochastic training behaviour; paired seeds and identical
+  forward-call/minibatch schedules match the draws across supervision arms.
+  No model behaviour, optimisation setting, dataset or evaluation rule is changed.
+* The original saved checkpoints contain trainable parameters and source-target
+  transforms, but omit the final refreshed feature-map buffers. They remain as
+  originally written, with their original hashes. A separate reconstruction step
+  replays the paired training-forward RNG schedule, records final persistent
+  buffers and writes complete reconstruction checkpoints to another directory.
+  Each reconstruction must reproduce saved target embeddings and direct scores
+  before being accepted. Its checksums and discrepancies are archived separately.
+
+Manuscript descriptions use the verified distinction between stochastic training
+and deterministic evaluation. The reconstruction script changes storage, not
+training, predictions or reported metrics. The original checkpoint and prediction
+files are never overwritten. This note is an implementation audit, not a
+post-outcome change to a scientific hypothesis or hyperparameter choice.
+
+
+run_matched_finetuning.py
+"""Matched source-supervision interventions; fixed final partial-FT checkpoint."""
+import os
+from pathlib import Path
+ROOT = Path(__file__).resolve().parent
+os.environ.setdefault('OMP_NUM_THREADS', '4')
+os.environ.setdefault('OPENBLAS_NUM_THREADS', '4')
+os.environ.setdefault('TOKENIZERS_PARALLELISM', 'false')
+os.environ.setdefault('HF_HUB_DISABLE_XET', '1')
+os.environ.setdefault('HF_HOME', str(ROOT / 'runtime' / 'hf'))
+os.environ.setdefault('CUBLAS_WORKSPACE_CONFIG', ':4096:8')
+import sys
+# Isolated optional server libraries, with the server's existing torch installation.
+if (ROOT / 'deps').exists(): sys.path.insert(0, str(ROOT / 'deps'))
+if Path('/home/yagr/.local/lib/python3.12/site-packages').exists():
+    sys.path.append('/home/yagr/.local/lib/python3.12/site-packages')
+sys.modules['torchvision'] = None
+import argparse, hashlib, json, math, time, platform, traceback, multiprocessing
+from concurrent.futures import ProcessPoolExecutor
+import numpy as np
+import pandas as pd
+import torch
+from torch import nn
+from sklearn.model_selection import GroupShuffleSplit
+from sklearn.metrics import r2_score, mean_squared_error, roc_auc_score
+from scipy.stats import spearmanr
+from catboost import CatBoostRegressor
+from transformers import AutoTokenizer, AutoModel
+
+MODEL = 'ibm/MoLFormer-XL-both-10pct'
+REVISION = '7b12d946c181a37f6012b9dc3b002275de070314'
+ARMS = ['expert', 'quant-continuous', 'quant-binary', 'expert-shuffled',
+        'quant-shuffled', 'quant-binary-shuffled']
+TARGETS = ['QAC-104', 'Q-HERO-405', 'OOD-17']
+
+
+def sha(path): return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+def object_sha(value): return hashlib.sha256(json.dumps(value, sort_keys=True).encode()).hexdigest()
+def weights_sha(net):
+    h = hashlib.sha256()
+    for name, tensor in net.state_dict().items():
+        h.update(name.encode()); h.update(tensor.detach().cpu().numpy().tobytes())
+    return h.hexdigest()
+def write_json(path, value):
+    tmp = Path(str(path) + '.tmp'); tmp.write_text(json.dumps(value, indent=2, default=str)); tmp.replace(path)
+
+
+class Net(nn.Module):
+    def __init__(self, backbone):
+        super().__init__(); self.enc = backbone; self.drop = nn.Dropout(.1); self.fc = nn.Linear(768, 1)
+    def embed(self, **kw): return self.enc(**kw).pooler_output
+    def forward(self, **kw): return self.fc(self.drop(self.embed(**kw))).squeeze(-1)
+
+
+def load_net(seed, device):
+    torch.manual_seed(seed); np.random.seed(seed)
+    enc, loading = AutoModel.from_pretrained(MODEL, revision=REVISION,
+        code_revision=REVISION, trust_remote_code=True, deterministic_eval=True,
+        output_loading_info=True)
+    # AutoModel intentionally omits the pretrained masked-language-model head.
+    allowed_unused = {'lm_head.decoder.weight', 'lm_head.transform.LayerNorm.bias',
+        'lm_head.transform.LayerNorm.weight', 'lm_head.transform.dense.bias',
+        'lm_head.transform.dense.weight'}
+    if (loading['missing_keys'] or set(loading['unexpected_keys']) - allowed_unused
+            or loading['mismatched_keys'] or loading.get('error_msgs')):
+        raise RuntimeError(('backbone loading mismatch', loading))
+    for module in enc.modules():
+        if hasattr(module, 'deterministic'): module.deterministic = True
+    net = Net(enc)
+    for name, p in net.enc.named_parameters():
+        if name.startswith('embeddings') or any(f'layer.{i}.' in name for i in range(4)):
+            p.requires_grad = False
+    return net.to(device), loading
+
+
+def tokenise(tokenizer, smiles):
+    return tokenizer(list(smiles), padding='max_length', truncation=False,
+                     max_length=202, return_tensors='pt')
+
+
+@torch.no_grad()
+def outputs(net, tokens, device, batch_size=32):
+    net.eval(); reps = []; scores = []
+    for start in range(0, len(tokens['input_ids']), batch_size):
+        batch = {k: v[start:start + batch_size].to(device) for k, v in tokens.items()}
+        emb = net.embed(**batch)
+        reps.append(emb.float().cpu().numpy()); scores.append(net.fc(emb).squeeze(-1).float().cpu().numpy())
+    return np.vstack(reps), np.concatenate(scores)
+
+
+def decoder_predict(xtr, ytr, xte):
+    model = CatBoostRegressor(iterations=300, depth=5, learning_rate=.05,
+        random_seed=1729, thread_count=4, verbose=False, allow_writing_files=False)
+    model.fit(xtr, ytr); return model.predict(xte)
+
+
+def evaluate(reps, targets, folds):
+    result = {}
+    for name in TARGETS[:2]:
+        d = targets[name]; pred = np.zeros(len(d))
+        for tr, te in folds[name]:
+            pred[te] = decoder_predict(reps[name][tr], d.y.values[tr], reps[name][te])
+        result[name] = pred
+    result['OOD-17'] = decoder_predict(reps['QAC-104'], targets['QAC-104'].y.values, reps['OOD-17'])
+    return result
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--output-dir', type=Path, default=ROOT / 'results')
+    parser.add_argument('--epochs', type=int, default=30)
+    parser.add_argument('--seeds', type=int, default=5)
+    parser.add_argument('--arms', nargs='+', choices=ARMS, default=ARMS)
+    parser.add_argument('--device', default='cuda')
+    parser.add_argument('--smoke', action='store_true')
+    args = parser.parse_args()
+    if args.smoke: args.epochs = 1; args.seeds = 1
+    out = args.output_dir; out.mkdir(parents=True, exist_ok=True)
+    if (out / 'metrics.csv').exists(): raise RuntimeError('Use a fresh output directory; existing results are immutable.')
+    (out / 'representations').mkdir(exist_ok=True); (out / 'checkpoints').mkdir(exist_ok=True)
+    torch.set_num_threads(4)
+    torch.backends.cuda.matmul.allow_tf32 = False; torch.backends.cudnn.allow_tf32 = False
+    torch.use_deterministic_algorithms(True, warn_only=True)
+    device = torch.device(args.device)
+    if device.type == 'cuda': torch.cuda.set_per_process_memory_fraction(.70)
+    data = ROOT / 'data'
+    expert = pd.read_csv(data / 'matched-pooled_expert.csv')
+    quant = pd.read_csv(data / 'matched-pooled_quant.csv')
+    targets = {n: pd.read_csv(data / f'target_{n}.csv') for n in TARGETS}
+    for col in ['can', 'cation', 'scaffold']: assert expert[col].tolist() == quant[col].tolist()
+    assert expert.can.is_unique and len(expert) == 681
+    target_cations = set().union(*(set(d.cation) for d in targets.values()))
+    assert not set(expert.cation) & target_cations
+    tr, va = next(GroupShuffleSplit(n_splits=1, test_size=.15, random_state=1729).split(expert, groups=expert.scaffold))
+    assert (len(tr), len(va)) == (377, 304)
+    assert not set(expert.scaffold.iloc[tr]) & set(expert.scaffold.iloc[va])
+    split = expert[['can', 'cation', 'scaffold']].copy(); split['partition'] = 'validation'; split.loc[tr, 'partition'] = 'train'
+    split.to_csv(out / 'source_split.csv', index=False)
+    assignments = pd.read_csv(data / 'target_folds.csv'); folds = {}
+    for name in TARGETS[:2]:
+        d = targets[name]; f = assignments[assignments.target == name].set_index('can')
+        assert f.index.is_unique and set(f.index) == set(d.can)
+        labels = f.loc[d.can, 'fold'].values
+        folds[name] = [(np.flatnonzero(labels != k), np.flatnonzero(labels == k)) for k in sorted(set(labels))]
+        for train, test in folds[name]: assert not set(d.scaffold.iloc[train]) & set(d.scaffold.iloc[test])
+    (out / 'target_folds.csv').write_bytes((data / 'target_folds.csv').read_bytes())
+    tokenizer = AutoTokenizer.from_pretrained(MODEL, revision=REVISION,
+        code_revision=REVISION, trust_remote_code=True)
+    tokenizer.padding_side = 'right'
+    lengths = {name: [len(v) for v in tokenizer(list(d.can), truncation=False)['input_ids']]
+               for name, d in dict(source=expert, **targets).items()}
+    assert max(max(v) for v in lengths.values()) <= 202
+    tok_source = tokenise(tokenizer, expert.can)
+    tok_targets = {name: tokenise(tokenizer, d.can) for name, d in targets.items()}
+    tokens_tr = {k: v[tr] for k, v in tok_source.items()}; tokens_va = {k: v[va] for k, v in tok_source.items()}
+    import transformers, sklearn, catboost, scipy
+    manifest = dict(model=MODEL, revision=REVISION, remote_code_revision=REVISION,
+        device=str(device), gpu=torch.cuda.get_device_name() if device.type == 'cuda' else None,
+        python=platform.python_version(), packages=dict(torch=torch.__version__, numpy=np.__version__,
+            pandas=pd.__version__, transformers=transformers.__version__, sklearn=sklearn.__version__,
+            catboost=catboost.__version__, scipy=scipy.__version__),
+        script_sha256=sha(__file__), protocol_sha256=sha(ROOT / 'PROTOCOL.md'),
+        input_sha256={p.name: sha(p) for p in data.glob('*.csv')},
+        seeds=args.seeds, epochs=args.epochs, batch_size=32, steps_per_epoch=math.ceil(len(tr) / 32),
+        arms=args.arms, smoke=args.smoke, train_n=len(tr), validation_n=len(va),
+        source_n=len(expert), source_groups=expert.scaffold.nunique(),
+        target_n={n: len(d) for n, d in targets.items()},
+        target_scaffolds={n: d.scaffold.nunique() for n, d in targets.items()},
+        max_tokens={n: max(v) for n, v in lengths.items()}, truncated=0,
+        source_target_cation_overlap=0, checkpoint_policy='final; fixed budget; diagnostic validation only',
+        decoder=dict(iterations=300, depth=5, learning_rate=.05, random_seed=1729),
+        started=time.time(), completed=False)
+    write_json(out / 'manifest.json', manifest)
+    progress = dict(started=time.time(), done=0, total=args.seeds * len(args.arms), completed=False)
+    def emit(**values): progress.update(values); progress['updated'] = time.time(); write_json(out / 'progress.json', progress)
+    metrics = []; predictions = []; direct_metrics = []; direct_predictions = []; training = []; epochs = []
+    def flush():
+        for name, rows in [('metrics', metrics), ('predictions', predictions), ('direct_metrics', direct_metrics),
+                           ('direct_predictions', direct_predictions), ('training', training), ('epochs', epochs)]:
+            if rows: pd.DataFrame(rows).to_csv(out / f'{name}.csv', index=False)
+    def record(arm, seed, reps=None, pp=None):
+        if pp is None: pp = evaluate(reps, targets, folds)
+        for name, pred in pp.items():
+            d = targets[name]
+            assert np.isfinite(pred).all()
+            metrics.append(dict(panel='matched-pooled-ft', arm=arm, seed=seed, head='catboost', target=name,
+                n=len(d), R2=r2_score(d.y, pred), RMSE=np.sqrt(mean_squared_error(d.y, pred))))
+            predictions.extend(dict(panel='matched-pooled-ft', arm=arm, seed=seed, head='catboost',
+                target=name, can=d.can.iloc[i], scaffold=d.scaffold.iloc[i], y=float(d.y.iloc[i]), pred=float(pred[i]))
+                for i in range(len(d)))
+        flush()
+        print('RESULT', arm, seed, [(r['target'], round(r['RMSE'], 4)) for r in metrics[-3:]], flush=True)
+    emit(stage='raw backbone')
+    net, loading = load_net(0, device)
+    manifest['parameters'] = sum(p.numel() for p in net.enc.parameters())
+    manifest['trainable_parameters_including_head'] = sum(p.numel() for p in net.parameters() if p.requires_grad)
+    manifest['trainable_names'] = [name for name, p in net.named_parameters() if p.requires_grad]
+    manifest['backbone_loading'] = loading
+    write_json(out / 'manifest.json', manifest)
+    raw = {n: outputs(net, t, device)[0] for n, t in tok_targets.items()}
+    for name, emb in raw.items(): np.save(out / 'representations' / f'raw-molformer_{name}.npy', emb)
+    record('raw-molformer', 0, raw)
+    del net; torch.cuda.empty_cache() if device.type == 'cuda' else None
+    # Decoder fitting never feeds information back into source training. A single
+    # independent CPU worker overlaps this fixed evaluation with the next GPU run.
+    pool = ProcessPoolExecutor(max_workers=1, mp_context=multiprocessing.get_context('spawn'))
+    pending = []
+    for seed in range(args.seeds):
+        for arm in args.arms:
+            emit(stage='training', arm=arm, seed=seed, epoch=0)
+            started = time.time(); net, loading = load_net(seed, device); initial_hash = weights_sha(net)
+            binary = arm.startswith('expert') or arm.startswith('quant-binary')
+            y = (expert.y if arm.startswith('expert') else quant.y).values.astype('float32').copy()
+            cutoff = None; mu = 0.; sd = 1.
+            if arm.startswith('quant-binary'):
+                cutoff = float(np.quantile(y[tr], float(expert.y.iloc[tr].mean())))
+                y = (y <= cutoff).astype('float32')
+            if not binary: mu = float(y[tr].mean()); sd = max(float(y[tr].std()), 1e-6); y = (y - mu) / sd
+            before = y[tr].copy()
+            if arm.endswith('shuffled'): y[tr] = np.random.default_rng(100000 + seed).permutation(y[tr])
+            assert np.array_equal(np.sort(before), np.sort(y[tr]))
+            torch.manual_seed(300000 + seed)
+            params = [p for p in net.parameters() if p.requires_grad]
+            opt = torch.optim.AdamW(params, lr=3e-5, weight_decay=.01)
+            scheduler = torch.optim.lr_scheduler.OneCycleLR(opt, max_lr=3e-5,
+                total_steps=manifest['steps_per_epoch'] * args.epochs, pct_start=.1)
+            lossfn = nn.BCEWithLogitsLoss() if binary else nn.MSELoss()
+            yt = torch.tensor(y[tr], dtype=torch.float32, device=device)
+            yv = torch.tensor(y[va], dtype=torch.float32, device=device)
+            generator = torch.Generator().manual_seed(200000 + seed)
+            batches_hash = hashlib.sha256(); updates = 0
+            for epoch in range(args.epochs):
+                net.train(); order = torch.randperm(len(tr), generator=generator)
+                batches_hash.update(order.numpy().tobytes()); train_loss = 0.
+                for start in range(0, len(tr), 32):
+                    idx = order[start:start + 32]; batch = {k: v[idx].to(device) for k, v in tokens_tr.items()}
+                    opt.zero_grad(set_to_none=True); loss = lossfn(net(**batch), yt[idx.to(device)])
+                    if not torch.isfinite(loss): raise RuntimeError(('nonfinite training loss', arm, seed, epoch))
+                    loss.backward(); torch.nn.utils.clip_grad_norm_(params, 1.)
+                    opt.step(); scheduler.step(); updates += 1; train_loss += float(loss.detach()) * len(idx)
+                net.eval(); validation_loss = 0.
+                with torch.no_grad():
+                    for start in range(0, len(va), 32):
+                        batch = {k: v[start:start + 32].to(device) for k, v in tokens_va.items()}
+                        pred = net(**batch); validation_loss += float(lossfn(pred, yv[start:start + 32])) * len(pred)
+                epochs.append(dict(arm=arm, seed=seed, epoch=epoch + 1, updates=updates,
+                    train_loss=train_loss / len(tr), val_loss=validation_loss / len(va),
+                    seconds=time.time() - started, learning_rate=opt.param_groups[0]['lr']))
+                pd.DataFrame(epochs).to_csv(out / 'epochs.csv', index=False)
+                emit(epoch=epoch + 1, updates=updates, seconds=time.time() - started)
+                if epoch == 0 or (epoch + 1) % 5 == 0:
+                    print('EPOCH', arm, seed, epoch + 1, round(train_loss / len(tr), 5),
+                          round(validation_loss / len(va), 5), round(time.time() - started, 1), flush=True)
+            emit(stage='extract and decode')
+            reps = {}; scores = {}
+            for name, tokens in tok_targets.items():
+                reps[name], scores[name] = outputs(net, tokens, device)
+                assert np.isfinite(reps[name]).all() and np.isfinite(scores[name]).all()
+                np.save(out / 'representations' / f'{arm}_seed{seed}_{name}.npy', reps[name])
+                d = targets[name]; p = scores[name] if binary else scores[name] * sd + mu
+                rho = float(spearmanr(d.y, p).statistic); agreement = -rho if binary else rho
+                active = (d.y.values < np.median(d.y.values)).astype(int)
+                direct_metrics.append(dict(arm=arm, seed=seed, target=name, n=len(d), kind='binary' if binary else 'continuous',
+                    rank_agreement=agreement, AUC=roc_auc_score(active, p if binary else -p),
+                    R2=None if binary else r2_score(d.y, p), RMSE=None if binary else np.sqrt(mean_squared_error(d.y, p))))
+                direct_predictions.extend(dict(arm=arm, seed=seed, target=name, can=d.can.iloc[i],
+                    scaffold=d.scaffold.iloc[i], y=float(d.y.iloc[i]), score=float(p[i]),
+                    rank_score=float(-p[i] if binary else p[i])) for i in range(len(d)))
+            checkpoint = out / 'checkpoints' / f'{arm}_seed{seed}.pt'
+            # Frozen parameters are reconstructed from the immutable pretrained checkpoint.
+            torch.save(dict(state_dict={n: p.detach().cpu() for n, p in net.named_parameters() if p.requires_grad},
+                arm=arm, seed=seed, model=MODEL, revision=REVISION, target_mean=mu, target_sd=sd,
+                binary_cutoff=cutoff, epochs=args.epochs, updates=updates), checkpoint)
+            training.append(dict(arm=arm, seed=seed, train_n=len(tr), val_n=len(va),
+                epochs=args.epochs, updates=updates, initial_sha256=initial_hash,
+                batch_order_sha256=batches_hash.hexdigest(), train_id_sha256=object_sha(expert.can.iloc[tr].tolist()),
+                label_sha256=hashlib.sha256(y[tr].tobytes()).hexdigest(),
+                positive_prevalence=float(y[tr].mean()) if binary else None,
+                cutoff=cutoff, target_mean=mu, target_sd=sd, checkpoint_sha256=sha(checkpoint),
+                checkpoint_file=str(checkpoint), seconds=time.time() - started,
+                final_train_loss=epochs[-1]['train_loss'], final_val_loss=epochs[-1]['val_loss']))
+            del net, opt, scheduler, params; torch.cuda.empty_cache() if device.type == 'cuda' else None
+            pending.append((arm, seed, pool.submit(evaluate, reps, targets, folds)))
+            flush(); emit(done=progress['done'] + 1, pending_decoders=len(pending))
+            still_pending = []
+            for tag, paired_seed, future in pending:
+                if future.done(): record(tag, paired_seed, pp=future.result())
+                else: still_pending.append((tag, paired_seed, future))
+            pending = still_pending
+    emit(stage='finish fixed target decoders', pending_decoders=len(pending))
+    for arm, seed, future in pending: record(arm, seed, pp=future.result())
+    pool.shutdown()
+    flush(); manifest['completed'] = True; manifest['finished'] = time.time()
+    manifest['output_sha256'] = {p.name: sha(p) for p in out.glob('*.csv')}
+    write_json(out / 'manifest.json', manifest); emit(stage='complete', completed=True)
+
+
+if __name__ == '__main__':
+    main()
+
+
+reconstruct_checkpoints.py
+"""Recover final native feature-map buffers and independently reproduce outputs.
+
+Training checkpoints and predictions remain immutable. Accept reconstructed
+checkpoints only after numerical agreement with both embeddings and direct heads.
+"""
+from pathlib import Path
+import argparse,json,time
+import run_matched_finetuning as ft
+import numpy as np
+import pandas as pd
+import torch
+from sklearn.model_selection import GroupShuffleSplit
+
+ROOT=Path(__file__).resolve().parent
+
+def main():
+    ap=argparse.ArgumentParser();ap.add_argument('--results',type=Path,default=ROOT/'results')
+    ap.add_argument('--seeds',nargs='+',type=int,default=list(range(5)));a=ap.parse_args()
+    r=a.results;out=r/'reproducible_checkpoints';out.mkdir(exist_ok=True)
+    torch.set_num_threads(4);torch.backends.cuda.matmul.allow_tf32=False;torch.backends.cudnn.allow_tf32=False
+    torch.use_deterministic_algorithms(True,warn_only=True);device=torch.device('cuda')
+    torch.cuda.set_per_process_memory_fraction(.30)
+    source=pd.read_csv(ROOT/'data/matched-pooled_expert.csv')
+    tr,va=next(GroupShuffleSplit(n_splits=1,test_size=.15,random_state=1729).split(source,groups=source.scaffold))
+    tokenizer=ft.AutoTokenizer.from_pretrained(ft.MODEL,revision=ft.REVISION,code_revision=ft.REVISION,trust_remote_code=True)
+    tokenizer.padding_side='right';tokens=ft.tokenise(tokenizer,source.can.iloc[tr])
+    targets={n:pd.read_csv(ROOT/'data'/f'target_{n}.csv') for n in ft.TARGETS}
+    target_tokens={n:ft.tokenise(tokenizer,d.can) for n,d in targets.items()}
+    predictions=pd.read_csv(r/'direct_predictions.csv');train=pd.read_csv(r/'training.csv')
+    records=[]
+    for seed in a.seeds:
+        started=time.time();net,loading=ft.load_net(seed,device)
+        # Only shapes and the stochastic forward schedule determine feature-map
+        # draws; no gradient or optimiser operation consumes a random draw.
+        torch.manual_seed(300000+seed);generator=torch.Generator().manual_seed(200000+seed)
+        net.train()
+        with torch.no_grad():
+            for epoch in range(30):
+                order=torch.randperm(len(tr),generator=generator)
+                for start in range(0,len(tr),32):
+                    idx=order[start:start+32]
+                    batch={k:v[idx].to(device) for k,v in tokens.items()}
+                    net(**batch)
+        state_names=set(net.state_dict())
+        buffers={name:b.detach().cpu().clone() for name,b in net.named_buffers() if name in state_names}
+        projection_count=sum('feature_map' in name and name.endswith('weight') for name in buffers)
+        assert projection_count==12,(projection_count,list(buffers))
+        for arm in ft.ARMS:
+            original=r/'checkpoints'/f'{arm}_seed{seed}.pt'
+            saved=torch.load(original,map_location='cpu',weights_only=False)
+            digest=train.set_index(['arm','seed']).loc[(arm,seed)].checkpoint_sha256
+            assert ft.sha(original)==digest
+            combined=dict(saved['state_dict'],**buffers)
+            missing=net.load_state_dict(combined,strict=False)
+            assert not missing.unexpected_keys
+            frozen={name for name,p in net.named_parameters() if not p.requires_grad}
+            assert set(missing.missing_keys)==frozen,(set(missing.missing_keys)-frozen)
+            binary=arm.startswith('expert') or arm.startswith('quant-binary')
+            checks=[]
+            for name,tok in target_tokens.items():
+                emb,score=ft.outputs(net,tok,device)
+                archived_emb=np.load(r/'representations'/f'{arm}_seed{seed}_{name}.npy')
+                sub=predictions[(predictions.arm==arm)&(predictions.seed==seed)&(predictions.target==name)].set_index('can').loc[targets[name].can]
+                restored_score=score if binary else score*saved['target_sd']+saved['target_mean']
+                feature_diff=float(np.max(np.abs(emb-archived_emb)))
+                score_diff=float(np.max(np.abs(restored_score-sub.score.values)))
+                assert np.allclose(emb,archived_emb,rtol=1e-5,atol=1e-6),(seed,arm,name,'embedding',feature_diff)
+                assert np.allclose(restored_score,sub.score.values,rtol=1e-5,atol=1e-6),(seed,arm,name,'score',score_diff)
+                checks.append(dict(target=name,max_feature_difference=feature_diff,max_score_difference=score_diff))
+            path=out/f'{arm}_seed{seed}.pt';assert not path.exists()
+            torch.save(dict(saved,state_dict=combined,buffer_replay='paired native forward RNG schedule; verified against original outputs'),path)
+            records.append(dict(arm=arm,seed=seed,original_checkpoint_sha256=digest,
+                reconstructed_checkpoint_sha256=ft.sha(path),checkpoint_file=str(path),
+                persistent_buffer_count=len(buffers),feature_map_count=projection_count,
+                max_feature_difference=max(c['max_feature_difference'] for c in checks),
+                max_score_difference=max(c['max_score_difference'] for c in checks)))
+            pd.DataFrame(records).to_csv(r/f'checkpoint_reconstruction_seeds_{"_".join(map(str,a.seeds))}.csv',index=False)
+            print('REPRODUCED',seed,arm,checks,flush=True)
+        del net;torch.cuda.empty_cache();print('SEED BUFFER REPLAY',seed,round(time.time()-started,1),'seconds',flush=True)
+    ft.write_json(r/f'checkpoint_reconstruction_seeds_{"_".join(map(str,a.seeds))}.json',dict(complete=True,
+        script_sha256=ft.sha(__file__),implementation_note_sha256=ft.sha(ROOT/'PROTOCOL_IMPLEMENTATION_NOTE.md'),
+        original_checkpoints_preserved=True,checkpoints=len(records),max_feature_difference=max(d['max_feature_difference'] for d in records),
+        max_score_difference=max(d['max_score_difference'] for d in records)))
+
+if __name__=='__main__':main()
+
+

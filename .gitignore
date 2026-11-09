@@ -5,6 +5,16 @@ COMA_new/
 data/*.tar.gz
 *.tar.gz
 
+# Model checkpoints
+*.pth
+
+# Unrelated project directories
+teeth_*/
+
+# Large data archive (available separately)
+Data_and_models.zip
+Data_and_models/
+
 # Office lock files
 ~$*
 

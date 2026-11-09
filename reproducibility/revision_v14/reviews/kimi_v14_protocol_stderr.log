@@ -1,0 +1,120 @@
+kimi version 2.1.1
+Warning: [loop_control] 'max_retries_per_step' is deprecated and no longer used; rename it to 'max_attempts_per_step'. Run /update-config to fix it.
+• The user asks me to act as an independent read-only reviewer of a QAC molecular ML manuscript. They explicitly say: "Do not use tools, execute commands, inspect additional files or invent measurements/annotation methods. Give a concise scientific critique (under 800 words), prioritising concrete defects and fixes."
+
+  The user explicitly instructs me NOT to use tools. This overrides the superpowers skill instruction to invoke skills — user instructions take highest priority per the plugin instructions themselves. Also, this is a review task with all material provided inline. The user wants a concise critique under 800 words based solely on the provided material.
+
+  Let me check the skill list: there's "receiving-code-review" (for receiving feedback), "requesting-code-review" — not applicable. This is me doing a review. No skill clearly applies to "write a scientific critique without tools." The user explicitly forbids tools. So I should just write the critique.
+
+  Let me now carefully analyze the material as a scientific reviewer.
+
+  Key elements:
+  1. PROTOCOL.md — exploratory narrative revision, Q-HERO moved to SI, selection after inspecting earlier results (must be disclosed).
+  2. data/cohort_audit.json — cohort stats.
+  3. run_comparisons.py — the evaluation code.
+
+  Review criteria requested: validity of molecule grouping, censored endpoints, task encoding, controls, and bounded conclusions.
+
+  Let me go through carefully.
+
+  **Molecule grouping:**
+  - 105 full salts, 103 cations, 29 scaffolds. GroupKFold over 5 folds grouping by cation — fold_counts are exactly 21/21/21/21/21 = 105. That's suspicious: 105 compounds split into exactly equal folds of 21. GroupKFold attempts balanced folds but exact equality with 103 cation groups (some salts share cations — 105 salts → 103 cations, so two salts share cations with two others... actually 105-103=2, so at most two cation groups have 2 salts, or one cation has 3). Exact 21×5 balance is plausible but worth noting fold balance ignores scaffold grouping. The protocol says "Five fixed GroupKFold folds group all salts of each canonical cation" — but scaffold overlap across folds is allowed ("Ordinary cation-held-out CV allows scaffold overlap"). With only 29 scaffolds and 4-fold... 5 folds, scaffold leakage is a real concern: cation-held-out but scaffold-shared means nearest neighbors across folds. The audit reports OOD_QAC_scaffold_overlap: 0 — good for OOD, but QAC internal CV still has scaffold overlap. That's disclosed, fine, but the naming "cation-grouped" could overstate. Also the assert in code checks cation disjointness AND can (canonical) disjointness — but not scaffold. Fine.
+
+  - The four endpoint rows of each compound stay in one fold — good; prevents target leakage across tasks of same compound.
+
+  - But: shared-model encodings ('all') pool all four endpoints. In CV, predictions are made per fold; training rows for 'all' include all tasks. OK.
+
+  - OOD-17: 4 scaffolds, 17 molecules, 67 exact pairs + 1 right-censored = 68 = 17×4. Good. The final decoder is fit on all QAC-105. OOD evaluation is a single fit — no uncertainty from training resampling for OOD predictions (only the paired bootstrap over seeds and scaffold groups for contrasts). The protocol acknowledges 4 groups → unstable intervals.
+
+  **Censored endpoint:**
+  - IT505 E. coli MBC right-censored (>500). Code: `subset &= df.qualifier.values=='='` — so censored rows excluded from metrics for all cohorts/tasks. But wait — the baseline also is computed including censored? Baseline computes predictions for all rows including censored, but metrics aren't computed for baseline in the code shown... Actually metrics are computed in run() only; baseline() just produces predictions. Where are baseline metrics computed? Not shown — presumably elsewhere. The code excludes non-'=' rows from metrics globally. That's fine, but: is any other OOD value censored or flagged? Audit says only 1. Also what about QAC duplicates median — the "one flagged conflicting duplicate" — registry presumably has 420 exact pairs = 105×4. OK.
+
+  - Concern: for the censored IT505 row, the molecule retains predictions across other endpoints; fine. But the claim "exclude it from exact-value RMSE/R2, retain the molecule and report its bound and prediction separately" — code excludes it from all metrics including Spearman and MAE. Good. However, note the pooled metrics include the other three endpoints of that molecule — fine.
+
+  - A subtle issue: exclusion uses qualifier on the evaluation cohort only; the training side never includes OOD so no issue.
+
+  **Task encoding:**
+  - Three modes: separate (4 independent models), onehot (4 indicators: species ×2, MIC/MBC ×2 — full factorial, so 4 distinct one-hot patterns; with intercept this is fine, no linear dependency since it's not a redundant encoding... Actually [idx<2, idx>=2, idx%2==0, idx%2==1]: for idx 0: T,T,T,F; idx1: T,T,F,T; idx2: F,F,T,F... wait idx>=2 for idx2 is False; idx%2==0 for idx2 is True. So pattern: (Sa, notEc, MIC, notMBC)... the four columns sum to 2 per row; there is no all-ones redundancy; columns are not linearly dependent (check: a(Sa)+b(Ec)+c(MIC)+d(MBC)=0 for all four patterns → patterns are (1,0,1,0),(1,0,0,1),(0,1,1,0),(0,1,0,1); solving gives a=b=c=d=0). Fine — it's a valid two-way ANOVA-style coding.
+  - Text encoding: 1536-d embeddings of four fixed archived task descriptions, concatenated to molecular vectors. Key critique: the text describes only strain and endpoint — identical for every molecule within a task. Thus the text features are constant within each task; they provide no per-molecule information beyond task identity. Their effect is equivalent to (at most) a task indicator — a 1536-d constant vector per task vs 4-d one-hot. Any performance difference vs one-hot is essentially regularization/noise via CatBoost on constant high-d features. This is a valid "no task metadata" vs "task metadata" contrast only in a weak sense; the embedding adds no biological information. Also embedding drift: text-embedding-3-small via OpenRouter reconstruction — reproducibility depends on provider snapshot; they cache with hashes, good.
+  - Protocol says "(1) four independent endpoint models, matching the meaningful single-task interpretation of no task metadata" — fine.
+  - Important subtlety: in 'separate' mode, is a molecule's prediction produced by a model trained only on that task — yes. In pooled modes, CatBoost gets molecular vector + metadata. OK.
+
+  - Potential defect: in run(), for encoding 'separate', task loop over TASKS; pred initialized NaN then filled; assert finite. Good.
+
+  - **A real concern**: design() for OOD uses pairs.molecule_index — assumed consistent with QAC vector rows; can't verify. Also xo computed but for 'separate' encoding, osel by task; fine.
+
+  - **Leakage check on folds**: fold assignment uses identities only — asserted. Folds fixed across representations — the manifest says same folds. Good.
+
+  - **The matched-source representations**: 681 shared molecules, exclusion of evaluation cations, 377/304 split, five paired seeds, shuffled-label controls. That's from v12; reused. The protocol says "Recover the omitted conflicting target's vectors from the audited reconstructed checkpoints" — potential integrity risk: mixing reconstructed checkpoint vectors with v12 vectors; they say verify against saved vectors. Can't verify from provided material — flag as something requiring audit evidence in the manuscript.
+
+  - **Historical encoders** saw original cohort → any QAC CV using legacy encoders is contaminated (training overlap). The protocol relegates them to "secondary descriptive reconstructions" and explicitly says they cannot identify out-of-source supervision benefits. Good. But: does the legacy encoder representation of QAC-105 molecules reflect information learned from those same molecules? Yes — 256-d human/quantitative encoders were trained/fit with source/target overlap on the original collection. Their CV R2 will be optimistically biased. The protocol acknowledges this. The critique: the manuscript must ensure legacy arms are never compared favorably to matched arms as evidence of supervision benefit; only descriptive.
+
+  - **Shuffled-label controls**: good for supervision claims.
+
+  **Controls:**
+  - Baseline = training-fold median (task-specific); for OOD, full QAC median per task. Negative R2 visible — good.
+  - Missing control: no molecular-features-only ablation? Fresh raw features are the representation. What about a scaffold/retention baseline? Not required.
+  - Missing: per-seed variance display — they say display seed means rather than ensemble metrics. Good practice, but they should also show dispersion (SD/CI across seeds) — mean-only hides instability.
+  - Bootstrap: resamples source seeds AND entire cation-scaffold groups with 10k draws, 95% percentile. With 29 scaffold groups and 5 seeds, resampling "entire cation-scaffold groups" — how many groups? 29 scaffolds among 103 cations; group-bootstrap with 29 clusters is okay-ish; OOD 4 groups → they acknowledge instability. Note: percentile intervals on differences; fine for exploratory.
+  - Seed resampling: "resample source seeds" — with 5 seeds, resampling seeds as units... if matched arms share paired seeds, resampling differences is a paired bootstrap; OK.
+
+  **Bounded conclusions:**
+  - They disclaim equivalence, causality, logit≠concentration, denoising not identified. Good.
+  - Selection disclosure: Q-HERO moved to SI after inspecting earlier results; cohorts/figures/narrative selected post hoc — protocol discloses, but the manuscript must too (they state "This selection must be disclosed").
+  - "No assertion that its measurements are erroneous is made" — fine.
+  - Exploratory framing with 10k draws but no multiple-comparison control across many arm/encoding combinations (how many configurations? configurations.json not shown — could be many). With many arms × 3 encodings × 4 tasks × 2 cohorts, the chance of spurious "wins" is high; percentile intervals per contrast without FDR — flag.
+
+  **Concrete defects I can point out:**
+
+  1. **Censored handling asymmetry / left-censoring unknown**: only right-censoring addressed; if any MICs are reported as "≤" (below detection), the code's qualifier filter would drop them silently from metrics. Audit says only 1 censored pair, so OK — but the code applies the '=' filter uniformly, so any future/supplied '≤' rows vanish from all metrics without a count. Recommend reporting dropped-row counts per cohort/task.
+
+  2. **Pooled-model CV subtlety**: for shared encodings ('all'), the model is trained on pooled tasks; R2 computed per task. Fine. But the 'separate' vs 'all' comparison conflates task metadata with multi-task pooling (more training data per model). The one-hot encoding has only 4 indicator columns; CatBoost is not linear, so interactions molecule×task learned. The interpretive claim "no task metadata" vs "task metadata" is fair, but differences may reflect pooling sample size rather than metadata value. Hmm — that's a fair critique: the three encodings differ in both metadata content and training-set composition (separate: n≈105 per model; shared: n=420). Any "task metadata helps" conclusion is confounded with 4× data. Must be bounded.
+
+  3. **Text embedding equivalence**: text features are constant per task → mathematically near-equivalent to task indicators; a 1536-d constant vector per task can at most shift predictions by task, and CatBoost must split on near-constant features — with 4 distinct vectors, splits on these features act as task selectors, but high dimensionality with constant-per-task values across only 420 rows risks spurious splits? No — constant within task, so any split on a text feature separates tasks; it can't overfit within task. Effectively the embedding arm ≈ one-hot arm with extra degrees of freedom; large performance differences would be surprising and small differences uninterpretable. The contrast should be framed as a reconstruction of v5, which it is for historical arms. For matched arms, adding text encoding on top is fine but adds little.
+
+  Wait — actually is it exactly constant per task? The metadata rows are the same four vectors for all molecules of a task. Yes. So the information content is ≤ log2(4)=2 bits, same as one-hot. Differences in pooled predictions between onehot and text arise only from CatBoost's partitioning choices. OK.
+
+  4. **Fold balance suspicious/exact**: 21×5 exactly. GroupKFold with 103 groups over 5 folds giving exactly 21 each is possible (105 items /5). Not a defect per se. But note scaffold overlap within CV — with 29 scaffolds across 5 folds, random cation assignment means scaffold-mates often split across train/test → optimistic QAC CV for scaffold-sensitive representations. They disclose "Ordinary cation-held-out CV allows scaffold overlap," and the strict QAC-104 scaffold-CV is a separate sensitivity. Fine — but the primary narrative numbers are the lenient ones; recommend making the scaffold-held-out numbers co-primary or clearly foregrounding the leakage direction.
+
+  5. **OOD inference**: single final decoder fit on all 105; OOD R2 with n=17 (16 exact for one task) — R2/RMSE on 16 points is extremely unstable; Spearman on n=16 likewise. Protocol acknowledges intervals unstable; recommend emphasizing MAE/bound checks and prediction-vs-bound for the censored compound, and avoiding R2 headline claims. Also with 4 scaffolds, per-scaffold predictions tell more.
+
+  6. **Duplicate conflict**: "one flagged conflicting duplicate" identified by median — medians can hide bimodality; the strict 104 analysis is a sensitivity — fine, but request the conflicting identity be named in manuscript (protocol says identify explicitly — verify it is).
+
+  7. **Legacy contamination**: acknowledged; ensure no headline comparisons. Also legacy "human" encoder 256-d "human annotation" — H1-H7 reserved for coauthors — fine.
+
+  8. **Reproducibility**: text embeddings reconstructed via OpenRouter — provider-side model version drift; they hash-cache. MolStreamer fine-tune "fixed final 30-epoch" — common initial weights/batches within seed. ProcessPoolExecutor with 6 workers — determinism OK given seeds.
+
+  9. **Baseline for OOD**: predicts full QAC median per task — reasonable; negative R2 visible. Good.
+
+  10. **Metrics subsetting bug risk**: In metrics, subset &= qualifier=='=' — for QAC, if any QAC rows are non-'=' they'd be dropped from both training? No — training uses q.y directly without qualifier filter! In run(), decoder fits use q.y.values[tr] for ALL rows including any censored QAC rows (if QAC had censored values, they'd enter training as exact). Audit says OOD has 1 censored pair; QAC exact pairs 420 = 105×4, so presumably no QAC censoring. But the code doesn't guard: if a QAC row had qualifier '>', it would be trained on as if exact. Recommend asserting all QAC qualifiers are '='. That's a concrete code-level fix.
+
+  11. **Censored row in pooled training for OOD model**: final OOD decoder fit on x[select] — QAC only, so no issue.
+
+  12. **Bootstrap details**: "resample source seeds and entire cation-scaffold groups" — unclear whether two-stage (resample seeds, then resample scaffolds) or combined; with 5 seeds, resampling seeds with replacement and recomputing mean differences — but predictions are fixed per seed; a paired seed-bootstrap of the difference in seed means... If they resample seeds independently per arm, pairing is broken. Protocol says "retaining fixed predictions and identical paired rows" — suggests pairs kept. Ambiguity worth clarifying in manuscript.
+
+  13. **Multiple comparisons**: many arms (human, continuous, binary, shuffled controls ×5 seeds ×3 encodings ×...), exploratory — recommend Holm/FDR or clearly descriptive language.
+
+  14. **Claim boundary**: "no equivalence margin" — good; ensure no language like "matched encoders perform similarly to" without interval support.
+
+  15. units: log2 mg/L vs previous log2 µM — mixing would be a defect; they guard. Emphasize unit consistency in figures (labels "log2 mg/L").
+
+  Word budget: under 800. Prioritize: 
+  - Task-encoding confound (pooling vs metadata) — big.
+  - Text embedding ≤2 bits information — big.
+  - QAC CV scaffold leakage direction (lenient primary) — big.
+  - Censoring: train-side guard + dropped-count reporting.
+  - OOD small-n metrics: avoid R2 headlines; report bound check for IT505.
+  - Selection disclosure (Q-HERO, post-hoc) must appear in abstract/results, not just protocol.
+  - Legacy encoders descriptive only.
+  - Multiplicity.
+  - Bootstrap clarity, seed dispersion shown.
+
+  Structure: brief summary sentence; numbered defects with fixes; short "what is sound" list; conclusion.
+
+  Keep under 800 words. Let me write ~650-750 words.
+
+  No tools — the user forbade them. The superpowers "using-superpowers" says invoke skills before any response, but user explicit instruction "Do not use tools" takes priority, and no skill matches "write a scientific critique" anyway. receiving-code-review/requesting-code-review are about code review workflows, not this. Proceed directly.
+
+  Format: markdown, headers, tight. Word count discipline.
+
+To resume this session: kimi -r session_20be1ab3-a974-4579-a18b-a43607e99f4d

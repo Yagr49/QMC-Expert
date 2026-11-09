@@ -1,0 +1,77 @@
+{
+  "actual_reviewer": "Claude CLI",
+  "execution": "local Mac",
+  "authorised": true,
+  "completed": true,
+  "started_utc": "2026-10-14T10:21:15.219067+00:00",
+  "prompt_sha256": "e71955d481d760c8c131235a8990610433743436efebe1c07f6e63d40d4b6523",
+  "files_sha256": {
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v22/figures/figure3_backbone_route_error_violins.png": "a9b665a5fd5dc4dacb9f2d91dc6a3ff2d3d78aca99c4509d8d4f4479cae92c6d",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v23/figures/figure3_backbone_route_error_violins.png": "189ed2dda9b307cae05a5b003bf19fa978b7adcdd1d909b59401f73b99a35462",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v23/figures/figure_OOD_routes_for_section2_3.png": "9f9ddd3bd126a2c5406eb4ff7c6f7097ab8246fed39fe999a5a2ffb7d2dc1d15",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v23/make_FT_violins.py": "cb801925e3fd606415d07e6e7d393db20e2c0077e999d5f440d294910606b2a9",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v23/figure3_FT_manifest.json": "b04959e8f7c55b1b263043d632bfdf1f27e777dfc32e4fead473f4768993c3e4",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v23/figure3_caption_EN.txt": "7ad26bdcc154cf410848f6a9524091317d8cac30aa9407c2f51d33282d86aad4",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v23/figure_OOD_caption_EN.txt": "1f3cde50c4457ebbae042bc6b500a20476e802e0f7d6b502ba3063fc9dd1659b"
+  },
+  "returncode": 0,
+  "tool_calls": [
+    {
+      "name": "Read",
+      "input": {
+        "file_path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v22/figures/figure3_backbone_route_error_violins.png"
+      }
+    },
+    {
+      "name": "Read",
+      "input": {
+        "file_path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v23/figures/figure3_backbone_route_error_violins.png"
+      }
+    },
+    {
+      "name": "Read",
+      "input": {
+        "file_path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v23/figures/figure_OOD_routes_for_section2_3.png"
+      }
+    },
+    {
+      "name": "Read",
+      "input": {
+        "file_path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v23/make_FT_violins.py"
+      }
+    },
+    {
+      "name": "Read",
+      "input": {
+        "file_path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v23/figure3_FT_manifest.json"
+      }
+    },
+    {
+      "name": "Read",
+      "input": {
+        "file_path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v23/figure3_caption_EN.txt"
+      }
+    },
+    {
+      "name": "Read",
+      "input": {
+        "file_path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v23/figure_OOD_caption_EN.txt"
+      }
+    }
+  ],
+  "model_usage": {
+    "claude-sonnet-4-6": {
+      "inputTokens": 4,
+      "outputTokens": 4087,
+      "cacheReadInputTokens": 2250,
+      "cacheCreationInputTokens": 14105,
+      "webSearchRequests": 0,
+      "costUSD": 0.11488575000000001,
+      "contextWindow": 200000,
+      "maxOutputTokens": 32000
+    }
+  },
+  "cost_usd": 0.11488575000000001,
+  "visually_read_all_three_figures": true,
+  "seconds": 78.624596118927
+}

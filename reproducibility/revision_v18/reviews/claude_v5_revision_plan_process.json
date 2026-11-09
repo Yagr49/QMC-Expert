@@ -1,0 +1,23 @@
+{
+  "reviewer": "claude",
+  "execution": "local Mac",
+  "authorised": true,
+  "completed": true,
+  "started_utc": "2026-10-13T08:10:16.726574+00:00",
+  "prompt_sha256": "84ee76656165b84e6eec173c2b051a4952ae7cd53f598c3227c8bf6e97741e24",
+  "returncode": 0,
+  "model_usage": {
+    "claude-sonnet-4-6": {
+      "inputTokens": 2,
+      "outputTokens": 2911,
+      "cacheReadInputTokens": 0,
+      "cacheCreationInputTokens": 14616,
+      "webSearchRequests": 0,
+      "costUSD": 0.09848100000000001,
+      "contextWindow": 200000,
+      "maxOutputTokens": 32000
+    }
+  },
+  "cost_usd": 0.09848100000000001,
+  "seconds": 59.09877586364746
+}

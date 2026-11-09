@@ -1,0 +1,453 @@
+{
+  "core_cpu": [
+    {
+      "name": "repeat_qac105_cation",
+      "argv": [
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/core_v14/run_comparisons.py"
+      ],
+      "env": {
+        "PYTHONPATH": "/home/yagr/coma_revision_v12_20261011/deps:/home/yagr/anaconda3/lib/python3.12/site-packages:/home/yagr/.local/lib/python3.12/site-packages",
+        "HF_HOME": "/home/yagr/coma_revision_v12_20261011/runtime/hf",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "OMP_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "TOKENIZERS_PARALLELISM": "false",
+        "PYTHONUNBUFFERED": "1"
+      }
+    },
+    {
+      "name": "repeat_qac105_scaffold",
+      "argv": [
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/core_v14/run_scaffold_sensitivity.py"
+      ],
+      "env": {
+        "PYTHONPATH": "/home/yagr/coma_revision_v12_20261011/deps:/home/yagr/anaconda3/lib/python3.12/site-packages:/home/yagr/.local/lib/python3.12/site-packages",
+        "HF_HOME": "/home/yagr/coma_revision_v12_20261011/runtime/hf",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "OMP_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "TOKENIZERS_PARALLELISM": "false",
+        "PYTHONUNBUFFERED": "1"
+      }
+    },
+    {
+      "name": "repeat_frozen_molformer",
+      "argv": [
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/core_frozen/run_extension.py",
+        "--panels",
+        "matched-pooled",
+        "matched-sa",
+        "--features",
+        "/home/yagr/coma_models_check_20261012/core_frozen/data/molformer.npy",
+        "--backbone",
+        "molformer",
+        "--device",
+        "cpu",
+        "--seeds",
+        "5",
+        "--fold-file",
+        "/home/yagr/coma_models_check_20261012/core_frozen/data/target_folds.csv",
+        "--output-dir",
+        "/home/yagr/coma_models_check_20261012/core_frozen/results_molformer"
+      ],
+      "env": {
+        "PYTHONPATH": "/home/yagr/coma_revision_v12_20261011/deps:/home/yagr/anaconda3/lib/python3.12/site-packages:/home/yagr/.local/lib/python3.12/site-packages",
+        "HF_HOME": "/home/yagr/coma_revision_v12_20261011/runtime/hf",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "OMP_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "TOKENIZERS_PARALLELISM": "false",
+        "PYTHONUNBUFFERED": "1"
+      }
+    },
+    {
+      "name": "repeat_frozen_c3-molformer",
+      "argv": [
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/core_frozen/run_extension.py",
+        "--panels",
+        "matched-pooled",
+        "matched-sa",
+        "--features",
+        "/home/yagr/coma_models_check_20261012/core_frozen/data/c3-molformer.npy",
+        "--backbone",
+        "c3-molformer",
+        "--device",
+        "cpu",
+        "--seeds",
+        "5",
+        "--fold-file",
+        "/home/yagr/coma_models_check_20261012/core_frozen/data/target_folds.csv",
+        "--output-dir",
+        "/home/yagr/coma_models_check_20261012/core_frozen/results_c3-molformer"
+      ],
+      "env": {
+        "PYTHONPATH": "/home/yagr/coma_revision_v12_20261011/deps:/home/yagr/anaconda3/lib/python3.12/site-packages:/home/yagr/.local/lib/python3.12/site-packages",
+        "HF_HOME": "/home/yagr/coma_revision_v12_20261011/runtime/hf",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "OMP_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "TOKENIZERS_PARALLELISM": "false",
+        "PYTHONUNBUFFERED": "1"
+      }
+    },
+    {
+      "name": "repeat_frozen_chemberta100m",
+      "argv": [
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/core_frozen/run_extension.py",
+        "--panels",
+        "matched-pooled",
+        "matched-sa",
+        "--features",
+        "/home/yagr/coma_models_check_20261012/core_frozen/data/chemberta100m.npy",
+        "--backbone",
+        "chemberta100m",
+        "--device",
+        "cpu",
+        "--seeds",
+        "5",
+        "--fold-file",
+        "/home/yagr/coma_models_check_20261012/core_frozen/data/target_folds.csv",
+        "--output-dir",
+        "/home/yagr/coma_models_check_20261012/core_frozen/results_chemberta100m"
+      ],
+      "env": {
+        "PYTHONPATH": "/home/yagr/coma_revision_v12_20261011/deps:/home/yagr/anaconda3/lib/python3.12/site-packages:/home/yagr/.local/lib/python3.12/site-packages",
+        "HF_HOME": "/home/yagr/coma_revision_v12_20261011/runtime/hf",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "OMP_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "TOKENIZERS_PARALLELISM": "false",
+        "PYTHONUNBUFFERED": "1"
+      }
+    },
+    {
+      "name": "repeat_frozen_chemfm1b",
+      "argv": [
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/core_frozen/run_extension.py",
+        "--panels",
+        "matched-pooled",
+        "matched-sa",
+        "--features",
+        "/home/yagr/coma_models_check_20261012/core_frozen/data/chemfm1b.npy",
+        "--backbone",
+        "chemfm1b",
+        "--device",
+        "cpu",
+        "--seeds",
+        "5",
+        "--fold-file",
+        "/home/yagr/coma_models_check_20261012/core_frozen/data/target_folds.csv",
+        "--output-dir",
+        "/home/yagr/coma_models_check_20261012/core_frozen/results_chemfm1b"
+      ],
+      "env": {
+        "PYTHONPATH": "/home/yagr/coma_revision_v12_20261011/deps:/home/yagr/anaconda3/lib/python3.12/site-packages:/home/yagr/.local/lib/python3.12/site-packages",
+        "HF_HOME": "/home/yagr/coma_revision_v12_20261011/runtime/hf",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "OMP_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "TOKENIZERS_PARALLELISM": "false",
+        "PYTHONUNBUFFERED": "1"
+      }
+    },
+    {
+      "name": "repeat_context529",
+      "argv": [
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/core_frozen/run_extension.py",
+        "--panels",
+        "context",
+        "--device",
+        "cpu",
+        "--seeds",
+        "5",
+        "--fold-file",
+        "/home/yagr/coma_models_check_20261012/core_frozen/data/target_folds.csv",
+        "--output-dir",
+        "/home/yagr/coma_models_check_20261012/core_frozen/results_context"
+      ],
+      "env": {
+        "PYTHONPATH": "/home/yagr/coma_revision_v12_20261011/deps:/home/yagr/anaconda3/lib/python3.12/site-packages:/home/yagr/.local/lib/python3.12/site-packages",
+        "HF_HOME": "/home/yagr/coma_revision_v12_20261011/runtime/hf",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "OMP_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "TOKENIZERS_PARALLELISM": "false",
+        "PYTHONUNBUFFERED": "1"
+      }
+    },
+    {
+      "name": "retrained_qac105_cation",
+      "argv": [
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/wait_and_run.py",
+        "--marker",
+        "status/retrained_vectors.ready",
+        "--lane",
+        "gpu",
+        "--",
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/retrained_v14/run_comparisons.py"
+      ],
+      "env": {
+        "PYTHONPATH": "/home/yagr/coma_revision_v12_20261011/deps:/home/yagr/anaconda3/lib/python3.12/site-packages:/home/yagr/.local/lib/python3.12/site-packages",
+        "HF_HOME": "/home/yagr/coma_revision_v12_20261011/runtime/hf",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "OMP_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "TOKENIZERS_PARALLELISM": "false",
+        "PYTHONUNBUFFERED": "1"
+      }
+    },
+    {
+      "name": "retrained_qac105_scaffold",
+      "argv": [
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/wait_and_run.py",
+        "--marker",
+        "status/retrained_vectors.ready",
+        "--lane",
+        "gpu",
+        "--",
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/retrained_v14/run_scaffold_sensitivity.py"
+      ],
+      "env": {
+        "PYTHONPATH": "/home/yagr/coma_revision_v12_20261011/deps:/home/yagr/anaconda3/lib/python3.12/site-packages:/home/yagr/.local/lib/python3.12/site-packages",
+        "HF_HOME": "/home/yagr/coma_revision_v12_20261011/runtime/hf",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "OMP_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "TOKENIZERS_PARALLELISM": "false",
+        "PYTHONUNBUFFERED": "1"
+      }
+    },
+    {
+      "name": "audit_repeats",
+      "argv": [
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/audit_repeats.py"
+      ],
+      "env": {
+        "PYTHONPATH": "/home/yagr/coma_revision_v12_20261011/deps:/home/yagr/anaconda3/lib/python3.12/site-packages:/home/yagr/.local/lib/python3.12/site-packages",
+        "HF_HOME": "/home/yagr/coma_revision_v12_20261011/runtime/hf",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "OMP_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "TOKENIZERS_PARALLELISM": "false",
+        "PYTHONUNBUFFERED": "1"
+      }
+    }
+  ],
+  "gpu": [
+    {
+      "name": "repeat_matched_ft_30",
+      "argv": [
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/core_ft/run_matched_finetuning.py",
+        "--output-dir",
+        "/home/yagr/coma_models_check_20261012/core_ft/results",
+        "--epochs",
+        "30",
+        "--seeds",
+        "5",
+        "--device",
+        "cuda"
+      ],
+      "env": {
+        "PYTHONPATH": "/home/yagr/coma_revision_v12_20261011/deps:/home/yagr/anaconda3/lib/python3.12/site-packages:/home/yagr/.local/lib/python3.12/site-packages",
+        "HF_HOME": "/home/yagr/coma_revision_v12_20261011/runtime/hf",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "OMP_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "TOKENIZERS_PARALLELISM": "false",
+        "PYTHONUNBUFFERED": "1"
+      }
+    },
+    {
+      "name": "encode_retrained_qac105_ood17",
+      "argv": [
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/extend_retrained.py"
+      ],
+      "env": {
+        "PYTHONPATH": "/home/yagr/coma_revision_v12_20261011/deps:/home/yagr/anaconda3/lib/python3.12/site-packages:/home/yagr/.local/lib/python3.12/site-packages",
+        "HF_HOME": "/home/yagr/coma_revision_v12_20261011/runtime/hf",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "OMP_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "TOKENIZERS_PARALLELISM": "false",
+        "PYTHONUNBUFFERED": "1"
+      }
+    },
+    {
+      "name": "chemprop_3seeds",
+      "argv": [
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/wait_and_run.py",
+        "--marker",
+        "status/baseline_setup.finished",
+        "--lane",
+        "tabular_cpu",
+        "--",
+        "/home/yagr/coma_models_check_20261012/envs/baselines/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/run_baselines.py",
+        "--model",
+        "chemprop"
+      ],
+      "env": {
+        "OMP_NUM_THREADS": "2",
+        "OPENBLAS_NUM_THREADS": "2",
+        "MKL_NUM_THREADS": "2",
+        "TOKENIZERS_PARALLELISM": "false",
+        "PYTHONUNBUFFERED": "1",
+        "HF_HOME": "/home/yagr/coma_models_check_20261012/runtime/hf",
+        "TABPFN_DISABLE_TELEMETRY": "1",
+        "HF_HUB_DISABLE_TELEMETRY": "1",
+        "WANDB_DISABLED": "true",
+        "JAX_PLATFORMS": "cpu",
+        "XLA_PYTHON_CLIENT_PREALLOCATE": "false"
+      }
+    },
+    {
+      "name": "tabpfn",
+      "argv": [
+        "/home/yagr/coma_models_check_20261012/envs/baselines/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/run_baselines.py",
+        "--model",
+        "tabpfn"
+      ],
+      "env": {
+        "OMP_NUM_THREADS": "2",
+        "OPENBLAS_NUM_THREADS": "2",
+        "MKL_NUM_THREADS": "2",
+        "TOKENIZERS_PARALLELISM": "false",
+        "PYTHONUNBUFFERED": "1",
+        "HF_HOME": "/home/yagr/coma_models_check_20261012/runtime/hf",
+        "TABPFN_DISABLE_TELEMETRY": "1",
+        "HF_HUB_DISABLE_TELEMETRY": "1",
+        "WANDB_DISABLED": "true",
+        "JAX_PLATFORMS": "cpu",
+        "XLA_PYTHON_CLIENT_PREALLOCATE": "false"
+      }
+    }
+  ],
+  "tabular_cpu": [
+    {
+      "name": "catboost_control",
+      "argv": [
+        "/home/yagr/coma_models_check_20261012/envs/baselines/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/run_baselines.py",
+        "--model",
+        "catboost"
+      ],
+      "env": {
+        "OMP_NUM_THREADS": "2",
+        "OPENBLAS_NUM_THREADS": "2",
+        "MKL_NUM_THREADS": "2",
+        "TOKENIZERS_PARALLELISM": "false",
+        "PYTHONUNBUFFERED": "1",
+        "HF_HOME": "/home/yagr/coma_models_check_20261012/runtime/hf",
+        "TABPFN_DISABLE_TELEMETRY": "1",
+        "HF_HUB_DISABLE_TELEMETRY": "1",
+        "WANDB_DISABLED": "true",
+        "JAX_PLATFORMS": "cpu",
+        "XLA_PYTHON_CLIENT_PREALLOCATE": "false"
+      }
+    },
+    {
+      "name": "autogluon",
+      "argv": [
+        "/home/yagr/coma_models_check_20261012/envs/baselines/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/run_baselines.py",
+        "--model",
+        "autogluon"
+      ],
+      "env": {
+        "OMP_NUM_THREADS": "2",
+        "OPENBLAS_NUM_THREADS": "2",
+        "MKL_NUM_THREADS": "2",
+        "TOKENIZERS_PARALLELISM": "false",
+        "PYTHONUNBUFFERED": "1",
+        "HF_HOME": "/home/yagr/coma_models_check_20261012/runtime/hf",
+        "TABPFN_DISABLE_TELEMETRY": "1",
+        "HF_HUB_DISABLE_TELEMETRY": "1",
+        "WANDB_DISABLED": "true",
+        "JAX_PLATFORMS": "cpu",
+        "XLA_PYTHON_CLIENT_PREALLOCATE": "false"
+      }
+    },
+    {
+      "name": "tabfm",
+      "argv": [
+        "/home/yagr/coma_models_check_20261012/envs/tabfm/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/run_baselines.py",
+        "--model",
+        "tabfm"
+      ],
+      "env": {
+        "OMP_NUM_THREADS": "2",
+        "OPENBLAS_NUM_THREADS": "2",
+        "MKL_NUM_THREADS": "2",
+        "TOKENIZERS_PARALLELISM": "false",
+        "PYTHONUNBUFFERED": "1",
+        "HF_HOME": "/home/yagr/coma_models_check_20261012/runtime/hf",
+        "TABPFN_DISABLE_TELEMETRY": "1",
+        "HF_HUB_DISABLE_TELEMETRY": "1",
+        "WANDB_DISABLED": "true",
+        "JAX_PLATFORMS": "cpu",
+        "XLA_PYTHON_CLIENT_PREALLOCATE": "false"
+      }
+    }
+  ]
+}

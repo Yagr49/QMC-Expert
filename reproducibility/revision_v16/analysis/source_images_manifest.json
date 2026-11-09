@@ -1,0 +1,14 @@
+[
+  {
+    "url": "https://raw.githubusercontent.com/deepforestsci/chemberta3/706f58472c351825960edc05ee9dd9aebd7bec6c/results/images/Molformer-splits-benchmark1.png",
+    "sha256": "e2dbf72467aa4677603ae0a18c89ade34edb90cfa40eb517026d8025a37720dc",
+    "commit": "706f58472c351825960edc05ee9dd9aebd7bec6c",
+    "file": "Molformer-splits-benchmark1.png"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/deepforestsci/chemberta3/706f58472c351825960edc05ee9dd9aebd7bec6c/results/images/Deepchem-splits-benchmark1.png",
+    "sha256": "2692a7326b2d3536460a5d519464344d0e485fa0df827758a77ab0a86e3d997a",
+    "commit": "706f58472c351825960edc05ee9dd9aebd7bec6c",
+    "file": "Deepchem-splits-benchmark1.png"
+  }
+]

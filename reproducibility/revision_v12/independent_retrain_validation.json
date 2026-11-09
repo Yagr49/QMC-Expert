@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "scope": "one full 30-epoch human seed 0 retrain; same GPU and pinned environment; no portability claim",
+  "max_parameter_difference": 0.0,
+  "max_prediction_differences": {
+    "predictions": 0.0,
+    "direct_predictions": 0.0
+  },
+  "max_feature_differences": {
+    "QAC-104": 0.0,
+    "Q-HERO-405": 0.0,
+    "OOD-17": 0.0
+  },
+  "paired_identity_initialisation_and_batches": true,
+  "script_sha256": "8ae5f48bbad8baff25f2ef257128393a605d86088c9aff34e973721145d26a31"
+}

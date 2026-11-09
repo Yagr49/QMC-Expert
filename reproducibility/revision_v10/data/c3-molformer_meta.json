@@ -1,0 +1,31 @@
+{
+  "model": "DeepChem/MoLFormer-c3-1.1B",
+  "revision": "9f1b9ea3590833bd0ea1a70e789c5d3da11ba7ed",
+  "remote_code_revision": "7b12d946c181a37f6012b9dc3b002275de070314",
+  "pooling": "pooler",
+  "shape": [
+    1939,
+    768
+  ],
+  "max_tokens": 194,
+  "context": 202,
+  "truncated": 0,
+  "dtype": "torch.float32",
+  "parameters": 44375040,
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [
+      "lm_head.decoder.weight",
+      "lm_head.transform.LayerNorm.bias",
+      "lm_head.transform.LayerNorm.weight",
+      "lm_head.transform.dense.bias",
+      "lm_head.transform.dense.weight"
+    ],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "torch": "2.14.0+cu130",
+  "seconds": 1.026301622390747,
+  "smiles_sha256": "3090ee80929898fd4eaaeb4f3085d994464b25041dacb45205f0454238691237",
+  "features_sha256": "ced2d42a87ff8cb54e53a952c8dd76fdff96de445dcdae091d3e4d82124b2ab6"
+}

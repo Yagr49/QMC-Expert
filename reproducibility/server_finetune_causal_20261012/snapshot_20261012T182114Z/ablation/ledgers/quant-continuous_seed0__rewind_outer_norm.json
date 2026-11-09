@@ -1,0 +1,15 @@
+{
+  "arm": "quant-continuous",
+  "seed": 0,
+  "variant": "rewind_outer_norm",
+  "name": "quant-continuous_seed0__rewind_outer_norm",
+  "encoder_buffer_sha256": "67dd6296a3a58003ea4006429f4d9a86a3e2bd618c166c1154bd1070b5c1a278",
+  "changed_parameter_names": [
+    "LayerNorm.weight",
+    "LayerNorm.bias"
+  ],
+  "checkpoint_sha256": "a11e1aa790a44224f7958f2bea6cd1ea0f9b6fc3cb0945413c7c07481bc2eb37",
+  "intact_replay_exact": {},
+  "script_sha256": "52cc505b52427511cf0deb4141be384a0f0f033e1ce32a5168730d2f267c6562",
+  "protocol_sha256": "72c4243e1523863087a59662486c299dc28234fa40fe19409221db17ea37092b"
+}

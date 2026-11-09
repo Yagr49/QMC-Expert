@@ -1,0 +1,76 @@
+{
+  "completed": true,
+  "jobs": 9,
+  "fits": 18,
+  "results": [
+    {
+      "name": "v5_human",
+      "encoding": "categorical",
+      "original": true,
+      "fits": 1,
+      "seconds": 3.5943045616149902
+    },
+    {
+      "name": "v5_human",
+      "encoding": "separate",
+      "original": true,
+      "fits": 4,
+      "seconds": 6.168989181518555
+    },
+    {
+      "name": "v5_human",
+      "encoding": "text",
+      "original": true,
+      "fits": 1,
+      "seconds": 6.678246259689331
+    },
+    {
+      "name": "v5_qac_ablation",
+      "encoding": "categorical",
+      "original": true,
+      "fits": 1,
+      "seconds": 3.2658019065856934
+    },
+    {
+      "name": "v5_qac_ablation",
+      "encoding": "text",
+      "original": true,
+      "fits": 1,
+      "seconds": 4.650649547576904
+    },
+    {
+      "name": "v5_raw",
+      "encoding": "categorical",
+      "original": true,
+      "fits": 1,
+      "seconds": 11.529338121414185
+    },
+    {
+      "name": "v5_qac_ablation",
+      "encoding": "separate",
+      "original": true,
+      "fits": 4,
+      "seconds": 5.968413591384888
+    },
+    {
+      "name": "v5_raw",
+      "encoding": "text",
+      "original": true,
+      "fits": 1,
+      "seconds": 13.274340152740479
+    },
+    {
+      "name": "v5_raw",
+      "encoding": "separate",
+      "original": true,
+      "fits": 4,
+      "seconds": 31.484090328216553
+    }
+  ],
+  "script_sha256": "cf5df902682b25f3ec844ebac288ef6067f09c915c3885d6207ec6a864aad27f",
+  "python": "3.13.9",
+  "torch": null,
+  "catboost": "1.2.10",
+  "numpy": "2.2.6",
+  "data_manifest_sha256": "5804f00c6972646909fff693554c45f37f6ddd1d6b9c36b84b7b9918840d71ae"
+}

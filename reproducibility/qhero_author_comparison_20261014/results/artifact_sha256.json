@@ -1,0 +1,15 @@
+{
+  "results/metrics.csv": "cf3dd20772172c65254647fa878a908caa74b86133a1f4755d12f3eb34f6ce02",
+  "results/predictions.csv": "d9d9cf420f3055e8ac569a95304fa3330f6c3286193fd48920ebf2f859d9e840",
+  "results/summary.csv": "8924ffdeef3a8daa36233c4e232cbc531285bb7153c90ee22f0a1dc417b48a3f",
+  "results/completion.json": "f4d1f73f2ad7a732a064591ce0e821b94c84fd1a9693a6ecfee9dbaa92c18f1a",
+  "results/validation.json": "bda2e113e11dff40cd78d842154c0ec07d8713665313beaf5c092ac98cd79249",
+  "results/paired_test_contrasts.csv": "5c39506d60413ab3ba4a540f4fb700fe29e15690345a3f16bf41367d0483f43d",
+  "primary_results/completion.json": "faf9084b26694490af339834e58f816cceaf9fbc830b149171ab61c1d1700edd",
+  "secondary_results/completion.json": "a3f5759a08ee2e854b9323e91719b87d81306a7acd3cedb8e0a09e1dbcc4a83d",
+  "rescale.json": "a699be05152057e20f90a8abe7b2e47cbd9ea20370bb0f6501705abe20b07292",
+  "results/paired_scaffold_contrasts.csv": "a566e518bc1c33973d0d3a211fddb136d459ca4ba95f23f16ea4a0f2411fd584",
+  "results/scaffold_contrast_validation.json": "fb1b40ea4c7e8344c2ebd2b78662e2074819cf389a356b7781c0368d3b764f42",
+  "scaffold_contrasts.py": "d618efe4405e1b2d9f52ddc86d649f785db6d1120f7eec8d919d6326af0f78d7",
+  "README_RU.md": "0b52f2de12e1f7717134478e2d6fd45c927eb700450afc6b087e7a49299eff28"
+}

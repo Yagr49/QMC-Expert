@@ -1,0 +1,30 @@
+{
+  "completed": true,
+  "documents": [
+    {
+      "path": "/Users/egorilin/Desktop/COMA/2026_10_13_Paper_2_edited-v19_CV_and_seed_variability.docx",
+      "sha256": "82e32b60c545962ffd5659a47ab25d8cfffbae2cbd62cfd5b671153839dd7a86",
+      "figures": 8,
+      "relationships_styles_valid": true
+    },
+    {
+      "path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v19/Supplementary_Information_v19.docx",
+      "sha256": "423c3765c814a4412328e1ea3b4d3362d3e10d4e1753afcf5314a7384e932f79",
+      "figures": 30,
+      "relationships_styles_valid": true
+    }
+  ],
+  "original_v5_and_v18_unchanged": true,
+  "historical_holdout_values_byte_preserved_as_cell_text": true,
+  "no_CV_SD_attached_to_historical_holdout_values": true,
+  "new_CV_rows_per_original_table": 3,
+  "CV_decoder_fits": 30,
+  "rowwise_CV_metric_and_population_SD_recomputed": true,
+  "source_seed_SD_sample_definition_verified": true,
+  "recovered_original_probe_uncertainty": true,
+  "all_original_figures_and_Office_objects_byte_preserved": true,
+  "previous_SI_tables_byte_preserved_as_cell_text": true,
+  "SI_tables": 45,
+  "chemistry_assay_and_coauthor_fields_preserved": true,
+  "new_variability_types_explicit": true
+}

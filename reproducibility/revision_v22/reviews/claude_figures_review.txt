@@ -1,0 +1,40 @@
+---
+
+## Independent Figure Review — revision_v22 (2026-10-14)
+
+### Figure 2 — Contrastive t-SNE scatter
+
+**Visual quality (180 mm, Aptos, pastel palette):** Acceptable. The soft peach (#E6B490) and teal (#87CABA) markers, rounded-frame panels, and shared bottom legend are consistent with a minimal publication style. Font, weight hierarchy (bold panel labels at 11 pt, title 10 pt, silhouette annotation 8 pt), and legend size (8.5 pt) render cleanly at 600 dpi.
+
+**Material issue — independent axis scaling not flagged:**
+Each panel's x/y limits are computed independently from its own marker cloud (code: `ax.set_xlim(data.x_pdf.min()-.09*dx, ...)`). The "after" cloud appears spatially larger on screen, partly because t-SNE axes are not aligned. No note in the figure or its visible text warns the reader. The manuscript caption (not in permitted files) must state explicitly that axes are not comparable between panels and that t-SNE distances are arbitrary within each embedding. The figure itself should not be altered to fake aligned axes, but a brief axis-inequality note below the silhouette lines (or in the caption) is necessary to avoid misreading.
+
+**Silhouette discrepancy (0.107 vector source vs. 0.108 v5 raster):** The figure correctly shows 0.107 from the archived PDF marker coordinates. The manifest records both values transparently. The manuscript caption must report 0.107 as the figure value and acknowledge that the legacy raster rounds to 0.108; no numeric change to the figure is warranted.
+
+**Minor:** The legend sits at `bbox_to_anchor=(0.5, 0.02)`, which places it very close to the figure bottom edge. At some journal trim sizes this could be clipped. Verify that the production PDF retains at least 4 mm of white space below the legend.
+
+---
+
+### Figure 3 — Backbone-route error violins
+
+**Visual quality (180 mm, Aptos):** Acceptable overall. Horizontal layout with three shared-scale panels reads well. The five-colour pastel palette (blue, lavender, peach, rose, teal) is distinct enough for grayscale printing only if routes are identified by label, not colour alone — acceptable given the y-axis route labels on panel (a).
+
+**Statistic correctness:** The plotted values are confirmed correct. Each violin represents 420 per-endpoint mean absolute errors (cation/scaffold: 105 compounds × 4 endpoints, averaged over seeds 0–2) or 67 for OOD-17 (17 compounds). The bound IT505/Ec MBC >500 mg/L is excluded from exact-error densities as required. The largest plotted tail is 7.338 (LoRA/OOD), within the 0–8.05 axis. White median dots and IQR bars are drawn from the endpoint-summary distribution, not from seed-level residuals. No SD bars or CI intervals appear in the figure; the RMSE±sample-SD table is separate. All of this is consistent with the manifest and the brief.
+
+**Material issue — OOD jitter visibility:** The 67 individual OOD endpoint-summary dots use `alpha=0.15`, `s=2.1`. At 600 dpi/180 mm this is borderline: in the PNG they are faintly visible but may disappear in a journal's PDF compression or in grayscale print. Increase `alpha` to ≈ 0.30 and `s` to ≈ 3.5 for reliable reproduction without overstating point density. This is the only code-level change recommended.
+
+**Caption (figure3_caption_EN.txt):** Two typographic errors: `"(a)Cation"` and `"(b)scaffold holdout"` each lack a space after the closing parenthesis; additionally "scaffold" is not capitalised while "Cation" is. Fix both for consistency. The statistical disclaimer ("density shapes do not establish statistical significance or a causal effect of human-label meaning") and the note distinguishing human routes from the compact v5 MLP are present and correctly worded.
+
+**Route-comparison framing:** The comparison conflates different capacities and objectives (frozen linear head, LoRA, full fine-tuning, partial-backbone direct, frozen-source CatBoost). The caption correctly marks these as a practical pipeline comparison and explicitly bars causal or universal conclusions. No further changes needed.
+
+---
+
+### Summary of required actions
+
+| # | Figure | Action | Priority |
+|---|--------|---------|----------|
+| 1 | F2 | Add axis-non-alignment statement to caption | **Required** |
+| 2 | F2 | Confirm ≥4 mm bottom margin for legend in production PDF | Verify |
+| 3 | F3 | Increase OOD jitter `alpha` to ~0.30, `s` to ~3.5 | **Required** |
+| 4 | F3 caption | Fix spacing and capitalisation after panel labels (a), (b) | **Required** |
+| 5 | Manuscript | Report Figure 2 silhouette as 0.107; note raster rounds to 0.108 | **Required** |

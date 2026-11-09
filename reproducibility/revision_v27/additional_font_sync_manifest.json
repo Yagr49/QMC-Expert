@@ -1,0 +1,128 @@
+{
+  "completed": true,
+  "font": "Futura",
+  "font_file": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v27/FuturaMedium.ttf",
+  "font_sha256": "339872ef90678703ba37183f449b61def1d52037a3da8e4c5686f5bd2038b5a3",
+  "shared_font_source": "theme_v27.py",
+  "colours_and_layout_from_attached_reference_figures_preserved": true,
+  "grouped_violin_source": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/analysis/FT_route_endpoint_mean_absolute_errors.csv",
+  "grouped_violin_sha256": "527e4058ac67ecdbe334bedffeedc5d61aec5d9e046f40f82c2a50a9a28a2f08",
+  "grouped_violin_summary": [
+    {
+      "route": "frozen_head",
+      "schema": "cation",
+      "n": 420,
+      "minimum": 0.0501718918482462,
+      "maximum": 7.0774055850415225,
+      "median": 1.3277710974216461,
+      "q25": 0.6575142542521157,
+      "q75": 2.185179432233175
+    },
+    {
+      "route": "lora",
+      "schema": "cation",
+      "n": 420,
+      "minimum": 0.0857722759246826,
+      "maximum": 6.906440191657225,
+      "median": 1.3761469324429827,
+      "q25": 0.7594182540973028,
+      "q75": 2.1814412573973336
+    },
+    {
+      "route": "full_FT",
+      "schema": "cation",
+      "n": 420,
+      "minimum": 0.0626130898793538,
+      "maximum": 6.705111476968606,
+      "median": 1.1189596255620322,
+      "q25": 0.6200248003005981,
+      "q75": 1.9757846991221113
+    },
+    {
+      "route": "human_direct",
+      "schema": "cation",
+      "n": 420,
+      "minimum": 0.0528056621551513,
+      "maximum": 6.598656177520752,
+      "median": 0.9769858817259469,
+      "q25": 0.6147966633240382,
+      "q75": 1.7943790356318154
+    },
+    {
+      "route": "human_CatBoost",
+      "schema": "cation",
+      "n": 420,
+      "minimum": 0.0803577759518878,
+      "maximum": 6.847712931821518,
+      "median": 0.9935038301930672,
+      "q25": 0.5451179191374197,
+      "q75": 1.7479212632190253
+    },
+    {
+      "route": "frozen_head",
+      "schema": "scaffold",
+      "n": 420,
+      "minimum": 0.041417678197225,
+      "maximum": 6.893291645438353,
+      "median": 1.1930016477902732,
+      "q25": 0.6128547191619875,
+      "q75": 2.2019292265176773
+    },
+    {
+      "route": "lora",
+      "schema": "scaffold",
+      "n": 420,
+      "minimum": 0.0955219666163126,
+      "maximum": 6.335179302285989,
+      "median": 1.3279369870821633,
+      "q25": 0.67516169945399,
+      "q75": 2.2558026413122807
+    },
+    {
+      "route": "full_FT",
+      "schema": "scaffold",
+      "n": 420,
+      "minimum": 0.0643108288447062,
+      "maximum": 5.859471612364928,
+      "median": 1.252156913280487,
+      "q25": 0.6296761333942416,
+      "q75": 2.059038360913595
+    },
+    {
+      "route": "human_direct",
+      "schema": "scaffold",
+      "n": 420,
+      "minimum": 0.0972333749135338,
+      "maximum": 6.636509736378987,
+      "median": 1.1047064065933228,
+      "q25": 0.605663259824117,
+      "q75": 1.8589294552803042
+    },
+    {
+      "route": "human_CatBoost",
+      "schema": "scaffold",
+      "n": 420,
+      "minimum": 0.0893750239324885,
+      "maximum": 6.261203127477137,
+      "median": 1.0394652571304674,
+      "q25": 0.5559299672363415,
+      "q75": 1.8863353128733347
+    }
+  ],
+  "tsne_points_per_panel": 221,
+  "no_models_refitted": true,
+  "no_tsne_rerun": true,
+  "formats": [
+    "PDF",
+    "SVG",
+    "PNG600dpi"
+  ],
+  "output_sha256": {
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v27/figures/figure3_backbone_route_error_violins_futura.pdf": "443b68063e291407407e93c816da7ac6d34cbc5d9204e392bd47a0c81473f3e6",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v27/figures/figure3_backbone_route_error_violins_futura.svg": "7996b044fb1d9ef1a918a699a60309bcc061e1dbb75b62b650d6aa979072a37d",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v27/figures/figure3_backbone_route_error_violins_futura.png": "b4d327b5bab857fe22b16c706c45df39d07705db0599b552e8d08628fa6ace16",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v27/figures/figure2_contrastive_futura.png": "705c81bdbb2587c218e66265608e7f74aa1a02468f85328760f08db5202d77b2",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v27/figures/figure2_contrastive_futura.pdf": "62c617f75ddc03452d4041d5dfafdbc5388e6547b32dd5e973640c48bf100521",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v27/figures/figure2_contrastive_futura.svg": "2c00fd22ea68d3311056bc769a8503b74174a7a63081a484c4844fdf4fed88a0"
+  }
+}

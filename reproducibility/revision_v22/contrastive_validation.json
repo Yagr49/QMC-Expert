@@ -1,0 +1,34 @@
+{
+  "font": "Aptos",
+  "width_mm": 180,
+  "png_dpi": 600,
+  "palette": {
+    "Bad": "#E6B490",
+    "Good": "#87CABA"
+  },
+  "source": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v20/tsne_pdf_marker_coordinates.csv",
+  "source_sha256": "35a6d9acc903c06680d7e4b70c255f3a9d7283d1c59a4ac45322b0f22c83340c",
+  "checks": [
+    {
+      "panel": "before",
+      "points": 221,
+      "Bad": 172,
+      "Good": 49,
+      "all_scatter_offsets_exactly_preserved": true
+    },
+    {
+      "panel": "after",
+      "points": 221,
+      "Bad": 172,
+      "Good": 49,
+      "all_scatter_offsets_exactly_preserved": true
+    }
+  ],
+  "source_reported_after_silhouette": 0.107,
+  "original_v5_raster_reported_after_silhouette": 0.108,
+  "no_tsne_rerun": true,
+  "no_point_selection_or_geometry_changes": true,
+  "class_labels_are_expert_calls_not_new_assay_measurements": true,
+  "legend_bottom_margin_mm": 5.414305555555555,
+  "panel_axes_independently_scaled_not_aligned": true
+}

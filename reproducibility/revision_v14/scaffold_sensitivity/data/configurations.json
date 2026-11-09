@@ -1,0 +1,281 @@
+[
+  {
+    "name": "raw-molformer",
+    "arm": "raw-molformer",
+    "seed": -1,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "expert_seed0",
+    "arm": "expert",
+    "seed": 0,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "quant-continuous_seed0",
+    "arm": "quant-continuous",
+    "seed": 0,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "quant-binary_seed0",
+    "arm": "quant-binary",
+    "seed": 0,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "expert-shuffled_seed0",
+    "arm": "expert-shuffled",
+    "seed": 0,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "quant-shuffled_seed0",
+    "arm": "quant-shuffled",
+    "seed": 0,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "quant-binary-shuffled_seed0",
+    "arm": "quant-binary-shuffled",
+    "seed": 0,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "expert_seed1",
+    "arm": "expert",
+    "seed": 1,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "quant-continuous_seed1",
+    "arm": "quant-continuous",
+    "seed": 1,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "quant-binary_seed1",
+    "arm": "quant-binary",
+    "seed": 1,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "expert-shuffled_seed1",
+    "arm": "expert-shuffled",
+    "seed": 1,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "quant-shuffled_seed1",
+    "arm": "quant-shuffled",
+    "seed": 1,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "quant-binary-shuffled_seed1",
+    "arm": "quant-binary-shuffled",
+    "seed": 1,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "expert_seed2",
+    "arm": "expert",
+    "seed": 2,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "quant-continuous_seed2",
+    "arm": "quant-continuous",
+    "seed": 2,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "quant-binary_seed2",
+    "arm": "quant-binary",
+    "seed": 2,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "expert-shuffled_seed2",
+    "arm": "expert-shuffled",
+    "seed": 2,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "quant-shuffled_seed2",
+    "arm": "quant-shuffled",
+    "seed": 2,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "quant-binary-shuffled_seed2",
+    "arm": "quant-binary-shuffled",
+    "seed": 2,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "expert_seed3",
+    "arm": "expert",
+    "seed": 3,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "quant-continuous_seed3",
+    "arm": "quant-continuous",
+    "seed": 3,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "quant-binary_seed3",
+    "arm": "quant-binary",
+    "seed": 3,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "expert-shuffled_seed3",
+    "arm": "expert-shuffled",
+    "seed": 3,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "quant-shuffled_seed3",
+    "arm": "quant-shuffled",
+    "seed": 3,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "quant-binary-shuffled_seed3",
+    "arm": "quant-binary-shuffled",
+    "seed": 3,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "expert_seed4",
+    "arm": "expert",
+    "seed": 4,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "quant-continuous_seed4",
+    "arm": "quant-continuous",
+    "seed": 4,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "quant-binary_seed4",
+    "arm": "quant-binary",
+    "seed": 4,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "expert-shuffled_seed4",
+    "arm": "expert-shuffled",
+    "seed": 4,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "quant-shuffled_seed4",
+    "arm": "quant-shuffled",
+    "seed": 4,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  },
+  {
+    "name": "quant-binary-shuffled_seed4",
+    "arm": "quant-binary-shuffled",
+    "seed": 4,
+    "provenance": "matched-source-excluded",
+    "encodings": [
+      "onehot"
+    ]
+  }
+]

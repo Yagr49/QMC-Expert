@@ -1,0 +1,61 @@
+{
+  "jobs": {
+    "repeat_matched_ft_30": {
+      "state": "failed",
+      "started": "2026-10-12T01:39:23.224099+00:00",
+      "command": [
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/core_ft/run_matched_finetuning.py",
+        "--output-dir",
+        "/home/yagr/coma_models_check_20261012/core_ft/results",
+        "--epochs",
+        "30",
+        "--seeds",
+        "5",
+        "--device",
+        "cuda"
+      ],
+      "pid": 2459569,
+      "exit_code": 1,
+      "finished": "2026-10-12T01:39:23.334764+00:00"
+    },
+    "encode_retrained_qac105_ood17": {
+      "state": "failed",
+      "started": "2026-10-12T01:39:23.335017+00:00",
+      "command": [
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/extend_retrained.py"
+      ],
+      "pid": 2459586,
+      "exit_code": 1,
+      "finished": "2026-10-12T01:39:23.450610+00:00"
+    },
+    "chemprop_3seeds": {
+      "state": "running",
+      "started": "2026-10-12T01:39:23.450827+00:00",
+      "command": [
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/wait_and_run.py",
+        "--marker",
+        "status/baseline_setup.finished",
+        "--lane",
+        "tabular_cpu",
+        "--",
+        "/home/yagr/coma_models_check_20261012/envs/baselines/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/run_baselines.py",
+        "--model",
+        "chemprop"
+      ],
+      "pid": 2459597
+    }
+  },
+  "lane": "gpu",
+  "pid": 2459565,
+  "started": "2026-10-12T01:39:23.224021+00:00",
+  "state": "running",
+  "current_job": "chemprop_3seeds"
+}

@@ -1,0 +1,41 @@
+## Scientific Critique: QAC Molecular ML Manuscript (Exploratory Revision)
+
+### 1. Post-Hoc Cohort and Narrative Selection — Inadequately Mitigated
+
+The protocol explicitly states that "earlier QAC/OOD outcomes and v5 were already inspected" before cohorts, figures, and narrative were selected. The 105-molecule cohort and the 17-compound structural OOD set were chosen after reviewing results. While the protocol labels this "exploratory," the manuscript must prominently disclose this selection in the abstract and results sections, not only in a supplementary protocol file. Burying the disclosure in PROTOCOL.md is insufficient; any performance claim—however hedged—is susceptible to optimism bias when the evaluation set was visible during design. The authors should quantify the number of candidate cohort/OOD configurations considered and rejected, or explicitly state that no alternatives were evaluated.
+
+### 2. Conflicting Duplicate: Disclosure Without Resolution
+
+The protocol acknowledges one flagged conflicting duplicate whose median endpoint is retained. The cohort audit confirms 105 full-salt structures from 103 cations, implying two salts share a cation identity with discordant measured values. The manuscript must name this compound, report both raw values, state the magnitude of the conflict (in log₂ mg/L), and justify median imputation over exclusion. The "strict 104-molecule analysis" is relegated to a sensitivity study, but if the conflicting duplicate materially affects any primary endpoint (particularly for a small N=105 dataset where one outlier can shift fold-level metrics), it should be the primary analysis, not the sensitivity.
+
+### 3. Task Encoding via Text Embeddings: Scope Conflation Risk
+
+The text-embedding-3-small vectors encode four strain/endpoint descriptions ("*S. aureus* ATCC 43300 MIC," etc.), not molecular structures or activities. The protocol correctly states no generative GPT claim is made. However, the manuscript must make explicit that these 1536-dimensional vectors are constant per task across all molecules—they function identically to a learned task intercept, not as molecular descriptors. Any performance difference between one-hot and text-encoding arms reflects only the geometry of the task embedding space relative to CatBoost's tree splits, not biological information. Presenting text-encoding as a distinct "representation" arm without this clarification will mislead readers into inferring semantic biological content from the embedding.
+
+### 4. OOD Evaluation: Structural Non-Overlap Does Not Validate Generalization
+
+The audit confirms zero scaffold overlap between OOD-17 and both QAC-105 and the source training set. This is appropriate for a structural OOD test. However, with only 17 molecules across four scaffold families and one right-censored endpoint excluded, the effective OOD evaluation has N≤16 exact pairs per pooled analysis and as few as 3–5 per task. The bootstrap resampling over four cation-scaffold groups for OOD is explicitly flagged as unstable in the protocol. The manuscript must not present OOD R²/RMSE point estimates without confidence intervals, and must state that with four resample groups, percentile intervals are unreliable regardless of draw count (10,000 draws cannot compensate for four exchangeable units). OOD results should be treated as anecdotal, not as a validation benchmark.
+
+### 5. Historical Encoder Contamination: Secondary Status Insufficiently Enforced
+
+Historical 256-d encoders had source/target overlap with the original cohort. The protocol designates them "secondary descriptive reconstructions," but `run_comparisons.py` processes them through identical CV folds and metric computation as primary arms. If historical encoder results appear in the same results tables or figures as matched-source arms, readers will make direct comparisons that the contamination renders invalid. The manuscript must visually and statistically segregate these arms, ideally in supplementary material only, with a clear contamination warning in any caption where they appear.
+
+### 6. Cross-Validation Leakage via Scaffold Overlap Within QAC-105
+
+The GroupKFold groups by canonical cation, preventing exact cation leakage. The audit reports 29 scaffolds across 103 cations. With five folds of 21 molecules each, multiple cations sharing a scaffold will appear in both training and test folds. The code asserts cation and canonical SMILES non-overlap but does not assert scaffold non-overlap. The existing "strict scaffold-CV QAC-104" sensitivity study addresses this, but it is pre-existing and separate. The primary CV results should acknowledge that scaffold overlap is present and that R² estimates are therefore optimistic relative to true structural generalization.
+
+### 7. Seed-Mean Reporting and Baseline Comparisons
+
+Reporting seed means rather than ensemble metrics is methodologically sound. However, the baseline (task-median predictor) uses a single deterministic prediction, making direct variance comparisons with five-seed model arms asymmetric. Negative R² values are retained, which is correct. The manuscript should confirm that seed-mean R² is not systematically inflated relative to the R² of the mean prediction, as these quantities diverge when predictions are noisy.
+
+### Summary of Required Fixes
+
+| Issue | Required Action |
+|---|---|
+| Post-hoc selection | Prominent disclosure in abstract/results |
+| Conflicting duplicate | Name compound, justify median over exclusion |
+| Text embeddings | Clarify constant-per-task nature; no biological inference |
+| OOD sample size | Report intervals; label results anecdotal |
+| Historical encoder contamination | Segregate to supplementary with explicit warning |
+| Scaffold CV leakage | Acknowledge in primary results; promote scaffold-CV sensitivity |
+| Baseline asymmetry | Clarify seed-mean vs. deterministic comparison |

@@ -1,7 +1,46 @@
 # Reproducibility audit — QMC-Expert
 
 Audit of the manuscript *"Expert Judgement as Supervision"* against the artifacts in this
-repository. Every number below is produced by a script in `reproducibility/`.
+repository. This is a historical audit, not the latest matched results. Sections 4–7 were
+clarified on 2026-10-11: corpus overlap and diagnostic re-runs do not establish that all
+original metrics were computed incorrectly; the previously inferred OOD RMSE 2.27 is
+withdrawn. See `revision_v14/METRIC_AUDIT_CLARIFICATION_RU.md`.
+
+**Update, 2026-10-12:** dated April/May notebooks and their saved outputs have now been
+recovered from VS Code history. The generating code for the bootstrap CSV is in the
+May `causal_final.ipynb`; July `shap_causal_analysis.ipynb` explicitly prints the original
+regression RMSE 2.133. See `notebook_recovery_20261012/README_RU.md` for provenance.
+The original 2.13 has a saved-output source and must not be replaced by the different
+May regression result simply because that experiment also has archived contrasts.
+
+**Completed reproduction and article update, 2026-10-12:** all 30 matched partial
+fine-tuning training runs were independently repeated. All 93 historical target
+arrays and all 62 QAC-105/OOD-17 arrays reproduce byte-for-byte with the archived
+encoding batch layout. Re-encoding with a changed batch composition perturbs
+features around 1e-6 and changes some CatBoost predictions; replaying the original
+layout with the independently trained models resolves this discrepancy. Cached
+v14 cation and scaffold refits are exact. Some historical Mac-to-Linux MLP/context
+branches remain unresolved environment sensitivities, and extreme Ridge outputs
+remain unstable. See `server_models_20261012/analysis/RESULTS_RU.md` and the audit
+JSON files; this is not a claim that every historical branch is now reproduced.
+
+The current article is
+`2026_10_12_Paper_2_edited-v16_finetuning_and_weight_interventions.docx`.
+It retains the 913 completed graph/tabular fits and adds 363 direct-target
+fine-tuning fits plus 1,331 decoder fits after encoder-weight controls. All
+33 final-OOD target models were reloaded and reproduce their predictions.
+The original five article tables, annotation fields and chemistry records
+are preserved. Reverting human-guided weights increases cation-CV pooled
+RMSE by 0.109 [0.037, 0.201] under the new conditional seed/scaffold interval
+convention; scaffold/OOD intervals include zero. LoRA does not outperform
+full fine-tuning in the tested cation-CV protocol. See
+`server_finetune_causal_20261012/analysis/RESULTS_RU.md` and
+`revision_v16/document_validation.json`. QAC-105/OOD-17 remains the
+main evaluation. Historical recommendations about Q-HERO below are archival,
+not the present study design. Notebook recovery locates generating code for
+selected CKA/SHAP analyses; exact encoder/execution-state provenance for every
+published attribution summary remains unresolved. Earlier statements that no
+generating code is available should be read with this recovery update.
 
 ## 1. Size of the expert-labelled set
 
@@ -64,21 +103,23 @@ therefore cannot be verified and no inter-rater agreement (Fleiss' κ) can be co
 Two consequences:
 
 * **All 105** molecules of the QAC-105 regression benchmark (Tables 1–2) are inside the
-  expert-labelled training set, and 99/105 are inside the quantitative corpus. Both
-  encoders saw every test molecule during representation learning. Tables 1–2 are
-  in-domain and contaminated **for both arms symmetrically**, so the *comparison*
-  survives but the absolute R² values do not.
-* **The 17-compound OOD set is clean** (zero overlap with everything). §2.3–2.4 are the
-  trustworthy part of the paper and should carry the headline claim.
+  expert-labelled corpus, and 99/105 are inside the quantitative corpus. This establishes
+  source-corpus overlap, not the exact checkpoint training membership of every compound.
+  The original evaluation does not demonstrate source-excluded transfer. The overlap is
+  unequal across arms and cannot by itself validate their comparison. The reported R²
+  values may still describe the historical evaluation protocol.
+* **The 17-compound OOD set has no identical canonical full-salt overlap** with these
+  corpora. That is a useful independence check, not sufficient validation of every OOD
+  metric or claim. Censoring, scaffold coverage and the small sample also matter.
 
 Also: 97 % of the expert set is inside the quantitative corpus. The two supervision
-sources are not independent collections — they are coarse vs fine labels on the *same*
-molecules. That is a cleaner controlled experiment than the manuscript describes and
-should be stated as such.
+sources substantially share molecules. This should be disclosed, but does not by itself
+make the historical experiment matched: source membership, training objective and
+training budget also need control.
 
 ## 5. Out-of-domain RMSE
 
-`analysis/ablation_bootstrap.csv` (paired bootstrap, ∆RMSE):
+`analysis/ablation_bootstrap.csv` labels its contrast column `mean_delta_rmse`:
 
 | pair | ∆ | 95 % CI |
 |---|---|---|
@@ -86,10 +127,20 @@ should be stated as such.
 | regression − MolFormer | −0.037 | [−0.134, +0.065] |
 | expert − regression | −0.086 | [−0.227, +0.054] |
 
-With MolFormer = 2.31 these give expert = **2.19** and regression = **2.27**.
-The manuscript printed 2.13 for the regression encoder, which both contradicts the
-bootstrap file and inverts the sign of the effect the surrounding sentence describes.
-Corrected to 2.27 in the revised manuscript.
+**Correction, 2026-10-11:** the previous audit added these differences to the manuscript's
+MolFormer RMSE 2.31 and inferred expert 2.19 / regression 2.27. The baseline's membership
+in that exact experiment has not been established, and the generating predictions/code
+for this bootstrap CSV have not been located. The inferred 2.27 is withdrawn; this file
+alone does not prove that the original 2.13 is an arithmetic error. Nor does it establish
+that the column actually contains MAE differences merely because another analysis uses
+absolute residuals.
+
+The separately regenerated `causal/ood_paired_residuals.csv` yields RMSE
+2.108902 / 2.395987 / 2.291288 for expert / regression / raw features by directly taking
+the square root of the mean squared residual. It comes from `causal_check.py`, with its
+own five-decoder ensemble and censoring-at-bound convention, and is not an exact
+reproduction of the original table. These artifacts must not be combined into a single
+claimed correction. Primary v14 scores are independently computed from v14 predictions.
 
 ## 6. Re-run of Table 2 (`rebuild_table2*.py`)
 
@@ -114,18 +165,20 @@ CatBoost on the 108-compound biocide set, 432 (molecule, endpoint) pairs, mean R
 
 Two observations:
 
-1. **The three representations are indistinguishable.** Every difference is far inside one
-   standard deviation across seeds. The paper's claim "expert labels ≍ quantitative
-   labels" reproduces — but *raw MolFormer matches both*, which the paper does not report
-   for this benchmark. On QAC-105 the contrastive encoder adds nothing measurable; the
-   evidence that it adds a "biological component" rests on the OOD set alone.
-2. **Splitting by pair inflates every number.** The same molecule supplies up to four rows
-   with an identical feature vector, so a random split over pairs puts it in train and
-   test at once. Moving to a molecule-level split roughly halves R².
+1. **The three representations have close point estimates in this diagnostic re-run.**
+   Their seed standard deviations alone do not establish equivalence or absence of
+   benefit. This run also includes MW and LogP and omits text embeddings, so it cannot
+   resolve every original model comparison or replace the matched v14 analysis.
+2. **Pair and molecule splits test different tasks.** The same molecule supplies up to
+   four rows with the same molecular representation, so a random split over pairs allows
+   another endpoint from a test molecule into training. The higher scores then describe
+   prediction of missing endpoints for partially observed molecules, rather than
+   prediction for unseen molecules. The reported molecule split uses original row
+   indices; duplicate structures can still cross it. Strict cation grouping is in v14.
 
 This re-run omits the OpenAI class embeddings and does not tune CatBoost, so absolute
-values are not expected to equal the published table; the *relative* ordering is the
-point.
+values are not expected to equal the published table. It is a diagnostic comparison of
+splits, not an exact reproduction or a definitive representation ranking.
 
 ## 7. RMSE / R² inconsistency in Tables 1–2
 
@@ -141,9 +194,13 @@ TABLE 2, implied Var(y_test):      S.a.MIC  S.a.MBC  E.c.MIC  E.c.MBC
 ```
 
 The clearest case: for S. aureus MIC the classified embeddings go from 0.91 (R²=0.71) to
-0.92 (R²=0.75) — higher RMSE *and* higher R² on the same endpoint, which cannot happen on
-a common test set. The plain rows and the multitask rows come from different pipelines
-and different splits; the table presents them as comparable.
+0.92 (R²=0.75). Higher RMSE and higher ordinary predictive R² cannot both occur on the
+same fixed observations with the same weights. This flags a need to trace the test sets,
+metric definitions, aggregation and transcription. The identity need not hold between
+separately averaged RMSE and R² across different folds/seeds. The notebook contains
+different plain-versus-multitask splits, but asserts shared indices for categorical
+versus OpenAI coding; different splits therefore cannot be assumed to explain every
+table discrepancy. Exact original per-row provenance remains incomplete.
 
 ## 8. Suspected bug in the few-shot scan
 

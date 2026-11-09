@@ -1,0 +1,112 @@
+SOURCE 1 /30 compact_human_seed0 seconds 2
+SOURCE 2 /30 compact_mic_continuous_seed0 seconds 1
+SOURCE 3 /30 compact_mic_binary_seed0 seconds 1
+SOURCE 4 /30 compact_human_shuffled_seed0 seconds 1
+SOURCE 5 /30 compact_continuous_shuffled_seed0 seconds 1
+SOURCE 6 /30 compact_binary_shuffled_seed0 seconds 2
+SOURCE 7 /30 compact_human_seed1 seconds 2
+SOURCE 8 /30 compact_mic_continuous_seed1 seconds 1
+SOURCE 9 /30 compact_mic_binary_seed1 seconds 2
+SOURCE 10 /30 compact_human_shuffled_seed1 seconds 2
+SOURCE 11 /30 compact_continuous_shuffled_seed1 seconds 1
+SOURCE 12 /30 compact_binary_shuffled_seed1 seconds 2
+SOURCE 13 /30 compact_human_seed2 seconds 2
+SOURCE 14 /30 compact_mic_continuous_seed2 seconds 1
+SOURCE 15 /30 compact_mic_binary_seed2 seconds 2
+SOURCE 16 /30 compact_human_shuffled_seed2 seconds 2
+SOURCE 17 /30 compact_continuous_shuffled_seed2 seconds 1
+SOURCE 18 /30 compact_binary_shuffled_seed2 seconds 2
+SOURCE 19 /30 compact_human_seed3 seconds 2
+SOURCE 20 /30 compact_mic_continuous_seed3 seconds 1
+SOURCE 21 /30 compact_mic_binary_seed3 seconds 2
+SOURCE 22 /30 compact_human_shuffled_seed3 seconds 2
+SOURCE 23 /30 compact_continuous_shuffled_seed3 seconds 1
+SOURCE 24 /30 compact_binary_shuffled_seed3 seconds 2
+SOURCE 25 /30 compact_human_seed4 seconds 2
+SOURCE 26 /30 compact_mic_continuous_seed4 seconds 1
+SOURCE 27 /30 compact_mic_binary_seed4 seconds 2
+SOURCE 28 /30 compact_human_shuffled_seed4 seconds 1
+SOURCE 29 /30 compact_continuous_shuffled_seed4 seconds 1
+SOURCE 30 /30 compact_binary_shuffled_seed4 seconds 2
+DECODE 1 / 82 v5_raw text fits 1
+DECODE 2 / 82 v5_raw categorical fits 1
+DECODE 3 / 82 v5_human categorical fits 1
+DECODE 4 / 82 v5_human text fits 1
+DECODE 5 / 82 v5_human separate fits 4
+DECODE 6 / 82 v5_raw separate fits 4
+DECODE 7 / 82 v5_human categorical fits 11
+DECODE 8 / 82 v5_human onehot fits 11
+DECODE 9 / 82 v5_human text fits 11
+DECODE 10 / 82 v5_qac_ablation categorical fits 1
+DECODE 11 / 82 v5_raw onehot fits 11
+DECODE 12 / 82 v5_qac_ablation text fits 1
+DECODE 13 / 82 v5_qac_ablation separate fits 4
+DECODE 14 / 82 v5_human separate fits 44
+DECODE 15 / 82 v5_qac_ablation categorical fits 11
+DECODE 16 / 82 v5_qac_ablation onehot fits 11
+DECODE 17 / 82 v5_raw categorical fits 11
+DECODE 18 / 82 v5_raw text fits 11
+DECODE 19 / 82 v5_qac_ablation text fits 11
+DECODE 20 / 82 compact_human_seed0 categorical fits 11
+DECODE 21 / 82 v5_qac_ablation separate fits 44
+DECODE 22 / 82 compact_mic_continuous_seed0 categorical fits 11
+DECODE 23 / 82 matched_raw onehot fits 11
+DECODE 24 / 82 compact_human_seed0 text fits 11
+DECODE 25 / 82 compact_mic_binary_seed0 categorical fits 11
+DECODE 26 / 82 matched_raw categorical fits 11
+DECODE 27 / 82 compact_mic_continuous_seed0 text fits 11
+DECODE 28 / 82 compact_human_shuffled_seed0 categorical fits 11
+DECODE 29 / 82 matched_raw text fits 11
+DECODE 30 / 82 compact_mic_binary_seed0 text fits 11
+DECODE 31 / 82 compact_continuous_shuffled_seed0 categorical fits 11
+DECODE 32 / 82 compact_binary_shuffled_seed0 categorical fits 11
+DECODE 33 / 82 compact_initial_seed0 categorical fits 11
+DECODE 34 / 82 compact_human_seed0 onehot fits 11
+DECODE 35 / 82 compact_human_weight_only_seed0 categorical fits 11
+DECODE 36 / 82 compact_human_seed1 categorical fits 11
+DECODE 37 / 82 compact_mic_continuous_seed1 categorical fits 11
+DECODE 38 / 82 compact_human_seed0 text_permuted fits 11
+DECODE 39 / 82 compact_human_seed0 random_code fits 11
+DECODE 40 / 82 compact_human_seed1 text fits 11
+DECODE 41 / 82 compact_mic_binary_seed1 categorical fits 11
+DECODE 42 / 82 compact_human_shuffled_seed1 categorical fits 11
+DECODE 43 / 82 compact_mic_continuous_seed1 text fits 11
+DECODE 44 / 82 compact_continuous_shuffled_seed1 categorical fits 11
+DECODE 45 / 82 compact_binary_shuffled_seed1 categorical fits 11
+DECODE 46 / 82 compact_initial_seed1 categorical fits 11
+DECODE 47 / 82 compact_mic_binary_seed1 text fits 11
+DECODE 48 / 82 compact_human_weight_only_seed1 categorical fits 11
+DECODE 49 / 82 compact_human_seed2 categorical fits 11
+DECODE 50 / 82 compact_mic_continuous_seed2 categorical fits 11
+DECODE 51 / 82 compact_mic_binary_seed2 categorical fits 11
+DECODE 52 / 82 v5_raw separate fits 44
+DECODE 53 / 82 compact_human_shuffled_seed2 categorical fits 11
+DECODE 54 / 82 compact_mic_continuous_seed2 text fits 11
+DECODE 55 / 82 compact_human_seed2 text fits 11
+DECODE 56 / 82 compact_continuous_shuffled_seed2 categorical fits 11
+DECODE 57 / 82 compact_binary_shuffled_seed2 categorical fits 11
+DECODE 58 / 82 compact_mic_binary_seed2 text fits 11
+DECODE 59 / 82 compact_initial_seed2 categorical fits 11
+DECODE 60 / 82 compact_human_weight_only_seed2 categorical fits 11
+DECODE 61 / 82 compact_human_seed3 categorical fits 11
+DECODE 62 / 82 compact_mic_continuous_seed3 categorical fits 11
+DECODE 63 / 82 compact_mic_binary_seed3 categorical fits 11
+DECODE 64 / 82 compact_human_shuffled_seed3 categorical fits 11
+DECODE 65 / 82 compact_continuous_shuffled_seed3 categorical fits 11
+DECODE 66 / 82 compact_human_seed3 text fits 11
+DECODE 67 / 82 compact_mic_continuous_seed3 text fits 11
+DECODE 68 / 82 compact_binary_shuffled_seed3 categorical fits 11
+DECODE 69 / 82 compact_initial_seed3 categorical fits 11
+DECODE 70 / 82 compact_mic_binary_seed3 text fits 11
+DECODE 71 / 82 compact_human_weight_only_seed3 categorical fits 11
+DECODE 72 / 82 compact_human_seed4 categorical fits 11
+DECODE 73 / 82 compact_mic_continuous_seed4 categorical fits 11
+DECODE 74 / 82 compact_mic_binary_seed4 categorical fits 11
+DECODE 75 / 82 compact_human_shuffled_seed4 categorical fits 11
+DECODE 76 / 82 compact_continuous_shuffled_seed4 categorical fits 11
+DECODE 77 / 82 compact_binary_shuffled_seed4 categorical fits 11
+DECODE 78 / 82 compact_mic_continuous_seed4 text fits 11
+DECODE 79 / 82 compact_human_seed4 text fits 11
+DECODE 80 / 82 compact_mic_binary_seed4 text fits 11
+DECODE 81 / 82 compact_initial_seed4 categorical fits 11
+DECODE 82 / 82 compact_human_weight_only_seed4 categorical fits 11

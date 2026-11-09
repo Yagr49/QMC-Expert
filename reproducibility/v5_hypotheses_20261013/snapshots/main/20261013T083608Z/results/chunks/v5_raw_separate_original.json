@@ -1,0 +1,12 @@
+{
+  "name": "v5_raw",
+  "encoding": "separate",
+  "original": true,
+  "arm": "v5_raw",
+  "seed": -1,
+  "provenance": "v5_archived_approximate_reconstruction",
+  "completed": true,
+  "fits": 4,
+  "seconds": 49.42469358444214,
+  "predictions": 88
+}

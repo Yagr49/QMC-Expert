@@ -1,0 +1,16 @@
+cohort,schema,task,n,RMSE,MAE,R2,name,encoding,arm,seed,provenance
+OOD17,full-QAC105,Sa_MIC,17,1.958516751937283,1.6811309144145117,-0.25400757210620006,compact_initial_seed4,categorical,initial,4,v5_architecture_weight_control
+OOD17,full-QAC105,Sa_MBC,17,2.1626833841149478,1.797568444913141,-0.04333221213671745,compact_initial_seed4,categorical,initial,4,v5_architecture_weight_control
+OOD17,full-QAC105,Ec_MIC,17,2.2859076709191637,1.9879308086893,-0.5784792128201153,compact_initial_seed4,categorical,initial,4,v5_architecture_weight_control
+OOD17,full-QAC105,Ec_MBC,16,2.1269098270999525,1.7173946343661073,-0.1564060442397135,compact_initial_seed4,categorical,initial,4,v5_architecture_weight_control
+OOD17,full-QAC105,pooled,67,2.1368552233400515,1.7971795075544166,,compact_initial_seed4,categorical,initial,4,v5_architecture_weight_control
+QAC105,cation,Sa_MIC,105,1.8266797740286647,1.438928307979626,0.13101705799297358,compact_initial_seed4,categorical,initial,4,v5_architecture_weight_control
+QAC105,cation,Sa_MBC,105,1.9487524392540754,1.4955146743148977,0.014873861128035903,compact_initial_seed4,categorical,initial,4,v5_architecture_weight_control
+QAC105,cation,Ec_MIC,105,1.8193922439036736,1.4264294608628383,0.14741964912666217,compact_initial_seed4,categorical,initial,4,v5_architecture_weight_control
+QAC105,cation,Ec_MBC,105,1.9775208986441832,1.572173239826584,0.1041242007218447,compact_initial_seed4,categorical,initial,4,v5_architecture_weight_control
+QAC105,cation,pooled,420,1.8944109973878072,1.4832614207459864,,compact_initial_seed4,categorical,initial,4,v5_architecture_weight_control
+QAC105,scaffold,Sa_MIC,105,2.0277109753887426,1.608111091181811,-0.07077572023702139,compact_initial_seed4,categorical,initial,4,v5_architecture_weight_control
+QAC105,scaffold,Sa_MBC,105,2.226118659388016,1.6722498199936082,-0.28550899201072566,compact_initial_seed4,categorical,initial,4,v5_architecture_weight_control
+QAC105,scaffold,Ec_MIC,105,2.0749543437639932,1.6409586682681954,-0.10891876280378021,compact_initial_seed4,categorical,initial,4,v5_architecture_weight_control
+QAC105,scaffold,Ec_MBC,105,2.1281676357945867,1.7013548480376823,-0.037569770008696546,compact_initial_seed4,categorical,initial,4,v5_architecture_weight_control
+QAC105,scaffold,pooled,420,2.1155229318147346,1.6556686068703244,,compact_initial_seed4,categorical,initial,4,v5_architecture_weight_control

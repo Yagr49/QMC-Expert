@@ -1,0 +1,30 @@
+All 11 PNGs rendered successfully, including native-resolution crops of both font previews, the parity grid, and the G4 structure. Here is the review.
+
+**Font preference: Aptos.** Comparing the two `figureS26_prediction_route_violins.png` previews (identical data/layout), both are clean humanist sans at these sizes and either is acceptable, but Aptos has slightly tighter advance widths and crisper lining numerals ("8/6/4", subscript "2" in log₂), which measurably reduces collision risk in the densest panels (`figure2_QAC105_parity.png`'s 12-panel grid, `figureS28_decoder_error_violins.png`'s 30 violins). Segoe UI is more open/airy — fine if you prefer that calm look, but labels run wider. Subscripts render correctly in both. No missing glyphs in either preview.
+
+**sources/image1.png (historical reference).** Bars + ±1 SD whiskers, value labels above bars, thin grid, readable. Note: the one-line footnote "Error bars show ±1 std…" is a statistical note inside the image; per your style it belongs in the caption. Otherwise consistent; keep as preserved reference.
+
+**sources/image4.png (historical reference).** Layout fine, but each panel footnote shows a visible .notdef box: "□ higher = better" / "□ lower = better". The arrow glyph was not in the rendering font. Fix by removing the arrow or using a supported character; better, move "higher/lower = better" into the caption.
+
+**figure1_supervision_and_transfer.png.** Soft pastel boxes, thin arrows, short labels; good. Colour semantics differ between panels (a: task colours; b: stage colours) but arrows disambiguate, so acceptable. No changes required.
+
+**figure2_QAC105_parity.png.** Marker/glyph system is consistent (lavender circle = Human, mint square = Continuous MIC, orange triangle = Binary MIC, matching `figure5_weight_rewind.png`). Diagonal parity line and a–l panel tags are clean. Points are horizontally jittered by measured value; vertical stacking at discrete measured values is inherent to the data, not a flaw. At journal size the pale lavender points on white are the weakest contrast element — consider a slightly deeper fill or thin darker edge. Row/column headers and shared axes are economical; nothing essential is lost.
+
+**figure3_OOD_families_ACS1996.png.** ACS-1996 depictions are crisp at native resolution; counterions (Br⁻, Cl⁻) legible, including the four stacked Cl⁻ for G4. Subscripts in "CF₃" correct. Layout is airy. Acceptable as-is; if placed at single-column width, G4 (tetra-QAC) will be small but still serviceable for an SI.
+
+**figure4_paired_error_violins.png.** Consistent lavender/mint encoding with figure5; median+IQR glyphs readable; long KDE tails to ~7 are expected. Panel b (OOD17) overlays jittered raw points on the violins — mostly fine, though a few dots sit on top of the median bars; consider a small horizontal dodge or lighter alpha. **Naming inconsistency:** panels read "QAC105" and "OOD17" while figure1 uses "QAC-105" and "OOD-17". Standardise (recommend "QAC-105", "OOD-17" everywhere, including this filename's title strings). Also define "Sa/Ec" abbreviations in the caption.
+
+**figure5_weight_rewind.png.** Correct Δ glyph in "Rewind − intact ΔRMSE"; dashed zero line; marker/colour legend matches figure2. Main issue: in the OOD-17 panel the 95% whiskers reach ~0.58 against a 0.6 y-limit, so caps nearly touch the panel top. Add headroom (e.g., ±0.65) or clip with a caption note. Rotated x labels are readable, no collisions. Per your spec, the "unadjusted 95% paired" explanation is properly left for the caption.
+
+**figureS28_decoder_error_violins.png.** Palette is consistent (grey RDKit, blue Raw, lavender Human, mint Continuous, orange Binary); rotated x labels legible; subscript log₂ correct; median/IQR glyphs clear; tails to ~8 unremarkable. Good as-is.
+
+**figureS29_direct_adaptation.png.** Shared y-axis across the three regimes is the right call (it honestly shows OOD inflation). Points sit in small jittered clusters with short mean ticks; fine. Two nits: (1) the colour-to-method mapping (grey/blue/orange/lavender/mint for Linear/MLP/LoRA/Partial/Full) reuses lavender/mint/orange that elsewhere mean Human/Continuous/Binary — since colour is redundant with the x labels, consider a single neutral colour to avoid cross-figure misreading; (2) there is no legend or caption note explaining the per-category mean ticks — one caption sentence suffices.
+
+**Cross-figure consistency (main actionable list).**
+1. Standardise names: "QAC-105" and "OOD-17" (fix `figure4_paired_error_violins.png` titles; align `figure2_QAC105_parity.png`/`figure4` filename stems if convenient).
+2. Move statistical footnotes out of `sources/image1.png` and repair the tofu boxes in `sources/image4.png`.
+3. Give `figure5_weight_rewind.png` OOD-17 y-headroom.
+4. Slightly deepen point fill/edge in `figure2_QAC105_parity.png` for small-size contrast.
+5. Optionally de-colour `figureS29_direct_adaptation.png`.
+
+Overall the set meets the stated aim: soft, calm graphics, ordinary readable fonts (Aptos recommended), pastel lavender/mint, thin light grids, short labels, and statistics kept out of the panels. Nothing in these figures implies causality beyond the descriptive statistics you describe.

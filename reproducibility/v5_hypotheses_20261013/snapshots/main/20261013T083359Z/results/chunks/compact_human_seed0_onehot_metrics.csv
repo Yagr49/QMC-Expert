@@ -1,0 +1,16 @@
+cohort,schema,task,n,RMSE,MAE,R2,name,encoding,arm,seed,provenance
+OOD17,full-QAC105,Sa_MIC,17,1.9803517928607903,1.5823284489339053,-0.2821247076784248,compact_human_seed0,onehot,human,0,v5_architecture_task_code_control
+OOD17,full-QAC105,Sa_MBC,17,2.092505139055932,1.756603289953629,0.023280641459312523,compact_human_seed0,onehot,human,0,v5_architecture_task_code_control
+OOD17,full-QAC105,Ec_MIC,17,2.4477703476445445,1.901386711215532,-0.8099344058227196,compact_human_seed0,onehot,human,0,v5_architecture_task_code_control
+OOD17,full-QAC105,Ec_MBC,16,2.4709259153020264,1.9529375260583357,-0.5607438989026281,compact_human_seed0,onehot,human,0,v5_architecture_task_code_control
+OOD17,full-QAC105,pooled,67,2.2548480413510545,1.7960061801296343,,compact_human_seed0,onehot,human,0,v5_architecture_task_code_control
+QAC105,cation,Sa_MIC,105,1.7866858224012494,1.4145323294328835,0.16865211979215755,compact_human_seed0,onehot,human,0,v5_architecture_task_code_control
+QAC105,cation,Sa_MBC,105,1.965745524339517,1.4665690956613713,-0.0023816092462087823,compact_human_seed0,onehot,human,0,v5_architecture_task_code_control
+QAC105,cation,Ec_MIC,105,1.7426248184089184,1.302191736146215,0.21784931256531614,compact_human_seed0,onehot,human,0,v5_architecture_task_code_control
+QAC105,cation,Ec_MBC,105,1.8722715426612664,1.4621785793006463,0.19694865481234025,compact_human_seed0,onehot,human,0,v5_architecture_task_code_control
+QAC105,cation,pooled,420,1.8438101638742792,1.411367935135279,,compact_human_seed0,onehot,human,0,v5_architecture_task_code_control
+QAC105,scaffold,Sa_MIC,105,2.0971866251622724,1.6935386980414286,-0.14540894383127623,compact_human_seed0,onehot,human,0,v5_architecture_task_code_control
+QAC105,scaffold,Sa_MBC,105,2.1832089622600916,1.7262184756090608,-0.23642879277047513,compact_human_seed0,onehot,human,0,v5_architecture_task_code_control
+QAC105,scaffold,Ec_MIC,105,2.136094153354575,1.704881675979774,-0.17523150178164837,compact_human_seed0,onehot,human,0,v5_architecture_task_code_control
+QAC105,scaffold,Ec_MBC,105,2.188884303815322,1.7327416265414766,-0.09761808781237935,compact_human_seed0,onehot,human,0,v5_architecture_task_code_control
+QAC105,scaffold,pooled,420,2.1516682969928818,1.714345119042935,,compact_human_seed0,onehot,human,0,v5_architecture_task_code_control

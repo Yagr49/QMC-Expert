@@ -1,0 +1,31 @@
+{
+  "old_pid": 2657286,
+  "old_children": [
+    2657384,
+    2657385,
+    2657386,
+    2657387
+  ],
+  "new_pid": 2658866,
+  "workers": 8,
+  "preserved_configurations": [
+    [
+      "CB_35_descriptors",
+      0
+    ],
+    [
+      "CB_human",
+      1
+    ],
+    [
+      "CB_human",
+      2
+    ],
+    [
+      "RF_35_descriptors",
+      0
+    ]
+  ],
+  "model_settings_changed": false,
+  "time": 1791953714.2499886
+}

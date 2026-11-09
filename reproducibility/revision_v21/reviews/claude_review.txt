@@ -1,0 +1,36 @@
+## 1 · COMPLETION AUDIT
+
+**Verified complete:** all 12 source-route RMSE entries; human-partial / frozen-CatBoost route (seeds 0–2); compact source control (5 runs × 4 conditions, null OOD result retained as-is); Tiihonen COE safe refit. Table 6 is fully populated.
+
+**Not complete — do not assert:** (a) QHERO binary classification (matched RF35 vs. partial-FT→CB, 405 salts) — remote completion.json exists but numbers not yet delivered to this packet; leave cells blank. (b) Full quantitative multi-target checkpoint not located; do not cite. (c) 1,500→1,103 label provenance requires coauthor confirmation; leave original field unchanged.
+
+**Necessary remaining check:** receive and verify QHERO classification numbers from Kimi-agent before any table entry or claim referencing that result.
+
+---
+
+## 2 · INTRODUCTION ADDITIONS *(highlight yellow)*
+
+**[Addition A]** Generalisation to structurally novel compound families remains the central bottleneck in computational MIC prediction. Cross-validated performance on in-distribution chemical series routinely overstates out-of-distribution (OOD) accuracy, a gap that is particularly acute for quaternary ammonium compounds whose activity depends on subtle charge-geometry interplay.
+
+**[Addition B]** Representation quality and decoder choice jointly govern whether source-task gains transfer to novel targets. Freezing a pre-trained or adapted backbone and coupling it to an external flexible decoder can preserve generalisation capacity that may be eroded when backbone weights are retrained end-to-end on small labelled sets. This is architecturally distinct from parameter-efficient partial backbone adaptation (e.g. LoRA, selective-layer unfreezing) and from full fine-tuning; each involves different capacity, objective and regularisation trade-offs that preclude universal ranking across settings.
+
+**[Addition C]** Here we introduce a two-stage strategy: an external compact MLP encoder (768→512→384→256), trained with a supervised contrastive objective on expert human labels while MolFormer weights remain fully frozen, produces task-specific representations decoded by CatBoost for quantitative MIC prediction. We report a systematic comparison against frozen linear probing, direct LoRA, direct full fine-tuning and a direct human-partial prediction head on identical source seeds, using mean ± sample SD (ddof = 1) over three complete training runs.
+
+---
+
+## 3 · SECTION 2.1 ADDITION *(highlight yellow; append after Figure 2 caption)*
+
+**[Addition 2.1-A]** The 256-dimensional human embeddings are produced by an external compact MLP (768→512→384→256) operating entirely on frozen MolFormer representations; no MolFormer weights are modified at any stage. This architecture is distinct from both LoRA adaptation and selective backbone unfreezing, which alter transformer parameters directly, and from the partial-backbone source procedure described separately below.
+
+**[Addition 2.1-B]** To quantify the representational benefit we compared five routes on identical source seeds 0–2 (mean ± sample SD, ddof = 1, three complete training runs; Table 6). Frozen MolFormer with a linear head achieved cation RMSE 2.013 ± 0.006 and OOD 2.560 ± 0.206. Direct LoRA yielded 2.040 ± 0.049 (cation) and 2.756 ± 0.172 (OOD); direct full fine-tuning yielded 1.863 ± 0.045 (cation) but 3.032 ± 0.408 (OOD). The human-partial direct predictor gave 1.797 ± 0.057 (cation) and 2.412 ± 0.088 (OOD). Freezing those human-guided representations and decoding with CatBoost reduced errors further to 1.743 ± 0.031 (cation), 1.819 ± 0.044 (scaffold) and 2.106 ± 0.071 (OOD).
+
+**[Addition 2.1-C]** These paired results motivate the frozen-representation→CatBoost route: OOD RMSE under frozen human embeddings (2.106) is lower than under direct full fine-tuning (3.032) or direct LoRA (2.756) on the same seeds. However, a compact-encoder source-control experiment (human vs. label-shuffled labels, five runs) yielded OOD Δ RMSE = +0.096, 95 % CI [−0.143, +0.283] — a null result. The OOD contrast reflects the combined effect of backbone adaptation procedure and decoder choice; it does not establish a causal contribution of human semantic labelling alone.
+
+---
+
+## 4 · MATERIAL RISKS
+
+- QHERO classification numbers absent; no entry or claim permitted until verified delivery from Kimi-agent.
+- Full-FT OOD SD ± 0.408 is large; three-run mean is indicative, not definitive.
+- Compact-control null result must not be concealed or reframed as positive causal evidence.
+- 1,500→1,103 provenance gap could affect reproducibility; coauthor resolution required before submission.

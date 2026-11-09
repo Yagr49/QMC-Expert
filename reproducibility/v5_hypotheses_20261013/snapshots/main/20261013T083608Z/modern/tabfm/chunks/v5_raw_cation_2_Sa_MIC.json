@@ -1,0 +1,45 @@
+{
+  "rep": "v5_raw",
+  "schema": "cation",
+  "fold": 2,
+  "task": "Sa_MIC",
+  "completed": true,
+  "n_train": 84,
+  "n_test": 21,
+  "seconds": 21.038618564605713,
+  "model": "tabfm",
+  "info": {
+    "backend": "jax-cpu",
+    "constructor": {
+      "n_estimators": 4,
+      "random_state": 1729
+    },
+    "estimator_parameters": {
+      "batch_size": "1",
+      "cache_context": "False",
+      "cat_encoder_mode": "appearance",
+      "enable_nnls": "False",
+      "feat_shuffle_method": "random",
+      "keep_cache_on_device": "True",
+      "max_num_features": "500",
+      "max_num_rows": "None",
+      "maybe_quantize_kv_cache": "True",
+      "min_rows_for_single_val_split": "2000",
+      "n_estimators": "4",
+      "n_feature_crosses": "0",
+      "n_svd_features": "0",
+      "nnls_beta": "0.75",
+      "norm_methods": "None",
+      "num_folds_for_cv": "5",
+      "outlier_threshold": "4.0",
+      "permute_categorical": "False",
+      "random_state": "1729",
+      "total_svd_pool": "None",
+      "use_amp": "True",
+      "verbose": "False"
+    },
+    "checkpoint_snapshots": [
+      "/home/yagr/coma_models_check_20261012/runtime/hf/hub/models--google--tabfm-1.0.0-jax/snapshots/d5e74033fcf257699fab013e2cdd7edf424ff904"
+    ]
+  }
+}

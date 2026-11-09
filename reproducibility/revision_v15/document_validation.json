@@ -1,0 +1,20 @@
+{
+  "completed": true,
+  "main": "/Users/egorilin/Desktop/COMA/2026_10_12_Paper_2_edited-v15_models_and_reproducibility.docx",
+  "supporting_information": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v15/Supplementary_Information_v15.docx",
+  "main_sha256": "aa949aa08b9ece0918b2425cf3f37b12e0710ff8d74571a68b9efb979f88b409",
+  "si_sha256": "80cc15c7d9e843f944133ec803ae33798419edf423ad217f6b57fbb8afe9c491",
+  "input_hashes_unchanged": true,
+  "document_xml_relationships_styles_valid": true,
+  "coauthor_fields_byte_preserved": true,
+  "chemistry_and_assay_records_preserved": true,
+  "primary_tables_unchanged": true,
+  "existing_media_byte_preserved": true,
+  "main_figures": 6,
+  "main_tables": 5,
+  "supplementary_figures": 21,
+  "pooled_model_comparisons": 63,
+  "pooled_scores_recomputed_from_predictions": true,
+  "full_QAC105_and_OOD17_preserved": true,
+  "abstract_words": 173
+}

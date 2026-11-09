@@ -1,0 +1,4947 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Supporting Information v30</title><style>body{font-family:"Times New Roman",Times,serif;color:#111;line-height:1.35;max-width:960px;margin:40px auto;padding:0 25px}h1,h2{margin-top:28px}h1{font-size:18px}h2{font-size:15px}p{font-size:12.5px}.caption{font-size:11px;color:#333}table{border-collapse:collapse;width:100%;font-size:10.5px;margin:12px 0 22px}td{padding:5px;border:1px solid #ccc;vertical-align:top}tr:first-child{background:#eee}img{max-width:100%;height:auto;display:block;margin:auto}a{color:#063}nav{padding:14px;background:#f7f7f7}</style><body><nav><strong>Supporting Information</strong><p>Times New Roman · tables cited by the main text</p>
+<a href="#s1">S1. Expert annotation and molecular representations</a><br>
+<a href="#s2">S2. Reference results and task encoding</a><br>
+<a href="#s3">S3. Validation and matched compact encoders</a><br>
+<a href="#s4">S4. Molecular and tabular decoder comparisons</a><br>
+<a href="#s5">S5. Structural OOD evaluation</a><br>
+<a href="#s6">S6. External Q-HERO classification</a><br>
+<a href="#s7">S7. Geometry and intervention controls</a><br>
+<a href="#s8">S8. Chemistry and microbiological methods</a><br>
+<a href="#s9">S9. References</a><br>
+<a href="#s10">S10. Additional illustrations</a><br>
+<a href="#s1">S1. Expert annotation and molecular representations</a><br>
+<a href="#s2">S2. Reference results and task encoding</a><br>
+<a href="#s3">S3. Validation and matched compact encoders</a><br>
+<a href="#s4">S4. Molecular and tabular decoder comparisons</a><br>
+<a href="#s5">S5. Structural OOD evaluation</a><br>
+<a href="#s6">S6. External Q-HERO classification</a><br>
+<a href="#s7">S7. Geometry and intervention controls</a><br>
+<a href="#s8">S8. Chemistry and microbiological methods</a><br>
+<a href="#s9">S9. References</a><br>
+<a href="#s10">S10. Additional illustrations</a><br>
+</nav>
+<p>Supporting Information</p>
+<p>Expert Judgement as Supervision: Binary Human Labels Match Quantitative Measurements for Representation Learning for Rational Design of Highly Efficient Biocides.</p>
+<p>Egor A. Ilina, Nikita A. Frolova, Mary A. Seferyana, Anvar B. Valeeva, Egor V. Sinikina,b, Taygib M. Iliyasova, Andrey D. Vinokurova, Elena V. Detushevaa,c, Elizabeth Sonc, Michael G. Medvedev*a,d, Anatoly N. Vereshchagin*a</p>
+<p>a N. D. Zelinsky Institute of Organic Chemistry, Russian Academy of Sciences, Leninsky prospect 47, Moscow 119991, Russian Federation; vereshchagin@ioc.ac.ru (A. N. V.); egor22366@gmail.com (E.A.I.); nfrolov@ioc.ac,ru (N. A. F.)</p>
+<p>b Mendeleev University of Chemical Technology of Russia, Miusskaya square 9, Moscow, 125047, Russian Federation</p>
+<p>c State Research Center for Applied Microbiology and Biotechnology, Territory “Quarter A”, no. 24, Obolensk, 142279 Serpukhov, Moscow Region, Russian Federation.</p>
+<p>d National Research University Higher School of Economics, 101000 Moscow, Russian Federation</p>
+<p>Content</p>
+<p>Acronyms</p>
+<p>MIC - Minimum Inhibitory Concentration</p>
+<p>MBC - Minimum Bactericidal Concentration</p>
+<p>QAC - Quaternary Ammonium Compound</p>
+<p>OOD - Out-of-Distribution</p>
+<p>RMSE - Root Mean Squared Error</p>
+<p>MAE - Mean Absolute Error</p>
+<p>SHAP - SHapley Additive exPlanations</p>
+<p>CKA - Centered Kernel Alignment</p>
+<p>PCA - Principal Component Analysis</p>
+<p>MLP - Multilayer Perceptron</p>
+<p>SMOTE - Synthetic Minority Over-sampling Technique</p>
+<p>LoRA - Low-Rank Adaptation</p>
+<p>S1. Expert annotation and molecular representations</p>
+<p>S2. Reference results and task encoding</p>
+<p>S3. Validation and matched compact encoders</p>
+<p>S4. Molecular and tabular decoder comparisons</p>
+<p>S5. Structural OOD evaluation</p>
+<p>S6. External Q-HERO classification</p>
+<p>S7. Geometry and intervention controls</p>
+<p>S8. Chemistry and microbiological methods</p>
+<p>S9. References</p>
+<p>S10. Additional illustrations</p>
+<p>S1. Expert annotation and molecular representations</p>
+<p>Expert annotation yielded 1,103 final Good/Bad labels (859 Bad, 244 Good). After standardisation, the panel comprises 1,066 canonical full salts. Annotation logistics (collection dates, annotator identities, materials shown, access to quantitative values, blinding, aggregation and agreement statistics) will be completed by the experimental coauthors.</p>
+<p>A five-fold representation benchmark compares MolFormer, ChemBERTa, Morgan and MACCS features for classifying expert labels. Figures S1–S4 show the corresponding diagnostic plots. These comparisons evaluate label classification and are not used as quantitative MIC/MBC generalisation metrics. The MolFormer F1 of 0.655 reported in the main text is the reference value for that comparison.</p>
+<img src="preview_assets/image01.png" alt="SI figure 1">
+<p class="caption">Figure S1. F1-score comparison across molecular representations for expert-label classification.</p>
+<img src="preview_assets/image02.png" alt="SI figure 2">
+<p class="caption">Figure S2. Accuracy comparison across molecular representations for expert-label classification.</p>
+<img src="preview_assets/image03.png" alt="SI figure 3">
+<p class="caption">Figure S3. Fold-specific classification metrics for the representation benchmark.</p>
+<img src="preview_assets/image04.png" alt="SI figure 4">
+<p class="caption">Figure S4. Embedding cluster-quality diagnostics for the contrastive representation.</p>
+<p>S2. Reference results and task encoding</p>
+<p>Frozen MolFormer provides 768-dimensional molecular features. The external encoder uses layer widths 768–512–384–256 (691,584 trainable parameters) and is trained without updating MolFormer weights. StandardScaler and Borderline SMOTE (sampling strategy 0.8) follow the reference training procedure. The contrastive projection head is removed before quantitative decoding.</p>
+<p class="caption">Table S1. Reference holdout metrics for the primary quantitative endpoints. The E. coli MIC cell printed as R² = 0.60 corresponds to R² = 0.5918; the strain header ATCC 4300 is the original table typo for ATCC 43300.</p>
+<table>
+<tr>
+<td colspan="2">ML models</td>
+<td colspan="4">RMSE</td>
+</tr>
+<tr>
+<td colspan="2"></td>
+<td colspan="2">S. aureus ATCC 4300 </td>
+<td colspan="2">E. coli ATCC 25922</td>
+</tr>
+<tr>
+<td colspan="2"></td>
+<td>log2(MIC)</td>
+<td> log2(MBC)</td>
+<td> log2(MIC)</td>
+<td> log2(MBC)</td>
+</tr>
+<tr>
+<td>MLP </td>
+<td>descriptors</td>
+<td>1.01 (R2=0.68)</td>
+<td>1.57 (R2=0.25)</td>
+<td>1.40 (R2=0.32)</td>
+<td>1.37 (R2=0.40)</td>
+</tr>
+<tr>
+<td>MLP + stacking </td>
+<td></td>
+<td>-</td>
+<td>1.51 (R2=0.30)</td>
+<td>1.29 (R2=0.43)</td>
+<td>1.36 (R2=0.41)</td>
+</tr>
+<tr>
+<td>Multitask MLP  </td>
+<td></td>
+<td>0.87 (R2=0.70)</td>
+<td>1.43 (R2=0.41)</td>
+<td>1.31 (R2=0.41)</td>
+<td>1.33 (R2=0.46)</td>
+</tr>
+<tr>
+<td>MLP </td>
+<td>embeddings</td>
+<td>1.36(R2=0.20)</td>
+<td>1.89 (R2=0.35)</td>
+<td>1.35 (R2=0.31)</td>
+<td>1.45 (R2=0.33)</td>
+</tr>
+<tr>
+<td>Multitask Catboost </td>
+<td></td>
+<td>0.91 (R2=0.71)</td>
+<td>0.95 (R2=0.64)</td>
+<td>1.31 (R2=0.43)</td>
+<td>1.08 (R2=0.74)</td>
+</tr>
+<tr>
+<td>Multitask + encodedclasses Catboost </td>
+<td></td>
+<td>0.92 (R2=0.75)</td>
+<td>0.85 (R2=0.68)</td>
+<td>0.95 (R2=0.60)</td>
+<td>1.00 (R2=0.77)</td>
+</tr>
+<tr>
+<td colspan="6">MIC and MBC [mg/L]; multitask means added labels of type bacteria and activity; encoded classes means added OpenAI encoded of type bacteria and activity</td>
+</tr>
+</table>
+<p class="caption">Table S2. Reference metrics for secondary quantitative comparisons. Author-reported values are retained.</p>
+<table>
+<tr>
+<td colspan="2">ML models</td>
+<td colspan="4">RMSE</td>
+</tr>
+<tr>
+<td colspan="2"></td>
+<td colspan="2">S. aureus ATCC 4300 </td>
+<td colspan="2">E. coli ATCC 25922</td>
+</tr>
+<tr>
+<td colspan="2"></td>
+<td>log2(MIC)</td>
+<td>log2(MBC)</td>
+<td>log2(MIC)</td>
+<td>log2(MBC)</td>
+</tr>
+<tr>
+<td>Catboost</td>
+<td>classified embeddings</td>
+<td>1.36 (R2=0.20)</td>
+<td>1.89 (R2=0.35)</td>
+<td>1.35 (R2=0.31)</td>
+<td>1.45 (R2=0.33)</td>
+</tr>
+<tr>
+<td>Multitask Catboost</td>
+<td></td>
+<td>0.91 (R2=0.71)</td>
+<td>0.95 (R2=0.64)</td>
+<td>1.31 (R2=0.43)</td>
+<td>1.08 (R2=0.74)</td>
+</tr>
+<tr>
+<td>Multitask + encoded classes Catboost </td>
+<td></td>
+<td>0.92 (R2=0.75)</td>
+<td>0.85 (R2=0.68)</td>
+<td>0.95 (R2=0.60)</td>
+<td>1.00 (R2=0.77)</td>
+</tr>
+<tr>
+<td>Catboost </td>
+<td>multi regression embeddings</td>
+<td>1.19 (R2=0.23)</td>
+<td>1.64 (R2=0.38)</td>
+<td>1.22 (R2=0.37)</td>
+<td>1.29 (R2=0.37)</td>
+</tr>
+<tr>
+<td>Multitask Catboost </td>
+<td></td>
+<td>0.86 (R2=0.81)</td>
+<td>0.96 (R2=0.64)</td>
+<td>1.28 (R2=0.32)</td>
+<td>1.08 (R2=0.73)</td>
+</tr>
+<tr>
+<td>Multitask + encoded classes Catboost </td>
+<td></td>
+<td>0.92 (R2=0.78)</td>
+<td>0.89 (R2=0.68)</td>
+<td>1.01 (R2=0.58)</td>
+<td>1.01 (R2=0.77)</td>
+</tr>
+<tr>
+<td colspan="6">MIC and MBC [mg/L]; multitask means added labels of type bacteria and activity; encoded classes means added OpenAI encoded of type bacteria and activity; classified embeddings – embeddings after binary classified model; multi-regression embeddings – embeddings from multi-regression model; </td>
+</tr>
+</table>
+<p>Task encodings based on text use OpenAI text-embedding-3-small, yielding four fixed 1,536-dimensional vectors. Species and endpoint descriptions were submitted to the embedding service; molecular structures and target concentrations were not. Fixed task vectors are shared across folds. Categorical species/endpoint coding and categorical task-ID coding serve as controls.</p>
+<p>Sa_MIC: Minimum Inhibitory Concentration against Staphylococcus aureus ATCC 43300, a methicillin-resistant Gram-positive bacterium. MIC measures the lowest concentration that inhibits visible bacterial growth.</p>
+<p>Sa_MBC: Minimum Bactericidal Concentration against Staphylococcus aureus ATCC 43300, a methicillin-resistant Gram-positive bacterium. MBC measures the lowest concentration that kills 99.9% of bacteria.</p>
+<p>Ec_MIC: Minimum Inhibitory Concentration against Escherichia coli ATCC 25922, a Gram-negative reference strain. MIC measures the lowest concentration that inhibits visible bacterial growth.</p>
+<p>Ec_MBC: Minimum Bactericidal Concentration against Escherichia coli ATCC 25922, a Gram-negative reference strain. MBC measures the lowest concentration that kills 99.9% of bacteria.</p>
+<p>S3. Validation and matched compact encoders</p>
+<p>Row-wise validation follows the author worksheet protocol on 108 records representing 105 full salts. A withheld task row may still leave another measurement of the same molecule in the training set. Cation and scaffold holdouts keep the corresponding molecular groups outside target-training folds.</p>
+<p>Uncertainty is reported as follows: fold standard deviation over five folds with ddof = 0; source-seed standard deviation over five complete runs with ddof = 1. These spreads are descriptive and are not 95% confidence intervals.</p>
+<p class="caption">Table S3. Five-fold row-CV reconstruction: mean ± fold SD (ddof = 0).</p>
+<table>
+<tr>
+<td>Representation / coding</td>
+<td>Endpoint</td>
+<td>Folds</td>
+<td>RMSE mean ± SD</td>
+<td>R² mean ± SD</td>
+</tr>
+<tr>
+<td>v5_human / categorical_org_met</td>
+<td>Ec_MBC</td>
+<td>5</td>
+<td>1.1622 ± 0.1107</td>
+<td>0.6573 ± 0.0718</td>
+</tr>
+<tr>
+<td>v5_human / categorical_org_met</td>
+<td>Ec_MIC</td>
+<td>5</td>
+<td>0.9744 ± 0.1351</td>
+<td>0.7238 ± 0.0624</td>
+</tr>
+<tr>
+<td>v5_human / categorical_org_met</td>
+<td>Sa_MBC</td>
+<td>5</td>
+<td>1.4703 ± 0.3031</td>
+<td>0.4076 ± 0.2529</td>
+</tr>
+<tr>
+<td>v5_human / categorical_org_met</td>
+<td>Sa_MIC</td>
+<td>5</td>
+<td>1.3364 ± 0.3599</td>
+<td>0.4810 ± 0.2240</td>
+</tr>
+<tr>
+<td>v5_human / categorical_org_met</td>
+<td>pooled</td>
+<td>5</td>
+<td>1.2786 ± 0.1695</td>
+<td>0.6625 ± 0.0368</td>
+</tr>
+<tr>
+<td>v5_human / categorical_task_id</td>
+<td>Ec_MBC</td>
+<td>5</td>
+<td>1.3152 ± 0.1902</td>
+<td>0.5210 ± 0.2740</td>
+</tr>
+<tr>
+<td>v5_human / categorical_task_id</td>
+<td>Ec_MIC</td>
+<td>5</td>
+<td>1.0657 ± 0.3161</td>
+<td>0.6540 ± 0.1856</td>
+</tr>
+<tr>
+<td>v5_human / categorical_task_id</td>
+<td>Sa_MBC</td>
+<td>5</td>
+<td>1.5240 ± 0.3385</td>
+<td>0.3126 ± 0.3901</td>
+</tr>
+<tr>
+<td>v5_human / categorical_task_id</td>
+<td>Sa_MIC</td>
+<td>5</td>
+<td>1.3802 ± 0.2650</td>
+<td>0.4548 ± 0.1390</td>
+</tr>
+<tr>
+<td>v5_human / categorical_task_id</td>
+<td>pooled</td>
+<td>5</td>
+<td>1.3450 ± 0.2158</td>
+<td>0.6238 ± 0.0752</td>
+</tr>
+<tr>
+<td>v5_human / text</td>
+<td>Ec_MBC</td>
+<td>5</td>
+<td>1.1977 ± 0.1637</td>
+<td>0.6434 ± 0.0508</td>
+</tr>
+<tr>
+<td>v5_human / text</td>
+<td>Ec_MIC</td>
+<td>5</td>
+<td>0.9827 ± 0.1811</td>
+<td>0.7174 ± 0.0807</td>
+</tr>
+<tr>
+<td>v5_human / text</td>
+<td>Sa_MBC</td>
+<td>5</td>
+<td>1.4159 ± 0.2527</td>
+<td>0.4493 ± 0.2132</td>
+</tr>
+<tr>
+<td>v5_human / text</td>
+<td>Sa_MIC</td>
+<td>5</td>
+<td>1.3019 ± 0.1867</td>
+<td>0.5120 ± 0.1004</td>
+</tr>
+<tr>
+<td>v5_human / text</td>
+<td>pooled</td>
+<td>5</td>
+<td>1.2489 ± 0.1450</td>
+<td>0.6765 ± 0.0376</td>
+</tr>
+<tr>
+<td>v5_raw / categorical_org_met</td>
+<td>Ec_MBC</td>
+<td>5</td>
+<td>1.1122 ± 0.1215</td>
+<td>0.6856 ± 0.0722</td>
+</tr>
+<tr>
+<td>v5_raw / categorical_org_met</td>
+<td>Ec_MIC</td>
+<td>5</td>
+<td>0.8950 ± 0.1332</td>
+<td>0.7645 ± 0.0655</td>
+</tr>
+<tr>
+<td>v5_raw / categorical_org_met</td>
+<td>Sa_MBC</td>
+<td>5</td>
+<td>1.4123 ± 0.2906</td>
+<td>0.4540 ± 0.2356</td>
+</tr>
+<tr>
+<td>v5_raw / categorical_org_met</td>
+<td>Sa_MIC</td>
+<td>5</td>
+<td>1.3124 ± 0.4014</td>
+<td>0.4972 ± 0.2409</td>
+</tr>
+<tr>
+<td>v5_raw / categorical_org_met</td>
+<td>pooled</td>
+<td>5</td>
+<td>1.2312 ± 0.1800</td>
+<td>0.6863 ± 0.0473</td>
+</tr>
+<tr>
+<td>v5_raw / categorical_task_id</td>
+<td>Ec_MBC</td>
+<td>5</td>
+<td>1.3303 ± 0.1976</td>
+<td>0.5027 ± 0.3062</td>
+</tr>
+<tr>
+<td>v5_raw / categorical_task_id</td>
+<td>Ec_MIC</td>
+<td>5</td>
+<td>1.0497 ± 0.3368</td>
+<td>0.6644 ± 0.1863</td>
+</tr>
+<tr>
+<td>v5_raw / categorical_task_id</td>
+<td>Sa_MBC</td>
+<td>5</td>
+<td>1.4934 ± 0.3429</td>
+<td>0.3277 ± 0.4000</td>
+</tr>
+<tr>
+<td>v5_raw / categorical_task_id</td>
+<td>Sa_MIC</td>
+<td>5</td>
+<td>1.3869 ± 0.3139</td>
+<td>0.4499 ± 0.1719</td>
+</tr>
+<tr>
+<td>v5_raw / categorical_task_id</td>
+<td>pooled</td>
+<td>5</td>
+<td>1.3455 ± 0.2286</td>
+<td>0.6220 ± 0.0872</td>
+</tr>
+<tr>
+<td>v5_raw / text</td>
+<td>Ec_MBC</td>
+<td>5</td>
+<td>1.1797 ± 0.1264</td>
+<td>0.6438 ± 0.0942</td>
+</tr>
+<tr>
+<td>v5_raw / text</td>
+<td>Ec_MIC</td>
+<td>5</td>
+<td>0.9077 ± 0.1538</td>
+<td>0.7589 ± 0.0650</td>
+</tr>
+<tr>
+<td>v5_raw / text</td>
+<td>Sa_MBC</td>
+<td>5</td>
+<td>1.3434 ± 0.2063</td>
+<td>0.4939 ± 0.2149</td>
+</tr>
+<tr>
+<td>v5_raw / text</td>
+<td>Sa_MIC</td>
+<td>5</td>
+<td>1.3739 ± 0.2021</td>
+<td>0.4626 ± 0.0876</td>
+</tr>
+<tr>
+<td>v5_raw / text</td>
+<td>pooled</td>
+<td>5</td>
+<td>1.2286 ± 0.1389</td>
+<td>0.6848 ± 0.0475</td>
+</tr>
+</table>
+<img src="preview_assets/image05.png" alt="SI figure 5">
+<p class="caption">Figure S5. Row-CV endpoint R² for raw and human-guided features. Bars show SD over five folds; symbols denote the three fixed task-coding configurations.</p>
+<p class="caption">Table S4. Holdout endpoint metrics reconstructed on the 108 worksheet records.</p>
+<table>
+<tr>
+<td>Representation / coding</td>
+<td>Endpoint</td>
+<td>n</td>
+<td>RMSE</td>
+<td>R²</td>
+</tr>
+<tr>
+<td>v5_human / categorical</td>
+<td>Sa_MIC</td>
+<td>22</td>
+<td>1.0741</td>
+<td>0.6587</td>
+</tr>
+<tr>
+<td>v5_human / categorical</td>
+<td>Sa_MBC</td>
+<td>22</td>
+<td>1.6136</td>
+<td>0.4823</td>
+</tr>
+<tr>
+<td>v5_human / categorical</td>
+<td>Ec_MIC</td>
+<td>21</td>
+<td>1.2349</td>
+<td>0.6523</td>
+</tr>
+<tr>
+<td>v5_human / categorical</td>
+<td>Ec_MBC</td>
+<td>22</td>
+<td>1.2775</td>
+<td>0.7352</td>
+</tr>
+<tr>
+<td>v5_human / separate</td>
+<td>Sa_MIC</td>
+<td>22</td>
+<td>1.4333</td>
+<td>-0.1198</td>
+</tr>
+<tr>
+<td>v5_human / separate</td>
+<td>Sa_MBC</td>
+<td>22</td>
+<td>1.9153</td>
+<td>-0.0464</td>
+</tr>
+<tr>
+<td>v5_human / separate</td>
+<td>Ec_MIC</td>
+<td>22</td>
+<td>1.4463</td>
+<td>0.1095</td>
+</tr>
+<tr>
+<td>v5_human / separate</td>
+<td>Ec_MBC</td>
+<td>22</td>
+<td>1.4293</td>
+<td>0.1517</td>
+</tr>
+<tr>
+<td>v5_human / text</td>
+<td>Sa_MIC</td>
+<td>22</td>
+<td>0.9585</td>
+<td>0.7282</td>
+</tr>
+<tr>
+<td>v5_human / text</td>
+<td>Sa_MBC</td>
+<td>22</td>
+<td>1.7659</td>
+<td>0.3799</td>
+</tr>
+<tr>
+<td>v5_human / text</td>
+<td>Ec_MIC</td>
+<td>21</td>
+<td>0.9927</td>
+<td>0.7753</td>
+</tr>
+<tr>
+<td>v5_human / text</td>
+<td>Ec_MBC</td>
+<td>22</td>
+<td>1.3418</td>
+<td>0.7079</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / categorical</td>
+<td>Sa_MIC</td>
+<td>22</td>
+<td>1.1182</td>
+<td>0.6301</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / categorical</td>
+<td>Sa_MBC</td>
+<td>22</td>
+<td>1.6248</td>
+<td>0.4751</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / categorical</td>
+<td>Ec_MIC</td>
+<td>21</td>
+<td>1.2227</td>
+<td>0.6591</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / categorical</td>
+<td>Ec_MBC</td>
+<td>22</td>
+<td>1.2812</td>
+<td>0.7337</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / separate</td>
+<td>Sa_MIC</td>
+<td>22</td>
+<td>1.1520</td>
+<td>0.2766</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / separate</td>
+<td>Sa_MBC</td>
+<td>22</td>
+<td>1.6796</td>
+<td>0.1953</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / separate</td>
+<td>Ec_MIC</td>
+<td>22</td>
+<td>1.3159</td>
+<td>0.2629</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / separate</td>
+<td>Ec_MBC</td>
+<td>22</td>
+<td>1.5079</td>
+<td>0.0558</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / text</td>
+<td>Sa_MIC</td>
+<td>22</td>
+<td>1.1301</td>
+<td>0.6222</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / text</td>
+<td>Sa_MBC</td>
+<td>22</td>
+<td>1.7806</td>
+<td>0.3695</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / text</td>
+<td>Ec_MIC</td>
+<td>21</td>
+<td>1.0346</td>
+<td>0.7560</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / text</td>
+<td>Ec_MBC</td>
+<td>22</td>
+<td>1.3830</td>
+<td>0.6897</td>
+</tr>
+<tr>
+<td>v5_raw / categorical</td>
+<td>Sa_MIC</td>
+<td>22</td>
+<td>1.0774</td>
+<td>0.6566</td>
+</tr>
+<tr>
+<td>v5_raw / categorical</td>
+<td>Sa_MBC</td>
+<td>22</td>
+<td>1.6515</td>
+<td>0.4576</td>
+</tr>
+<tr>
+<td>v5_raw / categorical</td>
+<td>Ec_MIC</td>
+<td>21</td>
+<td>1.2803</td>
+<td>0.6262</td>
+</tr>
+<tr>
+<td>v5_raw / categorical</td>
+<td>Ec_MBC</td>
+<td>22</td>
+<td>1.2253</td>
+<td>0.7564</td>
+</tr>
+<tr>
+<td>v5_raw / separate</td>
+<td>Sa_MIC</td>
+<td>22</td>
+<td>1.1892</td>
+<td>0.2292</td>
+</tr>
+<tr>
+<td>v5_raw / separate</td>
+<td>Sa_MBC</td>
+<td>22</td>
+<td>1.6440</td>
+<td>0.2290</td>
+</tr>
+<tr>
+<td>v5_raw / separate</td>
+<td>Ec_MIC</td>
+<td>22</td>
+<td>1.2235</td>
+<td>0.3628</td>
+</tr>
+<tr>
+<td>v5_raw / separate</td>
+<td>Ec_MBC</td>
+<td>22</td>
+<td>1.2846</td>
+<td>0.3148</td>
+</tr>
+<tr>
+<td>v5_raw / text</td>
+<td>Sa_MIC</td>
+<td>22</td>
+<td>1.0473</td>
+<td>0.6755</td>
+</tr>
+<tr>
+<td>v5_raw / text</td>
+<td>Sa_MBC</td>
+<td>22</td>
+<td>1.7129</td>
+<td>0.4166</td>
+</tr>
+<tr>
+<td>v5_raw / text</td>
+<td>Ec_MIC</td>
+<td>21</td>
+<td>1.0246</td>
+<td>0.7606</td>
+</tr>
+<tr>
+<td>v5_raw / text</td>
+<td>Ec_MBC</td>
+<td>22</td>
+<td>1.1014</td>
+<td>0.8032</td>
+</tr>
+</table>
+<p>Matched compact encoders share 681 source molecules (377 training, 304 validation), five paired source seeds and 480 updates without SMOTE. Human Good/Bad contrastive supervision is compared with continuous-MIC regression, binary-MIC controls, shuffled labels and raw features under identical target-decoder budgets and partitions.</p>
+<p class="caption">Table S5. Compact-control and representation configurations: seed-mean RMSE.</p>
+<table>
+<tr>
+<td>Arm / coding</td>
+<td>Endpoint</td>
+<td>Cation CV</td>
+<td>Scaffold CV</td>
+<td>OOD-17</td>
+</tr>
+<tr>
+<td>binary_shuffled / categorical</td>
+<td>Ec_MBC</td>
+<td>1.8929</td>
+<td>2.0546</td>
+<td>2.4307</td>
+</tr>
+<tr>
+<td>binary_shuffled / categorical</td>
+<td>Ec_MIC</td>
+<td>1.7243</td>
+<td>2.0121</td>
+<td>2.2737</td>
+</tr>
+<tr>
+<td>binary_shuffled / categorical</td>
+<td>Sa_MBC</td>
+<td>1.8650</td>
+<td>2.1739</td>
+<td>1.8703</td>
+</tr>
+<tr>
+<td>binary_shuffled / categorical</td>
+<td>Sa_MIC</td>
+<td>1.7569</td>
+<td>2.0008</td>
+<td>1.7313</td>
+</tr>
+<tr>
+<td>binary_shuffled / categorical</td>
+<td>pooled</td>
+<td>1.8113</td>
+<td>2.0616</td>
+<td>2.0939</td>
+</tr>
+<tr>
+<td>continuous_shuffled / categorical</td>
+<td>Ec_MBC</td>
+<td>1.9903</td>
+<td>2.1692</td>
+<td>2.6393</td>
+</tr>
+<tr>
+<td>continuous_shuffled / categorical</td>
+<td>Ec_MIC</td>
+<td>1.8686</td>
+<td>2.1318</td>
+<td>2.6086</td>
+</tr>
+<tr>
+<td>continuous_shuffled / categorical</td>
+<td>Sa_MBC</td>
+<td>2.0054</td>
+<td>2.3181</td>
+<td>2.2961</td>
+</tr>
+<tr>
+<td>continuous_shuffled / categorical</td>
+<td>Sa_MIC</td>
+<td>1.8718</td>
+<td>2.1188</td>
+<td>2.0641</td>
+</tr>
+<tr>
+<td>continuous_shuffled / categorical</td>
+<td>pooled</td>
+<td>1.9353</td>
+<td>2.1863</td>
+<td>2.4185</td>
+</tr>
+<tr>
+<td>human / categorical</td>
+<td>Ec_MBC</td>
+<td>1.9134</td>
+<td>2.1098</td>
+<td>2.5511</td>
+</tr>
+<tr>
+<td>human / categorical</td>
+<td>Ec_MIC</td>
+<td>1.7590</td>
+<td>2.0543</td>
+<td>2.4426</td>
+</tr>
+<tr>
+<td>human / categorical</td>
+<td>Sa_MBC</td>
+<td>1.9728</td>
+<td>2.3132</td>
+<td>2.1125</td>
+</tr>
+<tr>
+<td>human / categorical</td>
+<td>Sa_MIC</td>
+<td>1.8371</td>
+<td>2.1463</td>
+<td>1.9183</td>
+</tr>
+<tr>
+<td>human / categorical</td>
+<td>pooled</td>
+<td>1.8724</td>
+<td>2.1583</td>
+<td>2.2680</td>
+</tr>
+<tr>
+<td>human / onehot</td>
+<td>Ec_MBC</td>
+<td>1.8723</td>
+<td>2.1889</td>
+<td>2.4709</td>
+</tr>
+<tr>
+<td>human / onehot</td>
+<td>Ec_MIC</td>
+<td>1.7426</td>
+<td>2.1361</td>
+<td>2.4478</td>
+</tr>
+<tr>
+<td>human / onehot</td>
+<td>Sa_MBC</td>
+<td>1.9657</td>
+<td>2.1832</td>
+<td>2.0925</td>
+</tr>
+<tr>
+<td>human / onehot</td>
+<td>Sa_MIC</td>
+<td>1.7867</td>
+<td>2.0972</td>
+<td>1.9804</td>
+</tr>
+<tr>
+<td>human / onehot</td>
+<td>pooled</td>
+<td>1.8438</td>
+<td>2.1517</td>
+<td>2.2548</td>
+</tr>
+<tr>
+<td>human / random_code</td>
+<td>Ec_MBC</td>
+<td>1.8946</td>
+<td>2.2442</td>
+<td>2.5875</td>
+</tr>
+<tr>
+<td>human / random_code</td>
+<td>Ec_MIC</td>
+<td>1.7849</td>
+<td>2.1572</td>
+<td>2.5778</td>
+</tr>
+<tr>
+<td>human / random_code</td>
+<td>Sa_MBC</td>
+<td>1.9784</td>
+<td>2.2789</td>
+<td>2.1448</td>
+</tr>
+<tr>
+<td>human / random_code</td>
+<td>Sa_MIC</td>
+<td>1.8167</td>
+<td>2.1566</td>
+<td>1.9487</td>
+</tr>
+<tr>
+<td>human / random_code</td>
+<td>pooled</td>
+<td>1.8701</td>
+<td>2.2099</td>
+<td>2.3272</td>
+</tr>
+<tr>
+<td>human / text</td>
+<td>Ec_MBC</td>
+<td>1.9276</td>
+<td>2.1990</td>
+<td>2.5143</td>
+</tr>
+<tr>
+<td>human / text</td>
+<td>Ec_MIC</td>
+<td>1.7896</td>
+<td>2.0904</td>
+<td>2.4445</td>
+</tr>
+<tr>
+<td>human / text</td>
+<td>Sa_MBC</td>
+<td>1.9889</td>
+<td>2.2970</td>
+<td>2.0912</td>
+</tr>
+<tr>
+<td>human / text</td>
+<td>Sa_MIC</td>
+<td>1.8514</td>
+<td>2.1801</td>
+<td>1.9533</td>
+</tr>
+<tr>
+<td>human / text</td>
+<td>pooled</td>
+<td>1.8912</td>
+<td>2.1930</td>
+<td>2.2600</td>
+</tr>
+<tr>
+<td>human / text_permuted</td>
+<td>Ec_MBC</td>
+<td>1.9278</td>
+<td>2.2135</td>
+<td>2.5084</td>
+</tr>
+<tr>
+<td>human / text_permuted</td>
+<td>Ec_MIC</td>
+<td>1.8149</td>
+<td>2.1335</td>
+<td>2.5010</td>
+</tr>
+<tr>
+<td>human / text_permuted</td>
+<td>Sa_MBC</td>
+<td>1.9876</td>
+<td>2.2479</td>
+<td>2.1316</td>
+</tr>
+<tr>
+<td>human / text_permuted</td>
+<td>Sa_MIC</td>
+<td>1.8320</td>
+<td>2.1563</td>
+<td>1.9966</td>
+</tr>
+<tr>
+<td>human / text_permuted</td>
+<td>pooled</td>
+<td>1.8919</td>
+<td>2.1883</td>
+<td>2.2922</td>
+</tr>
+<tr>
+<td>human_shuffled / categorical</td>
+<td>Ec_MBC</td>
+<td>1.9216</td>
+<td>2.0319</td>
+<td>2.4616</td>
+</tr>
+<tr>
+<td>human_shuffled / categorical</td>
+<td>Ec_MIC</td>
+<td>1.7391</td>
+<td>1.9818</td>
+<td>2.3910</td>
+</tr>
+<tr>
+<td>human_shuffled / categorical</td>
+<td>Sa_MBC</td>
+<td>1.8679</td>
+<td>2.1617</td>
+<td>2.0458</td>
+</tr>
+<tr>
+<td>human_shuffled / categorical</td>
+<td>Sa_MIC</td>
+<td>1.7983</td>
+<td>1.9847</td>
+<td>1.7230</td>
+</tr>
+<tr>
+<td>human_shuffled / categorical</td>
+<td>pooled</td>
+<td>1.8332</td>
+<td>2.0414</td>
+<td>2.1716</td>
+</tr>
+<tr>
+<td>human_weight_only / categorical</td>
+<td>Ec_MBC</td>
+<td>1.9619</td>
+<td>2.1121</td>
+<td>2.6253</td>
+</tr>
+<tr>
+<td>human_weight_only / categorical</td>
+<td>Ec_MIC</td>
+<td>1.7928</td>
+<td>2.0586</td>
+<td>2.6645</td>
+</tr>
+<tr>
+<td>human_weight_only / categorical</td>
+<td>Sa_MBC</td>
+<td>1.9613</td>
+<td>2.2329</td>
+<td>2.2142</td>
+</tr>
+<tr>
+<td>human_weight_only / categorical</td>
+<td>Sa_MIC</td>
+<td>1.8299</td>
+<td>2.0203</td>
+<td>1.9600</td>
+</tr>
+<tr>
+<td>human_weight_only / categorical</td>
+<td>pooled</td>
+<td>1.8881</td>
+<td>2.1076</td>
+<td>2.3840</td>
+</tr>
+<tr>
+<td>initial / categorical</td>
+<td>Ec_MBC</td>
+<td>1.9887</td>
+<td>2.0858</td>
+<td>2.4595</td>
+</tr>
+<tr>
+<td>initial / categorical</td>
+<td>Ec_MIC</td>
+<td>1.8106</td>
+<td>2.0384</td>
+<td>2.5089</td>
+</tr>
+<tr>
+<td>initial / categorical</td>
+<td>Sa_MBC</td>
+<td>1.9368</td>
+<td>2.2038</td>
+<td>2.2137</td>
+</tr>
+<tr>
+<td>initial / categorical</td>
+<td>Sa_MIC</td>
+<td>1.8143</td>
+<td>2.0018</td>
+<td>2.0414</td>
+</tr>
+<tr>
+<td>initial / categorical</td>
+<td>pooled</td>
+<td>1.8893</td>
+<td>2.0840</td>
+<td>2.3131</td>
+</tr>
+<tr>
+<td>matched_raw / categorical</td>
+<td>Ec_MBC</td>
+<td>1.9534</td>
+<td>2.1059</td>
+<td>2.7320</td>
+</tr>
+<tr>
+<td>matched_raw / categorical</td>
+<td>Ec_MIC</td>
+<td>1.8127</td>
+<td>2.0625</td>
+<td>2.9662</td>
+</tr>
+<tr>
+<td>matched_raw / categorical</td>
+<td>Sa_MBC</td>
+<td>1.9114</td>
+<td>2.2428</td>
+<td>2.3310</td>
+</tr>
+<tr>
+<td>matched_raw / categorical</td>
+<td>Sa_MIC</td>
+<td>1.7889</td>
+<td>2.0459</td>
+<td>1.8576</td>
+</tr>
+<tr>
+<td>matched_raw / categorical</td>
+<td>pooled</td>
+<td>1.8678</td>
+<td>2.1157</td>
+<td>2.5038</td>
+</tr>
+<tr>
+<td>matched_raw / onehot</td>
+<td>Ec_MBC</td>
+<td>1.9386</td>
+<td>2.0716</td>
+<td>2.1726</td>
+</tr>
+<tr>
+<td>matched_raw / onehot</td>
+<td>Ec_MIC</td>
+<td>1.8198</td>
+<td>2.0316</td>
+<td>2.3036</td>
+</tr>
+<tr>
+<td>matched_raw / onehot</td>
+<td>Sa_MBC</td>
+<td>1.9153</td>
+<td>2.1245</td>
+<td>2.2250</td>
+</tr>
+<tr>
+<td>matched_raw / onehot</td>
+<td>Sa_MIC</td>
+<td>1.7915</td>
+<td>2.0225</td>
+<td>2.0318</td>
+</tr>
+<tr>
+<td>matched_raw / onehot</td>
+<td>pooled</td>
+<td>1.8673</td>
+<td>2.0629</td>
+<td>2.1857</td>
+</tr>
+<tr>
+<td>matched_raw / text</td>
+<td>Ec_MBC</td>
+<td>1.9571</td>
+<td>2.1477</td>
+<td>2.3348</td>
+</tr>
+<tr>
+<td>matched_raw / text</td>
+<td>Ec_MIC</td>
+<td>1.8229</td>
+<td>2.0978</td>
+<td>2.5028</td>
+</tr>
+<tr>
+<td>matched_raw / text</td>
+<td>Sa_MBC</td>
+<td>1.9015</td>
+<td>2.1415</td>
+<td>2.1117</td>
+</tr>
+<tr>
+<td>matched_raw / text</td>
+<td>Sa_MIC</td>
+<td>1.7654</td>
+<td>2.0210</td>
+<td>1.9449</td>
+</tr>
+<tr>
+<td>matched_raw / text</td>
+<td>pooled</td>
+<td>1.8631</td>
+<td>2.1026</td>
+<td>2.2321</td>
+</tr>
+<tr>
+<td>mic_binary / categorical</td>
+<td>Ec_MBC</td>
+<td>1.8840</td>
+<td>2.0558</td>
+<td>2.5923</td>
+</tr>
+<tr>
+<td>mic_binary / categorical</td>
+<td>Ec_MIC</td>
+<td>1.7417</td>
+<td>2.0308</td>
+<td>2.5124</td>
+</tr>
+<tr>
+<td>mic_binary / categorical</td>
+<td>Sa_MBC</td>
+<td>1.9789</td>
+<td>2.2656</td>
+<td>2.0509</td>
+</tr>
+<tr>
+<td>mic_binary / categorical</td>
+<td>Sa_MIC</td>
+<td>1.8469</td>
+<td>2.0776</td>
+<td>1.8802</td>
+</tr>
+<tr>
+<td>mic_binary / categorical</td>
+<td>pooled</td>
+<td>1.8649</td>
+<td>2.1096</td>
+<td>2.2759</td>
+</tr>
+<tr>
+<td>mic_binary / text</td>
+<td>Ec_MBC</td>
+<td>1.8764</td>
+<td>2.0998</td>
+<td>2.5049</td>
+</tr>
+<tr>
+<td>mic_binary / text</td>
+<td>Ec_MIC</td>
+<td>1.7669</td>
+<td>2.0205</td>
+<td>2.4006</td>
+</tr>
+<tr>
+<td>mic_binary / text</td>
+<td>Sa_MBC</td>
+<td>1.9773</td>
+<td>2.2368</td>
+<td>2.0789</td>
+</tr>
+<tr>
+<td>mic_binary / text</td>
+<td>Sa_MIC</td>
+<td>1.8445</td>
+<td>2.0808</td>
+<td>1.8863</td>
+</tr>
+<tr>
+<td>mic_binary / text</td>
+<td>pooled</td>
+<td>1.8681</td>
+<td>2.1110</td>
+<td>2.2340</td>
+</tr>
+<tr>
+<td>mic_continuous / categorical</td>
+<td>Ec_MBC</td>
+<td>1.8763</td>
+<td>2.1597</td>
+<td>2.9780</td>
+</tr>
+<tr>
+<td>mic_continuous / categorical</td>
+<td>Ec_MIC</td>
+<td>1.7554</td>
+<td>2.1518</td>
+<td>2.8449</td>
+</tr>
+<tr>
+<td>mic_continuous / categorical</td>
+<td>Sa_MBC</td>
+<td>1.9814</td>
+<td>2.3312</td>
+<td>2.1047</td>
+</tr>
+<tr>
+<td>mic_continuous / categorical</td>
+<td>Sa_MIC</td>
+<td>1.8125</td>
+<td>2.0163</td>
+<td>1.7707</td>
+</tr>
+<tr>
+<td>mic_continuous / categorical</td>
+<td>pooled</td>
+<td>1.8584</td>
+<td>2.1677</td>
+<td>2.4738</td>
+</tr>
+<tr>
+<td>mic_continuous / text</td>
+<td>Ec_MBC</td>
+<td>1.8488</td>
+<td>2.1814</td>
+<td>3.0417</td>
+</tr>
+<tr>
+<td>mic_continuous / text</td>
+<td>Ec_MIC</td>
+<td>1.7629</td>
+<td>2.1252</td>
+<td>2.8322</td>
+</tr>
+<tr>
+<td>mic_continuous / text</td>
+<td>Sa_MBC</td>
+<td>1.9282</td>
+<td>2.2415</td>
+<td>2.0960</td>
+</tr>
+<tr>
+<td>mic_continuous / text</td>
+<td>Sa_MIC</td>
+<td>1.7851</td>
+<td>2.0352</td>
+<td>1.7856</td>
+</tr>
+<tr>
+<td>mic_continuous / text</td>
+<td>pooled</td>
+<td>1.8326</td>
+<td>2.1474</td>
+<td>2.4948</td>
+</tr>
+<tr>
+<td>v5_human / categorical</td>
+<td>Ec_MBC</td>
+<td>1.9442</td>
+<td>2.0452</td>
+<td>2.4605</td>
+</tr>
+<tr>
+<td>v5_human / categorical</td>
+<td>Ec_MIC</td>
+<td>1.8169</td>
+<td>2.0529</td>
+<td>2.5352</td>
+</tr>
+<tr>
+<td>v5_human / categorical</td>
+<td>Sa_MBC</td>
+<td>1.9894</td>
+<td>2.2378</td>
+<td>2.1728</td>
+</tr>
+<tr>
+<td>v5_human / categorical</td>
+<td>Sa_MIC</td>
+<td>1.8177</td>
+<td>2.0488</td>
+<td>1.6537</td>
+</tr>
+<tr>
+<td>v5_human / categorical</td>
+<td>pooled</td>
+<td>1.8936</td>
+<td>2.0978</td>
+<td>2.2289</td>
+</tr>
+<tr>
+<td>v5_human / onehot</td>
+<td>Ec_MBC</td>
+<td>1.9911</td>
+<td>2.0765</td>
+<td>2.2699</td>
+</tr>
+<tr>
+<td>v5_human / onehot</td>
+<td>Ec_MIC</td>
+<td>1.8605</td>
+<td>2.0302</td>
+<td>2.2740</td>
+</tr>
+<tr>
+<td>v5_human / onehot</td>
+<td>Sa_MBC</td>
+<td>2.0148</td>
+<td>2.1459</td>
+<td>2.1984</td>
+</tr>
+<tr>
+<td>v5_human / onehot</td>
+<td>Sa_MIC</td>
+<td>1.8025</td>
+<td>2.0169</td>
+<td>1.7163</td>
+</tr>
+<tr>
+<td>v5_human / onehot</td>
+<td>pooled</td>
+<td>1.9193</td>
+<td>2.0680</td>
+<td>2.1251</td>
+</tr>
+<tr>
+<td>v5_human / separate</td>
+<td>Ec_MBC</td>
+<td>2.0195</td>
+<td>2.0593</td>
+<td>2.1309</td>
+</tr>
+<tr>
+<td>v5_human / separate</td>
+<td>Ec_MIC</td>
+<td>1.8889</td>
+<td>2.0038</td>
+<td>2.1412</td>
+</tr>
+<tr>
+<td>v5_human / separate</td>
+<td>Sa_MBC</td>
+<td>2.0098</td>
+<td>2.1809</td>
+<td>2.2217</td>
+</tr>
+<tr>
+<td>v5_human / separate</td>
+<td>Sa_MIC</td>
+<td>1.7933</td>
+<td>2.0833</td>
+<td>1.7883</td>
+</tr>
+<tr>
+<td>v5_human / separate</td>
+<td>pooled</td>
+<td>1.9301</td>
+<td>2.0828</td>
+<td>2.0764</td>
+</tr>
+<tr>
+<td>v5_human / text</td>
+<td>Ec_MBC</td>
+<td>1.9929</td>
+<td>2.1198</td>
+<td>2.1558</td>
+</tr>
+<tr>
+<td>v5_human / text</td>
+<td>Ec_MIC</td>
+<td>1.8597</td>
+<td>2.0250</td>
+<td>2.0799</td>
+</tr>
+<tr>
+<td>v5_human / text</td>
+<td>Sa_MBC</td>
+<td>1.9723</td>
+<td>2.1909</td>
+<td>2.0976</td>
+</tr>
+<tr>
+<td>v5_human / text</td>
+<td>Sa_MIC</td>
+<td>1.7893</td>
+<td>2.0601</td>
+<td>1.7415</td>
+</tr>
+<tr>
+<td>v5_human / text</td>
+<td>pooled</td>
+<td>1.9054</td>
+<td>2.0999</td>
+<td>2.0232</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / categorical</td>
+<td>Ec_MBC</td>
+<td>1.9429</td>
+<td>1.9814</td>
+<td>2.7519</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / categorical</td>
+<td>Ec_MIC</td>
+<td>1.7947</td>
+<td>1.9717</td>
+<td>2.8495</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / categorical</td>
+<td>Sa_MBC</td>
+<td>1.9241</td>
+<td>2.1364</td>
+<td>2.3717</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / categorical</td>
+<td>Sa_MIC</td>
+<td>1.7288</td>
+<td>1.8976</td>
+<td>1.7433</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / categorical</td>
+<td>pooled</td>
+<td>1.8498</td>
+<td>1.9987</td>
+<td>2.4631</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / onehot</td>
+<td>Ec_MBC</td>
+<td>2.0030</td>
+<td>2.0342</td>
+<td>2.5741</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / onehot</td>
+<td>Ec_MIC</td>
+<td>1.8471</td>
+<td>1.9710</td>
+<td>2.4897</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / onehot</td>
+<td>Sa_MBC</td>
+<td>1.9317</td>
+<td>2.1273</td>
+<td>2.3480</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / onehot</td>
+<td>Sa_MIC</td>
+<td>1.7222</td>
+<td>1.9322</td>
+<td>1.7026</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / onehot</td>
+<td>pooled</td>
+<td>1.8789</td>
+<td>2.0175</td>
+<td>2.2999</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / separate</td>
+<td>Ec_MBC</td>
+<td>2.0095</td>
+<td>2.0762</td>
+<td>2.4927</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / separate</td>
+<td>Ec_MIC</td>
+<td>1.7916</td>
+<td>1.9959</td>
+<td>2.6511</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / separate</td>
+<td>Sa_MBC</td>
+<td>1.9805</td>
+<td>2.1216</td>
+<td>2.3097</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / separate</td>
+<td>Sa_MIC</td>
+<td>1.7341</td>
+<td>1.8851</td>
+<td>1.6720</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / separate</td>
+<td>pooled</td>
+<td>1.8826</td>
+<td>2.0217</td>
+<td>2.3087</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / text</td>
+<td>Ec_MBC</td>
+<td>1.8880</td>
+<td>2.0629</td>
+<td>2.6845</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / text</td>
+<td>Ec_MIC</td>
+<td>1.7270</td>
+<td>1.9762</td>
+<td>2.6384</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / text</td>
+<td>Sa_MBC</td>
+<td>1.8869</td>
+<td>2.1070</td>
+<td>2.4193</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / text</td>
+<td>Sa_MIC</td>
+<td>1.6417</td>
+<td>1.9006</td>
+<td>1.8050</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / text</td>
+<td>pooled</td>
+<td>1.7890</td>
+<td>2.0133</td>
+<td>2.4081</td>
+</tr>
+<tr>
+<td>v5_raw / categorical</td>
+<td>Ec_MBC</td>
+<td>1.9728</td>
+<td>2.1056</td>
+<td>2.9011</td>
+</tr>
+<tr>
+<td>v5_raw / categorical</td>
+<td>Ec_MIC</td>
+<td>1.8227</td>
+<td>2.0783</td>
+<td>2.8696</td>
+</tr>
+<tr>
+<td>v5_raw / categorical</td>
+<td>Sa_MBC</td>
+<td>1.9480</td>
+<td>2.1998</td>
+<td>2.0848</td>
+</tr>
+<tr>
+<td>v5_raw / categorical</td>
+<td>Sa_MIC</td>
+<td>1.8159</td>
+<td>1.9856</td>
+<td>1.7175</td>
+</tr>
+<tr>
+<td>v5_raw / categorical</td>
+<td>pooled</td>
+<td>1.8912</td>
+<td>2.0937</td>
+<td>2.4394</td>
+</tr>
+<tr>
+<td>v5_raw / onehot</td>
+<td>Ec_MBC</td>
+<td>1.9805</td>
+<td>2.1181</td>
+<td>2.5716</td>
+</tr>
+<tr>
+<td>v5_raw / onehot</td>
+<td>Ec_MIC</td>
+<td>1.8486</td>
+<td>2.0396</td>
+<td>2.5801</td>
+</tr>
+<tr>
+<td>v5_raw / onehot</td>
+<td>Sa_MBC</td>
+<td>1.9467</td>
+<td>2.1534</td>
+<td>2.0615</td>
+</tr>
+<tr>
+<td>v5_raw / onehot</td>
+<td>Sa_MIC</td>
+<td>1.7660</td>
+<td>2.0145</td>
+<td>1.5467</td>
+</tr>
+<tr>
+<td>v5_raw / onehot</td>
+<td>pooled</td>
+<td>1.8873</td>
+<td>2.0821</td>
+<td>2.2257</td>
+</tr>
+<tr>
+<td>v5_raw / separate</td>
+<td>Ec_MBC</td>
+<td>2.0275</td>
+<td>2.1363</td>
+<td>2.4428</td>
+</tr>
+<tr>
+<td>v5_raw / separate</td>
+<td>Ec_MIC</td>
+<td>1.8478</td>
+<td>1.9962</td>
+<td>2.5490</td>
+</tr>
+<tr>
+<td>v5_raw / separate</td>
+<td>Sa_MBC</td>
+<td>1.9906</td>
+<td>2.2075</td>
+<td>2.0901</td>
+</tr>
+<tr>
+<td>v5_raw / separate</td>
+<td>Sa_MIC</td>
+<td>1.7869</td>
+<td>1.9962</td>
+<td>1.6519</td>
+</tr>
+<tr>
+<td>v5_raw / separate</td>
+<td>pooled</td>
+<td>1.9158</td>
+<td>2.0861</td>
+<td>2.2078</td>
+</tr>
+<tr>
+<td>v5_raw / text</td>
+<td>Ec_MBC</td>
+<td>1.9842</td>
+<td>2.1230</td>
+<td>2.5903</td>
+</tr>
+<tr>
+<td>v5_raw / text</td>
+<td>Ec_MIC</td>
+<td>1.8242</td>
+<td>2.0443</td>
+<td>2.5779</td>
+</tr>
+<tr>
+<td>v5_raw / text</td>
+<td>Sa_MBC</td>
+<td>1.9580</td>
+<td>2.2034</td>
+<td>2.0491</td>
+</tr>
+<tr>
+<td>v5_raw / text</td>
+<td>Sa_MIC</td>
+<td>1.8037</td>
+<td>2.0293</td>
+<td>1.6454</td>
+</tr>
+<tr>
+<td>v5_raw / text</td>
+<td>pooled</td>
+<td>1.8942</td>
+<td>2.1011</td>
+<td>2.2452</td>
+</tr>
+</table>
+<p class="caption">Table S6. Complete compact-arm results: mean ± sample SD across source runs (ddof = 1).</p>
+<table>
+<tr>
+<td>Arm / coding</td>
+<td>Regime / endpoint</td>
+<td>Seeds</td>
+<td>RMSE mean ± SD</td>
+<td>R² mean ± SD</td>
+</tr>
+<tr>
+<td>binary_shuffled / categorical</td>
+<td>full-QAC105 / Ec_MBC</td>
+<td>5</td>
+<td>2.4307 ± 0.1901</td>
+<td>-0.5178 ± 0.2440</td>
+</tr>
+<tr>
+<td>binary_shuffled / categorical</td>
+<td>full-QAC105 / Ec_MIC</td>
+<td>5</td>
+<td>2.2737 ± 0.2194</td>
+<td>-0.5733 ± 0.3139</td>
+</tr>
+<tr>
+<td>binary_shuffled / categorical</td>
+<td>full-QAC105 / Sa_MBC</td>
+<td>5</td>
+<td>1.8703 ± 0.0526</td>
+<td>0.2192 ± 0.0437</td>
+</tr>
+<tr>
+<td>binary_shuffled / categorical</td>
+<td>full-QAC105 / Sa_MIC</td>
+<td>5</td>
+<td>1.7313 ± 0.1133</td>
+<td>0.0167 ± 0.1282</td>
+</tr>
+<tr>
+<td>binary_shuffled / categorical</td>
+<td>full-QAC105 / pooled</td>
+<td>5</td>
+<td>2.0939 ± 0.0877</td>
+<td>—</td>
+</tr>
+<tr>
+<td>binary_shuffled / categorical</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>1.8929 ± 0.0497</td>
+<td>0.1787 ± 0.0433</td>
+</tr>
+<tr>
+<td>binary_shuffled / categorical</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.7243 ± 0.0439</td>
+<td>0.2338 ± 0.0394</td>
+</tr>
+<tr>
+<td>binary_shuffled / categorical</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>1.8650 ± 0.0484</td>
+<td>0.0972 ± 0.0467</td>
+</tr>
+<tr>
+<td>binary_shuffled / categorical</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.7569 ± 0.0434</td>
+<td>0.1957 ± 0.0398</td>
+</tr>
+<tr>
+<td>binary_shuffled / categorical</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>1.8113 ± 0.0369</td>
+<td>—</td>
+</tr>
+<tr>
+<td>binary_shuffled / categorical</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.0546 ± 0.0354</td>
+<td>0.0327 ± 0.0334</td>
+</tr>
+<tr>
+<td>binary_shuffled / categorical</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>2.0121 ± 0.0236</td>
+<td>-0.0429 ± 0.0245</td>
+</tr>
+<tr>
+<td>binary_shuffled / categorical</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.1739 ± 0.0297</td>
+<td>-0.2261 ± 0.0335</td>
+</tr>
+<tr>
+<td>binary_shuffled / categorical</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>2.0008 ± 0.0218</td>
+<td>-0.0426 ± 0.0227</td>
+</tr>
+<tr>
+<td>binary_shuffled / categorical</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>2.0616 ± 0.0168</td>
+<td>—</td>
+</tr>
+<tr>
+<td>continuous_shuffled / categorical</td>
+<td>full-QAC105 / Ec_MBC</td>
+<td>5</td>
+<td>2.6393 ± 0.2234</td>
+<td>-0.7909 ± 0.2988</td>
+</tr>
+<tr>
+<td>continuous_shuffled / categorical</td>
+<td>full-QAC105 / Ec_MIC</td>
+<td>5</td>
+<td>2.6086 ± 0.1932</td>
+<td>-1.0645 ± 0.3121</td>
+</tr>
+<tr>
+<td>continuous_shuffled / categorical</td>
+<td>full-QAC105 / Sa_MBC</td>
+<td>5</td>
+<td>2.2961 ± 0.1962</td>
+<td>-0.1829 ± 0.2024</td>
+</tr>
+<tr>
+<td>continuous_shuffled / categorical</td>
+<td>full-QAC105 / Sa_MIC</td>
+<td>5</td>
+<td>2.0641 ± 0.4075</td>
+<td>-0.4363 ± 0.6186</td>
+</tr>
+<tr>
+<td>continuous_shuffled / categorical</td>
+<td>full-QAC105 / pooled</td>
+<td>5</td>
+<td>2.4185 ± 0.1503</td>
+<td>—</td>
+</tr>
+<tr>
+<td>continuous_shuffled / categorical</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>1.9903 ± 0.0722</td>
+<td>0.0915 ± 0.0645</td>
+</tr>
+<tr>
+<td>continuous_shuffled / categorical</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.8686 ± 0.0356</td>
+<td>0.1004 ± 0.0339</td>
+</tr>
+<tr>
+<td>continuous_shuffled / categorical</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>2.0054 ± 0.0802</td>
+<td>-0.0446 ± 0.0831</td>
+</tr>
+<tr>
+<td>continuous_shuffled / categorical</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.8718 ± 0.0408</td>
+<td>0.0873 ± 0.0399</td>
+</tr>
+<tr>
+<td>continuous_shuffled / categorical</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>1.9353 ± 0.0505</td>
+<td>—</td>
+</tr>
+<tr>
+<td>continuous_shuffled / categorical</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.1692 ± 0.0831</td>
+<td>-0.0792 ± 0.0823</td>
+</tr>
+<tr>
+<td>continuous_shuffled / categorical</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>2.1318 ± 0.0862</td>
+<td>-0.1721 ± 0.0952</td>
+</tr>
+<tr>
+<td>continuous_shuffled / categorical</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.3181 ± 0.0593</td>
+<td>-0.3947 ± 0.0711</td>
+</tr>
+<tr>
+<td>continuous_shuffled / categorical</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>2.1188 ± 0.0536</td>
+<td>-0.1697 ± 0.0592</td>
+</tr>
+<tr>
+<td>continuous_shuffled / categorical</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>2.1863 ± 0.0558</td>
+<td>—</td>
+</tr>
+<tr>
+<td>human / categorical</td>
+<td>full-QAC105 / Ec_MBC</td>
+<td>5</td>
+<td>2.5511 ± 0.1522</td>
+<td>-0.6684 ± 0.1992</td>
+</tr>
+<tr>
+<td>human / categorical</td>
+<td>full-QAC105 / Ec_MIC</td>
+<td>5</td>
+<td>2.4426 ± 0.1988</td>
+<td>-0.8118 ± 0.2883</td>
+</tr>
+<tr>
+<td>human / categorical</td>
+<td>full-QAC105 / Sa_MBC</td>
+<td>5</td>
+<td>2.1125 ± 0.0554</td>
+<td>0.0040 ± 0.0528</td>
+</tr>
+<tr>
+<td>human / categorical</td>
+<td>full-QAC105 / Sa_MIC</td>
+<td>5</td>
+<td>1.9183 ± 0.0812</td>
+<td>-0.2048 ± 0.1042</td>
+</tr>
+<tr>
+<td>human / categorical</td>
+<td>full-QAC105 / pooled</td>
+<td>5</td>
+<td>2.2680 ± 0.0774</td>
+<td>—</td>
+</tr>
+<tr>
+<td>human / categorical</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>1.9134 ± 0.0361</td>
+<td>0.1610 ± 0.0318</td>
+</tr>
+<tr>
+<td>human / categorical</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.7590 ± 0.0228</td>
+<td>0.2030 ± 0.0207</td>
+</tr>
+<tr>
+<td>human / categorical</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>1.9728 ± 0.0475</td>
+<td>-0.0101 ± 0.0485</td>
+</tr>
+<tr>
+<td>human / categorical</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.8371 ± 0.0503</td>
+<td>0.1205 ± 0.0482</td>
+</tr>
+<tr>
+<td>human / categorical</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>1.8724 ± 0.0339</td>
+<td>—</td>
+</tr>
+<tr>
+<td>human / categorical</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.1098 ± 0.0646</td>
+<td>-0.0205 ± 0.0630</td>
+</tr>
+<tr>
+<td>human / categorical</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>2.0543 ± 0.0646</td>
+<td>-0.0878 ± 0.0693</td>
+</tr>
+<tr>
+<td>human / categorical</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.3132 ± 0.0417</td>
+<td>-0.3884 ± 0.0501</td>
+</tr>
+<tr>
+<td>human / categorical</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>2.1463 ± 0.0724</td>
+<td>-0.2007 ± 0.0808</td>
+</tr>
+<tr>
+<td>human / categorical</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>2.1583 ± 0.0496</td>
+<td>—</td>
+</tr>
+<tr>
+<td>human / text</td>
+<td>full-QAC105 / Ec_MBC</td>
+<td>5</td>
+<td>2.5143 ± 0.1143</td>
+<td>-0.6186 ± 0.1442</td>
+</tr>
+<tr>
+<td>human / text</td>
+<td>full-QAC105 / Ec_MIC</td>
+<td>5</td>
+<td>2.4445 ± 0.1575</td>
+<td>-0.8111 ± 0.2246</td>
+</tr>
+<tr>
+<td>human / text</td>
+<td>full-QAC105 / Sa_MBC</td>
+<td>5</td>
+<td>2.0912 ± 0.0482</td>
+<td>0.0241 ± 0.0453</td>
+</tr>
+<tr>
+<td>human / text</td>
+<td>full-QAC105 / Sa_MIC</td>
+<td>5</td>
+<td>1.9533 ± 0.0700</td>
+<td>-0.2486 ± 0.0907</td>
+</tr>
+<tr>
+<td>human / text</td>
+<td>full-QAC105 / pooled</td>
+<td>5</td>
+<td>2.2600 ± 0.0768</td>
+<td>—</td>
+</tr>
+<tr>
+<td>human / text</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>1.9276 ± 0.0537</td>
+<td>0.1482 ± 0.0470</td>
+</tr>
+<tr>
+<td>human / text</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.7896 ± 0.0474</td>
+<td>0.1746 ± 0.0436</td>
+</tr>
+<tr>
+<td>human / text</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>1.9889 ± 0.0655</td>
+<td>-0.0270 ± 0.0671</td>
+</tr>
+<tr>
+<td>human / text</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.8514 ± 0.1042</td>
+<td>0.1051 ± 0.0985</td>
+</tr>
+<tr>
+<td>human / text</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>1.8912 ± 0.0579</td>
+<td>—</td>
+</tr>
+<tr>
+<td>human / text</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.1990 ± 0.0389</td>
+<td>-0.1081 ± 0.0392</td>
+</tr>
+<tr>
+<td>human / text</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>2.0904 ± 0.0495</td>
+<td>-0.1259 ± 0.0533</td>
+</tr>
+<tr>
+<td>human / text</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.2970 ± 0.0641</td>
+<td>-0.3695 ± 0.0770</td>
+</tr>
+<tr>
+<td>human / text</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>2.1801 ± 0.0360</td>
+<td>-0.2380 ± 0.0410</td>
+</tr>
+<tr>
+<td>human / text</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>2.1930 ± 0.0395</td>
+<td>—</td>
+</tr>
+<tr>
+<td>human_shuffled / categorical</td>
+<td>full-QAC105 / Ec_MBC</td>
+<td>5</td>
+<td>2.4616 ± 0.1228</td>
+<td>-0.5521 ± 0.1543</td>
+</tr>
+<tr>
+<td>human_shuffled / categorical</td>
+<td>full-QAC105 / Ec_MIC</td>
+<td>5</td>
+<td>2.3910 ± 0.1937</td>
+<td>-0.7360 ± 0.2769</td>
+</tr>
+<tr>
+<td>human_shuffled / categorical</td>
+<td>full-QAC105 / Sa_MBC</td>
+<td>5</td>
+<td>2.0458 ± 0.1086</td>
+<td>0.0643 ± 0.0994</td>
+</tr>
+<tr>
+<td>human_shuffled / categorical</td>
+<td>full-QAC105 / Sa_MIC</td>
+<td>5</td>
+<td>1.7230 ± 0.0283</td>
+<td>0.0292 ± 0.0319</td>
+</tr>
+<tr>
+<td>human_shuffled / categorical</td>
+<td>full-QAC105 / pooled</td>
+<td>5</td>
+<td>2.1716 ± 0.1120</td>
+<td>—</td>
+</tr>
+<tr>
+<td>human_shuffled / categorical</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>1.9216 ± 0.0280</td>
+<td>0.1540 ± 0.0246</td>
+</tr>
+<tr>
+<td>human_shuffled / categorical</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.7391 ± 0.0610</td>
+<td>0.2202 ± 0.0540</td>
+</tr>
+<tr>
+<td>human_shuffled / categorical</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>1.8679 ± 0.0649</td>
+<td>0.0940 ± 0.0619</td>
+</tr>
+<tr>
+<td>human_shuffled / categorical</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.7983 ± 0.0568</td>
+<td>0.1571 ± 0.0528</td>
+</tr>
+<tr>
+<td>human_shuffled / categorical</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>1.8332 ± 0.0495</td>
+<td>—</td>
+</tr>
+<tr>
+<td>human_shuffled / categorical</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.0319 ± 0.0763</td>
+<td>0.0531 ± 0.0709</td>
+</tr>
+<tr>
+<td>human_shuffled / categorical</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>1.9818 ± 0.0870</td>
+<td>-0.0131 ± 0.0879</td>
+</tr>
+<tr>
+<td>human_shuffled / categorical</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.1617 ± 0.1004</td>
+<td>-0.2143 ± 0.1126</td>
+</tr>
+<tr>
+<td>human_shuffled / categorical</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>1.9847 ± 0.0806</td>
+<td>-0.0272 ± 0.0826</td>
+</tr>
+<tr>
+<td>human_shuffled / categorical</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>2.0414 ± 0.0846</td>
+<td>—</td>
+</tr>
+<tr>
+<td>human_weight_only / categorical</td>
+<td>full-QAC105 / Ec_MBC</td>
+<td>5</td>
+<td>2.6253 ± 0.1591</td>
+<td>-0.7670 ± 0.2108</td>
+</tr>
+<tr>
+<td>human_weight_only / categorical</td>
+<td>full-QAC105 / Ec_MIC</td>
+<td>5</td>
+<td>2.6645 ± 0.2457</td>
+<td>-1.1592 ± 0.3886</td>
+</tr>
+<tr>
+<td>human_weight_only / categorical</td>
+<td>full-QAC105 / Sa_MBC</td>
+<td>5</td>
+<td>2.2142 ± 0.1285</td>
+<td>-0.0966 ± 0.1254</td>
+</tr>
+<tr>
+<td>human_weight_only / categorical</td>
+<td>full-QAC105 / Sa_MIC</td>
+<td>5</td>
+<td>1.9600 ± 0.2042</td>
+<td>-0.2668 ± 0.2565</td>
+</tr>
+<tr>
+<td>human_weight_only / categorical</td>
+<td>full-QAC105 / pooled</td>
+<td>5</td>
+<td>2.3840 ± 0.1197</td>
+<td>—</td>
+</tr>
+<tr>
+<td>human_weight_only / categorical</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>1.9619 ± 0.0261</td>
+<td>0.1181 ± 0.0234</td>
+</tr>
+<tr>
+<td>human_weight_only / categorical</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.7928 ± 0.0325</td>
+<td>0.1720 ± 0.0300</td>
+</tr>
+<tr>
+<td>human_weight_only / categorical</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>1.9613 ± 0.0164</td>
+<td>0.0021 ± 0.0167</td>
+</tr>
+<tr>
+<td>human_weight_only / categorical</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.8299 ± 0.0232</td>
+<td>0.1279 ± 0.0222</td>
+</tr>
+<tr>
+<td>human_weight_only / categorical</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>1.8881 ± 0.0198</td>
+<td>—</td>
+</tr>
+<tr>
+<td>human_weight_only / categorical</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.1121 ± 0.0412</td>
+<td>-0.0222 ± 0.0399</td>
+</tr>
+<tr>
+<td>human_weight_only / categorical</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>2.0586 ± 0.0456</td>
+<td>-0.0919 ± 0.0483</td>
+</tr>
+<tr>
+<td>human_weight_only / categorical</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.2329 ± 0.0351</td>
+<td>-0.2936 ± 0.0409</td>
+</tr>
+<tr>
+<td>human_weight_only / categorical</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>2.0203 ± 0.0380</td>
+<td>-0.0633 ± 0.0405</td>
+</tr>
+<tr>
+<td>human_weight_only / categorical</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>2.1076 ± 0.0352</td>
+<td>—</td>
+</tr>
+<tr>
+<td>initial / categorical</td>
+<td>full-QAC105 / Ec_MBC</td>
+<td>5</td>
+<td>2.4595 ± 0.2411</td>
+<td>-0.5582 ± 0.3034</td>
+</tr>
+<tr>
+<td>initial / categorical</td>
+<td>full-QAC105 / Ec_MIC</td>
+<td>5</td>
+<td>2.5089 ± 0.2147</td>
+<td>-0.9125 ± 0.3370</td>
+</tr>
+<tr>
+<td>initial / categorical</td>
+<td>full-QAC105 / Sa_MBC</td>
+<td>5</td>
+<td>2.2137 ± 0.1192</td>
+<td>-0.0956 ± 0.1177</td>
+</tr>
+<tr>
+<td>initial / categorical</td>
+<td>full-QAC105 / Sa_MIC</td>
+<td>5</td>
+<td>2.0414 ± 0.1644</td>
+<td>-0.3694 ± 0.2181</td>
+</tr>
+<tr>
+<td>initial / categorical</td>
+<td>full-QAC105 / pooled</td>
+<td>5</td>
+<td>2.3131 ± 0.1619</td>
+<td>—</td>
+</tr>
+<tr>
+<td>initial / categorical</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>1.9887 ± 0.0428</td>
+<td>0.0937 ± 0.0391</td>
+</tr>
+<tr>
+<td>initial / categorical</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.8106 ± 0.0505</td>
+<td>0.1552 ± 0.0467</td>
+</tr>
+<tr>
+<td>initial / categorical</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>1.9368 ± 0.0383</td>
+<td>0.0266 ± 0.0385</td>
+</tr>
+<tr>
+<td>initial / categorical</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.8143 ± 0.0233</td>
+<td>0.1426 ± 0.0221</td>
+</tr>
+<tr>
+<td>initial / categorical</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>1.8893 ± 0.0341</td>
+<td>—</td>
+</tr>
+<tr>
+<td>initial / categorical</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.0858 ± 0.0686</td>
+<td>0.0025 ± 0.0651</td>
+</tr>
+<tr>
+<td>initial / categorical</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>2.0384 ± 0.0828</td>
+<td>-0.0716 ± 0.0865</td>
+</tr>
+<tr>
+<td>initial / categorical</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.2038 ± 0.0560</td>
+<td>-0.2605 ± 0.0632</td>
+</tr>
+<tr>
+<td>initial / categorical</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>2.0018 ± 0.0764</td>
+<td>-0.0448 ± 0.0784</td>
+</tr>
+<tr>
+<td>initial / categorical</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>2.0840 ± 0.0627</td>
+<td>—</td>
+</tr>
+<tr>
+<td>mic_binary / categorical</td>
+<td>full-QAC105 / Ec_MBC</td>
+<td>5</td>
+<td>2.5923 ± 0.2004</td>
+<td>-0.7260 ± 0.2713</td>
+</tr>
+<tr>
+<td>mic_binary / categorical</td>
+<td>full-QAC105 / Ec_MIC</td>
+<td>5</td>
+<td>2.5124 ± 0.1562</td>
+<td>-0.9127 ± 0.2333</td>
+</tr>
+<tr>
+<td>mic_binary / categorical</td>
+<td>full-QAC105 / Sa_MBC</td>
+<td>5</td>
+<td>2.0509 ± 0.0751</td>
+<td>0.0608 ± 0.0692</td>
+</tr>
+<tr>
+<td>mic_binary / categorical</td>
+<td>full-QAC105 / Sa_MIC</td>
+<td>5</td>
+<td>1.8802 ± 0.1123</td>
+<td>-0.1590 ± 0.1369</td>
+</tr>
+<tr>
+<td>mic_binary / categorical</td>
+<td>full-QAC105 / pooled</td>
+<td>5</td>
+<td>2.2759 ± 0.0951</td>
+<td>—</td>
+</tr>
+<tr>
+<td>mic_binary / categorical</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>1.8840 ± 0.0586</td>
+<td>0.1863 ± 0.0511</td>
+</tr>
+<tr>
+<td>mic_binary / categorical</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.7417 ± 0.0562</td>
+<td>0.2180 ± 0.0507</td>
+</tr>
+<tr>
+<td>mic_binary / categorical</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>1.9789 ± 0.0516</td>
+<td>-0.0164 ± 0.0525</td>
+</tr>
+<tr>
+<td>mic_binary / categorical</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.8469 ± 0.0812</td>
+<td>0.1103 ± 0.0780</td>
+</tr>
+<tr>
+<td>mic_binary / categorical</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>1.8649 ± 0.0590</td>
+<td>—</td>
+</tr>
+<tr>
+<td>mic_binary / categorical</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.0558 ± 0.0486</td>
+<td>0.0314 ± 0.0457</td>
+</tr>
+<tr>
+<td>mic_binary / categorical</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>2.0308 ± 0.0485</td>
+<td>-0.0627 ± 0.0504</td>
+</tr>
+<tr>
+<td>mic_binary / categorical</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.2656 ± 0.0810</td>
+<td>-0.3329 ± 0.0947</td>
+</tr>
+<tr>
+<td>mic_binary / categorical</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>2.0776 ± 0.0377</td>
+<td>-0.1245 ± 0.0408</td>
+</tr>
+<tr>
+<td>mic_binary / categorical</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>2.1096 ± 0.0521</td>
+<td>—</td>
+</tr>
+<tr>
+<td>mic_binary / text</td>
+<td>full-QAC105 / Ec_MBC</td>
+<td>5</td>
+<td>2.5049 ± 0.2079</td>
+<td>-0.6127 ± 0.2632</td>
+</tr>
+<tr>
+<td>mic_binary / text</td>
+<td>full-QAC105 / Ec_MIC</td>
+<td>5</td>
+<td>2.4006 ± 0.2072</td>
+<td>-0.7512 ± 0.3049</td>
+</tr>
+<tr>
+<td>mic_binary / text</td>
+<td>full-QAC105 / Sa_MBC</td>
+<td>5</td>
+<td>2.0789 ± 0.2546</td>
+<td>0.0243 ± 0.2361</td>
+</tr>
+<tr>
+<td>mic_binary / text</td>
+<td>full-QAC105 / Sa_MIC</td>
+<td>5</td>
+<td>1.8863 ± 0.1134</td>
+<td>-0.1666 ± 0.1417</td>
+</tr>
+<tr>
+<td>mic_binary / text</td>
+<td>full-QAC105 / pooled</td>
+<td>5</td>
+<td>2.2340 ± 0.0520</td>
+<td>—</td>
+</tr>
+<tr>
+<td>mic_binary / text</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>1.8764 ± 0.0745</td>
+<td>0.1923 ± 0.0656</td>
+</tr>
+<tr>
+<td>mic_binary / text</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.7669 ± 0.0828</td>
+<td>0.1945 ± 0.0765</td>
+</tr>
+<tr>
+<td>mic_binary / text</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>1.9773 ± 0.0370</td>
+<td>-0.0145 ± 0.0382</td>
+</tr>
+<tr>
+<td>mic_binary / text</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.8445 ± 0.0670</td>
+<td>0.1131 ± 0.0655</td>
+</tr>
+<tr>
+<td>mic_binary / text</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>1.8681 ± 0.0554</td>
+<td>—</td>
+</tr>
+<tr>
+<td>mic_binary / text</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.0998 ± 0.0616</td>
+<td>-0.0108 ± 0.0583</td>
+</tr>
+<tr>
+<td>mic_binary / text</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>2.0205 ± 0.0607</td>
+<td>-0.0522 ± 0.0625</td>
+</tr>
+<tr>
+<td>mic_binary / text</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.2368 ± 0.0508</td>
+<td>-0.2984 ± 0.0590</td>
+</tr>
+<tr>
+<td>mic_binary / text</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>2.0808 ± 0.0658</td>
+<td>-0.1285 ± 0.0712</td>
+</tr>
+<tr>
+<td>mic_binary / text</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>2.1110 ± 0.0571</td>
+<td>—</td>
+</tr>
+<tr>
+<td>mic_continuous / categorical</td>
+<td>full-QAC105 / Ec_MBC</td>
+<td>5</td>
+<td>2.9780 ± 0.3380</td>
+<td>-1.2905 ± 0.4966</td>
+</tr>
+<tr>
+<td>mic_continuous / categorical</td>
+<td>full-QAC105 / Ec_MIC</td>
+<td>5</td>
+<td>2.8449 ± 0.2598</td>
+<td>-1.4611 ± 0.4440</td>
+</tr>
+<tr>
+<td>mic_continuous / categorical</td>
+<td>full-QAC105 / Sa_MBC</td>
+<td>5</td>
+<td>2.1047 ± 0.1054</td>
+<td>0.0099 ± 0.0984</td>
+</tr>
+<tr>
+<td>mic_continuous / categorical</td>
+<td>full-QAC105 / Sa_MIC</td>
+<td>5</td>
+<td>1.7707 ± 0.1544</td>
+<td>-0.0313 ± 0.1859</td>
+</tr>
+<tr>
+<td>mic_continuous / categorical</td>
+<td>full-QAC105 / pooled</td>
+<td>5</td>
+<td>2.4738 ± 0.1315</td>
+<td>—</td>
+</tr>
+<tr>
+<td>mic_continuous / categorical</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>1.8763 ± 0.0143</td>
+<td>0.1934 ± 0.0124</td>
+</tr>
+<tr>
+<td>mic_continuous / categorical</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.7554 ± 0.0304</td>
+<td>0.2062 ± 0.0275</td>
+</tr>
+<tr>
+<td>mic_continuous / categorical</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>1.9814 ± 0.0451</td>
+<td>-0.0188 ± 0.0464</td>
+</tr>
+<tr>
+<td>mic_continuous / categorical</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.8125 ± 0.0539</td>
+<td>0.1438 ± 0.0506</td>
+</tr>
+<tr>
+<td>mic_continuous / categorical</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>1.8584 ± 0.0314</td>
+<td>—</td>
+</tr>
+<tr>
+<td>mic_continuous / categorical</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.1597 ± 0.0102</td>
+<td>-0.0685 ± 0.0101</td>
+</tr>
+<tr>
+<td>mic_continuous / categorical</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>2.1518 ± 0.0098</td>
+<td>-0.1926 ± 0.0108</td>
+</tr>
+<tr>
+<td>mic_continuous / categorical</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.3312 ± 0.0462</td>
+<td>-0.4101 ± 0.0557</td>
+</tr>
+<tr>
+<td>mic_continuous / categorical</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>2.0163 ± 0.0344</td>
+<td>-0.0591 ± 0.0365</td>
+</tr>
+<tr>
+<td>mic_continuous / categorical</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>2.1677 ± 0.0180</td>
+<td>—</td>
+</tr>
+<tr>
+<td>mic_continuous / text</td>
+<td>full-QAC105 / Ec_MBC</td>
+<td>5</td>
+<td>3.0417 ± 0.4951</td>
+<td>-1.4152 ± 0.7599</td>
+</tr>
+<tr>
+<td>mic_continuous / text</td>
+<td>full-QAC105 / Ec_MIC</td>
+<td>5</td>
+<td>2.8322 ± 0.4478</td>
+<td>-1.4715 ± 0.7726</td>
+</tr>
+<tr>
+<td>mic_continuous / text</td>
+<td>full-QAC105 / Sa_MBC</td>
+<td>5</td>
+<td>2.0960 ± 0.1678</td>
+<td>0.0150 ± 0.1603</td>
+</tr>
+<tr>
+<td>mic_continuous / text</td>
+<td>full-QAC105 / Sa_MIC</td>
+<td>5</td>
+<td>1.7856 ± 0.1557</td>
+<td>-0.0487 ± 0.1804</td>
+</tr>
+<tr>
+<td>mic_continuous / text</td>
+<td>full-QAC105 / pooled</td>
+<td>5</td>
+<td>2.4948 ± 0.2299</td>
+<td>—</td>
+</tr>
+<tr>
+<td>mic_continuous / text</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>1.8488 ± 0.0245</td>
+<td>0.2169 ± 0.0207</td>
+</tr>
+<tr>
+<td>mic_continuous / text</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.7629 ± 0.0297</td>
+<td>0.1993 ± 0.0269</td>
+</tr>
+<tr>
+<td>mic_continuous / text</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>1.9282 ± 0.0441</td>
+<td>0.0352 ± 0.0446</td>
+</tr>
+<tr>
+<td>mic_continuous / text</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.7851 ± 0.0538</td>
+<td>0.1695 ± 0.0496</td>
+</tr>
+<tr>
+<td>mic_continuous / text</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>1.8326 ± 0.0264</td>
+<td>—</td>
+</tr>
+<tr>
+<td>mic_continuous / text</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.1814 ± 0.0382</td>
+<td>-0.0904 ± 0.0379</td>
+</tr>
+<tr>
+<td>mic_continuous / text</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>2.1252 ± 0.0183</td>
+<td>-0.1634 ± 0.0201</td>
+</tr>
+<tr>
+<td>mic_continuous / text</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.2415 ± 0.0600</td>
+<td>-0.3041 ± 0.0691</td>
+</tr>
+<tr>
+<td>mic_continuous / text</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>2.0352 ± 0.0355</td>
+<td>-0.0789 ± 0.0377</td>
+</tr>
+<tr>
+<td>mic_continuous / text</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>2.1474 ± 0.0238</td>
+<td>—</td>
+</tr>
+</table>
+<img src="preview_assets/image06.png" alt="SI figure 6">
+<p class="caption">Figure S6. Matched compact categorical-task pooled RMSE. Bars show sample SD over five source runs; raw features are a fixed single-checkpoint reference.</p>
+<p>S4. Molecular and tabular decoder comparisons</p>
+<p>Modern tabular and graph decoders (CatBoost, TabPFN, TabFM, AutoGluon, Chemprop) were evaluated on the same target registers with train-only preprocessing. Different PCA treatments and optimisation budgets make these practical pipeline comparisons rather than matched architecture trials.</p>
+<p class="caption">Table S7. Modern decoder endpoint results on reference guided features. Each method fits separate endpoint predictors with train-only PCA-32.</p>
+<table>
+<tr>
+<td>Model / representation</td>
+<td>Endpoint</td>
+<td>Cation CV</td>
+<td>Scaffold CV</td>
+<td>OOD-17</td>
+</tr>
+<tr>
+<td>autogluon / v5_human</td>
+<td>Sa_MIC</td>
+<td>1.9724</td>
+<td>2.1659</td>
+<td>1.6615</td>
+</tr>
+<tr>
+<td>autogluon / v5_human</td>
+<td>Sa_MBC</td>
+<td>2.1855</td>
+<td>2.2042</td>
+<td>2.4718</td>
+</tr>
+<tr>
+<td>autogluon / v5_human</td>
+<td>Ec_MIC</td>
+<td>1.9763</td>
+<td>2.0850</td>
+<td>2.0745</td>
+</tr>
+<tr>
+<td>autogluon / v5_human</td>
+<td>Ec_MBC</td>
+<td>2.1061</td>
+<td>2.1863</td>
+<td>2.0329</td>
+</tr>
+<tr>
+<td>autogluon / v5_human</td>
+<td>pooled</td>
+<td>2.0621</td>
+<td>2.1608</td>
+<td>2.0808</td>
+</tr>
+<tr>
+<td>autogluon / v5_raw</td>
+<td>Sa_MIC</td>
+<td>1.8935</td>
+<td>2.0574</td>
+<td>1.8706</td>
+</tr>
+<tr>
+<td>autogluon / v5_raw</td>
+<td>Sa_MBC</td>
+<td>2.1421</td>
+<td>2.2678</td>
+<td>2.2401</td>
+</tr>
+<tr>
+<td>autogluon / v5_raw</td>
+<td>Ec_MIC</td>
+<td>1.8637</td>
+<td>2.0927</td>
+<td>2.3404</td>
+</tr>
+<tr>
+<td>autogluon / v5_raw</td>
+<td>Ec_MBC</td>
+<td>2.0363</td>
+<td>2.0983</td>
+<td>2.1735</td>
+</tr>
+<tr>
+<td>autogluon / v5_raw</td>
+<td>pooled</td>
+<td>1.9871</td>
+<td>2.1306</td>
+<td>2.1631</td>
+</tr>
+<tr>
+<td>tabfm / v5_human</td>
+<td>Sa_MIC</td>
+<td>1.9027</td>
+<td>2.1068</td>
+<td>1.8181</td>
+</tr>
+<tr>
+<td>tabfm / v5_human</td>
+<td>Sa_MBC</td>
+<td>2.0946</td>
+<td>2.1954</td>
+<td>2.1583</td>
+</tr>
+<tr>
+<td>tabfm / v5_human</td>
+<td>Ec_MIC</td>
+<td>1.9629</td>
+<td>2.0253</td>
+<td>2.4253</td>
+</tr>
+<tr>
+<td>tabfm / v5_human</td>
+<td>Ec_MBC</td>
+<td>2.1032</td>
+<td>2.0834</td>
+<td>2.2691</td>
+</tr>
+<tr>
+<td>tabfm / v5_human</td>
+<td>pooled</td>
+<td>2.0177</td>
+<td>2.1036</td>
+<td>2.1778</td>
+</tr>
+<tr>
+<td>tabfm / v5_raw</td>
+<td>Sa_MIC</td>
+<td>1.7758</td>
+<td>2.0668</td>
+<td>1.6176</td>
+</tr>
+<tr>
+<td>tabfm / v5_raw</td>
+<td>Sa_MBC</td>
+<td>1.9680</td>
+<td>2.1751</td>
+<td>2.1125</td>
+</tr>
+<tr>
+<td>tabfm / v5_raw</td>
+<td>Ec_MIC</td>
+<td>1.8643</td>
+<td>2.0036</td>
+<td>2.3931</td>
+</tr>
+<tr>
+<td>tabfm / v5_raw</td>
+<td>Ec_MBC</td>
+<td>1.9943</td>
+<td>2.0705</td>
+<td>2.2761</td>
+</tr>
+<tr>
+<td>tabfm / v5_raw</td>
+<td>pooled</td>
+<td>1.9026</td>
+<td>2.0799</td>
+<td>2.1181</td>
+</tr>
+<tr>
+<td>tabpfn / v5_human</td>
+<td>Sa_MIC</td>
+<td>1.9610</td>
+<td>2.0908</td>
+<td>1.6764</td>
+</tr>
+<tr>
+<td>tabpfn / v5_human</td>
+<td>Sa_MBC</td>
+<td>2.0105</td>
+<td>2.2591</td>
+<td>2.1569</td>
+</tr>
+<tr>
+<td>tabpfn / v5_human</td>
+<td>Ec_MIC</td>
+<td>1.9641</td>
+<td>2.0339</td>
+<td>2.2627</td>
+</tr>
+<tr>
+<td>tabpfn / v5_human</td>
+<td>Ec_MBC</td>
+<td>2.1329</td>
+<td>2.1393</td>
+<td>2.5022</td>
+</tr>
+<tr>
+<td>tabpfn / v5_human</td>
+<td>pooled</td>
+<td>2.0183</td>
+<td>2.1324</td>
+<td>2.1651</td>
+</tr>
+<tr>
+<td>tabpfn / v5_raw</td>
+<td>Sa_MIC</td>
+<td>1.9081</td>
+<td>2.0745</td>
+<td>1.6874</td>
+</tr>
+<tr>
+<td>tabpfn / v5_raw</td>
+<td>Sa_MBC</td>
+<td>1.9618</td>
+<td>2.0914</td>
+<td>2.1162</td>
+</tr>
+<tr>
+<td>tabpfn / v5_raw</td>
+<td>Ec_MIC</td>
+<td>1.9431</td>
+<td>2.0288</td>
+<td>2.2208</td>
+</tr>
+<tr>
+<td>tabpfn / v5_raw</td>
+<td>Ec_MBC</td>
+<td>2.0570</td>
+<td>2.0923</td>
+<td>2.1703</td>
+</tr>
+<tr>
+<td>tabpfn / v5_raw</td>
+<td>pooled</td>
+<td>1.9683</td>
+<td>2.0719</td>
+<td>2.0579</td>
+</tr>
+</table>
+<p class="caption">Table S8. Grouped fold variability for guided-feature and modern-decoder procedures. Mean ± fold SD uses five folds and ddof = 0.</p>
+<table>
+<tr>
+<td>Representation / decoder</td>
+<td>Regime / endpoint</td>
+<td>Folds</td>
+<td>RMSE mean ± SD</td>
+<td>R² mean ± SD</td>
+</tr>
+<tr>
+<td>v5_human / categorical</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>1.9246 ± 0.2750</td>
+<td>0.1200 ± 0.1620</td>
+</tr>
+<tr>
+<td>v5_human / categorical</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.8014 ± 0.2371</td>
+<td>0.1285 ± 0.2139</td>
+</tr>
+<tr>
+<td>v5_human / categorical</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>1.9373 ± 0.4522</td>
+<td>-0.0930 ± 0.4733</td>
+</tr>
+<tr>
+<td>v5_human / categorical</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.7863 ± 0.3368</td>
+<td>0.0925 ± 0.3769</td>
+</tr>
+<tr>
+<td>v5_human / categorical</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>1.8784 ± 0.2391</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_human / categorical</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.0351 ± 0.2025</td>
+<td>-0.0225 ± 0.1265</td>
+</tr>
+<tr>
+<td>v5_human / categorical</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>2.0141 ± 0.3970</td>
+<td>-0.2356 ± 0.4647</td>
+</tr>
+<tr>
+<td>v5_human / categorical</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.1372 ± 0.6634</td>
+<td>-0.3942 ± 0.5879</td>
+</tr>
+<tr>
+<td>v5_human / categorical</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>2.0044 ± 0.4245</td>
+<td>-0.3556 ± 0.7407</td>
+</tr>
+<tr>
+<td>v5_human / categorical</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>2.0703 ± 0.3382</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_human / onehot</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>1.9712 ± 0.2803</td>
+<td>0.0653 ± 0.2165</td>
+</tr>
+<tr>
+<td>v5_human / onehot</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.8555 ± 0.1374</td>
+<td>0.0742 ± 0.1723</td>
+</tr>
+<tr>
+<td>v5_human / onehot</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>1.9908 ± 0.3101</td>
+<td>-0.1513 ± 0.3562</td>
+</tr>
+<tr>
+<td>v5_human / onehot</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.7666 ± 0.3576</td>
+<td>0.1045 ± 0.4094</td>
+</tr>
+<tr>
+<td>v5_human / onehot</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>1.9067 ± 0.2191</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_human / onehot</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.0612 ± 0.2516</td>
+<td>-0.0641 ± 0.2603</td>
+</tr>
+<tr>
+<td>v5_human / onehot</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>2.0084 ± 0.2964</td>
+<td>-0.2185 ± 0.3273</td>
+</tr>
+<tr>
+<td>v5_human / onehot</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.0749 ± 0.5474</td>
+<td>-0.3006 ± 0.4226</td>
+</tr>
+<tr>
+<td>v5_human / onehot</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>1.9612 ± 0.4706</td>
+<td>-0.3326 ± 0.8544</td>
+</tr>
+<tr>
+<td>v5_human / onehot</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>2.0410 ± 0.3330</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_human / separate</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>1.9973 ± 0.2985</td>
+<td>0.0513 ± 0.1942</td>
+</tr>
+<tr>
+<td>v5_human / separate</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.8792 ± 0.1907</td>
+<td>0.0546 ± 0.1898</td>
+</tr>
+<tr>
+<td>v5_human / separate</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>1.9834 ± 0.3247</td>
+<td>-0.1422 ± 0.3423</td>
+</tr>
+<tr>
+<td>v5_human / separate</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.7677 ± 0.3016</td>
+<td>0.1109 ± 0.3419</td>
+</tr>
+<tr>
+<td>v5_human / separate</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>1.9162 ± 0.2313</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_human / separate</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.0427 ± 0.2615</td>
+<td>-0.0441 ± 0.2526</td>
+</tr>
+<tr>
+<td>v5_human / separate</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>1.9808 ± 0.3025</td>
+<td>-0.1855 ± 0.3245</td>
+</tr>
+<tr>
+<td>v5_human / separate</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.1208 ± 0.5085</td>
+<td>-0.3584 ± 0.3871</td>
+</tr>
+<tr>
+<td>v5_human / separate</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>2.0348 ± 0.4473</td>
+<td>-0.4074 ± 0.8175</td>
+</tr>
+<tr>
+<td>v5_human / separate</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>2.0613 ± 0.2989</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_human / text</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>1.9710 ± 0.2945</td>
+<td>0.0749 ± 0.1949</td>
+</tr>
+<tr>
+<td>v5_human / text</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.8524 ± 0.1654</td>
+<td>0.0793 ± 0.1749</td>
+</tr>
+<tr>
+<td>v5_human / text</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>1.9441 ± 0.3323</td>
+<td>-0.1213 ± 0.4012</td>
+</tr>
+<tr>
+<td>v5_human / text</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.7521 ± 0.3628</td>
+<td>0.1027 ± 0.4529</td>
+</tr>
+<tr>
+<td>v5_human / text</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>1.8906 ± 0.2373</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_human / text</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.1049 ± 0.2508</td>
+<td>-0.1170 ± 0.2945</td>
+</tr>
+<tr>
+<td>v5_human / text</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>2.0027 ± 0.2998</td>
+<td>-0.2131 ± 0.3299</td>
+</tr>
+<tr>
+<td>v5_human / text</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.1190 ± 0.5567</td>
+<td>-0.3627 ± 0.4609</td>
+</tr>
+<tr>
+<td>v5_human / text</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>2.0117 ± 0.4438</td>
+<td>-0.3611 ± 0.7505</td>
+</tr>
+<tr>
+<td>v5_human / text</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>2.0748 ± 0.3236</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / categorical</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>1.9211 ± 0.2901</td>
+<td>0.1202 ± 0.1912</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / categorical</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.7841 ± 0.1946</td>
+<td>0.1393 ± 0.2171</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / categorical</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>1.8895 ± 0.3628</td>
+<td>-0.0363 ± 0.3734</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / categorical</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.6974 ± 0.3281</td>
+<td>0.1880 ± 0.3093</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / categorical</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>1.8384 ± 0.2048</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / categorical</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>1.9702 ± 0.2101</td>
+<td>0.0330 ± 0.1768</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / categorical</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>1.9411 ± 0.3460</td>
+<td>-0.1633 ± 0.4242</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / categorical</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.0468 ± 0.6125</td>
+<td>-0.2775 ± 0.5028</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / categorical</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>1.8606 ± 0.3731</td>
+<td>-0.1641 ± 0.6145</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / categorical</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>1.9761 ± 0.2996</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / onehot</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>1.9720 ± 0.3508</td>
+<td>0.0849 ± 0.2033</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / onehot</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.8329 ± 0.2288</td>
+<td>0.1089 ± 0.1565</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / onehot</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>1.9198 ± 0.2137</td>
+<td>-0.0769 ± 0.3100</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / onehot</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.7000 ± 0.2757</td>
+<td>0.1803 ± 0.2999</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / onehot</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>1.8663 ± 0.2169</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / onehot</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.0156 ± 0.2746</td>
+<td>-0.0132 ± 0.2511</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / onehot</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>1.9382 ± 0.3579</td>
+<td>-0.1362 ± 0.3697</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / onehot</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.0682 ± 0.4980</td>
+<td>-0.2975 ± 0.3746</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / onehot</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>1.8933 ± 0.3858</td>
+<td>-0.2317 ± 0.7163</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / onehot</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>1.9918 ± 0.3211</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / separate</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>1.9814 ± 0.3348</td>
+<td>0.0700 ± 0.2144</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / separate</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.7813 ± 0.1918</td>
+<td>0.1509 ± 0.1675</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / separate</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>1.9710 ± 0.1938</td>
+<td>-0.1447 ± 0.3480</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / separate</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.7110 ± 0.2821</td>
+<td>0.1774 ± 0.2677</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / separate</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>1.8708 ± 0.2105</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / separate</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.0638 ± 0.2262</td>
+<td>-0.0659 ± 0.2412</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / separate</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>1.9719 ± 0.3086</td>
+<td>-0.1893 ± 0.3798</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / separate</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.0550 ± 0.5274</td>
+<td>-0.2756 ± 0.3927</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / separate</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>1.8532 ± 0.3452</td>
+<td>-0.1601 ± 0.6056</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / separate</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>1.9984 ± 0.3060</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / text</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>1.8646 ± 0.2965</td>
+<td>0.1777 ± 0.1671</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / text</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.7158 ± 0.1960</td>
+<td>0.2188 ± 0.1242</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / text</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>1.8771 ± 0.1917</td>
+<td>-0.0178 ± 0.2385</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / text</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.6180 ± 0.2779</td>
+<td>0.2563 ± 0.2866</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / text</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>1.7798 ± 0.1815</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / text</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.0427 ± 0.2877</td>
+<td>-0.0558 ± 0.3273</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / text</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>1.9548 ± 0.2903</td>
+<td>-0.1756 ± 0.3820</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / text</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.0473 ± 0.4980</td>
+<td>-0.2715 ± 0.3722</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / text</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>1.8612 ± 0.3849</td>
+<td>-0.1614 ± 0.6188</td>
+</tr>
+<tr>
+<td>v5_qac_ablation / text</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>1.9890 ± 0.3113</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_raw / categorical</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>1.9397 ± 0.3596</td>
+<td>0.1124 ± 0.2106</td>
+</tr>
+<tr>
+<td>v5_raw / categorical</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.8052 ± 0.2516</td>
+<td>0.1187 ± 0.2473</td>
+</tr>
+<tr>
+<td>v5_raw / categorical</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>1.9118 ± 0.3735</td>
+<td>-0.0568 ± 0.3802</td>
+</tr>
+<tr>
+<td>v5_raw / categorical</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.7839 ± 0.3395</td>
+<td>0.0877 ± 0.3976</td>
+</tr>
+<tr>
+<td>v5_raw / categorical</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>1.8773 ± 0.2290</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_raw / categorical</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.0913 ± 0.2449</td>
+<td>-0.0755 ± 0.1217</td>
+</tr>
+<tr>
+<td>v5_raw / categorical</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>2.0446 ± 0.3731</td>
+<td>-0.2645 ± 0.3961</td>
+</tr>
+<tr>
+<td>v5_raw / categorical</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.1278 ± 0.5582</td>
+<td>-0.3669 ± 0.4343</td>
+</tr>
+<tr>
+<td>v5_raw / categorical</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>1.9419 ± 0.4146</td>
+<td>-0.2695 ± 0.6966</td>
+</tr>
+<tr>
+<td>v5_raw / categorical</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>2.0735 ± 0.2902</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_raw / onehot</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>1.9562 ± 0.3094</td>
+<td>0.0862 ± 0.2136</td>
+</tr>
+<tr>
+<td>v5_raw / onehot</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.8401 ± 0.1778</td>
+<td>0.0913 ± 0.1741</td>
+</tr>
+<tr>
+<td>v5_raw / onehot</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>1.9294 ± 0.2583</td>
+<td>-0.0796 ± 0.3101</td>
+</tr>
+<tr>
+<td>v5_raw / onehot</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.7262 ± 0.3727</td>
+<td>0.1421 ± 0.4095</td>
+</tr>
+<tr>
+<td>v5_raw / onehot</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>1.8759 ± 0.2073</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_raw / onehot</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.0945 ± 0.3150</td>
+<td>-0.0847 ± 0.2436</td>
+</tr>
+<tr>
+<td>v5_raw / onehot</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>1.9976 ± 0.4116</td>
+<td>-0.1907 ± 0.3572</td>
+</tr>
+<tr>
+<td>v5_raw / onehot</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.0992 ± 0.4800</td>
+<td>-0.3337 ± 0.3565</td>
+</tr>
+<tr>
+<td>v5_raw / onehot</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>1.9725 ± 0.4092</td>
+<td>-0.3314 ± 0.7718</td>
+</tr>
+<tr>
+<td>v5_raw / onehot</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>2.0569 ± 0.3230</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_raw / separate</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>1.9960 ± 0.3558</td>
+<td>0.0586 ± 0.2181</td>
+</tr>
+<tr>
+<td>v5_raw / separate</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.8350 ± 0.2172</td>
+<td>0.0960 ± 0.2077</td>
+</tr>
+<tr>
+<td>v5_raw / separate</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>1.9711 ± 0.2784</td>
+<td>-0.1373 ± 0.3619</td>
+</tr>
+<tr>
+<td>v5_raw / separate</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.7501 ± 0.3610</td>
+<td>0.1343 ± 0.3595</td>
+</tr>
+<tr>
+<td>v5_raw / separate</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>1.9014 ± 0.2344</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_raw / separate</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.1145 ± 0.3046</td>
+<td>-0.1211 ± 0.3059</td>
+</tr>
+<tr>
+<td>v5_raw / separate</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>1.9725 ± 0.3072</td>
+<td>-0.1662 ± 0.2754</td>
+</tr>
+<tr>
+<td>v5_raw / separate</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.1554 ± 0.4767</td>
+<td>-0.4052 ± 0.3560</td>
+</tr>
+<tr>
+<td>v5_raw / separate</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>1.9612 ± 0.3723</td>
+<td>-0.3024 ± 0.6884</td>
+</tr>
+<tr>
+<td>v5_raw / separate</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>2.0660 ± 0.2887</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_raw / text</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>1.9580 ± 0.3212</td>
+<td>0.0835 ± 0.2297</td>
+</tr>
+<tr>
+<td>v5_raw / text</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.8147 ± 0.1856</td>
+<td>0.1118 ± 0.2064</td>
+</tr>
+<tr>
+<td>v5_raw / text</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>1.9336 ± 0.3084</td>
+<td>-0.0892 ± 0.3600</td>
+</tr>
+<tr>
+<td>v5_raw / text</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.7604 ± 0.3931</td>
+<td>0.1102 ± 0.4306</td>
+</tr>
+<tr>
+<td>v5_raw / text</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>1.8777 ± 0.2493</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_raw / text</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.1018 ± 0.2997</td>
+<td>-0.0891 ± 0.2109</td>
+</tr>
+<tr>
+<td>v5_raw / text</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>2.0084 ± 0.3814</td>
+<td>-0.2086 ± 0.3458</td>
+</tr>
+<tr>
+<td>v5_raw / text</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.1413 ± 0.5194</td>
+<td>-0.3859 ± 0.3942</td>
+</tr>
+<tr>
+<td>v5_raw / text</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>1.9891 ± 0.4018</td>
+<td>-0.3569 ± 0.7815</td>
+</tr>
+<tr>
+<td>v5_raw / text</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>2.0768 ± 0.3188</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_human / autogluon</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>2.0942 ± 0.2242</td>
+<td>-0.0343 ± 0.0461</td>
+</tr>
+<tr>
+<td>v5_human / autogluon</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.9664 ± 0.1985</td>
+<td>-0.0202 ± 0.0737</td>
+</tr>
+<tr>
+<td>v5_human / autogluon</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>2.1546 ± 0.3664</td>
+<td>-0.3023 ± 0.2711</td>
+</tr>
+<tr>
+<td>v5_human / autogluon</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.9238 ± 0.4352</td>
+<td>-0.0313 ± 0.4016</td>
+</tr>
+<tr>
+<td>v5_human / autogluon</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>2.0500 ± 0.2227</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_human / autogluon</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.1654 ± 0.3014</td>
+<td>-0.1586 ± 0.2266</td>
+</tr>
+<tr>
+<td>v5_human / autogluon</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>2.0572 ± 0.3396</td>
+<td>-0.2734 ± 0.3520</td>
+</tr>
+<tr>
+<td>v5_human / autogluon</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.1611 ± 0.4337</td>
+<td>-0.4095 ± 0.3018</td>
+</tr>
+<tr>
+<td>v5_human / autogluon</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>2.1184 ± 0.4509</td>
+<td>-0.5229 ± 0.8577</td>
+</tr>
+<tr>
+<td>v5_human / autogluon</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>2.1414 ± 0.2894</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_raw / autogluon</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>2.0147 ± 0.2960</td>
+<td>0.0378 ± 0.1810</td>
+</tr>
+<tr>
+<td>v5_raw / autogluon</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.8537 ± 0.1929</td>
+<td>0.0826 ± 0.1570</td>
+</tr>
+<tr>
+<td>v5_raw / autogluon</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>2.0998 ± 0.4234</td>
+<td>-0.2980 ± 0.5472</td>
+</tr>
+<tr>
+<td>v5_raw / autogluon</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.8481 ± 0.4120</td>
+<td>0.0040 ± 0.5130</td>
+</tr>
+<tr>
+<td>v5_raw / autogluon</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>1.9705 ± 0.2562</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_raw / autogluon</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.0825 ± 0.2568</td>
+<td>-0.0929 ± 0.3014</td>
+</tr>
+<tr>
+<td>v5_raw / autogluon</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>2.0643 ± 0.3437</td>
+<td>-0.2765 ± 0.3285</td>
+</tr>
+<tr>
+<td>v5_raw / autogluon</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.2146 ± 0.4886</td>
+<td>-0.4819 ± 0.3718</td>
+</tr>
+<tr>
+<td>v5_raw / autogluon</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>2.0191 ± 0.3951</td>
+<td>-0.3821 ± 0.7496</td>
+</tr>
+<tr>
+<td>v5_raw / autogluon</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>2.1095 ± 0.2991</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_human / tabfm</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>2.0853 ± 0.2738</td>
+<td>-0.0242 ± 0.1162</td>
+</tr>
+<tr>
+<td>v5_human / tabfm</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.9556 ± 0.1693</td>
+<td>-0.0171 ± 0.1298</td>
+</tr>
+<tr>
+<td>v5_human / tabfm</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>2.0785 ± 0.2589</td>
+<td>-0.2494 ± 0.3275</td>
+</tr>
+<tr>
+<td>v5_human / tabfm</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.8467 ± 0.4581</td>
+<td>0.0152 ± 0.5272</td>
+</tr>
+<tr>
+<td>v5_human / tabfm</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>2.0050 ± 0.2256</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_human / tabfm</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.0670 ± 0.2604</td>
+<td>-0.0551 ± 0.1872</td>
+</tr>
+<tr>
+<td>v5_human / tabfm</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>2.0045 ± 0.2900</td>
+<td>-0.1957 ± 0.2201</td>
+</tr>
+<tr>
+<td>v5_human / tabfm</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.1571 ± 0.4078</td>
+<td>-0.4012 ± 0.2614</td>
+</tr>
+<tr>
+<td>v5_human / tabfm</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>2.0815 ± 0.3259</td>
+<td>-0.4014 ± 0.4921</td>
+</tr>
+<tr>
+<td>v5_human / tabfm</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>2.0904 ± 0.2350</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_raw / tabfm</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>1.9663 ± 0.3326</td>
+<td>0.0837 ± 0.2039</td>
+</tr>
+<tr>
+<td>v5_raw / tabfm</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.8582 ± 0.1506</td>
+<td>0.0668 ± 0.2015</td>
+</tr>
+<tr>
+<td>v5_raw / tabfm</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>1.9501 ± 0.2648</td>
+<td>-0.0990 ± 0.2965</td>
+</tr>
+<tr>
+<td>v5_raw / tabfm</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.7230 ± 0.4299</td>
+<td>0.1261 ± 0.4987</td>
+</tr>
+<tr>
+<td>v5_raw / tabfm</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>1.8884 ± 0.2320</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_raw / tabfm</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.0535 ± 0.2647</td>
+<td>-0.0429 ± 0.1974</td>
+</tr>
+<tr>
+<td>v5_raw / tabfm</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>1.9790 ± 0.3134</td>
+<td>-0.1660 ± 0.2438</td>
+</tr>
+<tr>
+<td>v5_raw / tabfm</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.1375 ± 0.4025</td>
+<td>-0.3844 ± 0.2949</td>
+</tr>
+<tr>
+<td>v5_raw / tabfm</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>2.0410 ± 0.3258</td>
+<td>-0.4203 ± 0.7110</td>
+</tr>
+<tr>
+<td>v5_raw / tabfm</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>2.0645 ± 0.2528</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_human / tabpfn</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>2.1155 ± 0.2713</td>
+<td>-0.0524 ± 0.0984</td>
+</tr>
+<tr>
+<td>v5_human / tabpfn</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.9536 ± 0.2034</td>
+<td>-0.0059 ± 0.0649</td>
+</tr>
+<tr>
+<td>v5_human / tabpfn</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>1.9840 ± 0.3254</td>
+<td>-0.0953 ± 0.1703</td>
+</tr>
+<tr>
+<td>v5_human / tabpfn</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.9344 ± 0.3217</td>
+<td>-0.0274 ± 0.2421</td>
+</tr>
+<tr>
+<td>v5_human / tabpfn</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>2.0090 ± 0.1941</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_human / tabpfn</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.1172 ± 0.3066</td>
+<td>-0.1074 ± 0.2357</td>
+</tr>
+<tr>
+<td>v5_human / tabpfn</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>2.0047 ± 0.3432</td>
+<td>-0.1981 ± 0.2894</td>
+</tr>
+<tr>
+<td>v5_human / tabpfn</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.2107 ± 0.4650</td>
+<td>-0.4686 ± 0.3320</td>
+</tr>
+<tr>
+<td>v5_human / tabpfn</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>2.0581 ± 0.3681</td>
+<td>-0.3813 ± 0.5624</td>
+</tr>
+<tr>
+<td>v5_human / tabpfn</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>2.1134 ± 0.2838</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_raw / tabpfn</td>
+<td>cation / Ec_MBC</td>
+<td>5</td>
+<td>2.0397 ± 0.2667</td>
+<td>0.0255 ± 0.0514</td>
+</tr>
+<tr>
+<td>v5_raw / tabpfn</td>
+<td>cation / Ec_MIC</td>
+<td>5</td>
+<td>1.9344 ± 0.1839</td>
+<td>0.0118 ± 0.0620</td>
+</tr>
+<tr>
+<td>v5_raw / tabpfn</td>
+<td>cation / Sa_MBC</td>
+<td>5</td>
+<td>1.9433 ± 0.2689</td>
+<td>-0.0567 ± 0.1329</td>
+</tr>
+<tr>
+<td>v5_raw / tabpfn</td>
+<td>cation / Sa_MIC</td>
+<td>5</td>
+<td>1.8694 ± 0.3827</td>
+<td>0.0085 ± 0.4041</td>
+</tr>
+<tr>
+<td>v5_raw / tabpfn</td>
+<td>cation / pooled</td>
+<td>5</td>
+<td>1.9610 ± 0.1692</td>
+<td>—</td>
+</tr>
+<tr>
+<td>v5_raw / tabpfn</td>
+<td>scaffold / Ec_MBC</td>
+<td>5</td>
+<td>2.0695 ± 0.3083</td>
+<td>-0.0730 ± 0.3074</td>
+</tr>
+<tr>
+<td>v5_raw / tabpfn</td>
+<td>scaffold / Ec_MIC</td>
+<td>5</td>
+<td>2.0047 ± 0.3119</td>
+<td>-0.2055 ± 0.2945</td>
+</tr>
+<tr>
+<td>v5_raw / tabpfn</td>
+<td>scaffold / Sa_MBC</td>
+<td>5</td>
+<td>2.0538 ± 0.3949</td>
+<td>-0.2684 ± 0.2214</td>
+</tr>
+<tr>
+<td>v5_raw / tabpfn</td>
+<td>scaffold / Sa_MIC</td>
+<td>5</td>
+<td>2.0450 ± 0.3483</td>
+<td>-0.4447 ± 0.7579</td>
+</tr>
+<tr>
+<td>v5_raw / tabpfn</td>
+<td>scaffold / pooled</td>
+<td>5</td>
+<td>2.0521 ± 0.2861</td>
+<td>—</td>
+</tr>
+</table>
+<p>S5. Structural OOD evaluation</p>
+<p>The reference register lists all 105 full salts. The 17 newly synthesised OOD compounds span kojic-acid, tetrahydropyridine, dihydropyran and glycoluril families. Frozen OOD predictors are trained on the reference cohort only; OOD activity labels are not used for checkpoint selection. Compound identities and measured activities accompany this SI as QAC105.csv and OOD17.csv.</p>
+<p class="caption">Table S9. OOD route scores on 67 exact endpoints. Repeated results are mean ± sample SD over the stated runs.</p>
+<table>
+<tr>
+<td>Experiment</td>
+<td>Route</td>
+<td>Task code</td>
+<td>Runs</td>
+<td>RMSE log2 mg/L</td>
+</tr>
+<tr>
+<td>Archived reference</td>
+<td>v5_raw</td>
+<td>Text</td>
+<td>1</td>
+<td>2.245</td>
+</tr>
+<tr>
+<td>Archived reference</td>
+<td>v5_human</td>
+<td>Text</td>
+<td>1</td>
+<td>2.023</td>
+</tr>
+<tr>
+<td>Archived reference</td>
+<td>v5_qac_ablation</td>
+<td>Text</td>
+<td>1</td>
+<td>2.408</td>
+</tr>
+<tr>
+<td>Matched compact</td>
+<td>Raw MolFormer</td>
+<td>Categorical</td>
+<td>1</td>
+<td>2.504</td>
+</tr>
+<tr>
+<td>Matched compact</td>
+<td>Human</td>
+<td>Categorical</td>
+<td>5</td>
+<td>2.268 ± 0.077</td>
+</tr>
+<tr>
+<td>Matched compact</td>
+<td>Shuffled human</td>
+<td>Categorical</td>
+<td>5</td>
+<td>2.172 ± 0.112</td>
+</tr>
+<tr>
+<td>Matched compact</td>
+<td>Binary MIC</td>
+<td>Categorical</td>
+<td>5</td>
+<td>2.276 ± 0.095</td>
+</tr>
+<tr>
+<td>Matched compact</td>
+<td>Continuous MIC</td>
+<td>Categorical</td>
+<td>5</td>
+<td>2.474 ± 0.131</td>
+</tr>
+<tr>
+<td>Matched compact</td>
+<td>Weights reset; BN retained</td>
+<td>Categorical</td>
+<td>5</td>
+<td>2.384 ± 0.120</td>
+</tr>
+<tr>
+<td>Backbone routes</td>
+<td>frozen_head</td>
+<td>Route-specific</td>
+<td>3</td>
+<td>2.560 ± 0.206</td>
+</tr>
+<tr>
+<td>Backbone routes</td>
+<td>full_FT</td>
+<td>Route-specific</td>
+<td>3</td>
+<td>3.032 ± 0.408</td>
+</tr>
+<tr>
+<td>Backbone routes</td>
+<td>human_CatBoost</td>
+<td>Route-specific</td>
+<td>3</td>
+<td>2.106 ± 0.071</td>
+</tr>
+<tr>
+<td>Backbone routes</td>
+<td>human_direct</td>
+<td>Route-specific</td>
+<td>3</td>
+<td>2.412 ± 0.088</td>
+</tr>
+<tr>
+<td>Backbone routes</td>
+<td>lora</td>
+<td>Route-specific</td>
+<td>3</td>
+<td>2.756 ± 0.172</td>
+</tr>
+</table>
+<img src="preview_assets/image07.png" alt="SI figure 7">
+<p class="caption">Figure S7. Measured versus predicted OOD endpoints for compact human and quantitative encoders. Dashed lines denote identity.</p>
+<p>S6. External Q-HERO classification</p>
+<p>Q-HERO is an external binary classification benchmark, distinct from the QAC MIC/MBC regression task. The cleaned cohort contains 405 molecules (360 active at S. aureus MIC ≤ 8 µM; 45 inactive). Human, quantitative and shuffled-human features use matched partial-MolFormer adaptation with CatBoost classifiers (800 iterations, depth 6, learning rate 0.05).</p>
+<p class="caption">Table S10. Q-HERO405 classification. Mean ± sample SD over five paired source/decoder runs; fixed RF and raw references have one fit.</p>
+<table>
+<tr>
+<td>Model</td>
+<td>Protocol</td>
+<td>Runs</td>
+<td>AUROC</td>
+<td>AUPRC</td>
+</tr>
+<tr>
+<td>Author-style RF35</td>
+<td>random_heldout20</td>
+<td>1</td>
+<td>0.7269</td>
+<td>0.9448</td>
+</tr>
+<tr>
+<td>CatBoost35</td>
+<td>random_heldout20</td>
+<td>1</td>
+<td>0.8164</td>
+<td>0.9594</td>
+</tr>
+<tr>
+<td>Raw MolFormer → CB</td>
+<td>random_heldout20</td>
+<td>1</td>
+<td>0.8225</td>
+<td>0.9561</td>
+</tr>
+<tr>
+<td>Human partial → CB</td>
+<td>random_heldout20</td>
+<td>5</td>
+<td>0.8321 ± 0.0490</td>
+<td>0.9728 ± 0.0144</td>
+</tr>
+<tr>
+<td>Shuffled human partial → CB</td>
+<td>random_heldout20</td>
+<td>5</td>
+<td>0.8448 ± 0.0295</td>
+<td>0.9693 ± 0.0126</td>
+</tr>
+<tr>
+<td>Quantitative partial → CB</td>
+<td>random_heldout20</td>
+<td>5</td>
+<td>0.8438 ± 0.0228</td>
+<td>0.9769 ± 0.0041</td>
+</tr>
+<tr>
+<td>Author-style RF35</td>
+<td>scaffold_CV_pooled</td>
+<td>1</td>
+<td>0.5651</td>
+<td>0.8885</td>
+</tr>
+<tr>
+<td>CatBoost35</td>
+<td>scaffold_CV_pooled</td>
+<td>1</td>
+<td>0.5823</td>
+<td>0.8947</td>
+</tr>
+<tr>
+<td>Raw MolFormer → CB</td>
+<td>scaffold_CV_pooled</td>
+<td>1</td>
+<td>0.5947</td>
+<td>0.9285</td>
+</tr>
+<tr>
+<td>Human partial → CB</td>
+<td>scaffold_CV_pooled</td>
+<td>5</td>
+<td>0.6755 ± 0.0332</td>
+<td>0.9345 ± 0.0145</td>
+</tr>
+<tr>
+<td>Shuffled human partial → CB</td>
+<td>scaffold_CV_pooled</td>
+<td>5</td>
+<td>0.5674 ± 0.0703</td>
+<td>0.9138 ± 0.0256</td>
+</tr>
+<tr>
+<td>Quantitative partial → CB</td>
+<td>scaffold_CV_pooled</td>
+<td>5</td>
+<td>0.7156 ± 0.0103</td>
+<td>0.9489 ± 0.0056</td>
+</tr>
+</table>
+<p class="caption">Table S11. Paired Q-HERO scaffold contrasts from 2,000 paired seed/scaffold bootstrap draws over fixed OOF predictions and 29 scaffolds.</p>
+<table>
+<tr>
+<td>Contrast</td>
+<td>Metric</td>
+<td>Difference</td>
+<td>Conditional 95% CI</td>
+</tr>
+<tr>
+<td>Human partial → CB − Shuffled human partial → CB</td>
+<td>AUROC</td>
+<td>+0.1081</td>
+<td>[+0.0305, +0.2370]</td>
+</tr>
+<tr>
+<td>Human partial → CB − Shuffled human partial → CB</td>
+<td>AUPRC</td>
+<td>+0.0207</td>
+<td>[+0.0025, +0.0494]</td>
+</tr>
+<tr>
+<td>Human partial → CB − Quantitative partial → CB</td>
+<td>AUROC</td>
+<td>-0.0401</td>
+<td>[-0.0876, +0.0269]</td>
+</tr>
+<tr>
+<td>Human partial → CB − Quantitative partial → CB</td>
+<td>AUPRC</td>
+<td>-0.0144</td>
+<td>[-0.0325, +0.0036]</td>
+</tr>
+<tr>
+<td>Human partial → CB − Author-style RF35</td>
+<td>AUROC</td>
+<td>+0.1104</td>
+<td>[+0.0262, +0.2012]</td>
+</tr>
+<tr>
+<td>Human partial → CB − Author-style RF35</td>
+<td>AUPRC</td>
+<td>+0.0460</td>
+<td>[+0.0055, +0.0879]</td>
+</tr>
+<tr>
+<td>Quantitative partial → CB − Author-style RF35</td>
+<td>AUROC</td>
+<td>+0.1506</td>
+<td>[+0.0531, +0.2496]</td>
+</tr>
+<tr>
+<td>Quantitative partial → CB − Author-style RF35</td>
+<td>AUPRC</td>
+<td>+0.0604</td>
+<td>[+0.0137, +0.1075]</td>
+</tr>
+</table>
+<p>S7. Geometry and intervention controls</p>
+<p>Linear CKA between MolFormer and human-guided features is 0.933 on the reference cohort and 0.946 on OOD compounds. Five-fold linear probes give R² = 0.891 ± 0.037 from MolFormer to human features and R² = 0.844 ± 0.060 in the reverse direction (fold SD). Summed mean |SHAP| values on the 67 exact OOD endpoints are 2.930 (MolFormer), 0.636 (human-guided) and 0.761 (task identifier).</p>
+<p>Label-permutation and weight-rewind controls test procedural dependence of the predictions while retaining the same molecules, partitions and training budget.</p>
+<p class="caption">Table S12. Scaffold-clustered label and weight intervention contrasts plotted in Figure S8.</p>
+<table>
+<tr>
+<td>Architecture</td>
+<td>Evaluation</td>
+<td>Contrast</td>
+<td>DeltaRMSE</td>
+<td>Conditional95%CI</td>
+<td>Scaffolds</td>
+</tr>
+<tr>
+<td>compact</td>
+<td>cation</td>
+<td>Human − shuffled</td>
+<td>+0.039</td>
+<td>[-0.074, +0.159]</td>
+<td>29</td>
+</tr>
+<tr>
+<td>compact</td>
+<td>cation</td>
+<td>Reset weights − intact</td>
+<td>+0.016</td>
+<td>[-0.091, +0.114]</td>
+<td>29</td>
+</tr>
+<tr>
+<td>partial</td>
+<td>cation</td>
+<td>Human − shuffled</td>
+<td>-0.120</td>
+<td>[-0.221, -0.043]</td>
+<td>29</td>
+</tr>
+<tr>
+<td>partial</td>
+<td>cation</td>
+<td>Reset weights − intact</td>
+<td>+0.109</td>
+<td>[+0.037, +0.201]</td>
+<td>29</td>
+</tr>
+<tr>
+<td>compact</td>
+<td>scaffold</td>
+<td>Human − shuffled</td>
+<td>+0.117</td>
+<td>[-0.012, +0.253]</td>
+<td>29</td>
+</tr>
+<tr>
+<td>compact</td>
+<td>scaffold</td>
+<td>Reset weights − intact</td>
+<td>-0.051</td>
+<td>[-0.153, +0.059]</td>
+<td>29</td>
+</tr>
+<tr>
+<td>partial</td>
+<td>scaffold</td>
+<td>Human − shuffled</td>
+<td>-0.122</td>
+<td>[-0.258, -0.003]</td>
+<td>29</td>
+</tr>
+<tr>
+<td>partial</td>
+<td>scaffold</td>
+<td>Reset weights − intact</td>
+<td>+0.097</td>
+<td>[-0.004, +0.228]</td>
+<td>29</td>
+</tr>
+<tr>
+<td>compact</td>
+<td>full-QAC105</td>
+<td>Human − shuffled</td>
+<td>+0.096</td>
+<td>[-0.143, +0.283]</td>
+<td>4</td>
+</tr>
+<tr>
+<td>compact</td>
+<td>full-QAC105</td>
+<td>Reset weights − intact</td>
+<td>+0.116</td>
+<td>[-0.056, +0.336]</td>
+<td>4</td>
+</tr>
+<tr>
+<td>partial</td>
+<td>full-QAC105</td>
+<td>Human − shuffled</td>
+<td>-0.282</td>
+<td>[-0.600, -0.031]</td>
+<td>4</td>
+</tr>
+<tr>
+<td>partial</td>
+<td>full-QAC105</td>
+<td>Reset weights − intact</td>
+<td>+0.243</td>
+<td>[-0.067, +0.582]</td>
+<td>4</td>
+</tr>
+</table>
+<img src="preview_assets/image08.png" alt="SI figure 8">
+<p class="caption">Figure S8. Label-permutation and weight-rewind ΔRMSE under scaffold-clustered conditional intervals.</p>
+<p>S8. Chemistry and microbiological methods</p>
+<p>Chemical characterisation and microbiological methods are reproduced from the experimental sections of the main article. Citation numbers follow the main bibliography. Full source NMR, HRMS and FT-IR spectra, the THP optimisation table and Schemes S1–S2 remain to be inserted by the experimental coauthors.</p>
+<p class="caption">Table S13. THP multicomponent-reaction optimisation corresponding to main Section 2.3.2 (placeholder for the original experimental record).</p>
+<table>
+<tr>
+<td>Entry</td>
+<td>Status</td>
+</tr>
+<tr>
+<td>Original optimisation entries, including entries 3 and 7</td>
+<td>To be completed by experimental coauthors</td>
+</tr>
+</table>
+<p class="caption">Scheme S1. Competitive THP/4H-pyran cyclisation (to be inserted; cited in Section 2.3.2).</p>
+<p class="caption">Scheme S2. THP epimerisation (to be inserted; cited in Section 2.3.2).</p>
+<p>S8.1 Chemistry</p>
+<p>S8.1.1 General information</p>
+<p>Аll starting reagents were obtained from commercial suppliers and were used without further purification. All solvents used were reagent grade and distilled prior to application. Air sensitive reactions were performed under high purity argon atmosphere. Thin-layer chromatography was performed using silica gel 60 F254 aluminum sheets under UV light. IR spectra were recorded with a Bruker ALPHA-T FT-IR spectrometer in KBr pellets. HR-ESI-MS were recorded on a Bruker microTOF II instrument (Bruker Daltonik GmbH, Bremen, Germany); external or internal calibration was performed with electrospray calibrant solution (Fluka). All melting points were measured with a Stuart SMP30 melting point apparatus and are uncorrected. 1H and 13C NMR spectra were recorded with a Bruker AM300 at ambient temperature in Dimethyl sulfoxide-d₆ (DMSO-d6) or Chloroform-d (CDCl3) solutions. The NMR, HRMS and FT-IR spectra of the newly synthesized compounds can be found in the supporting information. </p>
+<p>S8.1.2 Synthesis and Characterization of Substrates and Products</p>
+<p>Synthesis of 5,5&#x27;-(pentane-1,5-diylbis(oxy))bis(2-(hydroxymethyl)-4H-pyran-4-one) A:</p>
+<p>To a solution of kojic acid (1.847 g, 13 mmol) in anhydrous DMF (25 mL) was added K2CO3 (1.794 g, 13 mmol). The suspension was stirred at 60 oC for 1 h. 1,5-Dibromopentane (1.356 g, 5.9 mmol) was added and the mixture was stirred at 80 oC for 24 h. Result of reaction was confirmed by TLC (MeOH/CHCl3 1:10). The solvent was removed under reduced pressure. Distilled water (20 mL) was added to the crude residue, and the mixture was stirred at RT for 2 h. Formed precipitates were filtrated through a glass filter, washed with acetone (20 mL), and dried under a vacuum to afford sand yellow solid product X (1.46 g, 4.1 mmol, 70% yield). </p>
+<p>C17H20O8; M. w. 352.339; Sand yellow solid; M. p. 143–145°C; 1H NMR (300 MHz, DMSO-d6): δ 8.10 (s, 2H, 2CH), 6.30 (s, 2H, 2CH), 5.69 (br s, 2H, 2OH), 4.30 (s, 4H, 2CH2), 3.83 (t, J = 6.3 Hz, 4H, 2CH2), 1.73 (p, J = 7.0 Hz, 4H, 2CH2), 1.58-1.44 (m, 2H, CH2) ppm; 13C NMR (75 MHz, DMSO-d6): δ 173.1, 167.9, 147.1, 140.1, 110.9, 68.7, 59.3, 28.2, 21.9 ppm; HRMS (ESI): calcd for C17H20O8 375.1050, found 375.1051.</p>
+<p>Synthesis of 1,1&#x27;-(((pentane-1,5-diylbis(oxy))bis(4-oxo-4H-pyran-5,2-diyl))bis(methylene))bis(4-(alkylamino)pyridin-1-ium) dichlorides 1-4:</p>
+<p>Compound A (1.33 g, 3.77 mmol) was dissolved in 25 ml of chloroform. The resulting suspension was cooled in an ice bath, and a solution of thionyl chloride (1.094 mL, 15.08 mmol) in 7 mL of CHCl3 was added dropwise under stirring. The reaction mixture was then heated under reflux with stirring for 24 hours. Progress of the reaction was monitored by TLC (MeOH:CHCl3, 1:10). Upon completion, the reaction mixture was concentrated and dried using a rotary evaporator. The residue was resuspended in 5 mL of chloroform and filtered through a Schott filter. After solvent evaporation, brown powder was obtained. The obtained brown powder (0.2 g, 0.5 mmol) and 4-alkylaminopyridine (1.1 mmol) were dissolved in 7 ml of acetonitrile. The resulting mixture was heated under reflux with stirring for 24 hours. Upon completion, the reaction was cooled to room temperature, and the solvent was evaporated under vacuum. The crude residue was washed with acetone (15 ml) and dried under a vacuum to afford light brown solid.</p>
+<p>1,1&#x27;-(((pentane-1,5-diylbis(oxy))bis(4-oxo-4H-pyran-5,2-diyl))bis(methylene))bis(4-(octylamino)pyridin-1-ium) dichloride (1):</p>
+<p>C43H62Cl2N4O6; M. w. 730.989; light brown solid (0.346 g, 0.474 mmol, 94% yield); M. p. 165–168°C; IR (neat/cm−1): 3429, 3212, 2927, 2855, 1652, 1591, 1189; 1H NMR (300 MHz, DMSO-d6): δ 9.32 (t, J = 5.7 Hz, 2H, 2NH), 8.38 (d, J = 7.4 Hz, 2H, CHpy), 8.24-8.14 (m, 4H, 2CHpy + 2CH), 7.09-6.95 (m, 4H, 2CHpy), 6.46 (s, 2H, 2CH), 5.39 (s, 4H, 2CH2), 3.80 (t, J = 6.4 Hz, 4H, 2CH2N+), 3.32-3.24 (m, 4H, 2CH2), 1.78-1.18 (m, 30H, 15CH2), 0.85 (t, J = 6.9 Hz, 6H, 2CH3) ppm; 13C NMR (75 MHz, DMSO-d6): δ 172.6, 160.3, 157.0, 147.3, 143.9, 141.5, 140.6, 114.2, 110.5, 105.5, 68.7, 55.8, 42.3, 31.1, 28.6, 28.0, 27.8, 26.2, 22.0, 21.9, 13.9 ppm; HRMS (ESI): calcd for C43H62N4O6 365.2329, found 365.2339.</p>
+<p>1,1&#x27;-(((pentane-1,5-diylbis(oxy))bis(4-oxo-4H-pyran-5,2-diyl))bis(methylene))bis(4-(nonylamino)pyridin-1-ium) dichloride (2):</p>
+<p>C45H66Cl2N4O6; M. w. 759.044; light brown solid (0.357 g, 0.47 mmol, 94% yield); M. p. 207–210°C; IR (neat/cm−1): 3432, 3211, 2926, 2855, 1653, 1591, 1190; 1H NMR (300 MHz, DMSO-d6): δ 9.33 (t, J = 5.4 Hz, 2H, 2NH), 8.38 (d, J = 7.3 Hz, 2H, CHpy), 8.24-8.14 (m, 4H, 2CHpy + 2CH), 7.010-6.96 (m, 4H, 2CHpy), 6.47 (s, 2H, 2CH), 5.40 (s, 4H, 2CH2), 3.81 (t, J = 6.3 Hz, 4H, 2CH2N+), 3.33-3.24 (m, 4H, 2CH2), 1.80-1.17 (m, 34H, 17CH2), 0.86 (t, J = 6.9 Hz, 6H, 2CH3) ppm; 13C NMR (75 MHz, DMSO-d6): δ 172.5, 160.3, 157.0, 147.2, 143.9, 141.4, 140.6, 114.2, 110.5, 105.5, 68.7, 55.8, 42.3, 31.2, 28.8, 28.6, 28.5, 28.0, 27.8, 26.2, 22.0, 21.9, 13.8 ppm; HRMS (ESI): calcd for C45H66N4O6 379.2486, found 379.2493.</p>
+<p>1,1&#x27;-(((pentane-1,5-diylbis(oxy))bis(4-oxo-4H-pyran-5,2-diyl))bis(methylene))bis(4-(decylamino)pyridin-1-ium) dichloride (3):</p>
+<p>C47H70Cl2N4O6; M. w. 787.098; light brown solid (0.342 g, 0.434 mmol, 87% yield); M. p. 169–172°C; IR (neat/cm−1): 3432, 3210, 2926, 2854, 1653, 1591, 1190; 1H NMR (300 MHz, DMSO-d6): δ 9.25 (t, J = 5.6 Hz, 2H, 2NH), 8.37 (d, J = 7.2 Hz, 2H, CHpy), 8.24-8.14 (m, 4H, 2CHpy + 2CH), 7.08-6.96 (m, 4H, 2CHpy), 6.46 (s, 2H, 2CH), 5.39 (s, 4H, 2CH2), 3.81 (t, J = 6.3 Hz, 4H, 2CH2N+), 3.32-3.24 (m, 4H, 2CH2), 1.80-1.17 (m, 38H, 19CH2), 0.85 (t, J = 6.9 Hz, 6H, 2CH3) ppm; 13C NMR (75 MHz, DMSO-d6): δ 172.5, 160.3, 157.0, 147.2, 143.9, 141.4, 140.6, 114.2, 110.5, 105.5, 68.7, 55.8, 42.3, 31.2, 28.93, 28.91, 28.6, 28.0, 27.8, 26.2, 22.0, 21.9, 13.9 ppm; HRMS (ESI): calcd for C47H70N4O6 393.2642, found 393.2633.</p>
+<p>1,1&#x27;-(((pentane-1,5-diylbis(oxy))bis(4-oxo-4H-pyran-5,2-diyl))bis(methylene))bis(4-(dodecylamino)pyridin-1-ium) dichloride (4):</p>
+<p>C51H78Cl2N4O6; M. w. 843.206; light brown solid (0.375 g, 0.445 mmol, 89% yield); M. p. 215–217°C; IR (neat/cm−1): 3429, 3211, 2925, 2853, 1654, 1591, 1191; 1H NMR (300 MHz, DMSO-d6): δ 9.32 (t, J = 5.7 Hz, 2H, 2NH), 8.38 (d, J = 7.4 Hz, 2H, CHpy), 8.24-8.14 (m, 4H, 2CHpy + 2CH), 7.10-6.95 (m, 4H, 2CHpy), 6.46 (s, 2H, 2CH), 5.40 (s, 4H, 2CH2), 3.81 (t, J = 6.2 Hz, 4H, 2CH2N+), 3.34-3.22 (m, 4H, 2CH2), 1.79-1.16 (m, 46H, 23CH2), 0.85 (t, J = 6.9 Hz, 6H, 2CH3) ppm; 13C NMR (75 MHz, DMSO-d6): δ 172.5, 160.3, 157.0, 147.2, 143.9, 141.4, 140.5, 114.2, 110.5, 105.5, 68.7, 55.8, 42.3, 31.2, 29.0, 28.9, 28.6, 28.0, 27.8, 26.2, 22.0, 21.9, 13.9 ppm; HRMS (ESI): calcd for C51H78N4O6 421.2955, found 421.2942.</p>
+<p>Synthesis of Methyl (4SR,6RS)-5,5-dicyano-2-methyl-4,6-(3-pyridine)-1,4,5,6-tetrahydropyridine-3-carboxylate B:</p>
+<p>A mixture of 3-pyridinecarboxaldehyde (6 mmol), malononitrile (3 mmol), methyl acetoacetate (3 mmol) and ammonium acetate (12 mmol, 924 mg) was refluxed in ethanol (10 ml) for 4 h. Formed precipitates were quickly filtrated through a glass filter, and dried under a vacuum to afford white solid product B (0.67 g, 1.8 mmol, 62%).</p>
+<p>C20H17N5O2; M. w. 359.39; White solid; M. p. 200–203°C; 1H NMR (300 MHz, DMSO-d6): δ = 8.81 (d, J = 8 Hz, 1H, Ar), 8.72 (dd, J = 4.8 Hz, J1 = 1.5 Hz, 1H, Ar), 8.56–8.53 (m, 2H, Ar), 8.03 (dt, J = 8 Hz, J1 = 1.7 Hz, 1H, Ar), 7.8 (s, 1H, NH), 7.68 (dt, J = 8 Hz, J1 = 1.6 Hz, 1H, Ar), 7.6 (dd, J = 8 Hz, J1 = 4.8 Hz, 1H, Ar), 7.43 (dd, J = 8 Hz, J1 = 4.8 Hz, 1H, Ar), 5.42 (s, 1H, CH), 4.95 (s, 1H, CH), 3.16 (s, 3H, OCH3), 2.36 (s, 3H, CH3) ppm.</p>
+<p>Synthesis of Methyl (4RS,6RS)-5,5-dicyano-2-methyl-4,6-(3-pyridine)-1,4,5,6-tetrahydropyridine-3-carboxylate C:</p>
+<p>Tetrahydropyridine B (1.39 mmol, 500 mg) in anhydrous DMSO (20 ml) was heated to 80-85 oC for 11 h. After heating, the mixture was concentrated under reduced pressure, water (25 ml) was added to the crude residue. Formed precipitates were filtrated through a glass filter and dried under a vacuum. Compound C was purified by recrystallization in methanol (0.38 g, 1 mmol, 76%).</p>
+<p>C20H17N5O2; M. w. 359.39; White solid; M. p. 245–248°C; 1H NMR (300 MHz, DMSO-d6): δ = 8.74-8.63 (m, 3H, Ar), 8.60 (d, J = 4.8 Hz, 1H, Ar), 8.09 (s, 1H, NH), 7.93 (d, J = 8.0 Hz, 1H, Ar), 7.80 (d, J = 7.9 Hz, 1H, Ar), 7.56 (dd, J = 8.1 Hz, J1 = 4.8 Hz, 1H, Ar), 7.47 (dd, J = 7.9 Hz, J1 = 4.8 Hz, 1H, Ar), 5.08 (s, 1H, CH), 4.67 (s, 1H, CH), 3.45 (s, 3H, OCH3), 2.52 (s, 3H, CH3) ppm; 13C NMR (75 MHz, DMSO-d6): δ 166.2, 154.7, 151.2, 150.8, 149.7, 149.4, 137.3, 136.5, 134.6, 129.5, 123.6, 123.5, 113.6, 112.9, 89.0, 53.3, 50.6, 43.4, 42.4, 19.8 ppm; HRMS (ESI): calcd for C20H18N5O2 360.1455, found 360.1458.</p>
+<p>(2&#x27;R,4&#x27;R)-3&#x27;,3&#x27;-Dicyano-5&#x27;-(methoxycarbonyl)-6&#x27;-methyl-1,1&#x27;&#x27;-dialkyl-1&#x27;,2&#x27;,3&#x27;,4&#x27;-tetrahydro-[3,2&#x27;:4&#x27;,3&#x27;&#x27;-terpyridine]-1,1&#x27;&#x27;-ium dibromides 5-9:</p>
+<p>Halogenoalkane (2 mmol) was added to a solution of C (0.5 mmol, 0.200 g) in dry acetonitrile (3 mL). The mixture was stirred and heated to reflux for 24 h. Result of reaction was confirmed by TLC (ethyl acetate/petroleum ether 1:1). After solvent evaporation under reduced pressure, ethyl acetate (5 mL) was added to the reaction residue and the mixture was vigorously stirred for 1 h. Formed precipitates were quickly filtrated through a glass filter, and dried under a vacuum to afford white solid product.</p>
+<p>(2&#x27;R,4&#x27;R)-3&#x27;,3&#x27;-Dicyano-5&#x27;-(methoxycarbonyl)-6&#x27;-methyl-1,1&#x27;&#x27;-dioctyl-1&#x27;,2&#x27;,3&#x27;,4&#x27;-tetrahydro-[3,2&#x27;:4&#x27;,3&#x27;&#x27;-terpyridine]-1,1&#x27;&#x27;-ium dibromide (5):</p>
+<p>C36H51Br2N5O2; M. w. 585.83; White solid (0.258 g, 0.44 mmol, 88% yield); M. p. 213-216 °C; IR (neat/cm−1): 3438, 3188, 2927, 2856, 2250, 1668, 1252; 1H NMR (300 MHz, DMSO-d6): δ 9.55 (s, 1H, NH), 9.33 (d, J = 6.1 Hz, 1H, CHpy), 9.29-9.20 (m, 2H, 2CHpy), 8.87-8.74 (m, 2H, 2CHpy), 8.50 (s, 1H, CHpy), 8.45-8.28 (m, 2H, 2CHpy), 5.46 (s, 1H, CH), 5.27 (s, 1H, CH), 4.85-4.62 (m, 4H, 2CH2N+), 3.47 (s, 3H, OCH3), 2.57 (s, 3H, CH3), 1.97-1.91 (m, 4H, 2CH2), 1.31-1.20 (m, 20H, 10CH2), 0.92-0.80 (m, 6H, 2CH3) ppm; 13C NMR (75 MHz, DMSO-d6): δ 165.6, 156.0, 146.5, 146.3, 145.3, 145.2, 144.8, 144.7, 139.2, 133.8, 128.1, 127.9, 112.3, 111.9, 87.7, 61.3, 61.1, 51.7, 50.7, 42.5, 41.9, 31.08, 31.02, 30.6, 30.5, 28.38, 28.31, 25.2, 25.1, 21.98, 21.96, 20.1, 13.8 ppm; HRMS (ESI): calcd for C36H51N5O2 292.7016, found 292.7010.</p>
+<p>(2&#x27;R,4&#x27;R)-3&#x27;,3&#x27;-Dicyano-5&#x27;-(methoxycarbonyl)-6&#x27;-methyl-1,1&#x27;&#x27;-dinonyl-1&#x27;,2&#x27;,3&#x27;,4&#x27;-tetrahydro-[3,2&#x27;:4&#x27;,3&#x27;&#x27;-terpyridine]-1,1&#x27;&#x27;-ium dibromide (6):</p>
+<p>C38H55Br2N5O2; M. w. 613.89; White solid (0.264 g, 0.43 mmol, 86% yield); M. p. 214-217 °C; IR (neat/cm−1): 3430, 3186, 2927, 2855, 2251, 1668, 1253; 1H NMR (300 MHz, DMSO-d6): δ 9.55 (s, 1H, NH), 9.33 (d, J = 6.1 Hz, 1H, CHpy), 9.30-9.20 (m, 2H, 2CHpy), 8.87-8.74 (m, 2H, 2CHpy), 8.50 (s, 1H, CHpy), 8.45-8.28 (m, 2H, 2CHpy), 5.46 (s, 1H, CH), 5.28 (s, 1H, CH), 4.86-4.65 (m, 4H, 2CH2N+), 3.48 (s, 3H, OCH3), 2.58 (s, 3H, CH3), 1.97-1.91 (m, 4H, 2CH2), 1.32-1.16 (m, 24H, 12CH2), 0.92-0.81 (m, 6H, 2CH3) ppm; 13C NMR (75 MHz, DMSO-d6): δ 165.6, 156.0, 146.5, 146.3, 145.3, 145.1, 144.79, 144.70, 139.2, 133.8, 128.1, 127.9, 112.3, 111.9, 87.7, 61.3, 61.0, 51.7, 50.7, 42.4, 41.8, 31.15, 31.12, 30.6, 30.5, 28.66, 28.6, 28.5, 28.4, 28.3, 25.2, 25.1, 22.0, 21.9, 20.1, 13.8 ppm; HRMS (ESI): calcd for C38H53N5O2 306.7172, found 306.7181.</p>
+<p>(2&#x27;R,4&#x27;R)-3&#x27;,3&#x27;-Dicyano-1,1&#x27;&#x27;-didecyl-5&#x27;-(methoxycarbonyl)-6&#x27;-methyl-1&#x27;,2&#x27;,3&#x27;,4&#x27;-tetrahydro-[3,2&#x27;:4&#x27;,3&#x27;&#x27;-terpyridine]-1,1&#x27;&#x27;-diium bromide (7):</p>
+<p>C40H59Br2N5O2; M. w. 641.94; White solid (0.289 g, 0.45 mmol, 90% yield); M. p. 218-221 °C; IR (neat/cm−1): 3434, 3189, 2926, 2855, 2249, 1668, 1251; 1H NMR (300 MHz, DMSO-d6): δ 9.54 (s, 1H, NH), 9.34 (d, J = 6.1 Hz, 1H, CHpy), 9.30-9.23 (m, 2H, 2CHpy), 8.88-8.76 (m, 2H, 2CHpy), 8.50 (s, 1H, CHpy), 8.46-8.32 (m, 2H, 2CHpy), 5.48 (s, 1H, CH), 5.26 (s, 1H, CH), 4.82-4.70 (m, 4H, 2CH2N+), 3.50 (s, 3H, OCH3), 2.59 (s, 3H, CH3), 1.99-1.93 (m, 4H, 2CH2), 1.36-1.19 (m, 28H, 14CH2), 0.94-0.84 (m, 6H, 2CH3) ppm; 13C NMR (75 MHz, DMSO-d6): δ 165.7, 156.1, 146.6, 146.3, 145.3, 145.2, 144.7, 139.3, 133.9, 128.1, 128.0, 112.3, 111.9, 87.7, 61.3, 61.1, 51.8, 50.8, 42.5, 41.9, 31.2, 30.6, 30.5, 28.8, 28.79, 28.76, 28.70, 28.6, 28.3, 25.2, 22.0, 20.1, 13.9 ppm; HRMS (ESI): calcd for C40H59N5O2 320.7329, found 320.7327.</p>
+<p>(2&#x27;R,4&#x27;R)-3&#x27;,3&#x27;-dicyano-5&#x27;-(methoxycarbonyl)-6&#x27;-methyl-1,1&#x27;&#x27;-diundecyl-1&#x27;,2&#x27;,3&#x27;,4&#x27;-tetrahydro-[3,2&#x27;:4&#x27;,3&#x27;&#x27;-terpyridine]-1,1&#x27;&#x27;-diium bromide (8):</p>
+<p>C42H63Br2N5O2; M. w. 669.99; White solid (0.281 g, 0.42 mmol, 84% yield); M. p. 215-218 °C; IR (neat/cm−1): 3433, 3187, 2926, 2854, 2249, 1669, 1251; 1H NMR (300 MHz, DMSO-d6): δ 9.55 (s, 1H, NH), 9.33 (d, J = 6.1 Hz, 1H, CHpy), 9.29-9.20 (m, 2H, 2CHpy), 8.87-8.74 (m, 2H, 2CHpy), 8.51 (s, 1H, CHpy), 8.44-8.28 (m, 2H, 2CHpy), 5.45 (s, 1H, CH), 5.28 (s, 1H, CH), 4.85-4.64 (m, 4H, 2CH2N+), 3.47 (s, 3H, OCH3), 2.56 (s, 3H, CH3), 1.98-1.90 (m, 4H, 2CH2), 1.31-1.14 (m, 32H, 16CH2), 0.91-0.81 (m, 6H, 2CH3) ppm; 13C NMR (75 MHz, DMSO-d6): δ 165.6, 156.0, 146.5, 146.3, 145.3, 145.2, 144.8, 144.7, 139.2, 133.8, 128.1, 127.9, 112.3, 111.9, 87.7, 61.3, 61.1, 51.7, 50.7, 42.5, 41.9, 31.2, 30.6, 30.5, 28.9, 28.89, 28.83, 28.7, 28.68, 28.64, 28.3, 25.2, 25.1, 22.0, 20.1, 13.8 ppm; HRMS (ESI): calcd for C42H63N5O2 334.7485, found 334.7497.</p>
+<p>(2&#x27;R,4&#x27;R)-3&#x27;,3&#x27;-dicyano-1,1&#x27;&#x27;-didodecyl-5&#x27;-(methoxycarbonyl)-6&#x27;-methyl-1&#x27;,2&#x27;,3&#x27;,4&#x27;-tetrahydro-[3,2&#x27;:4&#x27;,3&#x27;&#x27;-terpyridine]-1,1&#x27;&#x27;-diium bromide (9):</p>
+<p>C44H67Br2N5O2; M. w. 698.05; White solid (0.321 g, 0.46 mmol, 92% yield); M. p. 229-232 °C; IR (neat/cm−1): 3438, 3189, 2925, 2853, 2249, 1669, 1250; 1H NMR (300 MHz, DMSO-d6): δ 9.52 (s, 1H, NH), 9.31 (d, J = 6.1 Hz, 1H, CHpy), 8.85-8.72 (m, 2H, 2CHpy), 8.47 (s, 1H, CHpy), 8.44-8.26 (m, 2H, 2CHpy), 5.44 (s, 1H, CH), 5.24 (s, 1H, CH), 4.81-4.63 (m, 4H, 2CH2N+), 3.46 (s, 3H, OCH3), 2.56 (s, 3H, CH3), 1.96-1.90 (m, 4H, 2CH2), 1.36-1.13 (m, 36H, 18CH2), 0.85 (t, J = 6.5 Hz, 6H, 2CH3) ppm; 13C NMR (75 MHz, DMSO-d6): δ 165.6, 156.0, 146.6, 146.3, 145.3, 145.2, 144.7, 139.2, 133.9, 128.1, 127.9, 112.3, 111.9, 87.7, 61.3, 61.1, 51.7, 50.7, 42.4, 41.9, 31.2, 30.6, 30.5, 28.96, 28.91, 28.8, 28.7, 28.6, 28.3, 25.27, 25.1, 22.0, 20.1, 13.9 ppm; HRMS (ESI): calcd for C44H67N5O2 348.7642, found 348.7636.</p>
+<p>Synthesis of Ethyl 6-amino-5-cyano-2-methoxy-4-(pyridin-3-yl)-2-(trifluoromethyl)-3,4-dihydro-2H-pyran-3-carboxylate D:</p>
+<p>A mixture of 3-pyridinecarboxaldehyde (2 mmol), malononitrile (2 mmol), ethyl 4,4,4-trifluoroacetoacetate (2 mmol) and ammonium acetate (2 mmol, 154 mg) was stirred in methanol (5 мл) for 6 h. The compound D was isolated by simple filtration (0.47 g, 1.26 mmol, 63% yield).</p>
+<p>C16H16F3N3O4; M. w. 371,316; White solid; M. p. 196–199°C; 1H NMR (300 MHz, DMSO-d6): δ 8.54-8.46 (m, 2H, 2CHpy), 7.82 (d, J = 7.9 Hz, 1H, CHpy), 7.38 (t, J = 5.9 Hz, 1H, CHpy), 7.11 (s, 2H, NH2), 4.00 (d, J = 11.9 Hz, 1H, CH), 3.90 (q, J = 7.1 Hz, 2H, CH2), 3.34 (s, 3H, OCH3), 3.23 (d, J = 11.9 Hz, 1H, CH), 0.90 (t, J = 7.1 Hz, 3H, CH3) ppm; 13C NMR (75 MHz, DMSO-d6): δ 166.4, 159.3, 150.0, 149.1, 136.1, 134.6, 123.6, 121.3 (q, J = 291.1 Hz, CF3), 119.0, 96.1 (q, J = 31.9 Hz, C(CF3)), 60.9, 56.5, 52.5, 48.8, 36.3, 13.4 ppm; HRMS (ESI): calcd for C16H16F3N3O4 372.1166, found 372.1179.</p>
+<p>Synthesis of 3-(6-amino-5-cyano-3-(ethoxycarbonyl)-2-methoxy-2-(trifluoromethyl)-3,4-dihydro-2H-pyran-4-yl)-1-alkylpyridin-1-ium bromides 10-12:</p>
+<p>Halogenoalkane (2 mmol) was added to a solution of D (0.5 mmol, 0.200 g) in dry acetonitrile (3 mL). The mixture was stirred and heated to reflux for 24 h. Result of reaction was confirmed by TLC (ethyl acetate/petroleum ether 1:1). After solvent evaporation under reduced pressure, ethyl acetate (5 mL) was added to the reaction residue and the mixture was vigorously stirred for 1 h. Formed precipitates were quickly filtrated through a glass filter, and dried under a vacuum to afford white solid product.</p>
+<p>3-(6-amino-5-cyano-3-(ethoxycarbonyl)-2-methoxy-2-(trifluoromethyl)-3,4-dihydro-2H-pyran-4-yl)-1-nonylpyridin-1-ium bromide (10):</p>
+<p>C25H35BrF3N3O4; M. w. 578,471; White solid (0.257 g, 0.44 mmol, 89% yield); M. p. 178–180; IR (neat/cm−1): 3258, 3094, 2929, 2857, 2194, 1738, 1636, 1600; 1H NMR (300 MHz, DMSO-d6): δ 9.35 (s, 1H, CHpy), 9.13 (d, J = 6.0 Hz, 1H, CHpy), 8.80 (d, J = 8.1 Hz, 1H, CHpy), 8.29-8.19 (m, 1H, CHpy), 7.39 (s, 2H, NH2), 4.63 (t, J = 7.1 Hz, 2H, 2CH2N+), 4.32 (d, J = 11.9 Hz, 1H, CH), 4.06-3.82 (m, 2H, OCH2), 3.61-3.52 (m, 4H, CH + OCH3), 1.96-1.85 (m, 2H, CH2), 1.27-1.21 (m, 12H, 6CH2), 0.98 (t, J = 7.1 Hz, 3H, CH3), 0.87 (t, J = 6.3 Hz, CH3) ppm; 13C NMR (75 MHz, DMSO-d6): δ 165.9, 159.6, 145.8, 144.7, 144.6, 140.5, 128.1, 121.1 (q, J = 291.3 Hz, CF3), 118.7, 96.2 (q, J = 33.2 Hz, C(CF3)), 61.4, 60.9, 54.9, 52.7, 47.6, 36.1, 31.1, 30.6, 28.6, 28.4, 28.3, 25.0, 22.0, 13.8, 13.5 ppm; HRMS (ESI): calcd for C25H35F3N3O4 498.2574, found 498.2568.</p>
+<p>3-(6-amino-5-cyano-3-(ethoxycarbonyl)-2-methoxy-2-(trifluoromethyl)-3,4-dihydro-2H-pyran-4-yl)-1-undecylpyridin-1-ium bromide (11):</p>
+<p>C27H39BrF3N3O4; M. w. 606,525; White solid (0.242 g, 0.39 mmol, 84% yield); M. p. 162–165°C; IR (neat/cm−1): 3258, 3091, 2928, 2856, 2194, 1738, 1635, 1600; 1H NMR (300 MHz, DMSO-d6): δ 9.35 (s, 1H, CHpy), 9.14 (d, J = 6.0 Hz, 1H, CHpy), 8.80 (d, J = 8.1 Hz, 1H, CHpy), 8.24 (t, J = 7.1 Hz, 1H, CHpy), 7.37 (s, 2H, NH2), 4.63 (t, J = 7.1 Hz, 2H, 2CH2N+), 4.32 (d, J = 12.0 Hz, 1H, CH), 4.06-3.82 (m, 2H, OCH2), 3.62-3.50 (m, 4H, CH + OCH3), 1.96-1.85 (m, 2H, CH2), 1.36-1.13 (m, 16H, 8CH2), 0.98 (t, J = 7.1 Hz, 3H, CH3), 0.87 (t, J = 6.3 Hz, CH3); 13C NMR (75 MHz, DMSO-d6): δ 165.9, 159.5, 145.8, 144.7, 144.6, 140.5, 128.7, 121.1 (q, J = 290.4 Hz, CF3), 118.7, 96.2 (q, J = 32.8 Hz, C(CF3)), 61.4, 60.9, 54.9, 52.7, 47.6, 36.1, 31.2, 30.6, 28.9, 28.8, 28.7, 28.6, 28.3, 25.0, 22.0, 13.8, 13.5 ppm; HRMS (ESI): calcd for C27H39F3N3O4 526.2887, found 526.2879.</p>
+<p>3-(6-amino-5-cyano-3-(ethoxycarbonyl)-2-methoxy-2-(trifluoromethyl)-3,4-dihydro-2H-pyran-4-yl)-1-dodecylpyridin-1-ium bromide (12):</p>
+<p>C28H41BrF3N3O4; M. w. 620,552; White solid (0.251 g, 0.4 mmol, 81% yield); M. p. 175–177°C; IR (neat/cm−1): 3259, 3084, 2927, 2855, 2193, 1738, 1634, 1600; 1H NMR (300 MHz, DMSO-d6): δ 9.35 (s, 1H, CHpy), 9.13 (d, J = 6.0 Hz, 1H, CHpy), 8.80 (d, J = 8.1 Hz, 1H, CHpy), 8.29-8.18 (m, 1H, CHpy), 7.37 (s, 2H, NH2), 4.63 (t, J = 7.1 Hz, 2H, 2CH2N+), 4.32 (d, J = 12.0 Hz, 1H, CH), 4.06-3.82 (m, 2H, OCH2), 3.61-3.52 (m, 4H, CH + OCH3), 1.96-1.85 (m, 2H, CH2), 1.35-1.13 (m, 18H, 9CH2), 0.98 (t, J = 7.1 Hz, 3H, CH3), 0.88 (t, J = 6.3 Hz, CH3); 13C NMR (75 MHz, DMSO-d6): δ 166.0, 159.6, 145.8, 144.8, 144.6, 140.5, 128.1, 121.2 (q, J = 291.9 Hz, CF3), 119.0, 96.3 (q, J = 31.7 Hz, C(CF3)), 61.4, 60.9, 54.9, 52.7, 47.6, 36.1, 31.2, 30.7, 28.98, 28.95, 28.8, 28.7, 28.6, 28.3, 25.1, 22.0, 13.9, 13.5 ppm; HRMS (ESI): calcd for C28H41F3N3O4 540.3044, found 540.3022.</p>
+<p>Synthesis of ethyl (2-(2-hydroxyethoxy)ethyl)carbamate (X)</p>
+<p>A round-bottom flask equipped with a Dean–Stark apparatus was charged with diethyl carbonate (42 mmol) and 2-(2-aminoethoxy)ethan-1-ol (85 mmol). The reaction mixture was stirred at 125°C for 24 h and then heated under reflux at 150 °C for 4 days. The product was purified by column chromatography (EtOAc/MeOH, 8:1) and obtained as an orange oil in 75% yield (31.5 mmol, 5.58 g).</p>
+<p>C7H15NO4; M. w. 177.200; orange oil; 1H NMR (300 MHz, DMSO-d6) δ 7.13 – 7.03 (m, 1H, NH), 4.59 (t, J = 5.5 Hz, 1H, OH), 3.99 (q, J = 7.1 Hz, 2H, СH2), 3.50 (q, J = 5.3 Hz, 2H, CH2), 3.45 – 3.37 (m, 4H, 2CH2), 3.13 (q, J = 5.9 Hz, 2H, 2CH2), 1.16 (t, J = 7.1 Hz, 3H, CH3). </p>
+<p>1,3-bis(2-(2-hydroxyethoxy)ethyl)urea (X)</p>
+<p>Ethyl(2-(2-hydroxyethoxy)ethyl)carbamate (9 mmol) and 2-(2-aminoethoxy)ethan-1-ol (10 mmol) were placed in a round-bottom flask equipped with a Dean–Stark apparatus. The reaction mixture was stirred at 180–190 °C for 7 days. Purification by column chromatography (EtOAc/MeOH, 8:1) afforded the desired product as an orange oil in 60% yield (5.4 mmol, 1.28 g).</p>
+<p>C9H20N2O5; M. w. 236.268; orange oil; 1H NMR (300 MHz, DMSO-d6) δ 6.08 – 5.87 (m, 2H, 2NH), 4.58 (t, 2H, 2OH), 3.65 – 3.46 (m, 4H, 2CH2), 3.46 – 3.36 (m, 8H, 4CH2), 3.20 – 3.12 (m, 4H, 2CH2). </p>
+<p>1,3,4,6-tetrakis(2-(2-hydroxyethoxy)ethyl)tetrahydroimidazo[4,5-d]imidazole-2,5(1H,3H)-dione (X)</p>
+<p>1,3-Bis(2-(2-hydroxyethoxy)ethyl)urea (2.54 mmol) and a 45% aqueous solution of glyoxal (1.15 mmol in 0.5 mL of water) were placed in a round-bottom flask. The mixture was acidified to pH~1 with concentrated HCl and stirred at 90 °C for 6 h. The reaction progress was monitored by TLC (EtOAc/MeOH, 2:1). The reaction mixture was then neutralized with 25% aqueous NaOH and concentrated to dryness under reduced pressure. The resulting yellow oily crude product was purified by column chromatography (EtOAc/MeOH, 8:1) to afford the desired product in 53% yield (1.35 mmol, 0,668 g).</p>
+<p>C20H38N4O10; M. w. 494.542; light yellow oil;1H NMR (300 MHz, DMSO-d6) δ 5.54 (s, 2H, 2CH), 4.63 (t, J = 5.3 Hz, 4H, 4OH), 3.64 – 3.47 (m, 20H, 10CH2), 3.47 – 3.39 (m, 8H, 4CH2), 3.34 – 3.26 (m, 4H, 2CH2). 13C NMR (75 MHz, DMSO-d6) δ 158.41, 72.26, 69.02, 68.53, 60.19, 42.17, 25.49. </p>
+<p>1,3,4,6-tetrakis(2-(2-chloroethoxy)ethyl)tetrahydroimidazo[4,5-d]imidazole-2,5(1H,3H)-dione (X)</p>
+<p>A round-bottom flask containing the compound (0.6 mmol) in chloroform (2 ml) was placed in an ice bath. Thionyl chloride (3.36 mmol) was added dropwise to the stirred solution. The reaction mixture was then heated under reflux for 12 h. The solvent was removed under reduced pressure, and the resulting yellow oily crude product was purified by column chromatography (chloroform) to afford the desired product in 70% yield (0.42 mmol, 0.238 g).</p>
+<p>C20H34Cl4N4O6; M. w. 568.314; light yellow oil; 1H NMR (300 MHz, CDCl3) δ 5.69 (s, 2H, 2CH), 3.77 – 3.59 (m, 28H, 14CH2), 3.53 – 3.47 (m, 2H, CH2), 3.47 – 3.42 (m, 2H, CH2). 13C NMR (75 MHz, CDCl3) δ 158.87, 71.14, 70.33, 70.07, 43.25, 42.59. </p>
+<p>1,3,4,6-tetrakis(2-(2-(4-(alkylamino)-1λ4 -pyridin-1-yl)ethoxy)ethyl)tetrahydroimidazo[4,5-d]imidazole-2,5(1H,3H)-dione (13-17)</p>
+<p>1,3,4,6-Tetrakis(2-(2-chloroethoxy)ethyl)tetrahydroimidazo[4,5-d]imidazole-2,5(1H,3H)-dione and N-alkylpyridin-4-amine were placed in a round-bottom flask. Dry 1-butanol (1–2 mL) was added, and the mixture was heated under reflux for 5 days. After completion, the reaction mixture was concentrated to dryness under reduced pressure. The resulting yellow solid was purified by recrystallization from acetonitrile to afford the product.</p>
+<p>1,1&#x27;,1&#x27;&#x27;,1&#x27;&#x27;&#x27;-((((2,5-dioxodihydroimidazo[4,5-d]imidazole-1,3,4,6(2H,5H)-tetrayl)tetrakis(ethane-2,1-diyl))tetrakis(oxy))tetrakis(ethane-2,1-diyl))tetrakis(4-(heptylamino)pyridin-1-ium) tetrachloride (13)</p>
+<p>C68H114Cl4N12O6; M. w. 1337.538; white hygroscopic solid (0.176 g, 0.13 mmol, 71% yield); IR (neat/cm−1): 3208, 3102, 3015, 2955, 2929, 2857, 1695, 1653, 1590, 1557, 1520, 1482, 1351, 1320, 1237, 1316, 1194, 1117, 1053, 905, 842, 782, 724, 664, 578, 544, 506 1H NMR (300 MHz, DMSO-d6) δ 9.19 – 8.97 (m, 4H, NH), 8.29 (d, J = 7.0 Hz, 4H, CHpy), 8.10 (d, J = 7.2 Hz, 4H, CHpy), 6.94 (dd, J = 27.7, 7.3 Hz, 8H, CHar), 5.33 (s, 2H, CHgl), 4.48 – 4.20 (m, 8H, CH2(py)), 3.79 – 3.69 (m, 8H, CH2(gl)), 3.60 – 3.37 (m, J = 29.0 Hz, 12H, CH2(alk)), 3.28 – 3.15 (m, J = 5.8 Hz, 12H, CH2(NH)), 1.63 – 1.45 (m, J = 6.9 Hz, 8H, CH2(alk)), 1.42 – 1.12 (m, 32H, CH2(alk)), 0.86 (t, J = 6.8 Hz, 12H, CH3(alk)). 13C NMR (75 MHz, DMSO-d6) δ 158.75, 157.19, 144.41, 142.04, 110.34, 105.35, 69.39, 68.68, 56.59, 42.72, 42.64, 31.67, 28.84, 28.40, 26.78, 22.51, 14.40. HRMS (ESI) m/z: [M – 4Cl-]4+ calcd for C68H114N12O64+ 298.7229, found 298.7249.</p>
+<p>1,1&#x27;,1&#x27;&#x27;,1&#x27;&#x27;&#x27;-((((2,5-dioxodihydroimidazo[4,5-d]imidazole-1,3,4,6(2H,5H)-tetrayl)tetrakis(ethane-2,1-diyl))tetrakis(oxy))tetrakis(ethane-2,1-diyl))tetrakis(4-(octylamino)pyridin-1-ium) tetrachloride (14)</p>
+<p>C72H122Cl4N12O6; M. w. 1393.646; white hygroscopic solid (0.162 g, 0.12 mmol, 68% yield); IR (neat/cm−1): 3207, 3100, 2926, 2855, 2326, 1695, 1652, 1590, 1556, 1482, 1352, 1318, 1237, 1193, 1117, 1064, 841, 782, 723, 508; 1H NMR (300 Мгц, DMSO-d6) δ 9.16 – 9.05 (m, 4H, NH), 8.38 – 8.24 (m, 4H, CHpy), 8.10 (dd, J = 7.3, 1.7 Hz, 4H, CHpy), 6.99 (dd, J = 7.3, 2.8 Hz, 4H, CHpy), 6.89 (dd, J = 7.5, 2.8 Hz, 4H, CHpy), 5.34 (s, 2H, CHgl), 4.38 – 4.22 (m, 8H, CH2(py)), 3.85 – 3.65 (m, 8H, CH2(gl)), 3.62 – 3.37 (m, 12H, CH2(alk)), 3.28 – 3.11 (m, 12H, CH2(NH)), 1.66 – 1.46 (m, 8H, CH2(alk)), 1.40 – 1.17 (m, 40H, CH2(alk)), 0.86 (t, J = 6.3 Hz, 12H, CH3(alk)). 13C NMR (75 MHz, DMSO-d6) δ 158.77, 157.20, 144.42, 142.04, 110.37, 105.35, 69.62, 69.40, 68.69, 56.60, 42.74, 31.71, 29.16, 29.12, 28.40, 26.84, 22.55, 14.41. HRMS (ESI) m/z: [M – 4Cl-]4+ calcd for C72H122N12O64+ 312.7390, found 312.7397.</p>
+<p>1,1&#x27;,1&#x27;&#x27;,1&#x27;&#x27;&#x27;-((((2,5-dioxodihydroimidazo[4,5-d]imidazole-1,3,4,6(2H,5H)-tetrayl)tetrakis(ethane-2,1-diyl))tetrakis(oxy))tetrakis(ethane-2,1-diyl))tetrakis(4-(nonylamino)pyridin-1-ium) tetrachloride (15)</p>
+<p>C76H130Cl4N12O6; M. w. 1449.754; white hygroscopic solid (0.190 g, 0.13 mmol, 75% yield); IR (neat/cm−1): 3206, 3100, 2926, 2855. 1695, 1653, 1590, 1558, 1520, 1352, 1320, 1237, 1195, 1118, 1054, 905, 842, 782, 723, 581, 507; 1H NMR (300 MHz, DMSO-d6) δ 9.14 (t, J = 5.3 Hz, 4H, NH), 8.31 (d, J = 7.8 Hz, 4H, CHpy), 8.12 (d, J = 6.1 Hz, 4H, CHpy), 7.01 (dd, J = 7.3, 2.6 Hz, 4H, CHar), 6.88 (dd, J = 7.5, 2.6 Hz, 4H, CHar), 5.35 (s, 2H, CHgl), 4.47 – 4.17 (m, 8H, CH2(py)), 3.86 – 3.62 (m, 8H, CH2(gl)), 3.62 – 3.36 (m, J = 19.9, 8.3 Hz, 12H, CH2(alk)), 3.27 – 3.14 (m, 12H, CH2(NH)), 1.66 – 1.43 (m, J = 6.8 Hz, 8H, CH2(alk)), 1.41 – 1.06 (m, 48H, CH2(alk)), 0.86 (t, J = 6.6 Hz, 12H, CH3(alk)). 13C NMR (75 MHz, DMSO-d6) δ 158.75, 157.18, 144.40, 142.04, 110.35, 105.36, 69.38, 68.67, 56.60, 42.73, 42.64, 31.74, 29.43, 29.20, 29.13, 28.40, 26.83, 22.56, 14.70. HRMS (ESI) m/z: [M – 4Cl-]4+ calcd for C76H130N12O64+ 326.7561, found 326.7554</p>
+<p>1,1&#x27;,1&#x27;&#x27;,1&#x27;&#x27;&#x27;-((((2,5-dioxodihydroimidazo[4,5-d]imidazole-1,3,4,6(2H,5H)-tetrayl)tetrakis(ethane-2,1-diyl))tetrakis(oxy))tetrakis(ethane-2,1-diyl))tetrakis(4-(decylamino)pyridin-1-ium) tetrachloride (16)</p>
+<p>C80H138Cl4N12O6; M. w. 1505.862; white hygroscopic solid (0.168 g, 0.11 mmol, 81% yield); IR (neat/cm−1): 3207, 3100, 2926, 2855, 1695, 1663, 1591, 1557, 1519, 1480, 1352, 1321, 1237, 1194, 1117, 1056, 844, 786, 753, 719, 545, 507; 1H NMR (300 MHz, DMSO-d6) δ 9.18 – 9.07 (m, 4H, NH), 8.30 (d, J = 7.4 Hz, 4H, CHpy), 8.11 (d, J = 7.5 Hz, 4H, CHpy), 6.99 (d, J = 7.2 Hz, 4H, CHpy), 6.89 (d, J = 6.4 Hz, 4H, CHpy), 5.34 (s, 2H, CHgl), 4.41 – 4.26 (m, 8H, CH2(py)), 3.81 – 3.66 (m, 8H, CH2(gl)), 3.57 – 3.39 (m, 12H, CH2(alk)), 3.28 – 3.17 (m, 12H, CH2(NH)), 1.65 – 1.48 (m, 8H, CH2(alk)), 1.41 – 1.17 (m, 56H, CH2(alk)), 0.86 (t, J = 6.3 Hz, 12H, CH3(alk)). 13C NMR (75 MHz, DMSO-d6) δ 157.20, 144.43, 142.06, 110.37, 105.37, 69.40, 68.68, 56.61, 42.75, 31.77, 29.49, 29.46, 29.22, 29.18, 28.40, 26.85, 22.57, 14.42. HRMS (ESI) m/z: [M – 4Cl-]4+ calcd for C80H138N12O64+ 340.7697, found 340.7710</p>
+<p>1,1&#x27;,1&#x27;&#x27;,1&#x27;&#x27;&#x27;-((((2,5-dioxodihydroimidazo[4,5-d]imidazole-1,3,4,6(2H,5H)-tetrayl)tetrakis(ethane-2,1-diyl))tetrakis(oxy))tetrakis(ethane-2,1-diyl))tetrakis(4-(dodecylamino)pyridin-1-ium) tetrachloride (17)</p>
+<p>C88H154Cl4N12O6; M. w. 1618.078; white hygroscopic solid (0.174 g, 0.11 mmol, 70% yield); IR (neat/cm−1): 3207, 3099, 2925, 2854, 1695, 1653, 1591, 1557, 1469, 1353, 1194, 1118, 1056, 842, 754, 622, 580, 505; 1H NMR (300 MHz, DMSO-d6) δ 9.40 – 9.18 (m, 4H, NH), 8.28 (d, J = 3.5 Hz, 4H, CHpy), 8.07 (d, J = 5.2 Hz, 4H, CHpy), 7.01 (d, J = 7.2 Hz, 4H, CHpy), 6.87 (d, J = 7.7 Hz, 4H, CHpy), 5.32 (s, 2H, CHgl), 4.44 – 4.14 (m, 8H, CH2(py)), 3.82 – 3.64 (m, 8H, CH2(gl)), 3.58 – 3.41 (m, 12H, CH2(alk)), 3.26 – 3.13 (m, 12H, CH2(NH)), 1.62 – 1.48 (m, 8H, CH2(alk)), 1.42 – 1.14 (m, 72H, CH2(alk)), 0.86 (t, J = 6.5 Hz, 12H, CH3(alk)). 13C NMR (75 MHz, DMSO-d6) δ 157.20, 144.42, 142.04, 110.38, 105.35, 69.40, 68.68, 56.60, 42.75, 31.78, 29.56, 29.51, 29.24, 29.20, 28.41, 26.87, 22.57, 14.41. HRMS (ESI) m/z: [M – 4Cl-]4+ calcd for C88H154N12O64+ 368.8040, found 368.8023</p>
+<p>S8.2 Microbiological assay</p>
+<p>S8.2.1 Bacterial strains </p>
+<p>Laboratory strains of the microorganisms E. coli ATCC 25922, S. aureus ATCC 43300 were obtained from the State Collection of Pathogenic Microorganisms (Obolensk, Russia). </p>
+<p>S8.2.2 Identification of microorganisms</p>
+<p>Species identification of microorganisms was carried out on a MALDI-TOF Biotyper mass spectrometer (Bruker, Billerica, MA, USA) according to the standard microflex User Manual. One part of the daily bacterial culture was introduced into a 2 mL tube (Eppendorf, Hamburg, Germany) containing 300 µL of deionized water and triturated until a homogeneous suspension was obtained. Then, 900 µL of 96% ethanol was added and shaken. The tube was then centrifuged at 12,000× g for 2 min. The supernatant was discarded, and the precipitate was dried in air. After drying, the precipitate was thoroughly mixed with 30 µL of 70% formic acid, incubated for 10 min at room temperature, and then mixed with 30 µL of acetonitrile (Sigma-Aldrich, St. Louis, MO, USA) and incubated for another 10 min. This mixture was centrifuged at 12,000×g for 2 min; then, 1 µL of the supernatant was transferred to an MSP 96 Polished Steel MALDI Target Plate (Bruker Daltonik GmbH, Bremen, Germany), air-dried, and covered with 1 µL of a saturated solution of α-cyano-4-hydroxycinnamic acid (Bruker Daltonik, Bremen, Germany). The MALDI target plate was placed in a MALDI-TOF microflex LRF instrument (Bruker Daltonik, Bremen, Germany). The data acquisition settings were as follows: ion source 1 at 19.50 kV, ion source 2 at 18.22 kV, lens at 7.01 kV, and a mass range of 2000 to 20,000 Da. Spectrum registration was performed automatically using MALDI Biotyper RTC 3.1 software (Bruker Daltonik, Bremen, Germany). The obtained spectra were compared with the reference spectra of the FFL v1.0 data-base. Identification scores ≥2.0 and 1.7–1.99 indicated recognition of the species and genus levels, respectively, while scores &lt;1.7 indicated a lack of reliable data.</p>
+<p>S8.2.3 Cultivation of microorganisms.</p>
+<p>Microorganisms were cultivated using agar and GRM broth. Cultivation of microorganisms was carried out for 20–24 h at a temperature of 37°C.</p>
+<p>S8.2.4 MIC and MBC determination.</p>
+<p>The synthesized QACs were dissolved in the DMSO/water system at a ratio of 1/9 with a final concentration of 1000 mg/L. For better dissolution, the samples were sonicated for 15 to 60 minutes at 40°C. The MIC and MBC of the antimicrobials was determined by the microdilution method in culture broth, as indicated by the Clinical and Laboratory Standards Institute of the United States of America 76.</p>
+<p>S9. References</p>
+<p>Model and dataset references</p>
+<p>Ross, J.; Belgodere, B.; Chenthamarakshan, V.; Padhi, I.; Mroueh, Y.; Das, P. Large-scale chemical language representations capture molecular structure and properties. Nature Machine Intelligence 2022, 4, 1256–1264. https://doi.org/10.1038/s42256-022-00580-7.</p>
+<p>Hu, E. J.; Shen, Y.; Wallis, P.; Allen-Zhu, Z.; Li, Y.; Wang, S.; Wang, L.; Chen, W. LoRA: Low-Rank Adaptation of Large Language Models. arXiv 2021, arXiv:2106.09685. https://doi.org/10.48550/arXiv.2106.09685.</p>
+<p>Heid, E.; et al. Chemprop: A Machine Learning Package for Chemical Property Prediction. J. Chem. Inf. Model. 2024, 64 (1), 9–17. https://doi.org/10.1021/acs.jcim.3c01250.</p>
+<p>Hollmann, N.; Müller, S.; Purucker, L.; Krishnakumar, A.; Körfer, M.; Hoo, S. B.; Schirrmeister, R. T.; Hutter, F. Accurate predictions on small data with a tabular foundation model. Nature 2025, 637, 319–326. https://doi.org/10.1038/s41586-024-08328-6.</p>
+<p>Google Research. TabFM: Tabular Foundation Models. https://github.com/google-research/tabfm (accessed 2026-10-12); code revision fbb665569425fd2f490c6576b3af967876fe11ff904; JAX regression checkpoint google/tabfm-1.0.0-jax, revision d5e74033fcf257699fab013e2cdd7edf424ff904.</p>
+<p>Erickson, N.; Mueller, J.; Shirkov, A.; Zhang, H.; Larroy, P.; Li, M.; Smola, A. AutoGluon-Tabular: Robust and Accurate AutoML for Structured Data. arXiv 2020, arXiv:2003.06505. https://doi.org/10.48550/arXiv.2003.06505.</p>
+<p>Schölkopf, B.; Locatello, F.; Bauer, S.; Ke, N. R.; Kalchbrenner, N.; Goyal, A.; Bengio, Y. Towards Causal Representation Learning. 2021. https://arxiv.org/abs/2102.11107.</p>
+<p>Ghaemi, S.; Consylman, A.; Pan, B.; Wu, A.; Petersen, A.; Chang, G.; McDonough, D.; Forman, M.; Bezold, E. L.; Wuest, W. M.; Shehu, A.; Zhao, L.; Minbiole, K. P. C., Topology-Aware Generation and Activity-Based Filtering: A Computational-Experimental Framework for Data-Scarce Quaternary Ammonium Compound Discovery. Journal of Chemical Information and Modeling 2026, 66, 3117-3128.</p>
+<p>Bibliography for chemical records</p>
+<p>1.Iskandar, K.; Murugaiyan, J.; Hammoudi Halat, D.; Hage, S. E.; Chibabhai, V.; Adukkadukkam, S.; Roques, C.; Molinier, L.; Salameh, P.; Van Dongen, M., Antibiotic Discovery and Resistance: The Chase and the Race. Antibiotics (Basel) 2022, 11.</p>
+<p>2.Gargate, N.; Laws, M.; Rahman, K. M., Current economic and regulatory challenges in developing antibiotics for Gram-negative bacteria. npj Antimicrobials and Resistance 2025, 3, 50.</p>
+<p>3.Lack of innovation set to undermine antibiotic performance and health gains. https://www.who.int/news/item/22-06-2022-22-06-2022-lack-of-innovation-set-to-undermine-antibiotic-performance-and-health-gains (15.04.2026), </p>
+<p>4.Melchiorri, D.; Rocke, T.; Alm, R. A.; Cameron, A. M.; Gigante, V., Addressing urgent priorities in antibiotic development: insights from WHO 2023 antibacterial clinical pipeline analyses. Lancet Microbe 2025, 6, 100992.</p>
+<p>5.Sati, H.; Carrara, E.; Savoldi, A.; Hansen, P.; Garlasco, J.; Campagnaro, E.; Boccia, S.; Castillo-Polo, J. A.; Magrini, E.; Garcia-Vello, P.; Wool, E.; Gigante, V.; Duffy, E.; Cassini, A.; Huttner, B.; Pardo, P. R.; Naghavi, M.; Mirzayev, F.; Zignol, M.; Cameron, A.; Tacconelli, E.; Aboderin, A.; Al Ghoribi, M.; Al-Salman, J.; Amir, A.; Apisarnthanarak, A.; Blaser, M.; El-Sharif, A.; Essack, S.; Harbarth, S.; Huang, X.; Kapoor, G.; Knight, G.; Muhwa, J. C.; Monnet, D. L.; Ousassa, T.; Sacsaquispe, R.; Severin, J.; Sugai, M.; Taneja, N.; Umubyeyi Nyaruhirira, A., The WHO Bacterial Priority Pathogens List 2024: a prioritisation study to guide research, development, and public health strategies against antimicrobial resistance. The Lancet Infectious Diseases 2025, 25, 1033-1043.</p>
+<p>6.Schroder, H.; Machunsky, C.; Strobach, H.; Schror, K., Nitric oxide but not prostacyclin has an autocrine function in porcine aortic endothelial cells. Advances in prostaglandin, thromboxane, and leukotriene research 1991, 21B, 671-4.</p>
+<p>7.Organization, W. H., Analysis of antibacterial agents in clinical and preclinical development: overview and analysis 2025. 2025.</p>
+<p>8.Coelho, J. R.; Carriço, J. A.; Knight, D.; Martínez, J. L.; Morrissey, I.; Oggioni, M. R.; Freitas, A. T., The use of machine learning methodologies to analyse antibiotic and biocide susceptibility in Staphylococcus aureus. PLoS One 2013, 8, e55582.</p>
+<p>9.Lin, B.; Yan, S.; Zhen, B., A machine learning method for predicting molecular antimicrobial activity. Scientific Reports 2025, 15, 6559.</p>
+<p>10.Krishnan, R.; Howard, I. S.; Comber, S.; Jha, A. N., In silico prediction of acute chemical toxicity of biocides in marine crustaceans using machine learning. Science of The Total Environment 2023, 887, 164072.</p>
+<p>11.Jukič, M.; Bren, U., Machine Learning in Antibacterial Drug Design. Frontiers in Pharmacology 2022, Volume 13 - 2022.</p>
+<p>12.Shankarnarayan, S. A.; Guthrie, J. D.; Charlebois, D. A. Machine learning for antimicrobial resistance research and drug development. In The Global Antimicrobial Resistance Epidemic-Innovative Approaches and Cutting-Edge Solutions; IntechOpen: 2022.</p>
+<p>13.Diéguez-Santana, K.; González-Díaz, H., Machine learning in antibacterial discovery and development: A bibliometric and network analysis of research hotspots and trends. Computers in Biology and Medicine 2023, 155, 106638.</p>
+<p>14.Liu, Z.; Chen, Q.; Yao, C.; Wang, Y.; Zhu, S.; Guan, J.; Miao, Y., The chemical design of antimicrobial ionic liquids guided by machine learning: a review on balancing efficacy and toxicity. Journal of Materials Chemistry B 2026, 14, 3023-3047.</p>
+<p>15.Sadaghiyanfam, S.; Kamberaj, H.; Isler, Y., Leveraging ChemBERTa and machine learning for accurate toxicity prediction of ionic liquids. Journal of the Taiwan Institute of Chemical Engineers 2025, 171, 106030.</p>
+<p>16.Krishnan, A.; Anahtar, M. N.; Valeri, J. A.; Jin, W.; Donghia, N. M.; Sieben, L.; Luttens, A.; Zhang, Y.; Modaresi, S. M.; Hennes, A.; Fromer, J.; Bandyopadhyay, P.; Chen, J. C.; Rehman, D.; Desai, R.; Edwards, P.; Lach, R. S.; Aschtgen, M.-S.; Gaborieau, M.; Gaetani, M.; Palace, S. G.; Omori, S.; Khonde, L.; Moroz, Y. S.; Blough, B.; Jin, C.; Loh, E.; Grad, Y. H.; Saei, A. A.; Coley, C. W.; Wong, F.; Collins, J. J., A generative deep learning approach to &lt;em&gt;de novo&lt;/em&gt; antibiotic design. Cell 2025, 188, 5962-5979.e22.</p>
+<p>17.Olayo-Alarcon, R.; Amstalden, M. K.; Zannoni, A.; Bajramovic, M.; Sharma, C. M.; Brochado, A. R.; Rezaei, M.; Müller, C. L., Pre-trained molecular representations enable antimicrobial discovery. Nature Communications 2025, 16, 3420.</p>
+<p>18.Taha, M. M. E.; Oraibi, B.; Abdelwahab, S. I.; Sahli, K. A.; Assiri, A.; Qadri, M.; Alarifi, A.; Khardali, A.; Farasani, A.; Moshi, J. M.; Alsaadi, K. H.; Alshahrani, S.; Shubaily, H. M.; Binjomah, A. Z., Global trends and thematic evolution in antimicrobial stewardship research: a comprehensive bibliometric and network analysis (1977–2025). Journal of Hospital Infection 2026, 171, 11-26.</p>
+<p>19.Wang, X.; Rai, N.; Merchel Piovesan Pereira, B.; Eetemadi, A.; Tagkopoulos, I., Accelerated knowledge discovery from omics data by optimal experimental design. Nature Communications 2020, 11, 5026.</p>
+<p>20.Sowers, A.; Wang, G.; Xing, M.; Li, B., Advances in Antimicrobial Peptide Discovery via Machine Learning and Delivery via Nanotechnology. Microorganisms 2023, 11, 1129.</p>
+<p>21.Wang, Y.; Zhao, L.; Li, Z.; Xi, Y.; Pan, Y.; Zhao, G.; Zhang, L., A generative artificial intelligence approach for the discovery of antimicrobial peptides against multidrug-resistant bacteria. Nature Microbiology 2025, 10, 2997-3012.</p>
+<p>22.Raissi, M.; Perdikaris, P.; Karniadakis, G. E., Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations. Journal of Computational Physics 2019, 378, 686-707.</p>
+<p>23.Cuomo, S.; Di Cola, V. S.; Giampaolo, F.; Rozza, G.; Raissi, M.; Piccialli, F., Scientific Machine Learning Through Physics–Informed Neural Networks: Where we are and What’s Next. Journal of Scientific Computing 2022, 92, 88.</p>
+<p>24.Kuang, T.; Liu, P.; Ren, Z., Impact of Domain Knowledge and Multi-Modality on Intelligent Molecular Property Prediction: A Systematic Survey. Big Data Mining and Analytics 2024, 7, 858-888.</p>
+<p>25.Wahyudi, A.; Sueviriyapan, N.; Suriyapraphadilok, U., Generalizable physics-informed graph neural network for CO2 solubility prediction across amine classes. Separation and Purification Technology 2026, 385, 136395.</p>
+<p>26.Selby, D. A.; Jakhmola, R.; Sprang, M.; Großmann, G.; Raki, H.; Maani, N.; Pavliuk, D.; Ewald, J.; Vollmer, S., Visible neural networks for multi-omics integration: a critical review. Frontiers in Artificial Intelligence 2025, Volume 8 - 2025.</p>
+<p>27.Bickerton, G. R.; Paolini, G. V.; Besnard, J.; Muresan, S.; Hopkins, A. L., Quantifying the chemical beauty of drugs. Nature chemistry 2012, 4, 90-8.</p>
+<p>28.Lajiness, M. S.; Maggiora, G. M.; Shanmugasundaram, V., Assessment of the consistency of medicinal chemists in reviewing sets of compounds. J Med Chem 2004, 47, 4891-6.</p>
+<p>29.Kutchukian, P. S.; Vasilyeva, N. Y.; Xu, J.; Lindvall, M. K.; Dillon, M. P.; Glick, M.; Coley, J. D.; Brooijmans, N., Inside the Mind of a Medicinal Chemist: The Role of Human Bias in Compound Prioritization during Drug Discovery. PLOS ONE 2012, 7, e48476.</p>
+<p>30.Choung, O.-H.; Vianello, R.; Segler, M.; Stiefl, N.; Jiménez-Luna, J., Extracting medicinal chemistry intuition via preference machine learning. Nature Communications 2023, 14, 6651.</p>
+<p>31.Sundin, I.; Voronov, A.; Xiao, H.; Papadopoulos, K.; Bjerrum, E. J.; Heinonen, M.; Patronov, A.; Kaski, S.; Engkvist, O., Human-in-the-loop assisted de novo molecular design. Journal of Cheminformatics 2022, 14, 86.</p>
+<p>32.Menke, J.; Nahal, Y.; Bjerrum, E. J.; Kabeshov, M.; Kaski, S.; Engkvist, O., Metis: a python-based user interface to collect expert feedback for generative chemistry models. Journal of Cheminformatics 2024, 16, 100.</p>
+<p>33.Christiano, P. F.; Leike, J.; Brown, T.; Martic, M.; Legg, S.; Amodei, D. Deep Reinforcement Learning from Human Preferences. In Advances in Neural Information Processing Systems, 2017; Curran Associates, Inc.: 2017; Vol. 30; pp 4299-4307.</p>
+<p>34.Ouyang, L.; Wu, J.; Jiang, X.; Almeida, D.; Wainwright, C.; Mishkin, P.; Zhang, C.; Agarwal, S.; Slama, K.; Ray, A.; Schulman, J.; Hilton, J.; Kelton, F.; Miller, L.; Simens, M.; Askell, A.; Welinder, P.; Christiano, P. F.; Leike, J.; Lowe, R. Training language models to follow instructions with human feedback. In Advances in Neural Information Processing Systems, 2022; Curran Associates, Inc.: 2022; Vol. 35; pp 27730-27744.</p>
+<p>35.Georgoulis, E.; Zervou, M. A.; Pantazis, Y., Transfer learning on protein language models improves antimicrobial peptide classification. Scientific Reports 2025, 15, 37456.</p>
+<p>36.Cai, J.; Yan, J.; Un, C.; Wang, Y.; Campbell-Valois, F.-X.; Siu, S. W. I., BERT-AmPEP60: A BERT-Based Transfer Learning Approach to Predict the Minimum Inhibitory Concentrations of Antimicrobial Peptides for Escherichia coli and Staphylococcus aureus. Journal of Chemical Information and Modeling 2025, 65, 3186-3202.</p>
+<p>37.Kalliokoski, T.; Kramer, C.; Vulpetti, A.; Gedeck, P., Comparability of Mixed IC50 Data – A Statistical Analysis. PLOS ONE 2013, 8, e61007.</p>
+<p>38.Kramer, C.; Kalliokoski, T.; Gedeck, P.; Vulpetti, A., The Experimental Uncertainty of Heterogeneous Public Ki Data. Journal of Medicinal Chemistry 2012, 55, 5165-5173.</p>
+<p>39.Landrum, G. A.; Riniker, S., Combining IC50 or Ki Values from Different Sources Is a Source of Significant Noise. Journal of Chemical Information and Modeling 2024, 64, 1560-1567.</p>
+<p>40.Campisi, E.; Di Liberto, E.; Barchitta, M.; Maugeri, A.; Favara, G.; Magnano San Lio, R.; Vecchi, E.; D&#x27;Ancona, F.; Agodi, A., Evaluation of preventive interventions addressing healthcare-associated infections and antimicrobial resistance: a systematic review. Journal of Hospital Infection 2026, 171, 120-136.</p>
+<p>41.Alves, P. J.; Gryson, L.; Hajjar, J.; Lepelletier, D.; Reners, M.; Rodríguez Salazar, J.; Simon, A., Role of antiseptics in the prevention and treatment of infections in nursing homes. Journal of Hospital Infection 2023, 131, 58-69.</p>
+<p>42.Buciński, A.; Socha, A.; Wnuk, M.; Bączek, T.; Nowaczyk, A.; Krysiński, J.; Goryński, K.; Koba, M., Artificial neural networks in prediction of antifungal activity of a series of pyridine derivatives against Candida albicans. Journal of Microbiological Methods 2009, 76, 25-29.</p>
+<p>43.Wnuk, M.; Marszałł, M.; Zapęcka, A.; Nowaczyk, A.; Krysiński, J.; Romaszko, J.; Kawczak, P.; Bączek, T.; Buciński, A., Prediction of antimicrobial activity of imidazole derivatives by artificial neural networks. 2013, 8, 1-15.</p>
+<p>44.Badura, A.; Krysiński, J.; Nowaczyk, A.; Buciński, A., Prediction of the antimicrobial activity of quaternary ammonium salts against Staphylococcus aureus using artificial neural networks. Arabian Journal of Chemistry 2021, 14, 103233.</p>
+<p>45.Badura, A.; Krysiński, J.; Nowaczyk, A.; Buciński, A., Application of artificial neural networks to prediction of new substances with antimicrobial activity against Escherichia coli. Journal of Applied Microbiology 2021, 130, 40-49.</p>
+<p>46.Badura, A.; Krysiński, J.; Nowaczyk, A.; Buciński, A., Application of artificial neural networks to the prediction of antifungal activity of imidazole derivatives against Candida albicans. Chemometrics and Intelligent Laboratory Systems 2022, 222, 104501.</p>
+<p>47.Ramić, A.; Skočibušić, M.; Odžak, R.; Čipak Gašparović, A.; Milković, L.; Mikelić, A.; Sović, K.; Primožič, I.; Hrenar, T. Antimicrobial Activity of Quasi-Enantiomeric Cinchona Alkaloid Derivatives and Prediction Model Developed by Machine Learning. Antibiotics, 10, 659, 2021.</p>
+<p>48.Lorenc, A.; Badura, A.; Karolak, M.; Pałkowski, Ł.; Kubik, Ł.; Skrzypczak, A.; Buciński, A., Hybrid Machine Learning Model for Dual Prediction of Antimicrobial Activity against Staphylococcus aureus and Candida albicans. Journal of Pharmaceutical Innovation 2026, 21, 174.</p>
+<p>49.Tiihonen, A.; Cox-Vazquez, S. J.; Liang, Q.; Ragab, M.; Ren, Z.; Hartono, N. T. P.; Liu, Z.; Sun, S.; Zhou, C.; Incandela, N. C.; Limwongyut, J.; Moreland, A. S.; Jayavelu, S.; Bazan, G. C.; Buonassisi, T., Predicting Antimicrobial Activity of Conjugated Oligoelectrolyte Molecules via Machine Learning. Journal of the American Chemical Society 2021, 143, 18917-18931.</p>
+<p>50.Hodyna, D.; Kovalishyn, V.; Rogalsky, S.; Blagodatnyi, V.; Petko, K.; Metelytsia, L., Antibacterial Activity of Imidazolium-Based Ionic Liquids Investigated by QSAR Modeling and Experimental Studies. Chem Biol Drug Des 2016, 88, 422-33.</p>
+<p>51.Makarov, D. M.; Fadeeva, Y. A.; Safonova, E. A.; Shmukler, L. E., Predictive modeling of antibacterial activity of ionic liquids by machine learning methods. Computational Biology and Chemistry 2022, 101, 107775.</p>
+<p>52.Ghaemi, S.; Consylman, A.; Pan, B.; Wu, A.; Petersen, A.; Chang, G.; McDonough, D.; Forman, M.; Bezold, E. L.; Wuest, W. M.; Shehu, A.; Zhao, L.; Minbiole, K. P. C., Topology-Aware Generation and Activity-Based Filtering: A Computational-Experimental Framework for Data-Scarce Quaternary Ammonium Compound Discovery. Journal of Chemical Information and Modeling 2026, 66, 3117-3128.</p>
+<p>53.Ilin, E. A.; Frolov, N. A.; Seferyan, M. A.; Valeev, A. B.; Vinokurov, A. D.; Detusheva, E. V.; Son, E.; Medvedev, M. G.; Vereshchagin, A. N., Tackling the challenge of ML-assisted antibacterial activity prediction: One step closer to controlled quaternary ammonium compounds design via neural networks model. Bioorganic Chemistry 2025, 167, 109175.</p>
+<p>54.Ward, M.; O&#x27;Boyle, N. M., Analysis of the structural diversity of heterocycles amongst European medicines agency approved pharmaceuticals (2014–2023). RSC Medicinal Chemistry 2025, 16, 4540-4570.</p>
+<p>55.Fedorowicz, J.; Sączewski, J. Advances in the Synthesis of Biologically Active Quaternary Ammonium Compounds. International Journal of Molecular Sciences, 25, 4649, 2024.</p>
+<p>56.Ma, J.; Liu, N.; Huang, M.; Wang, L.; Han, J.; Qian, H.; Che, F., Synthesis, physicochemical and antimicrobial properties of cardanol-derived quaternary ammonium compounds (QACs) with heterocyclic polar head. Journal of Molecular Liquids 2019, 294, 111669.</p>
+<p>57.Zhou, Z.; Zhou, S.; Zhang, X.; Zeng, S.; Xu, Y.; Nie, W.; Zhou, Y.; Xu, T.; Chen, P., Quaternary Ammonium Salts: Insights into Synthesis and New Directions in Antibacterial Applications. Bioconjugate Chemistry 2023, 34, 302-325.</p>
+<p>58.Burnett, C. L.; Bergfeld, W. F.; Belsito, D. V.; Hill, R. A.; Klaassen, C. D.; Liebler, D. C.; Marks, J. G., Jr.; Shank, R. C.; Slaga, T. J.; Snyder, P. W.; Andersen, F. A., Final report of the safety assessment of Kojic acid as used in cosmetics. Int J Toxicol 2010, 29, 244s-73.</p>
+<p>59.Aati, H. Y.; Lotfy, M. M.; Al-tweel, A.; Al-enezi, B.; Abdelkader, K.; AbouZid, S. F.; Rateb, M. E.; Hassan, H. M.; Mohammed, R.; El Amir, D., Kojic acid: A River Nile-derived fungal secondary metabolite with preservative potential against Listeria monocytogenes in milk. Microbial Pathogenesis 2025, 204, 107532.</p>
+<p>60.Wu, Y.; Shi, Y. G.; Zeng, L. Y.; Pan, Y.; Huang, X. Y.; Bian, L. Q.; Zhu, Y. J.; Zhang, R. R.; Zhang, J., Evaluation of antibacterial and anti-biofilm properties of kojic acid against five food-related bacteria and related subcellular mechanisms of bacterial inactivation. Food Sci Technol Int 2019, 25, 3-15.</p>
+<p>61.Sie, C.; Ngaini, Z.; Suhaili, N.; Madiahlagan, E., Synthesis of Kojic Ester Derivatives as Potential Antibacterial Agent. Journal of Chemistry 2018, 2018, 1-7.</p>
+<p>62.Aytemir, M. D.; Özçelik, B., A study of cytotoxicity of novel chlorokojic acid derivatives with their antimicrobial and antiviral activities. European Journal of Medicinal Chemistry 2010, 45, 4089-4095.</p>
+<p>63.Emami, S.; Ghafouri, E.; Faramarzi, M. A.; Samadi, N.; Irannejad, H.; Foroumadi, A., Mannich bases of 7-piperazinylquinolones and kojic acid derivatives: Synthesis, in vitro antibacterial activity and in silico study. European Journal of Medicinal Chemistry 2013, 68, 185-191.</p>
+<p>64.Liu, X.; Xia, W.; Jiang, Q.; Xu, Y.; Yu, P., Effect of kojic acid-grafted-chitosan oligosaccharides as a novel antibacterial agent on cell membrane of gram-positive and gram-negative bacteria. Journal of Bioscience and Bioengineering 2015, 120, 335-339.</p>
+<p>65.Liu, X.; Xia, W.; Jiang, Q.; Xu, Y.; Yu, P., Synthesis, Characterization, and Antimicrobial Activity of Kojic Acid Grafted Chitosan Oligosaccharide. Journal of Agricultural and Food Chemistry 2014, 62, 297-303.</p>
+<p>66.Vereshchagin, A. N.; Frolov, N. A.; Minaeva, A. P.; Detusheva, E. V.; Derkach, Y. V.; Egorov, M. P., Synthesis and biological evaluation of novel cyanuric acid-tethered tris-pyridinium derivatives. Mendeleev Communications 2021, 31, 368-369.</p>
+<p>67.Mateeva, N. N.; Winfield, L. L.; Redda, K. K., The chemistry and pharmacology of tetrahydropyridines. Curr Med Chem 2005, 12, 551-71.</p>
+<p>68.Khan, M. M.; Faiz, F. A.; Khan, M. S., Tetrahydropyridines: a recent update for their multicomponent synthesis. RSC Advances 2026, 16, 2007-2029.</p>
+<p>69.Vereshchagin, A. N.; Iliyasov, T. M.; Karpenko, K. A.; Akchurin, R. N.; Minyaev, M. E. Tetrahydropyridines’ Stereoselective Formation, How Lockdown Assisted in the Identification of the Features of Its Mechanism. Molecules, 27, 4367, 2022.</p>
+<p>70.Tekin, K.; Hao, N.; Karagoz, S.; Ragauskas, A. J., Ethanol: A Promising Green Solvent for the Deconstruction of Lignocellulose. ChemSusChem 2018, 11, 3559-3575.</p>
+<p>71.Zheng, Z.; Dai, A.; Jin, Z.; Chi, Y. R.; Wu, J., Trifluoromethylpyridine: An Important Active Fragment for the Discovery of New Pesticides. Journal of Agricultural and Food Chemistry 2022, 70, 11019-11030.</p>
+<p>72.Wang, Y.; Xu, F.; Luo, D.; Guo, S.; He, F.; Dai, A.; Song, B.; Wu, J., Synthesis of Anthranilic Diamide Derivatives Containing Moieties of Trifluoromethylpyridine and Hydrazone as Potential Anti-Viral Agents for Plants. Journal of Agricultural and Food Chemistry 2019, 67, 13344-13352.</p>
+<p>73.Ponomarenko, O. V.; Panshina, S. Y.; Bakibaev, A. A.; Erkasov, R. S.; Kenzhebaj, M. S.; Montaeva, A. S., Glycoluril and Its Chemical Properties. EURASIAN JOURNAL OF CHEMISTRY 2023, 28.</p>
+<p>74.Kravchenko, A. N.; Baranov, V. V.; Gazieva, G. A., Synthesis of glycolurils and their analogues. Russian Chemical Reviews 2018, 87, 89.</p>
+<p>75.Galochkin, A. A.; Baranov, V. V.; Hansford, K. A.; Friberg, L. I. M.; Strel&#x27;tzova, E. D.; Lipatov, E. S.; Nelyubina, Y. V.; Kravchenko, A. N., Synthesis, Structures and Antifungal Activity of Selenoglycolurils. ChemistrySelect 2023, 8, e202300765.</p>
+<p>76.Henschel, J.; Dressler, J. M.; Winter, M.; Nowak, S., Reaction Product Analyses of the Most Active “Inactive” Material in Lithium-Ion Batteries—The Electrolyte. I: Themal Stress and Marker Molecules. Chemistry of Materials 2019, 31, 9970-9976.</p>
+<p>S10. Additional illustrations</p>
+<img src="preview_assets/image09.png" alt="SI figure 9">
+<p class="caption">Figure S9. Zero- and few-shot OOD illustration. The few-shot arm uses OOD labels for adaptation and is separate from frozen OOD validation.</p>
+<img src="preview_assets/image10.png" alt="SI figure 10">
+<p class="caption">Figure S10. Information-flow schematic from the reference experimental record.</p>
+</body></html>

@@ -1,0 +1,72 @@
+{
+  "source": "/Users/egorilin/Desktop/COMA/2026_10_14_Paper_2_edited-v24_section2_2_vertical_figures.docx",
+  "source_sha256": "359c270c4c294d41994c1958400d54b54bff8342a1dd65e07076165ecff7e3cd",
+  "main": "/Users/egorilin/Desktop/COMA/2026_10_14_Paper_2_edited-v25_correlations_and_split_figures.docx",
+  "main_sha256": "a9661f198997cceeada9ddf167cd68bb4954d604cef4d934eb80c7abcd851a0d",
+  "SI": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v25/Supplementary_Information_v25.docx",
+  "SI_source": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/Supplementary_Information_v24.docx",
+  "SI_sha256": "661d2ec9c90e3c0e6e4ec51513919beeada02b3640f3ce0df80d18c6a9dbe59e",
+  "archived_correlation_restored": "Figure4, original raster bytes unchanged",
+  "integrated_figure4_split_into": [
+    "Figure5 design",
+    "Figure6 error violins"
+  ],
+  "QHERO_renumbered": "Figure7",
+  "source_numeric_results_unchanged": true,
+  "figure1_numbers_corrected": "1103 labels, explicit descriptor/stacking/human ranges",
+  "old_figure1_source_bitmap_retained_in_package": true,
+  "new_molecular_depictions": "ACS1996 generic bis-QAC",
+  "tables_remain_in_SI": true,
+  "section2_3_and_later_scientific_text_unchanged_except_figure_numbers": true,
+  "new_and_revised_main_paragraphs_highlighted_yellow": true,
+  "revised_body_nodes": [
+    {
+      "body_index": 25,
+      "text": ""
+    },
+    {
+      "body_index": 26,
+      "text": "Figure 1. Conceptual expert-guidance pipeline and reference prediction workflows. The archive contains 1,103 final Good/Bad labels; the earlier collection-stage count of 1,500 remains subject to coauthor confirmation. Panel A distinguishes the descriptor-MLP reference range (R\u00b2 0.25\u20130.68, four endpoints) from stacking (R\u00b2 0.30\u20130.43, the three reported endpoints). Panel B uses recovered human/text holdout scores across four endpoints (R\u00b2 0.5918\u20130.7708, shown as 0.59\u20130.77). These are historical point-score ranges from Table S45, not CV uncertainty or a paired estimate from the new matched experiments. The upper curves are schematic. Representative bis-QAC scaffolds are drawn using ACS1996 styling; R denotes an unspecified substituent."
+    },
+    {
+      "body_index": 52,
+      "text": "Figure 5 makes the supervision comparison explicit under a matched design. External compact encoders use the same 681 source molecules, identical source partitions and five paired seeds, with target cations excluded. Human labels train a contrastive encoder and continuous MIC values train a regression encoder; the backbone remains frozen. Independently fitted quantitative decoders use the same CatBoost budget and native categorical task codes. This no-SMOTE follow-up retains the v5 encoder architecture while controlling source exposure, rather than replaying the historical full-corpus quantitative checkpoint."
+    },
+    {
+      "body_index": 53,
+      "text": "The vertical violins in Figure 6 show the observed endpoint-error distributions on the same 105 salts. Human and quantitative guidance give similar pooled errors, with their ordering depending on the holdout scheme. Shuffled-human guidance remains competitive in this compact-encoder experiment, limiting claims that human-label meaning uniquely explains the result. Detailed seed statistics and controls are in Table S41. These comparisons assess representation-learning procedures; an expert label is not assumed to be informationally equivalent to an individual concentration measurement."
+    },
+    {
+      "body_index": 57,
+      "text": "We additionally tested transfer of source-trained representations to the independent Q-HERO activity-classification collection (Figure 7). After deduplication and exclusion of conflicting records, 405 molecules were classified by S. aureus MIC \u22648 \u00b5M using fixed five-fold scaffold holdouts. Source cations were excluded from this target cohort. Human-guided partial-backbone features with a newly trained CatBoost classifier give AUROC 0.675 \u00b1 0.033, versus 0.595 for raw MolFormer and 0.565 for the authors\u2019 RF architecture refitted on the same cohort and folds. Quantitative guidance gives 0.716 \u00b1 0.010. These human and quantitative models use partial-backbone adaptation, distinct from the compact encoders in Figures 5\u20136; the external task therefore extends the supervision comparison across another representation-learning procedure."
+    },
+    {
+      "body_index": 60,
+      "text": "Figure 7. ROC curves for Q-HERO S. aureus activity (MIC \u2264 8 \u00b5M) on 405 deduplicated molecules. (a) Fixed stratified random holdout: 324 training and 81 test molecules, including 72 active and 9 inactive test compounds. (b) Pooled predictions from five scaffold-held-out folds across 29 scaffolds. Human, quantitative and shuffled-human representations use matched partial-MolFormer adaptation on 681 source molecules excluding target salts and cations; this architecture differs from Figures 5\u20136. CatBoost classifiers are fitted independently on target-training folds under the same protocol. Curves average individual ROC curves across five paired source/decoder seeds; shading is pointwise sample SD, not a confidence interval. Raw MolFormer and dashed RF35 are fixed seed 0 references. No ensemble probabilities or test-based model selection is used. Published 421-row metrics refer to a different cohort."
+    },
+    {
+      "body_index": 62,
+      "text": "To rigorously evaluate the generalization capability of the embeddings, we assembled an out-of-distribution (OOD) test set of 17 newly synthesized QACs belonging to a previously unexplored structural subtype, measured under independent assay conditions. Both embedding types were subsequently benchmarked on this held-out set, alongside the in-domain quaternary ammonium compounds described above (Figure 8). "
+    },
+    {
+      "body_index": 64,
+      "text": "Figure 8. Molecular classes represented in each dataset."
+    },
+    {
+      "body_index": 89,
+      "text": "To verify out-of-domain performance, we compared three representations: human embeddings, vanilla MolFormer features, and the descriptor-based approach. As we showed in our previous work, the descriptor-based approach performs better when the task is reframed as classification, so we also report classification metrics here. In the label-free setting, human embeddings achieve the best performance among the three representations. When categorical labels are supplied as input features, human embeddings again perform best, while vanilla MolFormer reaches a comparably small but non-negligible R2. In terms of classification accuracy with labels, the descriptor-based approach performs well, and when accuracy is measured within one activity class (accuracy \u00b11), all three representations achieve good performance (Figure 9)."
+    },
+    {
+      "body_index": 92,
+      "text": "Figure 9. Model performance transitioning from zero-shot to few-shot learning modes. Zero-Shot means without training on out-of-domain set; few-shot means training on 40% of out-of-domain set. In classification translucent bars indicate accuracy within the range of 1 nearest class. "
+    },
+    {
+      "body_index": 94,
+      "text": "For understanding how the resulting embeddings work, we turn to interpretable methods of machine learning. Our human embeddings are produced from the 768-dimensional MolFormer features by an encoder trained with a contrastive objective on the expert \u201cGood/Bad\u201d classification dataset. This raises two natural questions: does this training substantially reshape the pretrained representation, or does it mainly compress it; and is the expert classification dataset actually necessary, or would the regression data alone suffice? Figure 10 summarizes the information flow we set out to characterize \u2014 the encoder receives geometric information from MolFormer and a separate, task-relevant signal from the human labels, and we ask how much of the final embedding can be attributed to each source. We address these questions with three complementary analyses: a representational-similarity analysis, a feature-attribution analysis, and a controlled ablation in which a second encoder is trained without the expert dataset."
+    },
+    {
+      "body_index": 96,
+      "text": "Figure 10. Information flow in the contrastive encoder. The encoder combines geometric structure inherited from the pretrained MolFormer representation with a task-relevant signal supplied by the expert \u201cGood/Bad\u201d classification dataset. The resulting human embedding can be viewed as the sum of a structural component, which preserves the MolFormer geometry, and a biological component, which carries activity-discriminating information induced by the human labels and contributes most to out-of-domain generalization on the harder Gram-negative endpoints."
+    }
+  ]
+}

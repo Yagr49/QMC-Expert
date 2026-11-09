@@ -1,0 +1,198 @@
+• # Independent Scientific Review — Manuscript v9
+
+  **Manuscript:** "Human Binary Annotations Compete with Quantitative MIC Supervision: Controlled Tests of Molecular Representation Learning for QAC Biocides"
+  **Materials reviewed:** manuscript_v9_readable.md, PROTOCOL.md, run_interventions.py, analyse_interventions.py, analysis/summary.csv, analysis/paired_bootstrap.csv, LITERATURE_AND_SOURCE_AUDIT.md.
+
+  ---
+
+  ## 1. Overall assessment
+
+  The manuscript is unusually candid for this genre: it pre-registers an estimand (protocol fixed 11 Oct 2026 before results were inspected), separates "useful signal / competition / causal intervention / mechanism" explicitly, disclaims equivalence where it cannot be shown, and flags its own unverifiable provenance (lost annotator votes, absent CKA/SHAP scripts). The code implements what the protocol describes, and the headline numbers in the abstract and Section 2.6 match the supplied CSVs exactly (I re-derived every quoted ΔRMSE and interval from `paired_bootstrap.csv` — all correct).
+
+  However, three problems keep the paper weaker than its data allow:
+
+  1. **An adverse result present in `paired_bootstrap.csv` is missing from the text** — on the S. aureus panel the expert-trained encoder is reliably *worse than the untrained raw backbone*. This is not a nuance; it changes the paper's central message from "benefit does not reproduce" to "wrong-panel supervision degrades the representation."
+  2. **The analysis script only ever bootstraps expert-centred contrasts.** The natural causal contrast for the quantitative arm (real vs shuffled *continuous* MIC) is never computed, even though it is needed to interpret what the real-vs-shuffled expert effect actually means.
+  3. **The additive-gain question (expert encoder vs raw backbone / untrained encoder) is answered mostly in the SI-adjacent CSV rows rather than in the prose**, and the answer is null on the pooled panel and negative on the S. aureus panel. The manuscript's own framing ("real label assignment matters") is true but incomplete against these anchors.
+
+  The defensible core — a bounded algorithmic-causal claim about supervision content within one fixed pipeline, plus practical competition only under partial fine-tuning — is sound. The current text occasionally lets the stronger-sounding claims (title, abstract emphasis, "one result deserves separate emphasis") run ahead of that core.
+
+  ---
+
+  ## 2. Claims-to-evidence audit (the four claim classes)
+
+  | Claim class | Where tested | Result (from your own CSVs) | Verdict |
+  |---|---|---|---|
+  | **A. Useful expert signal** (labels carry learnable structure) | matched-pooled: expert − expert-shuffled = **−0.175 [−0.258, −0.058]** (scaffold bootstrap) | Supported, pooled panel only. Direct ranking ρ = 0.22/0.40/0.30 (see Finding 6). **Not reproduced** on matched-sa: +0.025 [−0.139, +0.311]. | Supported, panel-dependent |
+  | **B. Additive gain over raw backbone** | expert − raw-MolFormer: pooled **+0.005 [−0.092, +0.109]**; expert − untrained: pooled −0.060 [−0.138, +0.037]; matched-sa expert − raw: **+0.185 [+0.056, +0.380]** | Pooled: no gain (scaffold CIs include zero). SA: reliable *harm*. | **Not supported; negative on SA panel. Must be stated.** |
+  | **C. Competition with quantitative supervision** | Partial FT (archived): 0.269 vs 0.312/0.308 (3 seeds, sources differ in n and overlap). Frozen head: expert − continuous = **+0.109 [+0.007, +0.210]**; expert − binary MIC = −0.039 [−0.139, +0.136]; full-source: 0.095 vs 0.246 | Only under partial FT and only as "comparable, not equivalent." Frozen head: continuous MIC strictly dominates; binary MIC ≈ expert. | Protocol-dependent; title overgeneralises |
+  | **D. Biological mechanism** | CKA/SHAP archived but provenance-incomplete; correctly omitted as evidence | None claimed. | Correctly excluded |
+
+  Two descriptive patterns in your own Table 3 deserve explicit sentences because they sharpen claim C rather than inflating it:
+
+  - **Target resolution, not label origin, drives the frozen-head ranking.** Real expert labels and threshold-matched binary MIC are indistinguishable (−0.039 [−0.139, +0.136]); continuous MIC is clearly better. "Binary supervision is binary supervision; resolution is what buys performance" is the honest reading.
+  - **Shuffled continuous MIC (RMSE 1.605) sits at backbone level (1.602) and equals real expert labels (expert − quant-shuffled = +0.002 [−0.100, +0.097]), while shuffled *binary* labels are the only actively harmful arm (1.780, R² −0.080).** So "expert beats shuffled expert" partly measures the damage potential of the binary objective, not only the information in real labels. See Finding 4.
+
+  ---
+
+  ## 3. Critical findings
+
+  **Finding 1 (high): omitted adverse result — SA-panel expert encoder is worse than the backbone.**
+  `paired_bootstrap.csv` contains matched-sa `expert minus raw-molformer = +0.185 [+0.056, +0.380]` (scaffold) and `+0.185 [+0.110, +0.261]` (molecule), and `expert minus untrained = +0.109 [−0.051, +0.354]`. Positive ΔRMSE means the expert-trained encoder is *worse*. Section 2.6 reports only "the expert-label benefit does not reproduce." That is a euphemism for a reliable degradation relative to doing nothing, and it is directly relevant to any reader weighing human supervision for organism-specific tasks. It must appear in 2.6, the abstract, and the conclusion. Suggested wording in Section 5.
+
+  **Finding 2 (high): the "compete" claim is currently load-bearing in the title but holds only under partial fine-tuning.**
+  Under the frozen-backbone protocol (the protocol with the strongest internal validity — matched molecules, matched weights, matched budget), continuous MIC dominates with a CI excluding zero, and expert supervision merely recovers backbone performance. Under partial fine-tuning the comparison is weaker still as evidence: sources differ in molecule count (740 vs 1,153) and overlap, n = 3 seeds, no reported CIs. The manuscript body is careful; the title and abstract emphasis are not. Rename or qualify (Section 5).
+
+  **Finding 3 (high): missing contrast — real vs shuffled *continuous* MIC.**
+  `analyse_interventions.py` bootstraps only `expert minus <comparator>`. The content effect of the quantitative arm (quant-continuous vs quant-shuffled) is never interval-estimated, so the reader cannot tell whether the real>shuffled expert effect is large or small *relative to the analogous quantitative effect*. From the means it is almost certainly smaller (1.497 vs 1.605 ≈ −0.11 in ΔRMSE, comparable in size to the expert effect of −0.175 but on a stronger arm). This is a one-line change to the analysis loop (comparator base list) plus a sentence. Without it, claim A is incompletely calibrated.
+
+  **Finding 4 (medium): the shuffle controls are asymmetric across objectives — interpretive caution required.**
+  Shuffled binary labels degrade below untrained (R² −0.080 vs +0.055); shuffled continuous labels do not (+0.124). Therefore "expert > shuffled-expert" conflates (i) information in real labels with (ii) the harm that binary memorisation does when labels are noise. Add one shuffled-binary-MIC arm (binarise, then permute) to separate objective harm from content; until then, temper causal language about the *size* of the label-content effect. The molecule-level CI for expert−untrained (−0.060 [−0.119, −0.0017]) excludes zero only marginally and the scaffold CI includes zero — do not let that contrast be quoted as a positive result without both units shown.
+
+  **Finding 5 (medium): bootstrap conditions on 5 seeds; seed uncertainty is unquantified.**
+  `intervals()` averages squared errors over the 5 seeds per molecule and bootstraps molecules/clusters only. With RMSE_sd of 0.03–0.13 across seeds, the trained-seed set is a real variance source. Add a two-level bootstrap (resample seeds with replacement × molecules/clusters) or report a seed random-effect variance component. The manuscript does say intervals are "conditional on five trained seeds" — keep that sentence, but give the reader the second-level number.
+
+  **Finding 6 (medium): direct-ranking numbers are single-checkpoint but presented as "mean".**
+  `analyse_interventions.py` reads only `finetune/predictions_seed0.csv` (its own output notes "conditional on one FT checkpoint"). The manuscript quotes "mean rank agreement 0.22, 0.40, 0.30 … AUC 0.64, 0.69, 0.60." Either these means come from archived multi-seed predictions (then cite that file and give SDs/intervals) or they are seed-0 values (then say so). The AUCs have no visible provenance in the supplied analysis. Additionally: with n = 105, ρ = 0.22 has a CI that only just excludes zero; with n = 17, ρ = 0.30 is compatible with zero. The "deserves separate emphasis" paragraph must carry the intervals or it will be read as stronger than it is.
+
+  **Finding 7 (medium): pooled → SA panel restriction is confounded with composition shift — quantify, don't just assert.**
+  The text says "restricting the panel changes the selected chemical collection as well as its size; this contrast cannot identify an organism-matching effect." Correct, but the reader needs the descriptive table to judge the shift: per-panel positive prevalence, records per molecule (4,938/681 ≈ 7.3 vs 855/529 ≈ 1.6 — a 4.5-fold difference in information density per molecule that *alone* could explain the continuous arm's relative improvement), number of scaffold clusters, and the overlap/Jaccard of the two panels. Report why the 152 molecules drop out (non-aureus organism, censored qualifier).
+
+  **Finding 8 (low–medium): multiplicity and primary-contrast designation.**
+  ~24 contrasts are computed per (panel × head × target) block. The protocol names one primary outcome (paired Q-HERO-405 RMSE) but not one primary contrast. Designate pooled-panel expert−shuffled and expert−continuous as primary (defensible post hoc only because they are the two the abstract already leads with), label everything else secondary/exploratory, and state how many contrasts were run. Do not add a post-hoc non-inferiority/equivalence test at a margin chosen after seeing [+0.007, +0.210] — the manuscript's repeated "this is not an equivalence result" is the right call; keep it.
+
+  **Finding 9 (low): Table 1 (partial fine-tuning) reports means without seed SDs or CIs.**
+  "Comparable" and "differences are small relative to the observed seed variation" need the seed SDs printed (three seeds only). If archived per-seed predictions no longer exist, downgrade the language to "numerically intermediate" and say the comparability statement is descriptive.
+
+  **Finding 10 (low): ILToxDB arm uses a merged CC50/IC50/EC50 field.**
+  The audit and text acknowledge this, but a CC50-only sensitivity analysis is cheap and would show whether the cytotoxicity arm's near-zero result (R² 0.083 vs expert 0.095) is an endpoint-mixture artifact.
+
+  ---
+
+  ## 4. Code and reproducibility verification notes
+
+  The code does what the protocol says, and several details are better than typical:
+
+  - Permutations are restricted to source-training rows; target labels never enter supervision ✓ (`y[tr] = rng.permutation(y[tr])`).
+  - Initial weights are genuinely paired: `torch.manual_seed(seed)` immediately before `Encoder()` for every arm ✓; `init_sha256` is logged per run — **publish a SI table asserting hash equality across arms within panel×seed** (verification step 3 below).
+  - Evaluation uses out-of-fold predictions from scaffold-disjoint GroupKFold, with an explicit disjointness assertion ✓ — the bootstrap is over genuinely held-out predictions, not refitted test rows.
+  - Scaffold bootstrap correctly forms ratio-of-sums RMSE over resampled clusters ✓; B = 10,000 ✓; protocol and feature hashes in the manifest ✓.
+  - Source validation loss is computed but never used for selection ✓ (matches "diagnostic").
+  - One asymmetry to disclose: the "same minibatch ordering for a given seed" guarantee holds within a matched panel (equal train n); the `full` panel arms have different n, so ordering equivalence does not hold there — the text already treats `full` as descriptive only, fine.
+
+  Items to verify before submission (cannot be confirmed from supplied files): the "no prepared molecule is truncated (max token length 202)" claim has no accompanying prep script or hash — add the prep script's SHA to the manifest; the exclusion of evaluation cations/counterions from sources is done in data prep, not in `run_interventions.py` — cite the prep step; reconcile QAC-104 (new cohort) with QAC-105 (old name) explicitly (a reader will assume 104 = 105 − 1 conflict row — state it); the QMR Zenodo DOI landing page is unverified per your own audit — verify it resolves.
+
+  ---
+
+  ## 5. Exact English replacements
+
+  **Title** (choose one; current title asserts the one regime where evidence is weakest):
+
+  > *Option A (recommended):* "Human Binary Annotations as Supervision for QAC Potency Modelling: Matched-Molecule Interventions Separate Signal, Competition and Mechanism"
+  >
+  > *Option B (minimal change):* "Human Binary Annotations Can Compete with Quantitative MIC Supervision under Partial Fine-Tuning: Matched-Molecule Tests for QAC Biocides"
+
+  **Abstract, third sentence — replace:**
+
+  > "On 681 common molecules, real expert labels improved external Q-HERO RMSE relative to shuffled expert labels by 0.175 log2 µM (95% scaffold-bootstrap interval −0.258 to −0.058), while continuous pooled MIC was stronger by 0.109 (0.007 to 0.210)."
+
+  **with:**
+
+  > "On 681 common molecules, real expert labels improved external Q-HERO RMSE relative to shuffled expert labels by 0.175 log2 µM (95% scaffold-bootstrap interval −0.258 to −0.058), matched the raw MolFormer backbone (Δ = +0.005 [−0.092, +0.109]), and were outperformed by continuous pooled MIC by 0.109 [0.007, 0.210]. This ordering did not hold on the 529-molecule exact S. aureus panel, where the expert-trained encoder was worse than the untrained backbone (Δ = +0.185 [+0.056, +0.380]) and did not beat shuffled labels."
+
+  **Abstract, penultimate sentence — replace:**
+
+  > "The evidence establishes a useful, protocol-dependent human supervision signal and practical competition under partial fine-tuning."
+
+  **with:**
+
+  > "The evidence supports a useful, panel-dependent human supervision signal and practical competition under partial fine-tuning only; under a frozen backbone, continuous MIC strictly dominated and expert supervision recovered, but did not exceed, backbone-level performance."
+
+  **Abstract, final sentence — keep as is** (it is already correct and load-bearing).
+
+  **Section 2.1, descriptor-baseline meta-commentary — replace:**
+
+  > "The descriptor baseline is positive on Q-HERO (R² = +0.057), so it is not correct to describe both baselines as non-positive throughout."
+
+  **with:**
+
+  > "The descriptor baseline is weakly positive on Q-HERO (R² = +0.057) and negative on QAC-105 (−0.310) and OOD-17 (−0.486)."
+
+  **Section 2.1, "one result deserves separate emphasis" paragraph — replace the parenthetical with:**
+
+  > "…yet its direct score tracks measured MIC ordering: Spearman ρ = 0.40 (molecule-bootstrap CI reported in Table S__) on Q-HERO, 0.22 on QAC-105, and 0.30 on OOD-17, whose interval spans zero (n = 17); median-split AUCs are 0.69, 0.64 and 0.60. The regenerated ranking analysis conditions on one archived checkpoint per target; multi-seed summaries are in the Supporting Information. This is evidence that the final binary labels contain transferable potency-related signal; it is not evidence of quantitative MIC prediction."
+
+  **Section 2.6, pooled panel — after** "This control shows that the real label assignment matters in this panel." **insert:**
+
+  > "Two anchors qualify the size of this effect. First, the expert encoder does not measurably beat an untrained encoder (ΔRMSE −0.060 [−0.138, +0.037] on whole-scaffold bootstrap; the molecule-level interval, −0.060 [−0.119, −0.002], is marginal) or the raw MolFormer backbone (+0.005 [−0.092, +0.109]). Second, shuffled continuous MIC — which destroys the structure–potency pairing while preserving the continuous marginal distribution — performs at backbone level (RMSE 1.605 versus 1.602) and is statistically indistinguishable from real expert labels (+0.002 [−0.100, +0.097]). The defensible statement for this protocol is therefore that real expert labels recover backbone-level representation quality, whereas binary supervision *without* signal is actively harmful (shuffled-expert RMSE 1.780, R² −0.080). Within this panel, real expert labels and threshold-matched binary MIC were statistically indistinguishable (−0.039 [−0.139, +0.136]); the frozen-head ranking is driven by target resolution rather than by the human or database origin of the label."
+
+  **Section 2.6, S. aureus panel — replace:**
+
+  > "The expert-label benefit does not reproduce."
+
+  **with:**
+
+  > "The expert-label benefit does not reproduce, and the panel result is adverse rather than neutral: the expert-trained encoder is reliably worse than the raw MolFormer backbone (expert minus raw = +0.185 [+0.056, +0.380]) and no better than an untrained encoder (+0.109 [−0.051, +0.354]). Organism-matched supervision therefore degraded external prediction relative to no training at all in this panel."
+
+  (keep the following sentence about the contrast not identifying an organism-matching effect — it is correct.)
+
+  **Section 2.6, causal estimand paragraph — keep verbatim;** it is the best-written paragraph in the manuscript.
+
+  **Conclusion, first sentence — replace:**
+
+  > "Final human Good/Bad annotations contain activity-related information that can be learned and transferred to quantitative QAC modelling."
+
+  **with:**
+
+  > "Final human Good/Bad annotations contain activity-related information that the tested training algorithm can exploit: on the pooled-source panel real labels beat permuted labels, whereas on the organism-matched panel the benefit did not reproduce and the trained encoder underperformed the untrained backbone. Transfer of this signal to quantitative QAC modelling is real but panel- and protocol-dependent."
+
+  **Conclusion, "Competition is therefore protocol-dependent…" — append:**
+
+  > "…and was not observed under the frozen-backbone protocol, where continuous MIC strictly dominated and expert supervision matched but did not exceed the backbone."
+
+  **Table 3 — add a row** (numbers from `summary.csv`): `Pooled MIC | Raw MolFormer backbone | — | +0.128 | 1.602`, plus a footnote giving the two untrained/backbone anchors. Without the backbone row, the table invites the "additive gain" misreading.
+
+  **Section 1, grammar:** "The antimicrobial resistance (AMR) is a crucial challenge for modern society which is further exacerbated by nearly 40 years long period of "antibiotic discovery void" 1, 2." → "Antimicrobial resistance (AMR) is a crucial societal challenge, further exacerbated by a nearly 40-year 'antibiotic discovery void'.¹˒²"
+
+  **Author list:** "nfrolov@ioc.ac,ru" → "nfrolov@ioc.ac.ru".
+
+  ---
+
+  ## 6. Actionable statistical checks
+
+  Ordered by value per unit effort; all are runnable against the existing `predictions.csv` / `training.csv`.
+
+  1. **Full contrast matrix.** Extend `analyse_interventions.py` to bootstrap all arm-pairs (or at least add quant-continuous minus quant-shuffled). Report side-by-side with expert-centred contrasts. This calibrates the size of the expert content effect against the quantitative content effect.
+  2. **Add one arm: shuffled binary MIC** (binarise real MIC at the matched threshold, then permute within source train). This separates objective-harm from content in the shuffled-arm asymmetry (Finding 4).
+  3. **Verify pairing from `training.csv`.** Assert `init_sha256` is identical across arms within each panel×seed; publish the table. Also tabulate per-arm `positive_prevalence` and `binary_cutoff` (and tie counts) for the SI.
+  4. **Two-level bootstrap.** Resample the 5 seeds (with replacement) jointly with molecules/clusters; report the seed-level variance component alongside the current intervals.
+  5. **Panel description table.** For 681 and 529 panels: n molecules, records/molecule (median, IQR), positive prevalence, n cation-scaffold clusters, overlap between panels, and stated reason for dropout (organism ≠ aureus, censored qualifier). This is a description, not a test.
+  6. **Proper permutation p-value** for pooled expert vs expert-shuffled: ≥1,000 independent label permutations pooled across seeds; report the tail probability next to the bootstrap CI.
+  7. **Influence analysis.** Leave-one-scaffold-cluster-out recomputation of the two primary pooled contrasts; report the number of clusters and the min/max cluster influence. If the expert−shuffled effect is carried by one or two clusters, say so.
+  8. **Threshold sensitivity for quant-binary.** Recompute expert−binary-MIC at cutoffs ±1 and ±2 two-fold dilutions around the prevalence-matched threshold; report whether the "indistinguishable" conclusion is threshold-robust.
+  9. **Multi-seed direct ranking.** Recompute Spearman ρ and median-split AUC for the direct-transfer expert model across all available FT seeds; report mean ± SD and per-seed CIs; reconcile with the word "mean" in 2.1.
+  10. **Aggregation sensitivity.** Pooled-MIC arm with median vs mean vs per-record weighting; report whether the continuous arm's advantage is aggregation-robust (relevant to the "denoising" hypothesis the manuscript correctly keeps as untested).
+  11. **Ridge instability forensics.** Identify which arms/scaffolds produce the extreme Ridge errors; state whether instability is concentrated in particular arms (currently opaque). Keep results per protocol, but describe.
+  12. **CC50-only sensitivity** for the ILToxDB full-source arm.
+  13. **Table 1 seed SDs** for the partial-FT experiment (and bootstrap CIs if per-seed archived predictions survive); otherwise soften "comparable" to "numerically intermediate; descriptive only."
+  14. **Designate primary contrasts explicitly** (pooled-panel expert−shuffled, expert−continuous), state the total number of contrasts computed, and label the rest exploratory. Do not perform post-hoc equivalence/NI testing.
+
+  ---
+
+  ## 7. Editorial issues
+
+  - References "(77)", "(78)", "(79)" are un-renumbered placeholders in a 1–76 sequence; renumber before submission.
+  - Figure numbering skips 3 and 5 (extract shows 1, 2, 4, 6, 7) — check continuity.
+  - The "Table of contents: Update this table of contents in Word…" line is a leftover field instruction; delete.
+  - Confirm the CLSI M07 replacement for the mis-cited reference 76 (per your audit) is actually in v9's reference list; the correction is noted but not shown applied.
+  - The meta-commentary sentences in 2.1/2.3 ("so it is not correct to describe…", "The historical architecture table is not used…") read as revision history; consolidate into a single short "Provenance and exclusions" note or move to SI.
+  - The Choung et al. citation is correctly framed as prior work, not a first-ever claim — keep it that way in any cover letter.
+
+  ---
+
+  ## 8. Bottom line
+
+  The study's real, defensible contributions are: (i) a clean within-algorithm causal control showing real expert labels beat permuted ones on the pooled panel while the identical pipeline with organism-matched labels degrades below the untrained backbone — a genuinely informative negative boundary; (ii) an honest demonstration that binary human labels carry potency-correlated signal without ever seeing a concentration; and (iii) practical competition with quantitative supervision *under partial fine-tuning only*. The data do **not** support additive value over the frozen backbone, equivalence with measurements, or any mechanistic attribution — and the current text mostly says so, except where the title, the omitted SA-panel adverse contrast, the single-checkpoint ranking emphasis, and the missing quantitative real-vs-shuffled contrast let a stronger reading survive. Apply the replacements and checks above and the paper becomes one of the more carefully bounded supervision-comparison studies in this area; leave it as is and a competent referee will find the three gaps in Section 3 within an hour.
+
+  No files were modified and no tools were used, per your instruction.
+

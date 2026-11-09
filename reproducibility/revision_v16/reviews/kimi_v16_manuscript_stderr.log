@@ -1,0 +1,195 @@
+kimi version 2.1.1
+Warning: [loop_control] 'max_retries_per_step' is deprecated and no longer used; rename it to 'max_attempts_per_step'. Run /update-config to fix it.
+• The user has set up a specific role: I am an independent scientific reviewer. They have supplied the manuscript and numerical summaries directly in the message (manuscript_v16_readable.md, parameters_and_budgets.csv, published_metrics.csv). Instructions:
+
+  - Review only the supplied manuscript and numerical summaries.
+  - Do not call tools, read extra files, execute commands, edit files, or invent experiments.
+  - At most 600 words.
+  - Separate concrete errors affecting current claims from optional new experiments outside scope.
+  - Check internal numerical consistency and causal interpretation.
+  - Finding a model critique is not human peer review.
+  - Focus on v16 additions: direct MIC/MBC prediction vs frozen guided encoder + decoder; LoRA vs partial/full FT; weight rewinds preserving buffers and refitting decoder.
+  - Given limits: exploratory, fixed budgets, unadjusted intervals. Primary frozen-decoder: five source seeds; direct fits: three paired source/target seeds one-to-one; route contrasts use only first three source checkpoints. No universal adapter superiority, equivalence, independent human-information channel, biological causality established. H1-H7 blank. QAC105 = 420 exact endpoints; OOD17 = 67 exact + 1 right-censored, 4 scaffold families.
+  - Return concrete corrections if these limitations are violated.
+
+  The superpowers plugin says to invoke skills. But the user's explicit instructions take precedence: "Do not call tools". The Skill tool is a tool. The user instruction explicitly says not to call tools. Also the plugin instructions say user instructions take priority. So I should NOT invoke the Skill tool. The user says review only the supplied material, give at most 600 words. So I write the review directly.
+
+  Let me do the review carefully, focusing on internal numerical consistency of the v16 additions.
+
+  Key numbers to check:
+
+  1. Trainable parameters:
+  - Primary matched partial FT: 28,375,297 (text) — consistent with CSV "expert partial 28379140". Wait, CSV says 28379140 (28,379,140), but manuscript says 28,375,297 in section 1 and 4.2! Let me check.
+
+  Manuscript Section 1: "updating 28,375,297 parameters."
+  Section 4.2: "totalling 28,375,297 trainable parameters."
+  Table 6: "Pretrained / Partial FT | 28,379,140". Human/Continuous/Binary/Shuffled partial FT: 28,379,140.
+  CSV parameters_and_budgets.csv: expert partial = 28379140 (28,379,140). All arms 28379140.
+
+  So there's an internal inconsistency: 28,375,297 vs 28,379,140 — a difference of 3,843 parameters. That's a concrete numerical inconsistency affecting the primary matched experiment description vs the CSV and Table 6. Concrete correction needed.
+
+  2. Direct extension fit count: 363 fits = 165 pretrained-initialised capacity fits + 198 source-initialised. Check: 165 = 5 configs × 3 seeds × (5 cation folds + 5 scaffold folds + 1 final OOD fit) = 5 × 3 × 11 = 165. Yes. 198 = 6 source arms × 3 seeds × 11 = 198. Total 363. Consistent. Good.
+
+  Wait — "All 363 target fits use a fixed 30-epoch budget" — text says "From the pretrained encoder, frozen linear, frozen MLP, query/value LoRA, partial and full fine-tuning use three paired target seeds." That's 5 configs × 3 seeds = 15 runs per regime, 11 regimes each = 165. OK.
+
+  3. Weight controls: "120 intact/rewound configurations plus one pure raw reference each receive 11 CatBoost fits, totalling 1,331." 120 × 11 = 1320, +11 = 1331. Consistent. 120 = 6 arms × 5 seeds × (3 rewinds + 1 intact?) That's 6×5×4 = 120. Yes: intact + 3 rewind levels (outer LayerNorm, upper 8 blocks, all encoder). So 120 configurations each with 11 fits = 1320 + 11 (pure raw reference) = 1331. Consistent.
+
+  But wait — Table 7 has 5 columns... columns 2-4 are rewind-all contrasts for 3 regimes, column 5 is real−shuffled cation. Fine.
+
+  4. Table 6 parameter counts:
+  - Frozen linear: 4,612. LayerNorm(768) + Linear(768→4): LayerNorm has 768×2 = 1536 params; Linear 768×4 + 4 = 3076. Total 4612. Consistent. Good.
+  - MLP: 768→256→128→4. Linear1: 768×256+256 = 197,120 (or 196,864+256). 768×256 = 196,608 + 256 = 196,864. Linear2: 256×128+128 = 32,768+128 = 32,896. Linear3: 128×4+4 = 516. Sum: 196,864+32,896+516 = 230,276. Plus LayerNorm(768) 1,536 = 231,812. Consistent with Table 6 (231,812) and CSV raw-molformer compact 231812. Good.
+  - LoRA: 299,524. Text says rank 8, alpha 16, query+value in 12 blocks. MolFormer-XL: hidden 768, 12 heads? Q and V projections: each 768×768. LoRA A: 768×8, B: 8×768 per matrix → 2×768×8 = 12,288 per matrix; Q+V = 24,576 per block; ×12 = 294,912. Plus dropout and... 299,524 − 294,912 = 4,612 = head (LayerNorm+Linear). So 294,912 + 4,612 = 299,524. Consistent! Good.
+  - Full FT: 44,379,652. Partial: 28,379,140. Difference: 16,000,512. MolFormer-XL total params ~ 44.4M? Full = partial + layers 0–3 + embeddings. 16,000,512 for token embeddings (vocab ~ 2362 × 768 = 1,814,016?) plus 4 blocks (~3.5M each?). Plausible; can't fully verify but internal consistency: full − partial = 16,000,512. CSV raw-molformer full = 44379652, matches Table 6. Partial CSV = 28379140 matches Table 6 but NOT the 28,375,297 in sections 1/4.2. So inconsistency confirmed.
+
+  Also CSV linear = 4612, lora = 299524, compact (MLP) = 231812 — all match Table 6. Good.
+
+  5. Table 6 numbers check against narrative:
+  - "From pretrained initialisation, cation-CV RMSE is 1.863 for full fine-tuning, 2.013 for a frozen linear head and 2.040 for LoRA." Matches table (1.863±0.045, 2.013±0.006, 2.040±0.049). Good.
+  - "LoRA minus full-fine-tuning ΔRMSE is +0.177 [+0.071, +0.286]": 2.040 − 1.863 = 0.177. Good point estimate.
+  - OOD ordering: linear/LoRA/full = 2.560/2.756/3.032. Matches table. Good.
+  - Human source init: 1.797/1.834/2.412 matches table. Pretrained partial: 1.894/1.996/3.008 matches. Good.
+  - "human minus shuffled-human scaffold-CV ΔRMSE is −0.156 [−0.311, −0.009]": 1.834 − 1.990 = −0.156. Good.
+  - OOD direct human minus continuous-MIC: 2.412 − 3.075 = −0.663. Text says −0.664 [−1.301, −0.166]. Hmm: 2.412 − 3.075 = −0.663. Text says −0.664. Rounding? Table values are means rounded to 3 decimals; the true difference of unrounded means could be −0.664. This is a minor potential inconsistency but explainable by rounding — differences computed from unrounded values. Since means are reported to 3 decimals, −0.663 vs −0.664 is within rounding. Not a hard error. Similarly cation route contrast: direct/frozen-decoder 1.797/1.743 — wait, the decoder route for the first three source checkpoints: 1.743? Earlier text says the route comparison uses "the same first three source checkpoints" and reports human direct/frozen-encoder-plus-CatBoost RMSE 1.797/1.743. But Table 2 (five seeds) human pooled = 1.737. A three-seed subset giving 1.743 is plausible. OK.
+  - OOD direct-minus-decoder contrast: +0.306 [−0.278, +0.971]: 2.412 − 2.106 = +0.306. Good.
+
+  6. Scaffold route: 1.834/1.819 → direct minus decoder = +0.015, not given but fine.
+
+  7. Table 7 numbers vs narrative: human rewind-all cation +0.109 [+0.037, +0.201] etc. matches. Good.
+
+  8. "The rewind-all representation is not the pure raw reference: on OOD its contrast with pure raw is +0.032 [−0.154, +0.205]." Fine — not derivable from tables but plausible.
+
+  9. "restoring the pretrained outer encoder LayerNorm, upper eight blocks, or all encoder parameters" — 2 outer-norm tensors, 128 tensors from 8 blocks, 195 total encoder parameter tensors. 195 − 128 = 67; outer norm = 2 → 65 for remaining 4 blocks + embeddings? "All 195 named encoder parameter tensors" — embeddings included? If all encoder parameters = 195 tensors, and upper 8 blocks = 128, outer norm = 2, remaining = 65 tensors for layers 0–3 (4 blocks). 65/4 ≈ 16.25 per block — attention (Q,K,V,O = 4) + FFN (2) + 2 norms = 8 tensors per block → 32 for 4 blocks, plus embeddings (token + position = 2) = 34. 128+2+34 = 164 ≠ 195. Hmm. But MolFormer may have more tensors per block (biases separate? no, Linear has weight+bias = 2 tensors each: Q,K,V,O = 8 tensors; FFN: Linear1, Linear2 = 4 tensors (weights+biases); norms = 4 → 16 per block → 8 blocks = 128. Yes! That gives exactly 128 for 8 blocks. Then layers 0–3 = 64 tensors + token embedding (1) + outer norm (2) = 67; 128 + 67 = 195. Consistent. Nice — internally consistent.
+
+  10. Abstract: "A further 363-fit extension..." consistent with 4.8. Good.
+
+  11. Section 2.6: "All 363 target fits use a fixed 30-epoch budget" — but 4.8 says "minimise joint standardised MSE for 30 epochs". And primary source training also 30 epochs/360 updates (4.2): 360 updates with batch 32 over 377 molecules = 11.78 batches/epoch → 30 epochs = 353 steps ≈ 360. OK consistent-ish ("30 epochs/360 updates").
+
+  12. Check "updating 28,375,297 parameters" vs CSV and Table 6 28,379,140 — the discrepancy of 3,843. Which is right? The CSV (parameters_and_budgets.csv) says 28379140 for all six expert arms. Table 6 says 28,379,140 for partial FT. Section 4.2 architecture: "Embeddings and layers 0–3 remain frozen; layers 4–11, the outer encoder LayerNorm and dropout-0.1 scalar head are trained". Partial target FT (4.8): "updates upper eight blocks and the outer encoder LayerNorm". Note 4.8 partial target = 28,379,140 — includes the head? "Counts include the target head and its LayerNorm" per Table 6 caption. Source partial FT 28,375,297 presumably excludes head? Difference 3,843. Hmm, the source scalar head: dropout-0.1 scalar head — for binary, a scalar output: Linear(768→1) = 769 + LayerNorm 1536 = 2,305? Not 3,843. For multi-task? Source arms: human/binary (scalar head) vs continuous (scalar). 3,843 = ? 768×4+4 + 768×... hmm 4,612 is the target head (LN+Linear4). 4,612 − 769 = 3,843! So 28,375,297 + 3,843 = 28,379,140. The difference equals the four-output target head minus the scalar head (LayerNorm 1,536 + Linear(768→4) 3,076 = 4,612 vs LayerNorm 1,536 + Linear(768→1) 769 = 2,305; difference = 3,307). Not exactly. 3,843 = 4,612 − 769. So maybe source partial count includes scalar head 769? Then 28,375,297 includes embeddings?? Can't fully resolve — but the point stands: the manuscript gives two different trainable-parameter counts for what is described as the same partial-FT configuration (28,375,297 in §1/§4.2 vs 28,379,140 in Table 6 and the CSV), and the difference (3,843) is never explained. Since the primary claim is "identical partial MolFormer fine-tuning ... updating 28,375,297 parameters" and matched-ness is central, this inconsistency should be corrected/explained. Actually wait — maybe 28,375,297 is the source count and 28,379,140 includes the 4-output target head? 28,379,140 − 28,375,297 = 3,843. Target head LN+Linear4 = 4,612; minus source scalar head 769 = 3,843. Yes! So Table 6 counts (which "include the target head and its LayerNorm", per caption) = source backbone partial count + 4,612 − 769? But caption says counts include target head — doesn't mention removing scalar head. If the scalar head is replaced, then 28,375,297 − 769 + 4,612 = 28,379,140. That reconciles exactly IF the source count 28,375,297 includes the scalar head (769). Then the source description "totalling 28,375,297 trainable parameters" includes the scalar head — fine and consistent with Table 6 once you account for head swap. So the numbers can be reconciled, but the manuscript never states this; readers will see 28,375,297 vs 28,379,140 for "partial fine-tuning" and flag it. Correction: state that Table 6 counts include the four-output target head, or use one number consistently. This is a presentational/numerical-consistency correction, not fatal.
+
+  Hmm, but is this a "concrete error affecting current claims"? The matched-training claim (same parameter count across arms) is unaffected since all arms use the same count. The error is an unexplained numeric discrepancy. I'd flag it as a concrete correction (minor but concrete).
+
+  13. Causal interpretation issues to check:
+  - §2.7: "Restoring all encoder parameters makes all six source arms identical in representation and decoder predictions within every seed and regime. Thus their label-dependent prediction differences require the adapted encoder weights" — this is fine given buffers retained. But: does the rewind-all intervention remove ALL label-dependent differences? "the controls do not identify the meaning of an individual feature" — appropriately delimited. OK.
+  - §2.7: "The outer-normalisation rewind leaves the human decoder predictions unchanged" — interesting; consistent with claim that sensitivity is in upper 8 blocks. OK.
+  - Potential overreach: §2.6 "Source guidance therefore changes the starting representation; this comparison also includes its additional source-training data and budget." — appropriately hedged. Good.
+  - "This locates sensitivity within the tested computational procedure, not within a named human chemical concept." Good.
+  - Check claims of "actual LoRA": §2.6 and 4.8 describe LoRA rank 8 alpha 16 on Q/V of 12 blocks. The reviewer prompt says "actual LoRA versus partial/full fine-tuning" — fine.
+
+  14. One-to-one seed pairing limitation: The route comparison (direct vs frozen-encoder+decoder) uses the same first three source checkpoints — stated. But note: the frozen-decoder route numbers quoted (1.743 cation, 1.819 scaffold, 2.106 OOD) differ from the primary five-seed Tables 2–4 (1.737, 1.842 — wait scaffold pooled human five-seed = 1.842, three-seed subset 1.819; fine). The manuscript does say "The primary five-source-seed decoder results in Tables 2–4 remain separate." Good — limitation respected.
+
+  However, one subtle issue: §2.6 says "The two prediction routes are compared using the same first three source checkpoints. For human guidance, direct/frozen-encoder-plus-CatBoost RMSE is 1.797/1.743". It only gives human route contrast, and says Figure S22 shows all three real source signals. Fine.
+
+  15. Check Table 6 "Pretrained / Frozen + MLP" cation 1.981 vs frozen linear 2.013, LoRA 2.040, partial 1.894, full 1.863. The narrative: "This outcome does not favour small adapters in the tested cation-CV procedure." OK.
+
+  16. OOD-17: "67 exact and one right-censored" — abstract says "Scaffold holdout and 17 compounds from four new scaffold families expose limits to absolute concentration prediction." OK.
+
+  17. §2.4: "Averaging across the 67 exact pairs gives human MAE 1.649 and RMSE 2.054". Table 4 endpoint MAEs: human 1.535, 1.704, 1.669, 1.690 — mean of these four = (1.535+1.704+1.669+1.690)/4 = 6.598/4 = 1.6495 ≈ 1.650, text says 1.649. Fine (E. coli MBC has 16 exact values so simple mean of endpoint means isn't exactly the 67-pair average; rounding). OK.
+
+  18. Censoring math: IT505 E. coli MBC >500 mg/L → log2(500) ≈ 8.97; predictions 21.2–37.0 mg/L → log2 ≈ 4.4–5.2. Error ≈ 3.8–4.6 log2. Text: "absolute error exceeds 3.76–4.56 log2 units across the human-guided seeds" — consistent. "raises the human mean E. coli MBC RMSE lower bound to 2.356": human E. coli MBC RMSE over 16 exact + bound: if 16-exact RMSE is r, adding one error ≥3.76: sqrt((16 r² + 3.76²)/17). If result 2.356, then 16r² + 14.14 = 17×5.551 = 94.4 → 16r² = 80.2 → r = 2.24. Plausible (MAE 1.69, RMSE ~2.2). OK consistent.
+  - "pooled 68-pair RMSE lower bound to 2.101": human pooled 67-exact RMSE 2.054: 67×2.054² = 282.6; + min error² 14.14 → 296.7/68 = 4.364 → sqrt = 2.089. Text says 2.101. Hmm: 2.101² = 4.414; ×68 = 300.2; minus 282.6 = 17.6 → min error 4.2, not 3.76. But "exceeds 3.76–4.56" — uses per-seed minimum 3.76? If using 4.2... Let me recompute: maybe pooled 67 RMSE per seed varies. This is approximate; can't verify precisely, but the arithmetic 2.089 vs 2.101 is a small discrepancy possibly due to per-seed values. I shouldn't over-claim an error here since pooled RMSE is mean over seeds of seed-specific pooled RMSE, not pooled across seeds. So can't verify. Skip.
+
+  19. "913 fits comprise 880 endpoint fits for the four tabular decoders and 33 four-target graph fits": 880 = 4 decoders × 5 representations? No wait: tabular decoders = CatBoost, AutoGluon, TabPFN, TabFM = 4 decoders × 5 representations × 4 endpoints × 11 regimes = 880. Yes 4×5×4×11 = 880. Chemprop: 3 seeds × 11 regimes = 33. Total 913. Consistent. Good.
+
+  20. §4.6: "The full-QAC model uses all 105 compounds..." fine.
+
+  21. H1–H7 blank — respected; conclusions hedge appropriately ("If annotators saw the quantitative endpoints...").
+
+  22. Any violation of stated limitations? Scanning for overclaims:
+  - §2.6: "That conditional contrast favours the human arm in this four-family collection, without establishing universal superiority" — OK.
+  - §2.5: "Human-guided representations have lower pooled error point estimates than raw features for each of the four tabular decoders in all three evaluation regimes." Check Table 5: CatBoost: human 1.767/1.901/2.124 vs raw 1.890/1.956/2.295 ✓. AutoGluon: 1.810/1.934/2.148 vs 1.953/1.938/2.208 — scaffold: human 1.934 vs raw 1.938 ✓. TabPFN: 1.822/1.833/1.966 vs 1.948/1.984/2.225 ✓. TabFM: 1.730/1.814/1.992 vs 1.900/1.952/2.299 ✓. Claim holds.
+  - "They also have lower point errors than both quantitative representations under cation holdout and on OOD-17." Check cation: human vs continuous: CatBoost 1.767 vs 1.872 ✓; AutoGluon 1.810 vs 1.886 ✓; TabPFN 1.822 vs 1.853 ✓; TabFM 1.730 vs 1.772 ✓. OOD: 2.148 vs 2.289 ✓; 1.966 vs 2.265 ✓; 1.992 vs 2.541 ✓. vs binary: CatBoost 2.124 vs 2.224 ✓; AutoGluon 2.148 vs 2.197 ✓; TabPFN 1.966 vs 1.995 ✓; TabFM 1.992 vs 2.110 ✓. Claim holds.
+  - Scaffold exceptions stated correctly: continuous CatBoost 1.892 vs human 1.901 ✓ (Table 5: CatBoost continuous 1.892 < human 1.901 ✓); binary AutoGluon 1.911 vs human 1.934 ✓. But wait — are there other exceptions? TabFM scaffold: human 1.814 vs continuous 1.888, binary 1.936 ✓ human lower. TabPFN scaffold human 1.833 vs continuous 1.932 ✓. CatBoost binary 1.971 vs human 1.901 ✓. AutoGluon continuous 1.955 vs human 1.934 ✓ human lower. So exactly two exceptions, both stated. Good.
+
+  - §2.2 pooled RMSE: human 1.737 vs Table 2 endpoint means: (1.707+1.832+1.640+1.763)/4 = 6.942/4 = 1.7355 ≈ 1.737 (pooled over 420, fine). Continuous: (1.669+1.831+1.615+1.735)/4 = 6.850/4 = 1.7125 ≈ 1.715 ✓. Binary: (1.741+1.925+1.706+1.841)/4 = 7.213/4 = 1.803 ≈ 1.806 ✓. Raw: (1.768+1.921+1.800+1.939)/4 = 7.428/4 = 1.857 ≈ 1.858 ✓. Good.
+
+  - ΔRMSE checks: human − continuous = 1.737−1.715 = +0.022 ✓; human − binary = −0.069 ✓ (1.737−1.806 = −0.069 ✓); human − raw = −0.121 ✓ (1.737−1.858 = −0.121 ✓).
+
+  - Scaffold pooled: human 1.842: (1.829+1.980+1.722+1.825)/4 = 7.356/4 = 1.839 ≈ 1.842 ✓. continuous (1.767+1.949+1.726+1.807)/4 = 7.249/4 = 1.812 ≈ 1.814 ✓. binary (1.806+1.993+1.766+1.851)/4 = 7.416/4 = 1.854 ≈ 1.856 ✓. raw (1.896+2.008+1.958+2.045)/4 = 7.907/4 = 1.977 ≈ 1.978 ✓. human − raw = 1.842−1.978 = −0.136 ✓.
+
+  23. §2.3 text effect: 1.737→1.723, Δ −0.015 ✓ (1.723−1.737 = −0.014 ≈ −0.015, rounding of unrounded values).
+
+  24. §2.6: "Cation-CV human point error remains above both real quantitative initialisations (Table 6)" — human 1.797 vs continuous 1.737, binary 1.745 ✓.
+
+  25. Reference list / published_metrics.csv — the CSV is supplied as a numerical summary; check consistency with S23 claims. The CSV says ChemFM LoRA PRC-AUC 0.428 "not reported in cited body paragraph" — the manuscript cites ChemFM for "Modern foundation models also use low-rank adaptation for property prediction (6,13)". The interpretation column flags "not quantitative MIC or MBC". Fine — this is an audit artifact. No violation.
+
+  26. One more check: §1 says "A further 363-fit extension compares direct target prediction by frozen heads, LoRA, partial and full fine-tuning". CSV raw-molformer rows: compact, full, linear, lora, partial — 5 modes × 33 fits = 165 ✓ matches "165 pretrained-initialised capacity fits". Good.
+
+  27. §4.8: "The direct extension has 363 fits: 165 pretrained-initialised capacity fits and 198 source-initialised partial-target fits." ✓.
+
+  28. Potential issue: §2.6 says direct extension "use three paired target seeds" and "five fixed cation folds, five fixed scaffold folds and one final QAC→OOD fit per configuration" → 11 fits per run. ✓.
+
+  29. Now, are there any genuine overclaims violating the stated limitations? Let me scan the v16-specific language again:
+  - "This outcome does not favour small adapters in the tested cation-CV procedure." OK.
+  - "Prediction quality and the amount of adaptation must therefore be discussed with the validation regime and fixed optimisation recipe." OK.
+  - §2.7 title "What label and weight interventions identify" — the word "identify" is causal-ish but text delimits: "This supports the usefulness... It does not identify the causal effect of a chemical fragment..." OK.
+  - "Improved loss under real human labels therefore concerns the learning procedure under that assignment." OK.
+
+  30. The one thing I want to double-check: Table 7 column 5 "Real − shuffled: cation CV" for human = −0.120 [−0.221, −0.043] — identical to §2.2's human minus shuffled-human ΔRMSE −0.120 [−0.217, −0.043]. The intervals differ slightly: [−0.221, −0.043] vs [−0.217, −0.043]. Different bootstrap (5,000 vs 10,000 draws) → slightly different intervals. That's explainable but worth noting? Table 7 caption says "5,000 draws; five source seeds" while §4.4 says primary intervals use 10,000 draws. Same point estimate, slightly different interval bounds — minor, explainable by different draw counts, but a reviewer could flag the inconsistent bounds for the identical contrast. Actually it's the same contrast computed in two places with different draw counts; reporting two different intervals for the same quantity in the same paper is a minor consistency issue. Concrete correction: reconcile or note.
+
+  31. Another check: §2.7 "For each of 30 matched source checkpoints" — 6 arms × 5 seeds = 30 ✓.
+
+  32. §2.7 "All intact encodings reproduce the archived arrays exactly, and refitting reproduces all 93 intact/raw cation, scaffold and OOD prediction sets." 93: 30 checkpoints? Hmm, 93 = ? 30 intact × 3 regimes = 90 + 3 raw regimes = 93. Yes ✓ (raw has one run × 3 regimes). Nice.
+
+  33. Parameter count for source arms in CSV: all six = 28379140, but §4.2 says 28,375,297. And Table 6 partial target = 28,379,140 = CSV. So the manuscript's own §1 and §4.2 disagree with its Table 6 and CSV by 3,843. This is the main concrete numerical inconsistency. I worked out it equals replacing scalar head (769) with 4-output head (4,612): 28,375,297 includes scalar head; Table 6 counts include target head. But §4.2's "totalling 28,375,297 trainable parameters" for the source experiment and §1's "updating 28,375,297" — these are the source counts. Table 6 counts "include the target head and its LayerNorm". If the source number already includes the scalar head, fine. The problem: readers can't tell; the two numbers appear for "partial fine-tuning" of ostensibly the same backbone. Correction: add one sentence reconciling (e.g., "Table 6 counts include the four-output target head; the source-FT count 28,375,297 includes the scalar source head") or report the same quantity throughout.
+
+  Wait, actually, is 28,375,297 consistent with the architecture? Can't verify without model specs; but the internal discrepancy is the issue.
+
+  Hmm, but hold on: is it truly an error? §1: "The primary controlled source experiment uses identical partial MolFormer fine-tuning for every label arm, updating 28,375,297 parameters." Table 6 caption: "Counts include the target head and its LayerNorm; source pretraining is additional computation for the six guided initialisations." So Table 6's 28,379,140 for "Human / Partial FT" is the target-fit count (backbone partial + 4-out head). The source partial count 28,375,297. Difference 3,843 = 4,612 (target head) − 769 (scalar head). So both can be correct simultaneously. It's an apparent inconsistency that is actually reconcilable but unexplained. As a reviewer, I'd flag it as a correction for clarity: "state explicitly that the source-arm count (28,375,297) includes the scalar source head while Table 6 counts include the four-output target head; as written, §1/§4.2 and Table 6 give different parameter counts for the identically named partial fine-tuning."
+
+  Also the CSV lists expert arms at 28,379,140, not 28,375,297 — the CSV parameters column for expert arms thus matches Table 6 (target-head-inclusive?) but the CSV is about source arms ("expert, partial, 28379140"). If the CSV's "expert partial" count is 28,379,140 while §4.2 says the source partial FT totals 28,375,297, then the CSV and §4.2 disagree for the same source configuration. That's a sharper inconsistency: parameters_and_budgets.csv row "expert,partial,28379140" vs §4.2 "totalling 28,375,297". One of them is wrong or they count differently. Concrete correction needed.
+
+  34. Anything about causal interpretation to flag? The design is exploratory; the manuscript repeatedly avoids causal claims. One phrase: §2.7 "This locates sensitivity within the tested computational procedure, not within a named human chemical concept." Good. "the intervention supports only a contribution to the specified prediction loss where its interval resolves an effect." Good.
+
+  35. "finding a model critique is not human peer review" — the user means: I should not treat finding modeling critiques as equivalent to peer review? I think they mean the review should acknowledge it's a computational review, not human peer review. Or: the instruction to me is that identifying a model critique does not constitute human peer review — i.e., stay humble. I'll keep the review focused.
+
+  36. Optional new experiments outside scope — the user asks to separate concrete errors from optional new experiments. Optional suggestions could be: cross source/target seeds (crossing instead of pairing) to separate seed variance; more OOD families; equivalence testing with margin (TOST) if equivalence claims ever desired; ablation of LoRA rank/lr. But keep brief given 600-word cap. Maybe mention 1-2 briefly.
+
+  Also check: "route contrasts use only those same first three source checkpoints" — manuscript states this. ✓. "No universal adapter superiority..." respected. "H1-H7 blank" respected.
+
+  One more: §2.6 "Partial target fine-tuning is also initialised from each real and shuffled source arm with the matching source seed." 6 arms × 3 seeds = 18 runs × 11 = 198 ✓.
+
+  Also, Table 6 "Shuffled continuous MIC / Partial FT" cation 1.820 ± 0.039 vs continuous 1.737 — and §2.6 says real-vs-shuffled controls "reported with all intervals in S26". OK.
+
+  Potential subtle statistical issue worth flagging as correction: In Table 6, the paired LoRA−full ΔRMSE interval [+0.071, +0.286] is called "scaffold-group interval convention" — but with only 3 paired seeds, seed-level bootstrap resampling 3 values is extremely unstable; the manuscript does say exploratory/unadjusted. Not a violation per se. Also route contrast OOD interval [−0.278, +0.971] includes zero — correctly stated as inconclusive.
+
+  Another check: §2.6 claims "human minus shuffled-human scaffold-CV ΔRMSE is −0.156 [−0.311, −0.009]" — resolves. And cation real-vs-shuffled for direct: 1.797 vs 1.929 → −0.132, not reported but fine.
+
+  Word budget: 600 max. Need sections: (A) concrete errors/corrections; (B) consistency checks that passed (brief); (C) causal interpretation assessment (brief); (D) optional out-of-scope experiments (brief). Keep tight.
+
+  Priority items for concrete corrections:
+  1. Parameter-count discrepancy: 28,375,297 (§1, §4.2) vs 28,379,140 (Table 6; CSV for all six source arms). Difference 3,843 = target four-output head (4,612) minus scalar source head (769). Reconcile explicitly; CSV source-arm counts should match §4.2 if they describe source training.
+  2. Same contrast, two intervals: human−shuffled cation ΔRMSE −0.120 [−0.217, −0.043] (§2.2, 10,000 draws) vs [−0.221, −0.043] (Table 7, 5,000 draws). Same estimand, two different intervals — note the draw-count difference or report one.
+  3. OOD pooled RMSE lower bound arithmetic: text says min-error sensitivity raises pooled 68-pair RMSE lower bound to 2.101; using the stated 67-exact pooled RMSE 2.054 and the minimum error 3.76 gives ≈2.09 (per-seed values may explain; ask to show per-seed computation or reconcile). Actually since pooled RMSE is mean of seed-specific pooled RMSEs, and censor sensitivity per seed uses per-seed min error 3.76–4.56, the reported 2.101 could be right depending on per-seed exact-RMSE distribution. I computed: to get 2.101 lower bound with min error 3.76, need 67-pair RMSE ≈ 2.063. Reported 2.054. Small mismatch; flag as "verify".
+  4. Minor: −0.663 vs −0.664 (OOD human−continuous direct) — rounding; no action needed. Probably not worth words.
+
+  Passed checks (mention briefly to show diligence): Table 6 head parameter arithmetic (4,612; 231,812; 299,524 = 12×2×(768×8)+4,612); 363 = 165+198; 1,331 = 120×11+11; 195 = 128+2+65 tensor accounting; Table 5 claims verified against table (all point-estimate claims hold, exactly two scaffold exceptions as stated); pooled RMSE values in §2.2/§2.3 consistent with Table 2/3 endpoint means; ΔRMSE point estimates consistent.
+
+  Causal interpretation: appropriately hedged; the rewind inference ("label-dependent differences require the adapted encoder weights") is valid given buffers retained and decoder refit, and the manuscript correctly notes rewind-all ≠ pure raw (buffer state shared). One residual caveat: the claim "restoring all encoder parameters makes all six source arms identical within every seed and regime" justifies "differences require adapted weights" — but the contrapositive scope is limited to the refitted-CatBoost route; direct-route differences could in principle survive in other heads — not claimed though. Fine.
+
+  Also: the direct-route human advantage on OOD (Δ −0.664) is conditional on 4 families and 3 paired seeds; manuscript says so. No violation.
+
+  One more potential correction: §2.6 states LoRA minus full ΔRMSE +0.177 [+0.071, +0.286] "under the exploratory scaffold-group interval convention" — with only 3 paired seeds, seed-index bootstrap has C(3+3-1,3)=10 distinct seed resamples; the interval is essentially enumeration over 10 combos. Worth one sentence noting that with three paired seeds the "interval" is close to enumeration and extremely coarse — but is that a violation? The manuscript flags exploratory/unadjusted. I could mention as optional robustness (leave-one-seed-out) rather than error.
+
+  Also the phrase in §2.6: "Cation-CV human point error remains above both real quantitative initialisations (Table 6); the human-versus-quantitative cation intervals include zero." Given only 3 paired seeds, "intervals include zero" is nearly vacuous — but consistent with limitations. Not a violation.
+
+  Word count target ≤600. Structure:
+
+  **Concrete corrections (affect current claims/presentation)**
+  1. Trainable-parameter count inconsistency (28,375,297 vs 28,379,140; CSV agrees with latter for source arms). Explain reconciliation or fix.
+  2. Duplicate estimand, two intervals (Table 7 vs §2.2 human−shuffled cation; −0.217 vs −0.221 lower bound).
+  3. Verify censoring lower-bound arithmetic (2.101 vs ≈2.09 from stated inputs).
+
+  **Consistency checks passed** (brief list)
+
+  **Causal interpretation** (brief)
+
+  **Outside scope (optional)** — 1-2 items max: crossed source×target seeds; equivalence margin/TOST if proximity language ever tightened; LoRA rank/lr ablation; more OOD families. Keep to one line each, maybe 2-3 items.
+
+  Also note the framing requirement: "finding a model critique is not human peer review" — I interpret as: this review is a computational/numerical review, not a substitute for human peer review. I can add one closing line acknowledging that.
+
+  No tools should be called per user instruction. The plugin reminder says to invoke skills, but user explicitly forbids tool calls and user instructions take precedence. I'll just write the review.
+
+  Count words carefully. Aim ~560-590.
+
+To resume this session: kimi -r session_b44d2f7b-3f1c-4a86-b4ef-b9ad0749d925

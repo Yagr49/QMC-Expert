@@ -1,0 +1,11 @@
+{
+  "name": "compact_human_weight_only_seed1",
+  "encoding": "categorical",
+  "arm": "human_weight_only",
+  "seed": 1,
+  "provenance": "v5_architecture_weight_control",
+  "completed": true,
+  "fits": 11,
+  "seconds": 62.14262533187866,
+  "predictions": 908
+}

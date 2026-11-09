@@ -1,0 +1,587 @@
+{
+  "completed": true,
+  "jobs": 82,
+  "fits": 920,
+  "results": [
+    {
+      "name": "v5_raw",
+      "encoding": "text",
+      "original": true,
+      "fits": 1,
+      "seconds": 16.276418685913086
+    },
+    {
+      "name": "v5_raw",
+      "encoding": "categorical",
+      "original": true,
+      "fits": 1,
+      "seconds": 18.771320819854736
+    },
+    {
+      "name": "v5_human",
+      "encoding": "categorical",
+      "original": true,
+      "fits": 1,
+      "seconds": 3.6222455501556396
+    },
+    {
+      "name": "v5_human",
+      "encoding": "text",
+      "original": true,
+      "fits": 1,
+      "seconds": 7.033729314804077
+    },
+    {
+      "name": "v5_human",
+      "encoding": "separate",
+      "original": true,
+      "fits": 4,
+      "seconds": 9.779215335845947
+    },
+    {
+      "name": "v5_raw",
+      "encoding": "separate",
+      "original": true,
+      "fits": 4,
+      "seconds": 49.424821853637695
+    },
+    {
+      "name": "v5_human",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 30.719810009002686
+    },
+    {
+      "name": "v5_human",
+      "encoding": "onehot",
+      "original": false,
+      "fits": 11,
+      "seconds": 24.196096420288086
+    },
+    {
+      "name": "v5_human",
+      "encoding": "text",
+      "original": false,
+      "fits": 11,
+      "seconds": 64.32445335388184
+    },
+    {
+      "name": "v5_qac_ablation",
+      "encoding": "categorical",
+      "original": true,
+      "fits": 1,
+      "seconds": 3.3741421699523926
+    },
+    {
+      "name": "v5_raw",
+      "encoding": "onehot",
+      "original": false,
+      "fits": 11,
+      "seconds": 142.31369376182556
+    },
+    {
+      "name": "v5_qac_ablation",
+      "encoding": "text",
+      "original": true,
+      "fits": 1,
+      "seconds": 6.660459041595459
+    },
+    {
+      "name": "v5_qac_ablation",
+      "encoding": "separate",
+      "original": true,
+      "fits": 4,
+      "seconds": 8.792439699172974
+    },
+    {
+      "name": "v5_human",
+      "encoding": "separate",
+      "original": false,
+      "fits": 44,
+      "seconds": 95.35857367515564
+    },
+    {
+      "name": "v5_qac_ablation",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 27.84482741355896
+    },
+    {
+      "name": "v5_qac_ablation",
+      "encoding": "onehot",
+      "original": false,
+      "fits": 11,
+      "seconds": 25.123624086380005
+    },
+    {
+      "name": "v5_raw",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 181.60696125030518
+    },
+    {
+      "name": "v5_raw",
+      "encoding": "text",
+      "original": false,
+      "fits": 11,
+      "seconds": 184.65797805786133
+    },
+    {
+      "name": "v5_qac_ablation",
+      "encoding": "text",
+      "original": false,
+      "fits": 11,
+      "seconds": 60.53742837905884
+    },
+    {
+      "name": "compact_human_seed0",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 29.46167802810669
+    },
+    {
+      "name": "v5_qac_ablation",
+      "encoding": "separate",
+      "original": false,
+      "fits": 44,
+      "seconds": 96.98052835464478
+    },
+    {
+      "name": "compact_mic_continuous_seed0",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 27.64323592185974
+    },
+    {
+      "name": "matched_raw",
+      "encoding": "onehot",
+      "original": false,
+      "fits": 11,
+      "seconds": 134.3571457862854
+    },
+    {
+      "name": "compact_human_seed0",
+      "encoding": "text",
+      "original": false,
+      "fits": 11,
+      "seconds": 60.99583315849304
+    },
+    {
+      "name": "compact_mic_binary_seed0",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 24.979584455490112
+    },
+    {
+      "name": "matched_raw",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 179.84372997283936
+    },
+    {
+      "name": "compact_mic_continuous_seed0",
+      "encoding": "text",
+      "original": false,
+      "fits": 11,
+      "seconds": 60.30110502243042
+    },
+    {
+      "name": "compact_human_shuffled_seed0",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 25.684345245361328
+    },
+    {
+      "name": "matched_raw",
+      "encoding": "text",
+      "original": false,
+      "fits": 11,
+      "seconds": 193.48174357414246
+    },
+    {
+      "name": "compact_mic_binary_seed0",
+      "encoding": "text",
+      "original": false,
+      "fits": 11,
+      "seconds": 60.709160566329956
+    },
+    {
+      "name": "compact_continuous_shuffled_seed0",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 25.76464557647705
+    },
+    {
+      "name": "compact_binary_shuffled_seed0",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 27.987966299057007
+    },
+    {
+      "name": "compact_initial_seed0",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 28.279761791229248
+    },
+    {
+      "name": "compact_human_seed0",
+      "encoding": "onehot",
+      "original": false,
+      "fits": 11,
+      "seconds": 41.62846302986145
+    },
+    {
+      "name": "compact_human_weight_only_seed0",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 50.70605516433716
+    },
+    {
+      "name": "compact_human_seed1",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 60.465389013290405
+    },
+    {
+      "name": "compact_mic_continuous_seed1",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 62.00918173789978
+    },
+    {
+      "name": "compact_human_seed0",
+      "encoding": "text_permuted",
+      "original": false,
+      "fits": 11,
+      "seconds": 116.92206192016602
+    },
+    {
+      "name": "compact_human_seed0",
+      "encoding": "random_code",
+      "original": false,
+      "fits": 11,
+      "seconds": 116.83052086830139
+    },
+    {
+      "name": "compact_human_seed1",
+      "encoding": "text",
+      "original": false,
+      "fits": 11,
+      "seconds": 126.08738732337952
+    },
+    {
+      "name": "compact_mic_binary_seed1",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 63.863693952560425
+    },
+    {
+      "name": "compact_human_shuffled_seed1",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 56.412822008132935
+    },
+    {
+      "name": "compact_mic_continuous_seed1",
+      "encoding": "text",
+      "original": false,
+      "fits": 11,
+      "seconds": 117.04345798492432
+    },
+    {
+      "name": "compact_continuous_shuffled_seed1",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 51.84607744216919
+    },
+    {
+      "name": "compact_binary_shuffled_seed1",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 56.87300729751587
+    },
+    {
+      "name": "compact_initial_seed1",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 54.2001166343689
+    },
+    {
+      "name": "compact_mic_binary_seed1",
+      "encoding": "text",
+      "original": false,
+      "fits": 11,
+      "seconds": 123.17859745025635
+    },
+    {
+      "name": "compact_human_weight_only_seed1",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 62.142733573913574
+    },
+    {
+      "name": "compact_human_seed2",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 58.37321925163269
+    },
+    {
+      "name": "compact_mic_continuous_seed2",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 57.80249643325806
+    },
+    {
+      "name": "compact_mic_binary_seed2",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 58.44010329246521
+    },
+    {
+      "name": "v5_raw",
+      "encoding": "separate",
+      "original": false,
+      "fits": 44,
+      "seconds": 688.6744070053101
+    },
+    {
+      "name": "compact_human_shuffled_seed2",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 57.72227334976196
+    },
+    {
+      "name": "compact_mic_continuous_seed2",
+      "encoding": "text",
+      "original": false,
+      "fits": 11,
+      "seconds": 112.37963008880615
+    },
+    {
+      "name": "compact_human_seed2",
+      "encoding": "text",
+      "original": false,
+      "fits": 11,
+      "seconds": 126.93241143226624
+    },
+    {
+      "name": "compact_continuous_shuffled_seed2",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 58.25059247016907
+    },
+    {
+      "name": "compact_binary_shuffled_seed2",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 49.64976525306702
+    },
+    {
+      "name": "compact_mic_binary_seed2",
+      "encoding": "text",
+      "original": false,
+      "fits": 11,
+      "seconds": 111.45030283927917
+    },
+    {
+      "name": "compact_initial_seed2",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 46.04613542556763
+    },
+    {
+      "name": "compact_human_weight_only_seed2",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 45.84561824798584
+    },
+    {
+      "name": "compact_human_seed3",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 44.48866653442383
+    },
+    {
+      "name": "compact_mic_continuous_seed3",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 36.665611743927
+    },
+    {
+      "name": "compact_mic_binary_seed3",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 44.47668528556824
+    },
+    {
+      "name": "compact_human_shuffled_seed3",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 39.96613907814026
+    },
+    {
+      "name": "compact_continuous_shuffled_seed3",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 40.685802698135376
+    },
+    {
+      "name": "compact_human_seed3",
+      "encoding": "text",
+      "original": false,
+      "fits": 11,
+      "seconds": 94.25305700302124
+    },
+    {
+      "name": "compact_mic_continuous_seed3",
+      "encoding": "text",
+      "original": false,
+      "fits": 11,
+      "seconds": 89.56017565727234
+    },
+    {
+      "name": "compact_binary_shuffled_seed3",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 41.69636583328247
+    },
+    {
+      "name": "compact_initial_seed3",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 37.694021701812744
+    },
+    {
+      "name": "compact_mic_binary_seed3",
+      "encoding": "text",
+      "original": false,
+      "fits": 11,
+      "seconds": 92.61980772018433
+    },
+    {
+      "name": "compact_human_weight_only_seed3",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 42.8982880115509
+    },
+    {
+      "name": "compact_human_seed4",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 43.08118915557861
+    },
+    {
+      "name": "compact_mic_continuous_seed4",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 40.976035833358765
+    },
+    {
+      "name": "compact_mic_binary_seed4",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 40.0948531627655
+    },
+    {
+      "name": "compact_human_shuffled_seed4",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 42.64242768287659
+    },
+    {
+      "name": "compact_continuous_shuffled_seed4",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 40.80723333358765
+    },
+    {
+      "name": "compact_binary_shuffled_seed4",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 38.84292984008789
+    },
+    {
+      "name": "compact_mic_continuous_seed4",
+      "encoding": "text",
+      "original": false,
+      "fits": 11,
+      "seconds": 91.82205033302307
+    },
+    {
+      "name": "compact_human_seed4",
+      "encoding": "text",
+      "original": false,
+      "fits": 11,
+      "seconds": 93.3315794467926
+    },
+    {
+      "name": "compact_mic_binary_seed4",
+      "encoding": "text",
+      "original": false,
+      "fits": 11,
+      "seconds": 86.14516258239746
+    },
+    {
+      "name": "compact_initial_seed4",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 35.50278639793396
+    },
+    {
+      "name": "compact_human_weight_only_seed4",
+      "encoding": "categorical",
+      "original": false,
+      "fits": 11,
+      "seconds": 37.52970004081726
+    }
+  ],
+  "script_sha256": "cf5df902682b25f3ec844ebac288ef6067f09c915c3885d6207ec6a864aad27f",
+  "python": "3.11.16",
+  "torch": "2.6.0+cu124",
+  "catboost": "1.2.10",
+  "numpy": "2.2.6",
+  "data_manifest_sha256": "5804f00c6972646909fff693554c45f37f6ddd1d6b9c36b84b7b9918840d71ae"
+}

@@ -1,0 +1,101 @@
+FIT raw-molformer_linear_s0_cation_f0 train 84 test 21
+DONE raw-molformer_linear_s0_cation_f0 seconds 1.17
+FIT raw-molformer_linear_s0_cation_f2 train 84 test 21
+DONE raw-molformer_linear_s0_cation_f2 seconds 0.56
+FIT raw-molformer_linear_s0_cation_f4 train 84 test 21
+DONE raw-molformer_linear_s0_cation_f4 seconds 0.44
+FIT raw-molformer_linear_s0_scaffold_f1 train 84 test 21
+DONE raw-molformer_linear_s0_scaffold_f1 seconds 0.54
+FIT raw-molformer_linear_s0_scaffold_f3 train 84 test 21
+DONE raw-molformer_linear_s0_scaffold_f3 seconds 0.41
+FIT raw-molformer_linear_s0_full-QAC105_f-1 train 105 test 17
+DONE raw-molformer_linear_s0_full-QAC105_f-1 seconds 0.58
+FIT raw-molformer_compact_s0_cation_f1 train 84 test 21
+DONE raw-molformer_compact_s0_cation_f1 seconds 0.63
+FIT raw-molformer_compact_s0_cation_f3 train 84 test 21
+DONE raw-molformer_compact_s0_cation_f3 seconds 0.45
+FIT raw-molformer_compact_s0_scaffold_f0 train 84 test 21
+DONE raw-molformer_compact_s0_scaffold_f0 seconds 0.52
+FIT raw-molformer_compact_s0_scaffold_f2 train 84 test 21
+DONE raw-molformer_compact_s0_scaffold_f2 seconds 0.47
+FIT raw-molformer_compact_s0_scaffold_f4 train 84 test 21
+DONE raw-molformer_compact_s0_scaffold_f4 seconds 0.53
+FIT raw-molformer_lora_s0_cation_f0 train 84 test 21
+DONE raw-molformer_lora_s0_cation_f0 seconds 11.44
+FIT raw-molformer_lora_s0_cation_f2 train 84 test 21
+DONE raw-molformer_lora_s0_cation_f2 seconds 11.08
+FIT raw-molformer_lora_s0_cation_f4 train 84 test 21
+DONE raw-molformer_lora_s0_cation_f4 seconds 11.13
+FIT raw-molformer_lora_s0_scaffold_f1 train 84 test 21
+DONE raw-molformer_lora_s0_scaffold_f1 seconds 11.13
+FIT raw-molformer_lora_s0_scaffold_f3 train 84 test 21
+DONE raw-molformer_lora_s0_scaffold_f3 seconds 10.97
+FIT raw-molformer_lora_s0_full-QAC105_f-1 train 105 test 17
+DONE raw-molformer_lora_s0_full-QAC105_f-1 seconds 13.64
+FIT raw-molformer_partial_s0_cation_f1 train 84 test 21
+DONE raw-molformer_partial_s0_cation_f1 seconds 10.79
+FIT raw-molformer_partial_s0_cation_f3 train 84 test 21
+DONE raw-molformer_partial_s0_cation_f3 seconds 10.85
+FIT raw-molformer_partial_s0_scaffold_f0 train 84 test 21
+DONE raw-molformer_partial_s0_scaffold_f0 seconds 10.84
+FIT raw-molformer_partial_s0_scaffold_f2 train 84 test 21
+DONE raw-molformer_partial_s0_scaffold_f2 seconds 10.73
+FIT raw-molformer_partial_s0_scaffold_f4 train 84 test 21
+DONE raw-molformer_partial_s0_scaffold_f4 seconds 11.33
+FIT raw-molformer_full_s0_cation_f0 train 84 test 21
+DONE raw-molformer_full_s0_cation_f0 seconds 14.0
+FIT raw-molformer_full_s0_cation_f2 train 84 test 21
+DONE raw-molformer_full_s0_cation_f2 seconds 13.91
+FIT raw-molformer_full_s0_cation_f4 train 84 test 21
+DONE raw-molformer_full_s0_cation_f4 seconds 13.95
+FIT raw-molformer_full_s0_scaffold_f1 train 84 test 21
+DONE raw-molformer_full_s0_scaffold_f1 seconds 14.02
+FIT raw-molformer_full_s0_scaffold_f3 train 84 test 21
+DONE raw-molformer_full_s0_scaffold_f3 seconds 14.03
+FIT raw-molformer_full_s0_full-QAC105_f-1 train 105 test 17
+DONE raw-molformer_full_s0_full-QAC105_f-1 seconds 16.32
+FIT expert_partial_s0_cation_f1 train 84 test 21
+DONE expert_partial_s0_cation_f1 seconds 10.08
+FIT expert_partial_s0_cation_f3 train 84 test 21
+DONE expert_partial_s0_cation_f3 seconds 10.06
+FIT expert_partial_s0_scaffold_f0 train 84 test 21
+DONE expert_partial_s0_scaffold_f0 seconds 10.01
+FIT expert_partial_s0_scaffold_f2 train 84 test 21
+DONE expert_partial_s0_scaffold_f2 seconds 9.99
+FIT expert_partial_s0_scaffold_f4 train 84 test 21
+DONE expert_partial_s0_scaffold_f4 seconds 9.84
+FIT quant-continuous_partial_s0_cation_f0 train 84 test 21
+DONE quant-continuous_partial_s0_cation_f0 seconds 10.08
+FIT quant-continuous_partial_s0_cation_f2 train 84 test 21
+DONE quant-continuous_partial_s0_cation_f2 seconds 10.05
+FIT quant-continuous_partial_s0_cation_f4 train 84 test 21
+DONE quant-continuous_partial_s0_cation_f4 seconds 10.0
+FIT quant-continuous_partial_s0_scaffold_f1 train 84 test 21
+DONE quant-continuous_partial_s0_scaffold_f1 seconds 10.05
+FIT quant-continuous_partial_s0_scaffold_f3 train 84 test 21
+DONE quant-continuous_partial_s0_scaffold_f3 seconds 10.0
+FIT quant-continuous_partial_s0_full-QAC105_f-1 train 105 test 17
+DONE quant-continuous_partial_s0_full-QAC105_f-1 seconds 13.19
+FIT quant-binary_partial_s0_cation_f1 train 84 test 21
+DONE quant-binary_partial_s0_cation_f1 seconds 10.06
+FIT quant-binary_partial_s0_cation_f3 train 84 test 21
+DONE quant-binary_partial_s0_cation_f3 seconds 10.03
+FIT quant-binary_partial_s0_scaffold_f0 train 84 test 21
+DONE quant-binary_partial_s0_scaffold_f0 seconds 10.05
+FIT quant-binary_partial_s0_scaffold_f2 train 84 test 21
+DONE quant-binary_partial_s0_scaffold_f2 seconds 10.08
+FIT quant-binary_partial_s0_scaffold_f4 train 84 test 21
+DONE quant-binary_partial_s0_scaffold_f4 seconds 10.05
+FIT expert-shuffled_partial_s0_cation_f0 train 84 test 21
+DONE expert-shuffled_partial_s0_cation_f0 seconds 9.88
+FIT expert-shuffled_partial_s0_cation_f2 train 84 test 21
+DONE expert-shuffled_partial_s0_cation_f2 seconds 10.0
+FIT expert-shuffled_partial_s0_cation_f4 train 84 test 21
+DONE expert-shuffled_partial_s0_cation_f4 seconds 10.14
+FIT expert-shuffled_partial_s0_scaffold_f1 train 84 test 21
+DONE expert-shuffled_partial_s0_scaffold_f1 seconds 10.13
+FIT expert-shuffled_partial_s0_scaffold_f3 train 84 test 21
+DONE expert-shuffled_partial_s0_scaffold_f3 seconds 10.1
+FIT expert-shuffled_partial_s0_full-QAC105_f-1 train 105 test 17
+DONE expert-shuffled_partial_s0_full-QAC105_f-1 seconds 13.42
+FIT quant-shuffled_partial_s0_cation_f1 train 84 test 21

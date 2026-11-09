@@ -1,0 +1,10 @@
+{
+  "kimi_protocol": "completed; leakage/matching/transforms reviewed; replay correction applied",
+  "kimi_manuscript": "completed; all four concrete corrections incorporated",
+  "claude": "unavailable; local CLI not authenticated; executable not found on provided servers",
+  "author_fields": "H1-H7, A1, D1-D2 and C1 intentionally retained",
+  "numerical_audit": "93 downstream + 90 direct metrics; second-server standard-library recomputation passed",
+  "checkpoints": "all 30 reconstructed and original outputs reproduced; one full human retrain identical",
+  "transfer_authorisation": "code/protocol export explicitly authorised after initial auto-review rejection",
+  "document_status": "v12 author draft; coauthor provenance and chemical/archive fields remain open"
+}

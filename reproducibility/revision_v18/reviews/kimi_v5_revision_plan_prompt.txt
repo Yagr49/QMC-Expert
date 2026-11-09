@@ -1,0 +1,293 @@
+You are an independent scientific reviewer of an unpublished molecular ML manuscript. Its owner explicitly authorises review by Kimi and Claude. Review only supplied text; no tools, file edits, commands, delegation or invented results. Give at most 750 words. The author requires original v5 to remain the manuscript foundation, with new checks testing its hypotheses rather than silently replacing its method or metrics. Distinguish preserved original results, recovered notebook-output provenance, approximate reconstruction and newly completed controlled follow-ups.
+Focus on narrative continuity, adapter explanations and organising the hypothesis sequence.
+
+SOURCE v5_modelling_text.md
+Expert Judgement as Supervision: Binary Human Labels Match Quantitative Measurements for Representation Learning for Rational Design of Highly Efficient Biocides.
+
+Egor A. Ilina, Nikita A. Frolova, Mary A. Seferyana, Anvar B. Valeeva, Egor V. Sinikina,b, Taygib M. Iliyasova, Andrey D. Vinokurova, Elena V. Detushevaa,c, Elizabeth Sonc, Michael G. Medvedev*a,d, Anatoly N. Vereshchagin*a
+
+a N. D. Zelinsky Institute of Organic Chemistry, Russian Academy of Sciences, Leninsky prospect 47, Moscow 119991, Russian Federation; vereshchagin@ioc.ac.ru (A. N. V.); egor22366@gmail.com (E.A.I.); nfrolov@ioc.ac,ru (N. A. F.)
+
+b Mendeleev University of Chemical Technology of Russia, Miusskaya square 9, Moscow, 125047, Russian Federation
+
+c State Research Center for Applied Microbiology and Biotechnology, Territory “Quarter A”, no. 24, Obolensk, 142279 Serpukhov, Moscow Region, Russian Federation.
+
+d National Research University Higher School of Economics, 101000 Moscow, Russian Federation
+
+Table of contentsAbstract2Keywords21. Introduction22. Results and Discussion52.1 Training guidance NN models52.2 Training on QACs72.3 Out of domain inference112.3.1 Kojic acid-based bis-QACs122.3.2 Tetrahydropyridine-based bis-QACs122.3.3 Dihydropyran-based mono-QACs132.3.4 Glycoluril-based multi-QACs142.3.5 Out-of-domain performance verification152.4 Understanding the new embeddings163. Conclusion184. Experimental protocol204.1 Chemistry204.1.1 General information204.1.2 Synthesis and Characterization of Substrates and Products204.2 Microbiological assay304.2.1 Bacterial strains304.2.2 Identification of microorganisms304.2.3 Cultivation of microorganisms.314.2.4 MIC and MBC determination.315. CRediT authorship contribution statement316. Conflicts of interest327. Data availability328. Acknowledgments329. Appendix A. Supplementary data32References32
+
+Abstract
+
+Keywords
+
+Cationic biocides; QACs; NN models; MLP; Stacking; Molformer; Antibacterials, Guidance learning, Causal Inference
+
+1. Introduction
+
+The antimicrobial resistance (AMR) is a crucial challenge for modern society which is further exacerbated by nearly 40 years long period of “antibiotic discovery void” 1, 2. The WHO notes stagnant pipelines with 27 clinical agents against priorities in 2021 down from 31 in 2017, with 6 candidates fulfilling criteria for innovation 3. Overall, 13 new antimicrobials targeting priority pathogens were approved for the global market between 2017 and 2023 4. As of 2025 only 15 out of 90 clinical agents were innovative with just 5 targeting critical strains from WHO Bacterial Priority Pathogens List 5-7. Major shortages persist in oral outpatient therapies, pediatric formulations, and Gram-negative solutions, while preclinical volatility underscores need for sustained funding and innovation 7. 
+
+The twenty-first-century tool to boost innovation in antimicrobial pipelines is machine learning (ML) which is increasingly used to accelerate discovery, optimize efficacy–toxicity trade‑offs, and understand resistance mechanisms 8-17. Moreover, global trends indicate rapid ML incorporation in antimicrobial stewardship practices bringing innovative approaches to antimicrobial use optimization, personalized therapy and AMR reduction 18. There are now several case studies where ML has measurably shortened timelines for antimicrobial‑class discovery, including biocide‑related scaffolds and peptide‑based agents 19-21. 
+
+A particularly compelling strategy to overcome the limitations of purely data-driven approaches lies in the incorporation of domain knowledge and expert guidance into the modelling workflow. The concept, rooted in the physics-informed neural network (PINN) paradigm pioneered by Raissi, Perdikaris and Karniadakis 22, posits that encoding structured prior knowledge into a learning algorithm constrains the space of admissible solutions, amplifying the information content of the data and enabling effective generalization even when training examples are scarce 22, 23. In the molecular sciences, this principle has been validated in multiple contexts: integrating substructure and physicochemical knowledge into deep learning architectures has been shown to improve molecular property prediction by up to 4% in regression and 13% in classification tasks 24; physics-informed graph neural networks have achieved thermodynamically consistent extrapolation in chemical systems 25; and biologically-informed neural network architectures that embed ontological relationships have demonstrated enhanced interpretability and performance in drug sensitivity prediction 26. The common thread across these advances is that expert-curated information—whether it takes the form of physical constraints, biological priors, or cross-domain annotations—can compensate for the limited size and diversity of chemical datasets, steering models toward physically and biologically plausible solutions.
+
+A distinct and older line of work treats human expertise not as a constraint on the model but as a source of supervision in its own right. The intuition that experienced chemists possess a "gut feeling" for what constitutes a promising molecule has been formalised at least since QED, in which desirability functions were fitted to expert judgements of drug-likeness27. That intuition is known to be neither perfectly consistent nor bias-free — medicinal chemists reviewing the same compound sets agree only moderately with one another28, and their prioritisation carries systematic biases29— which is why expert labels are best aggregated across several annotators. Recent work has nonetheless shown that the signal survives aggregation and is machine-learnable: MolSkill distils the pairwise preferences of 35 medicinal chemists into an implicit scoring function that captures aspects of chemistry not covered by existing cheminformatic rule sets and outperforms QED at recognising drug-likeness30; in de novo design, fewer than 200 evaluations from a chemist are sufficient to reshape a generative model's objective31, and dedicated interfaces now exist for collecting such feedback at scale 32. The same economics of supervision is familiar outside chemistry, where reward models trained on binary human preferences steer large language models far more efficiently than dense supervision would 33, 34 [Christiano 2017; Ouyang 2022], and weak, noisy human heuristics can substitute for hand-labelled training data. What all of these approaches have in common is that human judgement is used to rank or filter candidate molecules. None of them asks whether human categorical judgement can replace quantitative supervision in learning the molecular representation itself, and none benchmarks it head-to-head, under an identical architecture, against a quantitative corpus an order of magnitude larger. That is the question we address here.
+
+An extension of this idea that is particularly relevant to antimicrobial research is the transfer of knowledge between related biological tasks. Transfer learning and multi-task approaches, in which a model trained on one objective informs predictions on another, have proven effective in contexts ranging from protein language model fine-tuning for antimicrobial peptide classification 35 to BERT-based minimum inhibitory concentrations (MIC) regression for E. coli and S. aureus 36. In the more specific context of small-molecule antimicrobials, a stacking approach—wherein predictions from a model trained on one bacterial species are fed as features into a model for another—offers an elegant mechanism for cross-species information transfer. Such biology-informing strategies are grounded in the mechanistic insights such as non-specific membrane disruption, meaning that activity against one pathogen could encode relevant information to another. Expert annotation of these cross-domain relationships—identifying which experimental signals from one biological system carry predictive value for another—is therefore not merely a modelling convenience but a principled encoding of domain knowledge that can yield dramatic improvements in predictive accuracy.
+
+The bottleneck in this domain, however, is not the choice of architecture but the nature of the data. Bioactivity corpora assembled from the literature are small, sparse, and — critically — protocol-heterogeneous. The problem compounds when values are pooled across laboratories: mixed IC₅₀ and Kᵢ data drawn from different sources carry an experimental uncertainty large enough to place a hard ceiling on the achievable accuracy of any model trained on them 37-39. The implication is uncomfortable but important: beyond a certain point, more quantitative data does not mean more information. This motivates a question that, to our knowledge, has not been asked directly — whether the fine quantitative gradation of activity is needed at all to learn a molecular representation, or whether a coarse categorical signal, provided by a human who has implicitly reconciled the incomparable protocols, suffices.
+
+In this paper, we will mainly focus on development and property predictions of cationic biocides, particularly membrane-targeting quaternary ammonium compounds (QACs), as antiseptics and disinfectants which are essential for prevention and treatment of microbial infections, especially healthcare-associated infections (HAIs). The main applications include variety of target objects from hand hygiene and surgical site preparation to surface cleaning providing rapid persistent antimicrobial action 40, 41. Previously, ML procedures were implemented in the chemistry workflow for antimicrobial activity estimation of cationic biocides derived from pyridine, cinchonine, imidazole, and bis-imidazole 42-48. Predictive ML model was developed for conjugated oligoelectrolytes utilizing domain-agnostic framework with a limited database of bis- and multi-QACs 49. Associative Neural Network was successfully employed to predict the MIC of ionic liquids 50, 51. Recent progress in QACs discovery was imbued by topology-aware generative model further highlighting practical validity of ML application 52.
+
+In our previous work, we established a baseline framework for predicting QAC antibacterial activity using an MLP with MolFormer-derived embeddings to simultaneously predict MIC and MBC against Gram-positive S. aureus (ATCC 43300) and Gram-negative E. coli (ATCC 25922). A biology-informed stacking approach—transferring S. aureus predictions as input features to the E. coli model—nearly doubled R² for the Gram-negative pathogen. Validated on 27 out-of-domain QACs, the framework achieved 61–69% classification accuracy and R² = 0.68 on unseen scaffolds, while comparison with gradient boosting, Gaussian Processes, and GNNs showed that added architectural complexity did not improve accuracy.53. Building on this foundation, the present work pursues a different question: not how to engineer a better predictor, but where the predictive signal in such models comes from, and how human expertise can be used to shape it most economically. We make three contributions. First, we learn dedicated molecular embeddings by contrastive training on a compact set of expert “Good/Bad” activity classifications, and show that these 1,500 binary human judgements rival an order-of-magnitude larger corpus of roughly 10,000 quantitative measurements covering the same compound families, even surpassing it on the most difficult Gram-negative endpoint. Second, we show that when the prediction task carries a textual description of its classes—the bacterial species and the activity type—encoding that description with large-language-model text embeddings outperforms one-hot encoding, particularly under scarce data. Third, through an interpretable analysis combining representational similarity, feature attribution, and a controlled ablation, we demonstrate that the foundation model already encodes a rich description of these molecules and that human guidance serves to direct and expose its biologically relevant components for downstream predictors. We assess generalization on a held-out set of 17 newly synthesized QACs belonging to a previously unexplored structural subtype. Together, these results represent a step toward ML-controlled rational design of highly efficient biocidal agents, and toward a more economical division of labor between foundation-model knowledge and human expertise.
+
+Figure 1. Expert guidance activity prediction.
+
+2. Results and Discussion
+
+2.1 Training guidance NN models
+
+Expert guidance datasets were constructed through systematic literature exploration followed by independent blind classification by three domain experts. Each reported compound was assigned an activity label ("Bad" or "Good") based on expert assessment of its antibacterial profile. A biocide agent was labeled "Good" based on objective correlation with its broad spectrum of antimicrobial activity. Additional criteria (e.g., cytotoxicity, cost, sustainability) were considered where possible. Disputed cases were resolved by majority among three experts. This procedure yielded a curated collection of 1,500 labeled compounds encompassing diverse antibacterial activity data.
+
+To identify the optimal descriptor for downstream expert-guided learning, we benchmarked four molecular representations under a unified 5-fold stratified cross-validation protocol: transformer-based embeddings (MolFormer, 768-dimensional; ChemBERTa) and classical fingerprints (Morgan, MACCS). MolFormer embeddings consistently outperformed all alternatives, achieving the highest mean F1-score of 0.655 (MLP with StandardScaler) and accuracy of 0.856, whereas Morgan, MACCS, and ChemBERTa exhibited near-random F1 scores (≤0.50) despite moderate accuracy (Figure SI 1-2). This accuracy–F1 divergence indicates that classical fingerprints and the smaller chemical language model capture majority-class bias rather than biocide-specific structural motifs, whereas MolFormer’s pre-trained chemical vocabulary already encodes the subtle physicochemical nuances relevant to membrane-targeting cationics. Detailed per-representation and per-scaler comparisons are provided in the Supporting Information. 
+
+Building on the MolFormer baseline, we trained a dedicated MLP-based encoder (512 → 384 → 256 neurons) with a supervised contrastive objective to distill the implicit “chemical intuition” embedded in the expert labels into a compact, task-specific latent space. To address the inherent class imbalance of the expert-annotated dataset, we employed Borderline SMOTE (sampling strategy = 0.8) during encoder training. The model was optimized with a hard-negative contrastive loss, which explicitly pushes hard misclassified negatives away from the anchor embedding, thereby sharpening inter-class boundaries. The resulting 256-dimensional representations are referred to as human embeddings hereafter.
+
+Figure 2 presents t-SNE projections (perplexity = 30) of the held-out test fold before and after contrastive refinement. Prior to expert-guided training, active and inactive compounds were heavily intermingled (silhouette score = 0.007). After contrastive learning, the two classes resolved into distinct spatial regions, with the silhouette score rising to 0.108—a 15-fold improvement in cluster separability. This visual trend was corroborated by complementary internal validation metrics: the Davies–Bouldin index decreased from 6.54 to 2.58, while the Calinski–Harabasz score increased from 3.60 to 22.08 (Figure SI 4). Collectively, these metrics confirm that the encoder reorganized the latent space so that molecules with similar antibacterial behavior map to proximal regions.
+
+Figure 2. t-SNE visualization of classification patterns in MolFormer embeddings versus human-labeled embeddings.
+
+2.2 Training on QACs
+
+Having obtained the embeddings, we next evaluated them on the MIC and MBC regression tasks for the quaternary ammonium compound dataset introduced in our previous work 53. As summarized in Table 1, embeddings outperform plain descriptors on this task, and adding categorical labels as input features improves predictive performance substantially further. In our previous work we showed that stacking models — in which the MIC and MBC values predicted by a first algorithm are fed as features into a second one — boost performance, an approach we termed “biology-informed” machine learning. Here we take this idea one step further and supply the activity type (MIC or MBC) and the bacterial species (S. Aureus or E. coli) directly as input features, using simple one-hot encoding. As shown in Table 1 (Multitask Catboost), this raises the R2 for MBC prediction by roughly 50%, although for MIC against E. coli the gain is more modest. We attribute this improvement to two effects: the labelling scheme effectively increases the number of training examples per model, and it allows the model to exploit “biological” information — for instance, the known activity of a compound against one bacterium when predicting its activity against another. 
+
+While one-hot encoding is the simplest way to represent categorical information, we obtain even better performance by encoding the bacterial species and activity type with an OpenAI text-embedding model. This is consistent with the observation that language-model embeddings of assay descriptions transfer bioactivity information across related endpoints [TwinBooster, JCIM 2024], and with proteochemometric modelling more broadly; here we confirm the effect in a setting with only four endpoints, where the semantic proximity of the two species and the two activity types is precisely what one-hot vectors discard. This strategy increases the R2 metric for MIC E. coli by about 30% relative to the descriptor-based approach. Overall, this multitask formulation proves remarkably effective for biocide activity prediction.
+
+Table 1. Resulted metrics for prediction of log2(MIC) and log2(MBC) with ML-regression models.
+
+ML modelsRMSES. aureus ATCC 4300 E. coli ATCC 25922log2(MIC) log2(MBC) log2(MIC) log2(MBC)MLP descriptors1.01 (R2=0.68)1.57 (R2=0.25)1.40 (R2=0.32)1.37 (R2=0.40)MLP + stacking -1.51 (R2=0.30)1.29 (R2=0.43)1.36 (R2=0.41)Multitask MLP  0.87 (R2=0.70)1.43 (R2=0.41)1.31 (R2=0.41)1.33 (R2=0.46)MLP embeddings1.36(R2=0.20)1.89 (R2=0.35)1.35 (R2=0.31)1.45 (R2=0.33)Multitask Catboost 0.91 (R2=0.71)0.95 (R2=0.64)1.31 (R2=0.43)1.08 (R2=0.74)Multitask + encodedclasses Catboost 0.92 (R2=0.75)0.85 (R2=0.68)0.95 (R2=0.60)1.00 (R2=0.77)MIC and MBC [mg/L]; multitask means added labels of type bacteria and activity; encoded classes means added OpenAI encoded of type bacteria and activity
+
+To clearly demonstrate the advantage of embeddings over descriptors in the multitask setting, we re-evaluated our previously reported approach while including the bacterial species and activity type as inputs. As Table 1 shows (Multitask MLP), multitask training outperforms the stacking approach, yet its metrics remain below those of the multitask embedding models. This indicates that the learned embeddings adapt better when task labels are supplied and, we believe, may generalize more readily to new bacterial species and activity types. Figure 3 illustrates this comparison in more detail. 
+
+Figure 3. Correlation analysis of experimental versus predicted antimicrobial activities. Correlation plots for log₂(MIC, MBC) predictions across different labels: no labels mean using no information about classes, one-hot encoding labels means adding info about bacteria and activity one-hot, OpenAI embeddings labels means adding info about bacteria and activity with text embeddings. Purple lines represent linear regression fits, with performance metrics (R², RMSE, MAE) displayed for each model-dataset combination.
+
+A natural objection to using expert “Good/Bad” labels is that they are a coarse, low-cost substitute for real measurements, and that a large body of quantitative data should always be preferable when it is available. To test this directly, we trained an architecturally identical encoder using a multi-output regression objective on a substantially larger collection of experimentally measured activities — on the order of 10,000 quantitative values spanning the same families of QACs together with additional measured activities.
+
+The quantitative values were compiled from the broad scale QAC data set consisting of 1559 unique molecules. The collection of data was acquired from literature references focusing on recent years of QACs microbiological investigations and our own collection of published pyridine-derived QACs. The microbiological data included MICs, MBCs, minimal biofilm inhibition concentrations (MBICs) and minimal biofilm eradication concentrations (MBECs) values for ~400 strains with more than 18000 individual entries. The data covered broad spectrum of bacterial and fungi pathogens including clinical isolates and multi-resistant variants. The core of collected values comprised activities against ESKAPEE group with the prevalence of S. aureus and E. coli species accounting to ~40% of all metrics. Thus, the designed data set not only matched the specified targets but also allowed for additional cross-type annotation. 
+
+Both embedding types were subsequently evaluated on the same set of QACs described above. The central finding is that these two encoders perform on par, despite an almost tenfold difference in the amount of supervision behind them (Table 2). In the strongest configuration (multitask with encoded class labels), the embeddings trained on 1,100 expert binary annotations match those trained on roughly 10,000 quantitative measurements on three of the four endpoints (R² of 0.75 vs 0.78 for S. aureus MIC, 0.68 vs 0.68 for S. aureus MBC, and 0.77 vs 0.77 for E. coli MBC) and in fact surpass them on the hardest, Gram-negative E. coli MIC endpoint (0.60 vs 0.58). Moreover, when the quantitative-trained embeddings are combined with one-hot categorical labels, they show a small but consistent decline relative to the expert-trained embeddings, indicating that the advantage of the larger dataset does not carry over once simple task structure is added. We interpret this to mean that a coarse expert classification distils the structure–activity relationships most relevant to the task — effectively filtering experimental noise and redundant quantitative variation — so that a compact set of human judgments rivals an order-of-magnitude larger corpus of measured activities. In a field where quantitative assays are slow and expensive, this suggests that structured expert intuition is not merely a fallback when data are scarce, but a competitive and economical source of supervision in its own right. 
+
+We stress that this parity does not mean a binary label is informationally equivalent to a quantitative measurement in isolation. In assigning each "Good/Bad" call, the expert implicitly integrated a broad range of activity data — and occasionally considerations outside the model's feature space entirely, such as synthetic accessibility or toxicity. The expert label is thus a low-dimensional summary of high-dimensional domain knowledge, and its value lies precisely in making that knowledge cheaply available to the model.
+
+Table 2. Resulted metrics for prediction of log2(MIC) and log2(MBC) with ML-regression models for both type of embeddings
+
+ML modelsRMSES. aureus ATCC 4300 E. coli ATCC 25922log2(MIC)log2(MBC)log2(MIC)log2(MBC)Catboostclassified embeddings1.36 (R2=0.20)1.89 (R2=0.35)1.35 (R2=0.31)1.45 (R2=0.33)Multitask Catboost0.91 (R2=0.71)0.95 (R2=0.64)1.31 (R2=0.43)1.08 (R2=0.74)Multitask + encoded classes Catboost 0.92 (R2=0.75)0.85 (R2=0.68)0.95 (R2=0.60)1.00 (R2=0.77)Catboost multi regression embeddings1.19 (R2=0.23)1.64 (R2=0.38)1.22 (R2=0.37)1.29 (R2=0.37)Multitask Catboost 0.86 (R2=0.81)0.96 (R2=0.64)1.28 (R2=0.32)1.08 (R2=0.73)Multitask + encoded classes Catboost 0.92 (R2=0.78)0.89 (R2=0.68)1.01 (R2=0.58)1.01 (R2=0.77)MIC and MBC [mg/L]; multitask means added labels of type bacteria and activity; encoded classes means added OpenAI encoded of type bacteria and activity; classified embeddings – embeddings after binary classified model; multi-regression embeddings – embeddings from multi-regression model; 
+
+2.3 Out of domain inference
+
+To rigorously evaluate the generalization capability of the embeddings, we assembled an out-of-distribution (OOD) test set of 17 newly synthesized QACs belonging to a previously unexplored structural subtype, measured under independent assay conditions. Both embedding types were subsequently benchmarked on this held-out set, alongside the in-domain quaternary ammonium compounds described above (Figure 4). 
+
+Figure 4. Molecular classes represented in each dataset.
+
+The QAC's architecture follows the principle of core, tail and linker interconnection. While QACs can be classified in variety of ways, the usual approach is division by quantity of charged cores. Within the framework of current study, we sought to utilize three main subclasses of QACs (mono-, bis-, and multi-QACs) for a thorough assessment of predictive potential of the developed ML model.
+
+Heterocycles are among the most well-known and diverse classes of compounds in organic chemistry, forming the basic structural backbones of most modern drugs, including QACs, which often have a heterocyclic nature 54-57. For the purposes of this study, we selected four suitable scaffolds to obtain the target structures: kojic acid, tetrahydropyridine, dihydropyran, and glycoluril derivatives. All 17 novel obtained compounds were subjected to MIC and MBC evaluation via broth microdilution assay. Detailed representation of the synthesis methodologies, microbiological results and compounds description can be found in the experimental section and supplementary materials. The synthetic approaches are described below.
+
+2.3.1 Kojic acid-based bis-QACs 
+
+Kojic acid (KA) is a multifunctional natural low toxic organic compound used in cosmetics as skin-depigmenting agent 58, 59. KA itself possesses moderate antibacterial activity, but several synthetically derived classes show significantly enhanced potency against a broad spectrum of bacteria 60-65. Here we used the functionalization of KA to obtain bis-QAСs architectures in similar fashion to the commercially available antiseptic octenidine with alkylaminopyridine pharmacophore group. First, dimerization of KA with 1,5-dibromopentane afforded the dihydroxy-platform. Chlorination of dimer 1 and subsequent quaternization with 4-(alkylamino)pyridines occurred at the pyridine nitrogen atom led to the target bis-QACs 1-4 (Scheme 1). The required 4-(alkylamino)pyridines were obtained separately in three steps from carboxylic acids as reported previously 66.
+
+Scheme 1. Synthesis of KA-based bis-QACs.
+
+2.3.2 Tetrahydropyridine-based bis-QACs 
+
+Tetrahydropyridine (THP) scaffold is a versatile nitrogen-containing heterocycle widely used in medicinal chemistry as a bioactive ring system and pharmacophore 67. One of the key features of THP-based drug design is efficient and fast synthesis through multicomponent reactions (MCR) 68. Previously, we found that 1,4,5,6-THP are produced through a MCR between aromatic aldehydes, malononitrile, methyl acetoacetate, and ammonium acetate in methanol at 64 ℃ for 2 h 69. When using 3-pyridinecarboxaldehyde as the aromatic moiety, MСR is a convenient method for creating bis-pyridine platforms which are known precursors of bis-QACs. The followed Menshutkin reaction yielded the second set of bis-QACs 5-9 (Scheme 2).
+
+Scheme 2. Synthesis of THP-based bis-QACs.
+
+However, despite the well-known nature of the method, we encountered several unexpected difficulties during the implementation of the process requiring optimization of the MCR synthesis conditions. First, the desired THP was produced in mixture with 4H-pyran as a result of a competitive process of intramolecular cyclization via the attack of carbonyl on the nitrile group after Michael addition (Scheme S1). The MCR conditions for a 3-pyridinecarboxaldehyde, malononitrile, methyl acetoacetate and ammonium acetate were optimized by varying the solvent, temperature, and the equivalents of ammonium acetate (Table S1). 4H-Pyran was the primary product during the reaction at room temperature, while at 64 ℃ and increased solvent load the quantity of the by-product slightly decreased (Table S1 entry 3). As the amount of NH4OAc increases to 4.0 mol. equiv., the reaction’s sole product is desired THP. Consequently, we attempted to conduct the reaction using ethanol, which is less hazardous to human health and is classified as a green solvent 70. Carrying out a similar reaction in ethanol at 78 ℃ resulted in 62% yield of the desired THP (Table S1 entry 7). Second, the Menshutkin reaction led to the formation of bis-QAC in the form of a pair of diastereoisomers (Scheme S2). In our previous study, we found that 4SR,6RS-THP convert to more stable epimers when heated in DMSO. Thus, we carried out additional epimerization step in order to obtain a more diastereoselectively pure product. The subsequent Menshutkin reaction yielded bis-pyridinium salts in the form of a single diastereomer.
+
+2.3.3 Dihydropyran-based mono-QACs 
+
+Next, we decided to use the obtained data on the pyran derivatives formation during the MCR to optimize the synthesis of dihydropyrans with trifluoro-substituted groups as a basis for the mono-QACs. The trifluoromethyl group serves as a crucial structural component in numerous fluorinated compounds that possess significant biological and pharmaceutical relevance. As a result, fluorine-containing heterocyclic compounds are now acknowledged as organic molecules exhibiting noteworthy biological activity, with potential utility in both medical and agricultural fields 71, 72. The CF3-dihydropyran was synthesized through a similar MCR involving ethyl 4,4,4-trifluoroacetoacetate as Michael addition component. The method is simple to operate, since the reaction can be carried out at room temperature, and the target product is isolated by simple filtration. N-alkylation of dihydropyran via Menshutkin reaction led to mono-QACs 10-12 (Scheme 3).
+
+Scheme 3. Synthesis of dihydropyrans -based mono-QACs.
+
+2.3.4 Glycoluril-based multi-QACs 
+
+Finally, a series of glycoluril-based multi-QACs was synthesized through a four-step synthetic route starting from 2-(2-aminoethoxy)ethan-1-ol (AmEtO). Glycoluril (GU) is a rigid bicyclic bis-urea heterocycle that serves as a key industrial and pharmaceutical building block — most notably as the classical precursor of cucurbituril macrocycles and as the core of the clinically used tranquilizer/nootropic drug mebicar (N,N,N′,N′-tetramethylglycoluril) 73. Its compact tetra-nitrogen bicyclic core represents an attractive, still largely unexplored scaffold for constructing multivalent QACs architectures. In addition, functionalized GU derivatives have attracted growing interest as biologically active molecules, highlighting the potential of the GU scaffold for medicinal chemistry 74, 75. Direct alkylation of GU backbone is problemating, so the heterocyclic linker was assembled synthetically from an amino alcohol, dimethyl carbonate, and glyoxal. Initially, a urea intermediate was prepared and subjected to condensation with glyoxal to afford the tetrahydroxyglycoluril scaffold. The obtained tetrahydroxyglycoluril was converted into a tetrachloride, which was reacted with 4-alkylaminopyridines in a final Menshutkin quaternization step to afford the target multi-QACs 13-17 (Scheme 4).
+
+Scheme 4. Synthesis of GU-based mono-QACs.
+
+2.3.5 Out-of-domain performance verification
+
+To verify out-of-domain performance, we compared three representations: human embeddings, vanilla MolFormer features, and the descriptor-based approach. As we showed in our previous work, the descriptor-based approach performs better when the task is reframed as classification, so we also report classification metrics here. In the label-free setting, human embeddings achieve the best performance among the three representations. When categorical labels are supplied as input features, human embeddings again perform best, while vanilla MolFormer reaches a comparably small but non-negligible R2. In terms of classification accuracy with labels, the descriptor-based approach performs well, and when accuracy is measured within one activity class (accuracy ±1), all three representations achieve good performance (Figure 5).
+
+To further assess the adaptability of these molecular representations, we evaluated model performance when transitioning from zero-shot to few-shot learning regimes. The models were fine-tuned using 40% of the available training data (full performance scaling curves as a function of dataset size are provided in the Supporting Information). In the label-free setting, human-derived embeddings consistently retain their predictive advantage. However, when activity labels are provided during fine-tuning, the performance gap closes, and all three representation strategies yield comparable predictive accuracy.
+
+ 
+
+Figure 5. Model performance transitioning from zero-shot to few-shot learning modes. Zero-Shot means without training on out-of-domain set; few-shot means training on 40% of out-of-domain set. In classification translucent bars indicate accuracy within the range of 1 nearest class. 
+
+2.4 Understanding the new embeddings
+
+For understanding how the resulting embeddings work, we turn to interpretable methods of machine learning. Our human embeddings are produced from the 768-dimensional MolFormer features by an encoder trained with a contrastive objective on the expert “Good/Bad” classification dataset. This raises two natural questions: does this training substantially reshape the pretrained representation, or does it mainly compress it; and is the expert classification dataset actually necessary, or would the regression data alone suffice? Figure 6 summarizes the information flow we set out to characterize — the encoder receives geometric information from MolFormer and a separate, task-relevant signal from the human labels, and we ask how much of the final embedding can be attributed to each source. We address these questions with three complementary analyses: a representational-similarity analysis, a feature-attribution analysis, and a controlled ablation in which a second encoder is trained without the expert dataset.
+
+Figure 6. Information flow in the contrastive encoder. The encoder combines geometric structure inherited from the pretrained MolFormer representation with a task-relevant signal supplied by the expert “Good/Bad” classification dataset. The resulting human embedding can be viewed as the sum of a structural component, which preserves the MolFormer geometry, and a biological component, which carries activity-discriminating information induced by the human labels and contributes most to out-of-domain generalization on the harder Gram-negative endpoints.
+
+We first compare the two representations directly, without fitting any predictive model. The Centered Kernel Alignment between the MolFormer features and the human embeddings is very high — about 0.93 on the in-domain biocides and 0.95 on the out-of-domain set — meaning that molecules that are close in MolFormer space remain close after the contrastive transformation. A complementary linear-probing analysis tells the same story: roughly 90% of the variance in the embedding can be recovered by a linear function of the MolFormer features, and vice versa. The contrastive training therefore does not build a representation from scratch; it preserves the geometric organization already present in the foundation model while compressing it into a more compact and task-oriented form.
+
+Geometric similarity, however, does not reveal how a downstream model actually uses each representation. To examine this, we trained a multitask gradient-boosting model on the MolFormer features and the human embeddings together and computed SHAP attributions (Figure SI 5). Summed over each block of features, the total attribution is 2.93 (95% CI [2.89, 2.97]) for the MolFormer block, 0.76 [0.63, 0.89] for the task identifier, and 0.64 [0.62, 0.65] for the embedding — an embedding-to-MolFormer ratio of 0.22 [0.21, 0.22] that is remarkably stable across bootstrap resampling and consistent across all four endpoints. This may at first seem to contradict the value of the embedding, but the two observations are consistent: SHAP measures the marginal contribution of a feature given everything else, so when two representations carry overlapping information the higher-dimensional one tends to absorb the attribution. The narrow confidence interval shows that the embedding makes a small but entirely reproducible contribution on top of the 768-dimensional MolFormer block; per individual coordinate, in fact, an embedding dimension carries comparable weight to a MolFormer dimension, so the smaller block total reflects the threefold lower dimensionality rather than redundancy. Whether the embedding is useful on its own — and whether the expert dataset was needed to build it — requires a dedicated experiment. 
+
+To isolate the role of the expert classification dataset, we trained a second encoder that was identical in architecture and contrastive loss but received its supervision only from the regression data, with the quantitative MIC/MBC values binned into discrete activity classes. The two encoders therefore differ in exactly one respect — the source of the supervisory signal — so any difference in downstream performance can be attributed to the supervision rather than to architectural choices. Both encoders substantially outperform the raw MolFormer features on the held-out set (out-of-domain RMSE 2.19 and 2.13 respectively, versus 2.31 for MolFormer), confirming that the contrastive compression itself is beneficial regardless of the label source. Between the two encoders, the difference is not merely undetectable but explicitly bounded. A causal-forest analysis of the per-molecule absolute residuals (CausalForestDML, with cross-fitting folds clustered at the molecule level to account for the correlation among the four endpoints measured on each compound) yields an average treatment effect of −0.015 log₂ units (95% CI [−0.43, +0.32]), the negative sign indicating a marginal reduction in error under expert supervision. The interval lies well below the ±1.0 log₂ unit (one two-fold dilution) reproducibility limit of the reference assay. Because a 95% interval is reported, the bound is conservative relative to the 90% interval required by a two one-sided test at α = 0.05. The inference is therefore one of equivalence rather than of insufficient evidence: any difference between the two supervision sources is smaller than half the assay resolution and is consequently not recoverable by a model trained on such data.
+
+The descriptive pattern supports this bound. The point estimate favours the expert-trained encoder on 66% of (compound, endpoint) pairs, yet in no individual case is the advantage distinguishable from zero. The conditional effects show no dependence on structural subtype (mean CATE = −0.017, −0.006 and −0.031 for mono-, bis- and multi-cationic compounds, respectively). No subpopulation is identified on which one label source systematically outperforms the other. The conclusion is not that one form of supervision dominates the other, but that a coarse binary human annotation matches quantitative supervision on this task — corroborating, from the causal side, the equivalence already observed against the ten-fold larger measured corpus.
+
+Taken together, these analyses give a coherent picture of what the human embeddings represent. Their structural component is inherited almost entirely from MolFormer, as reflected in the high alignment and linear recoverability and in the dominance of MolFormer features under SHAP attribution. Their biological component, although it accounts for only a modest fraction of the variance, is induced specifically by the expert classification dataset and carries additional, non-redundant information about antibacterial activity that improves out-of-domain prediction where it is hardest. In other words, the foundation model already encodes a rich description of these molecules, and the human-derived labels act as a guide that surfaces the biologically relevant directions within that description and makes them available to the downstream predictor.
+
+3. Conclusion
+
+In this work we studied how expert guidance and foundation-model representations can be combined for the prediction of antibacterial activity of QACs, a setting characterized by small, heterogeneous datasets. We assembled an OOD test set of 17 newly synthesized heterocycle-based cationic biocides belonging to three distinct structural subtypes of mono-, bis-, and multi-QACs. In the label-free setting, human embeddings achieve the best OOD performance among all representations. Three conclusions emerge that we believe extend beyond the specific case of biocides.
+
+First, in the small-data regime that is typical of antimicrobial discovery, incorporating structured human annotations can strengthen model quality to a degree that is easy to underestimate. Embeddings trained on only 1,500 expert “Good/Bad” classifications matched — and on the hardest Gram-negative endpoint exceeded — embeddings trained on an order-of-magnitude larger corpus of roughly 10,000 quantitative activity measurements covering the same compound families, and they consistently improved out-of-domain prediction over both descriptor baselines and embeddings trained on the in-domain quantitative data alone. Because experimental assays are slow and costly, structured expert judgement is positioned not as a stopgap for missing data but as a competitive and economical source of supervision: a small number of well-considered human labels can carry as much task-relevant signal as a far larger set of measured values.
+
+Embeddings trained on only 1,500 expert binary "Good/Bad" classifications proved statistically equivalent to embeddings trained on an order-of-magnitude larger corpus of roughly 10,000 quantitative activity measurements spanning the same compound families, while consistently improving out-of-domain prediction over both the descriptor baseline and the raw foundation-model features. The equivalence is quantitative, not merely nominal. On the out-of-domain test set, both encoders substantially outperform the raw MolFormer features (RMSE 2.19 and 2.13 versus 2.31), yet the difference between them is bounded at −0.015 log₂ units (95% CI [−0.43, +0.32]) — less than half the ±1 two-fold dilution to which the reference MIC values are themselves reproducible. This is not a failure to detect a difference; it is a demonstration that no difference exceeding half the assay's own resolution can exist. Two mechanisms plausibly account for this. First, the expert label compresses broad domain knowledge: in assigning it, the annotator implicitly weighs a wide spectrum of activity values and, in some cases, properties that are inaccessible to the model altogether, such as synthetic accessibility or toxicity. Second, and less obviously, the quantitative corpus is less informative than its size suggests, because values pooled across some 400 strains and dozens of protocols carry a resolution that is in part illusory. In issuing a single Good/Bad call, the expert performs an implicit harmonisation across these incomparable protocols. A coarse human judgement is therefore not a degraded measurement but a harmonisation operator applied to sources that numbers alone cannot reconcile.
+
+Third, our interpretability analysis indicates that the foundation model already possesses substantial knowledge about biologically active molecules, and that human guidance serves to direct and expose it. The contrastive encoder preserves almost all of the geometric structure of the MolFormer representation — Centered Kernel Alignment 0.93 in-domain and 0.95 out-of-domain, with roughly 90% of the embedding variance linearly recoverable from the MolFormer features — while adding a small but entirely reproducible biological component: summed SHAP attribution of 0.64 [0.62, 0.65] for the 256-dimensional embedding block against 2.93 [2.89, 2.97] for the 768-dimensional MolFormer block, a ratio of 0.22 [0.21, 0.22] stable across bootstrap resampling and consistent across all four endpoints. Per coordinate, an embedding dimension therefore carries weight comparable to a MolFormer dimension. The expert labels reorganise this space rather than rebuild it: contrastive refinement raised the silhouette score of the held-out fold from 0.007 to 0.108, lowered the Davies–Bouldin index from 6.54 to 2.58, and raised the Calinski–Harabasz score from 3.60 to 22.08. The foundation model supplies a rich latent description of chemical space; expert annotation acts as a lens that brings its activity-relevant part to the surface, where a simple downstream model can use it.
+
+SOURCE README_RU.md
+# Найденные ноутбуки за апрель и май 2026
+
+Восстановлено 48 снимков исследовательских ноутбуков из локальной истории VS Code.
+Основные версии находятся в `notebooks/`, промежуточные — в `history/`.
+В `additional/` сохранены связанные существующие ноутбуки, включая два июльских
+расчёта с исходными OOD-метриками. Оригинальные файлы и история VS Code не изменены.
+Ноутбуки не выполнялись; сохранённые выводы и графики перенесены вместе с кодом.
+Если копия содержала ключ API, его буквальное значение удалено.
+
+Даты истории VS Code — время сохранения в московском часовом поясе, а не
+подтверждённое время исполнения каждой ячейки. Для дополнительных существующих
+файлов отдельно указан тип даты: дата изменения файловой системы.
+
+| Дата сохранения | Ноутбук | Что найдено |
+|---|---|---|
+| 01.04.2026, 17:11 | [comparison_old_new_multitask](notebooks/2026-04-01_comparison_old_new_multitask.ipynb) | Сравнение baseline/multitask, подбор разбиения среди seeds 0–99; лучшим общим выбран 79. Более ранний вариант с пятифолдовой проверкой также сохранён в history. |
+| 24.05.2026, 23:32 | [descriptors_and_embeddings_comparison_with_labels](notebooks/2026-05-24_descriptors_and_embeddings_comparison_with_labels.ipynb) | Исполненные ячейки со сравнением дескрипторов, human embeddings, категорий задач и OpenAI; источник ключевых R² из Table 1/2. |
+| 24.05.2026, 23:23 | [descriptors_and_embeddings_comparison_with_labels_to_git](notebooks/2026-05-24_descriptors_and_embeddings_comparison_with_labels_to_git.ipynb) | Экспорт кода без результатов. Он не заменяет предыдущий ноутбук с выводами. |
+| 25.05.2026, 01:00 | [create_embeddings_for_test_by_multiregression](notebooks/2026-05-25_create_embeddings_for_test_by_multiregression.ipynb) | Исторический снимок подготовки количественного энкодера. Более полный сохранённый файл с результатами 03:43 находится в additional. |
+| 25.05.2026, 03:05 | [out_of_domain_full](notebooks/2026-05-25_out_of_domain_full.ipynb) | Код zero-shot/few-shot и сравнения представлений на OOD; присутствуют выводы загрузки/ошибок, но итоговых численных метрик в этой версии не найдено. |
+| 25.05.2026, 05:10 | [causal_final](notebooks/2026-05-25_causal_final.ipynb) | Сохранённые CKA, probing, SHAP и OOD-ablation; найден исходный код для analysis/ablation_bootstrap.csv. |
+| 02.07.2026, 10:57 | [shap_causal_analysis](additional/2026-07-02_shap_causal_analysis.ipynb) | Вывод с OOD RMSE 2.314 / 2.189 / 2.133, совпадающий с округлёнными 2.31 / 2.19 / 2.13 в исходной статье. Это более поздний расчёт, а не майский снимок. |
+
+## Что подтверждено сохранёнными выводами
+
+В майском `descriptors_and_embeddings_comparison_with_labels`, ячейка 20
+(индексация с нуля), сохранены следующие endpoint R²:
+
+| Вариант | Sa MIC | Sa MBC | Ec MIC | Ec MBC |
+|---|---:|---:|---:|---:|
+| Human contrastive + categorical task_id | 0.7102 | 0.6403 | 0.4269 | 0.7394 |
+| Human contrastive + OpenAI class vectors | 0.7494 | 0.6752 | 0.5918 | 0.7708 |
+| Первый вариант в Table 1/2 v5 | 0.71 | 0.64 | 0.43 | 0.74 |
+| Второй вариант в Table 1/2 v5 | 0.75 | 0.68 | 0.60 | 0.77 |
+
+Семь из восьми значений совпадают при округлении до двух знаков. Для Ec MIC
+текстового варианта сохранено 0.5918: обычное округление даёт 0.59, а не 0.60.
+Соответствующие endpoint RMSE в выводе этой ячейки не напечатаны, хотя код их
+рассчитывает. Это находка происхождения R², не полное воспроизведение всех RMSE
+и всех количественных моделей Table 2.
+
+Ячейки 18–20 делят строки «молекула × задача», со стратификацией по task_id.
+Подпись one-hot в статье не вполне соответствует именно найденному варианту:
+в ячейке 20 task_id передаётся CatBoost как категориальный признак. Ноутбук также
+содержит другие варианты разбиения в предыдущих ячейках; их результаты отличаются.
+Часть поздних ячеек не исполнена. При связывании чисел с кодом нужно учитывать,
+что сохранённый код мог редактироваться после последнего исполнения ячейки.
+
+В `causal_final`, ячейка 7, сохранены OOD RMSE:
+raw = 2.314, human = 2.189, regression = 2.276.
+Именно здесь находится функция boot_delta_rmse, которая для каждого bootstrap
+вычисляет sqrt(mean(a²)) − sqrt(mean(b²)); она действительно оценивает ΔRMSE.
+Числа её вывода совпадают с существующим analysis/ablation_bootstrap.csv.
+В CSV сохранено среднее bootstrap-разниц, а не точная разница исходных RMSE.
+Функция пересэмплирует отдельные endpoint-остатки, не кластеры молекул.
+
+В июльском `shap_causal_analysis`, ячейка 7, сохранено regression = 2.133
+при raw = 2.314 и human = 2.189. Поэтому 2.13 имеет найденный источник и не
+должно исправляться на 2.27 только на основании майского bootstrap CSV.
+Это два архивных расчёта с разными результатами regression-варианта.
+
+Апрельский подбор лучшего seed — отдельная подтверждённая особенность кода;
+при использовании его выбранного test для оценки качества нужна независимая
+проверка после выбора. Его прямое участие в числах Table 1/2 пока не установлено.
+
+## Указатель и проверка файлов
+
+- `inventory.csv` — все источники, даты, пути восстановленных копий и SHA-256.
+- `manifest.json` — происхождение и сохранённые метрические выводы.
+- `metric_outputs.json` — текст результатов из выбранных ноутбуков с номерами ячеек.
+- `article_number_provenance.csv` — сопоставление восьми human multitask R² и трёх июльских OOD RMSE с числами v5; совпадение после округления отмечено отдельно.
+- `validation.json` — проверка чтения JSON, совпадения хешей копий и удаления обнаруженных ключей.
+- `recover_notebooks.py` — воспроизводимый локальный скрипт восстановления; без сети и исполнения ноутбуков.
+
+
+SOURCE PROTOCOL.md
+# Checks anchored to v5 — 13 October 2026
+
+The v5 manuscript, its original compact-encoder method, reported Tables 1–2,
+chemistry, named OOD collection and stored notebook outputs define the starting
+point. Existing v14–v17 experiments test follow-up questions; they are not relabelled
+as reproductions of v5. This protocol is exploratory and follows all earlier results.
+
+H1: preserve and reconstruct the original performance. Load the archived human
+encoder and scaler, use the original 108 worksheet rows, decoder 500/depth6/.05/42
+and stratified 80/20 molecule–task row split. Report every prediction. The old
+OpenAI cache is absent: the existing reconstructed cell-8 task vectors are used,
+explicitly different from the cell-17 descriptions behind some saved outputs.
+Matching an old number is not a selection criterion. These are approximate
+reconstructions, and source-corpus overlap is disclosed.
+
+H2: check validation demands using the same saved representations and decoder.
+Retain the full 105 salts, five cation/scaffold folds and all 17 named OOD molecules.
+Categorical task ID, four one-hot indicators, reconstructed text and separate
+endpoint decoders are compared. Never use OOD for fitting or parameter selection.
+
+H3: check supervision in the v5 compact architecture. Reuse the common 681-molecule
+source panel, 377 training/304 validation, exclusion of evaluation cations and
+five paired seeds. Train 768→512→384→256 encoder and 128-dimensional contrastive
+projection. Human/binary-MIC use the recovered hard-negative objective; continuous
+MIC uses source-training-standardised MSE. Include three shuffled controls.
+All source batches, initial states and final 80-epoch budgets are paired; no SMOTE,
+noise augmentation or early stopping in this controlled follow-up. It tests the
+v5 architecture with declared changes, not exact historical source retraining.
+
+H4: representation versus semantics. Compare categorical/one-hot/text task codes,
+and for source seed 0 also random unit-normalised 1536-d codes and a fixed
+permutation of the text codes. Four codes are fixed before target outcomes.
+They test encoding-dependent prediction, not independent language understanding.
+
+H5: parameter/buffer contributions. Compare intact compact encoders with their
+identical untrained initial state; human controls also restore encoder parameters
+while retaining learned BatchNorm buffers. A full initial-state restore removes
+both weights and buffers. Distinguish geometry/CKA/probing from predictive loss.
+
+H6: decoder/model dependence. Apply the already defined TabPFN-V2, TabFM and
+AutoGluon budgets to archived v5 human/raw features on the same target folds.
+Chemprop and RDKit are independent structural references from the completed
+comparison. Prior direct-target full/partial/LoRA runs are procedure comparisons;
+different source chemistry or capacity is not labelled a pure architecture effect.
+
+Units: log2(mg/L). Score 420 exact QAC endpoints and 67 exact OOD endpoints.
+IT505 E. coli MBC >500 mg/L remains a bound, with separate minimum-error
+sensitivity. Do not replace it by an exact 500. Paired intervals resample whole
+scaffold groups and paired source seeds; four OOD families limit interpretation.
+
+The saved QAC-binned activity-only encoder is not the unlocated checkpoint trained
+on the larger quantitative corpus in original Table 2. Keep these provenance
+branches distinct. Human collection fields H1–H7/C1 remain for coauthors.
+
+All API/model-review calls execute only on the Mac. Server payloads contain no
+credentials or API calls. New outputs use separate directories; prior artifacts
+are read-only inputs. Failed and unfavourable results are retained.
+
+
+New checks are running, not completed. No future numbers may be invented. Original Tables 1–2 and chemistry will remain in the main paper. H1–H7/C1 are reserved for coauthors. Source-only heads and task text are not measured MIC. The full-corpus quantitative multitarget checkpoint has not been located; analysis/encoder_reg_only.pth is a distinct QAC-binned ablation. Recommend concrete corrections that retain the v5 narrative.

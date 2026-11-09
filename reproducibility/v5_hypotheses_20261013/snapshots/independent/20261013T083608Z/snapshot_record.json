@@ -1,0 +1,5 @@
+{
+  "host": "yagr@100.118.123.26",
+  "utc": "20261013T083608Z",
+  "response": "independent_original/status.json {\n  \"completed\": true,\n  \"done\": 9,\n  \"total\": 9\n}\nSnapshot files 53 bytes 3305432\n"
+}

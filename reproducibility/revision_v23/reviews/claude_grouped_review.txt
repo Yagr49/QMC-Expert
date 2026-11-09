@@ -1,0 +1,43 @@
+---
+
+## Independent Figure Review — v22 → v23 Redesign Verdict
+
+### Visual Inspection
+
+**v22 source (3-panel):** Panels (a) Cation holdout, (b) Scaffold holdout, (c) OOD-17. Five routes per panel in pastel blue/lavender/peach/rose/mint. Shared x-axis ~0–7+, ticks at 0 2 4 6. OOD panel carries visible faint jitter dots. Median/IQR markers present throughout.
+
+**v23 new Figure 3 (2-panel, 180×88 mm):** Panels (a) and (b) only — Cation holdout and Scaffold holdout. OOD panel **completely absent**. ✓ Same five routes, same pastel palette, same Aptos font. X-axis 0–8.05, ticks at 0 2 4 6 8; shared across both panels. Violins appear visually wider per panel than in v22 (expected: fewer panels → wider available column), but KDE is computed on the identical 420-point distribution — no data change. Medians (white dots) and IQR bars present. Route y-labels appear in panel (a) only; panel (b) correctly suppressed.
+
+**v23 OOD standalone (105×88 mm):** Single panel titled "OOD-17". All five routes present. Faint individual gray points overlaid on each violin (67 per route). IQR width visibly varies by route (Full FT broader than Human→CB). X-axis matches 0–8.05 scale. The IT505 Ec\_MBC >500 mg/L bound record is **not plotted as a point** — excluded from violin data per `qualifier!='='` filter, retained in CSV separately. ✓
+
+---
+
+### Script & Statistics Audit
+
+**Statistic identity confirmed:** `mean_absolute_error = mean(|y − prediction_seed|)` over seeds 0–2 per molecule×endpoint pair. Not ensemble error. Not KDE over 3 RMSE values. Not 1,260 independent residuals. ✓
+
+**Count assertions in script pass:** 420 summaries per route × {cation, scaffold}; 67 per route × {full-QAC105}. Manifest checks field confirms all ten cation/scaffold route×schema entries at n=420. ✓
+
+**Bound handling:** `assert len(bounds)==3` and `bounds.compound_id.eq('IT505').all() and bounds.task.eq('Ec_MBC').all()` — then excluded from violin data. OOD manifest records `bound_retained_separately='IT505/Ec_MBC>500mg/L'`. ✓
+
+**Run-level RMSE:** Saved to `FT_route_seed_metrics.csv` and `FT_route_RMSE_mean_sample_SD.csv`. Not plotted as density or uncertainty bars. ✓
+
+**DOCX insertion:** `inserted_into_DOCX=False` in OOD manifest. OOD figure is produced but not referenced in Section 2.1. ✓
+
+**Caption assertion at runtime:** `assert all(token.lower() not in caption_en.lower() for token in ['OOD','67','bound'])` — caption contains none of these tokens. ✓
+
+---
+
+### Issues Requiring Action
+
+**1 — Material (caption, minor):** The main Figure 3 caption ends: *"Correlated endpoints and runs preclude interpreting density differences as statistical significance or causal human-label effects."* This is correct but arrives abruptly after the checkpoint-lineage sentence. Consider moving this caveat to immediately follow the "420 exact endpoint summaries" sentence so it modifies the statistic rather than appearing to qualify only the human routes. No wording change is required for accuracy; placement is the only concern.
+
+**2 — Cosmetic (script only, no figure effect):** `os.environ.setdefault('MPLCONFIGDIR', '/private/tmp/coma_v22_ft_matplotlib')` retains the `v22` version label in a temp-directory name. This has zero effect on any output but will cause confusion if the script is re-run and the directory is inspected. Update the string to `coma_v23_ft_matplotlib`.
+
+**3 — OOD caption precision:** The phrase *"faint points show individual endpoint summaries"* is accurate but could add *"(one per molecule–endpoint pair, averaged over three runs)"* to prevent a reader from inferring 3×67 = 201 raw-seed points. Not mandatory; add if journal reviewers are likely to probe n.
+
+---
+
+### Summary Verdict
+
+The two-panel redesign is **correct and ready**. OOD is absent from Figure 3 and present as a self-contained standalone artifact for Section 2.3. All 420-per-route endpoint summaries and the 0–8.05 shared axes are preserved. No tail clipping, no new fits, no ensemble error, no RMSE-density substitution. The only actionable fixes are: *(1)* optional caption-sentence reordering for clarity; *(2)* one-word `MPLCONFIGDIR` string cleanup in the script. Neither requires regenerating the figures.

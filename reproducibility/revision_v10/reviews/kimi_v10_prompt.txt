@@ -1,0 +1,99 @@
+You are an independent scientific reviewer. Do not call tools, edit files, or claim to have rerun code. Review ONLY the supplied materials. Answer in English, <=1600 words. Earlier review corrections: protocol was exploratory, NOT preregistration; archived runs_direct.jsonl contains three-seed direct means, seed-0 bootstrap was separate. Author now asks whether modern molecular models and heterogeneity strengthen external Q-HERO and causality. Identify scientifically defensible framing and any contradictions; give one short results paragraph and one conclusion paragraph.
+
+# Exploratory extension fixed before inspecting new outputs (11 October 2026)
+This extension follows already inspected v9 and Mendeley results and Kimi review. It is not preregistered. No performance-based model or checkpoint selection.
+
+Models selected by publication/availability: ChemFM/ChemFM-1B (ChemFM, Communications Chemistry, online Dec 2025); DeepChem/MoLFormer-c3-1.1B and DeepChem/ChemBERTa-100M-MLM (ChemBERTa-3, Digital Discovery 2026). Hugging Face commit SHA pinned before extraction. The c3 name counts pretraining molecules, not parameters.
+All 1939 canonical full salts from v9 are encoded, without concentration labels, on the supplied server. ChemFM uses last non-padding token (causal encoder, compatible with sequence-classification convention); RoBERTa/ChemBERTa uses attention-masked mean hidden states (avoids randomly initialized pooler); c3 uses deterministic MoLFormer pooler. Verify no truncation; abort if a molecule exceeds model context. These are frozen-feature probes, not reproductions of fully fine-tuned published leaderboards. Unsupervised pretraining membership of evaluation compounds is unknown.
+
+Identical archived target-cation exclusions and target folds. CatBoost decoder unchanged. Within each backbone, source matched-pooled panel (681 molecules), source scaffold train/validation, five seeds, 80 epochs, minibatch and initial weights paired. Arms: expert, continuous MIC, binary MIC prevalence-matched, expert shuffled, continuous shuffled, binary MIC shuffled, untrained encoder, raw backbone. Network input dimension follows the backbone, remaining layers 256 and128. Training architecture capacity thus differs across backbones; compare supervision contrasts within backbone, not as a pure parameter-count effect. CPU encoder training keeps RNG convention consistent with v9. Fixed learning parameters, no target-driven tuning.
+
+Context sensitivity uses the identical 529 common molecules with expert labels, pooled quantitative MIC and exact S. aureus MIC and respective shuffled controls. Input MolFormer features/initial weights/source split/budget identical. This is an algorithmic intervention in the target definition and aggregation policy, not an isolated effect of provenance: organism mixture, censoring, number of observations and aggregation all vary.
+
+Primary descriptive focus Q-HERO-405 scaffold-held-out predictions. Report all targets and arms. Bootstrap whole scaffolds conditional on trained seeds plus nested seed/scaffold sensitivity; designate all extension comparisons exploratory with no multiplicity-adjusted significance claims. Existing v9 raw results retained. Repeated scaffold assignments and leave-one-scaffold-out loss sensitivity quantify evaluation dependence. Do not claim human denoising, equivalence/noninferiority, or biological causal mechanism.
+
+
+CURRENT RESULTS (ChemFM still pending; do not assume its results):
+backbone,panel,arm,target,seeds,n,R2,R2_sd,RMSE,RMSE_sd
+c3-molformer,baseline,raw-c3-molformer,Q-HERO-405,1,405,0.0756587146314685,,1.6486910744595922,
+c3-molformer,matched-pooled,expert,Q-HERO-405,5,405,0.010481212089513,0.0551278971132903,1.7053069035978978,0.0471184639971868
+c3-molformer,matched-pooled,expert-shuffled,Q-HERO-405,5,405,-0.1246736171786443,0.076102907509002,1.817779497411676,0.0609420121614143
+c3-molformer,matched-pooled,quant-binary,Q-HERO-405,5,405,0.0043501798312944,0.045276170331811,1.7107494132675072,0.0389477209016225
+c3-molformer,matched-pooled,quant-binary-shuffled,Q-HERO-405,5,405,-0.0533723835861159,0.0803696049263964,1.7590212976326112,0.0658041909561838
+c3-molformer,matched-pooled,quant-continuous,Q-HERO-405,5,405,0.1448788741145844,0.0518879231043777,1.58516648757526,0.0484232818884136
+c3-molformer,matched-pooled,quant-shuffled,Q-HERO-405,5,405,-0.0624727817742726,0.0795834109690778,1.7665882839474338,0.0665880760962532
+c3-molformer,matched-pooled,untrained,Q-HERO-405,5,405,0.0092529833062141,0.0576395212736546,1.706298517319127,0.0500617111596166
+chemberta100m,baseline,raw-chemberta100m,Q-HERO-405,1,405,-0.1273272382598569,,1.8207407467735768,
+chemberta100m,matched-pooled,expert,Q-HERO-405,5,405,-0.1573538513769993,0.0542705074629709,1.844423922796387,0.0432378082387079
+chemberta100m,matched-pooled,expert-shuffled,Q-HERO-405,5,405,-0.1394536168870715,0.0623933273610002,1.8299390375539504,0.0509860031294005
+chemberta100m,matched-pooled,quant-binary,Q-HERO-405,5,405,-0.1413052225242451,0.0252599507898778,1.8319049318521456,0.0201810592567987
+chemberta100m,matched-pooled,quant-binary-shuffled,Q-HERO-405,5,405,-0.111842915539773,0.0226021876964534,1.8081188724313455,0.0183280524890515
+chemberta100m,matched-pooled,quant-continuous,Q-HERO-405,5,405,-0.1625152512126068,0.0653256415082617,1.8483353988874205,0.0527901258927662
+chemberta100m,matched-pooled,quant-shuffled,Q-HERO-405,5,405,-0.122778677020545,0.0692103003082448,1.8163535133805224,0.056799713044169
+chemberta100m,matched-pooled,untrained,Q-HERO-405,5,405,-0.1149130294224685,0.0514565990136453,1.8103004623959584,0.0418780531057834
+molformer,baseline,raw-molformer,Q-HERO-405,1,405,0.127567486775788,,1.6017289764790374,
+molformer,context,expert,Q-HERO-405,5,405,-0.0851084239348932,0.0904439777730962,1.7850714237835568,0.0747102554034682
+molformer,context,expert-shuffled,Q-HERO-405,5,405,-0.0553523748636527,0.0476849391298887,1.761292854121366,0.0401568925588153
+molformer,context,quant-pooled,Q-HERO-405,5,405,0.2088432386044013,0.0492258808581782,1.524700853032927,0.0476693745128638
+molformer,context,quant-pooled-shuffled,Q-HERO-405,5,405,0.0183156133612664,0.050417751068166,1.698618883789946,0.0433482648964692
+molformer,context,quant-sa,Q-HERO-405,5,405,0.1104819714004193,0.01717000120171,1.6172769004509573,0.0155722484006556
+molformer,context,quant-sa-shuffled,Q-HERO-405,5,405,0.0508302822536183,0.079430048611995,1.6695434590417748,0.0690933435696771
+molformer,context,untrained,Q-HERO-405,5,405,0.0430410110126741,0.0367282646611419,1.6772789819695235,0.0323141420467717
+molformer,full,expert-full,Q-HERO-405,5,405,0.0947627023000346,0.0663284886415619,1.6306792153018337,0.0600941056493129
+molformer,full,quant-iltox-full,Q-HERO-405,5,405,0.0828895034375765,0.0663647683920543,1.6413713854253558,0.0593598532703994
+molformer,full,quant-pooled-full,Q-HERO-405,5,405,0.2459849490920638,0.0275955836747642,1.4888600128612883,0.0274989135929443
+molformer,full,quant-sa-full,Q-HERO-405,5,405,0.1847685766792622,0.0664457026447055,1.547276407824975,0.0638546137728508
+molformer,matched-pooled,expert,Q-HERO-405,5,405,0.1217823635334021,0.034566470270302,1.6067791799183062,0.0317906581425636
+molformer,matched-pooled,expert-shuffled,Q-HERO-405,5,405,-0.0801630556823918,0.1293078052675959,1.779766078949217,0.1050910098115059
+molformer,matched-pooled,quant-binary,Q-HERO-405,5,405,0.0786374598635622,0.0462095315623296,1.6456155993499402,0.0414133556133369
+molformer,matched-pooled,quant-binary-shuffled,Q-HERO-405,5,405,-0.0371241133817545,0.0713889164514302,1.7455612203840971,0.059742274051923
+molformer,matched-pooled,quant-continuous,Q-HERO-405,5,405,0.236756306862328,0.0520688890379041,1.497435573645387,0.0516500235213785
+molformer,matched-pooled,quant-shuffled,Q-HERO-405,5,405,0.1238155097345088,0.0541623037175179,1.6045498076287372,0.0498617277735627
+molformer,matched-pooled,untrained,Q-HERO-405,5,405,0.0545111689572254,0.0855920676468011,1.666128747889752,0.0740371341730078
+molformer,matched-sa,expert,Q-HERO-405,5,405,-0.0851084239348932,0.0904439777730962,1.7850714237835568,0.0747102554034682
+molformer,matched-sa,expert-shuffled,Q-HERO-405,5,405,-0.0553523748636527,0.0476849391298887,1.761292854121366,0.0401568925588153
+molformer,matched-sa,quant-binary,Q-HERO-405,5,405,-0.0176414176050142,0.0254444155168168,1.729789285580786,0.0216836081727885
+molformer,matched-sa,quant-continuous,Q-HERO-405,5,405,0.1104819714004193,0.01717000120171,1.6172769004509573,0.0155722484006556
+molformer,matched-sa,quant-shuffled,Q-HERO-405,5,405,0.0508302822536183,0.079430048611995,1.6695434590417748,0.0690933435696771
+molformer,matched-sa,untrained,Q-HERO-405,5,405,0.0430410110126741,0.0367282646611419,1.6772789819695235,0.0323141420467717
+
+backbone,panel,target,comparison,n,scaffolds,seeds,unit,delta_RMSE,ci_low,ci_high,leave_scaffold_min,leave_scaffold_max
+c3-molformer,matched-pooled,Q-HERO-405,expert minus expert-shuffled,405,29,5,seed+scaffold,-0.1127689723752025,-0.2459143222249582,-0.0123624208059855,-0.1375882759239848,-0.0968051942284109
+c3-molformer,matched-pooled,Q-HERO-405,expert minus quant-continuous,405,29,5,seed+scaffold,0.1200695203300523,-0.0097953068561015,0.2278231727716162,0.0676987355083196,0.1544977473179294
+c3-molformer,matched-pooled,Q-HERO-405,expert minus quant-binary,405,29,5,seed+scaffold,-0.0052764707247778,-0.1147231242131533,0.1716517379135191,-0.0214504435404365,0.0346863033164051
+c3-molformer,matched-pooled,Q-HERO-405,expert minus untrained,405,29,5,seed+scaffold,-0.0010583410976356,-0.0840749084408151,0.092713509000041,-0.0153176791983562,0.0182833422319292
+c3-molformer,matched-pooled,Q-HERO-405,expert minus raw-c3-molformer,405,29,5,seed+scaffold,0.0571365121323859,-0.0244847169242721,0.1616932354860888,0.0408789553786466,0.0802398448847432
+c3-molformer,matched-pooled,Q-HERO-405,quant-continuous minus quant-shuffled,405,29,5,seed+scaffold,-0.1818338952730036,-0.298533013015317,-0.0294752479047724,-0.2265139992474356,-0.1272420817635697
+c3-molformer,matched-pooled,Q-HERO-405,quant-binary minus quant-binary-shuffled,405,29,5,seed+scaffold,-0.0489016468680436,-0.2748724175510281,0.065443882542515,-0.0949920290170562,-0.0275773294009078
+c3-molformer,matched-pooled,Q-HERO-405,quant-binary-shuffled minus expert-shuffled,405,29,5,seed+scaffold,-0.058590854782381,-0.1642001321036337,0.0575860089947761,-0.0706092392515882,-0.0480369783962173
+chemberta100m,matched-pooled,Q-HERO-405,expert minus expert-shuffled,405,29,5,seed+scaffold,0.0143221373796933,-0.1153932037529788,0.0981683324726872,-0.0393344889279192,0.0308551843463074
+chemberta100m,matched-pooled,Q-HERO-405,expert minus quant-continuous,405,29,5,seed+scaffold,-0.0041090757307051,-0.1380072684997282,0.1215789445430111,-0.0615675633618257,0.0288356242987062
+chemberta100m,matched-pooled,Q-HERO-405,expert minus quant-binary,405,29,5,seed+scaffold,0.0128354592242063,-0.1190970238196712,0.107843881806058,-0.0222205358568188,0.0294918825725176
+chemberta100m,matched-pooled,Q-HERO-405,expert minus untrained,405,29,5,seed+scaffold,0.0341413878605849,-0.0580692570696308,0.1131786114581864,0.008195314965355,0.0477179876175326
+chemberta100m,matched-pooled,Q-HERO-405,expert minus raw-chemberta100m,405,29,5,seed+scaffold,0.0240885714650074,-0.0682557640168844,0.0964579840381613,0.0011479366182061,0.0375721008371494
+chemberta100m,matched-pooled,Q-HERO-405,quant-continuous minus quant-shuffled,405,29,5,seed+scaffold,0.0318745394250179,-0.0773894313923264,0.1398603852720613,0.0130035179574774,0.0480098368651165
+chemberta100m,matched-pooled,Q-HERO-405,quant-binary minus quant-binary-shuffled,405,29,5,seed+scaffold,0.0238006749632848,-0.0676070163153909,0.1075736500418012,0.0065185905485902,0.0325505696965173
+chemberta100m,matched-pooled,Q-HERO-405,quant-binary-shuffled minus expert-shuffled,405,29,5,seed+scaffold,-0.0223139968077978,-0.0911053781116135,0.04930750899,-0.0309151338124311,-0.0156990855155432
+molformer,context,Q-HERO-405,expert minus expert-shuffled,405,29,5,seed+scaffold,0.0246626779890157,-0.1503551140445474,0.346512305991365,-0.0784777396691913,0.1119669039769017
+molformer,context,Q-HERO-405,expert minus quant-pooled,405,29,5,seed+scaffold,0.2610248348150947,0.0666814678446683,0.5366273231407105,0.1583423632204159,0.3050819620917551
+molformer,context,Q-HERO-405,expert minus quant-sa,405,29,5,seed+scaffold,0.1689848441298793,-0.014940075697539,0.470903165940758,0.0597229794872768,0.2460190235493098
+molformer,context,Q-HERO-405,quant-pooled minus quant-sa,405,29,5,seed+scaffold,-0.0920399906852154,-0.1590961796770881,-0.0011426947743246,-0.1050772950515979,-0.0544390450160614
+molformer,context,Q-HERO-405,quant-pooled minus quant-pooled-shuffled,405,29,5,seed+scaffold,-0.1737644355078089,-0.2818743762597028,-0.0402228235023674,-0.1992667885503725,-0.1555071895443083
+molformer,context,Q-HERO-405,quant-sa minus quant-sa-shuffled,405,29,5,seed+scaffold,-0.0533499515024122,-0.1873244973615811,0.0748995892948686,-0.0814111086304347,-0.0278671023361765
+molformer,context,Q-HERO-405,expert minus raw-molformer,405,29,5,seed+scaffold,0.1845927430940677,0.049928613506942,0.4043216781228468,0.121041044148344,0.2363001998643699
+molformer,matched-pooled,Q-HERO-405,expert minus expert-shuffled,405,29,5,seed+scaffold,-0.1752157457813388,-0.3218256346973079,-0.0236676829637558,-0.2024537956873109,-0.1388398727924893
+molformer,matched-pooled,Q-HERO-405,expert minus quant-continuous,405,29,5,seed+scaffold,0.1088827399306009,-0.0007473143910132,0.2256080361691063,0.0962851650951384,0.1365842689076528
+molformer,matched-pooled,Q-HERO-405,expert minus quant-binary,405,29,5,seed+scaffold,-0.0390016721800889,-0.1488627050161312,0.1484276123565584,-0.0627181853241225,0.0265060952458526
+molformer,matched-pooled,Q-HERO-405,expert minus untrained,405,29,5,seed+scaffold,-0.0604134569572698,-0.1874615695653487,0.057179294477032,-0.0818703440925887,-0.039352034727327
+molformer,matched-pooled,Q-HERO-405,expert minus raw-molformer,405,29,5,seed+scaffold,0.0053017792238689,-0.1018204494711765,0.1146858004687582,-0.0158881384753275,0.0347076836575053
+molformer,matched-pooled,Q-HERO-405,quant-continuous minus quant-shuffled,405,29,5,seed+scaffold,-0.107021457734673,-0.2283537676703974,-0.0158810185956822,-0.1200666037487776,-0.0840266050059437
+molformer,matched-pooled,Q-HERO-405,quant-binary minus quant-binary-shuffled,405,29,5,seed+scaffold,-0.1003464787566645,-0.3144818292585284,0.033225718563223,-0.1630988884408777,-0.0785545242035072
+molformer,matched-pooled,Q-HERO-405,quant-binary-shuffled minus expert-shuffled,405,29,5,seed+scaffold,-0.0358675948445852,-0.1484465782777896,0.1124086344200778,-0.0465208868303503,-0.0022470795974642
+molformer,matched-sa,Q-HERO-405,expert minus expert-shuffled,405,29,5,seed+scaffold,0.0246626779890157,-0.1503551140445474,0.346512305991365,-0.0784777396691913,0.1119669039769017
+molformer,matched-sa,Q-HERO-405,expert minus quant-continuous,405,29,5,seed+scaffold,0.1689848441298793,-0.014940075697539,0.470903165940758,0.0597229794872768,0.2460190235493098
+molformer,matched-sa,Q-HERO-405,expert minus quant-binary,405,29,5,seed+scaffold,0.0564237122903641,-0.1428258165133556,0.3678755259579974,-0.0592894791970912,0.1383280030582718
+molformer,matched-sa,Q-HERO-405,expert minus untrained,405,29,5,seed+scaffold,0.108793732808742,-0.0674610734909538,0.392467066700661,0.0186858554071547,0.1647081510043238
+molformer,matched-sa,Q-HERO-405,expert minus raw-molformer,405,29,5,seed+scaffold,0.1845927430940677,0.049928613506942,0.4043216781228468,0.121041044148344,0.2363001998643699
+molformer,matched-sa,Q-HERO-405,quant-continuous minus quant-shuffled,405,29,5,seed+scaffold,-0.0533499515024122,-0.1873244973615811,0.0748995892948686,-0.0814111086304347,-0.0278671023361765
+
+Q-HERO spreadsheet has no row-level strain/protocol/lab identifiers. Public paper describes coordinated Wuest/Minbiole programme since2012. QMR replicate audit:38 same-compound/same-strain strata,23compounds,5strains, median range0 log2,94.7%withinone dilution;279within-group strain strata medianrange1. Cannot identify pooled conflict rate as lab error. Source-only QHEROvsQMR comparison confounded by chemistry,size,selection. Kimi original review proposed asymmetric binary-shuffle/nested-bootstrap controls: now included. Question: how to strengthen human signal without overclaiming heterogeneity or universal competitiveness?

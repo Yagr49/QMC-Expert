@@ -1,0 +1,214 @@
+{
+  "copied_table_numeric_cells": [
+    {
+      "source_table": 45,
+      "current_table": 1,
+      "cells_identical": true
+    },
+    {
+      "source_table": 46,
+      "current_table": 2,
+      "cells_identical": true
+    },
+    {
+      "source_table": 40,
+      "current_table": 3,
+      "cells_identical": true
+    },
+    {
+      "source_table": 35,
+      "current_table": 4,
+      "cells_identical": true
+    },
+    {
+      "source_table": 36,
+      "current_table": 5,
+      "cells_identical": true
+    },
+    {
+      "source_table": 41,
+      "current_table": 6,
+      "cells_identical": true
+    },
+    {
+      "source_table": 38,
+      "current_table": 7,
+      "cells_identical": true
+    },
+    {
+      "source_table": 42,
+      "current_table": 8,
+      "cells_identical": true
+    },
+    {
+      "source_table": 49,
+      "current_table": 9,
+      "cells_identical": true
+    },
+    {
+      "source_table": 47,
+      "current_table": 10,
+      "cells_identical": true
+    },
+    {
+      "source_table": 48,
+      "current_table": 11,
+      "cells_identical": true
+    },
+    {
+      "source_table": 50,
+      "current_table": 12,
+      "cells_identical": true
+    }
+  ],
+  "tables": 13,
+  "figures": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "main_reference_checks": [
+    {
+      "body_index": 26,
+      "kind": "Table",
+      "numbers": [
+        1
+      ]
+    },
+    {
+      "body_index": 34,
+      "kind": "Figure",
+      "numbers": [
+        1,
+        2
+      ]
+    },
+    {
+      "body_index": 48,
+      "kind": "Table",
+      "numbers": [
+        1,
+        2
+      ]
+    },
+    {
+      "body_index": 49,
+      "kind": "Table",
+      "numbers": [
+        2
+      ]
+    },
+    {
+      "body_index": 53,
+      "kind": "Table",
+      "numbers": [
+        3
+      ]
+    },
+    {
+      "body_index": 55,
+      "kind": "Table",
+      "numbers": [
+        6
+      ]
+    },
+    {
+      "body_index": 58,
+      "kind": "Table",
+      "numbers": [
+        7,
+        8
+      ]
+    },
+    {
+      "body_index": 61,
+      "kind": "Table",
+      "numbers": [
+        10,
+        11
+      ]
+    },
+    {
+      "body_index": 67,
+      "kind": "Figure",
+      "numbers": [
+        9
+      ]
+    },
+    {
+      "body_index": 68,
+      "kind": "Table",
+      "numbers": [
+        4,
+        5,
+        9
+      ]
+    },
+    {
+      "body_index": 68,
+      "kind": "Table",
+      "numbers": [
+        2
+      ]
+    },
+    {
+      "body_index": 87,
+      "kind": "Table",
+      "numbers": [
+        13
+      ]
+    },
+    {
+      "body_index": 87,
+      "kind": "Table",
+      "numbers": [
+        13
+      ]
+    },
+    {
+      "body_index": 87,
+      "kind": "Table",
+      "numbers": [
+        13
+      ]
+    },
+    {
+      "body_index": 100,
+      "kind": "Figure",
+      "numbers": [
+        10
+      ]
+    },
+    {
+      "body_index": 105,
+      "kind": "Table",
+      "numbers": [
+        12
+      ]
+    },
+    {
+      "body_index": 105,
+      "kind": "Figure",
+      "numbers": [
+        8
+      ]
+    }
+  ],
+  "DOCX_run_fonts": [
+    "Times New Roman"
+  ],
+  "author_placeholders": [
+    "annotation logistics",
+    "THP optimisation table",
+    "Scheme S1 and Scheme S2",
+    "source NMR/HRMS/FT-IR spectra"
+  ],
+  "font": "Times New Roman"
+}

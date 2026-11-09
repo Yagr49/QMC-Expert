@@ -1,0 +1,9 @@
+{
+  "complete": true,
+  "script_sha256": "7d7ff3ec17e34f25ec3a206e6cf65f4b6b7b96e84e1834ccc56792146d37beff",
+  "implementation_note_sha256": "444d6edecc8fc64f81f9493ee0de4db411c5edb02514502a4440478d5e86576a",
+  "original_checkpoints_preserved": true,
+  "checkpoints": 6,
+  "max_feature_difference": 0.0,
+  "max_score_difference": 1.7763568394002505e-15
+}

@@ -1,0 +1,25 @@
+{
+  "source": "/Users/egorilin/Desktop/COMA/2026_10_14_Paper_2_edited-v23_grouped_adaptation_only.docx",
+  "source_sha256": "31ca83e9a2e0629513c9bcf9158fa396171bc020a04060fd7d736d6dade36b4a",
+  "main": "/Users/egorilin/Desktop/COMA/2026_10_14_Paper_2_edited-v24_section2_2_vertical_figures.docx",
+  "main_sha256": "359c270c4c294d41994c1958400d54b54bff8342a1dd65e07076165ecff7e3cd",
+  "SI_source": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v20/Supplementary_Information_v20.docx",
+  "SI_source_sha256": "04f95ec9224f994c881c5d09c8f5036bbd607ffa1a28ec3c884a238c7d4af048",
+  "SI": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/Supplementary_Information_v24.docx",
+  "SI_sha256": "c092a961264cdf01e706eab23e7914fd5ba7f85ef689a1822e1eac6fa281f1cd",
+  "tables_moved": {
+    "Table1": "TableS45",
+    "Table2": "TableS46"
+  },
+  "original_parity_moved": "FigureS32",
+  "main_figures": {
+    "Figure3": "vertical backbone-route errors",
+    "Figure4": "matched compact supervision schematic + real vertical errors",
+    "Figure5": "QHERO405 scaffold ROC"
+  },
+  "original_figures5_to7_renumbered_to6_to8": true,
+  "OOD_absent_from_section2_1_and_main_new_violins": true,
+  "section2_3_scientific_text_unchanged": true,
+  "source_v5_and_prior_versions_unmodified": true,
+  "new_main_text_highlighted_yellow": true
+}

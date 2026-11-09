@@ -1,0 +1,36 @@
+---
+
+## Scientific Figure Audit — Figures 4 & 5, Section 2.2 (revision_v24)
+
+### Previously fixed — confirmed resolved
+- Figure 4 Y-axis label now reads **Mean absolute error, log₂(mg/L)** ✓
+- Caption explicitly states source-encoder weights frozen before target CatBoost training ✓
+- Both PNGs render as high-resolution (600 dpi) ✓
+
+---
+
+### Figure 4 — visual read verdict: **PASS with one minor diagram note**
+
+Panels b/c render correctly: four violins per holdout (Human, Quantitative, Shuffled human, Raw), medians and IQR bars visible, Y-axes consistent (~0–7), jittered scatter retained. Provenance n = 420 per arm matches caption claim. Raw is a single fixed curve (no seed shading) ✓. Architecture in panel (a) shows 768→512→384→256 and 681 source molecules ✓.
+
+**Remaining minor diagram issue:** Panel (a) labels only the MolFormer backbone as "Frozen." The two compact source encoders (Human / MIC) are not marked as frozen during target-fold training. The caption covers this, but the diagram itself could be misread as only freezing MolFormer while continuing to update the compact encoders. Adding a "frozen weights →" annotation or a padlock symbol to the compact encoder boxes would eliminate ambiguity without changing any data.
+
+---
+
+### Figure 5 — visual read verdict: **PASS with one visual transparency note**
+
+Both panels (random holdout, scaffold holdout) render correctly. Legend distinguishes faint chance diagonal, solid-line representations, and dashed-blue RF35 ✓. Shading (sample SD) appears on the five-seed arms; Raw and RF35 are single unshaded curves ✓. Stepped curves in panel (a) are expected given only 9 negatives in the 81-sample test.
+
+**Visual note — scaffold panel (b):** The RF35 dashed curve visually dips *below* the diagonal in the mid-FPR region. This is a real empirical property of the single-seed curve and is not a plotting error (stated AUROC 0.5651 is above chance). However, without a caption note, a reader may infer sub-chance RF35 performance. Consider adding a parenthetical such as "(AUROC 0.565; local dips below diagonal reflect scaffold imbalance at fixed seed 0)" — no data invention required.
+
+---
+
+### Section 2.2 — statistical scope check
+
+All five numerical AUROC values and their sample SDs match provenance to rounding: Human 0.675 ± 0.033, Quant 0.716 ± 0.010, Shuffle 0.567 ± 0.070, Raw 0.595, RF35 0.565 ✓. Bootstrap CI for Human−shuffle [0.031, 0.237] matches [0.0305, 0.2370] ✓. SD/CI distinction stated ("The ± values denote sample SD of five complete runs") ✓. Historical R² values and CV means are presented in separate sentences with distinct scopes ✓.
+
+**One mandatory scope gap:** The paired conditional bootstrap for Human−RF (+0.110) is computed in provenance but not reported in Section 2.2. The task brief notes ambiguity about whether this interval excludes zero (stated CI [0.026, 0.201] excludes zero, yet the brief also states "RandomHuman−RFCIincludes0"). This contradiction must be resolved: either (a) report the correct interval in text alongside a caveat that scaffold results may not generalise, or (b) explicitly state the CI is not reported and why. Omitting it while reporting the Human−shuffle CI creates a selectivity risk.
+
+---
+
+**Summary of mandatory fixes:** (1) Resolve and report Human−RF bootstrap CI in Section 2.2. **Minor fixes:** (2) Label compact encoders as frozen in Figure 4 panel (a) diagram. (3) Add a brief RF35 AUROC note in Figure 5 scaffold panel caption regarding dip below diagonal.

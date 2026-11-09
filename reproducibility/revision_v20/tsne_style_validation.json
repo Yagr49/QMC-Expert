@@ -1,0 +1,74 @@
+{
+  "font": "Aptos",
+  "palettes": {
+    "soft": "muted peach / mint",
+    "lavender": "lavender / mint"
+  },
+  "coordinate_input_sha256": "35a6d9acc903c06680d7e4b70c255f3a9d7283d1c59a4ac45322b0f22c83340c",
+  "checks": [
+    {
+      "variant": "soft",
+      "panel": "before",
+      "n": 221,
+      "Bad": 172,
+      "Good": 49,
+      "xlim": [
+        1.2698776862328316,
+        488.38706776846766
+      ],
+      "ylim": [
+        41.807941818226496,
+        450.4106581818734
+      ]
+    },
+    {
+      "variant": "soft",
+      "panel": "after",
+      "n": 221,
+      "Bad": 172,
+      "Good": 49,
+      "xlim": [
+        510.3098776859879,
+        997.4270677689125
+      ],
+      "ylim": [
+        41.80794181824345,
+        450.4106581816567
+      ]
+    },
+    {
+      "variant": "lavender",
+      "panel": "before",
+      "n": 221,
+      "Bad": 172,
+      "Good": 49,
+      "xlim": [
+        1.2698776862328316,
+        488.38706776846766
+      ],
+      "ylim": [
+        41.807941818226496,
+        450.4106581818734
+      ]
+    },
+    {
+      "variant": "lavender",
+      "panel": "after",
+      "n": 221,
+      "Bad": 172,
+      "Good": 49,
+      "xlim": [
+        510.3098776859879,
+        997.4270677689125
+      ],
+      "ylim": [
+        41.80794181824345,
+        450.4106581816567
+      ]
+    }
+  ],
+  "preserved": "All archived PDF marker centres and classes; no t-SNE rerun or alteration of scatter geometry",
+  "displayed_after_silhouette": 0.107,
+  "source_variants": "Attached/v5 raster prints .108; archived PDF prints .107; discrepancy explicit",
+  "figure_scope": "Original classification visualisation, not QAC105 regression CV, OOD performance or biological causality"
+}

@@ -1,0 +1,9 @@
+model,reference,metric,difference,ci_low,ci_high,bootstrap_repeats,unit
+CB_raw_MolFormer,RF_35_descriptors,AUROC,0.095679012345679,-0.10495756172839509,0.3271990740740739,2000,paired source/decoder seed + class-stratified test molecules; conditional
+CB_raw_MolFormer,RF_35_descriptors,AUPRC,0.011310594406195862,-0.04729487794933146,0.07424345222842352,2000,paired source/decoder seed + class-stratified test molecules; conditional
+CB_human,RF_35_descriptors,AUROC,0.10524691358024685,-0.06637731481481467,0.296929012345679,2000,paired source/decoder seed + class-stratified test molecules; conditional
+CB_human,RF_35_descriptors,AUPRC,0.027931623337014377,-0.012853196802503306,0.07295903789326197,2000,paired source/decoder seed + class-stratified test molecules; conditional
+CB_shuffled_human,RF_35_descriptors,AUROC,0.11790123456790136,-0.061126543209876545,0.3439853395061729,2000,paired source/decoder seed + class-stratified test molecules; conditional
+CB_shuffled_human,RF_35_descriptors,AUPRC,0.024491998619088462,-0.02194646087418093,0.07695764175444328,2000,paired source/decoder seed + class-stratified test molecules; conditional
+CB_quantitative,RF_35_descriptors,AUROC,0.11697530864197536,-0.014506172839506063,0.28380015432098765,2000,paired source/decoder seed + class-stratified test molecules; conditional
+CB_quantitative,RF_35_descriptors,AUPRC,0.03205871707258001,-0.000991383067977178,0.07372619639080344,2000,paired source/decoder seed + class-stratified test molecules; conditional

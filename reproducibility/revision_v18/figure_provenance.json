@@ -1,0 +1,42 @@
+{
+  "base": "v5 Figures 1 and 6; explanatory redraw",
+  "exact_example_compound": "target_29136ba3d6e0",
+  "ACS1996": true,
+  "font": "Aptos",
+  "input_sha256": {
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v14/representations/legacy-raw_QAC105.npy": "fb05bb52fb5dd9119cf827aa7230e3ab7707bf00fdd17565fd3c303d40867ec8",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v14/representations/legacy-human_QAC105.npy": "c7f0706c0a40065d7655da2bce25832ba30004b22f7b3ef7152713bb6d48c8c2"
+  },
+  "projections": [
+    {
+      "representation": "raw",
+      "shape": [
+        105,
+        768
+      ],
+      "explained_variance_ratio": [
+        0.33528036226731783,
+        0.14061130477625128
+      ],
+      "projection": "Independent PCA after per-row L2 normalisation"
+    },
+    {
+      "representation": "human",
+      "shape": [
+        105,
+        256
+      ],
+      "explained_variance_ratio": [
+        0.2953261369533471,
+        0.15328013717540062
+      ],
+      "projection": "Independent PCA after per-row L2 normalisation"
+    }
+  ],
+  "n_molecules": 105,
+  "source_provenance": "Archived v5 human encoder; source corpus overlaps QAC105",
+  "visualisation_only": true,
+  "activities_used_for_projection": false,
+  "independent_axes": true,
+  "no_structural_biological_variance_partition": true
+}

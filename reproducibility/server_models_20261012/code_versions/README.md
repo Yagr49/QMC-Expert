@@ -1,0 +1,1 @@
+Each filename contains the SHA256 recorded in model manifest.json. The three runner snapshots differ only in TabFM loading, TabPFN checkpoint selection and censored-bound diagnostics. CatBoost, AutoGluon and Chemprop fit parameters did not change.

@@ -1,0 +1,11 @@
+{
+  "name": "matched_raw",
+  "encoding": "categorical",
+  "arm": "matched_raw",
+  "seed": -1,
+  "provenance": "same_frozen_features_as_compact_controls",
+  "completed": true,
+  "fits": 11,
+  "seconds": 179.84355282783508,
+  "predictions": 908
+}

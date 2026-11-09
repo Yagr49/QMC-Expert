@@ -1,0 +1,11 @@
+author_index,split,raw_name,original_MIC,imputed_MIC,log2mic,author_imputation_matches
+58,train,COE2-3C-C3DABCO,>128,256.0,8.0,True
+114,train,COE-Y6,>64,128.0,7.0,True
+89,train,COE2-3C-C4MeC4P4,>128,256.0,8.0,True
+28,train,COE-T6,>16,32.0,5.0,True
+97,train,COE2-4C,>256,512.0,9.0,True
+111,train,COE-Y4,>64,128.0,7.0,True
+14,train,COE-D6C-HAc,>256,512.0,9.0,True
+108,train,COE-Y4IM2,>64,128.0,7.0,True
+128,test,COE-A4IM2,>64,128.0,7.0,True
+126,test,COE-D4IM2,>64,128.0,7.0,True

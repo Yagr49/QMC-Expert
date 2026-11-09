@@ -1,0 +1,50 @@
+{
+  "validated": true,
+  "main_panels": [
+    "cation",
+    "scaffold"
+  ],
+  "main_routes": 5,
+  "main_n_endpoint_summaries": 4200,
+  "per_route_per_panel": 420,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "source_values_preserved_to_1e_14": true,
+  "grouped_mean_sample_SD_preserved": true,
+  "main_caption_contains_no_OOD_67_bounds": true,
+  "main_caption_word_count": 123,
+  "OOD_standalone_prepared_only": true,
+  "OOD_inserted_into_DOCX_by_agent": false,
+  "source_v22_script_sha256": "31ff68bb2148c168b2f7e2ba898e4188ca13ce6b161b858cdaf9e444e2133620",
+  "source_v22_PNG_sha256": "a9b665a5fd5dc4dacb9f2d91dc6a3ff2d3d78aca99c4509d8d4f4479cae92c6d",
+  "PNG_sizes": {
+    "figure3_backbone_route_error_violins.png": [
+      4251,
+      2078
+    ],
+    "figure_OOD_routes_for_section2_3.png": [
+      2480,
+      2078
+    ]
+  },
+  "PDF_scope_and_font_checks": {
+    "figure3_backbone_route_error_violins": {
+      "width_mm": 179.99999491373697,
+      "height_mm": 88.00000110202365,
+      "PDF_text": "0\n2\n4\n6\n8\nFrozen head\nLoRA\nFull FT\nHuman direct\nHuman \u2192 CB\na\nCation holdout\n0\n2\n4\n6\n8\nb\nScaffold holdout\nMean absolute error over three runs, log\u2082(mg/L)\n",
+      "Aptos_present": true
+    },
+    "figure_OOD_routes_for_section2_3": {
+      "width_mm": 104.99999703301324,
+      "height_mm": 88.00000110202365,
+      "PDF_text": "0\n2\n4\n6\n8\nFrozen head\nLoRA\nFull FT\nHuman direct\nHuman \u2192 CB\nOOD-17\nMean absolute error over three runs, log\u2082(mg/L)\n",
+      "Aptos_present": true
+    }
+  },
+  "actual_Claude_visually_read_all_three": true,
+  "caption_EN_word_count": 123,
+  "post_review_changes": "Only caveat sentence order and writable temp cache directory name; PNG/PDF/SVG and all numerical data unchanged"
+}

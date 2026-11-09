@@ -1,0 +1,16 @@
+cohort,schema,task,n,RMSE,MAE,R2,name,encoding,arm,seed,provenance
+OOD17,full-QAC105,Sa_MIC,17,1.8246322740750445,1.5392958936214736,-0.08841942125262614,compact_mic_binary_seed2,text,mic_binary,2,v5_architecture_matched_source
+OOD17,full-QAC105,Sa_MBC,17,2.00494103270263,1.6664204538953418,0.1033149331400024,compact_mic_binary_seed2,text,mic_binary,2,v5_architecture_matched_source
+OOD17,full-QAC105,Ec_MIC,17,2.3095858910274227,1.8737501925594742,-0.6113494405033044,compact_mic_binary_seed2,text,mic_binary,2,v5_architecture_matched_source
+OOD17,full-QAC105,Ec_MBC,16,2.5701913391944147,2.0359266991306093,-0.688663470948442,compact_mic_binary_seed2,text,mic_binary,2,v5_architecture_matched_source
+OOD17,full-QAC105,pooled,67,2.189900598443607,1.7750113189162189,,compact_mic_binary_seed2,text,mic_binary,2,v5_architecture_matched_source
+QAC105,cation,Sa_MIC,105,1.827317723023233,1.4566316426887032,0.13040998541740256,compact_mic_binary_seed2,text,mic_binary,2,v5_architecture_matched_source
+QAC105,cation,Sa_MBC,105,1.9360960066478603,1.5418133923179715,0.02762837442344468,compact_mic_binary_seed2,text,mic_binary,2,v5_architecture_matched_source
+QAC105,cation,Ec_MIC,105,1.7516845261505973,1.354894715669638,0.20969554778092292,compact_mic_binary_seed2,text,mic_binary,2,v5_architecture_matched_source
+QAC105,cation,Ec_MBC,105,1.8711368679112714,1.5003748690407184,0.19792172517133244,compact_mic_binary_seed2,text,mic_binary,2,v5_architecture_matched_source
+QAC105,cation,pooled,420,1.8477763437064598,1.463428654929258,,compact_mic_binary_seed2,text,mic_binary,2,v5_architecture_matched_source
+QAC105,scaffold,Sa_MIC,105,2.1134130227299206,1.6375657733848916,-0.1632020788227977,compact_mic_binary_seed2,text,mic_binary,2,v5_architecture_matched_source
+QAC105,scaffold,Sa_MBC,105,2.2645004683777232,1.7402605844525256,-0.3302195572861988,compact_mic_binary_seed2,text,mic_binary,2,v5_architecture_matched_source
+QAC105,scaffold,Ec_MIC,105,2.060039045661315,1.6653787739243728,-0.09303368308057625,compact_mic_binary_seed2,text,mic_binary,2,v5_architecture_matched_source
+QAC105,scaffold,Ec_MBC,105,2.1266344011867058,1.7217239056108824,-0.0360752779446758,compact_mic_binary_seed2,text,mic_binary,2,v5_architecture_matched_source
+QAC105,scaffold,pooled,420,2.142475887955759,1.691232259343168,,compact_mic_binary_seed2,text,mic_binary,2,v5_architecture_matched_source

@@ -1,0 +1,114 @@
+You are Claude independently auditing completed molecular-ML results. The owner explicitly requested Claude and authorised sharing. Review only the supplied text, no tools or edits. At most450 words. Correct your earlier unsupported statements and give an accurate verdict; do not invent numerical confidence intervals, significance, provenance or experiments.
+Earlier your source-file audit had useful protocol comments but also errors. We completed fresh RF and frozen embedding comparisons; there is no victory claim. 
+SOURCE comparison_test20.csv
+model,train,n_train,n,R2,RMSE
+Author_RF21_refit,author_descriptor_train80,80,20,0.6491613775156464,1.093782292173194
+Author_RF21_refit,matched_valid_smiles_train78,78,20,0.5445628699913481,1.2462105012113736
+v5_raw_CatBoost,matched_valid_smiles_train78,78,20,0.0473371219530268,1.8023818724510567
+v5_human_CatBoost,matched_valid_smiles_train78,78,20,0.2370034289617075,1.613015284255105
+
+SOURCE validation.json
+{
+  "completed": true,
+  "native_rf_matches_archived_paper_code_to_1e_12": true,
+  "references_and_descriptor_frame_all107_smiles_identical": true,
+  "target_censoring_substitution_matches": true,
+  "test20_censored_as_exact_by_author": 2,
+  "conservative_source_overlap": [
+    {
+      "source": "expert1103",
+      "split": "newdata",
+      "comparison": "counterion-free and stereochemistry ignored",
+      "n_target_overlap": 1,
+      "author_indices": [
+        136
+      ],
+      "names": [
+        "Amethyl"
+      ]
+    },
+    {
+      "source": "expert1103",
+      "split": "test",
+      "comparison": "counterion-free and stereochemistry ignored",
+      "n_target_overlap": 0,
+      "author_indices": [],
+      "names": []
+    },
+    {
+      "source": "expert1103",
+      "split": "train",
+      "comparison": "counterion-free and stereochemistry ignored",
+      "n_target_overlap": 2,
+      "author_indices": [
+        119,
+        118
+      ],
+      "names": [
+        "COE2-3C-C3A-HEXYL",
+        "COE2-3C-C3A-PROPYL"
+      ]
+    }
+  ],
+  "scaler_stored_affine_max_abs_error": 4.76837158203125e-07,
+  "source_checkpoint_retrained_on_COE": false,
+  "catboost_test_tuning": false,
+  "old_quantitative_ft_not_used": "3/20 test cations overlap old quantitative FT sources",
+  "original_manuscript_modified": false
+}
+SOURCE v5_comparison_manifest.json
+{
+  "device": "cpu",
+  "n_rows": 105,
+  "frozen": true,
+  "source_encoder": "archived v5 compact human",
+  "target_task": "E.coli K12 MIC",
+  "unit": "log2(mg/L), equal to author log2(\u00b5g/mL)",
+  "tokenisation": {
+    "smiles": "RDKit canonical full supplied graph",
+    "max_length": 202,
+    "padding": "max_length",
+    "max_tokens": 168,
+    "truncated": 0,
+    "truncated_indices": []
+  },
+  "catboost": {
+    "iterations": 500,
+    "depth": 6,
+    "learning_rate": 0.05,
+    "random_seed": 42,
+    "thread_count": 4
+  },
+  "seconds": 8.74555230140686,
+  "canonical_smiles_sha256": "234345f31b9b9ba626ff694ae97783591f68b040fcbf2ce57d4babec85afdf25",
+  "source_overlap_note": "Full expert1103 source audit:0/20 test cations,2/78 train,1/7 newdata. Training membership within saved encoder not fully recovered. Newdata includes source-overlap and is not clean independent transfer.",
+  "test_tuning": false
+}
+SOURCE REVIEW_RESPONSE.md
+# Разбор независимого Claude-аудита
+
+Фактический Claude Sonnet4.6 CLI прочитал четыре разрешённых исходных файла на локальном Mac. Его исходный ответ сохранён целиком. Замечания проверены по данным; они не заменяют результаты расчёта.
+
+Принято и выполнено:
+
+- Различать COE / E.coli K12 и Q-HERO / S.aureus.
+- Заново fit RF21 из безопасных CSV, без загрузки публичной pickle-модели.
+- Проверить сохранённый split, число train80 против paper78 и добавить RF78 на тех же структурах, что наши модели.
+- Сохранить авторское правило MIC>X→2X и явно указать два таких ответа в test20.
+- Зафиксировать CatBoost-параметры до предсказания; не подбирать по test20; проверить source-overlap.
+- Не объявлять статистическую победу по одному split20 или причинную роль человеческой разметки.
+
+Исправлены ошибочные или неподтверждённые утверждения исходного обзора:
+
+- Invalid RDKit indices в реальных CSV — **108 и109**, COE-Y4IM2 иCOE-Y6IM2, а не14 и108. Авторский комментарий к старому коду не является актуальной картой структур.
+- 1103 — корпус человеческой разметки для внешнего адаптера, **не pretraining-корпус MolFormer**. Ноль его пересечений с test20 не доказывает тяжёлый OOD относительно всего MolFormer и не делает высокий R² подозрительным.
+- Для внешнего frozen адаптера допустимо source-обучение за пределами COE train78, при отсутствии target-test leakage. Требование обучать адаптер исключительно на78 COE не соответствует нашему transfer-протоколу.
+- Фраза «136−1−missing−9=114» не согласуется с числами и не подтверждена. По факту114 сохранённых строк =80train+20test+7newdata+7неиспользованных строк; источникXLSX менялся, paper15new не восстановлены какготовый cohort.
+- Названия rawXLSX, числовыеNo. и индексы отличаются от старых комментариев. Проверено прямое совпадение всех107 SMILES и y между Reference CSV и descriptorframe. RF80 воспроизводит архивный footer R²/RMSE до1e−12; это существенно сильнее предположения о возможном index drift.
+- Придуманный CI R² «±0.15–0.20» удалён. Интервал не вычислялся, его нельзя сообщать какрезультат. Непересечение отдельных CI также не является корректным общим критерием парного превосходства.
+- Нельзя утверждать, что значимость принципиально невозможна приN20, или требовать «signed attestation». Здесь обе наши point estimates фактически ниже RF, поэтому победы вообще нет. Никаких численныхp/CI не выдумано.
+- «21 AlvaDesc descriptors» содержит разнообразные2D/3D дескрипторы; не следует называть все21 исключительно3D.
+
+Законченный расчёт: RF80 R²0.649161/RMSE1.093782; RF78 0.544563/1.246211; raw+CB78 0.047337/1.802382; human+CB78 0.237003/1.613015. Человеческий адаптер улучшает raw, но авторский RF не побеждён.
+
+Assess: are native RF reproduction and matched78 comparison adequately supported? Can we say human-adapter improves raw point estimate but does not beat Tiihonen RF? What minimal caveats are needed? Explicitly separate human-source overlap from MolFormerpretraining, test20authorboundsubstitution from exactlabels, and newdata7 frompaper15. Do not repeat the earlier inventedCI or require formalattestation. Return concise final corrected assessment.

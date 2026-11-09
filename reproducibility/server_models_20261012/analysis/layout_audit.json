@@ -1,0 +1,381 @@
+{
+  "training": "independent 30-run repeat",
+  "layout": "104 archived batch + omitted compound in four-molecule batch",
+  "no_target_label_selection": true,
+  "byte_equal_all": true,
+  "comparisons": [
+    {
+      "name": "raw-molformer",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "raw-molformer",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "expert_seed0",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "expert_seed0",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-continuous_seed0",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-continuous_seed0",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-binary_seed0",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-binary_seed0",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "expert-shuffled_seed0",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "expert-shuffled_seed0",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-shuffled_seed0",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-shuffled_seed0",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-binary-shuffled_seed0",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-binary-shuffled_seed0",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "expert_seed1",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "expert_seed1",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-continuous_seed1",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-continuous_seed1",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-binary_seed1",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-binary_seed1",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "expert-shuffled_seed1",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "expert-shuffled_seed1",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-shuffled_seed1",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-shuffled_seed1",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-binary-shuffled_seed1",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-binary-shuffled_seed1",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "expert_seed2",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "expert_seed2",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-continuous_seed2",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-continuous_seed2",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-binary_seed2",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-binary_seed2",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "expert-shuffled_seed2",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "expert-shuffled_seed2",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-shuffled_seed2",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-shuffled_seed2",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-binary-shuffled_seed2",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-binary-shuffled_seed2",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "expert_seed3",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "expert_seed3",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-continuous_seed3",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-continuous_seed3",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-binary_seed3",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-binary_seed3",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "expert-shuffled_seed3",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "expert-shuffled_seed3",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-shuffled_seed3",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-shuffled_seed3",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-binary-shuffled_seed3",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-binary-shuffled_seed3",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "expert_seed4",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "expert_seed4",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-continuous_seed4",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-continuous_seed4",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-binary_seed4",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-binary_seed4",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "expert-shuffled_seed4",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "expert-shuffled_seed4",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-shuffled_seed4",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-shuffled_seed4",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-binary-shuffled_seed4",
+      "cohort": "QAC105",
+      "exact": true,
+      "max_difference": 0.0
+    },
+    {
+      "name": "quant-binary-shuffled_seed4",
+      "cohort": "OOD17",
+      "exact": true,
+      "max_difference": 0.0
+    }
+  ],
+  "main_target_cached_repeat": "core_v14/results and core_v14/scaffold_sensitivity/results"
+}

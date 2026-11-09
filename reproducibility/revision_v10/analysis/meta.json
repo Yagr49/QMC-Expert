@@ -1,0 +1,12 @@
+{
+  "exploratory": true,
+  "bootstrap_samples": 10000,
+  "intervals": "unadjusted; fixed target folds; conditional scaffold and nested seed/scaffold sensitivity; five seeds are not independent datasets",
+  "completed_models": [
+    "molformer",
+    "c3-molformer",
+    "chemberta100m",
+    "chemfm1b"
+  ],
+  "contrast_rows": 306
+}

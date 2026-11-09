@@ -1,0 +1,59 @@
+{
+  "completed": true,
+  "smoke": false,
+  "configurations": 121,
+  "intact_all_exact": true,
+  "buffer_state_shared_within_seed": true,
+  "rewind_all_audit": [
+    {
+      "seed": 0,
+      "cohort": "QAC105",
+      "rewind_all_equal_across_arms": true
+    },
+    {
+      "seed": 0,
+      "cohort": "OOD17",
+      "rewind_all_equal_across_arms": true
+    },
+    {
+      "seed": 1,
+      "cohort": "QAC105",
+      "rewind_all_equal_across_arms": true
+    },
+    {
+      "seed": 1,
+      "cohort": "OOD17",
+      "rewind_all_equal_across_arms": true
+    },
+    {
+      "seed": 2,
+      "cohort": "QAC105",
+      "rewind_all_equal_across_arms": true
+    },
+    {
+      "seed": 2,
+      "cohort": "OOD17",
+      "rewind_all_equal_across_arms": true
+    },
+    {
+      "seed": 3,
+      "cohort": "QAC105",
+      "rewind_all_equal_across_arms": true
+    },
+    {
+      "seed": 3,
+      "cohort": "OOD17",
+      "rewind_all_equal_across_arms": true
+    },
+    {
+      "seed": 4,
+      "cohort": "QAC105",
+      "rewind_all_equal_across_arms": true
+    },
+    {
+      "seed": 4,
+      "cohort": "OOD17",
+      "rewind_all_equal_across_arms": true
+    }
+  ]
+}

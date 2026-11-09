@@ -1,0 +1,895 @@
+Traceback (most recent call last):
+  File "/home/yagr/coma_models_check_20261012/run_baselines.py", line 372, in <module>
+    main()
+  File "/home/yagr/coma_models_check_20261012/run_baselines.py", line 302, in main
+    x, xo = features(rep, qm, om)
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yagr/coma_models_check_20261012/run_baselines.py", line 79, in features
+    from rdkit import Chem
+ModuleNotFoundError: No module named 'rdkit'
+FIT tabfm rdkit_s1729_cation_f0 Sa_MIC train 84 test 21
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 140 files:   0%|          | 0/140 [00:00<?, ?it/s]Fetching 140 files:   1%|          | 1/140 [00:00<01:09,  2.00it/s]Fetching 140 files:   2%|▏         | 3/140 [00:00<00:24,  5.49it/s]Fetching 140 files:   6%|▋         | 9/140 [00:01<00:12, 10.52it/s]Fetching 140 files:   9%|▉         | 13/140 [00:01<00:08, 14.97it/s]Fetching 140 files:  12%|█▏        | 17/140 [00:01<00:08, 14.67it/s]Fetching 140 files:  14%|█▎        | 19/140 [00:01<00:10, 11.38it/s]Fetching 140 files:  18%|█▊        | 25/140 [00:01<00:07, 15.84it/s]Fetching 140 files:  21%|██        | 29/140 [00:02<00:07, 15.84it/s]Fetching 140 files:  22%|██▏       | 31/140 [00:04<00:30,  3.58it/s]Fetching 140 files:  22%|██▏       | 31/140 [00:20<00:30,  3.58it/s]Fetching 140 files:  26%|██▋       | 37/140 [06:23<47:42, 27.79s/it]Fetching 140 files:  39%|███▊      | 54/140 [12:02<32:40, 22.80s/it]Fetching 140 files:  79%|███████▊  | 110/140 [12:13<02:54,  5.83s/it]Fetching 140 files: 100%|██████████| 140/140 [12:13<00:00,  5.24s/it]
+WARNING:absl:CheckpointManagerOptions.read_only=True, setting save_interval_steps=0.
+WARNING:absl:CheckpointManagerOptions.read_only=True, setting create=False.
+WARNING:absl:Given directory is read only=/home/yagr/coma_models_check_20261012/runtime/hf/hub/models--google--tabfm-1.0.0-jax/snapshots/d5e74033fcf257699fab013e2cdd7edf424ff904/regression/orbax
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_cation_f0 Sa_MIC 774.4
+FIT tabfm rdkit_s1729_cation_f0 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_cation_f0 Sa_MBC 13.7
+FIT tabfm rdkit_s1729_cation_f0 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_cation_f0 Ec_MIC 13.6
+FIT tabfm rdkit_s1729_cation_f0 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_cation_f0 Ec_MBC 13.7
+FIT tabfm rdkit_s1729_cation_f1 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_cation_f1 Sa_MIC 13.7
+FIT tabfm rdkit_s1729_cation_f1 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_cation_f1 Sa_MBC 13.7
+FIT tabfm rdkit_s1729_cation_f1 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_cation_f1 Ec_MIC 13.7
+FIT tabfm rdkit_s1729_cation_f1 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_cation_f1 Ec_MBC 13.7
+FIT tabfm rdkit_s1729_cation_f2 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_cation_f2 Sa_MIC 13.8
+FIT tabfm rdkit_s1729_cation_f2 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_cation_f2 Sa_MBC 13.7
+FIT tabfm rdkit_s1729_cation_f2 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_cation_f2 Ec_MIC 13.7
+FIT tabfm rdkit_s1729_cation_f2 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_cation_f2 Ec_MBC 13.7
+FIT tabfm rdkit_s1729_cation_f3 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_cation_f3 Sa_MIC 13.8
+FIT tabfm rdkit_s1729_cation_f3 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_cation_f3 Sa_MBC 13.7
+FIT tabfm rdkit_s1729_cation_f3 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_cation_f3 Ec_MIC 13.9
+FIT tabfm rdkit_s1729_cation_f3 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_cation_f3 Ec_MBC 13.7
+FIT tabfm rdkit_s1729_cation_f4 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_cation_f4 Sa_MIC 13.5
+FIT tabfm rdkit_s1729_cation_f4 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_cation_f4 Sa_MBC 13.3
+FIT tabfm rdkit_s1729_cation_f4 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_cation_f4 Ec_MIC 13.5
+FIT tabfm rdkit_s1729_cation_f4 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_cation_f4 Ec_MBC 13.3
+FIT tabfm rdkit_s1729_scaffold_f0 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_scaffold_f0 Sa_MIC 13.8
+FIT tabfm rdkit_s1729_scaffold_f0 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_scaffold_f0 Sa_MBC 13.7
+FIT tabfm rdkit_s1729_scaffold_f0 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_scaffold_f0 Ec_MIC 13.7
+FIT tabfm rdkit_s1729_scaffold_f0 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_scaffold_f0 Ec_MBC 13.7
+FIT tabfm rdkit_s1729_scaffold_f1 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_scaffold_f1 Sa_MIC 13.9
+FIT tabfm rdkit_s1729_scaffold_f1 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_scaffold_f1 Sa_MBC 13.7
+FIT tabfm rdkit_s1729_scaffold_f1 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_scaffold_f1 Ec_MIC 13.8
+FIT tabfm rdkit_s1729_scaffold_f1 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_scaffold_f1 Ec_MBC 13.6
+FIT tabfm rdkit_s1729_scaffold_f2 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_scaffold_f2 Sa_MIC 13.5
+FIT tabfm rdkit_s1729_scaffold_f2 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_scaffold_f2 Sa_MBC 13.3
+FIT tabfm rdkit_s1729_scaffold_f2 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_scaffold_f2 Ec_MIC 13.5
+FIT tabfm rdkit_s1729_scaffold_f2 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_scaffold_f2 Ec_MBC 13.4
+FIT tabfm rdkit_s1729_scaffold_f3 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_scaffold_f3 Sa_MIC 13.8
+FIT tabfm rdkit_s1729_scaffold_f3 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_scaffold_f3 Sa_MBC 13.7
+FIT tabfm rdkit_s1729_scaffold_f3 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_scaffold_f3 Ec_MIC 13.7
+FIT tabfm rdkit_s1729_scaffold_f3 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_scaffold_f3 Ec_MBC 13.8
+FIT tabfm rdkit_s1729_scaffold_f4 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_scaffold_f4 Sa_MIC 13.7
+FIT tabfm rdkit_s1729_scaffold_f4 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_scaffold_f4 Sa_MBC 13.9
+FIT tabfm rdkit_s1729_scaffold_f4 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_scaffold_f4 Ec_MIC 13.7
+FIT tabfm rdkit_s1729_scaffold_f4 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_scaffold_f4 Ec_MBC 13.7
+FIT tabfm rdkit_s1729_full-QAC105_f-1 Sa_MIC train 105 test 17
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_full-QAC105_f-1 Sa_MIC 13.8
+FIT tabfm rdkit_s1729_full-QAC105_f-1 Sa_MBC train 105 test 17
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_full-QAC105_f-1 Sa_MBC 13.8
+FIT tabfm rdkit_s1729_full-QAC105_f-1 Ec_MIC train 105 test 17
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_full-QAC105_f-1 Ec_MIC 13.7
+FIT tabfm rdkit_s1729_full-QAC105_f-1 Ec_MBC train 105 test 17
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT rdkit_s1729_full-QAC105_f-1 Ec_MBC 13.8
+FIT tabfm raw-molformer_s1729_cation_f0 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_cation_f0 Sa_MIC 8.8
+FIT tabfm raw-molformer_s1729_cation_f0 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_cation_f0 Sa_MBC 8.9
+FIT tabfm raw-molformer_s1729_cation_f0 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_cation_f0 Ec_MIC 8.8
+FIT tabfm raw-molformer_s1729_cation_f0 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_cation_f0 Ec_MBC 8.9
+FIT tabfm raw-molformer_s1729_cation_f1 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_cation_f1 Sa_MIC 8.8
+FIT tabfm raw-molformer_s1729_cation_f1 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_cation_f1 Sa_MBC 9.1
+FIT tabfm raw-molformer_s1729_cation_f1 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_cation_f1 Ec_MIC 8.5
+FIT tabfm raw-molformer_s1729_cation_f1 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_cation_f1 Ec_MBC 8.9
+FIT tabfm raw-molformer_s1729_cation_f2 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_cation_f2 Sa_MIC 8.9
+FIT tabfm raw-molformer_s1729_cation_f2 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_cation_f2 Sa_MBC 8.7
+FIT tabfm raw-molformer_s1729_cation_f2 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_cation_f2 Ec_MIC 9.0
+FIT tabfm raw-molformer_s1729_cation_f2 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_cation_f2 Ec_MBC 8.8
+FIT tabfm raw-molformer_s1729_cation_f3 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_cation_f3 Sa_MIC 8.8
+FIT tabfm raw-molformer_s1729_cation_f3 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_cation_f3 Sa_MBC 8.9
+FIT tabfm raw-molformer_s1729_cation_f3 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_cation_f3 Ec_MIC 8.8
+FIT tabfm raw-molformer_s1729_cation_f3 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_cation_f3 Ec_MBC 9.1
+FIT tabfm raw-molformer_s1729_cation_f4 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_cation_f4 Sa_MIC 8.7
+FIT tabfm raw-molformer_s1729_cation_f4 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_cation_f4 Sa_MBC 9.0
+FIT tabfm raw-molformer_s1729_cation_f4 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_cation_f4 Ec_MIC 8.8
+FIT tabfm raw-molformer_s1729_cation_f4 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_cation_f4 Ec_MBC 9.0
+FIT tabfm raw-molformer_s1729_scaffold_f0 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_scaffold_f0 Sa_MIC 8.7
+FIT tabfm raw-molformer_s1729_scaffold_f0 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_scaffold_f0 Sa_MBC 9.2
+FIT tabfm raw-molformer_s1729_scaffold_f0 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_scaffold_f0 Ec_MIC 8.6
+FIT tabfm raw-molformer_s1729_scaffold_f0 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_scaffold_f0 Ec_MBC 8.7
+FIT tabfm raw-molformer_s1729_scaffold_f1 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_scaffold_f1 Sa_MIC 9.0
+FIT tabfm raw-molformer_s1729_scaffold_f1 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_scaffold_f1 Sa_MBC 8.9
+FIT tabfm raw-molformer_s1729_scaffold_f1 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_scaffold_f1 Ec_MIC 9.0
+FIT tabfm raw-molformer_s1729_scaffold_f1 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_scaffold_f1 Ec_MBC 8.9
+FIT tabfm raw-molformer_s1729_scaffold_f2 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_scaffold_f2 Sa_MIC 9.0
+FIT tabfm raw-molformer_s1729_scaffold_f2 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_scaffold_f2 Sa_MBC 8.9
+FIT tabfm raw-molformer_s1729_scaffold_f2 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_scaffold_f2 Ec_MIC 8.9
+FIT tabfm raw-molformer_s1729_scaffold_f2 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_scaffold_f2 Ec_MBC 9.1
+FIT tabfm raw-molformer_s1729_scaffold_f3 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_scaffold_f3 Sa_MIC 8.9
+FIT tabfm raw-molformer_s1729_scaffold_f3 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_scaffold_f3 Sa_MBC 9.0
+FIT tabfm raw-molformer_s1729_scaffold_f3 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_scaffold_f3 Ec_MIC 8.8
+FIT tabfm raw-molformer_s1729_scaffold_f3 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_scaffold_f3 Ec_MBC 8.9
+FIT tabfm raw-molformer_s1729_scaffold_f4 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_scaffold_f4 Sa_MIC 8.8
+FIT tabfm raw-molformer_s1729_scaffold_f4 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_scaffold_f4 Sa_MBC 8.7
+FIT tabfm raw-molformer_s1729_scaffold_f4 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_scaffold_f4 Ec_MIC 9.0
+FIT tabfm raw-molformer_s1729_scaffold_f4 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_scaffold_f4 Ec_MBC 8.8
+FIT tabfm raw-molformer_s1729_full-QAC105_f-1 Sa_MIC train 105 test 17
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_full-QAC105_f-1 Sa_MIC 9.1
+FIT tabfm raw-molformer_s1729_full-QAC105_f-1 Sa_MBC train 105 test 17
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_full-QAC105_f-1 Sa_MBC 8.8
+FIT tabfm raw-molformer_s1729_full-QAC105_f-1 Ec_MIC train 105 test 17
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_full-QAC105_f-1 Ec_MIC 9.0
+FIT tabfm raw-molformer_s1729_full-QAC105_f-1 Ec_MBC train 105 test 17
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT raw-molformer_s1729_full-QAC105_f-1 Ec_MBC 8.9
+FIT tabfm expert_seed0_s1729_cation_f0 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_cation_f0 Sa_MIC 9.0
+FIT tabfm expert_seed0_s1729_cation_f0 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_cation_f0 Sa_MBC 8.7
+FIT tabfm expert_seed0_s1729_cation_f0 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_cation_f0 Ec_MIC 9.0
+FIT tabfm expert_seed0_s1729_cation_f0 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_cation_f0 Ec_MBC 8.6
+FIT tabfm expert_seed0_s1729_cation_f1 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_cation_f1 Sa_MIC 8.8
+FIT tabfm expert_seed0_s1729_cation_f1 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_cation_f1 Sa_MBC 8.9
+FIT tabfm expert_seed0_s1729_cation_f1 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_cation_f1 Ec_MIC 8.9
+FIT tabfm expert_seed0_s1729_cation_f1 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_cation_f1 Ec_MBC 9.1
+FIT tabfm expert_seed0_s1729_cation_f2 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_cation_f2 Sa_MIC 8.8
+FIT tabfm expert_seed0_s1729_cation_f2 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_cation_f2 Sa_MBC 9.1
+FIT tabfm expert_seed0_s1729_cation_f2 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_cation_f2 Ec_MIC 8.9
+FIT tabfm expert_seed0_s1729_cation_f2 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_cation_f2 Ec_MBC 9.0
+FIT tabfm expert_seed0_s1729_cation_f3 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_cation_f3 Sa_MIC 8.9
+FIT tabfm expert_seed0_s1729_cation_f3 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_cation_f3 Sa_MBC 9.0
+FIT tabfm expert_seed0_s1729_cation_f3 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_cation_f3 Ec_MIC 8.9
+FIT tabfm expert_seed0_s1729_cation_f3 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_cation_f3 Ec_MBC 9.1
+FIT tabfm expert_seed0_s1729_cation_f4 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_cation_f4 Sa_MIC 8.9
+FIT tabfm expert_seed0_s1729_cation_f4 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_cation_f4 Sa_MBC 9.3
+FIT tabfm expert_seed0_s1729_cation_f4 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_cation_f4 Ec_MIC 8.5
+FIT tabfm expert_seed0_s1729_cation_f4 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_cation_f4 Ec_MBC 8.9
+FIT tabfm expert_seed0_s1729_scaffold_f0 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_scaffold_f0 Sa_MIC 8.9
+FIT tabfm expert_seed0_s1729_scaffold_f0 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_scaffold_f0 Sa_MBC 9.0
+FIT tabfm expert_seed0_s1729_scaffold_f0 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_scaffold_f0 Ec_MIC 9.1
+FIT tabfm expert_seed0_s1729_scaffold_f0 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_scaffold_f0 Ec_MBC 8.8
+FIT tabfm expert_seed0_s1729_scaffold_f1 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_scaffold_f1 Sa_MIC 9.1
+FIT tabfm expert_seed0_s1729_scaffold_f1 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_scaffold_f1 Sa_MBC 8.8
+FIT tabfm expert_seed0_s1729_scaffold_f1 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_scaffold_f1 Ec_MIC 9.0
+FIT tabfm expert_seed0_s1729_scaffold_f1 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_scaffold_f1 Ec_MBC 8.8
+FIT tabfm expert_seed0_s1729_scaffold_f2 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_scaffold_f2 Sa_MIC 9.0
+FIT tabfm expert_seed0_s1729_scaffold_f2 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_scaffold_f2 Sa_MBC 8.9
+FIT tabfm expert_seed0_s1729_scaffold_f2 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_scaffold_f2 Ec_MIC 9.1
+FIT tabfm expert_seed0_s1729_scaffold_f2 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_scaffold_f2 Ec_MBC 8.8
+FIT tabfm expert_seed0_s1729_scaffold_f3 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_scaffold_f3 Sa_MIC 9.0
+FIT tabfm expert_seed0_s1729_scaffold_f3 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_scaffold_f3 Sa_MBC 8.7
+FIT tabfm expert_seed0_s1729_scaffold_f3 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_scaffold_f3 Ec_MIC 9.2
+FIT tabfm expert_seed0_s1729_scaffold_f3 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_scaffold_f3 Ec_MBC 8.6
+FIT tabfm expert_seed0_s1729_scaffold_f4 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_scaffold_f4 Sa_MIC 9.2
+FIT tabfm expert_seed0_s1729_scaffold_f4 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_scaffold_f4 Sa_MBC 8.8
+FIT tabfm expert_seed0_s1729_scaffold_f4 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_scaffold_f4 Ec_MIC 9.3
+FIT tabfm expert_seed0_s1729_scaffold_f4 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_scaffold_f4 Ec_MBC 8.6
+FIT tabfm expert_seed0_s1729_full-QAC105_f-1 Sa_MIC train 105 test 17
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_full-QAC105_f-1 Sa_MIC 9.1
+FIT tabfm expert_seed0_s1729_full-QAC105_f-1 Sa_MBC train 105 test 17
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_full-QAC105_f-1 Sa_MBC 8.7
+FIT tabfm expert_seed0_s1729_full-QAC105_f-1 Ec_MIC train 105 test 17
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_full-QAC105_f-1 Ec_MIC 9.2
+FIT tabfm expert_seed0_s1729_full-QAC105_f-1 Ec_MBC train 105 test 17
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT expert_seed0_s1729_full-QAC105_f-1 Ec_MBC 8.7
+FIT tabfm quant-continuous_seed0_s1729_cation_f0 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_cation_f0 Sa_MIC 9.2
+FIT tabfm quant-continuous_seed0_s1729_cation_f0 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_cation_f0 Sa_MBC 8.7
+FIT tabfm quant-continuous_seed0_s1729_cation_f0 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_cation_f0 Ec_MIC 9.2
+FIT tabfm quant-continuous_seed0_s1729_cation_f0 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_cation_f0 Ec_MBC 8.8
+FIT tabfm quant-continuous_seed0_s1729_cation_f1 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_cation_f1 Sa_MIC 8.9
+FIT tabfm quant-continuous_seed0_s1729_cation_f1 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_cation_f1 Sa_MBC 8.9
+FIT tabfm quant-continuous_seed0_s1729_cation_f1 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_cation_f1 Ec_MIC 8.9
+FIT tabfm quant-continuous_seed0_s1729_cation_f1 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_cation_f1 Ec_MBC 8.9
+FIT tabfm quant-continuous_seed0_s1729_cation_f2 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_cation_f2 Sa_MIC 9.1
+FIT tabfm quant-continuous_seed0_s1729_cation_f2 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_cation_f2 Sa_MBC 8.8
+FIT tabfm quant-continuous_seed0_s1729_cation_f2 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_cation_f2 Ec_MIC 8.9
+FIT tabfm quant-continuous_seed0_s1729_cation_f2 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_cation_f2 Ec_MBC 8.9
+FIT tabfm quant-continuous_seed0_s1729_cation_f3 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_cation_f3 Sa_MIC 8.9
+FIT tabfm quant-continuous_seed0_s1729_cation_f3 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_cation_f3 Sa_MBC 8.9
+FIT tabfm quant-continuous_seed0_s1729_cation_f3 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_cation_f3 Ec_MIC 9.0
+FIT tabfm quant-continuous_seed0_s1729_cation_f3 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_cation_f3 Ec_MBC 8.7
+FIT tabfm quant-continuous_seed0_s1729_cation_f4 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_cation_f4 Sa_MIC 9.1
+FIT tabfm quant-continuous_seed0_s1729_cation_f4 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_cation_f4 Sa_MBC 8.7
+FIT tabfm quant-continuous_seed0_s1729_cation_f4 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_cation_f4 Ec_MIC 9.1
+FIT tabfm quant-continuous_seed0_s1729_cation_f4 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_cation_f4 Ec_MBC 8.5
+FIT tabfm quant-continuous_seed0_s1729_scaffold_f0 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_scaffold_f0 Sa_MIC 9.2
+FIT tabfm quant-continuous_seed0_s1729_scaffold_f0 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_scaffold_f0 Sa_MBC 8.8
+FIT tabfm quant-continuous_seed0_s1729_scaffold_f0 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_scaffold_f0 Ec_MIC 9.2
+FIT tabfm quant-continuous_seed0_s1729_scaffold_f0 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_scaffold_f0 Ec_MBC 8.7
+FIT tabfm quant-continuous_seed0_s1729_scaffold_f1 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_scaffold_f1 Sa_MIC 9.2
+FIT tabfm quant-continuous_seed0_s1729_scaffold_f1 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_scaffold_f1 Sa_MBC 8.6
+FIT tabfm quant-continuous_seed0_s1729_scaffold_f1 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_scaffold_f1 Ec_MIC 9.0
+FIT tabfm quant-continuous_seed0_s1729_scaffold_f1 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_scaffold_f1 Ec_MBC 8.8
+FIT tabfm quant-continuous_seed0_s1729_scaffold_f2 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_scaffold_f2 Sa_MIC 8.9
+FIT tabfm quant-continuous_seed0_s1729_scaffold_f2 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_scaffold_f2 Sa_MBC 8.8
+FIT tabfm quant-continuous_seed0_s1729_scaffold_f2 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_scaffold_f2 Ec_MIC 9.0
+FIT tabfm quant-continuous_seed0_s1729_scaffold_f2 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_scaffold_f2 Ec_MBC 9.0
+FIT tabfm quant-continuous_seed0_s1729_scaffold_f3 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_scaffold_f3 Sa_MIC 8.9
+FIT tabfm quant-continuous_seed0_s1729_scaffold_f3 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_scaffold_f3 Sa_MBC 8.9
+FIT tabfm quant-continuous_seed0_s1729_scaffold_f3 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_scaffold_f3 Ec_MIC 8.9
+FIT tabfm quant-continuous_seed0_s1729_scaffold_f3 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_scaffold_f3 Ec_MBC 8.9
+FIT tabfm quant-continuous_seed0_s1729_scaffold_f4 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_scaffold_f4 Sa_MIC 9.1
+FIT tabfm quant-continuous_seed0_s1729_scaffold_f4 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_scaffold_f4 Sa_MBC 8.9
+FIT tabfm quant-continuous_seed0_s1729_scaffold_f4 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_scaffold_f4 Ec_MIC 9.1
+FIT tabfm quant-continuous_seed0_s1729_scaffold_f4 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_scaffold_f4 Ec_MBC 8.9
+FIT tabfm quant-continuous_seed0_s1729_full-QAC105_f-1 Sa_MIC train 105 test 17
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_full-QAC105_f-1 Sa_MIC 9.0
+FIT tabfm quant-continuous_seed0_s1729_full-QAC105_f-1 Sa_MBC train 105 test 17
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_full-QAC105_f-1 Sa_MBC 8.9
+FIT tabfm quant-continuous_seed0_s1729_full-QAC105_f-1 Ec_MIC train 105 test 17
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_full-QAC105_f-1 Ec_MIC 9.1
+FIT tabfm quant-continuous_seed0_s1729_full-QAC105_f-1 Ec_MBC train 105 test 17
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-continuous_seed0_s1729_full-QAC105_f-1 Ec_MBC 8.8
+FIT tabfm quant-binary_seed0_s1729_cation_f0 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_cation_f0 Sa_MIC 8.9
+FIT tabfm quant-binary_seed0_s1729_cation_f0 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_cation_f0 Sa_MBC 8.8
+FIT tabfm quant-binary_seed0_s1729_cation_f0 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_cation_f0 Ec_MIC 9.1
+FIT tabfm quant-binary_seed0_s1729_cation_f0 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_cation_f0 Ec_MBC 9.0
+FIT tabfm quant-binary_seed0_s1729_cation_f1 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_cation_f1 Sa_MIC 9.0
+FIT tabfm quant-binary_seed0_s1729_cation_f1 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_cation_f1 Sa_MBC 8.6
+FIT tabfm quant-binary_seed0_s1729_cation_f1 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_cation_f1 Ec_MIC 9.1
+FIT tabfm quant-binary_seed0_s1729_cation_f1 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_cation_f1 Ec_MBC 9.0
+FIT tabfm quant-binary_seed0_s1729_cation_f2 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_cation_f2 Sa_MIC 9.0
+FIT tabfm quant-binary_seed0_s1729_cation_f2 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_cation_f2 Sa_MBC 9.0
+FIT tabfm quant-binary_seed0_s1729_cation_f2 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_cation_f2 Ec_MIC 9.1
+FIT tabfm quant-binary_seed0_s1729_cation_f2 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_cation_f2 Ec_MBC 8.9
+FIT tabfm quant-binary_seed0_s1729_cation_f3 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_cation_f3 Sa_MIC 8.9
+FIT tabfm quant-binary_seed0_s1729_cation_f3 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_cation_f3 Sa_MBC 9.0
+FIT tabfm quant-binary_seed0_s1729_cation_f3 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_cation_f3 Ec_MIC 8.7
+FIT tabfm quant-binary_seed0_s1729_cation_f3 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_cation_f3 Ec_MBC 9.0
+FIT tabfm quant-binary_seed0_s1729_cation_f4 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_cation_f4 Sa_MIC 8.8
+FIT tabfm quant-binary_seed0_s1729_cation_f4 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_cation_f4 Sa_MBC 9.0
+FIT tabfm quant-binary_seed0_s1729_cation_f4 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_cation_f4 Ec_MIC 8.9
+FIT tabfm quant-binary_seed0_s1729_cation_f4 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_cation_f4 Ec_MBC 9.0
+FIT tabfm quant-binary_seed0_s1729_scaffold_f0 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_scaffold_f0 Sa_MIC 8.8
+FIT tabfm quant-binary_seed0_s1729_scaffold_f0 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_scaffold_f0 Sa_MBC 9.1
+FIT tabfm quant-binary_seed0_s1729_scaffold_f0 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_scaffold_f0 Ec_MIC 9.0
+FIT tabfm quant-binary_seed0_s1729_scaffold_f0 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_scaffold_f0 Ec_MBC 9.1
+FIT tabfm quant-binary_seed0_s1729_scaffold_f1 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_scaffold_f1 Sa_MIC 9.0
+FIT tabfm quant-binary_seed0_s1729_scaffold_f1 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_scaffold_f1 Sa_MBC 9.1
+FIT tabfm quant-binary_seed0_s1729_scaffold_f1 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_scaffold_f1 Ec_MIC 8.8
+FIT tabfm quant-binary_seed0_s1729_scaffold_f1 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_scaffold_f1 Ec_MBC 9.0
+FIT tabfm quant-binary_seed0_s1729_scaffold_f2 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_scaffold_f2 Sa_MIC 9.0
+FIT tabfm quant-binary_seed0_s1729_scaffold_f2 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_scaffold_f2 Sa_MBC 8.8
+FIT tabfm quant-binary_seed0_s1729_scaffold_f2 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_scaffold_f2 Ec_MIC 9.2
+FIT tabfm quant-binary_seed0_s1729_scaffold_f2 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_scaffold_f2 Ec_MBC 8.7
+FIT tabfm quant-binary_seed0_s1729_scaffold_f3 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_scaffold_f3 Sa_MIC 8.9
+FIT tabfm quant-binary_seed0_s1729_scaffold_f3 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_scaffold_f3 Sa_MBC 8.8
+FIT tabfm quant-binary_seed0_s1729_scaffold_f3 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_scaffold_f3 Ec_MIC 8.9
+FIT tabfm quant-binary_seed0_s1729_scaffold_f3 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_scaffold_f3 Ec_MBC 8.9
+FIT tabfm quant-binary_seed0_s1729_scaffold_f4 Sa_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_scaffold_f4 Sa_MIC 9.1
+FIT tabfm quant-binary_seed0_s1729_scaffold_f4 Sa_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_scaffold_f4 Sa_MBC 8.9
+FIT tabfm quant-binary_seed0_s1729_scaffold_f4 Ec_MIC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_scaffold_f4 Ec_MIC 9.1
+FIT tabfm quant-binary_seed0_s1729_scaffold_f4 Ec_MBC train 84 test 21
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_scaffold_f4 Ec_MBC 8.9
+FIT tabfm quant-binary_seed0_s1729_full-QAC105_f-1 Sa_MIC train 105 test 17
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_full-QAC105_f-1 Sa_MIC 9.0
+FIT tabfm quant-binary_seed0_s1729_full-QAC105_f-1 Sa_MBC train 105 test 17
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_full-QAC105_f-1 Sa_MBC 8.9
+FIT tabfm quant-binary_seed0_s1729_full-QAC105_f-1 Ec_MIC train 105 test 17
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_full-QAC105_f-1 Ec_MIC 9.1
+FIT tabfm quant-binary_seed0_s1729_full-QAC105_f-1 Ec_MBC train 105 test 17
+/home/yagr/anaconda3/envs/tabfm/lib/python3.12/site-packages/sklearn/utils/_tags.py:354: FutureWarning: The TabFMRegressor or classes from which it inherits use `_get_tags` and `_more_tags`. Please define the `__sklearn_tags__` method, or inherit from `sklearn.base.BaseEstimator` and/or other appropriate mixins such as `sklearn.base.TransformerMixin`, `sklearn.base.ClassifierMixin`, `sklearn.base.RegressorMixin`, and `sklearn.base.OutlierMixin`. From scikit-learn 1.7, not defining `__sklearn_tags__` will raise an error.
+  warnings.warn(
+DONE FIT quant-binary_seed0_s1729_full-QAC105_f-1 Ec_MBC 9.2

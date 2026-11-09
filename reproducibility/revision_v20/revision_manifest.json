@@ -1,0 +1,18 @@
+{
+  "base_main": "/Users/egorilin/Desktop/COMA/2026_10_13_Paper_2_edited-v19_CV_and_seed_variability.docx",
+  "base_main_sha256": "82e32b60c545962ffd5659a47ab25d8cfffbae2cbd62cfd5b671153839dd7a86",
+  "base_SI": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v19/Supplementary_Information_v19.docx",
+  "base_SI_sha256": "423c3765c814a4412328e1ea3b4d3362d3e10d4e1753afcf5314a7384e932f79",
+  "main": "/Users/egorilin/Desktop/COMA/2026_10_13_Paper_2_edited-v20_soft_contrastive_figure.docx",
+  "main_sha256": "ec04c62b29d7305a6c29711d2efe70780c663d04bc45d93d3389a08d27c27847",
+  "SI": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v20/Supplementary_Information_v20.docx",
+  "SI_sha256": "04f95ec9224f994c881c5d09c8f5036bbd607ffa1a28ec3c884a238c7d4af048",
+  "figure": "Figure2",
+  "original_raster_retained": "FigureS31",
+  "no_prediction_metrics_changed": true,
+  "tabular_comparator_scope_clarified": true,
+  "no_new_QHERO_content_added": true,
+  "style": "Aptos, muted peach and mint, white background, minimal labels",
+  "coordinate_source": "tsne_source_provenance.json",
+  "no_points_selected_added_or_moved_within_panel": true
+}

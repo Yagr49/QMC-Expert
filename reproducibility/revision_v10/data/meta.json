@@ -1,0 +1,68 @@
+{
+  "inputs": {
+    "/Users/egorilin/Desktop/COMA/expert_labels/expert_labels_1103.csv": "da349d6c7e745c67a4e2a1dcf39ec31c8ec821233057d6cf0a59b1cde140a17e",
+    "/Users/egorilin/Desktop/Veresh_Dataset_Paper/QMR_dataset_JCIM_v8_publication_ready.xlsx": "a4221b39714eded52b9fe41c1f7cbace0bb97309ff1946e7880a0accca38a69c",
+    "/Users/egorilin/Desktop/Veresh_paper_Mendeley/outputs/prepared_qac_target.csv": "cbe2171112e8e44083af3f6eb08916d1a758b80d0d81feb5203f3491b40a6488",
+    "/Users/egorilin/Desktop/Veresh_paper_Mendeley/outputs/prepared_qhero.csv": "3a037b40ddc0f1c8f0db919dd26148f0c7fb0cd98240111e46ea4804c4887b71",
+    "/Users/egorilin/Desktop/Veresh_paper_Mendeley/outputs/prepared_iltox_24h_mtt.csv": "33ac076e7b12b673e41409a43f0fe6bd6d7702491958b9d418e9cbedd46de416",
+    "/Users/egorilin/Desktop/COMA/reproducibility/finetune/data/eval_OOD-17.csv": "c86f745146ee45b885ed8da0c682bdcab18e2d37aba7519a473bb109943b8c6f"
+  },
+  "design": "Frozen MolFormer, matched molecules and initialization, fixed 80 epochs; exploratory protocol fixed before new results.",
+  "model_revision": "7b12d946c181a37f6012b9dc3b002275de070314",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "epochs": 80,
+  "matched-pooled": {
+    "molecules": 681,
+    "positive_labels": 96,
+    "scaffolds": 111,
+    "records": 4938
+  },
+  "matched-sa": {
+    "molecules": 529,
+    "positive_labels": 78,
+    "scaffolds": 91,
+    "records": 855
+  },
+  "expert-full": {
+    "molecules": 712,
+    "scaffolds": 113
+  },
+  "quant-pooled-full": {
+    "molecules": 1120,
+    "scaffolds": 231
+  },
+  "quant-sa-full": {
+    "molecules": 888,
+    "scaffolds": 168
+  },
+  "quant-iltox-full": {
+    "molecules": 273,
+    "scaffolds": 62
+  },
+  "QAC-104": {
+    "molecules": 104,
+    "scaffolds": 29
+  },
+  "Q-HERO-405": {
+    "molecules": 405,
+    "scaffolds": 29
+  },
+  "OOD-17": {
+    "molecules": 17,
+    "scaffolds": 4
+  },
+  "conflicting_expert_structures_removed": 1,
+  "heldout_cations": 505,
+  "exact_source_target_cation_overlap": 0,
+  "token_lengths": {
+    "max": 194,
+    "truncated_over_202": 0,
+    "total": 1939
+  }
+}

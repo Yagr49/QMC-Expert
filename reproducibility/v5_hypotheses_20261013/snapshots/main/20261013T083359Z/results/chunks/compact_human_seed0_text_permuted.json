@@ -1,0 +1,11 @@
+{
+  "name": "compact_human_seed0",
+  "encoding": "text_permuted",
+  "arm": "human",
+  "seed": 0,
+  "provenance": "v5_architecture_task_code_control",
+  "completed": true,
+  "fits": 11,
+  "seconds": 116.92187881469727,
+  "predictions": 908
+}

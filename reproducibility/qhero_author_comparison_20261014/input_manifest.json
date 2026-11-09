@@ -1,0 +1,53 @@
+{
+  "author_repo": "https://github.com/pb0316/Q-HERO",
+  "author_commit": "52ab433a4abc626e164cf72d1a39f02eda260b52",
+  "public_workbook": "a95cdb11e646fb7af0cdbc1279b93cfde29b49add4e8c48dda497a0d8e603be2",
+  "public_RF_code": "736cb48466f4b10e5ff070523bb3cc05ce4be74d31870568f8b794175ef5a887",
+  "target_source": "43c6fd33d8e9e1cbec3d73df3ceac48fb976e6880b436f98e40744429b622f53",
+  "binary_target": "1 iff MIC S. aureus <= 8 micromolar",
+  "source_representation": "Matched partial MolFormer fine-tuning; 681 source molecules; source seeds 0..4",
+  "source_overlaps": {
+    "expert": {
+      "source_molecules": 681,
+      "full_salt_overlap": 0,
+      "cation_overlap": 0
+    },
+    "quant": {
+      "source_molecules": 681,
+      "full_salt_overlap": 0,
+      "cation_overlap": 0
+    }
+  },
+  "n_target": 405,
+  "n_descriptors": 35,
+  "n_train": 324,
+  "n_test": 81,
+  "positive_count": 360,
+  "test_positives": 72,
+  "train_test_full_salt_overlap": 0,
+  "train_test_cation_overlap": 1,
+  "historical_compact_v5_adapter_used": false,
+  "target_numeric_MIC_used_to_train_classifier": true,
+  "test_used_for_model_selection": false,
+  "input_sha256": {
+    "author_features_MIC.csv": "bdb33cad431c74333c93ff003f50ec78f8c87a612e275468e4ac86b2b9196f67",
+    "descriptors.npy": "0c869a5963059f36e65e6808a1aad86f3d3fb2304db13946aeeda806e2dc4bb2",
+    "expert-shuffled_seed0_Q-HERO-405.npy": "07b43bb3e916e72f19d47aefac162edf0d97f3f0cd1ddf0837a2f9d62634a25b",
+    "expert-shuffled_seed1_Q-HERO-405.npy": "2ca6a8a514e193a2149529de8734ccda8e273ca225e9e47455b58b0aa4b7bec7",
+    "expert-shuffled_seed2_Q-HERO-405.npy": "f00615014072cbfa9fa7113df557746bcd349d8bced1c62ce94d864b452b9b1d",
+    "expert-shuffled_seed3_Q-HERO-405.npy": "95166155bac30593da1397a00b319c0b155cb02ab1502acb1c13e57a6a95720b",
+    "expert-shuffled_seed4_Q-HERO-405.npy": "d1c1f87bf015fce802f6ebecfd70de6a8750478e450e3524dc9afa349ded0e1a",
+    "expert_seed0_Q-HERO-405.npy": "08f591e1e0b316601460e5875d2d1f8aa89db45355010a1780b0e859c7b99fd6",
+    "expert_seed1_Q-HERO-405.npy": "b400529e0d2ef688c989beb20540da694dd84458c14ca342712631f3aeacd7cd",
+    "expert_seed2_Q-HERO-405.npy": "0a25735f002b83aab108fa0e4966166fb5484bc9a59d3dcf9e681a3502831fd6",
+    "expert_seed3_Q-HERO-405.npy": "04ea751ce3037b5bfe745c257ca9760b7ae57a269fb125e8864dd2dbfb7ef80b",
+    "expert_seed4_Q-HERO-405.npy": "48cd081f4d77958b3b92eb6c597d53a861af42b77bdc89970df9d1bd2661b6af",
+    "quant-continuous_seed0_Q-HERO-405.npy": "76ecf2f550837aac9b7a65fcb7c4a09e0117ea7c26e322847cf9fa13939c88a3",
+    "quant-continuous_seed1_Q-HERO-405.npy": "9231760ebead9db547e0995748fd522a89f9d53e44479b1110c2d2ed981552db",
+    "quant-continuous_seed2_Q-HERO-405.npy": "7949fbe40865fa4059a20c105fc202157290cacab2ed5406440913a9bb60e2fe",
+    "quant-continuous_seed3_Q-HERO-405.npy": "ff2d387ff4c0259e76cda881ef1be90aab9db2ff1c2d541f8f48644c2a4919a4",
+    "quant-continuous_seed4_Q-HERO-405.npy": "b3e181a8fc76f0725e73e365df8f0903c23117db3d4d95086568d3c482d98325",
+    "raw-molformer_Q-HERO-405.npy": "4fa3b664cd3956454d697b6e0239692dcacf3b20c68836ecfebff48287183178",
+    "target.csv": "45fe0f709d1dc49f0f97b253e5d4aa68e8d91a393f01112fec527e5a7362bf71"
+  }
+}

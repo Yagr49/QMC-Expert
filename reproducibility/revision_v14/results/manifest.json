@@ -1,0 +1,30 @@
+{
+  "started": 1791749140.2511122,
+  "completed": true,
+  "jobs": 56,
+  "protocol_sha256": "7c13c7df7a6b0f38428fd7b3d9465db04af4f12a9e984480d68f780560eb970a",
+  "python": "3.12.7",
+  "thread_count": 2,
+  "workers": 6,
+  "script_sha256": "7715e5683a760f0a0d038cd834d3d1d2453af4a29bc32a15d99c7253c283bc86",
+  "input_sha256": {
+    "configurations.json": "fe8adde8e26fc6e8d1c83f727a31b4d87f338d7aa2cd8419190d7a9fb916f33a",
+    "QAC105.csv": "f88b53777548bdbd79d0eb56128b7d4e18cb7ab2e002ea5ad359c30186f3ded4",
+    "cohort_audit.json": "14bb15746115c56d4b72c240517a864ff0c7dabdce4ba995c390502dc8425a38",
+    "._legacy_configurations.json": "6738cc607de5e7e9bffafb2467e60876b587def8a880d781d681ed42cb861d48",
+    "._task_text_embeddings.json": "6738cc607de5e7e9bffafb2467e60876b587def8a880d781d681ed42cb861d48",
+    "task_text_embeddings.json": "0fb3cbbae1d6955c0df4af956383e5540336a820b0f26b5e5ccb56ed32317d4e",
+    "._endpoint_registry.csv": "6738cc607de5e7e9bffafb2467e60876b587def8a880d781d681ed42cb861d48",
+    "OOD17.csv": "b2abafad0bacfc66b3228141175ae2fb0e924cbf95645b5f4d6fa2a0d307d2b2",
+    "._OOD17.csv": "6738cc607de5e7e9bffafb2467e60876b587def8a880d781d681ed42cb861d48",
+    "._QAC105.csv": "6738cc607de5e7e9bffafb2467e60876b587def8a880d781d681ed42cb861d48",
+    "._cohort_audit.json": "6738cc607de5e7e9bffafb2467e60876b587def8a880d781d681ed42cb861d48",
+    "task_text_embeddings.npy": "58f5b9417d437c18f69503322aec6923d03bbf05441d53e355cc1910600c1ff6",
+    "vector_extension_audit.json": "7b51ee0232b1b98be08a25d00b8ca433e1e2183aec16a922a2bd96bf0152062a",
+    "legacy_configurations.json": "503291670a8acf98cc1f542f7cea338fa3b636b5aaa99a18d6b11ab7e50c4417",
+    "endpoint_registry.csv": "8dc37da0240f9de1294d233542de4f4f7c179f2c080c39a5ef5dd4617dd4d129",
+    "._task_text_embeddings.npy": "6738cc607de5e7e9bffafb2467e60876b587def8a880d781d681ed42cb861d48"
+  },
+  "elapsed_s": 316.714079618454,
+  "prediction_rows": 27816
+}

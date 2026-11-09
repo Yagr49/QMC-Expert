@@ -1,0 +1,32 @@
+         panel               arm     head     target  seeds   n        R2    R2_sd     RMSE  RMSE_sd
+      baseline     raw-molformer catboost Q-HERO-405      1 405  0.127567      NaN 1.601729      NaN
+          full       expert-full catboost Q-HERO-405      5 405  0.094763 0.066328 1.630679 0.060094
+          full  quant-iltox-full catboost Q-HERO-405      5 405  0.082890 0.066365 1.641371 0.059360
+          full quant-pooled-full catboost Q-HERO-405      5 405  0.245985 0.027596 1.488860 0.027499
+          full     quant-sa-full catboost Q-HERO-405      5 405  0.184769 0.066446 1.547276 0.063855
+matched-pooled            expert catboost Q-HERO-405      5 405  0.121782 0.034566 1.606779 0.031791
+matched-pooled   expert-shuffled catboost Q-HERO-405      5 405 -0.080163 0.129308 1.779766 0.105091
+matched-pooled      quant-binary catboost Q-HERO-405      5 405  0.078637 0.046210 1.645616 0.041413
+matched-pooled  quant-continuous catboost Q-HERO-405      5 405  0.236756 0.052069 1.497436 0.051650
+matched-pooled    quant-shuffled catboost Q-HERO-405      5 405  0.123816 0.054162 1.604550 0.049862
+matched-pooled         untrained catboost Q-HERO-405      5 405  0.054511 0.085592 1.666129 0.074037
+    matched-sa            expert catboost Q-HERO-405      5 405 -0.085108 0.090444 1.785071 0.074710
+    matched-sa   expert-shuffled catboost Q-HERO-405      5 405 -0.055352 0.047685 1.761293 0.040157
+    matched-sa      quant-binary catboost Q-HERO-405      5 405 -0.017641 0.025444 1.729789 0.021684
+    matched-sa  quant-continuous catboost Q-HERO-405      5 405  0.110482 0.017170 1.617277 0.015572
+    matched-sa    quant-shuffled catboost Q-HERO-405      5 405  0.050830 0.079430 1.669543 0.069093
+    matched-sa         untrained catboost Q-HERO-405      5 405  0.043041 0.036728 1.677279 0.032314
+         panel     head     target                    comparison  seeds   n     unit  delta_RMSE    ci_low   ci_high
+matched-pooled catboost Q-HERO-405 expert minus quant-continuous      5 405 scaffold    0.108883  0.006665  0.210454
+matched-pooled catboost Q-HERO-405     expert minus quant-binary      5 405 scaffold   -0.039002 -0.139270  0.136480
+matched-pooled catboost Q-HERO-405  expert minus expert-shuffled      5 405 scaffold   -0.175216 -0.257986 -0.058067
+matched-pooled catboost Q-HERO-405   expert minus quant-shuffled      5 405 scaffold    0.001861 -0.099764  0.096906
+matched-pooled catboost Q-HERO-405        expert minus untrained      5 405 scaffold   -0.060413 -0.138162  0.037228
+matched-pooled catboost Q-HERO-405    expert minus raw-molformer      5 405 scaffold    0.005302 -0.091548  0.109210
+    matched-sa catboost Q-HERO-405 expert minus quant-continuous      5 405 scaffold    0.168985 -0.004090  0.454345
+    matched-sa catboost Q-HERO-405     expert minus quant-binary      5 405 scaffold    0.056424 -0.126242  0.346345
+    matched-sa catboost Q-HERO-405  expert minus expert-shuffled      5 405 scaffold    0.024663 -0.138744  0.310639
+    matched-sa catboost Q-HERO-405   expert minus quant-shuffled      5 405 scaffold    0.115635 -0.034849  0.359402
+    matched-sa catboost Q-HERO-405        expert minus untrained      5 405 scaffold    0.108794 -0.051222  0.353685
+    matched-sa catboost Q-HERO-405    expert minus raw-molformer      5 405 scaffold    0.184593  0.055791  0.380378
+COMPLETE True

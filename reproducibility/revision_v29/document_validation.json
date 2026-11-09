@@ -1,0 +1,13 @@
+{
+  "completed": true,
+  "original_v28_document_XML_recovered_exactly_after_removing_insertion": true,
+  "source_v28_unmodified": true,
+  "all_existing_tables_figures_Office_objects_and_text_preserved": true,
+  "figure_embedded_byte_identical": true,
+  "XML_relationships_styles_valid": true,
+  "main_figures": 9,
+  "added_link_and_caption_yellow": true,
+  "contrast_rows_verified": 15,
+  "no_new_model_fits": true,
+  "output_sha256": "4ae85860bc0b08e66e80f9089f8074f519d8ebe54957c7b551f3e3ac77e5a696"
+}

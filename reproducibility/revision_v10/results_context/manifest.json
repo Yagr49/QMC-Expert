@@ -1,0 +1,16 @@
+{
+  "device": "cpu",
+  "torch": "2.4.1",
+  "epochs": 80,
+  "seeds": 5,
+  "protocol_sha256": "7d635559bac2c4ef43314f6b5cd93fe0e3ab9afd1c28039b744e4fa71d9d0cc6",
+  "features_sha256": "e04dca21e00b5b5f603f82753e36e10e38a30fc42df4ae3093cb506d84c5851e",
+  "script_sha256": "468b010734415a6c06c217076bf0e222e2dd4e3d913b62013dbd08349d7c7140",
+  "heads": [
+    "catboost"
+  ],
+  "arms": null,
+  "backbone": "molformer",
+  "input_dim": 768,
+  "fixed_folds_sha256": "2a0230bad541e89973df133d96be8d59a13fc1d22453ffb0cc925a023719a815"
+}

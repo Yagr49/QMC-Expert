@@ -1,0 +1,16 @@
+{
+  "completed": true,
+  "OOD_compounds": 17,
+  "OOD_exact_endpoints": 67,
+  "OOD_bound": "IT505 Ec_MBC >500 mg/L",
+  "violin_values": 603,
+  "no_ensemble_error": true,
+  "no_tail_clipping": true,
+  "no_model_refits": true,
+  "source_sha256": {
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v18/analysis/predictions.csv": "8d5096b4a447f48c132112ee10079d5954050df9a94a6399d74b1ee769e5099c",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/analysis/FT_route_endpoint_mean_absolute_errors.csv": "527e4058ac67ecdbe334bedffeedc5d61aec5d9e046f40f82c2a50a9a28a2f08",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v18/analysis/contrasts.csv": "9e18452c44a6ef9a639fe86a54bf06523d91ff16a5bdd5ef29316828373f9830",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v16/analysis/paired_bootstrap.csv": "15521a4b0669faa3261ecf9178565f51646a891a18769600bfaaf3c15bc52fef"
+  }
+}

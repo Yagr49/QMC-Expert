@@ -1,0 +1,46 @@
+{
+  "source": "/Users/egorilin/Desktop/COMA/2026_10_14_Paper_2_edited-v22_pastel_adaptation_figures.docx",
+  "source_sha256": "da75123363daaad6b1664c34dc6696dc7b1c0ef49481365e28c9387ad0a246cb",
+  "output": "/Users/egorilin/Desktop/COMA/2026_10_14_Paper_2_edited-v23_grouped_adaptation_only.docx",
+  "output_sha256": "31ca83e9a2e0629513c9bcf9158fa396171bc020a04060fd7d736d6dade36b4a",
+  "revised_paragraphs": [
+    {
+      "body_index": 40,
+      "label": "v23_grouped_setup",
+      "text": "The adaptation comparison uses the original 105-QAC target cohort, with MIC and MBC against S. aureus and E. coli. Fixed five-fold cation and scaffold holdouts assess prediction for held-out molecular groups. The pretrained frozen-head, LoRA and full-fine-tuning branches each use three target-training seeds. The two human-guided prediction routes additionally share source checkpoints 0–2, holding their starting representation fixed."
+    },
+    {
+      "body_index": 41,
+      "label": "v23_grouped_backbone_results",
+      "text": "In a separate completed backbone experiment, a frozen pretrained backbone with a linear prediction head gave cation/scaffold RMSE 2.013 ± 0.006/1.986 ± 0.003. Direct LoRA gave 2.040 ± 0.049/2.089 ± 0.012, while direct full fine-tuning gave 1.863 ± 0.045/1.970 ± 0.026. These comparisons assess the stated prediction pipelines under the tested optimisation budgets; they do not establish a universal preference for full or parameter-efficient fine-tuning."
+    },
+    {
+      "body_index": 42,
+      "label": "v23_grouped_human_results",
+      "text": "Using the same three human-guided partial-backbone source checkpoints, direct target prediction gave cation/scaffold RMSE 1.797 ± 0.057/1.834 ± 0.058, compared with 1.743 ± 0.031/1.819 ± 0.044 when the source representation was frozen and decoded with CatBoost. These human-guided backbones are separate follow-up models, rather than the external compact encoder described above. All values use log₂(mg/L); ± denotes sample SD across three complete runs, rather than CV-fold SD or a 95% confidence interval."
+    },
+    {
+      "body_index": 43,
+      "label": "v23_grouped_comparison_scope",
+      "text": "The route comparison changes adaptation and decoding together and therefore does not isolate a causal effect of human-label meaning. A separate controlled follow-up retains the compact v5 architecture and uses the same 681 source molecules (377 training and 304 validation), with target cations excluded and five paired source seeds. This follow-up fixes source exposure and training updates and omits SMOTE; it is distinct from the archived SMOTE training procedure."
+    },
+    {
+      "body_index": 45,
+      "label": "v23_figure3_link",
+      "text": "Figure 3 compares the distributions of absolute MIC/MBC prediction errors for frozen-head, LoRA, full-backbone and human-guided adaptation in cation and scaffold holdouts. The two human-guided routes use partial backbone adaptation and share source checkpoints; they are distinct from the external compact feature encoder described above."
+    },
+    {
+      "body_index": 47,
+      "label": "v23_figure3_caption",
+      "text": "Figure 3. Absolute prediction-error distributions for (a) cation holdout and (b) scaffold holdout. Each violin uses the mean absolute error across three runs (seeds 0–2) for each molecule–endpoint pair, giving 420 exact endpoint summaries per route and panel. Correlated endpoints and runs preclude interpreting density differences as statistical significance or causal human-label effects. These are not errors of ensemble predictions. White markers show medians and bars show interquartile ranges; shared linear axes retain all tails. Frozen head, LoRA and full FT start from pretrained MolFormer. Human direct and Human → CB share human-guided partial-backbone source checkpoints; the former further fine-tunes on targets, whereas the latter freezes source features and fits CatBoost. These human models are separate follow-ups, not the external v5 compact encoder."
+    }
+  ],
+  "removed_OOD_from_section2_1": true,
+  "figure3_panels": [
+    "cation",
+    "scaffold"
+  ],
+  "all_sections_from_2_2_unchanged_verbatim": true,
+  "figure2_and_figure1_unchanged": true,
+  "OOD_staged_for_future_section2_3_not_yet_inserted": true
+}

@@ -1,0 +1,156 @@
+You are an independent molecular machine-learning figure reviewer. The researcher explicitly authorised Kimi review of the unpublished study. Use only ReadMediaFile on the single listed image; no commands, writes, other reads or delegation. Inspect the image and give at most400 Russian words of concrete visual and scientific feedback. Do not invent results or claim causality.
+TASK: propose refinements to the integrated human vs quantitative schematic with classic vertical error violins. Preserve the soft Figure1 style, Aptos,180mm width, minimal text inside figures. Assess source-vs-target flow: MolFormer frozen, external MLP trained on681 source (377train/304val), applied to105 target QAC embeddings; CatBoost is independently fitted for each arm/source seed/target fold under the SAME fixed protocol, not one shared fitted model. Five paired source seeds; noSMOTE. Human contrastive vs continuous MIC MSE objectives differ. All four endpoints pooled; categorical taskcode used in every branch, because shuffled-human text-code predictions do not exist. 420 true endpoint-wise mean absolute errors per arm/panel across five seeds (raw1fixed); never five-RMSE KDE, never ensemble error. Both cation/scaffold holdout, noOOD. All points/tails retained; median horizontal/IQRvertical. These new matched compact controls do not establish semantic causal superiority; shuffled actually has lower scaffold RMSE. Historical Table2 quantitative checkpoint remains missing, so this must never be called its reproduction. Original1500/10000source narrative belongs to historical v5, not matched681. Suggest only changes materially improving honesty/legibility; avoid adding more text.
+
+SUPPLIED figure4_caption_EN.txt
+Figure 4. Matched human and quantitative supervision of external compact encoders. (a) Frozen MolFormer embeddings are transformed by separate 768→512→384→256 encoders trained on the same 681 source molecules (377 training,304 validation) with five paired source seeds and no SMOTE. Human Good/Bad labels use the contrastive objective; continuous MIC uses regression. Each arm is evaluated through independently fitted CatBoost regressors under the same fixed 500-iteration/depth6/learning-rate0.05/seed42 protocol and native categorical task codes. Target labels train only the relevant target-training fold. (b,c) Cation- and scaffold-held-out errors on the same105 QAC salts and four MIC/MBC endpoints. Each vertical violin contains420 compound–endpoint mean absolute errors across five source runs; the raw MolFormer reference uses one fixed representation. Horizontal bars show medians and vertical lines interquartile ranges; all420 values are shown with decorative jitter. No OOD data or historical full-corpus quantitative Table2 checkpoint is used. These are matched follow-ups to the v5 compact architecture, not a rerun of its missing quantitative checkpoint. Different objectives limit causal attribution.
+
+SUPPLIED figure4_provenance.json
+{
+  "completed": true,
+  "source_molecules": 681,
+  "source_train": 377,
+  "source_validation": 304,
+  "target_salts": 105,
+  "endpoints": 4,
+  "source_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "SMOTE": false,
+  "architecture": [
+    768,
+    512,
+    384,
+    256
+  ],
+  "encoding": "native categorical task_id",
+  "decoder": {
+    "iterations": 500,
+    "depth": 6,
+    "learning_rate": 0.05,
+    "random_seed": 42
+  },
+  "decoder_fits_separate_for_each_arm_seed_fold": true,
+  "violin_unit": "420 mean absolute errors per compound/endpoint across five source seeds; raw is one fixed reference",
+  "marker": "Median horizontal bar, IQR vertical line; all420 errors have decorative jitter",
+  "historical_full_quantitative_Table2_model": false,
+  "OOD_included": false,
+  "source_sha256": {
+    "/Users/egorilin/Desktop/COMA/reproducibility/v5_hypotheses_20261013/snapshots/main/20261013T083608Z/results/chunks/compact_human_seed0_categorical.csv": "292b0f2d7d6ade2d059fc837cbabd6e9eeda28f1e7716c1a9340257457cf13d1",
+    "/Users/egorilin/Desktop/COMA/reproducibility/v5_hypotheses_20261013/snapshots/main/20261013T083608Z/results/chunks/compact_human_seed1_categorical.csv": "47e4e13e375207ff82795ac4b2222b0f2182a9b393df6ff08e5746c3ad78a3f4",
+    "/Users/egorilin/Desktop/COMA/reproducibility/v5_hypotheses_20261013/snapshots/main/20261013T083608Z/results/chunks/compact_human_seed2_categorical.csv": "95421f83e2c01b81a9059822bb23557328b8500b756136898e27ddf89f3eb146",
+    "/Users/egorilin/Desktop/COMA/reproducibility/v5_hypotheses_20261013/snapshots/main/20261013T083608Z/results/chunks/compact_human_seed3_categorical.csv": "bf4a3e06d67e87835284c6853a944273e6b9da4deaca8445b16db7a453b1db38",
+    "/Users/egorilin/Desktop/COMA/reproducibility/v5_hypotheses_20261013/snapshots/main/20261013T083608Z/results/chunks/compact_human_seed4_categorical.csv": "af606ebdf5005495d2de81a68c38a316d43580b72903757e87bca14390ee7a23",
+    "/Users/egorilin/Desktop/COMA/reproducibility/v5_hypotheses_20261013/snapshots/main/20261013T083608Z/results/chunks/compact_mic_continuous_seed0_categorical.csv": "096eecc00d480519a9af407eb15b64e236baf8cea1f98afc7e8af7a2b0d8cc57",
+    "/Users/egorilin/Desktop/COMA/reproducibility/v5_hypotheses_20261013/snapshots/main/20261013T083608Z/results/chunks/compact_mic_continuous_seed1_categorical.csv": "e83d9e00e4bb9230d31967ac5431028a875b3d6a39de56030516d27722a06946",
+    "/Users/egorilin/Desktop/COMA/reproducibility/v5_hypotheses_20261013/snapshots/main/20261013T083608Z/results/chunks/compact_mic_continuous_seed2_categorical.csv": "6ea1e25f88c3f3b1ca6e69030833a2064a58b67554028ffed8c5a93e30eeeb5a",
+    "/Users/egorilin/Desktop/COMA/reproducibility/v5_hypotheses_20261013/snapshots/main/20261013T083608Z/results/chunks/compact_mic_continuous_seed3_categorical.csv": "b7ab2a55d559fc1c71530e5a1cee6c18782d6e0d4b3d25ee1c6158b3115b1171",
+    "/Users/egorilin/Desktop/COMA/reproducibility/v5_hypotheses_20261013/snapshots/main/20261013T083608Z/results/chunks/compact_mic_continuous_seed4_categorical.csv": "274d7f5ffde9ba14258c4b1332f8194921410e03380e7b19b734dbeed2fdf8fd",
+    "/Users/egorilin/Desktop/COMA/reproducibility/v5_hypotheses_20261013/snapshots/main/20261013T083608Z/results/chunks/compact_human_shuffled_seed0_categorical.csv": "d70c8458912d16c9faa6b91f6ff894bb9791d5dc90c66b26cb01d62d99d01205",
+    "/Users/egorilin/Desktop/COMA/reproducibility/v5_hypotheses_20261013/snapshots/main/20261013T083608Z/results/chunks/compact_human_shuffled_seed1_categorical.csv": "ca46bfbb1770eb13af94bb2d647a587cd7dc649980a6c66ea6710ff7ab440ab3",
+    "/Users/egorilin/Desktop/COMA/reproducibility/v5_hypotheses_20261013/snapshots/main/20261013T083608Z/results/chunks/compact_human_shuffled_seed2_categorical.csv": "5d83f3f3069690a257a72f8b909989b2f3abf330b816eabc8809f184a1a6e603",
+    "/Users/egorilin/Desktop/COMA/reproducibility/v5_hypotheses_20261013/snapshots/main/20261013T083608Z/results/chunks/compact_human_shuffled_seed3_categorical.csv": "b05d4ebcac3e733cad44e51f9fcef1b60ac8169e672df88882c1a1140d3f3ff4",
+    "/Users/egorilin/Desktop/COMA/reproducibility/v5_hypotheses_20261013/snapshots/main/20261013T083608Z/results/chunks/compact_human_shuffled_seed4_categorical.csv": "a154a056180b24c2eb7e15f656351f57764ad7396be32f73fd3acf1c600c0c40",
+    "/Users/egorilin/Desktop/COMA/reproducibility/v5_hypotheses_20261013/snapshots/main/20261013T083608Z/results/chunks/matched_raw_categorical.csv": "da70ae9cc6e0e12e19d49298397f53d60a152061b783deaf58432b6858ced88d"
+  },
+  "plot_statistics": [
+    {
+      "schema": "cation",
+      "arm": "human",
+      "n": 420,
+      "median": 1.176772839591227,
+      "max": 6.604078858484224
+    },
+    {
+      "schema": "cation",
+      "arm": "mic_continuous",
+      "n": 420,
+      "median": 1.0838758847841978,
+      "max": 6.5855918183996875
+    },
+    {
+      "schema": "cation",
+      "arm": "human_shuffled",
+      "n": 420,
+      "median": 1.1429055749192338,
+      "max": 6.068327773302422
+    },
+    {
+      "schema": "cation",
+      "arm": "matched_raw",
+      "n": 420,
+      "median": 1.1760225085506724,
+      "max": 6.454376797433778
+    },
+    {
+      "schema": "scaffold",
+      "arm": "human",
+      "n": 420,
+      "median": 1.4240287690577982,
+      "max": 6.981193492808133
+    },
+    {
+      "schema": "scaffold",
+      "arm": "mic_continuous",
+      "n": 420,
+      "median": 1.3566110322675695,
+      "max": 6.81483919985998
+    },
+    {
+      "schema": "scaffold",
+      "arm": "human_shuffled",
+      "n": 420,
+      "median": 1.2966452223512146,
+      "max": 6.618213488085741
+    },
+    {
+      "schema": "scaffold",
+      "arm": "matched_raw",
+      "n": 420,
+      "median": 1.3758955151014296,
+      "max": 6.7893449147099645
+    }
+  ],
+  "caution": "Human/quantitative training objectives differ; no semantic causal superiority established",
+  "docx_modified": false
+}
+SUPPLIED figure4_compact_seed_metrics.csv
+arm,schema,seed,n,RMSE,MAE
+human,cation,0,420,1.8591778194403643,1.4516250633743533
+human,cation,1,420,1.8663772143366921,1.4450562403667462
+human,cation,2,420,1.8746176374943315,1.4641345920800364
+human,cation,3,420,1.9269331307092958,1.4706566315771603
+human,cation,4,420,1.8349713946737225,1.4340734843467222
+human,scaffold,0,420,2.214691233456632,1.789672892209934
+human,scaffold,1,420,2.10051346943905,1.6486942887134357
+human,scaffold,2,420,2.1847707982013214,1.7381042704446155
+human,scaffold,3,420,2.17978629239544,1.7264133203648
+human,scaffold,4,420,2.111699626544617,1.6395959359272185
+human_shuffled,cation,0,420,1.864399189891951,1.440269179655727
+human_shuffled,cation,1,420,1.8699360914523768,1.4456994156432328
+human_shuffled,cation,2,420,1.7552458583188226,1.3744828240725844
+human_shuffled,cation,3,420,1.812096096167184,1.3915869539682073
+human_shuffled,cation,4,420,1.8641031022318442,1.4708387877858538
+human_shuffled,scaffold,0,420,2.027762923470693,1.5918537145193468
+human_shuffled,scaffold,1,420,2.0707296181143127,1.63448793106812
+human_shuffled,scaffold,2,420,1.9161891698912596,1.5023743623124026
+human_shuffled,scaffold,3,420,2.0418553319267088,1.6124714032962537
+human_shuffled,scaffold,4,420,2.150401687840382,1.7238057293225861
+matched_raw,cation,-1,420,1.8678370481700586,1.443638824814853
+matched_raw,scaffold,-1,420,2.1156931604892866,1.6663451935802733
+mic_continuous,cation,0,420,1.896491133357142,1.4918188867791227
+mic_continuous,cation,1,420,1.866548941397806,1.3944021154356354
+mic_continuous,cation,2,420,1.8460510264547572,1.4159885499398586
+mic_continuous,cation,3,420,1.8706154072661776,1.424566173217789
+mic_continuous,cation,4,420,1.812341310591301,1.3783362230378846
+mic_continuous,scaffold,0,420,2.1478184105144713,1.703982574922859
+mic_continuous,scaffold,1,420,2.1489203125828227,1.6536672268209054
+mic_continuous,scaffold,2,420,2.174739669202453,1.691533315397951
+mic_continuous,scaffold,3,420,2.1847591947159355,1.6862684002902995
+mic_continuous,scaffold,4,420,2.1823281304724196,1.7136085008055455
+
+PERMITTED IMAGE (visually inspect):
+/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figures/figure4_human_quantitative_compact.png

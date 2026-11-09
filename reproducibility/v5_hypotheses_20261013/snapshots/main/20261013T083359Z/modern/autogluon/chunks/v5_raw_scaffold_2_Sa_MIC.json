@@ -1,0 +1,19 @@
+{
+  "rep": "v5_raw",
+  "schema": "scaffold",
+  "fold": 2,
+  "task": "Sa_MIC",
+  "completed": true,
+  "n_train": 84,
+  "n_test": 21,
+  "seconds": 24.699638605117798,
+  "model": "autogluon",
+  "info": {
+    "inner_train_n": 57,
+    "inner_val_n": 27,
+    "selected_model": "LightGBM",
+    "refitted_model": "LightGBM_FULL",
+    "selection_budget_s": 60,
+    "refit_extra_budget": true
+  }
+}

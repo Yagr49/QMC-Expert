@@ -1,0 +1,14 @@
+{
+  "completed": true,
+  "source_v21_unmodified": true,
+  "all_original_media_retained_byte_identical": true,
+  "figure1_preserved": true,
+  "all_native_tables_preserved": true,
+  "new_and_revised_text_yellow": true,
+  "captions_sequential_1_to7": true,
+  "relationship_targets_exist": true,
+  "drawing_ids_unique": true,
+  "later_section_content_unchanged_except_figure_numbers": true,
+  "tsne_coordinates_preserved": true,
+  "output_sha256": "da75123363daaad6b1664c34dc6696dc7b1c0ef49481365e28c9387ad0a246cb"
+}

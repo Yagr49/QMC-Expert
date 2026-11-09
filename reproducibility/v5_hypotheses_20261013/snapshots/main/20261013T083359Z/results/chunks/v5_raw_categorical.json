@@ -1,0 +1,11 @@
+{
+  "name": "v5_raw",
+  "encoding": "categorical",
+  "arm": "v5_raw",
+  "seed": -1,
+  "provenance": "v5_archived_grouped_followup",
+  "completed": true,
+  "fits": 11,
+  "seconds": 181.60677003860474,
+  "predictions": 908
+}

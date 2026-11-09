@@ -1,0 +1,26 @@
+• **Audit scope:** the four documents as provided; nothing executed; no results inspected. Per-dimension findings first, then errors, then the clarification, then limitations.
+
+  **Dimension-by-dimension findings (design level)**
+  - *Leakage:* guards present — exact-match cation exclusion asserted against the union of all target cations; source train/val and per-fold scaffold disjointness asserted; length audit with `truncated=0`; decoder fit on fold-train indices only; OOD-17 decoder on all QAC-104, as specified.
+  - *Matching:* within a seed, all six arms share backbone+head init (identical load path from `torch.manual_seed(seed)`), identical batch order (`Generator(200000+seed)`), identical global reseed (`300000+seed`) before the optimizer, so dropout and native feature-map draws match; 12 steps × 30 epochs = 360 updates; the same `default_rng(100000+seed)` index permutation is applied to every shuffled arm.
+  - *Transformations/permutation:* cutoff (`np.quantile(y[tr], prevalence)`) and standardization (`y[tr].std()`, ddof=0 = population SD) are training-only; shuffle touches only `y[tr]` with a multiset assertion; validation labels unshuffled and never backpropagated; final checkpoint used.
+  - *Direct vs refit:* sign conventions correct — `-rho` for both binary head types (positive class = active in each), `rho` for continuous; R²/RMSE `None` for binary heads; direct predictions invert scaling.
+  - *Checkpoint reproducibility:* see error 2 and limitations.
+
+  **Concrete errors (factual)**
+  1. PROTOCOL.md: "Use float32, **deterministic feature maps**, right padding to 202 tokens" is false as written. Per the note, `deterministic_eval=True` pins feature maps only in *evaluation*; during training the random orthogonal buffers refresh every forward. Correction (implemented via the note): "deterministic feature maps in evaluation; native stochastic refresh during training, matched across arms by paired seeds." Because PROTOCOL.md is immutable, the sentence remains inaccurate; manuscripts must carry the verified distinction.
+  2. reconstruct_checkpoints.py: `for epoch in range(30)` hardcodes replay length instead of `range(saved['epochs'])`. Inert at epochs=30, but wrong by construction for any other checkpoint. Correction: read the recorded epoch count and assert it against the manifest.
+
+  **Assessment of the documented clarification (separate from training/outcome changes):** as documented, it alters no training code, data, or evaluation rule; native stochastic training is retained; originals are preserved with hashes; each reconstruction is *gated* on reproducing archived embeddings and direct scores within stated tolerances, with discrepancies archived. It is a storage/audit fix, not a post-outcome scientific modification. Caveat: buffer recovery depends on the RNG-consumption sequence of the pinned custom code and torch build staying stable, and the gate compares against the pipeline's own archived outputs (self-consistency), not an independent retrain.
+
+  **Material limitations**
+  - Exact-string cation matching: "including counterion variants" holds only if variants share identical cation strings; normalization is upstream and unauditable here.
+  - Matching is schedule-level, not bitwise: `use_deterministic_algorithms(True, warn_only=True)` permits nondeterministic GPU ops, so arm-level numeric drift beyond the matched draws is possible.
+  - Checkpoints are not standalone-reconstructable (no buffers, frozen parameters, or RNG/optimizer state); reproducibility rests entirely on replay verification.
+  - Target-median AUC derives its threshold from each full target set — acceptable only as the labelled descriptive metric.
+  - OOD-17 rests on a single decoder fit; no fold-level uncertainty.
+  - Bootstrap machinery, archived-feature audit, and the stated contrasts live in scripts not provided; inferential claims are unaudited here.
+  - Five seeds, one panel, fixed folds — exploratory and conditional, as the protocol itself concedes.
+
+  **Optional follow-ups (not errors):** rerun one arm/seed twice to quantify bitwise stability; reconstruct one checkpoint on a second machine for end-to-end validation; extend cation exclusion to normalized salt keys; store frozen parameters and buffers in future checkpoints.
+

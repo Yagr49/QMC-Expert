@@ -1,0 +1,48 @@
+v14_cation {'old_rows': 27816, 'new_rows': 27816, 'common_rows': 27816, 'max_prediction_difference': 0.0, 'equal_within_1e_8': True}
+v14_scaffold {'old_rows': 15616, 'new_rows': 15616, 'common_rows': 15616, 'max_prediction_difference': 0.0, 'equal_within_1e_8': True}
+ft {'old_rows': 16306, 'new_rows': 16306, 'common_rows': 16306, 'max_prediction_difference': 0.0, 'equal_within_1e_8': True}
+c3 {'old_rows': 18936, 'new_rows': 74692, 'common_rows': 18936, 'max_prediction_difference': 0.0, 'equal_within_1e_8': True}
+chemfm {'old_rows': 18936, 'new_rows': 74692, 'common_rows': 18936, 'max_prediction_difference': 0.0, 'equal_within_1e_8': True}
+chemberta {'old_rows': 18936, 'new_rows': 74692, 'common_rows': 18936, 'max_prediction_difference': 3.4042255558586563, 'equal_within_1e_8': False}
+molformer {'old_rows': 85212, 'new_rows': 74692, 'common_rows': 64172, 'max_prediction_difference': 183816.3331413269, 'equal_within_1e_8': False}
+binary_shuffle {'old_rows': 3156, 'new_rows': 74692, 'common_rows': 3156, 'max_prediction_difference': 2.167406245913396, 'equal_within_1e_8': False}
+context {'old_rows': 18936, 'new_rows': 37872, 'common_rows': 18936, 'max_prediction_difference': 4.7132626477039885, 'equal_within_1e_8': False}
+Traceback (most recent call last):
+  File "/home/yagr/coma_models_check_20261012/audit_repeats.py", line 73, in <module>
+    main()
+  File "/home/yagr/coma_models_check_20261012/audit_repeats.py", line 69, in main
+    (ROOT / 'audit_repeats.json').write_text(json.dumps(reports, indent=2))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yagr/anaconda3/lib/python3.12/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/home/yagr/anaconda3/lib/python3.12/json/encoder.py", line 202, in encode
+    chunks = list(chunks)
+             ^^^^^^^^^^^^
+  File "/home/yagr/anaconda3/lib/python3.12/json/encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/home/yagr/anaconda3/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/home/yagr/anaconda3/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/home/yagr/anaconda3/lib/python3.12/json/encoder.py", line 326, in _iterencode_list
+    yield from chunks
+  File "/home/yagr/anaconda3/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/home/yagr/anaconda3/lib/python3.12/json/encoder.py", line 439, in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+  File "/home/yagr/anaconda3/lib/python3.12/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type int64 is not JSON serializable
+v14_cation {'old_rows': 27816, 'new_rows': 27816, 'common_rows': 27816, 'max_prediction_difference': 0.0, 'equal_within_1e_8': True}
+v14_scaffold {'old_rows': 15616, 'new_rows': 15616, 'common_rows': 15616, 'max_prediction_difference': 0.0, 'equal_within_1e_8': True}
+ft {'old_rows': 16306, 'new_rows': 16306, 'common_rows': 16306, 'max_prediction_difference': 0.0, 'equal_within_1e_8': True}
+c3 {'old_rows': 18936, 'new_rows': 74692, 'common_rows': 18936, 'max_prediction_difference': 0.0, 'equal_within_1e_8': True}
+chemfm {'old_rows': 18936, 'new_rows': 74692, 'common_rows': 18936, 'max_prediction_difference': 0.0, 'equal_within_1e_8': True}
+chemberta {'old_rows': 18936, 'new_rows': 74692, 'common_rows': 18936, 'max_prediction_difference': 3.4042255558586563, 'equal_within_1e_8': False}
+molformer {'old_rows': 85212, 'new_rows': 74692, 'common_rows': 64172, 'max_prediction_difference': 183816.3331413269, 'equal_within_1e_8': False}
+binary_shuffle {'old_rows': 3156, 'new_rows': 74692, 'common_rows': 3156, 'max_prediction_difference': 2.167406245913396, 'equal_within_1e_8': False}
+context {'old_rows': 18936, 'new_rows': 37872, 'common_rows': 18936, 'max_prediction_difference': 4.7132626477039885, 'equal_within_1e_8': False}
+v14_retrained_cation {'old_rows': 27816, 'new_rows': 23424, 'common_rows': 23424, 'max_prediction_difference': 0.9118373441073824, 'equal_within_1e_8': False}
+v14_retrained_scaffold {'old_rows': 15616, 'new_rows': 15616, 'common_rows': 15616, 'max_prediction_difference': 0.9118373441073824, 'equal_within_1e_8': False}

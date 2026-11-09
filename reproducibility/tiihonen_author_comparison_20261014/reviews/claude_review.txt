@@ -1,0 +1,121 @@
+---
+
+# Reproducibility Audit: Tiihonen et al. JACS 2021 — COE/E. coli K12 MIC
+
+## 1. Dataset & Protocol Identity
+
+**Verified from source files:**
+
+| Item | Stated (Paper/Code) | Verifiable in Code |
+|---|---|---|
+| Target | log₂(MIC µg/mL), E. coli K12 | `logmic()`: `np.log2(dataset.iloc[:,y_column])` ✓ |
+| Censoring | MIC > X → 2X (next dilution) | `clean_mics()`: strip `>`, then `*2` ✓ |
+| Outliers removed | Paper: 5; Code comment: **9** | **Discrepancy — see §3-A** |
+| Fingerprint | 21 AlvaDesc descriptors (opt_descr_names) | Hardcoded list in `Main_downselection.py` ✓ |
+| Var/Cor filtering | Fit on train only | Code applies to `dataset_train` only ✓ |
+| RF hyperparameters | n_est=236, max_depth=18, max_features='log2', max_samples=0.99, min_split=2, min_leaf=1, bootstrap=True | `ho_opt` dict ✓ |
+| Train/test split | Stratified by MIC group, seed=3 | **Hardcoded index lists** (not reproduced by `train_test_split`) — see §3-B |
+| Reported R²/RMSE | Paper: 0.65 / ~1.39 CV | Code footer: **0.6491613775 / 1.0937822922** (test set) ✓ |
+| Train N | Paper: 78 | Code: train_idx has **80 entries** — see §3-C |
+
+The CSV `dataset_outliers_dropped` (114 rows, 5262 columns) is consistent with: 136 total − 1 (No.140, NaN ALOGP) − molecules with no MIC − 9 outlier-dropped = 114, with the 114 comprising 80 train + 20 test + ~14 new data (13 or 7 depending on which new-data molecules are actually present after outlier removal).
+
+---
+
+## 2. Safe Minimal Replication Protocol
+
+To freshly fit the author RF21 (without unpickling), execute these exact steps:
+
+**Step 1 — Load data with index verification**
+```
+Load dataset_outliers_dropped.csv (index_col=0)
+For each i in train_idx (80 values) and test_idx (20 values):
+    Assert dataset.loc[i, 'name'] matches expected molecule name
+    (CRITICAL: index drift check — see §3-B)
+```
+
+**Step 2 — Separate new data and form splits**
+```
+dataset_newdata = rows whose 'name' ∈ name_newdata list (16 names; 3 are already-dropped outliers)
+dataset_main    = remaining rows
+dataset_train   = dataset_main.loc[train_idx]   # 80 rows
+dataset_test    = dataset_main.loc[test_idx]     # 20 rows
+```
+
+**Step 3 — Apply opt fingerprint (train-fitted features only)**
+```
+X_train = dataset_train[opt_descr_names]   # 80 × 21
+y_train = dataset_train['log2mic']
+X_test  = dataset_test[opt_descr_names]    # 20 × 21
+y_test  = dataset_test['log2mic']
+```
+
+**Step 4 — Fit author RF21**
+```python
+RandomForestRegressor(
+    n_estimators=236, max_depth=18, max_features='log2',
+    max_samples=0.99, min_samples_leaf=1, min_samples_split=2,
+    bootstrap=True, criterion='squared_error',  # NB: 'mse' deprecated ≥ sklearn 1.0
+    random_state=3, n_jobs=-2
+).fit(X_train, y_train, sample_weight=None)
+```
+*Note: the paper code uses `sample_weight=None` (sample_weighing=False) for the final test evaluation.*
+
+**Step 5 — Evaluate on held-out test20**
+```
+y_pred = regressor.predict(X_test)
+R²   = sklearn.metrics.r2_score(y_test, y_pred)     → target: 0.6491613775
+RMSE = sqrt(mean_squared_error(y_test, y_pred))     → target: 1.0937822922
+```
+
+**Step 6 — Repeat with MolFormer/CatBoost challenger**
+```
+Encode train_SMILES (78 valid; drop 2 invalid) → MolFormer frozen → adapter → 256-dim
+Fit CatBoost(n=500, depth=6, lr=0.05, seed=42) on 256-dim train features only
+Encode test_SMILES (20) → predict → compute same R² and RMSE
+```
+
+---
+
+## 3. Pitfalls That Would Invalidate a "Beating the Paper" Claim
+
+**A. Outlier count discrepancy (paper: 5 vs. code: 9).**
+The code comment explicitly lists **9 molecules with RMSE > 3.5**, including Amidine, Y62C, Y6N24C—which also appear in `name_newdata`. The paper states 5 were dropped and "three [new-data] molecules were flagged but not excluded." Net outcome: 6 permanently dropped from train/test pool, but the code appears to drop all 9 before separating new data, leaving only 13 new-data candidates instead of 16. Any replication must verify which 7 molecules appear in `y_opt_newdata` and reconcile against the paper's "15 new molecules."
+
+**B. Stale index-to-molecule mapping (index drift).**
+The source Excel file changed after initial model development. The code explicitly warns: *"The source Excel file has changed since model development and therefore train test split does not produce the same results... Now the code removes wrong molecules if the Excel file is modified."* The hardcoded train_idx/test_idx values refer to **row indices in the original Excel**. In the current CSV, these same integer indices may resolve to **different molecules.** You must verify every index against the `name` column before proceeding. Failure here means your "author RF21" is not trained on the same 80 molecules as the paper.
+
+**C. Train N=80 vs. paper-stated N=78.**
+The code's train_idx contains 80 entries, including indices 14 (COE-D6C-HAc) and 108 (COE-Y4IM2), which are documented as having **invalid RDKit SMILES**. The RF ignores SMILES and trains on all 80; chemprop-based models use only the 78 valid SMILES. The paper reports 78. The code-reported R²=0.6491613775 therefore reflects an **80-molecule train set**, not 78. Claiming superiority based on a 78-molecule train vs. a fair comparison requires re-training the author RF on the same 78 molecules the challenger encoder can process—or using all 80 with dummy-SMILES exclusion.
+
+**D. MolFormer/encoder distributional shift — 0/20 test coverage.**
+The frozen MolFormer was pre-trained on ZINC/PubChem-like small molecules. The audit note confirms **0 of the 20 held-out COE cations** appear in the MolFormer source corpus (1103 expert COEs), and only 2/78 train cations overlap. Every test-set prediction is thus a severe **out-of-distribution extrapolation** in MolFormer latent space. A higher raw R² from such embeddings does not reflect genuine generalisation; it may reflect adapter overfitting to the tiny train set.
+
+**E. Adapter and CatBoost training leakage risk.**
+The "externally human-trained" 768→512→384→256 adapter must be verified to have been trained with **zero access to the 20 held-out test SMILES and their labels**. If any hyperparameter of the adapter (architecture, dropout, learning rate) was chosen by observing test-set performance—even indirectly—the comparison is invalid. The CatBoost hyperparameters (n=500, depth=6, lr=0.05, seed=42) must likewise have been fixed before any test prediction. This must be documented with timestamps or commit history.
+
+**F. sklearn API change: `criterion='mse'` deprecated.**
+The author code uses `criterion='mse'` (sklearn < 1.0). In sklearn ≥ 1.0 this raises a warning or error; the correct keyword is `criterion='squared_error'`. The reproduced RF must pin the same sklearn version as the original (environment.yml) or use the updated keyword and confirm numerical identity with the reported 0.6491613775.
+
+**G. Statistical power: N=20 test set.**
+With N=20, the 95% confidence interval on R² is approximately ±0.15–0.20 (bootstrap). A challenger R² of, say, 0.75 is **not statistically distinguishable** from 0.65 on this test set. Any claim of "beating the paper" must report confidence intervals, and a permutation test or bootstrap CI is mandatory.
+
+**H. Var/Cor feature filtering scope.**
+The author pipeline applies variance and correlation filtering to `dataset_train` only—correctly. Any challenger that uses MolFormer embeddings must also ensure the 256-dim adapter projection was fitted solely on train data. Using the frozen MolFormer (no fitting) is safe; the learned adapter layers are the risk.
+
+---
+
+## 4. Justified Result Wording
+
+Given the above findings, the following formulations are defensible; those marked ✗ are not:
+
+| Wording | Verdict |
+|---|---|
+| "On the same held-out 20 molecules, author RF21 (freshly fitted per published hyperparameters) achieves R²=0.649, RMSE=1.094 log₂(µg/mL), consistent with the code-reported values." | ✓ **Supported** (after index-drift verification) |
+| "The MolFormer+CatBoost challenger achieves R²=X on the same 20-molecule test set (95% bootstrap CI: [Y, Z])." | ✓ **Supported** if no test leakage is confirmed |
+| "The challenger significantly outperforms the paper's model (p < 0.05)." | ✗ **Not supportable** with N=20 alone; requires bootstrap CI overlap test |
+| "The challenger beats the paper's R²=0.65." | ✗ **Misleading** — requires: (a) same train molecules, (b) confirmed no leakage, (c) CI not overlapping, (d) explained OOD extrapolation caveat |
+| "Our model achieves higher point-estimate R² than Tiihonen et al. on the same 20-molecule held-out set, though confidence intervals overlap and the MolFormer encoder operates substantially outside its training distribution for COE cations." | ✓ **Accurate and honest** |
+| "The paper's RF uses 21 domain-specific 3D AlvaDesc descriptors; our model uses a general-purpose language encoder with 0/20 test-set cation overlap in its training corpus, so the comparison reflects different representation strategies rather than a direct quality improvement." | ✓ **Required disclosure** |
+
+**Bottom line:** A fair comparison requires (1) confirmed index-to-molecule correspondence for the hardcoded train_idx/test_idx, (2) N=20 confidence intervals on all metrics, (3) explicit disclosure that the MolFormer encoder is far out-of-distribution for COE cations, and (4) a signed attestation that no CatBoost or adapter hyperparameter was chosen with test-label visibility. Without these, any numerical R² comparison is scientifically unsupported.

@@ -1,0 +1,19 @@
+{
+  "rep": "v5_raw",
+  "schema": "cation",
+  "fold": 2,
+  "task": "Ec_MIC",
+  "completed": true,
+  "n_train": 84,
+  "n_test": 21,
+  "seconds": 8.823623180389404,
+  "model": "autogluon",
+  "info": {
+    "inner_train_n": 66,
+    "inner_val_n": 18,
+    "selected_model": "LightGBM",
+    "refitted_model": "LightGBM_FULL",
+    "selection_budget_s": 60,
+    "refit_extra_budget": true
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "time_utc": "2026-10-12T17:59:38.106602+00:00",
+  "units": [
+    {
+      "unit": "coma-ftcausal-20261012-decode0",
+      "worker": 0,
+      "workers": 4
+    },
+    {
+      "unit": "coma-ftcausal-20261012-decode1",
+      "worker": 1,
+      "workers": 4
+    },
+    {
+      "unit": "coma-ftcausal-20261012-decode2",
+      "worker": 2,
+      "workers": 4
+    },
+    {
+      "unit": "coma-ftcausal-20261012-decode3",
+      "worker": 3,
+      "workers": 4
+    }
+  ],
+  "completed_chunks_reused": true,
+  "experiment_hyperparameters_unchanged": true
+}

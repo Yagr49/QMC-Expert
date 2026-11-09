@@ -1,0 +1,10 @@
+configuration,max_prediction_difference,n
+v5_human_categorical_original,0.0,87
+v5_human_separate_original,0.0,88
+v5_human_text_original,0.0,87
+v5_qac_ablation_categorical_original,0.0,87
+v5_qac_ablation_separate_original,0.0,88
+v5_qac_ablation_text_original,0.0,87
+v5_raw_categorical_original,0.0,87
+v5_raw_separate_original,0.0,88
+v5_raw_text_original,0.0,87

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="510.23622pt" height="164.409449pt" viewBox="0 0 510.23622 164.409449" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-14T14:04:29.987472</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.7.3, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 164.409449 
+L 510.23622 164.409449 
+L 510.23622 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 25.491402 79.792838 
+L 98.475591 79.792838 
+Q 107.292472 79.792838 107.292472 77.173795 
+L 107.292472 46.618299 
+Q 107.292472 43.999257 98.475591 43.999257 
+L 25.491402 43.999257 
+Q 16.67452 43.999257 16.67452 46.618299 
+L 16.67452 77.173795 
+Q 16.67452 79.792838 25.491402 79.792838 
+z
+" clip-path="url(#pe64c5d2a2f)" style="fill: #eff1f4; stroke: #b8bdc5; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 59.289449 36.249835 
+Q 59.289449 38.614526 59.289449 39.972986 
+" clip-path="url(#pe64c5d2a2f)" style="fill: none; stroke: #9ba2ac; stroke-width: 0.9; stroke-linecap: round"/>
+    <path d="M 60.889449 36.772986 
+L 59.289449 39.972986 
+L 57.689449 36.772986 
+z
+" clip-path="url(#pe64c5d2a2f)" style="fill: #9ba2ac; stroke: #9ba2ac; stroke-width: 0.9; stroke-linecap: round"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 157.254803 57.967483 
+L 257.669291 57.967483 
+Q 266.486173 57.967483 266.486173 55.348441 
+L 266.486173 29.158016 
+Q 266.486173 26.538973 257.669291 26.538973 
+L 157.254803 26.538973 
+Q 148.437921 26.538973 148.437921 29.158016 
+L 148.437921 55.348441 
+Q 148.437921 57.967483 157.254803 57.967483 
+z
+" clip-path="url(#pe64c5d2a2f)" style="fill: #afd9ce; stroke: #b8bdc5; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 157.254803 108.89331 
+L 257.669291 108.89331 
+Q 266.486173 108.89331 266.486173 106.274268 
+L 266.486173 80.083843 
+Q 266.486173 77.4648 257.669291 77.4648 
+L 157.254803 77.4648 
+Q 148.437921 77.4648 148.437921 80.083843 
+L 148.437921 106.274268 
+Q 148.437921 108.89331 157.254803 108.89331 
+z
+" clip-path="url(#pe64c5d2a2f)" style="fill: #c6bbe4; stroke: #b8bdc5; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 108.189581 56.115206 
+Q 126.150203 49.528567 143.166116 43.288377 
+" clip-path="url(#pe64c5d2a2f)" style="fill: none; stroke: #9ba2ac; stroke-width: 0.9; stroke-linecap: round"/>
+    <path d="M 139.610883 42.887978 
+L 143.166116 43.288377 
+L 140.712657 45.892324 
+z
+" clip-path="url(#pe64c5d2a2f)" style="fill: #9ba2ac; stroke: #9ba2ac; stroke-width: 0.9; stroke-linecap: round"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 108.010381 69.501974 
+Q 126.150031 80.810873 143.435798 91.587432 
+" clip-path="url(#pe64c5d2a2f)" style="fill: none; stroke: #9ba2ac; stroke-width: 0.9; stroke-linecap: round"/>
+    <path d="M 141.566766 88.53674 
+L 143.435798 91.587432 
+L 139.873826 91.252243 
+z
+" clip-path="url(#pe64c5d2a2f)" style="fill: #9ba2ac; stroke: #9ba2ac; stroke-width: 0.9; stroke-linecap: round"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 313.99937 78.337814 
+L 392.371654 78.337814 
+Q 401.188535 78.337814 401.188535 75.718772 
+L 401.188535 43.708252 
+Q 401.188535 41.089209 392.371654 41.089209 
+L 313.99937 41.089209 
+Q 305.182488 41.089209 305.182488 43.708252 
+L 305.182488 75.718772 
+Q 305.182488 78.337814 313.99937 78.337814 
+z
+" clip-path="url(#pe64c5d2a2f)" style="fill: #f7e8dc; stroke: #b8bdc5; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 268.410023 42.786607 
+Q 284.854056 47.345639 300.328434 51.635838 
+" clip-path="url(#pe64c5d2a2f)" style="fill: none; stroke: #9ba2ac; stroke-width: 0.9; stroke-linecap: round"/>
+    <path d="M 297.672222 49.239062 
+L 300.328434 51.635838 
+L 296.817286 52.322743 
+z
+" clip-path="url(#pe64c5d2a2f)" style="fill: #9ba2ac; stroke: #9ba2ac; stroke-width: 0.9; stroke-linecap: round"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 268.143195 92.063365 
+Q 284.853507 80.812142 300.729153 70.122908 
+" clip-path="url(#pe64c5d2a2f)" style="fill: none; stroke: #9ba2ac; stroke-width: 0.9; stroke-linecap: round"/>
+    <path d="M 297.181143 70.582942 
+L 300.729153 70.122908 
+L 298.968374 73.237336 
+z
+" clip-path="url(#pe64c5d2a2f)" style="fill: #9ba2ac; stroke: #9ba2ac; stroke-width: 0.9; stroke-linecap: round"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 426.659528 78.337814 
+L 490.337008 78.337814 
+Q 499.15389 78.337814 499.15389 75.718772 
+L 499.15389 43.708252 
+Q 499.15389 41.089209 490.337008 41.089209 
+L 426.659528 41.089209 
+Q 417.842646 41.089209 417.842646 43.708252 
+L 417.842646 75.718772 
+Q 417.842646 78.337814 426.659528 78.337814 
+z
+" clip-path="url(#pe64c5d2a2f)" style="fill: #edf3f8; stroke: #b8bdc5; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 403.679764 59.713512 
+Q 409.516516 59.713512 414.347038 59.713512 
+" clip-path="url(#pe64c5d2a2f)" style="fill: none; stroke: #9ba2ac; stroke-width: 0.9; stroke-linecap: round"/>
+    <path d="M 411.147038 58.113512 
+L 414.347038 59.713512 
+L 411.147038 61.313512 
+z
+" clip-path="url(#pe64c5d2a2f)" style="fill: #9ba2ac; stroke: #9ba2ac; stroke-width: 0.9; stroke-linecap: round"/>
+   </g>
+   <g id="text_1">
+    <text style="fill: #3e4148; font: 8.4px 'Aptos'; text-anchor: middle" x="208.686614" y="15.335291" transform="rotate(-0 208.686614 15.335291)">Supervision: 681 source molecules</text>
+   </g>
+   <g id="text_2">
+    <text style="fill: #3e4148; font: 9px 'Aptos'" transform="translate(48.813262 59.730985)">Frozen</text>
+    <text style="fill: #3e4148; font: 9px 'Aptos'" transform="translate(40.711855 68.402203)">MolFormer</text>
+   </g>
+   <g id="text_3">
+    <text style="fill: #3e4148; font: 8.5px 'Aptos'; text-anchor: middle" x="59.289449" y="29.790805" transform="rotate(-0 59.289449 29.790805)">105 QAC inputs</text>
+   </g>
+   <g id="text_4">
+    <text style="fill: #3e4148; font: 8.6px 'Aptos'" transform="translate(172.123438 40.138435)">Human Good / Bad</text>
+    <text style="fill: #3e4148; font: 8.6px 'Aptos'" transform="translate(173.847469 48.516178)">Compact encoder</text>
+   </g>
+   <g id="text_5">
+    <text style="fill: #3e4148; font: 8.6px 'Aptos'" transform="translate(180.542703 91.064261)">Measured MIC</text>
+    <text style="fill: #3e4148; font: 8.6px 'Aptos'" transform="translate(173.847469 99.442005)">Compact encoder</text>
+   </g>
+   <g id="text_6">
+    <text style="fill: #3e4148; font: 8.4px 'Aptos'; text-anchor: middle" x="207.217134" y="125.917087" transform="rotate(-0 207.217134 125.917087)">768 → 512 → 384 → 256</text>
+   </g>
+   <g id="text_7">
+    <text style="fill: #3e4148; font: 8.6px 'Aptos'" transform="translate(336.410809 57.682971)">Separate</text>
+    <text style="fill: #3e4148; font: 8.6px 'Aptos'" transform="translate(329.038324 65.968802)">CatBoost fits</text>
+   </g>
+   <g id="text_8">
+    <text style="fill: #3e4148; font: 8.6px 'Aptos'" transform="translate(442.034643 57.644674)">Held-out</text>
+    <text style="fill: #3e4148; font: 8.6px 'Aptos'" transform="translate(438.827111 65.930506)">MIC / MBC</text>
+   </g>
+   <g id="text_9">
+    <text style="fill: #3e4148; font: 8.2px 'Aptos'" transform="translate(429.178143 88.91617)">Cation / scaffold</text>
+    <text style="fill: #3e4148; font: 8.2px 'Aptos'" transform="translate(444.732518 96.816614)">holdout</text>
+   </g>
+   <g id="text_10">
+    <text style="fill: #767c86; font: 8.2px 'Aptos'; text-anchor: middle" x="242.974488" y="148.469953" transform="rotate(-0 242.974488 148.469953)">Source encoders frozen · Five paired runs</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pe64c5d2a2f">
+   <rect x="12.755906" y="13.152756" width="489.826772" height="145.502362"/>
+  </clipPath>
+ </defs>
+</svg>

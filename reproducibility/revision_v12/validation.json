@@ -1,0 +1,44 @@
+{
+  "completed": true,
+  "recomputed_metric_rows": 93,
+  "recomputed_direct_metric_rows": 90,
+  "prediction_rows": 16306,
+  "direct_prediction_rows": 15780,
+  "paired_initialisations_and_batches": true,
+  "source_target_cation_overlap": 0,
+  "fixed_folds_identical": true,
+  "epochs": 30,
+  "updates_per_arm": 360,
+  "source_seeds": 5,
+  "token_truncation": 0,
+  "bootstrap_samples": 10000,
+  "weighted_rank_expansion_audit": true,
+  "raw_feature_comparison": [
+    {
+      "target": "QAC-104",
+      "max_absolute_difference": 4.291534423828125e-06,
+      "mean_absolute_difference": 3.7109077766217524e-07,
+      "allclose_rtol_1e_4_atol_1e_5": true
+    },
+    {
+      "target": "Q-HERO-405",
+      "max_absolute_difference": 3.814697265625e-06,
+      "mean_absolute_difference": 3.7106966033206845e-07,
+      "allclose_rtol_1e_4_atol_1e_5": true
+    },
+    {
+      "target": "OOD-17",
+      "max_absolute_difference": 2.384185791015625e-06,
+      "mean_absolute_difference": 3.5851817870025116e-07,
+      "allclose_rtol_1e_4_atol_1e_5": true
+    }
+  ],
+  "checkpoint_storage": "server; hashes in training.csv",
+  "reconstructed_checkpoints": 30,
+  "final_feature_map_buffers_verified": true,
+  "max_reconstructed_feature_difference": 0.0,
+  "max_reconstructed_score_difference": 1.7763568394002505e-15,
+  "limitations": "Exploratory unadjusted intervals; fixed folds; five seeds; source-target scaffolds may overlap.",
+  "independent_standard_library_audit": "independent_audit_server26.json",
+  "same_environment_retrain": "independent_retrain_validation.json"
+}

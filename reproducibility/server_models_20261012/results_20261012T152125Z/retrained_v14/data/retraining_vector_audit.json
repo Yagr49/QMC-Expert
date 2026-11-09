@@ -1,0 +1,374 @@
+[
+  {
+    "name": "raw-molformer",
+    "cohort": "QAC105",
+    "max_abs_difference": 9.5367431640625e-07,
+    "allclose": true
+  },
+  {
+    "name": "raw-molformer",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "expert_seed0",
+    "cohort": "QAC105",
+    "max_abs_difference": 1.3113021850585938e-06,
+    "allclose": true
+  },
+  {
+    "name": "expert_seed0",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "quant-continuous_seed0",
+    "cohort": "QAC105",
+    "max_abs_difference": 1.1473894119262695e-06,
+    "allclose": true
+  },
+  {
+    "name": "quant-continuous_seed0",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "quant-binary_seed0",
+    "cohort": "QAC105",
+    "max_abs_difference": 1.1324882507324219e-06,
+    "allclose": true
+  },
+  {
+    "name": "quant-binary_seed0",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "expert-shuffled_seed0",
+    "cohort": "QAC105",
+    "max_abs_difference": 1.430511474609375e-06,
+    "allclose": true
+  },
+  {
+    "name": "expert-shuffled_seed0",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "quant-shuffled_seed0",
+    "cohort": "QAC105",
+    "max_abs_difference": 1.2218952178955078e-06,
+    "allclose": true
+  },
+  {
+    "name": "quant-shuffled_seed0",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "quant-binary-shuffled_seed0",
+    "cohort": "QAC105",
+    "max_abs_difference": 1.1920928955078125e-06,
+    "allclose": true
+  },
+  {
+    "name": "quant-binary-shuffled_seed0",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "expert_seed1",
+    "cohort": "QAC105",
+    "max_abs_difference": 1.8477439880371094e-06,
+    "allclose": true
+  },
+  {
+    "name": "expert_seed1",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "quant-continuous_seed1",
+    "cohort": "QAC105",
+    "max_abs_difference": 1.043081283569336e-06,
+    "allclose": true
+  },
+  {
+    "name": "quant-continuous_seed1",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "quant-binary_seed1",
+    "cohort": "QAC105",
+    "max_abs_difference": 2.6226043701171875e-06,
+    "allclose": true
+  },
+  {
+    "name": "quant-binary_seed1",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "expert-shuffled_seed1",
+    "cohort": "QAC105",
+    "max_abs_difference": 1.0728836059570312e-06,
+    "allclose": true
+  },
+  {
+    "name": "expert-shuffled_seed1",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "quant-shuffled_seed1",
+    "cohort": "QAC105",
+    "max_abs_difference": 1.1622905731201172e-06,
+    "allclose": true
+  },
+  {
+    "name": "quant-shuffled_seed1",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "quant-binary-shuffled_seed1",
+    "cohort": "QAC105",
+    "max_abs_difference": 1.1920928955078125e-06,
+    "allclose": true
+  },
+  {
+    "name": "quant-binary-shuffled_seed1",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "expert_seed2",
+    "cohort": "QAC105",
+    "max_abs_difference": 2.6226043701171875e-06,
+    "allclose": true
+  },
+  {
+    "name": "expert_seed2",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "quant-continuous_seed2",
+    "cohort": "QAC105",
+    "max_abs_difference": 1.0728836059570312e-06,
+    "allclose": true
+  },
+  {
+    "name": "quant-continuous_seed2",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "quant-binary_seed2",
+    "cohort": "QAC105",
+    "max_abs_difference": 2.6226043701171875e-06,
+    "allclose": true
+  },
+  {
+    "name": "quant-binary_seed2",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "expert-shuffled_seed2",
+    "cohort": "QAC105",
+    "max_abs_difference": 1.7285346984863281e-06,
+    "allclose": true
+  },
+  {
+    "name": "expert-shuffled_seed2",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "quant-shuffled_seed2",
+    "cohort": "QAC105",
+    "max_abs_difference": 1.519918441772461e-06,
+    "allclose": true
+  },
+  {
+    "name": "quant-shuffled_seed2",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "quant-binary-shuffled_seed2",
+    "cohort": "QAC105",
+    "max_abs_difference": 1.2814998626708984e-06,
+    "allclose": true
+  },
+  {
+    "name": "quant-binary-shuffled_seed2",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "expert_seed3",
+    "cohort": "QAC105",
+    "max_abs_difference": 9.834766387939453e-07,
+    "allclose": true
+  },
+  {
+    "name": "expert_seed3",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "quant-continuous_seed3",
+    "cohort": "QAC105",
+    "max_abs_difference": 1.1324882507324219e-06,
+    "allclose": true
+  },
+  {
+    "name": "quant-continuous_seed3",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "quant-binary_seed3",
+    "cohort": "QAC105",
+    "max_abs_difference": 2.384185791015625e-06,
+    "allclose": true
+  },
+  {
+    "name": "quant-binary_seed3",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "expert-shuffled_seed3",
+    "cohort": "QAC105",
+    "max_abs_difference": 1.7881393432617188e-06,
+    "allclose": true
+  },
+  {
+    "name": "expert-shuffled_seed3",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "quant-shuffled_seed3",
+    "cohort": "QAC105",
+    "max_abs_difference": 1.0728836059570312e-06,
+    "allclose": true
+  },
+  {
+    "name": "quant-shuffled_seed3",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "quant-binary-shuffled_seed3",
+    "cohort": "QAC105",
+    "max_abs_difference": 1.3709068298339844e-06,
+    "allclose": true
+  },
+  {
+    "name": "quant-binary-shuffled_seed3",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "expert_seed4",
+    "cohort": "QAC105",
+    "max_abs_difference": 1.6689300537109375e-06,
+    "allclose": true
+  },
+  {
+    "name": "expert_seed4",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "quant-continuous_seed4",
+    "cohort": "QAC105",
+    "max_abs_difference": 1.5497207641601562e-06,
+    "allclose": true
+  },
+  {
+    "name": "quant-continuous_seed4",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "quant-binary_seed4",
+    "cohort": "QAC105",
+    "max_abs_difference": 1.2516975402832031e-06,
+    "allclose": true
+  },
+  {
+    "name": "quant-binary_seed4",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "expert-shuffled_seed4",
+    "cohort": "QAC105",
+    "max_abs_difference": 1.1175870895385742e-06,
+    "allclose": true
+  },
+  {
+    "name": "expert-shuffled_seed4",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "quant-shuffled_seed4",
+    "cohort": "QAC105",
+    "max_abs_difference": 1.430511474609375e-06,
+    "allclose": true
+  },
+  {
+    "name": "quant-shuffled_seed4",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  },
+  {
+    "name": "quant-binary-shuffled_seed4",
+    "cohort": "QAC105",
+    "max_abs_difference": 1.1920928955078125e-06,
+    "allclose": true
+  },
+  {
+    "name": "quant-binary-shuffled_seed4",
+    "cohort": "OOD17",
+    "max_abs_difference": 0.0,
+    "allclose": true
+  }
+]

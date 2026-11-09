@@ -1,0 +1,9 @@
+{
+  "common_context_molecules": 529,
+  "context_scaffolds": 91,
+  "context_expert_good": 78,
+  "pooled_records_same_molecules": 4049,
+  "sa_exact_records_same_molecules": 855,
+  "new_label_columns": "pooled median versus exact S. aureus median; identical ordered molecules",
+  "limitations": "Pooling also changes organism, censoring treatment, record count, and aggregation. Not an isolated laboratory-heterogeneity intervention."
+}

@@ -1,0 +1,15 @@
+{
+  "arm": "quant-continuous",
+  "seed": 3,
+  "variant": "intact",
+  "name": "quant-continuous_seed3__intact",
+  "encoder_buffer_sha256": "1184309ee309f53c13254e20a73cea5200e85dba672a5bfba34deabf7fe61303",
+  "changed_parameter_names": [],
+  "checkpoint_sha256": "831cb4f57e7c95d94364ab3b602bc3d943fdd66968a5af9ed9f736d53a84468d",
+  "intact_replay_exact": {
+    "QAC105": true,
+    "OOD17": true
+  },
+  "script_sha256": "52cc505b52427511cf0deb4141be384a0f0f033e1ce32a5168730d2f267c6562",
+  "protocol_sha256": "72c4243e1523863087a59662486c299dc28234fa40fe19409221db17ea37092b"
+}

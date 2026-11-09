@@ -1,0 +1,34 @@
+{
+  "model": "DeepChem/ChemBERTa-100M-MLM",
+  "revision": "f5c45f44d3061f0346888f5c09db17ec1146d29d",
+  "remote_code_revision": null,
+  "pooling": "mean",
+  "shape": [
+    1939,
+    768
+  ],
+  "max_tokens": 145,
+  "context": 512,
+  "truncated": 0,
+  "dtype": "torch.float32",
+  "parameters": 92126976,
+  "loading_info": {
+    "missing_keys": [
+      "roberta.pooler.dense.bias",
+      "roberta.pooler.dense.weight"
+    ],
+    "unexpected_keys": [
+      "lm_head.bias",
+      "lm_head.dense.bias",
+      "lm_head.dense.weight",
+      "lm_head.layer_norm.bias",
+      "lm_head.layer_norm.weight"
+    ],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "torch": "2.14.0+cu130",
+  "seconds": 1.2041785717010498,
+  "smiles_sha256": "3090ee80929898fd4eaaeb4f3085d994464b25041dacb45205f0454238691237",
+  "features_sha256": "ed127bf2a453edab5925552f818129369f42c3978b26d7377365cc39d8e7f3c0"
+}

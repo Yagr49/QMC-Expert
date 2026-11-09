@@ -1,0 +1,4 @@
+target,n,seed,rho,ci_low,ci_high,unit
+OOD-17,17,0,0.5294117647058825,0.05944451031836029,0.8209010846389171,molecule; conditional on one FT checkpoint
+Q-HERO,411,0,0.4532311908180095,0.3726724840052804,0.5262917505713902,molecule; conditional on one FT checkpoint
+QAC-105,105,0,0.21239681218669418,0.009170635886840554,0.3978077867870931,molecule; conditional on one FT checkpoint

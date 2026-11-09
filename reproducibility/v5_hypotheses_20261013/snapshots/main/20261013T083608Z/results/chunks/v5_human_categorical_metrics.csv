@@ -1,0 +1,16 @@
+cohort,schema,task,n,RMSE,MAE,R2,name,encoding,arm,seed,provenance
+OOD17,full-QAC105,Sa_MIC,17,1.6536506829124789,1.4317327012367884,0.10600904079524176,v5_human,categorical,v5_human,-1,v5_archived_grouped_followup
+OOD17,full-QAC105,Sa_MBC,17,2.1727794290648648,1.7807717301288999,-0.05309611544442938,v5_human,categorical,v5_human,-1,v5_archived_grouped_followup
+OOD17,full-QAC105,Ec_MIC,17,2.5351571830716493,2.158172320194332,-0.9414726620936846,v5_human,categorical,v5_human,-1,v5_archived_grouped_followup
+OOD17,full-QAC105,Ec_MBC,16,2.460525067701429,2.017122062139425,-0.5476323001325527,v5_human,categorical,v5_human,-1,v5_archived_grouped_followup
+OOD17,full-QAC105,pooled,67,2.2289490805719963,1.8444098174738977,,v5_human,categorical,v5_human,-1,v5_archived_grouped_followup
+QAC105,cation,Sa_MIC,105,1.817727275948882,1.4100679349024041,0.13951389966717065,v5_human,categorical,v5_human,-1,v5_archived_grouped_followup
+QAC105,cation,Sa_MBC,105,1.9894210500564926,1.48161819847338,-0.026672470262206316,v5_human,categorical,v5_human,-1,v5_archived_grouped_followup
+QAC105,cation,Ec_MIC,105,1.816912614727984,1.4037355411351655,0.14974200978276075,v5_human,categorical,v5_human,-1,v5_archived_grouped_followup
+QAC105,cation,Ec_MBC,105,1.9441763459516603,1.5403874518523535,0.13408163395921047,v5_human,categorical,v5_human,-1,v5_archived_grouped_followup
+QAC105,cation,pooled,420,1.893602497744184,1.4589522815908256,,v5_human,categorical,v5_human,-1,v5_archived_grouped_followup
+QAC105,scaffold,Sa_MIC,105,2.048810734526624,1.596259214895472,-0.09317601166299805,v5_human,categorical,v5_human,-1,v5_archived_grouped_followup
+QAC105,scaffold,Sa_MBC,105,2.2378001376133887,1.6987016714137504,-0.2990357147578404,v5_human,categorical,v5_human,-1,v5_archived_grouped_followup
+QAC105,scaffold,Ec_MIC,105,2.05288848641006,1.6389250933286175,-0.0854588388117139,v5_human,categorical,v5_human,-1,v5_archived_grouped_followup
+QAC105,scaffold,Ec_MBC,105,2.045161801617678,1.6483453296171444,0.041789365526307964,v5_human,categorical,v5_human,-1,v5_archived_grouped_followup
+QAC105,scaffold,pooled,420,2.0977614744201185,1.645557827313746,,v5_human,categorical,v5_human,-1,v5_archived_grouped_followup

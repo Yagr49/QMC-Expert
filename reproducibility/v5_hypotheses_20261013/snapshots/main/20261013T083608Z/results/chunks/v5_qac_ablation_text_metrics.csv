@@ -1,0 +1,16 @@
+cohort,schema,task,n,RMSE,MAE,R2,name,encoding,arm,seed,provenance
+OOD17,full-QAC105,Sa_MIC,17,1.8050450892932612,1.4896710869533822,-0.06517677239402309,v5_qac_ablation,text,v5_qac_ablation,-1,v5_archived_grouped_followup
+OOD17,full-QAC105,Sa_MBC,17,2.419252338724642,1.9636760293163262,-0.3055667112149649,v5_qac_ablation,text,v5_qac_ablation,-1,v5_archived_grouped_followup
+OOD17,full-QAC105,Ec_MIC,17,2.638447699920369,2.187327894605397,-1.1028993013810844,v5_qac_ablation,text,v5_qac_ablation,-1,v5_archived_grouped_followup
+OOD17,full-QAC105,Ec_MBC,16,2.6844925316428485,2.0352443497376878,-0.8421992340384792,v5_qac_ablation,text,v5_qac_ablation,-1,v5_archived_grouped_followup
+OOD17,full-QAC105,pooled,67,2.4081156101242205,1.9172445489653704,,v5_qac_ablation,text,v5_qac_ablation,-1,v5_archived_grouped_followup
+QAC105,cation,Sa_MIC,105,1.6416517301877604,1.2870575822635137,0.2981432698674059,v5_qac_ablation,text,v5_qac_ablation,-1,v5_archived_grouped_followup
+QAC105,cation,Sa_MBC,105,1.8868698203221559,1.4189144241041554,0.07644582622203977,v5_qac_ablation,text,v5_qac_ablation,-1,v5_archived_grouped_followup
+QAC105,cation,Ec_MIC,105,1.7270051225359695,1.3311858486671813,0.23180780038408277,v5_qac_ablation,text,v5_qac_ablation,-1,v5_archived_grouped_followup
+QAC105,cation,Ec_MBC,105,1.8880452655311952,1.4824765155480586,0.18336038118863063,v5_qac_ablation,text,v5_qac_ablation,-1,v5_archived_grouped_followup
+QAC105,cation,pooled,420,1.7890332403306033,1.3799085926457273,,v5_qac_ablation,text,v5_qac_ablation,-1,v5_archived_grouped_followup
+QAC105,scaffold,Sa_MIC,105,1.90060681571567,1.4982971156710674,0.05925704220268824,v5_qac_ablation,text,v5_qac_ablation,-1,v5_archived_grouped_followup
+QAC105,scaffold,Sa_MBC,105,2.1070294630089634,1.5670402294142427,-0.15164788919478633,v5_qac_ablation,text,v5_qac_ablation,-1,v5_archived_grouped_followup
+QAC105,scaffold,Ec_MIC,105,1.97621880475075,1.5516513855494367,-0.005895109013202893,v5_qac_ablation,text,v5_qac_ablation,-1,v5_archived_grouped_followup
+QAC105,scaffold,Ec_MBC,105,2.062902921761898,1.6451568941118975,0.025092922664648576,v5_qac_ablation,text,v5_qac_ablation,-1,v5_archived_grouped_followup
+QAC105,scaffold,pooled,420,2.0132615735912807,1.5655364061866608,,v5_qac_ablation,text,v5_qac_ablation,-1,v5_archived_grouped_followup

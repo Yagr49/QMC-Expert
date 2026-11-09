@@ -1,0 +1,14 @@
+{
+  "started": 1791743451.7462766,
+  "done": 30,
+  "total": 30,
+  "completed": true,
+  "stage": "complete",
+  "updated": 1791744435.248175,
+  "arm": "quant-binary-shuffled",
+  "seed": 4,
+  "epoch": 30,
+  "updates": 360,
+  "seconds": 28.819860458374023,
+  "pending_decoders": 2
+}

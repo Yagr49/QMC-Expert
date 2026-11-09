@@ -1,0 +1,12 @@
+recovered_notebook,cell_index_zero_based,model,endpoint,metric,saved_output_value,v5_article_value,matches_after_rounding_2dp
+notebooks/2026-05-24_descriptors_and_embeddings_comparison_with_labels.ipynb,20,emb: Contr + task_id,SA_MIC,R2,0.7102,0.71,True
+notebooks/2026-05-24_descriptors_and_embeddings_comparison_with_labels.ipynb,20,emb: Contr + task_id,SA_MBC,R2,0.6403,0.64,True
+notebooks/2026-05-24_descriptors_and_embeddings_comparison_with_labels.ipynb,20,emb: Contr + task_id,EC_MIC,R2,0.4269,0.43,True
+notebooks/2026-05-24_descriptors_and_embeddings_comparison_with_labels.ipynb,20,emb: Contr + task_id,EC_MBC,R2,0.7394,0.74,True
+notebooks/2026-05-24_descriptors_and_embeddings_comparison_with_labels.ipynb,20,emb: Contr(256) + LLM_cls(1536),SA_MIC,R2,0.7494,0.75,True
+notebooks/2026-05-24_descriptors_and_embeddings_comparison_with_labels.ipynb,20,emb: Contr(256) + LLM_cls(1536),SA_MBC,R2,0.6752,0.68,True
+notebooks/2026-05-24_descriptors_and_embeddings_comparison_with_labels.ipynb,20,emb: Contr(256) + LLM_cls(1536),EC_MIC,R2,0.5918,0.6,False
+notebooks/2026-05-24_descriptors_and_embeddings_comparison_with_labels.ipynb,20,emb: Contr(256) + LLM_cls(1536),EC_MBC,R2,0.7708,0.77,True
+additional/2026-07-02_shap_causal_analysis.ipynb,7,MolFormer,pooled OOD,RMSE,2.314,2.31,True
+additional/2026-07-02_shap_causal_analysis.ipynb,7,emb_cls,pooled OOD,RMSE,2.189,2.19,True
+additional/2026-07-02_shap_causal_analysis.ipynb,7,emb_reg,pooled OOD,RMSE,2.133,2.13,True

@@ -1,0 +1,38 @@
+{
+  "units": [
+    {
+      "unit": "coma-ftcausal-20261012-direct0",
+      "action": "direct",
+      "worker": 0,
+      "workers": 2
+    },
+    {
+      "unit": "coma-ftcausal-20261012-direct1",
+      "action": "direct",
+      "worker": 1,
+      "workers": 2
+    },
+    {
+      "unit": "coma-ftcausal-20261012-vectors",
+      "action": "ablation-vectors",
+      "worker": 0,
+      "workers": 1
+    },
+    {
+      "unit": "coma-ftcausal-20261012-decode0",
+      "action": "ablation-decode",
+      "worker": 0,
+      "workers": 2
+    },
+    {
+      "unit": "coma-ftcausal-20261012-decode1",
+      "action": "ablation-decode",
+      "worker": 1,
+      "workers": 2
+    }
+  ],
+  "detached_from_Mac": true,
+  "direct_fits": 363,
+  "ablation_fits": 1331,
+  "expected_inputs_checked": 7
+}

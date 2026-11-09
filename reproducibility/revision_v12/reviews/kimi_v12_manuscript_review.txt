@@ -1,0 +1,25 @@
+• # Review: Human versus Quantitative Supervision for Antibacterial Molecular Representation Learning
+
+  **Verification note.** The printed matched fine-tuning contrasts match the supplied tables (expert−shuffled ΔRMSE −0.137 [−0.275, −0.055] vs. −0.1368 [−0.2746, −0.0550]; expert−shuffled rank +0.159 [−0.001, +0.429] vs. 0.1586 [−0.0010, 0.4290]; expert−continuous +0.076 [+0.011, +0.143] vs. 0.0764 [0.0110, 0.1426]). Archived-protocol numbers (§3.1, §3.4 frozen-panel CIs) cannot be checked against the evidence provided here; no inconsistency was detectable in cross-references (Table 4 ↔ §3.6 ↔ abstract ↔ conclusions). The causal-interpretation discipline is generally good.
+
+  ## Concrete errors
+
+  1. **§2.6 (factual/wording).** Quote: "Real-versus-shuffled labels preserve class counts and source chemistry." This is wrong for the continuous-MIC shuffled arms, which have no classes. Correction: "...preserve the marginal label distribution (class counts for binary arms; empirical values for continuous arms) and source chemistry while disrupting the structure–label relation."
+
+  2. **Conclusions (wording accuracy, not a new experiment).** Quote: "Quantitative supervision remains the stronger point estimate in several comparisons." This understates the paper's own matched fine-tuning results: the exploratory intervals for human−continuous MIC exclude zero for downstream RMSE (+0.076 [+0.011, +0.143]) and for direct rank (−0.129 [−0.239, −0.004]). By the draft's interval standard these are differences favouring continuous MIC, not merely "stronger point estimates." Correction: state plainly that these two exploratory intervals exclude zero, while human−binary and human−raw remain unresolved.
+
+  3. **§3.6 (wording).** Quote: "Neither comparison establishes statistical equivalence." True, but it follows a sentence reporting a contrast whose interval excludes zero, inviting the misreading that both comparisons are inconclusive. Correction: note explicitly that expert−continuous MIC shows a difference (continuous better) under the exploratory standard, whereas equivalence is not assessed anywhere in the paper — no equivalence test exists, and "unresolved" must not be read as "equivalent."
+
+  4. **Abstract (presentation, not an error).** It reports human 1.529 vs. continuous 1.453 and raw 1.607 but omits binary MIC at 1.525 ± 0.014 — the arm statistically closest to human supervision and most relevant to the title's framing. Add it.
+
+  None of items 1–4 requires new experiments; all are corrections to the existing text.
+
+  ## Material limitations
+
+  - **Construct validity of "human supervision" is currently unverifiable.** With H1–H7 unfilled, there is no evidence about annotator information access: if annotators saw MIC values, "human vs. quantitative supervision" partially collapses into measurement-vs-measurement comparison. The draft flags this honestly; it nonetheless bounds every human-supervision claim.
+  - **The headline benefit is unresolved everywhere.** Human-vs-raw contrasts include zero in all four backbones and in matched fine-tuning; absolute performance is modest (QAC R² ≈ 0, OOD-17 all negative, direct human rank 0.197). The defensible summary is narrower than the title suggests: human labels carry real-versus-shuffled signal under two MolFormer procedures, not demonstrated added value.
+  - **Statistical fragility.** Five seeds, 29 scaffold groups, intervals conditional on fixed folds, unadjusted multiplicity, and an extension "written after inspection of earlier analyses." Five single permutations are weak nulls; the direct real-vs-shuffled rank interval includes zero, so the direct label-assignment claim is not established.
+  - **Archived comparison confounds** label type with source size (740 vs. 1,153) and update budget (acknowledged); the adaptation contrast confounds architecture, schedule and environment (acknowledged). Neither supports any general statement about fine-tuning or adapters — the draft correctly abstains.
+  - **Q-HERO is not fully external** for the downstream-refit metric because its MIC enters fold training; row-level assay provenance is missing, so denoising and organism-context interpretations remain speculative (acknowledged).
+  - **Optional follow-ups (not errors):** recover annotation metadata and compute agreement; a preregistered confirmatory matched run with more seeds and calibrated permutation nulls; shuffled-head controls for the archived direct-transfer protocol; row-level strain/laboratory provenance for Q-HERO.
+

@@ -1,0 +1,17 @@
+{
+  "source": "/Users/egorilin/Desktop/COMA/2026_10_14_Paper_2_edited-v25_correlations_and_split_figures.docx",
+  "source_sha256": "a9661f198997cceeada9ddf167cd68bb4954d604cef4d934eb80c7abcd851a0d",
+  "main": "/Users/egorilin/Desktop/COMA/2026_10_14_Paper_2_edited-v26_OOD_and_interpretation.docx",
+  "main_sha256": "05b8e299c203d21481eeecbee518e4801c5e3f86b9228e1953c793280240e4eb",
+  "SI": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v26/Supplementary_Information_v26.docx",
+  "SI_sha256": "5458eb442d4a40216e99ddf813343df8cf8c238c584119915135154deaf3cf4a",
+  "chemistry_subsections_and_schemes_preserved": true,
+  "introduction_and_sections2_1_2_2_unchanged": true,
+  "new_OOD_figure": "Figure9 two separate experiment panels",
+  "original_OOD_zero_few_shot_moved": "FigureS33",
+  "original_information_diagram_moved": "FigureS34",
+  "conditional_intervention_figure": "FigureS35",
+  "conclusion_aligned_with_corrected_sections": true,
+  "no_new_fits": true,
+  "yellow_revised_text": true
+}

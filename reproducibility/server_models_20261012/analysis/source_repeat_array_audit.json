@@ -1,0 +1,467 @@
+[
+  {
+    "name": "quant-continuous_seed3_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-shuffled_seed3_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-shuffled_seed4_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-continuous_seed1_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-continuous_seed2_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-continuous_seed3_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-continuous_seed3_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert-shuffled_seed0_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert_seed3_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary-shuffled_seed0_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-shuffled_seed1_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert_seed3_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-continuous_seed1_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary_seed1_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-continuous_seed0_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert_seed4_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert-shuffled_seed3_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert-shuffled_seed0_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert_seed3_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-shuffled_seed4_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert_seed2_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert-shuffled_seed2_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary_seed0_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary_seed4_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary-shuffled_seed3_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert_seed0_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert-shuffled_seed4_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary-shuffled_seed1_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-continuous_seed4_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary_seed2_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary_seed4_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert_seed0_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary-shuffled_seed1_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "raw-molformer_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary-shuffled_seed3_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-shuffled_seed4_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary-shuffled_seed4_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary_seed1_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert_seed2_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-shuffled_seed1_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary-shuffled_seed3_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert_seed4_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-shuffled_seed2_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary-shuffled_seed1_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert-shuffled_seed1_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-continuous_seed2_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert_seed4_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary_seed0_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert_seed1_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary_seed2_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-shuffled_seed3_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert_seed2_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-shuffled_seed0_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert_seed1_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "raw-molformer_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary-shuffled_seed2_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-continuous_seed4_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary-shuffled_seed4_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-shuffled_seed0_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary_seed0_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert-shuffled_seed4_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-continuous_seed1_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary-shuffled_seed2_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert-shuffled_seed3_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-shuffled_seed2_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary-shuffled_seed4_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-continuous_seed0_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary_seed3_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary_seed2_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-shuffled_seed1_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary_seed3_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary_seed4_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert-shuffled_seed1_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert_seed0_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary_seed1_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-continuous_seed4_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-shuffled_seed2_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert-shuffled_seed1_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert-shuffled_seed2_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary-shuffled_seed0_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert-shuffled_seed4_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert-shuffled_seed2_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary-shuffled_seed2_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary_seed3_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert-shuffled_seed0_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-continuous_seed2_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-binary-shuffled_seed0_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-continuous_seed0_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-shuffled_seed3_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert-shuffled_seed3_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "raw-molformer_OOD-17.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "expert_seed1_Q-HERO-405.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  },
+  {
+    "name": "quant-shuffled_seed0_QAC-104.npy",
+    "exact": true,
+    "maxdiff": 0.0
+  }
+]

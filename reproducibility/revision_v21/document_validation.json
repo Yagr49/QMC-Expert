@@ -1,0 +1,14 @@
+{
+  "completed": true,
+  "new_yellow_paragraphs": 11,
+  "original_document_XML_recovered_exactly_after_removing_additions": true,
+  "all_source_parts_except_document_XML_byte_identical": true,
+  "original_figure1_byte_identical": true,
+  "original_tables_and_references_unchanged": true,
+  "section2_2_and_every_later_section_unchanged": true,
+  "original_source_SHA": "0dd55e7b9ef5125dd938fdb04e9c2d0a430cc4b86fc099b85e9f6e5e6d1c2bfb",
+  "output_SHA": "8eba72a98fc7a0a78021fccb28c0dad227f7bda06b38b49f3eccd214ffe559ac",
+  "two_reviewers_invoked_locally": "Claude Sonnet4.6 and Kimi",
+  "predictive_numbers_from_completed_artifacts": true,
+  "no_new_QHERO_numbers_in_manuscript": true
+}

@@ -1,0 +1,311 @@
+{
+  "figure": "figure3_backbone_route_error_violins",
+  "font": "Aptos",
+  "width_mm": 180,
+  "height_mm": 92,
+  "dpi_png": 600,
+  "orientation": "vertical",
+  "panels": [
+    "cation",
+    "scaffold"
+  ],
+  "primary_statistic": "Mean of absolute errors within each molecule\u00d7endpoint over the same three runs",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "violin_KDE": "Scott bandwidth on observed endpoint summaries, support within actual min/max",
+  "medians_IQR": true,
+  "no_tail_clipping": true,
+  "no_ensemble_predictions": true,
+  "no_KDE_over_RMSE": true,
+  "routes": [
+    {
+      "id": "frozen_head",
+      "label": "Frozen head",
+      "branch": "direct",
+      "arm": "raw-molformer",
+      "mode": "linear",
+      "color": "#91B7D6"
+    },
+    {
+      "id": "lora",
+      "label": "LoRA",
+      "branch": "direct",
+      "arm": "raw-molformer",
+      "mode": "lora",
+      "color": "#B8A7D3"
+    },
+    {
+      "id": "full_FT",
+      "label": "Full FT",
+      "branch": "direct",
+      "arm": "raw-molformer",
+      "mode": "full",
+      "color": "#E6B490"
+    },
+    {
+      "id": "human_direct",
+      "label": "Human direct",
+      "branch": "direct",
+      "arm": "expert",
+      "mode": "partial",
+      "color": "#D7A9BD"
+    },
+    {
+      "id": "human_CatBoost",
+      "label": "Human \u2192 CB",
+      "branch": "ablation",
+      "arm": "expert",
+      "variant": "intact",
+      "color": "#87CABA"
+    }
+  ],
+  "checks": [
+    {
+      "route": "frozen_head",
+      "schema": "cation",
+      "n_endpoint_summaries": 420,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "n_seed_predictions": 1260,
+      "all_three_seeds_present": true,
+      "exact_only": true
+    },
+    {
+      "route": "frozen_head",
+      "schema": "scaffold",
+      "n_endpoint_summaries": 420,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "n_seed_predictions": 1260,
+      "all_three_seeds_present": true,
+      "exact_only": true
+    },
+    {
+      "route": "lora",
+      "schema": "cation",
+      "n_endpoint_summaries": 420,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "n_seed_predictions": 1260,
+      "all_three_seeds_present": true,
+      "exact_only": true
+    },
+    {
+      "route": "lora",
+      "schema": "scaffold",
+      "n_endpoint_summaries": 420,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "n_seed_predictions": 1260,
+      "all_three_seeds_present": true,
+      "exact_only": true
+    },
+    {
+      "route": "full_FT",
+      "schema": "cation",
+      "n_endpoint_summaries": 420,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "n_seed_predictions": 1260,
+      "all_three_seeds_present": true,
+      "exact_only": true
+    },
+    {
+      "route": "full_FT",
+      "schema": "scaffold",
+      "n_endpoint_summaries": 420,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "n_seed_predictions": 1260,
+      "all_three_seeds_present": true,
+      "exact_only": true
+    },
+    {
+      "route": "human_direct",
+      "schema": "cation",
+      "n_endpoint_summaries": 420,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "n_seed_predictions": 1260,
+      "all_three_seeds_present": true,
+      "exact_only": true
+    },
+    {
+      "route": "human_direct",
+      "schema": "scaffold",
+      "n_endpoint_summaries": 420,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "n_seed_predictions": 1260,
+      "all_three_seeds_present": true,
+      "exact_only": true
+    },
+    {
+      "route": "human_CatBoost",
+      "schema": "cation",
+      "n_endpoint_summaries": 420,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "n_seed_predictions": 1260,
+      "all_three_seeds_present": true,
+      "exact_only": true
+    },
+    {
+      "route": "human_CatBoost",
+      "schema": "scaffold",
+      "n_endpoint_summaries": 420,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "n_seed_predictions": 1260,
+      "all_three_seeds_present": true,
+      "exact_only": true
+    }
+  ],
+  "plotted_summary": [
+    {
+      "route": "frozen_head",
+      "schema": "cation",
+      "n": 420,
+      "minimum": 0.05017189184824622,
+      "maximum": 7.0774055850415225,
+      "median": 1.3277710974216461,
+      "q25": 0.6575142542521157,
+      "q75": 2.185179432233175
+    },
+    {
+      "route": "lora",
+      "schema": "cation",
+      "n": 420,
+      "minimum": 0.08577227592468262,
+      "maximum": 6.906440191657225,
+      "median": 1.3761469324429827,
+      "q25": 0.7594182540973028,
+      "q75": 2.1814412573973336
+    },
+    {
+      "route": "full_FT",
+      "schema": "cation",
+      "n": 420,
+      "minimum": 0.06261308987935384,
+      "maximum": 6.705111476968606,
+      "median": 1.1189596255620322,
+      "q25": 0.6200248003005981,
+      "q75": 1.975784699122111
+    },
+    {
+      "route": "human_direct",
+      "schema": "cation",
+      "n": 420,
+      "minimum": 0.05280566215515137,
+      "maximum": 6.598656177520752,
+      "median": 0.976985881725947,
+      "q25": 0.6147966633240382,
+      "q75": 1.7943790356318154
+    },
+    {
+      "route": "human_CatBoost",
+      "schema": "cation",
+      "n": 420,
+      "minimum": 0.0803577759518878,
+      "maximum": 6.847712931821518,
+      "median": 0.9935038301930672,
+      "q25": 0.5451179191374197,
+      "q75": 1.7479212632190253
+    },
+    {
+      "route": "frozen_head",
+      "schema": "scaffold",
+      "n": 420,
+      "minimum": 0.04141767819722508,
+      "maximum": 6.893291645438353,
+      "median": 1.1930016477902732,
+      "q25": 0.6128547191619875,
+      "q75": 2.2019292265176773
+    },
+    {
+      "route": "lora",
+      "schema": "scaffold",
+      "n": 420,
+      "minimum": 0.09552196661631267,
+      "maximum": 6.335179302285989,
+      "median": 1.3279369870821633,
+      "q25": 0.67516169945399,
+      "q75": 2.255802641312281
+    },
+    {
+      "route": "full_FT",
+      "schema": "scaffold",
+      "n": 420,
+      "minimum": 0.06431082884470622,
+      "maximum": 5.859471612364928,
+      "median": 1.252156913280487,
+      "q25": 0.6296761333942416,
+      "q75": 2.0590383609135947
+    },
+    {
+      "route": "human_direct",
+      "schema": "scaffold",
+      "n": 420,
+      "minimum": 0.09723337491353383,
+      "maximum": 6.636509736378987,
+      "median": 1.1047064065933228,
+      "q25": 0.605663259824117,
+      "q75": 1.8589294552803042
+    },
+    {
+      "route": "human_CatBoost",
+      "schema": "scaffold",
+      "n": 420,
+      "minimum": 0.08937502393248857,
+      "maximum": 6.261203127477137,
+      "median": 1.0394652571304674,
+      "q25": 0.5559299672363415,
+      "q75": 1.8863353128733347
+    }
+  ],
+  "source_checkpoint_vs_compact_v5_distinct": true,
+  "whole_run_RMSE_mean_sample_SD_table": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/analysis/FT_route_grouped_RMSE_mean_sample_SD.csv",
+  "input_sha256": {
+    "/Users/egorilin/Desktop/COMA/reproducibility/server_finetune_causal_20261012/analysis/direct_predictions.csv": "a6f4e6f6ad205852e830e10f9d0fadd2b560d5de9af591bed1e216dd397786b8",
+    "/Users/egorilin/Desktop/COMA/reproducibility/server_finetune_causal_20261012/analysis/ablation_predictions.csv": "3e477e162ee147a39fdcfd06eb895e7e9f51c67f99877e0f34729a4f8dda8adf"
+  },
+  "forked_v23_script_sha256": "bf9ec3c762bd075b3436049daa2b97fc39bf8456cbd0eb7d7dffe7da7eac84aa",
+  "outputs_sha256": {
+    "pdf": "90aa38a2496f701a50a712881502dcebfa7759667f163f218a55b7320784c3f9",
+    "svg": "681136bc05e6645e43e0b8e1df4db294dc9513fa8e9c9fc06b550c08a9da2bc7",
+    "png": "1213ad818444343d4cc34d59c10d90236e9d79ebddbd8496b378b63b1ec619d6"
+  }
+}

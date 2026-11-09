@@ -1,0 +1,11 @@
+{
+  "name": "compact_human_shuffled_seed0",
+  "encoding": "categorical",
+  "arm": "human_shuffled",
+  "seed": 0,
+  "provenance": "v5_architecture_matched_source",
+  "completed": true,
+  "fits": 11,
+  "seconds": 25.68417000770569,
+  "predictions": 908
+}

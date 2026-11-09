@@ -1,0 +1,15 @@
+{
+  "arm": "quant-shuffled",
+  "seed": 0,
+  "variant": "rewind_outer_norm",
+  "name": "quant-shuffled_seed0__rewind_outer_norm",
+  "encoder_buffer_sha256": "67dd6296a3a58003ea4006429f4d9a86a3e2bd618c166c1154bd1070b5c1a278",
+  "changed_parameter_names": [
+    "LayerNorm.weight",
+    "LayerNorm.bias"
+  ],
+  "checkpoint_sha256": "5b457298283acb44324838c454de72f1651ef4235010cee407627395b14d41b1",
+  "intact_replay_exact": {},
+  "script_sha256": "52cc505b52427511cf0deb4141be384a0f0f033e1ce32a5168730d2f267c6562",
+  "protocol_sha256": "72c4243e1523863087a59662486c299dc28234fa40fe19409221db17ea37092b"
+}

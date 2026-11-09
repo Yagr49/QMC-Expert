@@ -1,0 +1,58 @@
+TASK: scientific audit of completed and unfinished experiments, followed by short English ADDITIONS to original v5 Introduction and Section2.1. User explicitly requires original author text to remain unchanged; new text will be highlighted yellow. Figure1 is retained. Section2.2 is for later discussion and must not be rewritten.
+
+One network/permission attempt is authorised by the new explicit user request; if this CLI cannot run, root records a blocked attempt. This packet does not assert live server access.
+
+CONTEXT: original approach freezes MolFormer, produces768dim, trains external compact MLP768→512→384→256 on human Good/Bad source then CatBoost predicts quantitative endpoints. This compact encoder is NOT LoRA and NOT partialMolFormer. A separate follow-up partially updates backbone using source human supervision; both its direct prediction route and frozen representation→CatBoost route are complete on same source seeds0–2. Direct pretrained frozenhead/LoRA/fullFT are separate target procedures with stated budgets; representational recipe vs head/objective/capacity differences prevent claims of universal adapter superiority. 105QACs ×4tasks=420exact endpoints;17OOD yield67exact +1bound IT505EcMBC>500mg/L retained asbound. MetricsRMSElog2mg/L. Mean±sampleSD of three whole training runs, ddof1; not foldSD and not95CI. ModelIDs/parameters need correct naming.
+
+COMPLETED DIRECT/SOURCE ROUTES (native local numbers):
+arm,mode,schema,RMSE,RMSE_SD,runs,n_exact
+expert,partial,cation,1.7966471128163393,0.05656932238817,3,420
+expert,partial,full-QAC105,2.411703972354278,0.0877331463565555,3,67
+expert,partial,scaffold,1.8344265366845995,0.0576808859439385,3,420
+raw-molformer,full,cation,1.8630163023950288,0.0452784917928547,3,420
+raw-molformer,full,full-QAC105,3.031600382823847,0.4081285229665843,3,67
+raw-molformer,full,scaffold,1.970118043136149,0.0260333581668138,3,420
+raw-molformer,linear,cation,2.013491335255327,0.0061637064176404,3,420
+raw-molformer,linear,full-QAC105,2.5603931216954323,0.2063135368975286,3,67
+raw-molformer,linear,scaffold,1.985593836575647,0.0026291358324026,3,420
+raw-molformer,lora,cation,2.040296716968376,0.0494319914643457,3,420
+raw-molformer,lora,full-QAC105,2.75568186103078,0.1715539786835175,3,67
+raw-molformer,lora,scaffold,2.0888912394717685,0.0117706022979438,3,420
+
+COMPLETED PAIRED ROUTE TABLE
+Table 6. Full direct fine-tuning gives cation RMSE 1.863 but OOD RMSE 3.032. The partial-human direct predictor gives OOD 2.412, versus 2.106 when that guided representation is frozen and decoded with CatBoost. This supports the two-stage route under the declared budget. It does not show that full fine-tuning is generally poor, nor is the partial backbone the external compact reference encoder.
+
+Table 6. Separate completed backbone-adaptation comparison: mean ± sample SD of complete seed-specific pooled RMSE over three paired source/target runs (ddof=1). The two human prediction routes use the same source seeds 0–2. Variability is over repeated training runs, not CV folds or a 95% CI.
+
+| Backbone experiment / route | Paired seeds | Cation CV | Scaffold CV | OOD-17 |
+| --- | --- | --- | --- | --- |
+| Pretrained / frozen linear head | three paired | 2.013 ± 0.006 | 1.986 ± 0.003 | 2.560 ± 0.206 |
+| Pretrained / direct LoRA | three paired | 2.040 ± 0.049 | 2.089 ± 0.012 | 2.756 ± 0.172 |
+| Pretrained / direct full FT | three paired | 1.863 ± 0.045 | 1.970 ± 0.026 | 3.032 ± 0.408 |
+| Human partial / direct prediction | three paired | 1.797 ± 0.057 | 1.834 ± 0.058 | 2.412 ± 0.088 |
+| Human partial / frozen CatBoost | same seeds 0–2 | 1.743 ± 0.031 | 1.819 ± 0.044 | 2.106 ± 0.071 |
+
+
+COMPACT SOURCE CONTROL: new samev5width encoder on681source (377train/304val),5paired source runs fixed80epochs480updates, noSMOTE. Native categorical CatBoost fixed500/depth6/.05/seed42. HumanOOD2.267958±.077363, shuffledhuman2.171614±.112036, binaryMIC2.275868±.095104, continuousMIC2.473803±.131482. Human−shuffleOODΔRMSE+.096,95CI[−.143,+.283]. Human improvesrawreference2.503814 but notshuffled. This is NOT sourcehumanpartialbackbone. Do not conceal or reinterpret null compact control as causalhumansemanticproof. The partialbackbone source-label and weightrewind experiments resolve some in-domain contrasts under a different procedure; no antibacterialmechanisticclaim.
+
+TIihonen JACS2021 is SEPARATE COE/E.coliK12dataset, NOTQHERO. Completed safe CSVrefit on publishedauthor split: RF80train→test20R².6491613775/RMSE1.0937822922 matchesfooter1e−12; RF78matchedvalidSMILES R².544563/RMSE1.246211; frozenrawMolFormer+fixedCB78 R².047337/RMSE1.802382; frozenv5human+sameCB78 R².237003/RMSE1.613015. Humanimprovesrawpoint but notRF. Two author testMIC>64 replaced128 (authorrule). Human1103source0/20testparentoverlap even ignoringstereo;2/78train;1/7newdata. AuditNOTMolFormerpretrain. Authorarchive80SMILESincludesinvalid108/109(COE-Y4IM2/COE-Y6IM2);descriptorshandle80. Savednewdata7notpaper15. OldquantFTsource overlaps3/20test, therefore notused. ActualClaudealreadyindependentlyreviewed these finishedCOEnumbers and withdrew inventedCI. Main/SInotchanged.
+
+QHERO: ongoing NEW matched binary classification authorcomparisonRF35 and5source-seedpartialFT→CBClassifier on405salts withheld-outcation-source. Latest root update: one newly authorised SSH attempt succeeded; primary QHERO completion.json exists remotely. Kimi-agent exclusively handles download/merge/verification; final classification numbers not yet provided to this packet. Earlier usage-limit block has been lifted. Do NOT call it complete, claim victory or fill in finalnumbers. OlderQHEROregression411scaffold results are differentendpoint/split/model and mustnot be substituted. Root/Kimiaudit handles finaldownload separately. No serverprocesschanges byClaude.
+
+KNOWN ORIGINAL PROVENANCE: v5strongTable1/2R² originally savedholdout; new rowCVmetrics are separately reconstructed108worksheetrows/105salts,not SDattachedtooldholdout. Fullquantmultitargetcheckpointnotlocated. Original1500collection vs1103finallabels needscoauthors; leavefield rather thanrewriteoriginal.8MayR² verifiedoutputs but notcompletedcrossvalmeans. Humanannotationmethoddetails forcoauthors. Current user wants only Intro/2.1ADDITIONS and unchangedoldprose, so avoidrewritingTable2 or introducingunverifiedhypothesesthere.
+
+ORIGINAL v5SECTION2.1 (author text preserved, not to be rewritten):
+2.1 Training guidance NN models
+
+Expert guidance datasets were constructed through systematic literature exploration followed by independent blind classification by three domain experts. Each reported compound was assigned an activity label ("Bad" or "Good") based on expert assessment of its antibacterial profile. A biocide agent was labeled "Good" based on objective correlation with its broad spectrum of antimicrobial activity. Additional criteria (e.g., cytotoxicity, cost, sustainability) were considered where possible. Disputed cases were resolved by majority among three experts. This procedure yielded a curated collection of 1,500 labeled compounds encompassing diverse antibacterial activity data.
+
+To identify the optimal descriptor for downstream expert-guided learning, we benchmarked four molecular representations under a unified 5-fold stratified cross-validation protocol: transformer-based embeddings (MolFormer, 768-dimensional; ChemBERTa) and classical fingerprints (Morgan, MACCS). MolFormer embeddings consistently outperformed all alternatives, achieving the highest mean F1-score of 0.655 (MLP with StandardScaler) and accuracy of 0.856, whereas Morgan, MACCS, and ChemBERTa exhibited near-random F1 scores (≤0.50) despite moderate accuracy (Figure SI 1-2). This accuracy–F1 divergence indicates that classical fingerprints and the smaller chemical language model capture majority-class bias rather than biocide-specific structural motifs, whereas MolFormer’s pre-trained chemical vocabulary already encodes the subtle physicochemical nuances relevant to membrane-targeting cationics. Detailed per-representation and per-scaler comparisons are provided in the Supporting Information. 
+
+Building on the MolFormer baseline, we trained a dedicated MLP-based encoder (512 → 384 → 256 neurons) with a supervised contrastive objective to distill the implicit “chemical intuition” embedded in the expert labels into a compact, task-specific latent space. To address the inherent class imbalance of the expert-annotated dataset, we employed Borderline SMOTE (sampling strategy = 0.8) during encoder training. The model was optimized with a hard-negative contrastive loss, which explicitly pushes hard misclassified negatives away from the anchor embedding, thereby sharpening inter-class boundaries. The resulting 256-dimensional representations are referred to as human embeddings hereafter.
+
+Figure 2 presents t-SNE projections (perplexity = 30) of the held-out test fold before and after contrastive refinement. Prior to expert-guided training, active and inactive compounds were heavily intermingled (silhouette score = 0.007). After contrastive learning, the two classes resolved into distinct spatial regions, with the silhouette score rising to 0.108—a 15-fold improvement in cluster separability. This visual trend was corroborated by complementary internal validation metrics: the Davies–Bouldin index decreased from 6.54 to 2.58, while the Calinski–Harabasz score increased from 3.60 to 22.08 (Figure SI 4). Collectively, these metrics confirm that the encoder reorganized the latent space so that molecules with similar antibacterial behavior map to proximal regions.
+
+Figure 2. t-SNE visualization of classification patterns in MolFormer embeddings versus human-labeled embeddings.
+
+
+OUTPUT at most650words: (1)exact completionaudit / necessary remaining checks only (nooptionalnewfits), (2)2–3 shortIntroductionparagraphadditions withoutuniversalfine-tuningjudgement, (3)Section2.1addition3–4shortparagraphs≤260words including numericdirectFT/LoRAandpairedhumanroutes withcorrect±scope, (4)materialrisks only. Preserve originalprose; donot rewrite2.2, donotinvent performance/CI/p. Which completednumbersactuallymotivate a frozenrepresentation→decoder route, and which do notestablishsmalladaptercausalsuperiority?

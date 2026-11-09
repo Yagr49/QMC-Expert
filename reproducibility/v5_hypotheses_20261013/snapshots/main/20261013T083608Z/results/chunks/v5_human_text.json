@@ -1,0 +1,11 @@
+{
+  "name": "v5_human",
+  "encoding": "text",
+  "arm": "v5_human",
+  "seed": -1,
+  "provenance": "v5_archived_grouped_followup",
+  "completed": true,
+  "fits": 11,
+  "seconds": 64.32424306869507,
+  "predictions": 908
+}

@@ -1,0 +1,467 @@
+{
+  "original_raw_records": 108,
+  "original_unique_structures": 105,
+  "retained_QAC104": 104,
+  "excluded": [
+    {
+      "compound_id": "target_25e7bff606cb",
+      "original_row_ids": "75;76",
+      "conflict_columns": "sa_mic_mg_l;sa_mbc_mg_l;ec_mbc_mg_l"
+    }
+  ],
+  "QAC_cations": 102,
+  "QAC_scaffolds": 29,
+  "OOD_codes": [
+    "IT505",
+    "IT502",
+    "IT499",
+    "DA253",
+    "PDD13",
+    "PDD14",
+    "PDD11",
+    "IT442",
+    "IT469",
+    "IT452",
+    "IT493",
+    "IT380",
+    "SEV-0338",
+    "SEV-035",
+    "SEV-036",
+    "SEV-030",
+    "SEV-033"
+  ],
+  "OOD_cations": 17,
+  "OOD_scaffolds": 4,
+  "OOD_overlap_counts": {
+    "source_cation_overlap": 0,
+    "QAC_cation_overlap": 0,
+    "source_scaffold_overlap": 0,
+    "QAC_scaffold_overlap": 0
+  },
+  "score_audits": [
+    {
+      "target": "QAC-104",
+      "arm": "expert",
+      "type": "pred",
+      "n": 104,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "max_metric_error": 1.3877787807814457e-16
+    },
+    {
+      "target": "QAC-104",
+      "arm": "expert-shuffled",
+      "type": "pred",
+      "n": 104,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "max_metric_error": 4.440892098500626e-16
+    },
+    {
+      "target": "QAC-104",
+      "arm": "quant-binary",
+      "type": "pred",
+      "n": 104,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "max_metric_error": 2.220446049250313e-16
+    },
+    {
+      "target": "QAC-104",
+      "arm": "quant-binary-shuffled",
+      "type": "pred",
+      "n": 104,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "max_metric_error": 4.440892098500626e-16
+    },
+    {
+      "target": "QAC-104",
+      "arm": "quant-continuous",
+      "type": "pred",
+      "n": 104,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "max_metric_error": 4.163336342344337e-17
+    },
+    {
+      "target": "QAC-104",
+      "arm": "quant-shuffled",
+      "type": "pred",
+      "n": 104,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "max_metric_error": 4.440892098500626e-16
+    },
+    {
+      "target": "QAC-104",
+      "arm": "raw-molformer",
+      "type": "pred",
+      "n": 104,
+      "seeds": [
+        0
+      ],
+      "max_metric_error": 4.440892098500626e-16
+    },
+    {
+      "target": "QAC-104",
+      "arm": "expert",
+      "type": "rank_score",
+      "n": 104,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "max_metric_error": 8.326672684688674e-17
+    },
+    {
+      "target": "QAC-104",
+      "arm": "expert-shuffled",
+      "type": "rank_score",
+      "n": 104,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "max_metric_error": 6.938893903907228e-17
+    },
+    {
+      "target": "QAC-104",
+      "arm": "quant-binary",
+      "type": "rank_score",
+      "n": 104,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "max_metric_error": 1.1102230246251565e-16
+    },
+    {
+      "target": "QAC-104",
+      "arm": "quant-binary-shuffled",
+      "type": "rank_score",
+      "n": 104,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "max_metric_error": 9.540979117872439e-17
+    },
+    {
+      "target": "QAC-104",
+      "arm": "quant-continuous",
+      "type": "rank_score",
+      "n": 104,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "max_metric_error": 2.7755575615628914e-17
+    },
+    {
+      "target": "QAC-104",
+      "arm": "quant-shuffled",
+      "type": "rank_score",
+      "n": 104,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "max_metric_error": 8.326672684688674e-17
+    },
+    {
+      "target": "OOD-17",
+      "arm": "expert",
+      "type": "pred",
+      "n": 17,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "max_metric_error": 2.220446049250313e-16
+    },
+    {
+      "target": "OOD-17",
+      "arm": "expert-shuffled",
+      "type": "pred",
+      "n": 17,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "max_metric_error": 4.440892098500626e-16
+    },
+    {
+      "target": "OOD-17",
+      "arm": "quant-binary",
+      "type": "pred",
+      "n": 17,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "max_metric_error": 4.440892098500626e-16
+    },
+    {
+      "target": "OOD-17",
+      "arm": "quant-binary-shuffled",
+      "type": "pred",
+      "n": 17,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "max_metric_error": 2.220446049250313e-16
+    },
+    {
+      "target": "OOD-17",
+      "arm": "quant-continuous",
+      "type": "pred",
+      "n": 17,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "max_metric_error": 1.8041124150158794e-16
+    },
+    {
+      "target": "OOD-17",
+      "arm": "quant-shuffled",
+      "type": "pred",
+      "n": 17,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "max_metric_error": 4.440892098500626e-16
+    },
+    {
+      "target": "OOD-17",
+      "arm": "raw-molformer",
+      "type": "pred",
+      "n": 17,
+      "seeds": [
+        0
+      ],
+      "max_metric_error": 0.0
+    },
+    {
+      "target": "OOD-17",
+      "arm": "expert",
+      "type": "rank_score",
+      "n": 17,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "max_metric_error": 0.0
+    },
+    {
+      "target": "OOD-17",
+      "arm": "expert-shuffled",
+      "type": "rank_score",
+      "n": 17,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "max_metric_error": 8.326672684688674e-17
+    },
+    {
+      "target": "OOD-17",
+      "arm": "quant-binary",
+      "type": "rank_score",
+      "n": 17,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "max_metric_error": 1.1102230246251565e-16
+    },
+    {
+      "target": "OOD-17",
+      "arm": "quant-binary-shuffled",
+      "type": "rank_score",
+      "n": 17,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "max_metric_error": 8.326672684688674e-17
+    },
+    {
+      "target": "OOD-17",
+      "arm": "quant-continuous",
+      "type": "rank_score",
+      "n": 17,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "max_metric_error": 0.0
+    },
+    {
+      "target": "OOD-17",
+      "arm": "quant-shuffled",
+      "type": "rank_score",
+      "n": 17,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "max_metric_error": 4.683753385137379e-17
+    }
+  ],
+  "OOD_atlas_pngs": [
+    "figureS20_OOD17_structures_page1.png",
+    "figureS20_OOD17_structures_page2.png",
+    "figureS20_OOD17_structures_page3.png"
+  ],
+  "inputs": {
+    "original_prepared": {
+      "path": "/Users/egorilin/Desktop/Veresh_paper_Mendeley/outputs/prepared_qac_target.csv",
+      "sha256": "cbe2171112e8e44083af3f6eb08916d1a758b80d0d81feb5203f3491b40a6488"
+    },
+    "original_raw": {
+      "path": "/Users/egorilin/Desktop/Veresh_paper_Mendeley/Data_biocides.xlsx",
+      "sha256": "e1c24713be34d9a2f689f1e93ff0004a76d82b3bd138c454a91359199e86f44e"
+    },
+    "ood_codes": {
+      "path": "/Users/egorilin/Desktop/Veresh_paper/QACs_SMILES_MIC_MBC.xlsx",
+      "sha256": "b3610b79e0b4bd96817fa2ec0b33e9482cbf6947216d152df6cf6c885d0bde5e"
+    },
+    "archived_QAC105": {
+      "path": "/Users/egorilin/Desktop/COMA/reproducibility/finetune/data/eval_QAC-105.csv",
+      "sha256": "f998f3199a35c0425270989ffb3fe77aed3784ca67cca15e8294ac9a9e395720"
+    },
+    "strict_QAC104": {
+      "path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v12/data/target_QAC-104.csv",
+      "sha256": "1a3fcd4f33d92ab7a6bd2d7fdc38f9142f20eeb5a68215c26716f1816d529944"
+    },
+    "strict_OOD17": {
+      "path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v12/data/target_OOD-17.csv",
+      "sha256": "445b59eaf37afbb1dbab258d512ed7370858e419788c69e1f336dfda52b62e69"
+    },
+    "source_expert": {
+      "path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v12/data/matched-pooled_expert.csv",
+      "sha256": "57adcddda2ff9bbae2af7e9f28c19b7df79962ef526144e3938ead763b490464"
+    },
+    "source_quant": {
+      "path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v12/data/matched-pooled_quant.csv",
+      "sha256": "939a0e8a17f57905cb4cd716e23a59e02acc56168431e9a5df1dcc133214448a"
+    },
+    "source_split": {
+      "path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v12/results/source_split.csv",
+      "sha256": "cc597ff1bba7a111b66b737914a1c91ca28cb9f9e827e608e8c2298d2dacf962"
+    },
+    "folds": {
+      "path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v12/data/target_folds.csv",
+      "sha256": "2a0230bad541e89973df133d96be8d59a13fc1d22453ffb0cc925a023719a815"
+    },
+    "predictions": {
+      "path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v12/results/predictions.csv",
+      "sha256": "43c74c58222ed82d8e03c6acedabd40670686882a07294322d86fa0b6f250c11"
+    },
+    "direct_predictions": {
+      "path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v12/results/direct_predictions.csv",
+      "sha256": "2ec65aeb7e2bf60a5c98448d15b5c1ed80cf905045ba59527d172baf345166c7"
+    },
+    "summary": {
+      "path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v12/analysis/summary.csv",
+      "sha256": "91f73f1e9c4804e8df2708e36010651c5d0315d769ebaa04d1e49b8f4fced417"
+    },
+    "direct_summary": {
+      "path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v12/analysis/direct_summary.csv",
+      "sha256": "acce9beaabd22a9526962ee16b4119d52118640bd3164bac8ad4ff42503bba4f"
+    }
+  },
+  "source_predictions_unchanged": true,
+  "training_performed": false,
+  "molecular_drawing": "RDKit MolToACS1996SVG; vector bonds and atom glyphs in SVG/PDF; uniform panel layout scale.",
+  "style_reference": "/Users/egorilin/Downloads/Telegram Desktop/Main_Article3_revised.docx",
+  "uncertainty": "Source-seed SD only; not assay uncertainty or per-molecule prediction intervals."
+}

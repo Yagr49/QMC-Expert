@@ -1,0 +1,27 @@
+## Corrected Final Assessment
+
+### Native RF Reproduction — Adequately Supported
+
+`validation.json` records exact agreement to 1e-12 between the refit RF and archived paper code, with all 107 SMILES and targets confirmed identical between the reference CSV and descriptor frame. This is strong, direct evidence of faithful reproduction; no assumption about index correspondence is required.
+
+### Matched-78 Comparison — Adequately Supported
+
+Refitting the same RF architecture on `matched_valid_smiles_train78` (n=78, same molecules as the CatBoost runs) yields R²=0.544, RMSE=1.246 on test20. This is the correct apples-to-apples baseline. The drop from RF80 (R²=0.649) is expected given two fewer training points and possible minor compositional differences; it does not impugn the original paper's result.
+
+### Human Adapter vs. Raw — Point Estimate Only
+
+On test20, human+CatBoost (R²=0.237, RMSE=1.613) outperforms raw+CatBoost (R²=0.047, RMSE=1.802) as a point estimate. **Neither model beats the matched RF78 baseline.** No inferential statistics were computed; with n=20, point estimates alone are reported. No victory claim is warranted and none is made.
+
+### Required Caveats
+
+**Test20 labels:** Two of 20 test values are author-substituted bounds (MIC>X→2X), not exact measurements. Reported metrics reflect these substituted values as the author intended; this is documented and should be disclosed in any presentation.
+
+**Source overlap — human adapter vs. MolFormer pretraining:** `expert1103` is the human-annotation corpus used to train the frozen adapter head, not the MolFormer backbone pretraining corpus. Overlap audits cover expert1103 only: 0/20 test cations, 2/78 train cations (COE2-3C-C3A-HEXYL, COE2-3C-C3A-PROPYL), 1/7 newdata (Amethyl). Test leakage is absent. The 2/78 train overlap is minor and does not invalidate the comparison. Nothing can be said about MolFormer backbone pretraining overlap from this audit.
+
+**Newdata7 vs. paper15new:** The 7 newdata rows include one source-overlapping compound (Amethyl) and are not a clean independent transfer set. They are distinct from the paper's 15 new compounds, which are not recovered as a ready cohort. Newdata7 results should not be presented as independent validation.
+
+**No invented statistics:** No confidence intervals or p-values were computed. The earlier stated "±0.15–0.20" CI is retracted; it had no computational basis.
+
+### Verdict
+
+Reproduction of the Tiihonen RF is verified. The human-annotated frozen adapter improves over the raw embedding point estimate but does not match the author's RF on this test split. All protocol safeguards (fixed hyperparameters, no test tuning, censoring rule preserved, overlap audited) are documented and satisfied.

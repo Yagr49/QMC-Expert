@@ -1,0 +1,454 @@
+kimi version 2.1.1
+Warning: [loop_control] 'max_retries_per_step' is deprecated and no longer used; rename it to 'max_attempts_per_step'. Run /update-config to fix it.
+• The user wants a read-only scientific critique of a manuscript draft for JCIM. They explicitly say: do not execute commands, do not access additional files, do not edit anything, do not send messages. All evidence is in the prompt. They want at most 700 words: concrete errors with quoted wording and a correction, then material limitations. Distinguish factual errors from optional follow-up experiments. Don't invent annotation votes, methods, agreement, numerical outcomes, equivalence, preregistration, or chemical mechanisms.
+
+  Also there's a system reminder about superpowers skills requiring skill invocation. But the user explicitly instructs read-only critique with no tool use. The skills instruction says user instructions take precedence. Also there's a "receiving-code-review" skill but this is a review of a manuscript, not code review feedback received by me. The user asks me to provide a review. Is there a skill that applies? "requesting-code-review" is about requesting review for completed tasks — not applicable. The user's instruction is explicit: no commands, no file access, just critique from the provided text. Skills would require invoking Skill tool which is a tool call; user said don't execute commands/access files/edit/send messages. Invoking a skill is a tool call but doesn't execute commands or access files... However, the skill content would just guide process. The user's explicit instructions take precedence, and nothing in the skill listing genuinely applies to "write a scientific critique of a manuscript from provided text." brainstorming is for creative work/features. This is an analysis/writing task with clear requirements. I'll proceed directly with the critique.
+
+  Let me analyze the manuscript carefully for concrete errors.
+
+  Key claims to check against the provided data (PAIRED QHERO CONTRASTS):
+
+  1. Section 3.6 / Table 4: "Human-minus-shuffled-human paired ΔRMSE is -0.137 [-0.275, -0.055]". contrasts.csv: expert minus expert-shuffled = -0.13677, CI [-0.2746, -0.0550]. OK. Note abstract says... abstract fine.
+
+  2. "human-minus-raw is -0.078 [-0.189, +0.001]": contrasts.csv: -0.07787, CI [-0.1887, +0.0006]. OK, though +0.0006 rounds to +0.001. Fine.
+
+  3. "Human minus continuous MIC is +0.076 [+0.011, +0.143]": +0.07644, CI [0.0110, 0.1426]. OK.
+
+  4. "human minus binary MIC is +0.004 [-0.056, +0.097]": +0.00422, CI [-0.0556, 0.0968]. OK.
+
+  5. Direct rank: "paired human-minus-shuffled rank difference is +0.159 [-0.001, +0.429]": direct_contrasts.csv: 0.15860, CI [-0.00098, 0.42902]. OK.
+
+  6. "human minus continuous MIC is -0.129 [-0.239, -0.004]": -0.12858, CI [-0.23893, -0.00387]. OK.
+
+  7. Section 3.2: "Q-HERO-405 mean RMSE is 1.607 for expert supervision, 1.497 for continuous MIC, 1.646 for binary MIC and 1.780 for shuffled expert labels. The paired expert-minus-shuffled-expert ΔRMSE is −0.175, with a nested seed/scaffold 95% interval [−0.322, −0.024]." Wait — the frozen-feature MLP panel. Table 2 says MolFormer-XL: Human RMSE 1.607, continuous 1.497, shuffled human 1.780. But binary MIC 1.646 — Table 2 doesn't show binary MIC (it shows shuffled human). Hmm, Table 2 columns: Raw, Human, Continuous MIC, Shuffled human. Binary MIC RMSE 1.646 is mentioned in text but not in Table 2; said to be in SI Table S7. Fine.
+
+  But wait: the frozen-feature expert minus shuffled ΔRMSE −0.175 — is that from matched frozen-feature experiments, and the provided contrasts.csv is for the matched partial fine-tuning (Section 3.6). The frozen-feature contrasts aren't in the provided CSVs, so I can't verify −0.175. Not an error per se.
+
+  8. Now check "expert minus shuffled" in Section 3.2 says "Continuous MIC also improves on shuffled continuous MIC: ΔRMSE −0.107 [−0.228, −0.016]." Not in provided CSV (these are FT contrasts). Can't verify.
+
+  9. Section 3.3: "c3-MoLFormer: ΔRMSE −0.113 [−0.246, −0.012]... ChemBERTa-100M (+0.014 [−0.115, +0.098]) and ChemFM-1B (−0.022 [−0.183, +0.074])". Can't verify from provided data (frozen-feature). OK.
+
+  10. Section 3.4: "pooled-minus-exact ΔRMSE is −0.092 [−0.159, −0.001]". Not in provided CSVs. OK.
+
+  Now find actual internal inconsistencies:
+
+  A. Section 2.3: "The embedding layer and lowest four encoder layers remain frozen, accounting for 16.0 of 44.4 million parameters." MolFormer-XL actually has ~44.4M? Hmm, MolFormer-XL is large (actually the paper says MolFormer-XL has ~44.4M? No — MolFormer-XL has about 44.4M non-embedding? Actually MolFormer-XL is reported with 44.4M parameters? Let me think. Ross et al. 2022: MolFormer-XL has 44.4M parameters? Hmm, the MolFormer models: base 4.3M? Actually I recall MolFormer-XL: 12 layers, hidden 768... The manuscript says 44.4M total, 16.0M frozen (embedding + 4 layers), trainable 28,375,297 in Section 2.7. 44.4M − 16.0M = 28.4M ≈ 28,375,297. Consistent internally. Can't flag without external knowledge; and instructed not to invent. OK.
+
+  B. Section 2.5: "c3-MoLFormer uses deterministic MolFormer pooling" and "its encoder has 44.4 million parameters". Fine.
+
+  C. Potential factual error: Section 3.1: "partial fine-tuning raises mean downstream R² from 0.134 for frozen MolFormer to 0.269 with expert labels, 0.312 with molecule-level MIC and 0.308 with record-level MIC... The observed differences between the expert and numerical means are 0.039–0.043 R² units." Check: 0.312 − 0.269 = 0.043; 0.308 − 0.269 = 0.039. OK consistent.
+
+  D. Abstract: "matched partial MolFormer fine-tuning on identical source molecules yields Q-HERO scaffold-CV RMSE 1.529 for human labels versus 1.453 for continuous MIC and 1.607 for raw features" — Table 4 matches. "with direct human rank agreement 0.197 without target refitting" — matches.
+
+  E. Now look for the real errors:
+
+  Error 1: Section 3.6 states "Human-minus-shuffled-human paired ΔRMSE is -0.137 [-0.275, -0.055]" — matches CSV. Hmm.
+
+  Error candidate: In Section 3.6 text: "raw features yield 1.607 (Table 4; Figure 5a). The corresponding mean R² values are 0.205, 0.282 and 0.209, with raw R² 0.122." Table 4: Human R² 0.205, continuous 0.282, binary 0.209, raw 0.122. OK.
+
+  Error candidate: Conclusions: "mean Q-HERO R² is 0.269 with human labels versus 0.312/0.308 with numerical supervision" — Section 3.1 OK.
+
+  Error candidate: "direct expert scores show positive rank agreement with measured potency without target refitting" — 0.397 mean. OK.
+
+  Hmm, what about the claim "Matched-molecule interventions show that real label assignment matters for the two MolFormer representations" — for matched partial FT, expert minus shuffled CI [-0.275, -0.055] excludes zero, OK; for frozen features on MolFormer CI given as [-0.322, -0.024] (can't verify but plausible).
+
+  F. Check Figure 3(b)/Section 3.4 text vs Table 3: "pooled MIC yields Q-HERO RMSE 1.525 versus 1.617 for exact S. aureus MIC... ΔRMSE −0.092 [−0.159, −0.001]". Table 3: pooled 1.525, exact 1.617. OK. 1.525−1.617 = −0.092. OK.
+
+  G. Section 3.4: "Pooled MIC also improves on its shuffled counterpart: −0.174 [−0.282, −0.040]." Table 3: pooled 1.525, shuffled pooled 1.699 → −0.174. OK.
+
+  H. Potential error: Section 2.6 "Paired RMSE contrasts average squared losses across source seeds before taking square roots; they therefore need not equal differences between mean seed-specific RMSE values." This is a methods note; fine.
+
+  I. Now, "Ten thousand paired bootstrap replicates resample source initialisation seeds and whole target cation-scaffold groups. For the single-run raw-feature reference, the same fixed prediction vector is reused in every paired seed draw: its own variation comes only from scaffold resampling, while the expert-minus-raw contrast also includes expert-training variability." OK.
+
+  J. Check the abstract claim "with direct human rank agreement 0.197" — Table 4 0.197 ± 0.020. OK.
+
+  K. Section 3.2 statement: "The expert representation is close to raw MolFormer (mean RMSE 1.602), with paired ΔRMSE +0.005 [−0.102, +0.115]." 1.607−1.602 = 0.005. OK. "Expert minus continuous MIC is +0.109 [−0.001, +0.226]." 1.607−1.497=0.110 ≈ 0.109. OK.
+
+  L. Section 3.2: "On the 529-molecule exact S. aureus panel, real expert labels yield mean RMSE 1.785 versus 1.761 with shuffled expert labels." Table 3: expert 1.785, shuffled exact S. aureus MIC 1.670 — wait, "shuffled expert labels" is not in Table 3. Table 3 shows shuffled pooled and shuffled exact MIC, not shuffled expert. The 1.761 shuffled-expert number is presumably in SI. OK.
+
+  M. Now a genuine issue: Section 3.3 Table 2 lists "Shuffled human RMSE" for ChemFM-1B as 1.808 ± 0.017 — very small SD compared to others; not an error.
+
+  N. Real candidate error — Section 2.7: "Source salts are right-padded to 202 tokens; every source and target is checked without truncation." Then Section 2.5: "All 1,939 prepared structures are encoded without truncation." Fine.
+
+  O. Candidate: Section 2.3 says "The eligible sources contain 740 expert-labelled molecules, 1,153 molecule-level MIC targets and 9,338 MIC records over those 1,153 molecules." Section 2.4 full-source comparison: "712 expert, 1,120 pooled-MIC, 888 exact S. aureus-MIC and 273 cytotoxicity molecules." Different protocols, noted. OK.
+
+  P. Now check a subtle numeric error in Section 3.6: "Direct human rank agreement is 0.197 ± 0.020, versus 0.039 ± 0.095 for shuffled human labels and 0.326 ± 0.060 for continuous MIC (Figure 5c). The paired human-minus-shuffled rank difference is +0.159 [-0.001, +0.429]". 0.197−0.039 = 0.158 ≈ 0.159 (paired vs unpaired mean difference fine). CSV: 0.1586. OK.
+
+  Q. Section 3.6: "human minus continuous MIC is -0.129 [-0.239, -0.004]" — mean diff 0.197−0.326 = −0.129. CSV −0.1286. OK.
+
+  R. Hmm — the draft is remarkably consistent. The task says "Test whether the claims correctly distinguish algorithmic causal interventions, actual human-label benefit over raw features, real-vs-shuffled signal, competition against numerical MIC and direct source-only ranking."
+
+  Potential genuine errors:
+
+  1. Section 3.6 / Figure 5b description: "Human-minus-shuffled-human paired ΔRMSE is -0.137 [-0.275, -0.055]" — but earlier in Section 3.2 (frozen MLP) it was −0.175. Distinct protocols; fine.
+
+  2. In the abstract: "Paired real-versus-shuffled controls, frozen-feature experiments across four backbones and same-chemistry numerical-context comparisons reveal dependence on supervision assignment, adaptation procedure and source composition." OK.
+
+  3. Check Section 2.4 numbers: "The pooled-MIC panel contains 681 shared source molecules, 111 cation-scaffold groups and 96 positive expert calls, with 4,938 underlying MIC records." Section 2.5: "Pooled MIC summarises 4,049 underlying records and exact S. aureus MIC summarises 855" on the 529 panel. OK.
+
+  4. Section 2.7: "The human and binary-MIC training arms each contain 52 positive calls among 377 molecules in this panel." But Section 2.4 says pooled panel has 96 positive expert calls among 681; training subset 377 → 52 positives. Plausible.
+
+  5. Possible error: Section 3.6 says "partial MolFormer fine-tuning yields Q-HERO-405 mean RMSE 1.529 ± 0.030 for human labels, 1.453 ± 0.016 for continuous MIC and 1.525 ± 0.014 for binary MIC". Positive-call counts: human 52 positives, binary MIC matched prevalence. OK.
+
+  6. Conclusions: "Quantitative supervision remains the stronger point estimate in several comparisons" — supported.
+
+  Now, are there any actual misstatements? Let me hunt harder.
+
+  (a) Section 3.1: "On QAC-105, partially fine-tuned R² values range from −0.004 to +0.053". But Section 2.2 says "Its evaluation collections contain 105 QAC structures" (archived protocol) — QAC-105 consistent.
+
+  (b) Section 2.2: "Q-HERO-405 contains 386 unique cations in 29 cation-scaffold groups." 405 structures vs 386 unique cations — consistent (duplicates).
+
+  (c) Figure 4(b): "one compound with no cationic nitrogen is omitted." OK.
+
+  (d) Section 2.6: "Ten thousand paired bootstrap replicates..." and Section 2.7 "Ten thousand paired seed/scaffold draws supply exploratory intervals for mean seed-specific rank differences; bootstrap midranks account for repeated molecules from sampled scaffold groups." direct_contrasts.csv valid_bootstrap_draws 10000. OK.
+
+  (e) Hmm: Section 2.7: "Every arm performs 30 epochs and 360 updates." 377 molecules / batch 32 → 12 updates per epoch × 30 = 360. Consistent.
+
+  (f) Section 2.3: "maximum epochs are 30 for expert and molecule-level MIC training and 10 for record-level MIC" — fine.
+
+  (g) Potential error: Section 3.6 states the raw reference "raw features yield 1.607" and in Section 3.2 raw MolFormer mean RMSE is 1.602. Both used; Table 4 uses 1.607. Slight inconsistency between 1.602 (frozen-feature protocol raw) and 1.607 (matched FT raw) — but these are different decoders? Actually both use "common 300-iteration CatBoost from Section 2.4". The frozen protocol raw = 1.602; matched FT raw re-encoded = 1.607. The draft says "The raw backbone is re-encoded in the same environment and included as the primary raw reference; archived raw features are retained for numerical auditing." So the difference is acknowledged. Fine.
+
+  (h) Now, a genuine error candidate: Section 3.6 "Human-minus-shuffled-human paired ΔRMSE is -0.137 [-0.275, -0.055]" matches CSV. Hmm.
+
+  (i) Check the claim in 3.6: "Real human labels yield lower loss than shuffled human labels under this matched training procedure. Improvement over the raw-feature reference remains unresolved. Human minus continuous MIC is +0.076 [+0.011, +0.143]" — CI excludes zero, meaning human is significantly worse than continuous MIC; the draft says "The quantitative point estimate is better" in 3.2 for frozen; in 3.6 it doesn't say "unresolved" for that contrast — it states the numbers. In Conclusions: "Quantitative supervision remains the stronger point estimate in several comparisons". But actually in 3.6 the human-minus-continuous interval [+0.011, +0.143] excludes zero, so it's more than a point estimate — the exploratory interval supports a real difference favoring continuous MIC. The draft's abstract says "yields RMSE 1.529 for human labels versus 1.453 for continuous MIC" — fine. The Conclusions "stronger point estimate" is an understatement but not an error.
+
+  Wait — actually there might be a real error: In Section 3.6 the draft says human-minus-raw ΔRMSE −0.078 [−0.189, +0.001], and text says "Improvement over the raw-feature reference remains unresolved." The CI upper bound +0.001 > 0, so unresolved — correct.
+
+  (j) Figure 5d: "human minus continuous MIC is -0.129 [-0.239, -0.004]" — excludes zero → direct rank: human significantly worse than continuous. Text says "The human real-minus-shuffled rank interval includes zero, so this direct label-assignment advantage remains unresolved despite its positive point estimate." Correct.
+
+  (k) Hmm, what about "The paired human-minus-shuffled rank difference is +0.159 [-0.001, +0.429]" — includes zero. OK.
+
+  (l) Possible factual error: Section 3.3 says "The positive expert-versus-shuffled contrast also appears with c3-MoLFormer: ΔRMSE −0.113 [−0.246, −0.012]." Can't verify.
+
+  (m) Now — is there an error in "MolFormer and c3-MoLFormer are checkpoints of the same architecture with different pretraining, so this is evidence across two representations rather than independent architectural replication." c3-MoLFormer from ChemBERTa-3 framework... plausible.
+
+  (n) Section 2.5: "The c3 checkpoint's '1.1B' name refers to pretraining molecules; its encoder has 44.4 million parameters." Hmm — c3-MoLFormer... In the ChemBERTa-3 paper, c3-MoLFormer-1.1B? Hmm. Can't verify externally (and we shouldn't). Internally consistent with 44.4M shared with MolFormer-XL? It says "its encoder has 44.4 million parameters" — same as MolFormer-XL total. Suspicious but not flaggable without evidence.
+
+  (o) Actual error hunt in Section 2.2: "The matched-molecule protocol additionally excludes all evaluation cation identities and their counterion variants, and removes conflicting expert and target labels." OK.
+
+  (p) Section 2.1: "The supplied expert archive contains 1,103 final annotation entries: 244 Good and 859 Bad." OK.
+
+  (q) Now the "16.0 of 44.4 million parameters" frozen: embedding + lowest 4 layers frozen; 44.4 − 28.375 = 16.0M frozen. Consistent.
+
+  (r) One more candidate: Section 3.4 Table 3: "Shuffled exact S. aureus MIC ... 1.670 ± 0.069" and text "real expert labels yield mean RMSE 1.785 versus 1.761 with shuffled expert labels" — shuffled expert 1.761 is not in Table 3 (it's a different control). Not an error.
+
+  (s) Error: Figure 3 caption "(a) Expert versus shuffled expert labels across four frozen backbones on the 681-molecule panel." OK.
+
+  (t) Hmm, Section 3.2: "Continuous MIC also improves on shuffled continuous MIC: ΔRMSE −0.107 [−0.228, −0.016]." For the frozen MLP. Fine.
+
+  (u) Wait — potential real discrepancy: Section 3.2 says the frozen expert-minus-shuffled ΔRMSE is −0.175, but Table 2 shows human 1.607 and shuffled human 1.780 → difference of means 0.173, paired −0.175. Consistent.
+
+  (v) Now check Section 3.6 statement: "Five shuffled runs are diagnostic controls" — but Section 2.7 says six arms with "each corresponding source-training-only shuffled control" and "Five seeds (0–4)". The shuffled controls: 5 seeds. But Section 2.6 says "Five shuffled runs are diagnostic controls, rather than a calibrated multi-permutation significance test." OK.
+
+  (w) Now an actual possible error: Section 2.7 "The six arms are human, continuous pooled MIC and binary pooled MIC, with each corresponding source-training-only shuffled control." That's 6 arms. Table 4 has 7 rows including raw. OK.
+
+  (x) Section 2.7: "Every arm performs 30 epochs and 360 updates." Consistent with 377/32 ≈ 11.8 → 12 steps. OK.
+
+  (y) Now check abstract: "direct human rank agreement 0.197 without target refitting" — OK.
+
+  So where are the concrete errors the user expects? The prompt says "Give at most 700 words: concrete errors with quoted wording and a correction, then material limitations." Perhaps the draft is mostly clean, and the critique should identify a few genuine issues:
+
+  Candidate error 1: Section 3.6 says "The matched extension removes source-identity, source-partition and update-budget differences between human and MIC fine-tuning." But the human arm has 52 positives / 377 and binary MIC matched prevalence; continuous MIC changes objective. Fine.
+
+  Candidate error 2: In Section 2.3: "Early stopping uses a scaffold-disjoint source-validation partition with patience six; the split seed follows the run seed." vs Section 2.7: "Validation losses are recorded but the final checkpoint is always used; no early stopping." Different protocols, clearly separated. OK.
+
+  Candidate error 3 — I found one: Section 3.6: "Human-minus-shuffled-human paired ΔRMSE is -0.137 [-0.275, -0.055]". CSV gives -0.13677 → -0.137 OK; CI [-0.2746, -0.0550] → [-0.275, -0.055] OK.
+
+  Hmm, wait — check Section 3.6 text: "human-minus-raw is -0.078 [-0.189, +0.001]" vs CSV -0.07787 → -0.078; CI [-0.1887, +0.0006] → [-0.189, +0.001]. OK.
+
+  Check "Human minus continuous MIC is +0.076 [+0.011, +0.143]" CSV 0.07644, CI [0.0110, 0.1426] → [+0.011, +0.143]. OK.
+
+  So numbers are consistent. Then the critique focuses on:
+
+  Real error A: The Conclusions say "Matched-molecule interventions show that real label assignment matters for the two MolFormer representations" — for the matched FT, human-vs-shuffled RMSE CI [-0.275, -0.055] excludes zero → supported. For frozen MolFormer [-0.322, -0.024] → supported. OK, not an error.
+
+  Real error B: Section 3.6 says "Direct human rank agreement is 0.197 ± 0.020, versus 0.039 ± 0.095 for shuffled human labels... The paired human-minus-shuffled rank difference is +0.159 [-0.001, +0.429]; ... this direct label-assignment advantage remains unresolved despite its positive point estimate." Correct.
+
+  Hmm, maybe the errors are more subtle:
+
+  Error 1: Section 2.5 states "All 1,939 prepared structures are encoded without truncation." and Section 2.7 "Source salts are right-padded to 202 tokens". MolFormer truncation: MolFormer-XL max 202 tokens? Hmm plausible.
+
+  Error 2 — Actually! Section 2.7: "Embeddings and layers 0–3 are frozen; layers 4–11, the pooler and a dropout-0.1 scalar head are trained, totalling 28,375,297 trainable parameters." But Section 2.3 says the archived protocol freezes "embedding layer and lowest four encoder layers... accounting for 16.0 of 44.4 million parameters". If the embedding + 4 layers = 16.0M frozen, trainable = 28.4M ≈ 28,375,297. Consistent.
+
+  Error 3 — Section 2.3: "MolFormer-XL uses checkpoint revision 7b12d946..." fine.
+
+  Let me look at the stated claim in Section 3.1 again: "partial fine-tuning raises mean downstream R² from 0.134 for frozen MolFormer to 0.269 with expert labels, 0.312 with molecule-level MIC and 0.308 with record-level MIC (Figure 2a). The observed differences between the expert and numerical means are 0.039–0.043 R² units under common downstream refitting." 0.312−0.269=0.043, 0.308−0.269=0.039. OK.
+
+  Hmm, but wait: is record-level MIC 0.308 vs molecule-level 0.312 — "record-level" trained on 9,338 records. Fine.
+
+  OK here's a genuine one: Section 3.2 states "Q-HERO-405 mean RMSE is 1.607 for expert supervision, 1.497 for continuous MIC..." and Table 2 header "Q-HERO-405 RMSE... Trained encoders: mean ± standard deviation over five source-training seeds. Raw features: one fixed decoder run." Raw = 1.602. Then Section 3.6 Table 4 raw = 1.607. The raw MolFormer number differs between protocols (1.602 vs 1.607) although both are "raw MolFormer with the same 300-iteration CatBoost". The draft explains the re-encoding. But in Section 3.2 it says "The expert representation is close to raw MolFormer (mean RMSE 1.602)". Fine.
+
+  Given the instruction "Do not invent... numerical outcomes", I should only flag what I can verify from the provided text/CSVs.
+
+  Let me now check direct_contrasts: "expert minus quant-binary: -0.0897 [-0.1791, +0.0055]" — draft doesn't report this one; fine.
+
+  Check adaptation_contrasts: "ft-expert minus mlp-expert: -0.0777 [-0.2252, +0.0231]" — draft mentions "adaptation contrasts" in SI. Fine.
+
+  Now, potential genuine error: In Section 3.6, "Human-minus-shuffled-human paired ΔRMSE is -0.137 [-0.275, -0.055]; human-minus-raw is -0.078 [-0.189, +0.001] (Figure 5b)." Then "Real human labels yield lower loss than shuffled human labels under this matched training procedure. Improvement over the raw-feature reference remains unresolved." The CI for human-minus-raw upper bound is +0.0006 ≈ +0.001 — technically includes zero by a hair; calling it "unresolved" is fair.
+
+  Now, the more interesting checks the user asks for:
+
+  1. "actual human-label benefit over raw features" — the draft consistently says unresolved. Good.
+
+  2. "real-vs-shuffled signal" — in matched FT, real-vs-shuffled RMSE CI excludes zero for RMSE but the direct-rank real-vs-shuffled CI includes zero; the draft says the direct advantage "remains unresolved". Consistent.
+
+  3. "competition against numerical MIC" — 3.6: human minus continuous +0.076 [+0.011, +0.143] excludes zero → continuous MIC significantly better under exploratory intervals. The draft's Conclusions say "Quantitative supervision remains the stronger point estimate in several comparisons" — this is an understatement: for matched FT RMSE the interval excludes zero. Not a factual error, but imprecise wording. Actually in 3.6 the draft does present it plainly. Hmm.
+
+  4. "direct source-only ranking" — 0.197 vs 0.039 shuffled, CI includes zero.
+
+  Now let me find concrete errors more aggressively:
+
+  ERROR CANDIDATE (strong): Section 3.6 says "Direct human rank agreement is 0.197 ± 0.020, versus 0.039 ± 0.095 for shuffled human labels and 0.326 ± 0.060 for continuous MIC (Figure 5c). The paired human-minus-shuffled rank difference is +0.159 [-0.001, +0.429]". CSV delta_rank = 0.1586 → "+0.159" OK. CI [-0.001, 0.429] OK.
+
+  ERROR CANDIDATE: Figure 5 caption: "Contrast intervals use 10,000 paired seed/scaffold draws" OK.
+
+  ERROR CANDIDATE — Section 2.4: "Group sizes are unequal: the pooled split contains 377 training and 304 validation molecules." 377+304=681. OK. Section 2.7 "52 positive calls among 377 molecules" OK.
+
+  ERROR CANDIDATE — Section 2.4: "The pooled-MIC panel contains 681 shared source molecules, 111 cation-scaffold groups and 96 positive expert calls, with 4,938 underlying MIC records." But Section 2.5 says on 529 molecules pooled MIC summarises 4,049 records. OK subset.
+
+  ERROR CANDIDATE — Section 3.4 says exact S. aureus panel "855 records"; Table 3 says exact S. aureus 855. OK.
+
+  ERROR — Abstract: "Paired real-versus-shuffled controls, frozen-feature experiments across four backbones and same-chemistry numerical-context comparisons reveal dependence on supervision assignment, adaptation procedure and source composition." Fine.
+
+  Hmm, maybe check "16.0 of 44.4 million parameters" — 44.4 total for MolFormer-XL. Actually MolFormer-XL has 44.4M? Hmm. The real MolFormer-XL: hidden size 768, 12 layers... MolFormer-XL in Ross et al. — I don't remember exactly; better not flag.
+
+  OK, given the draft is carefully internally consistent, maybe the intended "concrete errors" are:
+
+  1. Section 3.6: "Human-minus-shuffled-human paired ΔRMSE is -0.137 [-0.275, -0.055]" — fine.
+
+  Hold on, let me recheck Section 3.2's frozen-feature numbers against Section 3.6's fine-tuning numbers — the draft says in 3.2 "Q-HERO-405 mean RMSE is 1.607 for expert supervision, 1.497 for continuous MIC, 1.646 for binary MIC and 1.780 for shuffled expert labels." But Table 2 shows for MolFormer-XL: human 1.607, continuous 1.497, shuffled human 1.780 — but binary MIC 1.646 is NOT in Table 2 (Table 2 has no binary MIC column). The text mentions it; Table 2 note says binary-MIC controls are in SI Table S7. OK.
+
+  Hmm wait, actually — there's a subtle mismatch: Section 3.2 says the frozen expert-minus-shuffled ΔRMSE is −0.175 with CI [−0.322, −0.024]. Difference of means: 1.607 − 1.780 = −0.173. Paired −0.175 plausible. OK.
+
+  Let me check Figure 2 numbers: expert direct rank 0.397 ± 0.050, molecule MIC 0.547 ± 0.071, record MIC 0.612 ± 0.030. Hmm — record-level MIC direct rank agreement higher than molecule-level; fine.
+
+  Now — is there an error in the claim "Direct expert scores thus show positive potency-related ordering, while the numerical arms have stronger mean ordering"? 0.397 > 0, OK.
+
+  Maybe the error is in Section 3.1: "This is a descriptive comparison of practical performance. Unequal molecule counts and update budgets prevent interpreting it as an isolated causal effect of label type" — fine.
+
+  Alright, another angle: the user says "Test whether the claims correctly distinguish algorithmic causal interventions... The MLP is not an internal LoRA adapter; no general claim that fine-tuning is bad is justified."
+
+  Check: Section 1 says "The projection used here is a feature encoder, distinct from an internal adapter or LoRA. We therefore include matched partial backbone fine-tuning rather than assuming that small adapters are preferable." OK. Section 3.6: "it does not establish a general superiority of internal adapters." OK — actually wait: "Comparing it with the small frozen-feature encoder tests two specified adaptation procedures, whose architecture and optimisation differ; it does not establish a general superiority of internal adapters." Hmm — "internal adapters" — the MLP is an external encoder, not internal adapter. The sentence says it doesn't establish superiority of internal adapters — correct, trivially. Fine.
+
+  Given all this, perhaps the genuine concrete errors are few; the critique can list:
+
+  Error 1 (factual/numerical): Section 3.6 states the human-minus-raw ΔRMSE CI as [-0.189, +0.001]; the data give +0.0006, which rounds to +0.001 — not an error. Hmm.
+
+  Wait, actually let me recheck one: Section 3.6 "Human minus continuous MIC is +0.076 [+0.011, +0.143], and human minus binary MIC is +0.004 [-0.056, +0.097]." CSV: expert minus quant-continuous 0.07644 [0.01096, 0.14263] ✓; expert minus quant-binary 0.00422 [-0.05555, 0.09677] ✓.
+
+  Hmm so the numbers all check out. The user says "Do not invent ... numerical outcomes" — so the critique should verify the printed numbers against CSVs and note consistency, then focus on wording-level errors and limitations.
+
+  Wording-level errors I can defend:
+
+  ERROR 1: Section 3.6: "Human-minus-shuffled-human paired ΔRMSE is -0.137 [-0.275, -0.055]" — but then text says "Real human labels yield lower loss than shuffled human labels under this matched training procedure." Note sign convention: ΔRMSE defined as expert minus shuffled; negative favours real. Fine.
+
+  ERROR 2 — I think I finally see one: Section 3.2 says "The paired expert-minus-shuffled-expert ΔRMSE is −0.175, with a nested seed/scaffold 95% interval [−0.322, −0.024]." And Section 3.6 FT: −0.137. Both labelled "paired"; fine.
+
+  ERROR 3 — Section 2.7 says "Ten thousand paired seed/scaffold draws supply exploratory intervals for mean seed-specific rank differences". Section 2.6 defines the RMSE contrast procedure (average squared losses across seeds before sqrt) but the rank intervals use mean seed-specific differences. OK.
+
+  Maybe the intended errors are about overclaiming:
+
+  (a) Section 3.3: "The positive expert-versus-shuffled contrast also appears with c3-MoLFormer" — but wait, Table 2 shows c3-MoLFormer raw 1.649, human 1.705 — human WORSE than raw by 0.056; shuffled 1.818. Δ −0.113 plausible.
+
+  (b) Section 3.2 last paragraph: "Relative to raw MolFormer, expert supervision increases error by +0.185 [+0.050, +0.404]." Table 3 raw not shown for 529 panel; fine.
+
+  Hmm OK. Also check: Section 3.4 "pooled-minus-exact ΔRMSE is −0.092 [−0.159, −0.001]" — Table 3: 1.525−1.617=−0.092 ✓.
+
+  So the draft is internally consistent. The critique should then honestly report: numbers checked against the provided contrast tables are consistent (list a couple of verifications), and then give the material limitations and a small number of concrete wording errors. But the user explicitly asks for "concrete errors with quoted wording and a correction". If I can't find numerical errors, I must identify genuine textual errors:
+
+  Genuine error 1: Section 3.6: "Human-minus-shuffled-human paired ΔRMSE is -0.137 [-0.275, -0.055]" — matches. Not error.
+
+  Genuine error 2: Conclusions: "Matched-molecule interventions show that real label assignment matters for the two MolFormer representations" — For the direct-rank outcome in matched FT, real-vs-shuffled CI includes zero; for RMSE it excludes zero. The claim is about label assignment broadly; the draft itself qualifies direct rank as unresolved. Acceptable but the Conclusion overgeneralises slightly: the direct label-assignment advantage is unresolved. Also for c3/ChemBERTa/ChemFM frozen, effect only in 2 of 4 backbones. The Conclusions' summary "Matched-molecule interventions show that real label assignment matters for the two MolFormer representations" is supported for RMSE. Fine-ish.
+
+  Genuine error 3 — FOUND ONE: Section 3.6 says "human-minus-raw is -0.078 [-0.189, +0.001]" and concludes "Improvement over the raw-feature reference remains unresolved." But the same section's Table 4 lists raw RMSE 1.607 and human 1.529, and the abstract says "1.529 for human labels versus ... 1.607 for raw features". Consistent.
+
+  Genuine error 4 — Section 2.3: "The embedding layer and lowest four encoder layers remain frozen, accounting for 16.0 of 44.4 million parameters." And Section 2.7: 28,375,297 trainable of 44.4M. 44.4M − 28.375M = 16.02M ✓.
+
+  Genuine error 5 — Hmm: Section 2.7 says "MolFormer uses the same pinned checkpoint as Section 2.3." ✓.
+
+  Genuine error 6 — Section 3.1 "The six-descriptor reference reaches Q-HERO R² = 0.057." vs Section 3.1 first paragraph "raises mean downstream R² from 0.134 for frozen MolFormer" — fine.
+
+  OK here's another thought — maybe there IS a numeric error: Section 3.6: "The corresponding mean R² values are 0.205, 0.282 and 0.209, with raw R² 0.122." Table 4 ✓.
+
+  And: "Direct human rank agreement is 0.197 ± 0.020" — Table 4 ✓. "versus 0.039 ± 0.095 for shuffled human labels" — Table 4: 0.039 ± 0.095 ✓. "and 0.326 ± 0.060 for continuous MIC" ✓.
+
+  Alright — maybe the checkable error: Section 3.6 "human minus continuous MIC is -0.129 [-0.239, -0.004]" but direct_contrasts says -0.1286, CI [-0.2389, -0.0039] → -0.129 [-0.239, -0.004] ✓.
+
+  Given the thoroughness, I now think the intended critique is:
+
+  1. One or two genuine factual/wording errors that I should identify carefully. Let me scan once more for overclaims:
+
+  - Section 3.2: "This supports an effect of the structure–label assignment in this specified algorithm." OK, qualified.
+  - Section 3.4: "Restricting numerical supervision to the target organism therefore does not automatically improve transfer in this setting." OK.
+  - Section 3.6: "Real human labels yield lower loss than shuffled human labels under this matched training procedure." OK.
+  - Abstract: "restrict causal interpretation to controlled replacements within specified learning procedures" OK.
+  - Section 1: "A real-versus-shuffled label intervention addresses the third question." OK.
+
+  - POTENTIAL ERROR: Section 2.6: "Real-versus-shuffled labels preserve class counts and source chemistry while disrupting the structure–label relation." For continuous MIC shuffled — "class counts" doesn't apply; minor wording. Could flag as minor wording imprecision: for continuous targets, "class counts" is inapplicable. Correction: "preserve the marginal label distribution". That's a legitimate concrete wording error.
+
+  - POTENTIAL ERROR: Section 2.4: "Binary MIC uses a source-training-only threshold targeting the expert positive prevalence; MIC ties prevent exact prevalence matching." OK.
+
+  - POTENTIAL ERROR: Section 2.7: "The human and binary-MIC training arms each contain 52 positive calls among 377 molecules in this panel." Fine.
+
+  - POTENTIAL ERROR (real one?): Section 3.6: "Every trained arm has identical initial weights within seed, source split, minibatch order and 360-update budget." ✓.
+
+  - Section 2.7: "Five seeds (0–4) share initial weights, minibatch permutations and stochastic seeds across arms." ✓.
+
+  - Hmm: Section 2.7: "Attention feature maps are refreshed during native MolFormer training and deterministic in evaluation" — MolFormer uses attention biases refreshed per batch? OK.
+
+  - Section 3.5: "Similar median absolute errors can coexist with different RMSE because large residuals contribute disproportionately to squared loss." ✓.
+
+  - Figure 4 caption: "(a) Exact uncensored source MIC, aggregated by molecule and organism class after evaluation-cation exclusion, for mono- and bis-cationic QACs in Gram-positive, Gram-negative and fungal classes; a molecule can occur in several classes." OK.
+
+  - Section 3.5: "Source MIC records are aggregated once per molecule and organism class before plotting" — but Section 2.1.2 says pooled targets retain censoring bounds; Figure 4a says "Exact uncensored" — fine.
+
+  Now, "material limitations" the user wants:
+
+  1. Human annotation provenance entirely absent (H1–H7 placeholders): cannot assess whether labels encode independent chemical intuition or memorised measurements; the draft itself flags this. Inter-rater agreement cannot be computed. This limits interpretation of "human supervision" construct.
+
+  2. The "human benefit" question is unresolved: human vs raw CI includes zero in every backbone; so the paper's title/framing "Human versus Quantitative Supervision" risks implying a concluded competition. The strongest supported statements are negative/qualifying.
+
+  3. Five seeds and 29 scaffold groups; bootstrap intervals conditional on fixed target folds; exploratory, unadjusted; multiple contrasts — risk of selective emphasis. The extension "followed inspection of earlier analyses" — post-hoc.
+
+  4. Shuffled controls: five single permutations, not calibrated permutation nulls; the real-vs-shuffled RMSE effect sizes (−0.14 to −0.18 log2 µM) are modest relative to absolute RMSE ~1.5–1.8.
+
+  5. Direct rank agreement 0.197 is weak in absolute terms (and its real-vs-shuffled interval includes zero); rank agreement for shuffled human has SD 0.095 and mean 0.039 — the human direct signal is small.
+
+  6. Q-HERO MIC provenance: no row-level strain/lab metadata; pooled MIC across organisms as target for "antibacterial" claims; target refitting uses Q-HERO MIC in fold training, so Q-HERO is not fully external for the downstream-refit metric (draft acknowledges fold-training use but the "external" claim should be tempered — the target regressor is trained on Q-HERO MIC, making the task in-distribution refitting rather than pure external prediction). Actually the draft says "Q-HERO is external to representation training, while its fold-training MIC values are used for downstream refitting." OK acknowledged.
+
+  7. OOD-17 all negative R²; QAC R² near zero — absolute accuracy modest; claims should stay modest.
+
+  8. Archived protocol uses unequal source sizes (740 vs 1153) and different epoch budgets — descriptive only; draft acknowledges.
+
+  9. The frozen-feature MLP vs partial FT comparison changes architecture, schedule, environment — adaptation contrast not isolating capacity (acknowledged).
+
+  10. Causal language: "real label assignment matters" is an algorithmic intervention claim, not a human-annotation effect; draft mostly careful.
+
+  Also: binary MIC threshold "targeting expert positive prevalence" ties the binary arm's definition to the expert labels — fine.
+
+  One more possible concrete error: Section 3.2 "Q-HERO-405 mean RMSE is 1.607 for expert supervision, 1.497 for continuous MIC, 1.646 for binary MIC and 1.780 for shuffled expert labels. The paired expert-minus-shuffled-expert ΔRMSE is −0.175..." — with n=5 seeds. Fine.
+
+  Another: Section 2.6 "Ten thousand paired bootstrap replicates resample source initialisation seeds and whole target cation-scaffold groups." With only 5 seeds, resampling seeds means resampling 5 values with replacement — fine, acknowledged as exploratory.
+
+  Also potential error: "The paired human-minus-shuffled rank difference is +0.159 [-0.001, +0.429]" — the draft says "The human real-minus-shuffled rank interval includes zero, so this direct label-assignment advantage remains unresolved despite its positive point estimate." ✓ consistent.
+
+  Hmm, what about Section 3.6: "Direct human rank agreement is 0.197 ± 0.020... The paired human-minus-shuffled rank difference is +0.159 [-0.001, +0.429]; human minus continuous MIC is -0.129 [-0.239, -0.004]." Then Figure 5 caption. ✓.
+
+  Wait — one more check: the abstract says "direct human rank agreement 0.197 without target refitting" and Conclusions repeat. ✓.
+
+  Check the claim in 3.6 "human minus binary MIC is +0.004 [-0.056, +0.097]. Expert-versus-continuous supervision changes both target content and objective, while the binary-MIC comparison shares a binary objective. Neither comparison establishes statistical equivalence." Hmm — human minus continuous CI [+0.011, +0.143] EXCLUDES zero, so for that contrast the data do suggest a real difference (exploratory) favouring continuous MIC, not equivalence. The sentence "Neither comparison establishes statistical equivalence" is true (absence of evidence), but juxtaposed it may mislead; and in Conclusions "Quantitative supervision remains the stronger point estimate in several comparisons" understates that the human-minus-continuous RMSE and direct-rank intervals exclude zero. Is that a factual error? It's imprecise wording — the draft could state that two exploratory intervals favour continuous MIC. I'd flag as wording imprecision, not error.
+
+  Now — is there a true factual error anywhere? Let me check Table 4 "Direct rank agreement" for shuffled binary: -0.026 ± 0.146. OK.
+
+  Table 4 R² shuffled human 0.056 ± 0.048. OK.
+
+  Check Section 3.1 numbers vs any CSV: not provided (archived). OK.
+
+  Check Figure 2b: "expert model... mean Q-HERO rank agreement 0.397 ± 0.050 across three seeds, compared with 0.547 ± 0.071 for molecule-level MIC and 0.612 ± 0.030 for record-level MIC." Can't verify; fine.
+
+  OK here's another candidate error — Section 2.2: "Its evaluation collections contain 105 QAC structures, 411 Q-HERO structures and 17 newly synthesised QACs." But Section 3.1 says "On QAC-105". ✓ 105.
+
+  And "Q-HERO-405 contains 386 unique cations in 29 cation-scaffold groups" while archived uses Q-HERO-411. ✓ distinct.
+
+  Hmm, one more: Section 2.1 "The supplied expert archive contains 1,103 final annotation entries: 244 Good and 859 Bad." But Section 2.3 "eligible sources contain 740 expert-labelled molecules" and full source 712, matched 681, exact 529. ✓ attrition explained.
+
+  I think the honest critique: the draft is largely consistent; the verifiable numbers match the supplied contrast tables. Concrete errors I can assert:
+
+  1. Section 2.6: "Real-versus-shuffled labels preserve class counts and source chemistry" — inapplicable to continuous-MIC shuffled arms (no classes). Correction: "preserve the marginal label distribution (class counts for binary arms, empirical distribution for continuous arms)".
+
+  2. Section 3.6 / Conclusions wording: "Quantitative supervision remains the stronger point estimate in several comparisons" understates the matched-FT result: the human-minus-continuous ΔRMSE interval [+0.011, +0.143] and the direct-rank interval [−0.239, −0.004] exclude zero, so under the paper's own exploratory-interval standard, continuous MIC is better in those two contrasts, not merely a "stronger point estimate". Correction: state that these two exploratory intervals exclude zero. (This is a wording accuracy issue, not a demand for new experiments.)
+
+  3. Possibly: Section 3.2's claim "Continuous MIC also improves on shuffled continuous MIC: ΔRMSE −0.107 [−0.228, −0.016]" — fine.
+
+  4. Abstract: "Q-HERO scaffold-CV RMSE 1.529 for human labels versus 1.453 for continuous MIC and 1.607 for raw features" — accurate but omits binary MIC 1.525, which nearly equals human and would be relevant to a fair reading; omission rather than error.
+
+  Hmm, is there an actual error in "direct human rank agreement 0.197 without target refitting" — no.
+
+  5. One more potential real error: Section 3.6 states "Human-minus-shuffled-human paired ΔRMSE is -0.137 [-0.275, -0.055]". The provided CSV says -0.1368, so -0.137 ✓. Not error.
+
+  6. Section 2.4: "AdamW uses learning rate 0.001 ... 80 fixed epochs, with five paired initialisation seeds (0–4)." ✓.
+
+  7. Section 2.5: "ChemBERTa uses an attention-masked hidden-token mean" ✓.
+
+  Let me also check the claim "MolFormer and c3-MoLFormer are checkpoints of the same architecture with different pretraining" — c3-MoLFormer is from ChemBERTa-3 (5), which continued pretraining of MoLFormer? Plausible; can't verify.
+
+  Now — is there possibly an error about "44.4 million parameters" for MolFormer-XL? MolFormer-XL in Ross et al. has... I genuinely am unsure; the "XL" suggests large. Some sources: MolFormer-XL: 44.4M parameters? Hmm, actually I recall MolFormer-XL has around 44.4M? The model card: ibm/MoLFormer-XL-Large — hidden 768? No... MoLFormer-XL: 12 layers, d=768 would be ~86M with embeddings... Hmm. MolFormer-XL-Large actually: num_hidden_layers=12, hidden_size=768, vocab 2362... ~44.4M could be right if embedding is small (SMILES char vocab). Actually yes — MolFormer uses a small vocab (SMILES tokens ~2362? no, ~600). With vocab ~1500 and d=768, embedding ≈ 1.2M. 12 layers × ~7M? A transformer layer with d=768 is ~7M (4d² ×... 12×768²×... ≈ 7.1M). 12 layers ≈ 85M. Hmm that exceeds 44.4M. Maybe 6 layers? Whatever — can't verify; do not flag.
+
+  Also "16.0 of 44.4 million parameters" frozen for embeddings + 4 layers → implies 4 layers + embedding = 16M, so 8 layers trainable ≈ 12M... but Section 2.7 says layers 4–11 trained (8 layers) + pooler + head = 28.4M. Then 4 layers + embedding = 16M → per layer ~ (16M − embedding)/4. If embedding ~1.2M, per layer ~3.7M → d≈550? Inconsistent with typical but internally consistent between 2.3 and 2.7. Not flaggable.
+
+  Given the 700-word cap, structure:
+
+  - Brief statement of what was checked (numbers verified against supplied contrast tables; consistent).
+  - Concrete errors (2–4 items, quoted wording + correction), distinguishing factual errors vs optional follow-ups.
+  - Material limitations (bulleted, concise).
+
+  Let me finalize the concrete errors list:
+
+  E1 (factual/wording): §2.6 "Real-versus-shuffled labels preserve class counts" — wrong for continuous arms. Correction: preserve marginal label distributions; class counts only for binary arms.
+
+  E2 (wording accuracy): Conclusions "Quantitative supervision remains the stronger point estimate in several comparisons" — understates: in matched FT, human-minus-continuous ΔRMSE +0.076 [+0.011, +0.143] and direct-rank −0.129 [−0.239, −0.004] have exploratory intervals excluding zero. Correction: state that these exploratory intervals favour continuous MIC; only the raw-feature and binary-MIC contrasts remain unresolved.
+
+  E3 (imprecision): §3.6 "Neither comparison establishes statistical equivalence" — technically true but risks conflating "no equivalence shown" with "no difference shown" for the continuous contrast, whose interval excludes zero. Correction: explicitly separate the two contrasts.
+
+  E4 (minor, factual presentation): Abstract lists human 1.529 vs continuous 1.453 and raw 1.607 but omits binary MIC 1.525, which is statistically indistinguishable from human and directly relevant to "human vs quantitative supervision" framing. Not an error; note as presentation.
+
+  Hmm, the user said "Distinguish a factual error from an optional follow-up experiment." So the follow-up experiments (e.g., preregistered confirmatory run, more seeds, direct-transfer shuffled null in archived protocol, annotation metadata recovery) go in limitations, not errors.
+
+  Also check: is "Five shuffled runs are diagnostic controls, rather than a calibrated multi-permutation significance test" consistent with "This supports an effect of the structure–label assignment"? The draft appropriately hedges.
+
+  One more possible factual error: §3.2 "The expert representation is close to raw MolFormer (mean RMSE 1.602), with paired ΔRMSE +0.005 [−0.102, +0.115]." Table 2 raw 1.602, human 1.607 ✓.
+
+  And §3.3 says "None of the four backbones establishes an expert-supervision benefit over its raw features." Check Table 2: human vs raw: MolFormer 1.607 vs 1.602 (worse); c3 1.705 vs 1.649 (worse); ChemBERTa 1.844 vs 1.821 (worse); ChemFM 1.784 vs 1.681 (worse). ✓ true.
+
+  Also §3.4: Table 3 R² for expert −0.085 while pooled +0.209. ✓.
+
+  Also "The QMR audit identifies 38 same-compound/same-strain replicate strata over 23 compounds and five strains; their median log2 range is zero and 94.7% lie within one dilution." Can't verify; fine.
+
+  I might also flag: §3.6's statement "Real human labels yield lower loss than shuffled human labels under this matched training procedure" is supported for RMSE (CI excludes zero) but the parallel direct-rank claim is explicitly unresolved; the Conclusions sentence "Real human labels yield lower loss than shuffled human labels under this matched training procedure. Improvement over the raw-feature reference remains unresolved." is accurate. ✓.
+
+  One more check — the Conclusions: "Matched-molecule interventions show that real label assignment matters for the two MolFormer representations, while exposing dependence on backbone and source chemistry and no established added value over raw pretrained features." ✓ accurate.
+
+  So final answer structure (~650-700 words):
+
+  **Checks performed**: printed contrasts match provided CSVs (give 2 examples: expert−shuffled −0.137 [−0.275, −0.055] vs −0.1368 [−0.2746, −0.0550]; rank +0.159 [−0.001, +0.429] vs 0.1586 [−0.0010, 0.4290]; human−continuous +0.076 [+0.011, +0.143] vs 0.0764 [0.0110, 0.1426]). Archived-protocol numbers not independently verifiable here.
+
+  **Concrete errors**:
+  1. §2.6 quote "Real-versus-shuffled labels preserve class counts and source chemistry" — factually inapplicable to the continuous-MIC shuffled arms (no class counts). Correction: "...preserve the marginal label distribution (class counts for binary arms; empirical distribution for continuous arms) and source chemistry..."
+
+  2. Conclusions quote "Quantitative supervision remains the stronger point estimate in several comparisons" — understates the matched-FT evidence: the exploratory intervals for human−continuous MIC exclude zero for both RMSE [+0.011, +0.143] and direct rank [−0.239, −0.004]. By the paper's own interval standard these are differences, not merely point estimates. Correction: "In matched partial fine-tuning, exploratory intervals favour continuous MIC over human labels for downstream RMSE and direct rank agreement; comparisons against binary MIC and raw features remain unresolved."
+
+  3. §3.6 quote "Neither comparison establishes statistical equivalence" — accurate but placed after a contrast whose interval excludes zero; risks reading equivalence testing into an exploratory superiority analysis. Correction: add that human−continuous interval excludes zero (superiority of continuous MIC under exploratory standard), while equivalence is not assessed anywhere.
+
+  4. Minor: Abstract reports human 1.529 vs continuous 1.453 and raw 1.607 but not binary MIC 1.525, the arm most favourable to human supervision; add it for balance (presentation, not error).
+
+  **Material limitations**:
+  - Annotation provenance (H1–H7) absent: construct validity of "human supervision" unverifiable; agreement cannot be computed; possibility that annotators saw MIC cannot be excluded → the paper cannot separate independent chemical intuition from transmitted measurements. This is the central limitation, acknowledged.
+  - Human-vs-raw benefit unresolved in all backbones; the headline question "human vs quantitative" is answered negatively or unresolved everywhere; absolute performance modest (QAC R² ≈ 0, OOD-17 negative, direct human rank 0.197).
+  - Five seeds, 29 scaffold groups, intervals conditional on fixed folds, unadjusted, post-hoc extension after inspecting earlier analyses; five single permutations are weak nulls.
+  - Direct-transfer shuffled null unavailable for the archived protocol; direct human advantage (real vs shuffled rank) has CI including zero.
+  - Q-HERO target refitting uses Q-HERO MIC in fold training → downstream-refit metrics are not purely external prediction; row-level assay provenance missing, so "denoising" and organism-context claims remain speculative (draft acknowledges).
+  - Archived comparison confounds label type with source size and update budget (acknowledged); adaptation contrast confounds architecture/schedule/environment (acknowledged).
+
+  **Optional follow-ups** (distinguished from errors): annotation metadata recovery + agreement; preregistered confirmatory matched run with more seeds and calibrated permutation nulls; direct-transfer shuffled controls in archived protocol; row-level assay metadata for Q-HERO.
+
+  Word count check — need ≤700 words. Let me write tightly.
+
+  Also the user says "Do not invent annotation votes, methods, agreement, numerical outcomes, equivalence, preregistration or chemical mechanisms" — I'm complying; I only use provided numbers.
+
+  Also should I verify "94.7%" or other numbers? Not needed.
+
+  Also note one thing about the framing "The authors authorised this external internal review" — fine.
+
+  Also double-check E2 numbers: §3.6 says "Human minus continuous MIC is +0.076 [+0.011, +0.143]" (RMSE, positive = human worse) and "human minus continuous MIC is -0.129 [-0.239, -0.004]" (rank, negative = human worse). Both exclude zero ✓.
+
+  And the frozen-feature §3.2: "Expert minus continuous MIC is +0.109 [−0.001, +0.226]" — includes zero (barely). So frozen continuous-vs-human unresolved, but matched FT resolved. Good nuance.
+
+  Also abstract: "Q-HERO scaffold-CV RMSE 1.529 for human labels versus 1.453 for continuous MIC and 1.607 for raw features, with direct human rank agreement 0.197" ✓ matches Table 4.
+
+  One more potential error to consider: §3.6 says "The human real-minus-shuffled rank interval includes zero." ✓ matches [−0.001, +0.429].
+
+  I should also mention that the draft is careful about causal language — a positive note, briefly.
+
+  Now write ≤700 words. Aim ~650.
+
+To resume this session: kimi -r session_b7bd055d-6d0b-4454-a10a-fe5b00bcf13d

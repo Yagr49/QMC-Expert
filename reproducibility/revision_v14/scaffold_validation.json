@@ -1,0 +1,16 @@
+{
+  "completed": true,
+  "jobs": 31,
+  "QAC105": 105,
+  "QAC_scaffolds": 29,
+  "scaffold_train_test_overlap": 0,
+  "fold_compounds": {
+    "0": 21,
+    "1": 21,
+    "2": 21,
+    "3": 21,
+    "4": 21
+  },
+  "OOD_prediction_max_difference": 0.0,
+  "protocol_timing": "Exploratory follow-up after initial extension outcomes and protocol reviews"
+}

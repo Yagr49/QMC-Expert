@@ -1,0 +1,35 @@
+[
+  {
+    "name": "legacy-raw",
+    "arm": "legacy-raw",
+    "seed": -1,
+    "provenance": "legacy-overlapping-source",
+    "encodings": [
+      "separate",
+      "onehot",
+      "text"
+    ]
+  },
+  {
+    "name": "legacy-human",
+    "arm": "legacy-human",
+    "seed": -1,
+    "provenance": "legacy-overlapping-source",
+    "encodings": [
+      "separate",
+      "onehot",
+      "text"
+    ]
+  },
+  {
+    "name": "legacy-quantitative",
+    "arm": "legacy-quantitative",
+    "seed": -1,
+    "provenance": "legacy-overlapping-source",
+    "encodings": [
+      "separate",
+      "onehot",
+      "text"
+    ]
+  }
+]

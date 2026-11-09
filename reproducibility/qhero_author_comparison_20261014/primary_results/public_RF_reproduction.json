@@ -1,0 +1,26 @@
+{
+  "n": 421,
+  "cutoff_uM": 8,
+  "positive_fraction": 0.8907363420427553,
+  "cv_mean": {
+    "AUROC": 0.7053601694915254,
+    "AUPRC": 0.9393533993733149
+  },
+  "cv_fold_sd_ddof0": {
+    "AUROC": 0.10077548092548458,
+    "AUPRC": 0.024874462601104434
+  },
+  "heldout20": {
+    "AUROC": 0.6944444444444444,
+    "AUPRC": 0.9182827655124541,
+    "n": 85,
+    "positives": 76,
+    "prevalence": 0.8941176470588236
+  },
+  "reported": {
+    "cv_AUROC": 0.8036,
+    "cv_AUPRC": 0.9672,
+    "test_AUROC": 0.5592,
+    "test_AUPRC": 0.9121
+  }
+}

@@ -1,0 +1,27 @@
+• # External review: v14 QAC manuscript
+
+  **Overall.** This revision is transparent, internally consistent, and unusually disciplined about scope: every headline number I checked against `summary.csv`/`contrasts.csv` matches, grouping logic matches the claims attached to it, equivalence and causality are explicitly disclaimed, and adverse results (negative R², the median-baseline win on OOD S. aureus MIC, the IT505 bound failure) are retained rather than buried. The defects below are therefore about tightening validity, not rebuilding the study.
+
+  **Major defects**
+
+  1. **Informative censoring is excluded from OOD metrics.** IT505's E. coli MBC (>500 mg/L) is dropped from every exact-value metric, so the headline pooled OOD MAE/RMSE (1.649/2.054) rests on 67 of 68 values — and the excluded point is the worst failure (human predictions 21.2–37.0 mg/L). MIC bounds are informative: ">500" denotes inactivity, so excluding censored points biases OOD error downward exactly where absolute accuracy matters. *Fix:* report a bound-aware score (e.g., hinge error max(0, log2 500 − log2 ŷ)) alongside exact-value metrics, and state explicitly whether any historical QAC workbook entries were converted from bounds (4.3 asserts all 420 are uncensored in the supplied file only).
+
+  2. **Annotation provenance (H1–H7) gates the central interpretation.** If annotators saw the MIC/MBC values later used as quantitative supervision (H4), human judgement is not an independent supervisory channel and the human-vs-MIC contrast becomes measurement-derived signal versus measurement-derived signal; the bias direction is not signable ex ante. *Fix:* complete H1–H7 before submission; until then label the Conclusions claim "provisional pending blinding/adjudication records," not only in 4.1/4.4.
+
+  3. **Post-hoc narrative selection is disclosed but under-specified.** The abstract and introduction say Q-HERO was demoted "after inspection of earlier analyses" without stating what was seen. *Fix:* one main-text sentence giving the direction/magnitude of the demoted results so readers can judge selective emphasis without excavating SI. Similarly, flag the scaffold real-vs-shuffled contrast ([−0.2591, −0.0001]) as hypothesis-generating in the Conclusions, not just Results — its upper limit is a hair below zero among many unadjusted contrasts.
+
+  4. **Uncertainty is asymmetric for the raw reference.** Raw MolFormer has one decoder run; bootstrap intervals for human-vs-raw contrasts resample only the five trained-arm seeds while the raw prediction is held fixed, and bootstrapping five seed indices is coarse. The "improvement over raw features" claim carries one-sided uncertainty. *Fix:* run the raw decoder across matched decoder seeds, or state in 4.4 that raw-arm decoder variability is unrepresented.
+
+  5. **Training unit differs across arms and is never stated.** The human arm uses one call per training molecule (377; 52 positive); MIC arms draw on records that repeat molecules (4,938 records / 681 molecules). If MIC arms train on records, molecules with more assays get more gradient weight, so "matched source chemistry" no longer implies matched supervision size or weighting. *Fix:* state per-arm training-example counts and aggregation (per-record vs per-molecule mean log MIC) in 4.2.
+
+  6. **Internal inconsistency in cation-fold construction.** 105 salts / 103 cations cannot give "five folds of 21 salts each" under cation grouping (103 is not divisible by 5; duplicated cations inflate some folds), yet keeping counterion forms together requires cation grouping. Exact 21-salt folds are possible only under salt grouping, which contradicts that claim. *Fix:* report the actual grouping key and per-fold composition.
+
+  **Minor**
+
+  7. Text-vs-one-hot confounds task-description content with dimensionality (4 vs 1,536 features, constant within task). A random 1,536-d constant-per-task control would isolate content from dimension; the text's own caution is appreciated but a control would make the negative result interpretable.
+  8. Primary inference rests on pooled RMSE across endpoints with heterogeneous error scale (S. aureus MBC ≈1.9–2.0 vs E. coli MIC ≈1.6–1.7 log2 units), so pooling weights endpoints by their variance. A per-endpoint standardized sensitivity with multiplicity control would harden the main contrast.
+
+  **Validity confirmed.** Grouping validity: cation-held-out is correctly framed as within-family interpolation, scaffold-held-out as the extrapolation bound, OOD-17 as new families. Controls (marginal-preserving shuffle, frozen raw reference, paired seeds, prevalence-matched binary arm) are well constructed; legacy overlapping-source encoders are correctly quarantined. Task encoding is correctly scoped to four fixed strain/endpoint texts with a pinned cache and no compound data. Bounded conclusions are handled well: no equivalence margin, no causal language, exploratory unadjusted intervals labelled as such.
+
+  ~640 words.
+

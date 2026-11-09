@@ -1,0 +1,5 @@
+model,train,n_train,evaluation,n,R2,RMSE
+Author_RF21_refit,author_descriptor_train80,80,test20,20,0.6491613775156464,1.093782292173194
+Author_RF21_refit,author_descriptor_train80,80,newdata7,7,0.17133105690632244,1.4940992815164145
+Author_RF21_refit,matched_valid_smiles_train78,78,test20,20,0.5445628699913481,1.2462105012113736
+Author_RF21_refit,matched_valid_smiles_train78,78,newdata7,7,0.3535046584053695,1.3196890874600145

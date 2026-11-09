@@ -1,0 +1,21 @@
+{
+  "completed": true,
+  "fits": 30,
+  "configurations": 6,
+  "folds": 5,
+  "fold_split": "KFold over molecule-task rows, shuffle=True, random_state=42",
+  "decoder": "CatBoost 500/depth6/lr.05/seed42",
+  "SD": "Across five fold scores; numpy.std ddof=0, matching the original CV code; not a 95% CI",
+  "provenance": "New approximate reconstruction of the author CV approach, not recovered original CV uncertainty",
+  "task_codes": "categorical_org_met matches April cell6; task_id matches May cell20; text uses reconstructed cached October vectors",
+  "encoder": "Existing saved human encoder, no source retraining and no change to its historical SMOTE",
+  "exposure": "Different tasks for a molecule can cross row-wise CV folds; grouped-transfer results are separate",
+  "seconds": 72.59633159637451,
+  "script_sha256": "4dac03ea7d8039184095c954543a3f8cd0814e6146f7fe853ddd46361a0af091",
+  "input_sha256": {
+    "original108_endpoints.csv": "02a5c389a0d91adecb01e46654d59cebe6907b461d54847e290433e51d8b8ab0",
+    "v5_raw_original108.npy": "1a85303ab724be2c0da4704ddf706ed18f0b8376620c666bfa76c03336985aa9",
+    "v5_human_original108.npy": "3ec6a515d1aefce0d35574636c8bb5d9ae73bdb143e329a050e639f12779cfdf",
+    "task_text_embeddings.npy": "58f5b9417d437c18f69503322aec6923d03bbf05441d53e355cc1910600c1ff6"
+  }
+}

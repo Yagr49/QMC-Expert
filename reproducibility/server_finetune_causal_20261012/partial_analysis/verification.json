@@ -1,0 +1,319 @@
+{
+  "completed": false,
+  "partial_snapshot": true,
+  "snapshot": "reproducibility/server_finetune_causal_20261012/snapshot_20261012T180020Z",
+  "direct_fits": 100,
+  "ablation_fits": 164,
+  "direct_pairing_checks": [
+    {
+      "seed": 0,
+      "schema": "cation",
+      "fold": 0,
+      "fits": 10,
+      "same_batch_order": true,
+      "same_linear_head": true,
+      "same_train_only_scale": true
+    },
+    {
+      "seed": 0,
+      "schema": "cation",
+      "fold": 1,
+      "fits": 9,
+      "same_batch_order": true,
+      "same_linear_head": true,
+      "same_train_only_scale": true
+    },
+    {
+      "seed": 0,
+      "schema": "cation",
+      "fold": 2,
+      "fits": 9,
+      "same_batch_order": true,
+      "same_linear_head": true,
+      "same_train_only_scale": true
+    },
+    {
+      "seed": 0,
+      "schema": "cation",
+      "fold": 3,
+      "fits": 9,
+      "same_batch_order": true,
+      "same_linear_head": true,
+      "same_train_only_scale": true
+    },
+    {
+      "seed": 0,
+      "schema": "cation",
+      "fold": 4,
+      "fits": 9,
+      "same_batch_order": true,
+      "same_linear_head": true,
+      "same_train_only_scale": true
+    },
+    {
+      "seed": 0,
+      "schema": "full-QAC105",
+      "fold": -1,
+      "fits": 9,
+      "same_batch_order": true,
+      "same_linear_head": true,
+      "same_train_only_scale": true
+    },
+    {
+      "seed": 0,
+      "schema": "scaffold",
+      "fold": 0,
+      "fits": 9,
+      "same_batch_order": true,
+      "same_linear_head": true,
+      "same_train_only_scale": true
+    },
+    {
+      "seed": 0,
+      "schema": "scaffold",
+      "fold": 1,
+      "fits": 9,
+      "same_batch_order": true,
+      "same_linear_head": true,
+      "same_train_only_scale": true
+    },
+    {
+      "seed": 0,
+      "schema": "scaffold",
+      "fold": 2,
+      "fits": 9,
+      "same_batch_order": true,
+      "same_linear_head": true,
+      "same_train_only_scale": true
+    },
+    {
+      "seed": 0,
+      "schema": "scaffold",
+      "fold": 3,
+      "fits": 9,
+      "same_batch_order": true,
+      "same_linear_head": true,
+      "same_train_only_scale": true
+    },
+    {
+      "seed": 0,
+      "schema": "scaffold",
+      "fold": 4,
+      "fits": 9,
+      "same_batch_order": true,
+      "same_linear_head": true,
+      "same_train_only_scale": true
+    }
+  ],
+  "original_prediction_replays": [
+    {
+      "arm": "expert",
+      "seed": 0,
+      "schema": "cation",
+      "n": 420,
+      "max_prediction_difference": 0.0
+    },
+    {
+      "arm": "expert",
+      "seed": 0,
+      "schema": "full-QAC105",
+      "n": 68,
+      "max_prediction_difference": 0.0
+    },
+    {
+      "arm": "expert",
+      "seed": 0,
+      "schema": "scaffold",
+      "n": 420,
+      "max_prediction_difference": 0.0
+    },
+    {
+      "arm": "expert",
+      "seed": 1,
+      "schema": "cation",
+      "n": 420,
+      "max_prediction_difference": 0.0
+    },
+    {
+      "arm": "expert",
+      "seed": 1,
+      "schema": "full-QAC105",
+      "n": 68,
+      "max_prediction_difference": 0.0
+    },
+    {
+      "arm": "expert",
+      "seed": 1,
+      "schema": "scaffold",
+      "n": 420,
+      "max_prediction_difference": 0.0
+    },
+    {
+      "arm": "expert",
+      "seed": 2,
+      "schema": "cation",
+      "n": 420,
+      "max_prediction_difference": 0.0
+    },
+    {
+      "arm": "expert",
+      "seed": 2,
+      "schema": "full-QAC105",
+      "n": 68,
+      "max_prediction_difference": 0.0
+    },
+    {
+      "arm": "expert",
+      "seed": 2,
+      "schema": "scaffold",
+      "n": 420,
+      "max_prediction_difference": 0.0
+    },
+    {
+      "arm": "expert",
+      "seed": 3,
+      "schema": "cation",
+      "n": 420,
+      "max_prediction_difference": 0.0
+    },
+    {
+      "arm": "expert",
+      "seed": 3,
+      "schema": "scaffold",
+      "n": 420,
+      "max_prediction_difference": 0.0
+    },
+    {
+      "arm": "raw-molformer",
+      "seed": -1,
+      "schema": "cation",
+      "n": 420,
+      "max_prediction_difference": 0.0
+    },
+    {
+      "arm": "raw-molformer",
+      "seed": -1,
+      "schema": "full-QAC105",
+      "n": 68,
+      "max_prediction_difference": 0.0
+    },
+    {
+      "arm": "raw-molformer",
+      "seed": -1,
+      "schema": "scaffold",
+      "n": 420,
+      "max_prediction_difference": 0.0
+    }
+  ],
+  "weight_rewind_shared_buffer_audit": {
+    "completed": true,
+    "smoke": false,
+    "configurations": 121,
+    "intact_all_exact": true,
+    "buffer_state_shared_within_seed": true,
+    "rewind_all_audit": [
+      {
+        "seed": 0,
+        "cohort": "QAC105",
+        "rewind_all_equal_across_arms": true
+      },
+      {
+        "seed": 0,
+        "cohort": "OOD17",
+        "rewind_all_equal_across_arms": true
+      },
+      {
+        "seed": 1,
+        "cohort": "QAC105",
+        "rewind_all_equal_across_arms": true
+      },
+      {
+        "seed": 1,
+        "cohort": "OOD17",
+        "rewind_all_equal_across_arms": true
+      },
+      {
+        "seed": 2,
+        "cohort": "QAC105",
+        "rewind_all_equal_across_arms": true
+      },
+      {
+        "seed": 2,
+        "cohort": "OOD17",
+        "rewind_all_equal_across_arms": true
+      },
+      {
+        "seed": 3,
+        "cohort": "QAC105",
+        "rewind_all_equal_across_arms": true
+      },
+      {
+        "seed": 3,
+        "cohort": "OOD17",
+        "rewind_all_equal_across_arms": true
+      },
+      {
+        "seed": 4,
+        "cohort": "QAC105",
+        "rewind_all_equal_across_arms": true
+      },
+      {
+        "seed": 4,
+        "cohort": "OOD17",
+        "rewind_all_equal_across_arms": true
+      }
+    ]
+  },
+  "rewind_all_predictions_equal": [
+    {
+      "seed": 0,
+      "schema": "cation",
+      "arms": 1,
+      "predictions_identical": true
+    },
+    {
+      "seed": 0,
+      "schema": "full-QAC105",
+      "arms": 1,
+      "predictions_identical": true
+    },
+    {
+      "seed": 0,
+      "schema": "scaffold",
+      "arms": 1,
+      "predictions_identical": true
+    },
+    {
+      "seed": 1,
+      "schema": "cation",
+      "arms": 1,
+      "predictions_identical": true
+    },
+    {
+      "seed": 1,
+      "schema": "full-QAC105",
+      "arms": 1,
+      "predictions_identical": true
+    },
+    {
+      "seed": 1,
+      "schema": "scaffold",
+      "arms": 1,
+      "predictions_identical": true
+    },
+    {
+      "seed": 2,
+      "schema": "cation",
+      "arms": 1,
+      "predictions_identical": true
+    },
+    {
+      "seed": 2,
+      "schema": "scaffold",
+      "arms": 1,
+      "predictions_identical": true
+    }
+  ],
+  "script_sha256": "52cc505b52427511cf0deb4141be384a0f0f033e1ce32a5168730d2f267c6562",
+  "interval_convention": "5000 paired seed/group draws, unadjusted, conditional on fitted models; four OOD families"
+}

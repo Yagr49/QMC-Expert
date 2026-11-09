@@ -1,0 +1,10 @@
+{
+  "prepared": true,
+  "completion": "reviewnotyetstarted",
+  "sources_sha256": {
+    "reproducibility/revision_v16/analysis/direct_summary.csv": "8b0327ce552bfad8397ddc72c8100e9da00f3cf50057f4c5abfd5806da12f561",
+    "reproducibility/revision_v19/analysis/seed_summary.csv": "6a970b83370f713d7ee6bcd5b2367c6a579fa037d871437752db01b9b701ca27",
+    "reproducibility/revision_v20/manuscript_v20_readable.md": "eff6b89195413e3e250e3af9086f538ff60079450cc223c73c7a54193339cbf2",
+    "reproducibility/revision_v18/sources/v5_modelling_text.md": "8ed217c2631553998449f537e33f33e06e16e8170c6dbcf7ffddedfa063e0fd3"
+  }
+}

@@ -1,0 +1,38 @@
+Traceback (most recent call last):
+  File "/home/yagr/coma_models_check_20261012/wait_and_run.py", line 31, in <module>
+    main()
+  File "/home/yagr/coma_models_check_20261012/wait_and_run.py", line 22, in main
+    raise RuntimeError('Dependency lane finished without the required marker')
+RuntimeError: Dependency lane finished without the required marker
+COMPLETED 1 / 31 expert_seed0 onehot elapsed 27
+COMPLETED 2 / 31 quant-continuous_seed0 onehot elapsed 28
+COMPLETED 3 / 31 raw-molformer onehot elapsed 29
+COMPLETED 4 / 31 expert-shuffled_seed0 onehot elapsed 30
+COMPLETED 5 / 31 quant-binary_seed0 onehot elapsed 30
+COMPLETED 6 / 31 quant-shuffled_seed0 onehot elapsed 30
+COMPLETED 7 / 31 quant-binary-shuffled_seed0 onehot elapsed 57
+COMPLETED 8 / 31 expert_seed1 onehot elapsed 57
+COMPLETED 9 / 31 quant-continuous_seed1 onehot elapsed 57
+COMPLETED 10 / 31 expert-shuffled_seed1 onehot elapsed 58
+COMPLETED 11 / 31 quant-shuffled_seed1 onehot elapsed 61
+COMPLETED 12 / 31 quant-binary_seed1 onehot elapsed 61
+COMPLETED 13 / 31 quant-continuous_seed2 onehot elapsed 86
+COMPLETED 14 / 31 quant-binary-shuffled_seed1 onehot elapsed 86
+COMPLETED 15 / 31 expert_seed2 onehot elapsed 86
+COMPLETED 16 / 31 quant-binary_seed2 onehot elapsed 88
+COMPLETED 17 / 31 quant-shuffled_seed2 onehot elapsed 90
+COMPLETED 18 / 31 expert-shuffled_seed2 onehot elapsed 90
+COMPLETED 19 / 31 expert_seed3 onehot elapsed 114
+COMPLETED 20 / 31 quant-binary-shuffled_seed2 onehot elapsed 115
+COMPLETED 21 / 31 quant-binary_seed3 onehot elapsed 117
+COMPLETED 22 / 31 expert-shuffled_seed3 onehot elapsed 118
+COMPLETED 23 / 31 quant-continuous_seed3 onehot elapsed 118
+COMPLETED 24 / 31 quant-shuffled_seed3 onehot elapsed 121
+COMPLETED 25 / 31 quant-binary-shuffled_seed3 onehot elapsed 143
+COMPLETED 26 / 31 expert_seed4 onehot elapsed 144
+COMPLETED 27 / 31 quant-continuous_seed4 onehot elapsed 146
+COMPLETED 28 / 31 expert-shuffled_seed4 onehot elapsed 147
+COMPLETED 29 / 31 quant-binary_seed4 onehot elapsed 147
+COMPLETED 30 / 31 quant-shuffled_seed4 onehot elapsed 149
+COMPLETED 31 / 31 quant-binary-shuffled_seed4 onehot elapsed 162
+DONE {"started": 1791813936.273382, "completed": true, "jobs": 31, "protocol_sha256": "354084456ca8bc2fed824a13d2d0eef082cd6d95655c20b973ab51c7ceff5bf7", "python": "3.12.7", "thread_count": 2, "workers": 6, "script_sha256": "7715e5683a760f0a0d038cd834d3d1d2453af4a29bc32a15d99c7253c283bc86", "input_sha256": {"configurations.json": "14eb950c0c243740e784af7d7a6e607982f68cbcd14cae1bcb04d828a19c9567", "endpoint_registry.csv": "56a084f809df9cd96276cca71393fba98bf84235858219920196fb34ce310d93"}, "elapsed_s": 161.69849348068237, "prediction_rows": 15616}

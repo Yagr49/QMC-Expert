@@ -1,0 +1,39 @@
+• ## Independent review: QAC-105 / OOD-17 extension
+
+  The protocol is unusually candid, and most safeguards (fixed folds, cation disjointness, censored-row exclusion, shuffled-label controls, baseline with visible negative R², disclosure of post-hoc selection) are sound. My concerns concentrate on interpretive validity rather than execution.
+
+  ### Major issues
+
+  **1. Task-encoding contrast is confounded with pooling.** "Separate" fits four models on ~105 rows each; one-hot and text encodings fit one model on 420 pooled rows. Any apparent benefit of "task metadata" is therefore inseparable from a 4× increase in training data per model. Fix: either fit shared-encodings models with per-task training subsets matched in size, or explicitly bound the conclusion to "pooling plus metadata" and drop causal language about metadata value.
+
+  **2. The text embedding carries at most 2 bits.** The four archived descriptions are identical for every molecule within a task, so `text` encoding adds nothing beyond task identity — mathematically it is a 1536-d re-parameterisation of the 4-d one-hot, and CatBoost splits on near-constant features act only as task selectors. Differences between `onehot` and `text` arms reflect partitioning idiosyncrasies, not biological information. This is acceptable as a reconstruction of the v5 comparison, but the manuscript must not interpret matched-arm `onehot` vs `text` differences as evidence about task descriptions.
+
+  **3. Primary QAC CV permits scaffold leakage.** With 29 scaffolds distributed across 5 cation-grouped folds, scaffold-mates routinely straddle train/test, inflating R² for scaffold-sensitive representations. The lenient CV is the primary analysis; the strict scaffold-held-out QAC-104 result is relegated to a "separate pre-existing sensitivity." Given the OOD-17 claim rests on generalisation to novel scaffolds, this is the wrong emphasis. Fix: foreground the scaffold-CV numbers alongside, or reframe cation-CV as an interpolation result.
+
+  **4. Censoring is handled downstream but not upstream.** Metrics filter `qualifier=='='`, but training fits (`decoder(x[tr], q.y.values[tr], …)`) ingest all QAC rows unconditionally; a hypothetical '>' row in QAC would silently enter as exact. Audit shows only the one OOD censored pair, so current results are unaffected, but the code should assert all training-side qualifiers are '=' and report dropped-row counts per cohort/task rather than dropping silently.
+
+  **5. OOD metrics on 16–17 points will not support R² headlines.** R² and Spearman on n=17 (n=16 for the censored task) are dominated by one or two compounds. The protocol concedes intervals are unstable; the manuscript should go further — headline MAE and per-scaffold predictions, report IT505 explicitly as prediction-vs-bound (does the decoder exceed 500 mg/L?), and avoid any R² claim for OOD.
+
+  ### Moderate issues
+
+  **6. Selection disclosure placement.** Moving Q-HERO to SI, and choosing cohorts/figures/narrative after inspecting earlier outcomes, is disclosed in PROTOCOL.md but must appear in the manuscript itself (Results or a "post-hoc extension" statement), ideally with the archived Q-HERO summary retained in SI rather than fully removed.
+
+  **7. Legacy encoders.** Correctly demoted to descriptive status given source/target overlap; ensure no table or figure invites a supervision-benefit comparison against matched arms, and that the "distinct references" caveat for raw features is repeated wherever legacy and fresh raw results appear together.
+
+  **8. Multiplicity.** Multiple representations × three encodings × four tasks × two cohorts, each with 10,000-draw intervals and no error control, guarantees some nominally significant contrasts. Label all interval statements exploratory, apply Holm control within any prespecified contrast family, or restrict inferential language to a small primary set.
+
+  **9. Bootstrap mechanics need specification.** "Resample source seeds and entire cation-scaffold groups" is ambiguous: two-stage, combined, or union resampling? Independent seed resampling across paired arms would break pairing; the protocol says pairs are retained, but the manuscript should state the unit structure explicitly, since with five seeds the seed-level bootstrap is coarse (at most 2⁵-1 distinct replicates unless group resampling compounds it).
+
+  **10. Seed means without dispersion.** Showing seed means rather than ensemble metrics is right, but means alone hide instability; report per-seed SD or a 95% range across the five paired seeds.
+
+  ### Minor
+
+  - The conflicting duplicate is handled by median, which can mask bimodal conflicts; ensure its identity is named in the manuscript as the protocol requires, not only in audit files.
+  - Text-embedding reconstruction via OpenRouter risks provider-side version drift; hash-caching mitigates this — state the snapshot/hash in Methods.
+  - Fold counts are exactly 21×5; harmless, but confirm fold assignment was not manually balanced in a way that interacts with scaffold distribution.
+  - Keep units explicit ("log2 mg/L") on every figure axis; the µM/mg/L history makes this a real hazard.
+
+  ### Summary
+
+  The design is defensible as an exploratory, well-controlled revision, and the bounded-conclusion language is largely appropriate. The decisive fixes are: (a) reframe the task-encoding contrast to acknowledge the pooling confound and the information-theoretic emptiness of the text arm; (b) elevate scaffold-held-out QAC evidence rather than burying it; (c) make OOD claims rest on bounds, MAE, and per-scaffold behaviour rather than small-n R²; and (d) carry the post-hoc-selection disclosure from the protocol into the manuscript text itself.
+

@@ -1,0 +1,241 @@
+RESULT raw-molformer 0 [('QAC-104', 2.075), ('Q-HERO-405', 1.6072), ('OOD-17', 1.6982)]
+EPOCH expert 0 1 0.92963 0.72715 1.4
+EPOCH expert 0 5 0.33934 0.49306 5.2
+EPOCH expert 0 10 0.23691 0.4922 9.8
+EPOCH expert 0 15 0.18916 0.4863 14.5
+EPOCH expert 0 20 0.13972 0.57457 19.2
+EPOCH expert 0 25 0.12086 0.50413 23.8
+EPOCH expert 0 30 0.12187 0.58319 28.5
+EPOCH quant-continuous 0 1 1.33885 0.83282 1.1
+EPOCH quant-continuous 0 5 0.43468 0.725 4.9
+EPOCH quant-continuous 0 10 0.20725 0.44947 9.7
+EPOCH quant-continuous 0 15 0.13341 0.51427 14.4
+EPOCH quant-continuous 0 20 0.11443 0.53558 19.2
+EPOCH quant-continuous 0 25 0.0907 0.48549 23.9
+EPOCH quant-continuous 0 30 0.09403 0.47182 28.7
+EPOCH quant-binary 0 1 0.92915 0.72027 1.1
+EPOCH quant-binary 0 5 0.30153 0.63934 4.9
+EPOCH quant-binary 0 10 0.17798 0.52906 9.7
+EPOCH quant-binary 0 15 0.13535 0.55363 14.4
+EPOCH quant-binary 0 20 0.13481 0.65601 19.2
+EPOCH quant-binary 0 25 0.09778 0.63565 23.9
+EPOCH quant-binary 0 30 0.0989 0.68784 28.7
+RESULT expert 0 [('QAC-104', 1.9602), ('Q-HERO-405', 1.4834), ('OOD-17', 1.8865)]
+EPOCH expert-shuffled 0 1 0.92696 0.72699 1.1
+EPOCH expert-shuffled 0 5 0.36535 0.46109 4.9
+EPOCH expert-shuffled 0 10 0.31746 0.4641 9.7
+EPOCH expert-shuffled 0 15 0.28643 0.57551 14.4
+EPOCH expert-shuffled 0 20 0.25333 0.57435 19.2
+EPOCH expert-shuffled 0 25 0.2326 0.60919 23.9
+EPOCH expert-shuffled 0 30 0.23538 0.64329 28.7
+RESULT quant-continuous 0 [('QAC-104', 1.9708), ('Q-HERO-405', 1.46), ('OOD-17', 1.6915)]
+EPOCH quant-shuffled 0 1 1.32953 0.84066 1.1
+EPOCH quant-shuffled 0 5 0.9338 0.78861 4.9
+EPOCH quant-shuffled 0 10 0.79173 0.76525 9.7
+EPOCH quant-shuffled 0 15 0.7027 0.87167 14.4
+EPOCH quant-shuffled 0 20 0.59772 0.87359 19.2
+EPOCH quant-shuffled 0 25 0.57612 0.89015 23.9
+EPOCH quant-shuffled 0 30 0.57212 0.96539 28.7
+RESULT quant-binary 0 [('QAC-104', 1.896), ('Q-HERO-405', 1.5216), ('OOD-17', 2.2221)]
+EPOCH quant-binary-shuffled 0 1 0.92826 0.72057 1.1
+EPOCH quant-binary-shuffled 0 5 0.37588 0.55352 4.9
+EPOCH quant-binary-shuffled 0 10 0.3367 0.57102 9.7
+EPOCH quant-binary-shuffled 0 15 0.28266 0.66016 14.5
+EPOCH quant-binary-shuffled 0 20 0.23129 0.69074 19.2
+EPOCH quant-binary-shuffled 0 25 0.21253 0.68919 24.0
+EPOCH quant-binary-shuffled 0 30 0.22155 0.75061 28.8
+RESULT expert-shuffled 0 [('QAC-104', 2.0953), ('Q-HERO-405', 1.6517), ('OOD-17', 1.8103)]
+EPOCH expert 1 1 0.84896 0.67281 1.1
+EPOCH expert 1 5 0.36081 0.43352 4.9
+EPOCH expert 1 10 0.2668 0.48826 9.7
+EPOCH expert 1 15 0.19864 0.43922 14.5
+EPOCH expert 1 20 0.14321 0.52571 19.2
+EPOCH expert 1 25 0.10766 0.52409 24.0
+EPOCH expert 1 30 0.12598 0.52777 28.7
+RESULT quant-shuffled 0 [('QAC-104', 1.956), ('Q-HERO-405', 1.6025), ('OOD-17', 1.6615)]
+EPOCH quant-continuous 1 1 1.11605 0.81673 1.1
+EPOCH quant-continuous 1 5 0.44302 0.5171 4.9
+EPOCH quant-continuous 1 10 0.19348 0.49104 9.7
+EPOCH quant-continuous 1 15 0.14074 0.4528 14.4
+EPOCH quant-continuous 1 20 0.10814 0.46752 19.2
+EPOCH quant-continuous 1 25 0.08857 0.45884 23.9
+EPOCH quant-continuous 1 30 0.08694 0.42608 28.7
+RESULT quant-binary-shuffled 0 [('QAC-104', 2.1226), ('Q-HERO-405', 1.6286), ('OOD-17', 1.9784)]
+EPOCH quant-binary 1 1 0.84492 0.67745 1.1
+EPOCH quant-binary 1 5 0.29441 0.56227 4.9
+EPOCH quant-binary 1 10 0.18995 0.58827 9.7
+EPOCH quant-binary 1 15 0.13268 0.60352 14.4
+EPOCH quant-binary 1 20 0.13269 0.63929 19.2
+EPOCH quant-binary 1 25 0.09425 0.62524 24.0
+EPOCH quant-binary 1 30 0.09348 0.58613 28.7
+RESULT expert 1 [('QAC-104', 2.0417), ('Q-HERO-405', 1.5293), ('OOD-17', 1.6898)]
+EPOCH expert-shuffled 1 1 0.83829 0.67296 1.1
+EPOCH expert-shuffled 1 5 0.38371 0.42677 4.9
+EPOCH expert-shuffled 1 10 0.32503 0.5105 9.7
+EPOCH expert-shuffled 1 15 0.26412 0.57726 14.4
+EPOCH expert-shuffled 1 20 0.23828 0.65573 19.2
+EPOCH expert-shuffled 1 25 0.20305 0.76611 24.0
+EPOCH expert-shuffled 1 30 0.20156 0.76526 28.7
+RESULT quant-continuous 1 [('QAC-104', 1.9723), ('Q-HERO-405', 1.4707), ('OOD-17', 1.7626)]
+EPOCH quant-shuffled 1 1 1.18371 0.83129 1.1
+EPOCH quant-shuffled 1 5 0.95091 0.7353 5.0
+EPOCH quant-shuffled 1 10 0.83187 0.80345 9.7
+EPOCH quant-shuffled 1 15 0.71618 0.85973 14.5
+EPOCH quant-shuffled 1 20 0.68229 1.02298 19.3
+EPOCH quant-shuffled 1 25 0.62357 1.06693 24.0
+EPOCH quant-shuffled 1 30 0.61633 1.0492 28.8
+RESULT quant-binary 1 [('QAC-104', 2.0003), ('Q-HERO-405', 1.5163), ('OOD-17', 1.7581)]
+EPOCH quant-binary-shuffled 1 1 0.83937 0.67736 1.1
+EPOCH quant-binary-shuffled 1 5 0.37731 0.56084 4.9
+EPOCH quant-binary-shuffled 1 10 0.33069 0.68152 9.7
+EPOCH quant-binary-shuffled 1 15 0.26495 0.72923 14.5
+EPOCH quant-binary-shuffled 1 20 0.23982 0.72539 19.2
+EPOCH quant-binary-shuffled 1 25 0.22233 0.82467 24.0
+EPOCH quant-binary-shuffled 1 30 0.20107 0.79979 28.8
+RESULT expert-shuffled 1 [('QAC-104', 1.9915), ('Q-HERO-405', 1.7306), ('OOD-17', 1.7839)]
+EPOCH expert 2 1 0.84585 0.686 1.1
+EPOCH expert 2 5 0.31957 0.42531 4.9
+EPOCH expert 2 10 0.26119 0.45837 9.7
+EPOCH expert 2 15 0.19067 0.47339 14.5
+EPOCH expert 2 20 0.14789 0.48392 19.2
+EPOCH expert 2 25 0.09535 0.52791 24.0
+EPOCH expert 2 30 0.11215 0.5465 28.8
+RESULT quant-shuffled 1 [('QAC-104', 2.0445), ('Q-HERO-405', 1.6562), ('OOD-17', 1.6245)]
+EPOCH quant-continuous 2 1 1.20493 0.82002 1.3
+EPOCH quant-continuous 2 5 0.42377 0.58623 5.1
+EPOCH quant-continuous 2 10 0.20362 0.55143 9.9
+EPOCH quant-continuous 2 15 0.144 0.40859 14.6
+EPOCH quant-continuous 2 20 0.10685 0.46748 19.4
+EPOCH quant-continuous 2 25 0.07784 0.43126 24.2
+EPOCH quant-continuous 2 30 0.08909 0.42719 28.9
+RESULT quant-binary-shuffled 1 [('QAC-104', 2.0011), ('Q-HERO-405', 1.7201), ('OOD-17', 1.6913)]
+EPOCH quant-binary 2 1 0.84508 0.68522 1.1
+EPOCH quant-binary 2 5 0.28091 0.56248 4.9
+EPOCH quant-binary 2 10 0.19358 0.45736 9.7
+EPOCH quant-binary 2 15 0.15282 0.49324 14.5
+EPOCH quant-binary 2 20 0.13015 0.487 19.3
+EPOCH quant-binary 2 25 0.10326 0.55543 24.0
+EPOCH quant-binary 2 30 0.08685 0.57587 28.8
+RESULT expert 2 [('QAC-104', 1.9706), ('Q-HERO-405', 1.5675), ('OOD-17', 1.8043)]
+EPOCH expert-shuffled 2 1 0.85387 0.68407 1.1
+EPOCH expert-shuffled 2 5 0.38057 0.42175 6.7
+EPOCH expert-shuffled 2 10 0.34372 0.4483 12.2
+EPOCH expert-shuffled 2 15 0.29534 0.43995 16.9
+EPOCH expert-shuffled 2 20 0.26642 0.48479 21.7
+EPOCH expert-shuffled 2 25 0.23771 0.53447 26.5
+EPOCH expert-shuffled 2 30 0.2414 0.4935 31.6
+RESULT quant-continuous 2 [('QAC-104', 1.959), ('Q-HERO-405', 1.4274), ('OOD-17', 1.7517)]
+EPOCH quant-shuffled 2 1 1.16881 0.83743 1.1
+EPOCH quant-shuffled 2 5 0.95583 0.79898 5.0
+EPOCH quant-shuffled 2 10 0.78302 1.01501 9.7
+EPOCH quant-shuffled 2 15 0.77844 0.92347 14.5
+EPOCH quant-shuffled 2 20 0.64558 0.94352 19.2
+EPOCH quant-shuffled 2 25 0.62034 0.90278 24.0
+EPOCH quant-shuffled 2 30 0.62327 0.94427 28.7
+RESULT quant-binary 2 [('QAC-104', 1.8727), ('Q-HERO-405', 1.5495), ('OOD-17', 1.8897)]
+EPOCH quant-binary-shuffled 2 1 0.84864 0.68427 1.1
+EPOCH quant-binary-shuffled 2 5 0.38626 0.55649 4.9
+EPOCH quant-binary-shuffled 2 10 0.33704 0.65752 9.7
+EPOCH quant-binary-shuffled 2 15 0.29185 0.66053 14.5
+EPOCH quant-binary-shuffled 2 20 0.27072 0.68601 19.2
+EPOCH quant-binary-shuffled 2 25 0.24682 0.7649 24.0
+EPOCH quant-binary-shuffled 2 30 0.22966 0.77294 28.8
+RESULT expert-shuffled 2 [('QAC-104', 1.9665), ('Q-HERO-405', 1.6552), ('OOD-17', 1.9116)]
+EPOCH expert 3 1 0.63963 0.52244 1.1
+EPOCH expert 3 5 0.33395 0.41709 4.9
+EPOCH expert 3 10 0.2361 0.43016 9.7
+EPOCH expert 3 15 0.18129 0.45467 14.5
+EPOCH expert 3 20 0.15448 0.50245 19.2
+EPOCH expert 3 25 0.12805 0.5442 24.0
+EPOCH expert 3 30 0.11994 0.52481 28.8
+RESULT quant-shuffled 2 [('QAC-104', 1.9738), ('Q-HERO-405', 1.6088), ('OOD-17', 1.7522)]
+EPOCH quant-continuous 3 1 0.95463 0.72599 1.1
+EPOCH quant-continuous 3 5 0.40986 0.5943 4.9
+EPOCH quant-continuous 3 10 0.26771 0.49594 9.7
+EPOCH quant-continuous 3 15 0.15881 0.44011 14.5
+EPOCH quant-continuous 3 20 0.11252 0.54036 19.2
+EPOCH quant-continuous 3 25 0.10298 0.43848 24.0
+EPOCH quant-continuous 3 30 0.09648 0.44245 28.7
+RESULT quant-binary-shuffled 2 [('QAC-104', 1.8396), ('Q-HERO-405', 1.6804), ('OOD-17', 2.1398)]
+EPOCH quant-binary 3 1 0.64977 0.57198 1.1
+EPOCH quant-binary 3 5 0.29168 0.58766 5.0
+EPOCH quant-binary 3 10 0.18394 0.54285 9.7
+EPOCH quant-binary 3 15 0.13683 0.54912 14.5
+EPOCH quant-binary 3 20 0.12331 0.65564 19.3
+EPOCH quant-binary 3 25 0.09806 0.58038 24.1
+EPOCH quant-binary 3 30 0.08703 0.57255 28.8
+RESULT expert 3 [('QAC-104', 2.0393), ('Q-HERO-405', 1.5347), ('OOD-17', 1.8362)]
+EPOCH expert-shuffled 3 1 0.63195 0.5229 2.6
+EPOCH expert-shuffled 3 5 0.3888 0.4322 10.7
+EPOCH expert-shuffled 3 10 0.33687 0.43788 20.5
+EPOCH expert-shuffled 3 15 0.28577 0.4505 28.0
+EPOCH expert-shuffled 3 20 0.2588 0.48042 32.8
+EPOCH expert-shuffled 3 25 0.22395 0.48145 37.6
+EPOCH expert-shuffled 3 30 0.23187 0.51114 42.4
+RESULT quant-continuous 3 [('QAC-104', 1.9693), ('Q-HERO-405', 1.4472), ('OOD-17', 1.7272)]
+EPOCH quant-shuffled 3 1 1.0491 0.76801 1.5
+EPOCH quant-shuffled 3 5 0.94259 0.78325 5.3
+EPOCH quant-shuffled 3 10 0.86851 0.82555 10.0
+EPOCH quant-shuffled 3 15 0.77532 0.91221 14.8
+EPOCH quant-shuffled 3 20 0.67739 1.00767 23.0
+EPOCH quant-shuffled 3 25 0.65547 1.03866 29.1
+EPOCH quant-shuffled 3 30 0.62985 1.15888 33.8
+RESULT quant-binary 3 [('QAC-104', 2.0181), ('Q-HERO-405', 1.513), ('OOD-17', 1.8128)]
+RESULT expert-shuffled 3 [('QAC-104', 2.0384), ('Q-HERO-405', 1.617), ('OOD-17', 1.7748)]
+EPOCH quant-binary-shuffled 3 1 0.62988 0.57197 1.1
+EPOCH quant-binary-shuffled 3 5 0.38046 0.55082 5.0
+EPOCH quant-binary-shuffled 3 10 0.33251 0.58539 9.7
+EPOCH quant-binary-shuffled 3 15 0.28753 0.66638 14.5
+EPOCH quant-binary-shuffled 3 20 0.23782 0.70126 19.3
+EPOCH quant-binary-shuffled 3 25 0.2016 0.7791 24.0
+EPOCH quant-binary-shuffled 3 30 0.20639 0.76446 29.6
+RESULT quant-shuffled 3 [('QAC-104', 2.0374), ('Q-HERO-405', 1.538), ('OOD-17', 1.6191)]
+EPOCH expert 4 1 0.7926 0.62856 1.1
+EPOCH expert 4 5 0.33035 0.43491 4.9
+EPOCH expert 4 10 0.26835 0.4883 9.7
+EPOCH expert 4 15 0.19054 0.51438 14.5
+EPOCH expert 4 20 0.1465 0.50509 19.2
+EPOCH expert 4 25 0.11994 0.5298 24.0
+EPOCH expert 4 30 0.11699 0.58875 28.8
+EPOCH quant-continuous 4 1 1.10006 0.77364 1.1
+EPOCH quant-continuous 4 5 0.37148 0.54587 5.0
+EPOCH quant-continuous 4 10 0.18757 0.54594 9.7
+EPOCH quant-continuous 4 15 0.15659 0.45814 14.5
+EPOCH quant-continuous 4 20 0.10417 0.46603 19.3
+EPOCH quant-continuous 4 25 0.10168 0.44278 24.1
+EPOCH quant-continuous 4 30 0.10509 0.44726 28.9
+RESULT quant-binary-shuffled 3 [('QAC-104', 2.0937), ('Q-HERO-405', 1.7339), ('OOD-17', 1.781)]
+EPOCH quant-binary 4 1 0.78464 0.63847 1.1
+EPOCH quant-binary 4 5 0.3021 0.50777 4.9
+EPOCH quant-binary 4 10 0.25984 0.65649 9.7
+EPOCH quant-binary 4 15 0.16488 0.56477 14.5
+EPOCH quant-binary 4 20 0.13736 0.64064 19.3
+EPOCH quant-binary 4 25 0.10891 0.59776 24.1
+EPOCH quant-binary 4 30 0.10099 0.62186 28.8
+RESULT expert 4 [('QAC-104', 2.0304), ('Q-HERO-405', 1.5305), ('OOD-17', 1.4394)]
+EPOCH expert-shuffled 4 1 0.78941 0.62777 1.1
+EPOCH expert-shuffled 4 5 0.39508 0.43236 4.9
+EPOCH expert-shuffled 4 10 0.33362 0.4756 9.7
+EPOCH expert-shuffled 4 15 0.28557 0.51164 14.5
+EPOCH expert-shuffled 4 20 0.25091 0.58167 19.3
+EPOCH expert-shuffled 4 25 0.21791 0.57654 24.1
+EPOCH expert-shuffled 4 30 0.21617 0.64904 28.9
+RESULT quant-continuous 4 [('QAC-104', 1.8506), ('Q-HERO-405', 1.4588), ('OOD-17', 1.7731)]
+EPOCH quant-shuffled 4 1 1.13069 0.79183 1.1
+EPOCH quant-shuffled 4 5 0.91098 0.76879 4.9
+EPOCH quant-shuffled 4 10 0.87461 0.83703 9.7
+EPOCH quant-shuffled 4 15 0.73451 0.95319 14.5
+EPOCH quant-shuffled 4 20 0.63579 1.0494 19.3
+EPOCH quant-shuffled 4 25 0.62918 1.02303 24.0
+EPOCH quant-shuffled 4 30 0.61135 1.07808 28.8
+RESULT quant-binary 4 [('QAC-104', 2.0918), ('Q-HERO-405', 1.5247), ('OOD-17', 1.946)]
+EPOCH quant-binary-shuffled 4 1 0.78842 0.63866 1.1
+EPOCH quant-binary-shuffled 4 5 0.38132 0.56669 4.9
+EPOCH quant-binary-shuffled 4 10 0.32309 0.67802 9.7
+EPOCH quant-binary-shuffled 4 15 0.29474 0.69198 14.5
+EPOCH quant-binary-shuffled 4 20 0.25929 0.84586 19.3
+EPOCH quant-binary-shuffled 4 25 0.21776 0.92469 24.0
+EPOCH quant-binary-shuffled 4 30 0.22168 0.97227 28.8
+RESULT expert-shuffled 4 [('QAC-104', 2.0519), ('Q-HERO-405', 1.6738), ('OOD-17', 1.7458)]
+RESULT quant-shuffled 4 [('QAC-104', 2.0279), ('Q-HERO-405', 1.5758), ('OOD-17', 1.6696)]
+RESULT quant-binary-shuffled 4 [('QAC-104', 2.046), ('Q-HERO-405', 1.5328), ('OOD-17', 1.518)]

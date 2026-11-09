@@ -1,0 +1,86 @@
+
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.5.3 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File "/home/yagr/coma_models_check_20261012/extend_retrained.py", line 8, in <module>
+    import run_matched_finetuning as ft
+  File "/home/yagr/coma_models_check_20261012/core_ft/run_matched_finetuning.py", line 20, in <module>
+    import pandas as pd
+  File "/home/yagr/anaconda3/lib/python3.12/site-packages/pandas/__init__.py", line 49, in <module>
+    from pandas.core.api import (
+  File "/home/yagr/anaconda3/lib/python3.12/site-packages/pandas/core/api.py", line 1, in <module>
+    from pandas._libs import (
+  File "/home/yagr/anaconda3/lib/python3.12/site-packages/pandas/_libs/__init__.py", line 17, in <module>
+    import pandas._libs.pandas_datetime  # noqa: F401 # isort: skip # type: ignore[reportUnusedImport]
+Traceback (most recent call last):
+  File "/home/yagr/.local/lib/python3.12/site-packages/numpy/core/_multiarray_umath.py", line 46, in __getattr__
+    raise ImportError(msg)
+ImportError: 
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.5.3 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+
+Traceback (most recent call last):
+  File "/home/yagr/coma_models_check_20261012/extend_retrained.py", line 8, in <module>
+    import run_matched_finetuning as ft
+  File "/home/yagr/coma_models_check_20261012/core_ft/run_matched_finetuning.py", line 20, in <module>
+    import pandas as pd
+  File "/home/yagr/anaconda3/lib/python3.12/site-packages/pandas/__init__.py", line 49, in <module>
+    from pandas.core.api import (
+  File "/home/yagr/anaconda3/lib/python3.12/site-packages/pandas/core/api.py", line 1, in <module>
+    from pandas._libs import (
+  File "/home/yagr/anaconda3/lib/python3.12/site-packages/pandas/_libs/__init__.py", line 17, in <module>
+    import pandas._libs.pandas_datetime  # noqa: F401 # isort: skip # type: ignore[reportUnusedImport]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ImportError: numpy.core.multiarray failed to import
+ENCODED raw-molformer [{'name': 'raw-molformer', 'cohort': 'QAC105', 'max_abs_difference': 9.5367431640625e-07, 'allclose': True}, {'name': 'raw-molformer', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+Traceback (most recent call last):
+  File "/home/yagr/coma_models_check_20261012/extend_retrained.py", line 70, in <module>
+    main()
+  File "/home/yagr/coma_models_check_20261012/extend_retrained.py", line 47, in main
+    assert not result.unexpected_keys and set(result.missing_keys) == frozen
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+ENCODED raw-molformer [{'name': 'raw-molformer', 'cohort': 'QAC105', 'max_abs_difference': 9.5367431640625e-07, 'allclose': True}, {'name': 'raw-molformer', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED expert_seed0 [{'name': 'expert_seed0', 'cohort': 'QAC105', 'max_abs_difference': 1.3113021850585938e-06, 'allclose': True}, {'name': 'expert_seed0', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED quant-continuous_seed0 [{'name': 'quant-continuous_seed0', 'cohort': 'QAC105', 'max_abs_difference': 1.1473894119262695e-06, 'allclose': True}, {'name': 'quant-continuous_seed0', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED quant-binary_seed0 [{'name': 'quant-binary_seed0', 'cohort': 'QAC105', 'max_abs_difference': 1.1324882507324219e-06, 'allclose': True}, {'name': 'quant-binary_seed0', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED expert-shuffled_seed0 [{'name': 'expert-shuffled_seed0', 'cohort': 'QAC105', 'max_abs_difference': 1.430511474609375e-06, 'allclose': True}, {'name': 'expert-shuffled_seed0', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED quant-shuffled_seed0 [{'name': 'quant-shuffled_seed0', 'cohort': 'QAC105', 'max_abs_difference': 1.2218952178955078e-06, 'allclose': True}, {'name': 'quant-shuffled_seed0', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED quant-binary-shuffled_seed0 [{'name': 'quant-binary-shuffled_seed0', 'cohort': 'QAC105', 'max_abs_difference': 1.1920928955078125e-06, 'allclose': True}, {'name': 'quant-binary-shuffled_seed0', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED expert_seed1 [{'name': 'expert_seed1', 'cohort': 'QAC105', 'max_abs_difference': 1.8477439880371094e-06, 'allclose': True}, {'name': 'expert_seed1', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED quant-continuous_seed1 [{'name': 'quant-continuous_seed1', 'cohort': 'QAC105', 'max_abs_difference': 1.043081283569336e-06, 'allclose': True}, {'name': 'quant-continuous_seed1', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED quant-binary_seed1 [{'name': 'quant-binary_seed1', 'cohort': 'QAC105', 'max_abs_difference': 2.6226043701171875e-06, 'allclose': True}, {'name': 'quant-binary_seed1', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED expert-shuffled_seed1 [{'name': 'expert-shuffled_seed1', 'cohort': 'QAC105', 'max_abs_difference': 1.0728836059570312e-06, 'allclose': True}, {'name': 'expert-shuffled_seed1', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED quant-shuffled_seed1 [{'name': 'quant-shuffled_seed1', 'cohort': 'QAC105', 'max_abs_difference': 1.1622905731201172e-06, 'allclose': True}, {'name': 'quant-shuffled_seed1', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED quant-binary-shuffled_seed1 [{'name': 'quant-binary-shuffled_seed1', 'cohort': 'QAC105', 'max_abs_difference': 1.1920928955078125e-06, 'allclose': True}, {'name': 'quant-binary-shuffled_seed1', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED expert_seed2 [{'name': 'expert_seed2', 'cohort': 'QAC105', 'max_abs_difference': 2.6226043701171875e-06, 'allclose': True}, {'name': 'expert_seed2', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED quant-continuous_seed2 [{'name': 'quant-continuous_seed2', 'cohort': 'QAC105', 'max_abs_difference': 1.0728836059570312e-06, 'allclose': True}, {'name': 'quant-continuous_seed2', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED quant-binary_seed2 [{'name': 'quant-binary_seed2', 'cohort': 'QAC105', 'max_abs_difference': 2.6226043701171875e-06, 'allclose': True}, {'name': 'quant-binary_seed2', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED expert-shuffled_seed2 [{'name': 'expert-shuffled_seed2', 'cohort': 'QAC105', 'max_abs_difference': 1.7285346984863281e-06, 'allclose': True}, {'name': 'expert-shuffled_seed2', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED quant-shuffled_seed2 [{'name': 'quant-shuffled_seed2', 'cohort': 'QAC105', 'max_abs_difference': 1.519918441772461e-06, 'allclose': True}, {'name': 'quant-shuffled_seed2', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED quant-binary-shuffled_seed2 [{'name': 'quant-binary-shuffled_seed2', 'cohort': 'QAC105', 'max_abs_difference': 1.2814998626708984e-06, 'allclose': True}, {'name': 'quant-binary-shuffled_seed2', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED expert_seed3 [{'name': 'expert_seed3', 'cohort': 'QAC105', 'max_abs_difference': 9.834766387939453e-07, 'allclose': True}, {'name': 'expert_seed3', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED quant-continuous_seed3 [{'name': 'quant-continuous_seed3', 'cohort': 'QAC105', 'max_abs_difference': 1.1324882507324219e-06, 'allclose': True}, {'name': 'quant-continuous_seed3', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED quant-binary_seed3 [{'name': 'quant-binary_seed3', 'cohort': 'QAC105', 'max_abs_difference': 2.384185791015625e-06, 'allclose': True}, {'name': 'quant-binary_seed3', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED expert-shuffled_seed3 [{'name': 'expert-shuffled_seed3', 'cohort': 'QAC105', 'max_abs_difference': 1.7881393432617188e-06, 'allclose': True}, {'name': 'expert-shuffled_seed3', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED quant-shuffled_seed3 [{'name': 'quant-shuffled_seed3', 'cohort': 'QAC105', 'max_abs_difference': 1.0728836059570312e-06, 'allclose': True}, {'name': 'quant-shuffled_seed3', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED quant-binary-shuffled_seed3 [{'name': 'quant-binary-shuffled_seed3', 'cohort': 'QAC105', 'max_abs_difference': 1.3709068298339844e-06, 'allclose': True}, {'name': 'quant-binary-shuffled_seed3', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED expert_seed4 [{'name': 'expert_seed4', 'cohort': 'QAC105', 'max_abs_difference': 1.6689300537109375e-06, 'allclose': True}, {'name': 'expert_seed4', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED quant-continuous_seed4 [{'name': 'quant-continuous_seed4', 'cohort': 'QAC105', 'max_abs_difference': 1.5497207641601562e-06, 'allclose': True}, {'name': 'quant-continuous_seed4', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED quant-binary_seed4 [{'name': 'quant-binary_seed4', 'cohort': 'QAC105', 'max_abs_difference': 1.2516975402832031e-06, 'allclose': True}, {'name': 'quant-binary_seed4', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED expert-shuffled_seed4 [{'name': 'expert-shuffled_seed4', 'cohort': 'QAC105', 'max_abs_difference': 1.1175870895385742e-06, 'allclose': True}, {'name': 'expert-shuffled_seed4', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED quant-shuffled_seed4 [{'name': 'quant-shuffled_seed4', 'cohort': 'QAC105', 'max_abs_difference': 1.430511474609375e-06, 'allclose': True}, {'name': 'quant-shuffled_seed4', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]
+ENCODED quant-binary-shuffled_seed4 [{'name': 'quant-binary-shuffled_seed4', 'cohort': 'QAC105', 'max_abs_difference': 1.1920928955078125e-06, 'allclose': True}, {'name': 'quant-binary-shuffled_seed4', 'cohort': 'OOD17', 'max_abs_difference': 0.0, 'allclose': True}]

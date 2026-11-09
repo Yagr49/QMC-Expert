@@ -1,0 +1,465 @@
+{
+  "font": "Aptos",
+  "font_files": {
+    "Aptos": "/Applications/Microsoft Word.app/Contents/Resources/DFonts/Aptos.ttf",
+    "Segoe UI": "/private/tmp/coma_v17_SegoeUI.ttf"
+  },
+  "font_comparison": "Same data and layout in Aptos and Segoe UI; fonts not redistributed.",
+  "font_embedding": "Print/preview embedding permitted by installed font flags (fsType=8).",
+  "palette": {
+    "human": "#8B7BC7",
+    "continuous": "#52AB98",
+    "binary": "#D8A377",
+    "raw": "#98A2AD",
+    "human_null": "#C6BBE4",
+    "continuous_null": "#AFD9CE",
+    "binary_null": "#EBD1BB",
+    "blue": "#94B6D5",
+    "orange": "#D8A377",
+    "purple": "#C6BBE4",
+    "teal": "#AFD9CE"
+  },
+  "figures": [
+    "figure1_supervision_and_transfer",
+    "figure2_QAC105_parity",
+    "figureS23_OOD17_parity",
+    "figureS27_task_encoding",
+    "figure3_OOD_families_ACS1996",
+    "figure4_paired_error_violins",
+    "figureS24_OOD17_individual_endpoints",
+    "figureS25_scaffold_transfer",
+    "figureS26_prediction_route_violins",
+    "figureS29_direct_adaptation",
+    "figure5_weight_rewind",
+    "figureS28_decoder_error_violins",
+    "figureS5_expert_set",
+    "figureS6_overlap",
+    "figureS7_qhero_violins",
+    "figureS8_qhero_r2",
+    "figureS9_equivalence",
+    "figureS10_split_effect",
+    "figureS11_representation_quality",
+    "figureS12_zeroshot",
+    "figureS13_calibration",
+    "figureS21_matched_finetuning_learning",
+    "figureS22_matched_finetuning_error_violins"
+  ],
+  "inputs_sha256": {
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v14/results/predictions.csv": "e9fbe2d05524bfa987ac98b534168a90d4cbaefaf7a3415220fe4024a1c54b9b",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v14/analysis/summary.csv": "3b20aebeeadefef3a8b931a5799d45b80e51cfee6f262a35fe59fb9cf873c230",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v14/data/OOD17.csv": "b2abafad0bacfc66b3228141175ae2fb0e924cbf95645b5f4d6fa2a0d307d2b2",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v14/analysis/scaffold_summary.csv": "e6a5a61ebee30942512da9645aa3998351d1d9a68cffe2cf4351df70a41f07a8",
+    "/Users/egorilin/Desktop/COMA/reproducibility/server_finetune_causal_20261012/analysis/direct_predictions.csv": "a6f4e6f6ad205852e830e10f9d0fadd2b560d5de9af591bed1e216dd397786b8",
+    "/Users/egorilin/Desktop/COMA/reproducibility/server_finetune_causal_20261012/analysis/ablation_predictions.csv": "3e477e162ee147a39fdcfd06eb895e7e9f51c67f99877e0f34729a4f8dda8adf",
+    "/Users/egorilin/Desktop/COMA/reproducibility/server_finetune_causal_20261012/analysis/direct_metrics.csv": "f246a06bb3f3e0c1081fbdead9bd3e361ee2a0e3c115ab55ee781788ab688504",
+    "/Users/egorilin/Desktop/COMA/reproducibility/server_finetune_causal_20261012/analysis/paired_bootstrap.csv": "15521a4b0669faa3261ecf9178565f51646a891a18769600bfaaf3c15bc52fef",
+    "/Users/egorilin/Desktop/COMA/reproducibility/server_models_20261012/results_20261012T152125Z/new_baselines/tabpfn/predictions.csv": "87e3da1a164482086d7bb17e8fec39f6f7cb1924029178796ff1eab4eb5e783b",
+    "/Users/egorilin/Desktop/COMA/reproducibility/server_models_20261012/results_20261012T152125Z/new_baselines/tabfm/predictions.csv": "db6b1fb8bdbc9d3d8d7b98d8b4dbc9454a7f7473e34c9059998f67480bacdcb4",
+    "/Users/egorilin/Desktop/COMA/reproducibility/qhero/qhero_residuals.csv": "f17cc1a4d3dd59e081f949fbbbd10c73040d56210a245add93acf366897bb7e8",
+    "/Users/egorilin/Desktop/COMA/reproducibility/qhero/qhero_metrics.csv": "14c210eb66603f3205510464428813cca0582df43aa6e70f1577c856f94efd8f",
+    "/Users/egorilin/Desktop/COMA/reproducibility/causal/ood_paired_residuals.csv": "6c993c63a87807028221a615b461f1b1dc0a53bd8b825600e52798f8b33d7192",
+    "/Users/egorilin/Desktop/COMA/reproducibility/table2/table2_rebuild.csv": "195509dd45953cdf0e87eacdfa426ebdaf46543c21c3a30ea907e287c121dbcc",
+    "/Users/egorilin/Desktop/COMA/reproducibility/finetune/runs.jsonl": "821920d508094a75a2d52b56f844cccb6a8f542eb2b8e8affae0d8bbc3aefa87",
+    "/Users/egorilin/Desktop/COMA/reproducibility/finetune/runs_direct.jsonl": "27a4f53b1da534307f225b930b5710d6f3486f1f7ea751b139c6130b093c9dc3",
+    "/Users/egorilin/Desktop/COMA/reproducibility/finetune/predictions_seed0.csv": "b1c504f82d0c7b2bed99059c901e15d93a53d9a7213f8dd97a9f765af6f0756c",
+    "/Users/egorilin/Desktop/COMA/reproducibility/finetune/recalibration.csv": "d037693a7823f1890c21195dbaf6f896a2a0a2e046f433aa3217add3a14351e0",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v12/results/epochs.csv": "7fff3135a9d4e51bad0473ae7f8e3d694cff72d050eb01d80cb3f52e79789950",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v12/results/predictions.csv": "43c74c58222ed82d8e03c6acedabd40670686882a07294322d86fa0b6f250c11",
+    "/Users/egorilin/Desktop/COMA/expert_labels/expert_labels_1103.csv": "da349d6c7e745c67a4e2a1dcf39ec31c8ec821233057d6cf0a59b1cde140a17e"
+  },
+  "plot_checks": [
+    {
+      "figure": "figure2_QAC105_parity",
+      "cohort": "QAC105",
+      "prediction_rows": 13020,
+      "limits": [
+        -3.5,
+        10.0
+      ],
+      "all_predictions_within_axes": true,
+      "statistics_in_caption_and_tables": true
+    },
+    {
+      "figure": "figureS23_OOD17_parity",
+      "cohort": "OOD17",
+      "prediction_rows": 2108,
+      "limits": [
+        -3.5,
+        10.0
+      ],
+      "all_predictions_within_axes": true,
+      "statistics_in_caption_and_tables": true
+    },
+    {
+      "figure": "figureS26_prediction_route_violins",
+      "distributions": [
+        {
+          "schema": "cation",
+          "arm": "expert",
+          "route": "direct",
+          "n": 420,
+          "max": 6.598656177520752,
+          "median": 0.976985881725947
+        },
+        {
+          "schema": "cation",
+          "arm": "expert",
+          "route": "decoder",
+          "n": 420,
+          "max": 6.847712931821518,
+          "median": 0.9935038301930672
+        },
+        {
+          "schema": "cation",
+          "arm": "quant-continuous",
+          "route": "direct",
+          "n": 420,
+          "max": 6.5892652404217715,
+          "median": 1.0047627687454224
+        },
+        {
+          "schema": "cation",
+          "arm": "quant-continuous",
+          "route": "decoder",
+          "n": 420,
+          "max": 6.64692665484213,
+          "median": 0.9316680179089349
+        },
+        {
+          "schema": "cation",
+          "arm": "quant-binary",
+          "route": "direct",
+          "n": 420,
+          "max": 6.594608306884766,
+          "median": 0.9810324619915557
+        },
+        {
+          "schema": "cation",
+          "arm": "quant-binary",
+          "route": "decoder",
+          "n": 420,
+          "max": 7.007812786600591,
+          "median": 0.9973062033029463
+        },
+        {
+          "schema": "scaffold",
+          "arm": "expert",
+          "route": "direct",
+          "n": 420,
+          "max": 6.636509736378987,
+          "median": 1.1047064065933228
+        },
+        {
+          "schema": "scaffold",
+          "arm": "expert",
+          "route": "decoder",
+          "n": 420,
+          "max": 6.261203127477137,
+          "median": 1.0394652571304674
+        },
+        {
+          "schema": "scaffold",
+          "arm": "quant-continuous",
+          "route": "direct",
+          "n": 420,
+          "max": 6.326676686604817,
+          "median": 1.157536635796229
+        },
+        {
+          "schema": "scaffold",
+          "arm": "quant-continuous",
+          "route": "decoder",
+          "n": 420,
+          "max": 6.1443566138162256,
+          "median": 1.0431922695071982
+        },
+        {
+          "schema": "scaffold",
+          "arm": "quant-binary",
+          "route": "direct",
+          "n": 420,
+          "max": 6.613918622334798,
+          "median": 1.1699913254088634
+        },
+        {
+          "schema": "scaffold",
+          "arm": "quant-binary",
+          "route": "decoder",
+          "n": 420,
+          "max": 6.187629785157429,
+          "median": 1.0774086534406138
+        },
+        {
+          "schema": "full-QAC105",
+          "arm": "expert",
+          "route": "direct",
+          "n": 67,
+          "max": 6.431734336605548,
+          "median": 1.8540756702423093
+        },
+        {
+          "schema": "full-QAC105",
+          "arm": "expert",
+          "route": "decoder",
+          "n": 67,
+          "max": 5.206972671106875,
+          "median": 1.4022651807539248
+        },
+        {
+          "schema": "full-QAC105",
+          "arm": "quant-continuous",
+          "route": "direct",
+          "n": 67,
+          "max": 7.378501944930235,
+          "median": 2.205399990081787
+        },
+        {
+          "schema": "full-QAC105",
+          "arm": "quant-continuous",
+          "route": "decoder",
+          "n": 67,
+          "max": 5.612483375171017,
+          "median": 1.318723609608506
+        },
+        {
+          "schema": "full-QAC105",
+          "arm": "quant-binary",
+          "route": "direct",
+          "n": 67,
+          "max": 6.2240341238090195,
+          "median": 1.8605056603749592
+        },
+        {
+          "schema": "full-QAC105",
+          "arm": "quant-binary",
+          "route": "decoder",
+          "n": 67,
+          "max": 4.794928251828263,
+          "median": 1.4819816287850778
+        }
+      ],
+      "full_tail_max": 7.378501944930235
+    },
+    {
+      "figure": "figureS28_decoder_error_violins",
+      "distributions": [
+        {
+          "model": "tabpfn",
+          "representation": "rdkit",
+          "schema": "cation",
+          "n": 420,
+          "max": 7.174217612458357
+        },
+        {
+          "model": "tabpfn",
+          "representation": "raw-molformer",
+          "schema": "cation",
+          "n": 420,
+          "max": 7.116941299083193
+        },
+        {
+          "model": "tabpfn",
+          "representation": "expert_seed0",
+          "schema": "cation",
+          "n": 420,
+          "max": 7.489852118461535
+        },
+        {
+          "model": "tabpfn",
+          "representation": "quant-continuous_seed0",
+          "schema": "cation",
+          "n": 420,
+          "max": 7.411845377907799
+        },
+        {
+          "model": "tabpfn",
+          "representation": "quant-binary_seed0",
+          "schema": "cation",
+          "n": 420,
+          "max": 7.496626730660871
+        },
+        {
+          "model": "tabpfn",
+          "representation": "rdkit",
+          "schema": "scaffold",
+          "n": 420,
+          "max": 5.871786135028042
+        },
+        {
+          "model": "tabpfn",
+          "representation": "raw-molformer",
+          "schema": "scaffold",
+          "n": 420,
+          "max": 6.795065069136054
+        },
+        {
+          "model": "tabpfn",
+          "representation": "expert_seed0",
+          "schema": "scaffold",
+          "n": 420,
+          "max": 6.475679105256387
+        },
+        {
+          "model": "tabpfn",
+          "representation": "quant-continuous_seed0",
+          "schema": "scaffold",
+          "n": 420,
+          "max": 6.785455521937134
+        },
+        {
+          "model": "tabpfn",
+          "representation": "quant-binary_seed0",
+          "schema": "scaffold",
+          "n": 420,
+          "max": 7.031315057309111
+        },
+        {
+          "model": "tabpfn",
+          "representation": "rdkit",
+          "schema": "full-QAC105",
+          "n": 67,
+          "max": 6.377827339452078
+        },
+        {
+          "model": "tabpfn",
+          "representation": "raw-molformer",
+          "schema": "full-QAC105",
+          "n": 67,
+          "max": 5.405633725810809
+        },
+        {
+          "model": "tabpfn",
+          "representation": "expert_seed0",
+          "schema": "full-QAC105",
+          "n": 67,
+          "max": 4.869400519586543
+        },
+        {
+          "model": "tabpfn",
+          "representation": "quant-continuous_seed0",
+          "schema": "full-QAC105",
+          "n": 67,
+          "max": 6.426657292794508
+        },
+        {
+          "model": "tabpfn",
+          "representation": "quant-binary_seed0",
+          "schema": "full-QAC105",
+          "n": 67,
+          "max": 4.450054812920193
+        },
+        {
+          "model": "tabfm",
+          "representation": "rdkit",
+          "schema": "cation",
+          "n": 420,
+          "max": 7.270495149682839
+        },
+        {
+          "model": "tabfm",
+          "representation": "raw-molformer",
+          "schema": "cation",
+          "n": 420,
+          "max": 6.922424051355202
+        },
+        {
+          "model": "tabfm",
+          "representation": "expert_seed0",
+          "schema": "cation",
+          "n": 420,
+          "max": 7.100778314660866
+        },
+        {
+          "model": "tabfm",
+          "representation": "quant-continuous_seed0",
+          "schema": "cation",
+          "n": 420,
+          "max": 6.747982475351174
+        },
+        {
+          "model": "tabfm",
+          "representation": "quant-binary_seed0",
+          "schema": "cation",
+          "n": 420,
+          "max": 6.969239446710427
+        },
+        {
+          "model": "tabfm",
+          "representation": "rdkit",
+          "schema": "scaffold",
+          "n": 420,
+          "max": 6.247614833902199
+        },
+        {
+          "model": "tabfm",
+          "representation": "raw-molformer",
+          "schema": "scaffold",
+          "n": 420,
+          "max": 6.985796451568604
+        },
+        {
+          "model": "tabfm",
+          "representation": "expert_seed0",
+          "schema": "scaffold",
+          "n": 420,
+          "max": 6.68606438452134
+        },
+        {
+          "model": "tabfm",
+          "representation": "quant-continuous_seed0",
+          "schema": "scaffold",
+          "n": 420,
+          "max": 6.51111116224656
+        },
+        {
+          "model": "tabfm",
+          "representation": "quant-binary_seed0",
+          "schema": "scaffold",
+          "n": 420,
+          "max": 7.332681271623452
+        },
+        {
+          "model": "tabfm",
+          "representation": "rdkit",
+          "schema": "full-QAC105",
+          "n": 67,
+          "max": 5.306059095453103
+        },
+        {
+          "model": "tabfm",
+          "representation": "raw-molformer",
+          "schema": "full-QAC105",
+          "n": 67,
+          "max": 6.0879778595674825
+        },
+        {
+          "model": "tabfm",
+          "representation": "expert_seed0",
+          "schema": "full-QAC105",
+          "n": 67,
+          "max": 4.904548856805642
+        },
+        {
+          "model": "tabfm",
+          "representation": "quant-continuous_seed0",
+          "schema": "full-QAC105",
+          "n": 67,
+          "max": 6.943131181787331
+        },
+        {
+          "model": "tabfm",
+          "representation": "quant-binary_seed0",
+          "schema": "full-QAC105",
+          "n": 67,
+          "max": 5.0009568663347554
+        }
+      ],
+      "full_tail_max": 7.496626730660871
+    }
+  ],
+  "model_training_performed": false,
+  "raw_predictions_changed": false,
+  "original_author_SI_images": "Retained unchanged as S1\u2013S4",
+  "historical_raster_and_chemical_diagrams": "Retained unchanged when editable/source data were unavailable",
+  "captions": "Methods, uncertainty, counts and censoring remain in document captions and tables"
+}

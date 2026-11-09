@@ -1,0 +1,91 @@
+{
+  "source": "/Users/egorilin/Desktop/COMA/2026_07_09_Paper_2_edited-v5_NF_3.docx",
+  "source_sha256": "0dd55e7b9ef5125dd938fdb04e9c2d0a430cc4b86fc099b85e9f6e5e6d1c2bfb",
+  "output": "/Users/egorilin/Desktop/COMA/2026_10_14_Paper_2_edited-v21_v5_intro_2_1_yellow.docx",
+  "output_sha256": "8eba72a98fc7a0a78021fccb28c0dad227f7bda06b38b49f3eccd214ffe559ac",
+  "added_paragraphs": [
+    {
+      "label": "intro_01",
+      "after_original_body_index": 14,
+      "text": "Pre-trained molecular models offer a reusable description of chemical structure, but adapting that description to a small antibacterial dataset still requires two choices: which information should guide the representation, and which parts of the prediction pipeline should be trained. Full backbone fine-tuning, low-rank updates inside transformer layers and an external feature encoder make different use of the available supervision. Their relative performance must therefore be tested under the intended validation regime, rather than inferred from the number of trainable parameters alone.",
+      "highlight": "yellow",
+      "paragraph_sha256": "5bf1796593659bc589b4042af1f66527f37576bbfc65e62418209442d829d99b"
+    },
+    {
+      "label": "intro_02",
+      "after_original_body_index": 18,
+      "text": "Our approach separates representation guidance from quantitative decoding. Frozen MolFormer first maps each molecular structure to a 768-dimensional vector. A compact external neural encoder then learns a 256-dimensional representation from expert Good/Bad judgements, while CatBoost learns the quantitative relationship between that representation and the MIC/MBC endpoints. Human labels guide source training; a new molecule does not require a human label when its representation or predicted activity is computed. This separation provides a concrete way to examine whether coarse expert supervision can organise useful molecular features for a distinct quantitative task.",
+      "highlight": "yellow",
+      "paragraph_sha256": "3b8a84e37af4ad342648a14e9b40d1d34b8a5d0b6a8e76efe77b32c9c1793a5d"
+    },
+    {
+      "label": "intro_03",
+      "after_original_body_index": 20,
+      "text": "We also test whether a frozen representation followed by a decoder is preferable to direct backbone adaptation in this setting. The completed follow-up compares frozen prediction heads, LoRA and full fine-tuning, and evaluates both prediction routes from human-guided partial-backbone initialisation. Full fine-tuning improves cation-holdout prediction in the tested procedure but has higher error on the independently measured OOD compounds; freezing the human-guided partial-backbone representation and fitting CatBoost gives lower OOD error than direct prediction from the same source initialisations. These results motivate a conditional choice of prediction route, rather than a general claim that fine-tuning is harmful or that a smaller adapter is necessarily superior. Matched source panels and label-shuffling controls assess whether the assignment of supervisory labels contributes beyond an added training stage.",
+      "highlight": "yellow",
+      "paragraph_sha256": "e509abaaefe64b38202afcfade0e5b56e643663f8a8e0a0076272de98fc9d52d"
+    },
+    {
+      "label": "fig1_caption",
+      "after_original_body_index": 23,
+      "text": "This is a conceptual illustration of the modelling workflow. Its ascending accuracy curves are schematic; the numerical comparisons are defined by the reported training and evaluation protocols. The trainable feature encoder and the quantitative decoder are described in Section 2.1.",
+      "highlight": "yellow",
+      "paragraph_sha256": "8fbb417901258abbc9cb73312574e55879f05570ff46686613b60887d2922752"
+    },
+    {
+      "label": "annotation_count",
+      "after_original_body_index": 27,
+      "text": "The recovered computational archive contains 1,103 final molecule-level Good/Bad calls. These final outcomes are distinguished from the earlier collection count reported above, which requires confirmation from the annotation records. The new matched-source panels are constructed from the recovered outcomes after standardisation and target-cation exclusion.",
+      "highlight": "yellow",
+      "paragraph_sha256": "9150a78975aa377ff28a691c5bdcb2fb75d7a7bc1baedf018750f36517df31e1"
+    },
+    {
+      "label": "coauthor_fields",
+      "after_original_body_index": 27,
+      "text": "[COAUTHORS — annotation provenance: confirm collection and final counts; annotators and information shown to them; blinding and voting; handling of uncertain calls; inter-annotator agreement; collection dates; and access to quantitative activity measurements.]",
+      "highlight": "yellow",
+      "paragraph_sha256": "8d9af8814f8770b2850a6218fb8c027d4c79ccd100497aecc2c3767582be148c"
+    },
+    {
+      "label": "section2_1_01",
+      "after_original_body_index": 29,
+      "text": "The reference encoder operates outside MolFormer. For a SMILES string s, the frozen backbone produces h₀ = fθ(s) ∈ R⁷⁶⁸. The archived StandardScaler normalises these input features before an external MLP produces z ∈ R²⁵⁶ through layers of width 512, 384 and 256. Expert labels train the MLP parameters ψ without updating the backbone parameters θ. A subsequent decoder predicts quantitative MIC/MBC from z and a task code. This feature adapter is distinct from LoRA updates inside the transformer and from partial or full backbone fine-tuning. The external encoder contains 691,584 trainable parameters. Its source-training contrastive projection head is removed when the 256-dimensional features are passed to the quantitative decoder.",
+      "highlight": "yellow",
+      "paragraph_sha256": "1bc5437d17fc25fd5a3731909e174373567f9b64aa33c341362ef19688170b41"
+    },
+    {
+      "label": "section2_1_setup",
+      "after_original_body_index": 32,
+      "text": "The new adaptation comparison uses the original 105-QAC target cohort, with MIC and MBC against S. aureus and E. coli, and the 17 newly synthesised compounds from four scaffold families. Fixed five-fold cation and scaffold holdouts assess new-compound prediction; the OOD decoder is fitted on the 105 compounds. The pretrained frozen-head, LoRA and full-fine-tuning branches each use three target-training seeds. The two human-guided prediction routes additionally share source checkpoints 0–2, allowing their starting representation to be held fixed.",
+      "highlight": "yellow",
+      "paragraph_sha256": "0492a7437e42f02a92aa47b8334d1a8d1143482451ec2d66bec4019592f50311"
+    },
+    {
+      "label": "section2_1_02",
+      "after_original_body_index": 32,
+      "text": "In a separate completed backbone experiment, direct full fine-tuning gave cation/scaffold RMSE 1.863 ± 0.045/1.970 ± 0.026, but OOD RMSE 3.032 ± 0.408. Direct LoRA gave OOD RMSE 2.756 ± 0.172, while a frozen pretrained backbone with a linear head gave 2.560 ± 0.206. These results demonstrate that improved grouped-validation performance need not produce lower error on the new chemical families under the tested optimisation budget.",
+      "highlight": "yellow",
+      "paragraph_sha256": "98b8b1c63864adc0d7524a707aa1c42db1b1062305214ac98b2ecfbccf0d60b7"
+    },
+    {
+      "label": "section2_1_03",
+      "after_original_body_index": 32,
+      "text": "Using the same three human-guided partial-backbone source checkpoints, direct target prediction gave OOD RMSE 2.412 ± 0.088, compared with 2.106 ± 0.071 when the source representation was frozen and decoded with CatBoost. The latter route gave cation/scaffold RMSE 1.743 ± 0.031/1.819 ± 0.044. These human-guided backbones are separate follow-up models, not the external compact encoder described above. All values use log₂(mg/L);  ±  denotes sample SD across three complete paired runs, not CV-fold SD or a 95% confidence interval. OOD scores include 67 exact endpoints, with the remaining bound retained separately.",
+      "highlight": "yellow",
+      "paragraph_sha256": "77feca3c910e7a45be3b7a79f10ccda668394c5e758139afe25dac90a4ccfc62"
+    },
+    {
+      "label": "section2_1_04",
+      "after_original_body_index": 32,
+      "text": "The route comparison changes adaptation and decoding together and therefore does not isolate a causal effect of human-label meaning. To retain the compact v5 architecture when testing supervisory content, a separate controlled follow-up trained encoders on the same 681 source molecules (377 training and 304 validation), with target cations excluded and five paired source seeds. This follow-up fixes source exposure and training updates and omits SMOTE; it is not an exact replay of the archived SMOTE procedure. Human and shuffled-human guidance give OOD RMSE 2.268 ± 0.077 and 2.172 ± 0.112, respectively, where ± is sample SD over the five source runs. This compact-encoder control does not establish a human-content advantage. We consequently interpret the route results as evidence about the stated prediction procedures, without attributing them to a uniquely human semantic mechanism.",
+      "highlight": "yellow",
+      "paragraph_sha256": "8be31daac8c43ebfff5a66079c96db112ed6414760d03f0baea9f5cc6544bac2"
+    }
+  ],
+  "all_original_paragraphs_retained": true,
+  "original_body_XML_preserved_verbatim": true,
+  "original_figure1_preserved": true,
+  "section2_2_unchanged": true,
+  "no_new_QHERO_or_Tiihonen_metrics_in_manuscript": true,
+  "source_based_draft_not_a_replacement_of_v20_SI": true
+}

@@ -1,0 +1,35 @@
+{
+  "completed": true,
+  "documents": [
+    {
+      "path": "/Users/egorilin/Desktop/COMA/2026_10_13_Paper_2_edited-v17_original_intro_and_expanded_SI.docx",
+      "sha256": "50df08ad884f9f724b39ea6742d6631d934b9651415d08d55c1a7887dfe4fdd0",
+      "figures": 5,
+      "tables": 6,
+      "coauthor_fields_byte_preserved": true,
+      "only_listed_media_restyled": true,
+      "xml_relationships_styles_valid": true
+    },
+    {
+      "path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v17/Supplementary_Information_v17.docx",
+      "sha256": "b784b22d21b06c532ed5ec1dca59020db5e593f1e544cdc4ffa5fe6790667981",
+      "figures": 29,
+      "tables": 34,
+      "coauthor_fields_byte_preserved": true,
+      "only_listed_media_restyled": true,
+      "xml_relationships_styles_valid": true
+    }
+  ],
+  "source_documents_unchanged": true,
+  "original_four_SI_figures_byte_preserved": true,
+  "main_first_four_tables_preserved": true,
+  "complete_SI_tables_preserved": true,
+  "chemistry_and_assay_section_preserved": true,
+  "route_table_recomputed": true,
+  "plotted_route_distributions_recomputed": true,
+  "restyled_figures": 23,
+  "plot_input_hashes_unchanged": true,
+  "font": "Aptos",
+  "full_105_and_17_compound_registries_preserved": true,
+  "paragraph_walkthrough_count": 52
+}

@@ -1,0 +1,114 @@
+{
+  "completed": true,
+  "font": "Futura",
+  "font_source": "theme_v27.py",
+  "source": "/Users/egorilin/Desktop/COMA/scatter_grid_desc_vs_emb_modified.png",
+  "source_sha256": "079c9bc7812b727db5140e382ea1e5d603aa162dc1d3b712ccd1c4b6c5873f31",
+  "panels": [
+    {
+      "row": 0,
+      "column": 0,
+      "raster_region": [
+        204,
+        33,
+        1769,
+        1613
+      ],
+      "raster_region_sha256": "ad24d8930987e28527116b713b5333f5b578b5d56285addabc40a7d34545ef2e",
+      "all_plot_pixels_preserved": true,
+      "metric_overlay_has_zero_data_markers": true,
+      "R2": 0.476,
+      "RMSE": 1.58,
+      "MAE": 1.18
+    },
+    {
+      "row": 0,
+      "column": 1,
+      "raster_region": [
+        1989,
+        33,
+        3554,
+        1613
+      ],
+      "raster_region_sha256": "b7d977542e198264326ef94df402df52624b7aca510768a685dfb9a9ca1ab1f3",
+      "all_plot_pixels_preserved": true,
+      "metric_overlay_has_zero_data_markers": true,
+      "R2": 0.559,
+      "RMSE": 1.55,
+      "MAE": 1.14
+    },
+    {
+      "row": 0,
+      "column": 2,
+      "raster_region": [
+        3774,
+        33,
+        5339,
+        1613
+      ],
+      "raster_region_sha256": "109d357ff2094b6741ae90f33bf9565145fd6d60929f315b1954b19f007f820f",
+      "all_plot_pixels_preserved": true,
+      "metric_overlay_has_zero_data_markers": true,
+      "R2": 0.616,
+      "RMSE": 1.45,
+      "MAE": 1.06
+    },
+    {
+      "row": 1,
+      "column": 0,
+      "raster_region": [
+        204,
+        1810,
+        1769,
+        3390
+      ],
+      "raster_region_sha256": "f27065fe1704744625c66084d295acadfac0eab9ff6d6df3cbbb59e96db09be7",
+      "all_plot_pixels_preserved": true,
+      "metric_overlay_has_zero_data_markers": true,
+      "R2": 0.384,
+      "RMSE": 1.48,
+      "MAE": 1.09
+    },
+    {
+      "row": 1,
+      "column": 1,
+      "raster_region": [
+        1989,
+        1810,
+        3554,
+        3390
+      ],
+      "raster_region_sha256": "f673005b106a1589977f9bbeec6ac7373fd58ead140c72dfaaf060c9f3cee1ea",
+      "all_plot_pixels_preserved": true,
+      "metric_overlay_has_zero_data_markers": true,
+      "R2": 0.719,
+      "RMSE": 1.06,
+      "MAE": 0.84
+    },
+    {
+      "row": 1,
+      "column": 2,
+      "raster_region": [
+        3774,
+        1810,
+        5339,
+        3390
+      ],
+      "raster_region_sha256": "d69c21187a62842b66ddb46a67d21a0a61106573b426565fb9027f9b06acf22d",
+      "all_plot_pixels_preserved": true,
+      "metric_overlay_has_zero_data_markers": true,
+      "R2": 0.767,
+      "RMSE": 0.97,
+      "MAE": 0.73
+    }
+  ],
+  "method": "Native Futura axes/text around unchanged archived raster plot interiors",
+  "no_marker_digitisation": true,
+  "no_predictions_recomputed": true,
+  "historical_metrics_preserved": true,
+  "formats": [
+    "PNG600dpi",
+    "PDF",
+    "SVG"
+  ]
+}

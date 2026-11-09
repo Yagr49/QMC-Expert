@@ -1,0 +1,72 @@
+{
+  "base": "2026_07_09_Paper_2_edited-v5_NF_3.docx",
+  "decoder": {
+    "iterations": 500,
+    "depth": 6,
+    "learning_rate": 0.05,
+    "random_seed": 42
+  },
+  "original_rows": 108,
+  "unique_full_salts": 105,
+  "cations": 103,
+  "OOD": 17,
+  "exact_OOD_endpoints": 67,
+  "archived_human_checkpoint": "/Users/egorilin/Desktop/Veresh_paper/encoder_borderline_smote.pth",
+  "full_measured_corpus_Table2_checkpoint": "Not located; reported table and notebook retained as provenance",
+  "qac_ablation_checkpoint": "analysis/encoder_reg_only.pth; distinct from measured-corpus multitarget model",
+  "text_cache": "Fresh reconstruction of cell-8 descriptions; original cell-17 cache absent. Replay is approximate, not an exact notebook execution.",
+  "source": {
+    "molecules": 681,
+    "train": 377,
+    "validation": 304,
+    "positive_train": 52
+  },
+  "compact_controls": {
+    "encoder": [
+      768,
+      512,
+      384,
+      256
+    ],
+    "projection": [
+      256,
+      128,
+      128
+    ],
+    "epochs": 80,
+    "batch_size": 64,
+    "paired_source_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "source_scaler": "Fit only on 377 training molecules",
+    "original_training_difference": "Uniform source batches; no SMOTE, augmentation or early stopping, to fix molecule exposure and final budget.",
+    "objective": "April hard-negative contrastive loss temp .05, alpha .3 for human/binary MIC; standardised MSE for continuous MIC",
+    "continuous_objective_difference": true
+  },
+  "inputs_sha256": {
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v14/data/QAC105.csv": "f88b53777548bdbd79d0eb56128b7d4e18cb7ab2e002ea5ad359c30186f3ded4",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v14/data/OOD17.csv": "b2abafad0bacfc66b3228141175ae2fb0e924cbf95645b5f4d6fa2a0d307d2b2",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v14/data/endpoint_registry.csv": "8dc37da0240f9de1294d233542de4f4f7c179f2c080c39a5ef5dd4617dd4d129",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v14/data/task_text_embeddings.npy": "58f5b9417d437c18f69503322aec6923d03bbf05441d53e355cc1910600c1ff6",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v14/data/task_text_embeddings.json": "0fb3cbbae1d6955c0df4af956383e5540336a820b0f26b5e5ccb56ed32317d4e",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v14/representations/legacy-raw_QAC105.npy": "fb05bb52fb5dd9119cf827aa7230e3ab7707bf00fdd17565fd3c303d40867ec8",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v14/representations/legacy-raw_OOD17.npy": "4e01fb3b976164f12700093b7c213133a064ce691123f54481d82e95625eb2b1",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v14/representations/legacy-human_QAC105.npy": "c7f0706c0a40065d7655da2bce25832ba30004b22f7b3ef7152713bb6d48c8c2",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v14/representations/legacy-human_OOD17.npy": "c37443e2156f14fb5b135e807e006b68b330538605a94be9df11feaa745860f9",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v14/representations/legacy-quantitative_QAC105.npy": "8f61b7fa99809fcb8fc60109f84f6968e834986105b1d0ef6df469626f456619",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v14/representations/legacy-quantitative_OOD17.npy": "3e231ec97dd2986a00e612fea42b358339ce745f5dd31b60ffb17c191acc30b1",
+    "/Users/egorilin/Desktop/Veresh_paper/Data_biocides.xlsx": "e1c24713be34d9a2f689f1e93ff0004a76d82b3bd138c454a91359199e86f44e",
+    "/Users/egorilin/Desktop/Veresh_paper/Test_molformer_original_biocides.xlsx": "32f111de6c7f9bcb6cb332963137810d356b1497acb014567e2b6ffedbffd8dd",
+    "/Users/egorilin/Desktop/Veresh_paper/scaler_classification.pkl": "a2e0c5261bd40507de551391696084400a98ee9eaae444c51c8407ce8baa372e",
+    "/Users/egorilin/Desktop/Veresh_paper/encoder_borderline_smote.pth": "05a54c4f1d49d7b4347cd7f200ba49e16557e7f43707fa7a6461092064cc0aed",
+    "/Users/egorilin/Desktop/COMA/analysis/encoder_reg_only.pth": "358ccc8f54bd2bef12cec052130beb4d924030ee4f54292434af4c8fa41094d1",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v12/data/matched-pooled_expert.csv": "57adcddda2ff9bbae2af7e9f28c19b7df79962ef526144e3938ead763b490464",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v12/data/matched-pooled_quant.csv": "939a0e8a17f57905cb4cd716e23a59e02acc56168431e9a5df1dcc133214448a",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v9/data/smiles.json": "3090ee80929898fd4eaaeb4f3085d994464b25041dacb45205f0454238691237",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v9/data/molformer.npy": "e04dca21e00b5b5f603f82753e36e10e38a30fc42df4ae3093cb506d84c5851e"
+  }
+}

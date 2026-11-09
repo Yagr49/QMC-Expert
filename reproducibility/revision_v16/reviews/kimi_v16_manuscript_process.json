@@ -1,0 +1,13 @@
+{
+  "reviewer": "kimi",
+  "cli_version": "2.1.1",
+  "execution": "local Mac",
+  "authorised_external_review": true,
+  "read_only_requested": true,
+  "prompt_sha256": "725a4dbc37d4b76bebc9c69332393aaa08130edc7a30330692e35e84c4fd5210",
+  "main_sha256": "3927d610a1ce35bc3491146436242505ffaf215ae87ab8af808b733734bb07d4",
+  "started_utc": "2026-10-13T05:59:30.297791+00:00",
+  "completed": true,
+  "returncode": 0,
+  "seconds": 237.4728660583496
+}

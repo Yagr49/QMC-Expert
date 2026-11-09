@@ -1,0 +1,127 @@
+{
+  "validated": true,
+  "orientation": "vertical",
+  "main_panels": [
+    "cation",
+    "scaffold"
+  ],
+  "main_routes": 5,
+  "main_endpoint_summaries": 4200,
+  "per_route_per_panel": 420,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "actual_source_values_preserved_to_1e_14": true,
+  "main_caption_no_OOD_67_bounds": true,
+  "main_caption_words": 123,
+  "labels_upright_multiline": true,
+  "OOD_standalone_not_inserted": true,
+  "figure_files": {
+    "figure3_backbone_route_error_violins": {
+      "width_mm": 179.99999491373697,
+      "height_mm": 92.00000457763672,
+      "Aptos_present": true,
+      "PNG_size": [
+        4251,
+        2173
+      ]
+    },
+    "figure_OOD_routes_for_section2_3": {
+      "width_mm": 110.00000406901042,
+      "height_mm": 92.00000457763672,
+      "Aptos_present": true,
+      "PNG_size": [
+        2598,
+        2173
+      ]
+    }
+  },
+  "source_script_sha256": "bf9ec3c762bd075b3436049daa2b97fc39bf8456cbd0eb7d7dffe7da7eac84aa",
+  "actual_Claude_vertical_Figure3_review": "acceptable as-is",
+  "actual_Claude_vertical_completed": true,
+  "invocation_proof": {
+    "claude_layout_process.json": {
+      "completed": true,
+      "model_usage": {
+        "claude-sonnet-4-6": {
+          "inputTokens": 2,
+          "outputTokens": 1492,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 1329,
+          "webSearchRequests": 0,
+          "costUSD": 0.027369749999999998,
+          "contextWindow": 200000,
+          "maxOutputTokens": 32000
+        }
+      },
+      "seconds": 31.227927923202515,
+      "tool_calls": 0
+    },
+    "claude_vertical_process.json": {
+      "completed": true,
+      "model_usage": {
+        "claude-sonnet-4-6": {
+          "inputTokens": 4,
+          "outputTokens": 4706,
+          "cacheReadInputTokens": 2387,
+          "cacheCreationInputTokens": 20705,
+          "webSearchRequests": 0,
+          "costUSD": 0.14896185,
+          "contextWindow": 200000,
+          "maxOutputTokens": 32000
+        }
+      },
+      "seconds": 93.13943099975586,
+      "tool_calls": 8
+    },
+    "claude_final_roc_process.json": {
+      "completed": true,
+      "model_usage": {
+        "claude-sonnet-4-6": {
+          "inputTokens": 4,
+          "outputTokens": 5248,
+          "cacheReadInputTokens": 2707,
+          "cacheCreationInputTokens": 9730,
+          "webSearchRequests": 0,
+          "costUSD": 0.11603159999999998,
+          "contextWindow": 200000,
+          "maxOutputTokens": 32000
+        }
+      },
+      "seconds": 97.68360614776611,
+      "tool_calls": 7
+    },
+    "PNG_final_comparisons": [
+      {
+        "path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figures/figure3_backbone_route_error_violins.png",
+        "audit": "claude_vertical_process.json",
+        "reviewed_hash": "1213ad818444343d4cc34d59c10d90236e9d79ebddbd8496b378b63b1ec619d6",
+        "current_hash": "1213ad818444343d4cc34d59c10d90236e9d79ebddbd8496b378b63b1ec619d6",
+        "unchanged": true
+      },
+      {
+        "path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figures/figure4_human_quantitative_compact.png",
+        "audit": "claude_vertical_process.json",
+        "reviewed_hash": "ca7351f21ef5283987527c2b8c0b019a3d5f4b3c2b8c2b4510c163de136117a2",
+        "current_hash": "d9fbebd54cab87a3bfe5411c76b31e80085bd775ab2a100f6ee9062084164b17",
+        "unchanged": false
+      },
+      {
+        "path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figures/figure4_human_quantitative_compact.png",
+        "audit": "claude_final_roc_process.json",
+        "reviewed_hash": "d9fbebd54cab87a3bfe5411c76b31e80085bd775ab2a100f6ee9062084164b17",
+        "current_hash": "d9fbebd54cab87a3bfe5411c76b31e80085bd775ab2a100f6ee9062084164b17",
+        "unchanged": true
+      },
+      {
+        "path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figures/figure5_qhero_real_roc.png",
+        "audit": "claude_final_roc_process.json",
+        "reviewed_hash": "abe23552dd4647cae45ff100f81747e5a1b0794b62ca3937c64e3309734c0a80",
+        "current_hash": "abe23552dd4647cae45ff100f81747e5a1b0794b62ca3937c64e3309734c0a80",
+        "unchanged": true
+      }
+    ]
+  }
+}

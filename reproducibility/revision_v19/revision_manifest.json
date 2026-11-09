@@ -1,0 +1,330 @@
+{
+  "base_main_sha256": "7afb952362f55019aa532dd2464fcec9cbb218ab2952c415f7fae040f6a360cb",
+  "base_SI_sha256": "6c30bb38a164f3d8e19f5c98796f29d84b7bc48ba6d0a3bd331e113d609e5985",
+  "main": "/Users/egorilin/Desktop/COMA/2026_10_13_Paper_2_edited-v19_CV_and_seed_variability.docx",
+  "main_sha256": "82e32b60c545962ffd5659a47ab25d8cfffbae2cbd62cfd5b671153839dd7a86",
+  "SI": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v19/Supplementary_Information_v19.docx",
+  "SI_sha256": "423c3765c814a4412328e1ea3b4d3362d3e10d4e1753afcf5314a7384e932f79",
+  "original_table_values_unchanged": true,
+  "new_CV_rows_per_original_table": 3,
+  "original_probe_SD_restored": true,
+  "main_seed_SD_entries": [
+    {
+      "table": 4,
+      "arm": "initial",
+      "schema": "cation",
+      "mean": 1.889259038429872,
+      "sd": 0.0341081504502376,
+      "n": 5
+    },
+    {
+      "table": 4,
+      "arm": "initial",
+      "schema": "scaffold",
+      "mean": 2.08404765268979,
+      "sd": 0.0627104481987871,
+      "n": 5
+    },
+    {
+      "table": 4,
+      "arm": "initial",
+      "schema": "full-QAC105",
+      "mean": 2.3130526360746435,
+      "sd": 0.1618806601078354,
+      "n": 5
+    },
+    {
+      "table": 4,
+      "arm": "human",
+      "schema": "cation",
+      "mean": 1.8724154393308807,
+      "sd": 0.0338776459177609,
+      "n": 5
+    },
+    {
+      "table": 4,
+      "arm": "human",
+      "schema": "scaffold",
+      "mean": 2.158292284007412,
+      "sd": 0.0496316752483931,
+      "n": 5
+    },
+    {
+      "table": 4,
+      "arm": "human",
+      "schema": "full-QAC105",
+      "mean": 2.267957622370833,
+      "sd": 0.0773633489768046,
+      "n": 5
+    },
+    {
+      "table": 4,
+      "arm": "human_shuffled",
+      "schema": "cation",
+      "mean": 1.833156067612436,
+      "sd": 0.0494978406211413,
+      "n": 5
+    },
+    {
+      "table": 4,
+      "arm": "human_shuffled",
+      "schema": "scaffold",
+      "mean": 2.041387746248671,
+      "sd": 0.0845658365712194,
+      "n": 5
+    },
+    {
+      "table": 4,
+      "arm": "human_shuffled",
+      "schema": "full-QAC105",
+      "mean": 2.171614438628147,
+      "sd": 0.1120360480208487,
+      "n": 5
+    },
+    {
+      "table": 4,
+      "arm": "mic_binary",
+      "schema": "cation",
+      "mean": 1.864913471382688,
+      "sd": 0.05896883921879,
+      "n": 5
+    },
+    {
+      "table": 4,
+      "arm": "mic_binary",
+      "schema": "scaffold",
+      "mean": 2.109582854136776,
+      "sd": 0.0520750039315799,
+      "n": 5
+    },
+    {
+      "table": 4,
+      "arm": "mic_binary",
+      "schema": "full-QAC105",
+      "mean": 2.275867634612612,
+      "sd": 0.0951036606067377,
+      "n": 5
+    },
+    {
+      "table": 4,
+      "arm": "binary_shuffled",
+      "schema": "cation",
+      "mean": 1.8113493819984527,
+      "sd": 0.0369395097094299,
+      "n": 5
+    },
+    {
+      "table": 4,
+      "arm": "binary_shuffled",
+      "schema": "scaffold",
+      "mean": 2.0615789119288683,
+      "sd": 0.0167862569373701,
+      "n": 5
+    },
+    {
+      "table": 4,
+      "arm": "binary_shuffled",
+      "schema": "full-QAC105",
+      "mean": 2.0939157686698486,
+      "sd": 0.0876725705554175,
+      "n": 5
+    },
+    {
+      "table": 4,
+      "arm": "mic_continuous",
+      "schema": "cation",
+      "mean": 1.8584095638134368,
+      "sd": 0.0313865234668898,
+      "n": 5
+    },
+    {
+      "table": 4,
+      "arm": "mic_continuous",
+      "schema": "scaffold",
+      "mean": 2.167713143497621,
+      "sd": 0.0180451424499407,
+      "n": 5
+    },
+    {
+      "table": 4,
+      "arm": "mic_continuous",
+      "schema": "full-QAC105",
+      "mean": 2.47380284658846,
+      "sd": 0.1314815706396866,
+      "n": 5
+    },
+    {
+      "table": 4,
+      "arm": "continuous_shuffled",
+      "schema": "cation",
+      "mean": 1.93530797743785,
+      "sd": 0.0505264435941543,
+      "n": 5
+    },
+    {
+      "table": 4,
+      "arm": "continuous_shuffled",
+      "schema": "scaffold",
+      "mean": 2.186289134343006,
+      "sd": 0.0558199689231534,
+      "n": 5
+    },
+    {
+      "table": 4,
+      "arm": "continuous_shuffled",
+      "schema": "full-QAC105",
+      "mean": 2.418531785954591,
+      "sd": 0.1503287357991941,
+      "n": 5
+    },
+    {
+      "table": 4,
+      "arm": "human_weight_only",
+      "schema": "cation",
+      "mean": 1.888054909913246,
+      "sd": 0.0197664628254283,
+      "n": 5
+    },
+    {
+      "table": 4,
+      "arm": "human_weight_only",
+      "schema": "scaffold",
+      "mean": 2.107558366006125,
+      "sd": 0.0352042839125354,
+      "n": 5
+    },
+    {
+      "table": 4,
+      "arm": "human_weight_only",
+      "schema": "full-QAC105",
+      "mean": 2.383991808551128,
+      "sd": 0.1197130737512644,
+      "n": 5
+    },
+    {
+      "table": 6,
+      "route": "Pretrained / frozen linear head",
+      "schema": "cation",
+      "mean": 2.013491335255327,
+      "sd": 0.006163706417640292,
+      "n": 3
+    },
+    {
+      "table": 6,
+      "route": "Pretrained / frozen linear head",
+      "schema": "scaffold",
+      "mean": 1.985593836575647,
+      "sd": 0.0026291358324025127,
+      "n": 3
+    },
+    {
+      "table": 6,
+      "route": "Pretrained / frozen linear head",
+      "schema": "full-QAC105",
+      "mean": 2.560393121695432,
+      "sd": 0.20631353689752868,
+      "n": 3
+    },
+    {
+      "table": 6,
+      "route": "Pretrained / direct LoRA",
+      "schema": "cation",
+      "mean": 2.040296716968376,
+      "sd": 0.04943199146434577,
+      "n": 3
+    },
+    {
+      "table": 6,
+      "route": "Pretrained / direct LoRA",
+      "schema": "scaffold",
+      "mean": 2.0888912394717685,
+      "sd": 0.011770602297943992,
+      "n": 3
+    },
+    {
+      "table": 6,
+      "route": "Pretrained / direct LoRA",
+      "schema": "full-QAC105",
+      "mean": 2.75568186103078,
+      "sd": 0.17155397868351754,
+      "n": 3
+    },
+    {
+      "table": 6,
+      "route": "Pretrained / direct full FT",
+      "schema": "cation",
+      "mean": 1.8630163023950288,
+      "sd": 0.045278491792854876,
+      "n": 3
+    },
+    {
+      "table": 6,
+      "route": "Pretrained / direct full FT",
+      "schema": "scaffold",
+      "mean": 1.970118043136149,
+      "sd": 0.02603335816681378,
+      "n": 3
+    },
+    {
+      "table": 6,
+      "route": "Pretrained / direct full FT",
+      "schema": "full-QAC105",
+      "mean": 3.031600382823847,
+      "sd": 0.40812852296658436,
+      "n": 3
+    },
+    {
+      "table": 6,
+      "route": "Human partial / direct prediction",
+      "schema": "cation",
+      "mean": 1.7966471128163388,
+      "sd": 0.056569322388170015,
+      "n": 3
+    },
+    {
+      "table": 6,
+      "route": "Human partial / direct prediction",
+      "schema": "scaffold",
+      "mean": 1.8344265366845995,
+      "sd": 0.057680885943938644,
+      "n": 3
+    },
+    {
+      "table": 6,
+      "route": "Human partial / direct prediction",
+      "schema": "full-QAC105",
+      "mean": 2.411703972354278,
+      "sd": 0.08773314635655548,
+      "n": 3
+    },
+    {
+      "table": 6,
+      "route": "Human partial / frozen CatBoost",
+      "schema": "cation",
+      "mean": 1.742822166227841,
+      "sd": 0.030572207834920546,
+      "n": 3
+    },
+    {
+      "table": 6,
+      "route": "Human partial / frozen CatBoost",
+      "schema": "scaffold",
+      "mean": 1.8188011559271808,
+      "sd": 0.04368478638877195,
+      "n": 3
+    },
+    {
+      "table": 6,
+      "route": "Human partial / frozen CatBoost",
+      "schema": "full-QAC105",
+      "mean": 2.106199085904346,
+      "sd": 0.07096112650525102,
+      "n": 3
+    }
+  ],
+  "rowcv_fits": 30,
+  "grouped_variability_tables": true,
+  "original_historical_holdout_SD": "Not identified; no SD was invented or attached from another protocol",
+  "methodology_continuity_table": "S44",
+  "source_v5_sha256": "0dd55e7b9ef5125dd938fdb04e9c2d0a430cc4b86fc099b85e9f6e5e6d1c2bfb"
+}

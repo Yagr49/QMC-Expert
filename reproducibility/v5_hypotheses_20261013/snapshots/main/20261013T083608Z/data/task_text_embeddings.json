@@ -1,0 +1,40 @@
+{
+  "requested_model": "openai/text-embedding-3-small",
+  "returned_model": "text-embedding-3-small",
+  "tasks": [
+    {
+      "id": "Sa_MIC",
+      "text": "Minimum Inhibitory Concentration against Staphylococcus aureus ATCC 43300, a methicillin-resistant Gram-positive bacterium. MIC measures the lowest concentration that inhibits visible bacterial growth."
+    },
+    {
+      "id": "Sa_MBC",
+      "text": "Minimum Bactericidal Concentration against Staphylococcus aureus ATCC 43300, a methicillin-resistant Gram-positive bacterium. MBC measures the lowest concentration that kills 99.9% of bacteria."
+    },
+    {
+      "id": "Ec_MIC",
+      "text": "Minimum Inhibitory Concentration against Escherichia coli ATCC 25922, a Gram-negative reference strain. MIC measures the lowest concentration that inhibits visible bacterial growth."
+    },
+    {
+      "id": "Ec_MBC",
+      "text": "Minimum Bactericidal Concentration against Escherichia coli ATCC 25922, a Gram-negative reference strain. MBC measures the lowest concentration that kills 99.9% of bacteria."
+    }
+  ],
+  "shape": [
+    4,
+    1536
+  ],
+  "usage": {
+    "prompt_tokens": 166,
+    "total_tokens": 166,
+    "cost": 3.32e-06,
+    "is_byok": false,
+    "cost_details": {
+      "upstream_inference_cost": 3.32e-06,
+      "upstream_inference_prompt_cost": 3.32e-06,
+      "upstream_inference_completions_cost": 0
+    }
+  },
+  "retrieved_unix": 1791748923.924001,
+  "sha256": "58f5b9417d437c18f69503322aec6923d03bbf05441d53e355cc1910600c1ff6",
+  "note": "Fresh reconstruction of four archived task descriptions; no molecular structures or measured activities sent."
+}

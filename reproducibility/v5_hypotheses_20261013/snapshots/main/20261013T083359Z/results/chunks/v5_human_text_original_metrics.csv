@@ -1,0 +1,6 @@
+cohort,schema,task,n,RMSE,MAE,R2,name,encoding,arm,seed,provenance
+original108,v5_row_task_holdout,Sa_MIC,22,0.9584554288490549,0.7940277896731538,0.7282272520784416,v5_human,text,v5_human,-1,v5_archived_approximate_reconstruction
+original108,v5_row_task_holdout,Sa_MBC,22,1.7658924206153768,1.2398213864829117,0.3798993272135335,v5_human,text,v5_human,-1,v5_archived_approximate_reconstruction
+original108,v5_row_task_holdout,Ec_MIC,21,0.9926992184502481,0.7060578786126473,0.7753115792557679,v5_human,text,v5_human,-1,v5_archived_approximate_reconstruction
+original108,v5_row_task_holdout,Ec_MBC,22,1.341823645289523,1.041427214496003,0.7078660500221308,v5_human,text,v5_human,-1,v5_archived_approximate_reconstruction
+original108,v5_row_task_holdout,pooled,87,1.3092050957663888,0.9480838625886332,,v5_human,text,v5_human,-1,v5_archived_approximate_reconstruction

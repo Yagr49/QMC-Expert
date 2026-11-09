@@ -1,0 +1,31 @@
+{
+  "expert_final_labels": 1103,
+  "collection_stage_reported_1500_not_used_as_final_count": true,
+  "descriptor_MLP_R2": [
+    0.68,
+    0.25,
+    0.32,
+    0.4
+  ],
+  "stacking_R2": [
+    0.3,
+    0.43,
+    0.41
+  ],
+  "human_text_recovered_R2": [
+    0.7494,
+    0.6752,
+    0.5918,
+    0.7708
+  ],
+  "displayed_human_range": [
+    0.59,
+    0.77
+  ],
+  "unknown_original_range_053_086_removed": true,
+  "scores_historical_holdout_not_CV": true,
+  "upper_curves_schematic": true,
+  "molecule_generic_not_dataset_specific": "[Br-].[Br-].*[n+]1ccc(Cc2ccc(Cc3cc[n+](*)cc3)cc2)cc1",
+  "molecule_style": "RDKit ACS1996",
+  "font": "Aptos"
+}

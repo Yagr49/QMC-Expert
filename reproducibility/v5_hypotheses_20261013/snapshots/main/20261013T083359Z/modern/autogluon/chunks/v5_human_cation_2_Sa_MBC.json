@@ -1,0 +1,19 @@
+{
+  "rep": "v5_human",
+  "schema": "cation",
+  "fold": 2,
+  "task": "Sa_MBC",
+  "completed": true,
+  "n_train": 84,
+  "n_test": 21,
+  "seconds": 29.83133292198181,
+  "model": "autogluon",
+  "info": {
+    "inner_train_n": 66,
+    "inner_val_n": 18,
+    "selected_model": "LightGBM",
+    "refitted_model": "LightGBM_FULL",
+    "selection_budget_s": 60,
+    "refit_extra_budget": true
+  }
+}

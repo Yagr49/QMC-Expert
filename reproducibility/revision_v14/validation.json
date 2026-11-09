@@ -1,0 +1,15 @@
+{
+  "completed": true,
+  "jobs": 56,
+  "prediction_rows": 27816,
+  "metrics_match_max_difference": 8.881784197001252e-16,
+  "QAC105": 105,
+  "QAC_cation_groups": 103,
+  "all_endpoints_molecule_grouped": true,
+  "OOD17": 17,
+  "OOD_exact_values": 67,
+  "OOD_censored_values": 1,
+  "OOD_never_used_in_fit": true,
+  "protocol_sha256": "7c13c7df7a6b0f38428fd7b3d9465db04af4f12a9e984480d68f780560eb970a",
+  "predictions_sha256": "e9fbe2d05524bfa987ac98b534168a90d4cbaefaf7a3415220fe4024a1c54b9b"
+}

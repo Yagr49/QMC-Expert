@@ -1,0 +1,14 @@
+{
+  "rows": 1207,
+  "role_counts": {
+    "External Q-HERO": 405,
+    "Source training": 377,
+    "Source validation": 304,
+    "QAC target": 104,
+    "New OOD compounds": 17
+  },
+  "representation": "frozen MolFormer full salts",
+  "normalisation": "per molecule L2; PCA fit on source training only",
+  "tsne": "joint illustrative embedding; perplexity35, seed1729,1500iterations",
+  "not_prediction": "Held-out structures used only for illustration. No ellipses or OOD distance threshold. No causal or transfer conclusion from proximity."
+}

@@ -1,0 +1,11 @@
+{
+  "name": "compact_mic_binary_seed2",
+  "encoding": "categorical",
+  "arm": "mic_binary",
+  "seed": 2,
+  "provenance": "v5_architecture_matched_source",
+  "completed": true,
+  "fits": 11,
+  "seconds": 58.43993306159973,
+  "predictions": 908
+}

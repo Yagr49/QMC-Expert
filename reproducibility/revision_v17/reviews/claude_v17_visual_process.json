@@ -1,0 +1,106 @@
+{
+  "reviewer": "claude",
+  "execution": "local Mac",
+  "authorised": true,
+  "cli_version": "2.1.87 (Claude Code)",
+  "prompt_sha256": "4cb03c4ed13e2cf9ee88c29f9019c06f7be667459152c9704f80bbc2d1cfe8b7",
+  "image_sha256": {
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v17/sources/image1.png": "6c480e4618358a89527341c803e00dfd86113717625bd42bf2ef10bac022422c",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v17/sources/image4.png": "432a405c3cb9ba34bc66206e2e0a95eaec43201876d0b313be613e59f7fee66a",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v17/font_previews/Aptos/figureS26_prediction_route_violins.png": "bf3734a28092aff6dfb2b6ff16ea4e9e5e43660aa08c76ff224fc984eb987e00",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v17/font_previews/Segoe_UI/figureS26_prediction_route_violins.png": "9605cbea4669f44edf9f48fe334c908bf3c05411f911bb478651378c80f61327",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v17/figures/figure1_supervision_and_transfer.png": "137d3254788fb22ebd02c89e91b3cf62a3f70ecc80e9eac7c7ff252515ee9f71",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v17/figures/figure2_QAC105_parity.png": "f29ef5b5c758686923290580f38346b67b71d9c5d56060be85618718394b0dec",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v17/figures/figure3_OOD_families_ACS1996.png": "0c254699fa06a8808786df02d9d42dc16f69c9bcbd2d29097c13677bb33fa795",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v17/figures/figure4_paired_error_violins.png": "fbf814002fc118f909df19c2fd531508d44d98adfa0ab3444dd6e67952ef0310",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v17/figures/figure5_weight_rewind.png": "b6d08009005ee5faa136d08ed6ae5dfcb46f6d0e95998ce77a6ea81cb0014400",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v17/figures/figureS28_decoder_error_violins.png": "d15376d7c27371049aa8f35b40b2bf2da89903aaca39fee51ba3fb151fbd353c",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v17/figures/figureS29_direct_adaptation.png": "f23e52c1c10373f84fbdaa44f7d06e567fa12da41ef49772db4fc46339ee24bd"
+  },
+  "started_utc": "2026-10-13T06:55:14.481918+00:00",
+  "completed": true,
+  "returncode": 0,
+  "tool_calls": [
+    {
+      "name": "Read",
+      "arguments": {
+        "file_path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v17/sources/image1.png"
+      }
+    },
+    {
+      "name": "Read",
+      "arguments": {
+        "file_path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v17/sources/image4.png"
+      }
+    },
+    {
+      "name": "Read",
+      "arguments": {
+        "file_path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v17/font_previews/Aptos/figureS26_prediction_route_violins.png"
+      }
+    },
+    {
+      "name": "Read",
+      "arguments": {
+        "file_path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v17/font_previews/Segoe_UI/figureS26_prediction_route_violins.png"
+      }
+    },
+    {
+      "name": "Read",
+      "arguments": {
+        "file_path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v17/figures/figure1_supervision_and_transfer.png"
+      }
+    },
+    {
+      "name": "Read",
+      "arguments": {
+        "file_path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v17/figures/figure2_QAC105_parity.png"
+      }
+    },
+    {
+      "name": "Read",
+      "arguments": {
+        "file_path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v17/figures/figure3_OOD_families_ACS1996.png"
+      }
+    },
+    {
+      "name": "Read",
+      "arguments": {
+        "file_path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v17/figures/figure4_paired_error_violins.png"
+      }
+    },
+    {
+      "name": "Read",
+      "arguments": {
+        "file_path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v17/figures/figure5_weight_rewind.png"
+      }
+    },
+    {
+      "name": "Read",
+      "arguments": {
+        "file_path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v17/figures/figureS28_decoder_error_violins.png"
+      }
+    },
+    {
+      "name": "Read",
+      "arguments": {
+        "file_path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v17/figures/figureS29_direct_adaptation.png"
+      }
+    }
+  ],
+  "visually_read_images": 11,
+  "model_usage": {
+    "claude-sonnet-4-6": {
+      "inputTokens": 9,
+      "outputTokens": 6368,
+      "cacheReadInputTokens": 8556,
+      "cacheCreationInputTokens": 12785,
+      "webSearchRequests": 0,
+      "costUSD": 0.14605754999999998,
+      "contextWindow": 200000,
+      "maxOutputTokens": 32000
+    }
+  },
+  "cost_usd": 0.14605754999999998,
+  "seconds": 131.19702291488647
+}

@@ -1,0 +1,213 @@
+# Human versus Quantitative Supervision for Antibacterial Molecular Representation Learning
+
+## Abstract
+
+Human Good/Bad annotations may provide supervision for molecular learning, but transferable signal, competition with numerical measurements and added value over pretrained features require separate tests. For antibacterial quaternary ammonium compounds, matched partial MolFormer fine-tuning on identical source molecules yields Q-HERO scaffold-CV RMSE 1.529 for human labels versus 1.525 for binary MIC, 1.453 for continuous MIC and 1.607 for raw features, with direct human rank agreement 0.197 without target refitting. Paired real-versus-shuffled controls, frozen-feature experiments across four backbones and same-chemistry numerical-context comparisons reveal dependence on supervision assignment, adaptation procedure and source composition. These exploratory results evaluate human annotations as protocol-dependent supervision, restrict causal interpretation to controlled replacements within specified learning procedures and leave measurement equivalence, biological mechanism and human denoising unresolved.
+
+## Keywords
+
+Quaternary ammonium compounds; human annotations; quantitative supervision; minimum inhibitory concentration; molecular representation learning; transfer learning; scaffold validation
+
+## 1. Introduction
+
+Supervision for molecular learning is usually expressed as a numerical property or a class derived from an experimental endpoint. Chemists also make qualitative decisions that can serve as training targets. Preference-learning studies have demonstrated that such decisions can be learned and used in molecular prioritisation and design (1). For antibacterial modelling, a more specific question is whether coarse human Good/Bad annotations carry transferable information about measured potency and whether the representations they train can compete with those learned from numerical measurements.
+
+Quaternary ammonium compounds (QACs) provide a useful setting for this comparison. Previous QAC activity modelling (2) and the topology-aware Q-HERO discovery framework (3) establish the relevance of molecular learning in this chemical domain. Our focus is the choice of supervision. Minimum inhibitory concentration (MIC) depends on organism, strain and assay context, and a collection of repeated measurements contains fewer independent molecules than records. Human annotations may summarise several observations and other considerations; the information available to annotators must therefore be documented before interpreting their labels as independent chemical intuition.
+
+We distinguish three questions. First, do human labels contain activity-related information that transfers to another collection? Second, do they produce practically competitive representations under a specified adaptation and downstream-learning protocol? Third, does replacing a supervision assignment change predictive loss when source chemistry, architecture and training conditions are held fixed? A real-versus-shuffled label intervention addresses the third question. Raw pretrained and untrained-encoder controls are also needed, because a trained representation can outperform a damaged shuffled-label representation without improving the original features.
+
+Adaptation capacity is a separate experimental choice. A small trainable projection over frozen molecular features and updates to transformer layers can respond differently to the same labels. Small projections offer a lower parameter budget; their predictive advantage must be tested with matched source chemistry and evaluation. The projection used here is a feature encoder, distinct from an internal adapter or LoRA. We therefore include matched partial backbone fine-tuning rather than assuming that small adapters are preferable.
+
+We examine these questions with three complementary protocols: archived partial MolFormer fine-tuning on eligible supervision collections, matched-molecule training of a small encoder over frozen features, and new partial fine-tuning on those same matched molecules. The latter compares expert labels with continuous and binarised MIC, their shuffled controls and untrained representations. Backbone sensitivity is evaluated with MolFormer-XL (4), c3-MoLFormer and ChemBERTa-100M from the ChemBERTa-3 framework (5), and ChemFM-1B (6). Pooled MIC, exact S. aureus MIC and mammalian-cell cytotoxicity from ILToxDB (7) provide distinct quantitative source definitions. Q-HERO is the principal external chemical collection; direct source-only prediction and target-trained scaffold cross-validation are reported separately.
+
+## 2. Methods
+
+### 2.1. Human annotations and quantitative sources
+
+The supplied expert archive contains 1,103 final annotation entries: 244 Good and 859 Bad. These counts describe archive entries before structure standardisation, deduplication and evaluation-set exclusions. The analyses use the final labels as available supervision. Individual annotator votes and adjudication records are absent from the supplied computational archive; inter-rater agreement is therefore not estimated from final labels.
+
+### 2.1.1. Collection of human annotations
+
+[COAUTHORS H1 — Annotators and collection period: insert the number of annotators, their relevant scientific backgrounds and experience, how they were recruited, and the dates or rounds of annotation. Confirm whether the same annotators participated in every round.]
+
+[COAUTHORS H2 — Compound selection: describe how compounds were selected and presented for annotation, the unit being rated (molecule, salt, assay record or another unit), the treatment of repeated structures and counterions, and any exclusions made before annotation.]
+
+[COAUTHORS H3 — Task and decision criteria: insert the exact question/instructions given to annotators and the operational definitions of Good and Bad. State which endpoints or practical considerations were relevant, whether numerical cutoffs were prescribed, and how uncertain or unrateable compounds were handled.]
+
+[COAUTHORS H4 — Information visible to annotators: specify whether annotators saw molecular structures, identifiers, measured MIC/MBC, cytotoxicity, organism/strain information, assay conditions, literature reports or model predictions. State explicitly whether the measurements subsequently used for quantitative supervision were available during annotation and whether Q-HERO or OOD evaluation information was visible.]
+
+[COAUTHORS H5 — Collection workflow: describe the interface or files used, the number of ratings requested per compound, whether ratings were independent, any discussion between annotators, presentation order, repeated checks and revisions between rounds. Attach the original instructions or a representative annotation form to Supporting Information if available.]
+
+[COAUTHORS H6 — Final-label construction: state how individual ratings were combined into the final Good/Bad call, including disagreement, ties, adjudication, missing ratings and revisions. Identify which steps are documented in records and which are reconstructed from the contributors' recollection.]
+
+[COAUTHORS H7 — Records and agreement: identify any recoverable individual votes, round identifiers and adjudication logs and their planned archive location. If votes are available, report agreement with its definition, sample size and uncertainty; otherwise confirm that agreement cannot be calculated. Annotation time or cost may be added if documented, but is not used to infer a measurement-replacement rate.]
+
+### 2.1.2. Quantitative source definitions
+
+The quantitative QMR export supplies molecule-level pooled MIC and the underlying assay records. Pooled numerical targets retain the archive's unified field across organisms, including coded censoring bounds. The organism-matched source requires an exact S. aureus MIC qualifier. ILToxDB supplies a 24 h MTT mammalian-cell cytotoxicity subset represented by a merged CC50/IC50/EC50 field (7); this is a cross-endpoint source rather than a homogeneous antibacterial measurement. Source files, hashes, curation rules and eligibility counts are recorded in the reproducibility manifests and Supporting Information.
+
+### 2.2. Evaluation cohorts and exclusion rules
+
+The archived partial-fine-tuning protocol removes all 532 evaluation full-salt identities from each supervision source. Its evaluation collections contain 105 QAC structures, 411 Q-HERO structures and 17 newly synthesised QACs. Full-salt identity exclusion does not establish exclusion of every counterion variant. The matched-molecule protocol additionally excludes all evaluation cation identities and their counterion variants, and removes conflicting expert and target labels. Its target collections contain QAC-104, Q-HERO-405 and OOD-17. Q-HERO-405 contains 386 unique cations in 29 cation-scaffold groups. Cohort sizes and exclusion rules differ between the two protocols, so their scores are not pooled into a single comparison.
+
+For representation-quality evaluation, a fresh target regressor is trained using five-fold scaffold-grouped cross-validation on QAC or Q-HERO; each reported prediction is held out of its target-regressor training fold. Thus Q-HERO is external to representation training, while its fold-training MIC values are used for downstream refitting. Source–target scaffold overlap is allowed; scaffold grouping applies to the source-validation partition and the target-regressor folds separately. Direct transfer applies the source-trained head without target refitting. OOD-17 is predicted with a downstream model trained on QAC and is treated as a small secondary case study. The newly synthesised mono-, bis- and multi-cationic compounds and the available synthesis, characterisation and microbiological protocols are described in Supporting Information Section S16.
+
+### 2.3. Archived partial backbone fine-tuning and direct transfer
+
+MolFormer-XL uses checkpoint revision 7b12d946c181a37f6012b9dc3b002275de070314 (4). The embedding layer and lowest four encoder layers remain frozen, accounting for 16.0 of 44.4 million parameters. The eligible sources contain 740 expert-labelled molecules, 1,153 molecule-level MIC targets and 9,338 MIC records over those 1,153 molecules. The expert and numerical collections overlap substantially but differ in size. Three source-training seeds are evaluated.
+
+The source model adds dropout and a scalar prediction head, using binary cross-entropy for expert labels and mean squared error for numerical log2 MIC in micromolar units. AdamW uses weight decay 0.01 and a one-cycle schedule with peak learning rate 3 × 10−5, batch size 32 and gradient clipping at norm 1.0. The maximum epochs are 30 for expert and molecule-level MIC training and 10 for record-level MIC training. Early stopping uses a scaffold-disjoint source-validation partition with patience six; the split seed follows the run seed. These source-size and update-budget differences are part of the practical comparison, rather than a matched-budget intervention.
+
+After partial fine-tuning, a fresh CatBoost regressor uses 800 iterations, depth six and learning rate 0.05 under target scaffold folds. A six-descriptor reference uses RDKit molecular weight, MolLogP, topological polar surface area, rotatable-bond count, hydrogen-bond-acceptor count and ring count under the same target-regressor protocol. Direct transfer instead applies the source-trained scalar head. Expert scores are oriented so that greater agreement means higher scores accompany lower MIC; numerical predictions are compared with measured MIC in their native direction. Rank agreement is the principal cross-objective direct metric. Target-median-split AUC and raw numerical regression metrics are secondary. Exploratory affine recalibration fitted on the evaluation data is retained only in Supporting Information Section S5.
+
+### 2.4. Matched-molecule supervision interventions
+
+The pooled-MIC panel contains 681 shared source molecules, 111 cation-scaffold groups and 96 positive expert calls, with 4,938 underlying MIC records. The exact S. aureus panel contains 529 shared source molecules, 91 groups and 78 positive calls, with 855 records. Within each panel, source molecules, feature scaling, scaffold partition, initial weights and training budget are shared across arms. A GroupShuffleSplit with random seed 1729 reserves 15% of scaffold groups for source validation. Group sizes are unequal: the pooled split contains 377 training and 304 validation molecules. This validation partition records diagnostics without checkpoint selection.
+
+The frozen features feed a neural encoder with hidden layers of 256 and 128 units. Binary objectives use binary cross-entropy with logits, and continuous objectives use mean squared error after target scaling fitted on source training. Input scaling is likewise fitted only on source training. AdamW uses learning rate 0.001, weight decay 0.01, batch size 64 and 80 fixed epochs, with five paired initialisation seeds (0–4). The controls comprise real expert labels, continuous MIC, binary MIC, each corresponding shuffled-label arm, an untrained encoder and the original pretrained features. Binary MIC uses a source-training-only threshold targeting the expert positive prevalence; MIC ties prevent exact prevalence matching. Permutation occurs within source training. The expert-versus-continuous intervention changes both target content and objective.
+
+The fixed downstream CatBoost decoder uses 300 iterations, depth five, learning rate 0.05 and random seed 1729. Cation-scaffold target folds are identical across arms. Ridge regression with alpha ten and target-training-only feature standardisation is a sensitivity analysis; all results, including unstable extrapolation, are retained in Supporting Information. A separate full-source comparison uses 712 expert, 1,120 pooled-MIC, 888 exact S. aureus-MIC and 273 cytotoxicity molecules. This comparison retains differences in source size and chemistry.
+
+### 2.5. Backbone and numerical-context sensitivity
+
+The additional checkpoints are c3-MoLFormer, ChemBERTa-100M-MLM and ChemFM-1B (5,6). Their revision hashes, loading diagnostics, pooling rules and feature checksums are archived. All 1,939 prepared structures are encoded without truncation. c3-MoLFormer uses deterministic MolFormer pooling, ChemBERTa uses an attention-masked hidden-token mean, and ChemFM uses the final non-padding hidden token. The encoder input dimension follows the backbone; its hidden dimensions and source-training budget remain fixed. These experiments adapt frozen features and do not perform full transformer fine-tuning. The c3 checkpoint's “1.1B” name refers to pretraining molecules; its encoder has 44.4 million parameters.
+
+For context sensitivity, the same 529 source molecules are assigned pooled MIC or exact S. aureus MIC, with corresponding shuffled controls. Pooled MIC summarises 4,049 underlying records and exact S. aureus MIC summarises 855. Source identities, initial weights and partition remain fixed. Expert, exact S. aureus and untrained runs reuse the deterministic 529-molecule experiment and are anchors rather than independent replications. Organism mixture, censoring, record count and aggregation change together, so this intervention estimates an effect of the composite target-definition policy.
+
+### 2.6. Outcomes, uncertainty and causal interpretation
+
+The main outcomes are RMSE in log2 µM and R² for target-trained regressors, and Spearman rank agreement for direct transfer. Seed means and standard deviations describe training variability. Paired RMSE contrasts average squared losses across source seeds before taking square roots; they therefore need not equal differences between mean seed-specific RMSE values. Ten thousand paired bootstrap replicates resample source initialisation seeds and whole target cation-scaffold groups. For the single-run raw-feature reference, the same fixed prediction vector is reused in every paired seed draw: its own variation comes only from scaffold resampling, while the expert-minus-raw contrast also includes expert-training variability. Untrained neural encoders have five initialisation seeds. These intervals are conditional on fixed target folds, based on a small number of seeds, exploratory and unadjusted for multiple comparisons. Conditional-scaffold intervals, leave-one-scaffold-out contrasts and all secondary targets are supplied in Supporting Information Sections S8 and S13.
+
+The causal estimand is the change in predictive loss under a specified replacement of supervision within a fixed computational procedure. Real-versus-shuffled labels preserve source-training marginal label distributions (class counts for binary arms and empirical values for continuous arms) and source chemistry while disrupting the structure–label relation. Five shuffled runs are diagnostic controls, rather than a calibrated multi-permutation significance test. This intervention does not identify a molecular antibacterial mechanism (8), an effect of expert status itself or removal of laboratory bias. The analyses followed earlier inspected experiments and are exploratory; no non-inferiority margin or confirmatory preregistration is claimed.
+
+### 2.7. Matched partial backbone fine-tuning
+
+The new experiment reuses the ordered 681-molecule pooled source panel, its 377/304 source-training/validation partition, evaluation-cation exclusions and QAC-104/Q-HERO-405 target folds from Section 2.4. MolFormer uses the same pinned checkpoint as Section 2.3. Embedding parameters and parameters in layers 0–3 remain frozen; layers 4–11, the pooler and a dropout-0.1 scalar head are trained, totalling 28,375,297 trainable parameters. Source salts are right-padded to 202 tokens; every source and target is checked without truncation. Attention feature maps are refreshed during native MolFormer training and deterministic in evaluation; their stochastic seeds and forward-call schedules are paired across arms. Float32 arithmetic is used.
+
+The six arms are human, continuous pooled MIC and binary pooled MIC, with each corresponding source-training-only shuffled control. The human and binary-MIC training arms each contain 52 positive calls among 377 molecules in this panel. Continuous targets are standardised on source training and inverted for direct predictions; binary MIC uses the same source-training prevalence rule as Section 2.4. Five seeds (0–4) share initial weights, minibatch permutations and stochastic seeds across arms. AdamW, weight decay 0.01, peak learning rate 3 × 10−5 with a one-cycle schedule, batch size 32 and gradient clipping at norm one are fixed. Every arm performs 30 epochs and 360 updates. Validation losses are recorded but the final checkpoint is always used; no early stopping or target-based selection occurs.
+
+Representation-quality evaluation uses the common 300-iteration CatBoost from Section 2.4. The raw backbone is re-encoded in the same environment and included as the primary raw reference; archived raw features are retained for numerical auditing. Direct transfer retains the source head without target fitting, including shuffled controls, and reports rank agreement plus descriptive target-median AUC. Ten thousand paired seed/scaffold draws supply exploratory intervals for mean seed-specific rank differences; bootstrap midranks account for repeated molecules from sampled scaffold groups. This extension followed inspection of earlier analyses. Its protocol was written before its own training and outcomes, without a confirmatory preregistration claim. The archived MLP comparison also changes adaptation architecture, optimisation schedule and computing environment, so it does not isolate trainable capacity alone.
+
+[FIGURE:design]
+
+Figure 1. Three evaluation protocols. (a) Archived partial fine-tuning uses unequal source collections and Q-HERO-411. (b) Matched frozen-feature adaptation and (c) matched partial MolFormer fine-tuning share the 681-molecule source panel, source partition, strict evaluation-cation exclusions and Q-HERO-405 scaffold folds. The matched fine-tuning experiment supplies both target-refit and direct-transfer controls. The historical cohorts and optimisation procedures remain distinct.
+
+## 3. Results and Discussion
+
+### 3.1. Practical competition after partial fine-tuning
+
+On Q-HERO-411, partial fine-tuning raises mean downstream R² from 0.134 for frozen MolFormer to 0.269 with expert labels, 0.312 with molecule-level MIC and 0.308 with record-level MIC (Figure 2a). The observed differences between the expert and numerical means are 0.039–0.043 R² units under common downstream refitting. This is a descriptive comparison of practical performance. Unequal molecule counts and update budgets prevent interpreting it as an isolated causal effect of label type, and the study does not establish statistical equivalence or a label-to-measurement exchange rate.
+
+[TABLE:protocols]
+
+Table 1. Supervision and evaluation designs. Counts refer to eligible source molecules; MIC records repeat molecules. Q-HERO is excluded from source representation training in both designs. Its MIC values enter the fold-training data only when a downstream regressor is fitted. Detailed source-specific results and secondary targets appear in Supporting Information Tables S2–S8.
+
+Absolute predictive accuracy remains modest. On QAC-105, partially fine-tuned R² values range from −0.004 to +0.053, and all OOD-17 R² values remain negative. The six-descriptor reference reaches Q-HERO R² = 0.057. These secondary results are retained in Supporting Information Table S2 and do not support a broad high-accuracy MIC-prediction claim.
+
+Direct transfer supplies a complementary test (Figure 2b). The expert model, trained with binary targets, has mean Q-HERO rank agreement 0.397 ± 0.050 across three seeds, compared with 0.547 ± 0.071 for molecule-level MIC and 0.612 ± 0.030 for record-level MIC. Direct expert scores thus show positive potency-related ordering, while the numerical arms have stronger mean ordering. A direct-transfer shuffled-label null is unavailable; evidence that label assignment matters comes from the separate matched interventions in Section 3.2. The expert model receives no numerical concentrations as training targets; whether annotators themselves saw such measurements is specified in Section 2.1.1. Quantitative direct predictions have negative raw R², so ranking and absolute MIC calibration remain distinct outcomes.
+
+[FIGURE:competition]
+
+Figure 2. Partial-fine-tuning results on Q-HERO-411. (a) Downstream scaffold-CV R² for raw MolFormer and the three supervision sources. (b) Direct rank agreement without target refitting. Points are individual source-training seeds; bars show mean ± seed standard deviation, not confidence intervals across independent datasets. Sources differ in molecule count and record exposure. Panels answer different prediction questions.
+
+### 3.2. Label assignment matters, but improvement over raw features is unresolved
+
+On the matched 681-molecule panel, Q-HERO-405 mean RMSE is 1.607 for expert supervision, 1.497 for continuous MIC, 1.646 for binary MIC and 1.780 for shuffled expert labels. The paired expert-minus-shuffled-expert ΔRMSE is −0.175, with a nested seed/scaffold 95% interval [−0.322, −0.024]. This supports an effect of the structure–label assignment in this specified algorithm. Continuous MIC also improves on shuffled continuous MIC: ΔRMSE −0.107 [−0.228, −0.016].
+
+The human representation is close to raw MolFormer (mean RMSE 1.602), with paired ΔRMSE +0.005 [−0.102, +0.115]. Expert minus continuous MIC is +0.109 [−0.001, +0.226]. The quantitative point estimate is better, but the nested interval includes zero. The expert-versus-binary-MIC contrast likewise does not establish equivalence. Label-content effects and incremental value over pretrained features must therefore be assessed separately.
+
+The effect is sensitive to the source panel. On the 529-molecule exact S. aureus panel, real expert labels yield mean RMSE 1.785 versus 1.761 with shuffled expert labels. Relative to raw MolFormer, expert supervision increases error by +0.185 [+0.050, +0.404]. Because this panel changes source chemistry and size, comparison with the 681-molecule panel cannot identify an organism-matching effect. It nevertheless provides an adverse result that limits generalisation of the positive pooled-panel finding.
+
+### 3.3. Modern backbones reveal protocol dependence
+
+The positive expert-versus-shuffled contrast also appears with c3-MoLFormer: ΔRMSE −0.113 [−0.246, −0.012]. It is unresolved with ChemBERTa-100M (+0.014 [−0.115, +0.098]) and ChemFM-1B (−0.022 [−0.183, +0.074]). MolFormer and c3-MoLFormer are checkpoints of the same architecture with different pretraining, so this is evidence across two representations rather than independent architectural replication. None of the four backbones establishes an expert-supervision benefit over its raw features.
+
+[TABLE:backbones]
+
+Table 2. Q-HERO-405 RMSE in log2 µM on identical target scaffold folds and the 681-molecule source panel. Trained encoders: mean ± standard deviation over five source-training seeds. Raw features: one fixed decoder run. All binary-MIC, shuffled and untrained controls and secondary targets are reported in Supporting Information Table S7.
+
+These comparisons show why selecting a larger or newer model is insufficient to establish a stronger supervision effect. Backbone pretraining, pooling and representation capacity differ, while within-backbone interventions share the source chemistry and training conditions. The results establish boundary conditions for human-label learning under frozen-feature adaptation rather than a ranking of fully fine-tuned foundation models.
+
+### 3.4. Quantitative context changes downstream error on identical source chemistry
+
+On the same 529 source molecules, pooled MIC yields Q-HERO RMSE 1.525 versus 1.617 for exact S. aureus MIC (Table 3). The paired pooled-minus-exact ΔRMSE is −0.092 [−0.159, −0.001], with an exploratory interval close to zero. Pooled MIC also improves on its shuffled counterpart: −0.174 [−0.282, −0.040]. Restricting numerical supervision to the target organism therefore does not automatically improve transfer in this setting.
+
+[TABLE:context]
+
+Table 3. Numerical-context comparison on identical 529-molecule source chemistry and Q-HERO-405 target folds. Mean ± source-seed standard deviation; five seeds. Expert and exact S. aureus arms reuse the matched-panel runs and are not independent replications. Record counts describe repeated observations, not independent molecules or annotation costs.
+
+[FIGURE:contrasts]
+
+Figure 3. Paired changes in Q-HERO-405 RMSE. (a) Expert versus shuffled expert labels across four frozen backbones on the 681-molecule panel. (b) Supervision contrasts on identical 529-molecule source chemistry. Intervals resample source seeds and whole target scaffolds while retaining fixed target folds; they are exploratory and unadjusted. Negative values favour the first named arm.
+
+The context intervention changes organism mixture, censoring, record count and aggregation together. Its outcome therefore cannot be attributed to laboratory heterogeneity alone. Q-HERO's supplied worksheet lacks row-level strain, protocol and laboratory provenance. The QMR audit identifies 38 same-compound/same-strain replicate strata over 23 compounds and five strains; their median log2 range is zero and 94.7% lie within one dilution. These selective replicates preclude interpreting every pooled disagreement as an inter-laboratory error, while not establishing universal assay reproducibility. Human denoising remains a hypothesis requiring richer annotation and assay metadata.
+
+The separate full-source comparison reaches mean Q-HERO R² of 0.095 with expert labels, 0.246 with pooled MIC, 0.185 with exact S. aureus MIC and 0.083 with cytotoxicity supervision. Different source sizes and chemical coverage contribute to this practical ranking. Cytotoxicity is a useful cross-endpoint comparator, but these results do not identify an effect of endpoint alone or a general advantage for human labels.
+
+### 3.5. Chemical distributions, individual errors and scope
+
+Figure 4 places the prediction comparisons in their chemical context. Source MIC records are aggregated once per molecule and organism class before plotting mono- and bis-cationic distributions. Q-HERO is shown separately by cationic-nitrogen count. These distributions reflect changes in molecular structure and sampling alongside charge count; they do not estimate the causal effect of adding a cationic centre.
+
+The model-error panels compare the same 405 scaffold-held-out Q-HERO structures and retain paired correspondence between human and quantitative supervision. Errors are averaged across source seeds for each molecule. Similar median absolute errors can coexist with different RMSE because large residuals contribute disproportionately to squared loss. The violins therefore complement the paired contrasts rather than establish statistical equivalence. A direct expert-score classification illustration, with a source-defined logit threshold and no target refitting, appears in Supporting Information Figure S12.
+
+[FIGURE:violins]
+
+Figure 4. Split violin comparisons of chemical context and prediction errors. (a) Exact uncensored source MIC, aggregated by molecule and organism class after evaluation-cation exclusion, for mono- and bis-cationic QACs in Gram-positive, Gram-negative and fungal classes; a molecule can occur in several classes. (b) Measured Q-HERO MIC by cationic-nitrogen count; one compound with no cationic nitrogen is omitted. (c) Absolute errors under expert versus continuous MIC supervision for the same 405 target structures, averaged over five source seeds. (d) Paired absolute-error differences. KDE is estimated in plotted log2 coordinates and clipped to observed support; bars show median and interquartile range. These descriptive distributions provide no biological causal interpretation or independent-record p-values.
+
+The main methodological contribution is the separation of transferable label signal, practical competition and incremental value over pretrained representations. Archived partial fine-tuning describes practical competition under unequal source collections; the two matched extensions provide controlled label replacements under frozen-feature and partial-backbone adaptation. The matched partial-fine-tuning extension in Section 3.6 connects the two observations on the same source and target identities. Annotation provenance, fixed target-fold uncertainty, exploratory multiple comparisons and the small OOD cohort bound the current conclusions. Historical contrastive-encoder geometry and in-domain comparisons are retained in Supporting Information Section S15 and do not provide mechanistic identification.
+
+### 3.6. Matched partial fine-tuning connects adaptation and supervision comparisons
+
+With the same 681 source molecules and fixed final-checkpoint budget, partial MolFormer fine-tuning yields Q-HERO-405 mean RMSE 1.529 ± 0.030 for human labels, 1.453 ± 0.016 for continuous MIC and 1.525 ± 0.014 for binary MIC; raw features yield 1.607 (Table 4; Figure 5a). The corresponding mean R² values are 0.205, 0.282 and 0.209, with raw R² 0.122. These scores use the same held-out target folds and common decoder.
+
+[TABLE:matched]
+
+Table 4. Matched partial MolFormer fine-tuning on the 681-molecule pooled panel, with Q-HERO-405 evaluation. Trained arms: mean ± standard deviation over five source-training seeds; raw: one fixed decoder run. Downstream RMSE uses log2 µM and target-refit scaffold CV. Direct rank agreement uses the source head without target fitting. Every trained arm has identical initial weights within seed, source split, minibatch order and 360-update budget. Direct ranking is undefined as an activity endpoint for the raw representation without a source-trained head.
+
+Human-minus-shuffled-human paired ΔRMSE is -0.137 [-0.275, -0.055]; human-minus-raw is -0.078 [-0.189, +0.001] (Figure 5b). Real human labels yield lower loss than shuffled human labels under this matched training procedure. Improvement over the raw-feature reference remains unresolved. Human minus continuous MIC is +0.076 [+0.011, +0.143], and human minus binary MIC is +0.004 [-0.056, +0.097]. Expert-versus-continuous supervision changes both target content and objective, while the binary-MIC comparison shares a binary objective. The exploratory continuous-MIC interval favours continuous supervision, while the human-versus-binary-MIC interval includes zero. Statistical equivalence is not assessed: no equivalence test or pre-specified margin is used.
+
+Direct human rank agreement is 0.197 ± 0.020, versus 0.039 ± 0.095 for shuffled human labels and 0.326 ± 0.060 for continuous MIC (Figure 5c). The paired human-minus-shuffled rank difference is +0.159 [-0.001, +0.429]; human minus continuous MIC is -0.129 [-0.239, -0.004] (Figure 5d). The human real-minus-shuffled rank interval includes zero, so this direct label-assignment advantage remains unresolved despite its positive point estimate. Positive rank agreement concerns ordering; it does not establish absolute MIC calibration. Full numerical direct-regression outcomes, source-validation curves, secondary targets, adaptation contrasts and matched error violins are retained in Supporting Information Section S18.
+
+[FIGURE:matched]
+
+Figure 5. Matched partial fine-tuning on Q-HERO-405. (a) Downstream target-refit RMSE and the same-environment raw reference. (b) Paired loss contrasts. (c) Direct rank agreement with no target fitting. (d) Paired rank contrasts. Points show five source seeds and bars show seed standard deviations. Contrast intervals use 10,000 paired seed/scaffold draws and are exploratory, unadjusted and conditional on fixed target folds. Five shuffled runs supply diagnostic null controls rather than a calibrated permutation test.
+
+Secondary-target accuracy remains limited: human mean R² is -0.103 on QAC-104 and -0.118 on OOD-17. All trained arms have negative mean R² on both collections, limiting the positive supervision-assignment finding to the specified Q-HERO evaluation rather than a general high-accuracy or prospective prediction claim.
+
+The matched extension removes source-identity, source-partition and update-budget differences between human and MIC fine-tuning. It does not optimise each objective independently or show that fine-tuning is generally beneficial or harmful. Comparing it with the small frozen-feature encoder tests two specified adaptation procedures, whose architecture and optimisation differ; it does not establish a general superiority of internal adapters. Human annotation provenance and the possibility that annotators saw numerical endpoints remain reserved for coauthor completion.
+
+## 4. Conclusions
+
+Final human Good/Bad annotations can supply activity-related supervision for antibacterial QAC representation learning. After partial MolFormer fine-tuning and target refitting, mean Q-HERO R² is 0.269 with human labels versus 0.312/0.308 with numerical supervision; direct expert scores show positive rank agreement with measured potency without target refitting. Matched-molecule interventions show that real label assignment matters for the two MolFormer representations, while exposing dependence on backbone and source chemistry and no established added value over raw pretrained features.
+
+On identical source molecules, the matched partial-fine-tuning extension yields Q-HERO mean R² 0.205 with human supervision versus 0.282 with continuous MIC and 0.122 with raw features. Real human labels yield lower loss than shuffled human labels under this matched training procedure. Improvement over the raw-feature reference remains unresolved. Direct human rank agreement is 0.197; this result includes a matched shuffled-head control and uses no target refitting. Its paired real-minus-shuffled interval includes zero.
+
+In matched partial fine-tuning, continuous MIC yields lower downstream error and stronger direct ranking than human supervision under the exploratory unadjusted intervals, while human-versus-binary-MIC and human-versus-raw intervals include zero. Pooled numerical context can transfer better than exact organism-matched MIC on identical source chemistry. The supported causal interpretation concerns replacements of supervision within the specified learning procedure. The results motivate human annotations as a coarse supervision source whose usefulness must be stated with its annotation protocol, source chemistry, adaptation method and evaluation regime; they do not establish measurement replacement, universal denoising or a molecular antibacterial mechanism.
+
+## Supporting Information
+
+Dataset and annotation audits; complete source-specific and secondary-target results; archived and matched partial-fine-tuning and direct-transfer tables; exploratory recalibration; matched-supervision controls and bootstrap sensitivity; checkpoint and reproducibility records; chemical-space and direct-score illustrations; historical contrastive analyses; synthesis, characterisation descriptions and microbiological protocols (DOCX and HTML). The machine-readable reproducibility files contain input manifests, source exclusions, target folds, model metadata, training summaries and per-molecule predictions.
+
+## Data Availability Statement
+
+[COAUTHORS D1 — Insert the verified public archive URL/DOI and exact version for the QAC-AMR/QMR source data and final expert labels. The earlier draft lists 10.5281/zenodo.22286669 and https://github.com/Yagr49/QMC-Expert; their public availability and inclusion of this revision's materials must be confirmed before retaining those claims.]
+
+[COAUTHORS D2 — Insert the immutable archive URL/DOI and code revision for the analyses supporting this article, including source manifests, exclusion rules, target folds, checkpoint identifiers, training settings and per-molecule predictions. State any access or redistribution restrictions for reused sources.]
+
+## Author Contributions
+
+[EXISTING:credit]
+
+## Conflicts of Interest
+
+The authors declare no competing financial interests.
+
+## Acknowledgments
+
+[EXISTING:acknowledgments]
+
+OpenAI Codex assisted with manuscript revision, analysis-code preparation, figure preparation and consistency checks; Kimi Code supplied internal critical feedback. Numerical results are supported by executable analysis scripts and archived predictions. Responsibility for the scientific content rests with the human authors.
+
+## References
+
+[REFERENCES]

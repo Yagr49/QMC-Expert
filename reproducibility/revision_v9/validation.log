@@ -1,0 +1,32 @@
+{
+  "input_file_hashes": 6,
+  "all_source_target_cation_overlap": 0,
+  "target_sizes": {
+    "target_Q-HERO-405": 405,
+    "target_OOD-17": 17,
+    "target_QAC-104": 104
+  },
+  "finite_backbone_features": [
+    1939,
+    768
+  ],
+  "paired_initialisation_and_source_identities": true,
+  "independently_recomputed_metric_rows": 486,
+  "prediction_rows": 85212,
+  "target_scaffolds_disjoint_between_folds": true,
+  "paired_intervals": 144,
+  "documents": [
+    {
+      "path": "/Users/egorilin/Desktop/COMA/2026_10_11_Paper_2_edited-v9_supervision_controls.docx",
+      "original_media_preserved": true,
+      "xml_and_relationships_valid": true,
+      "sha256": "53619054381c0823dda81fc255182dabecda91b319a12ba10c29b8d856c85118"
+    },
+    {
+      "path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v9/Supplementary_Information_v9.docx",
+      "original_media_preserved": true,
+      "xml_and_relationships_valid": true,
+      "sha256": "51d87fd0bdd908311192147497e238e5114a551afaf353738d97ea8a11caa729"
+    }
+  ]
+}

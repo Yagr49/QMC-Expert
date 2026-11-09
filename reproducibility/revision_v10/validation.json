@@ -1,0 +1,22 @@
+{
+  "source_target_cation_overlap": 0,
+  "modern_checkpoint_metadata_valid": true,
+  "paired_initialisation_identities_and_archived_folds": true,
+  "recomputed_catboost_metric_rows": 687,
+  "prediction_rows": 120454,
+  "all_four_backbones_complete": true,
+  "documents": [
+    {
+      "path": "/Users/egorilin/Desktop/COMA/2026_10_11_Paper_2_edited-v10_modern_models_QHERO.docx",
+      "sha256": "9b0cda3cfa9229263789c18920771d8120cfb0abcd6baf8eba146a3715fd2cc4",
+      "media_preserved": true,
+      "xml_relationships_valid": true
+    },
+    {
+      "path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v10/Supplementary_Information_v10.docx",
+      "sha256": "3f387c7c77aada94a2400f515b6edd308fb56c22ce47cad80da2c28c419bbae8",
+      "media_preserved": true,
+      "xml_relationships_valid": true
+    }
+  ]
+}

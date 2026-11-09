@@ -1,0 +1,20 @@
+{
+  "core": {
+    "installed": true
+  },
+  "chemprop": {
+    "installed": true
+  },
+  "autogluon": {
+    "installed": true
+  },
+  "tabpfn": {
+    "installed": true
+  },
+  "tabfm": {
+    "installed": true,
+    "git_sha": "fbb665569425fd2f490c6576b3af967876fe11ff",
+    "backend": "jax-cpu"
+  },
+  "finished_utc_epoch": 1791769346.6103399
+}

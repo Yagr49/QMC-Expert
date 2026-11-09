@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="784.8pt" height="496.8pt" viewBox="0 0 784.8 496.8" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-11T23:25:00.519065</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.7.3, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 496.8 
+L 784.8 496.8 
+L 784.8 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 31.8528 146.1312 
+L 182.8512 146.1312 
+Q 194.4072 146.1312 194.4072 138.8952 
+L 194.4072 68.4648 
+Q 194.4072 61.2288 182.8512 61.2288 
+L 31.8528 61.2288 
+Q 20.2968 61.2288 20.2968 68.4648 
+L 20.2968 138.8952 
+Q 20.2968 146.1312 31.8528 146.1312 
+z
+" clip-path="url(#p965d66632d)" style="fill: #e9edf1; stroke: #93999f; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 243.7128 141.3072 
+L 379.3032 141.3072 
+Q 390.8592 141.3072 390.8592 134.0712 
+L 390.8592 73.2888 
+Q 390.8592 66.0528 379.3032 66.0528 
+L 243.7128 66.0528 
+Q 232.1568 66.0528 232.1568 73.2888 
+L 232.1568 134.0712 
+Q 232.1568 141.3072 243.7128 141.3072 
+z
+" clip-path="url(#p965d66632d)" style="fill: #d9e9f5; stroke: #93999f; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 451.7208 97.8912 
+L 610.4232 97.8912 
+Q 621.9792 97.8912 621.9792 90.6552 
+L 621.9792 39.5208 
+Q 621.9792 32.2848 610.4232 32.2848 
+L 451.7208 32.2848 
+Q 440.1648 32.2848 440.1648 39.5208 
+L 440.1648 90.6552 
+Q 440.1648 97.8912 451.7208 97.8912 
+z
+" clip-path="url(#p965d66632d)" style="fill: #e5dbee; stroke: #93999f; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 451.7208 179.8992 
+L 610.4232 179.8992 
+Q 621.9792 179.8992 621.9792 172.6632 
+L 621.9792 121.5288 
+Q 621.9792 114.2928 610.4232 114.2928 
+L 451.7208 114.2928 
+Q 440.1648 114.2928 440.1648 121.5288 
+L 440.1648 172.6632 
+Q 440.1648 179.8992 451.7208 179.8992 
+z
+" clip-path="url(#p965d66632d)" style="fill: #d5e7e2; stroke: #93999f; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 451.7208 261.9072 
+L 610.4232 261.9072 
+Q 621.9792 261.9072 621.9792 254.6712 
+L 621.9792 203.5368 
+Q 621.9792 196.3008 610.4232 196.3008 
+L 451.7208 196.3008 
+Q 440.1648 196.3008 440.1648 203.5368 
+L 440.1648 254.6712 
+Q 440.1648 261.9072 451.7208 261.9072 
+z
+" clip-path="url(#p965d66632d)" style="fill: #f3dfd3; stroke: #93999f; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 659.7288 184.7232 
+L 749.0952 184.7232 
+Q 760.6512 184.7232 760.6512 177.4872 
+L 760.6512 87.7608 
+Q 760.6512 80.5248 749.0952 80.5248 
+L 659.7288 80.5248 
+Q 648.1728 80.5248 648.1728 87.7608 
+L 648.1728 177.4872 
+Q 648.1728 184.7232 659.7288 184.7232 
+z
+" clip-path="url(#p965d66632d)" style="fill: #f3efdf; stroke: #93999f; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 31.8528 411.4512 
+L 198.2592 411.4512 
+Q 209.8152 411.4512 209.8152 404.2152 
+L 209.8152 328.9608 
+Q 209.8152 321.7248 198.2592 321.7248 
+L 31.8528 321.7248 
+Q 20.2968 321.7248 20.2968 328.9608 
+L 20.2968 404.2152 
+Q 20.2968 411.4512 31.8528 411.4512 
+z
+" clip-path="url(#p965d66632d)" style="fill: #e2edf5; stroke: #93999f; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 262.9728 411.4512 
+L 467.8992 411.4512 
+Q 479.4552 411.4512 479.4552 404.2152 
+L 479.4552 328.9608 
+Q 479.4552 321.7248 467.8992 321.7248 
+L 262.9728 321.7248 
+Q 251.4168 321.7248 251.4168 328.9608 
+L 251.4168 404.2152 
+Q 251.4168 411.4512 262.9728 411.4512 
+z
+" clip-path="url(#p965d66632d)" style="fill: #e6dfee; stroke: #93999f; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 536.4648 411.4512 
+L 749.0952 411.4512 
+Q 760.6512 411.4512 760.6512 404.2152 
+L 760.6512 328.9608 
+Q 760.6512 321.7248 749.0952 321.7248 
+L 536.4648 321.7248 
+Q 524.9088 321.7248 524.9088 328.9608 
+L 524.9088 404.2152 
+Q 524.9088 411.4512 536.4648 411.4512 
+z
+" clip-path="url(#p965d66632d)" style="fill: #f5e2d4; stroke: #93999f; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font: 14px 'DejaVu Sans'; text-anchor: start" x="22.608" y="26.496" transform="rotate(-0 22.608 26.496)">a) Learn molecular representations</text>
+   </g>
+   <g id="text_2">
+    <text style="font: 10px 'DejaVu Sans'" transform="translate(36.87075 93.341953)">Same 681 source molecules</text>
+    <text style="font: 10px 'DejaVu Sans'" transform="translate(43.969187 106.439375)">377 train / 304 validation</text>
+    <text style="font: 10px 'DejaVu Sans'" transform="translate(48.113719 119.536797)">Target cations excluded</text>
+   </g>
+   <g id="text_3">
+    <text style="font: 10px 'DejaVu Sans'" transform="translate(257.597062 99.890664)">Pretrained MolFormer</text>
+    <text style="font: 10px 'DejaVu Sans'" transform="translate(279.721281 112.988086)">768 features</text>
+   </g>
+   <g id="patch_11">
+    <path d="M 194.095118 103.68 
+Q 213.283572 103.68 231.353992 103.68 
+" style="fill: none; stroke: #51565c; stroke-linecap: round"/>
+    <path d="M 227.353992 101.68 
+L 231.353992 103.68 
+L 227.353992 105.68 
+" style="fill: none; stroke: #51565c; stroke-linecap: round"/>
+   </g>
+   <g id="text_4">
+    <text style="font: 10px 'DejaVu Sans'" transform="translate(483.752469 61.298664)">Human Good / Bad</text>
+    <text style="font: 10px 'DejaVu Sans'" transform="translate(486.272781 74.396086)">+ shuffled control</text>
+   </g>
+   <g id="patch_12">
+    <path d="M 390.13427 102.457512 
+Q 413.587448 84.382884 436.155061 66.990734 
+" style="fill: none; stroke: #51565c; stroke-linecap: round"/>
+    <path d="M 431.765916 67.848291 
+L 436.155061 66.990734 
+L 434.20762 71.016584 
+" style="fill: none; stroke: #51565c; stroke-linecap: round"/>
+   </g>
+   <g id="text_5">
+    <text style="font: 10px 'DejaVu Sans'" transform="translate(473.441531 143.306664)">Continuous pooled MIC</text>
+    <text style="font: 10px 'DejaVu Sans'" transform="translate(486.272781 156.404086)">+ shuffled control</text>
+   </g>
+   <g id="patch_13">
+    <path d="M 390.060916 104.991702 
+Q 413.588106 125.389826 436.27055 145.055554 
+" style="fill: none; stroke: #51565c; stroke-linecap: round"/>
+    <path d="M 434.558446 140.924125 
+L 436.27055 145.055554 
+L 431.938145 143.94638 
+" style="fill: none; stroke: #51565c; stroke-linecap: round"/>
+   </g>
+   <g id="text_6">
+    <text style="font: 10px 'DejaVu Sans'" transform="translate(485.613406 225.314664)">Binary pooled MIC</text>
+    <text style="font: 10px 'DejaVu Sans'" transform="translate(486.272781 238.412086)">+ shuffled control</text>
+   </g>
+   <g id="patch_14">
+    <path d="M 389.289176 105.536404 
+Q 413.585463 166.390654 437.46719 226.20657 
+" style="fill: none; stroke: #51565c; stroke-linecap: round"/>
+    <path d="M 437.841449 221.750121 
+L 437.46719 226.20657 
+L 434.126587 223.233294 
+" style="fill: none; stroke: #51565c; stroke-linecap: round"/>
+   </g>
+   <g id="text_7">
+    <text style="font: 10px 'DejaVu Sans'" transform="translate(669.26825 122.285953)">Same training</text>
+    <text style="font: 10px 'DejaVu Sans'" transform="translate(675.687781 135.383375)">budget and</text>
+    <text style="font: 10px 'DejaVu Sans'" transform="translate(667.694812 148.480797)">5 paired seeds</text>
+   </g>
+   <g id="patch_15">
+    <path d="M 624.262234 66.947054 
+Q 637.002613 98.857535 649.328433 129.729681 
+" style="fill: none; stroke: #51565c; stroke-linecap: round"/>
+    <path d="M 649.702691 125.273233 
+L 649.328433 129.729681 
+L 645.987829 126.756406 
+" style="fill: none; stroke: #51565c; stroke-linecap: round"/>
+   </g>
+   <g id="patch_16">
+    <path d="M 625.280955 146.150868 
+Q 637.001048 139.860511 647.736027 134.09888 
+" style="fill: none; stroke: #51565c; stroke-linecap: round"/>
+    <path d="M 643.265763 134.228282 
+L 647.736027 134.09888 
+L 645.157391 137.752732 
+" style="fill: none; stroke: #51565c; stroke-linecap: round"/>
+   </g>
+   <g id="patch_17">
+    <path d="M 624.058984 227.17546 
+Q 637.002548 180.862038 649.645179 135.625389 
+" style="fill: none; stroke: #51565c; stroke-linecap: round"/>
+    <path d="M 646.642337 138.93944 
+L 649.645179 135.625389 
+L 650.494715 140.016093 
+" style="fill: none; stroke: #51565c; stroke-linecap: round"/>
+   </g>
+   <g id="text_8">
+    <text style="font: 14px 'DejaVu Sans'; text-anchor: start" x="22.608" y="294.228" transform="rotate(-0 22.608 294.228)">b) Predict the original endpoints and test new scaffolds</text>
+   </g>
+   <g id="text_9">
+    <text style="font: 10px 'DejaVu Sans'" transform="translate(71.7935 356.249953)">Original QAC-105</text>
+    <text style="font: 10px 'DejaVu Sans'" transform="translate(45.252094 369.347375)">103 cations · 420 endpoints</text>
+    <text style="font: 10px 'DejaVu Sans'" transform="translate(58.744281 382.444797)">5 cation-grouped folds</text>
+   </g>
+   <g id="text_10">
+    <text style="font: 10px 'DejaVu Sans'" transform="translate(306.306312 356.249953)">Fixed CatBoost decoder</text>
+    <text style="font: 10px 'DejaVu Sans'" transform="translate(300.035219 369.347375)">Task: species + MIC / MBC</text>
+    <text style="font: 10px 'DejaVu Sans'" transform="translate(293.25475 382.444797)">One-hot or fixed text vectors</text>
+   </g>
+   <g id="patch_18">
+    <path d="M 213.354695 366.588 
+Q 231.773115 366.588 249.073501 366.588 
+" style="fill: none; stroke: #51565c; stroke-linecap: round"/>
+    <path d="M 245.073501 364.588 
+L 249.073501 366.588 
+L 245.073501 368.588 
+" style="fill: none; stroke: #51565c; stroke-linecap: round"/>
+   </g>
+   <g id="text_11">
+    <text style="font: 10px 'DejaVu Sans'" transform="translate(603.376875 356.249953)">Named OOD-17</text>
+    <text style="font: 10px 'DejaVu Sans'" transform="translate(577.463594 369.347375)">4 unseen scaffold families</text>
+    <text style="font: 10px 'DejaVu Sans'" transform="translate(577.383125 382.444797)">67 exact values + 1 &gt;500</text>
+   </g>
+   <g id="patch_19">
+    <path d="M 479.146833 366.588 
+Q 501.026494 366.588 521.788121 366.588 
+" style="fill: none; stroke: #51565c; stroke-linecap: round"/>
+    <path d="M 517.788121 364.588 
+L 521.788121 366.588 
+L 517.788121 368.588 
+" style="fill: none; stroke: #51565c; stroke-linecap: round"/>
+   </g>
+   <g id="text_12">
+    <text style="font: 10px 'DejaVu Sans'; text-anchor: start" x="26.46" y="458.244" transform="rotate(-0 26.46 458.244)">All endpoints of a cation stay in one fold. OOD measurements are used only for scoring.</text>
+   </g>
+   <g id="text_13">
+    <text style="fill: #626870; font: 9px 'DejaVu Sans'; text-anchor: start" x="26.46" y="482.364" transform="rotate(-0 26.46 482.364)">Historical 256-d encoders and Q-HERO analyses are retained separately in Supporting Information.</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p965d66632d">
+   <rect x="7.2" y="7.2" width="770.4" height="482.4"/>
+  </clipPath>
+ </defs>
+</svg>

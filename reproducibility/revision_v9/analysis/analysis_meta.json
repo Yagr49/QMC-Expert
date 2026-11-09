@@ -1,0 +1,7 @@
+{
+  "primary_metric": "CatBoost scaffold-held-out Q-HERO-405 paired RMSE; log2 uM",
+  "bootstrap_samples": 10000,
+  "uncertainty": "molecule and scaffold intervals condition on five trained source seeds; scaffold folds fixed; seeds are not five independent datasets",
+  "negative_controls": "five paired initialization seeds, not a permutation test with multiple shuffled label realizations",
+  "complete": true
+}

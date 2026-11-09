@@ -1,0 +1,93 @@
+{
+  "jobs": {
+    "repeat_matched_ft_30": {
+      "state": "complete",
+      "started": "2026-10-12T01:40:45.965912+00:00",
+      "command": [
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/core_ft/run_matched_finetuning.py",
+        "--output-dir",
+        "/home/yagr/coma_models_check_20261012/core_ft/results",
+        "--epochs",
+        "30",
+        "--seeds",
+        "5",
+        "--device",
+        "cuda"
+      ],
+      "pid": 2460063,
+      "exit_code": 0,
+      "finished": "2026-10-12T02:03:19.504188+00:00"
+    },
+    "encode_retrained_qac105_ood17": {
+      "state": "complete",
+      "started": "2026-10-12T14:00:19.478036+00:00",
+      "command": [
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/extend_retrained.py"
+      ],
+      "previous_attempts": [
+        {
+          "state": "failed",
+          "started": "2026-10-12T02:03:19.504523+00:00",
+          "command": [
+            "/home/yagr/anaconda3/bin/python",
+            "-s",
+            "/home/yagr/coma_models_check_20261012/extend_retrained.py"
+          ],
+          "pid": 2532479,
+          "exit_code": 1,
+          "finished": "2026-10-12T02:03:23.621017+00:00"
+        }
+      ],
+      "pid": 2570184,
+      "exit_code": 0,
+      "finished": "2026-10-12T14:00:27.442009+00:00"
+    },
+    "chemprop_3seeds": {
+      "state": "complete",
+      "started": "2026-10-12T02:03:23.621823+00:00",
+      "command": [
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/wait_and_run.py",
+        "--marker",
+        "status/baseline_setup.finished",
+        "--lane",
+        "tabular_cpu",
+        "--",
+        "/home/yagr/coma_models_check_20261012/envs/baselines/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/run_baselines.py",
+        "--model",
+        "chemprop"
+      ],
+      "pid": 2532812,
+      "exit_code": 0,
+      "finished": "2026-10-12T02:06:42.458056+00:00"
+    },
+    "tabpfn": {
+      "state": "complete",
+      "started": "2026-10-12T02:06:42.458572+00:00",
+      "command": [
+        "/home/yagr/coma_models_check_20261012/envs/baselines/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/run_baselines.py",
+        "--model",
+        "tabpfn"
+      ],
+      "pid": 2545113,
+      "exit_code": 0,
+      "finished": "2026-10-12T02:07:48.863468+00:00"
+    }
+  },
+  "lane": "gpu",
+  "pid": 2570183,
+  "started": "2026-10-12T14:00:19.477849+00:00",
+  "state": "finished",
+  "current_job": null,
+  "finished": "2026-10-12T14:00:27.442374+00:00",
+  "failures": 0
+}

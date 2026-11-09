@@ -1,0 +1,16 @@
+cohort,schema,task,n,RMSE,MAE,R2,name,encoding,arm,seed,provenance
+OOD17,full-QAC105,Sa_MIC,17,1.911464681443593,1.6262234479287605,-0.19447794005589158,compact_human_seed1,categorical,human,1,v5_architecture_matched_source
+OOD17,full-QAC105,Sa_MBC,17,2.108474045747433,1.7683724177235425,0.008316133488724953,compact_human_seed1,categorical,human,1,v5_architecture_matched_source
+OOD17,full-QAC105,Ec_MIC,17,2.2959420688073235,1.9143877399677658,-0.5923676589093241,compact_human_seed1,categorical,human,1,v5_architecture_matched_source
+OOD17,full-QAC105,Ec_MBC,16,2.4726919770755997,1.9949404012073149,-0.5629757385225462,compact_human_seed1,categorical,human,1,v5_architecture_matched_source
+OOD17,full-QAC105,pooled,67,2.2028792557823915,1.8234592196247492,,compact_human_seed1,categorical,human,1,v5_architecture_matched_source
+QAC105,cation,Sa_MIC,105,1.8557918429383948,1.4334346453022193,0.10309812026649712,compact_human_seed1,categorical,human,1,v5_architecture_matched_source
+QAC105,cation,Sa_MBC,105,1.9851881565594722,1.479247560132136,-0.022308213690146905,compact_human_seed1,categorical,human,1,v5_architecture_matched_source
+QAC105,cation,Ec_MIC,105,1.742811574289646,1.3698845044314376,0.21768165849987797,compact_human_seed1,categorical,human,1,v5_architecture_matched_source
+QAC105,cation,Ec_MBC,105,1.8738004322878488,1.4976582516011907,0.19563658213251667,compact_human_seed1,categorical,human,1,v5_architecture_matched_source
+QAC105,cation,pooled,420,1.866377214336692,1.4450562403667462,,compact_human_seed1,categorical,human,1,v5_architecture_matched_source
+QAC105,scaffold,Sa_MIC,105,2.0596625252459417,1.6290487576303538,-0.10478697585257124,compact_human_seed1,categorical,human,1,v5_architecture_matched_source
+QAC105,scaffold,Sa_MBC,105,2.296427559932621,1.724994936308445,-0.3679933920070766,compact_human_seed1,categorical,human,1,v5_architecture_matched_source
+QAC105,scaffold,Ec_MIC,105,1.9976479641142448,1.5949484835061791,-0.027828262537570092,compact_human_seed1,categorical,human,1,v5_architecture_matched_source
+QAC105,scaffold,Ec_MBC,105,2.035249541635898,1.6457849774087643,0.05105515165662944,compact_human_seed1,categorical,human,1,v5_architecture_matched_source
+QAC105,scaffold,pooled,420,2.10051346943905,1.6486942887134357,,compact_human_seed1,categorical,human,1,v5_architecture_matched_source

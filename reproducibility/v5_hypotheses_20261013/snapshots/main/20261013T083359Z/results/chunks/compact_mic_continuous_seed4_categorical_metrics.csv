@@ -1,0 +1,16 @@
+cohort,schema,task,n,RMSE,MAE,R2,name,encoding,arm,seed,provenance
+OOD17,full-QAC105,Sa_MIC,17,1.8118260958282852,1.4554519296793056,-0.0731948966521967,compact_mic_continuous_seed4,categorical,mic_continuous,4,v5_architecture_matched_source
+OOD17,full-QAC105,Sa_MBC,17,2.126841698473192,1.8041064781980063,-0.009036931022590844,compact_mic_continuous_seed4,categorical,mic_continuous,4,v5_architecture_matched_source
+OOD17,full-QAC105,Ec_MIC,17,2.7581076084116343,2.2704841793266333,-1.2979676447739168,compact_mic_continuous_seed4,categorical,mic_continuous,4,v5_architecture_matched_source
+OOD17,full-QAC105,Ec_MBC,16,2.968909638720708,2.1943347783977787,-1.253233277413826,compact_mic_continuous_seed4,categorical,mic_continuous,4,v5_architecture_matched_source
+OOD17,full-QAC105,pooled,67,2.4527089803736013,1.9271653796542019,,compact_mic_continuous_seed4,categorical,mic_continuous,4,v5_architecture_matched_source
+QAC105,cation,Sa_MIC,105,1.7305922690847093,1.3762412079627826,0.22003353595236985,compact_mic_continuous_seed4,categorical,mic_continuous,4,v5_architecture_matched_source
+QAC105,cation,Sa_MBC,105,1.9232763550031748,1.393348937679504,0.040462651335619104,compact_mic_continuous_seed4,categorical,mic_continuous,4,v5_architecture_matched_source
+QAC105,cation,Ec_MIC,105,1.7106189939166712,1.2919029554252002,0.24631612914941958,compact_mic_continuous_seed4,categorical,mic_continuous,4,v5_architecture_matched_source
+QAC105,cation,Ec_MBC,105,1.8756772703278766,1.4518517910840527,0.19402444042498446,compact_mic_continuous_seed4,categorical,mic_continuous,4,v5_architecture_matched_source
+QAC105,cation,pooled,420,1.812341310591301,1.3783362230378846,,compact_mic_continuous_seed4,categorical,mic_continuous,4,v5_architecture_matched_source
+QAC105,scaffold,Sa_MIC,105,2.0760410399713143,1.6599888575295296,-0.12242745304562042,compact_mic_continuous_seed4,categorical,mic_continuous,4,v5_architecture_matched_source
+QAC105,scaffold,Sa_MBC,105,2.34758803466199,1.732476608336714,-0.4296254591376809,compact_mic_continuous_seed4,categorical,mic_continuous,4,v5_architecture_matched_source
+QAC105,scaffold,Ec_MIC,105,2.138727512371513,1.7186964042184252,-0.17813091901297007,compact_mic_continuous_seed4,categorical,mic_continuous,4,v5_architecture_matched_source
+QAC105,scaffold,Ec_MBC,105,2.1575339913653324,1.743272133137514,-0.06640195966904039,compact_mic_continuous_seed4,categorical,mic_continuous,4,v5_architecture_matched_source
+QAC105,scaffold,pooled,420,2.1823281304724196,1.7136085008055455,,compact_mic_continuous_seed4,categorical,mic_continuous,4,v5_architecture_matched_source

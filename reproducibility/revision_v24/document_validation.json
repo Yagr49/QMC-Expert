@@ -1,0 +1,29 @@
+{
+  "completed": true,
+  "documents": [
+    {
+      "path": "/Users/egorilin/Desktop/COMA/2026_10_14_Paper_2_edited-v24_section2_2_vertical_figures.docx",
+      "figures": 8,
+      "sha256": "359c270c4c294d41994c1958400d54b54bff8342a1dd65e07076165ecff7e3cd",
+      "all_XML_relationships_styles_valid": true
+    },
+    {
+      "path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/Supplementary_Information_v24.docx",
+      "figures": 32,
+      "sha256": "c092a961264cdf01e706eab23e7914fd5ba7f85ef689a1822e1eac6fa281f1cd",
+      "all_XML_relationships_styles_valid": true
+    }
+  ],
+  "main_tables_moved_to_SI": true,
+  "moved_original_table_cells_unchanged": true,
+  "all_prior_SI_body_blocks_retained": true,
+  "all_original_main_and_SI_media_and_office_objects_preserved": true,
+  "all_figures_sequential": true,
+  "section2_1_has_no_OOD": true,
+  "section2_3_and_later_scientific_text_unchanged_except_figure_numbers": true,
+  "all_new_section2_2_text_yellow": true,
+  "compact_seed_RMSE_verified_against_completed_runs": true,
+  "compact_violin_same_420_endpoint_pairs_in_each_arm": true,
+  "QHERO_AUROC_verified": true,
+  "no_new_models_trained": true
+}

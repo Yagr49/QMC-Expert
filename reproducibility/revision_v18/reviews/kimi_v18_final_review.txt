@@ -1,0 +1,27 @@
+Review of the five permitted images and provided text:
+
+**Priority scientific corrections**
+
+1. **Preserve v5 exactly, but tag evidence status everywhere.** Keep the positive reported values: human-guided text-code R² **0.75, 0.68, 0.59, 0.77** vs quantitative-guided **0.78, 0.68, 0.58, 0.77**; retained Table 1/2 RMSE/R²; archived t-SNE metrics; OOD/few-shot history; CKA/probe/SHAP archive values. Label them unambiguously as **“reported v5”**. The recovered May text-code outputs **0.7494, 0.6752, 0.5918, 0.7708** and native-categorical outputs **0.7102, 0.6403, 0.4269, 0.7394** are **recovered notebook outputs**, not a full replay. The reconstructed human/text R² **0.728, 0.380, 0.775, 0.708** must remain **approximate reconstruction** and must not replace the May values in the abstract/conclusion.
+
+2. **Fix the descriptor-screen F1 discrepancy against the inspected SI bar plot.** The preserved plot (`image1.png`) prints MolFormer MLP + StandardScaler **F1 = 0.665**, whereas the main text reports mean F1 **0.655**. Either change the main text to 0.665 if the plot is authoritative, or define 0.655 as a different aggregate and state that the SI plot is not that aggregate. Do not leave both unexplained.
+
+3. **Remove/soften unsupported claims about what the expert “implicitly integrated.”** The sentence that Good/Bad calls integrated activity data and “occasionally considerations outside the model’s feature space entirely, such as synthetic accessibility or toxicity” is too strong while H1–H7 information-access records are reserved. Recast as conditional: “If calls were assigned with access to …, then the label may summarize …”. Keep “may be a low-dimensional summary” rather than asserting it.
+
+4. **Keep unresolved provenance explicitly non-probative.** Add one sentence near Table 2: the unresolved full-corpus multitarget checkpoint is **not evidence** that the QAC-binned ablation generated the original Table 2. Elsewhere, avoid linking any April/seed-79 selection to May Table 1/2 unless separately proven. Continue to state that CausalForestDML and endpoint-resampling ΔRMSE bootstrap are different analyses; add “not interchangeable estimands.”
+
+5. **Tone down “decisive content control.”** Human vs shuffled human is the **critical** content control, but its cation/scaffold/OOD ΔRMSE intervals all include zero and OOD favours shuffled. The weight-reset and partial-backbone rewind intervals are also null/unresolved at the stated level. Retain these prominently, but do not let captions imply biological causality; use “computational intervention under fixed controls.”
+
+6. **Clarify counts and splits.** For the “105 QACs,” state that these are 105 QAC salts/rows with **103 distinct cations** and **29 cation scaffolds**. For Figure 8/Table 5, make the **264 fits** auditable: 3 decoders × 2 representations × 4 endpoints × 11 evaluation regimes = 264, if that is the intended breakdown.
+
+**Claims/narrative continuity**
+
+The evidence-status discipline is generally strong and should be retained. To reduce reader burden, introduce a short tag legend once—“reported v5,” “recovered notebook output,” “approximate reconstruction,” “new controlled follow-up,” “separate completed experiment”—and reuse those exact tags in every figure caption and table note. The abstract already preserves v5 while reporting null shuffled/reset contrasts; consider adding “in several archived-feature/decoder configurations” to the OOD-improvement sentence so it is not read as a human-specific effect.
+
+**Figure/style suggestions**
+
+- **Global:** keep soft Aptos, pastel lavender/mint, thin grids, minimal in-plot text. Export vector versions and check ≥7–8 pt font after column scaling. Figure 7 correctly shows violins of per-compound/endpoint MAE across seeds with no tail capping; add **n = 420** and **n = 67** under cation/scaffold and OOD panels, and state whether y is shared.
+- **Figure 1:** good schematic. Enlarge the example QAC; the structure is legible at native resolution but small at journal width. Keep the caption caveat that strips show the first 24 archived coordinates with independently rescaled opacity and are not a variance partition. Verify ACS 1996 exact drawing and counterion placement.
+- **Figure 6:** colours/markers correctly encode structural class, not activity. Reduce the three top pathway boxes to a slim strip or move details to the caption; increase PCA point size slightly; keep the explicit “independent PCA / axes not aligned” note in the caption rather than adding in-panel text.
+- **Figure 8:** add faint grey connectors between raw and human-guided points within each decoder to make paired contrasts immediate. Keep a common x-axis across panels and add “lower is better” in the caption. Put exact values only in SI.
+- **`image1.png`:** if regenerated for revision, recolour to the same pastel palette; if preserved as historical, state that in the caption and still reconcile F1 = 0.665 vs 0.655. Increase footnote contrast.

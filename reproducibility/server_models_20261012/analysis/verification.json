@@ -1,0 +1,46 @@
+{
+  "snapshot": "/Users/egorilin/Desktop/COMA/reproducibility/server_models_20261012/results_20261012T152125Z",
+  "new_model_fits": 913,
+  "checks": [
+    {
+      "model": "catboost",
+      "prediction_rows": 4540,
+      "verified_metric_rows": 75,
+      "fits": 220
+    },
+    {
+      "model": "autogluon",
+      "prediction_rows": 4540,
+      "verified_metric_rows": 75,
+      "fits": 220
+    },
+    {
+      "model": "tabpfn",
+      "prediction_rows": 4540,
+      "verified_metric_rows": 75,
+      "fits": 220
+    },
+    {
+      "model": "tabfm",
+      "prediction_rows": 4540,
+      "verified_metric_rows": 75,
+      "fits": 220
+    },
+    {
+      "model": "chemprop",
+      "prediction_rows": 2724,
+      "verified_metric_rows": 45,
+      "fits": 33
+    }
+  ],
+  "primary_CV_molecules": 105,
+  "OOD_molecules": 17,
+  "OOD_exact_endpoints": 67,
+  "OOD_bounds": 1,
+  "comparison_source_seed": 0,
+  "bootstrap_seed": 1729,
+  "bootstrap_warning": "OOD scaffold interval uses only four families; descriptive, small-group uncertainty.",
+  "source_repeat_arrays_exact": 93,
+  "QAC105_OOD17_archived_layout_arrays_exact": 62,
+  "all_server_lanes_completed": true
+}

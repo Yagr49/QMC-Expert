@@ -1,0 +1,23 @@
+{
+  "completed": true,
+  "target": 405,
+  "endpoint": "S. aureus MIC<=8 micromolar",
+  "source": "v12 matched partial-MolFormer adaptation, not v5 external compact encoder",
+  "source_molecules": 681,
+  "target_source_cation_overlap": 0,
+  "source_decoder_seeds": "Paired0..4",
+  "test_random": 81,
+  "test_positive": 72,
+  "test_negative": 9,
+  "scaffold_OOF": 405,
+  "scaffolds": 29,
+  "curves": "Mean of each seed ROC, common FPR grid1001; no ensemble probability",
+  "shade": "Pointwise sampleSD across5 source/decoder runs, not confidence interval; single-fit raw/RF have no shade",
+  "no_new_fits": true,
+  "published421_not_same_cohort": true,
+  "source_sha256": {
+    "/Users/egorilin/Desktop/COMA/reproducibility/qhero_author_comparison_20261014/results/predictions.csv": "d9d9cf420f3055e8ac569a95304fa3330f6c3286193fd48920ebf2f859d9e840",
+    "/Users/egorilin/Desktop/COMA/reproducibility/qhero_author_comparison_20261014/data/target.csv": "45fe0f709d1dc49f0f97b253e5d4aa68e8d91a393f01112fec527e5a7362bf71"
+  },
+  "manuscript_modified": false
+}

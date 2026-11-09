@@ -1,0 +1,13 @@
+{
+  "github": "https://github.com/PV-Lab/MLforCOE",
+  "commit": "205a6c52c31dcf2d28766cbfe3ba964c83227a41",
+  "paper_doi": "10.1021/jacs.1c05055",
+  "local_author_data": "/Users/egorilin/Desktop/COMA/Data_and_models",
+  "source_snapshot": {
+    "Main_downselection.py": "b99afed9afcf9bcaa78acff313fb8fe1e42a8c73121e4da9af83a585174aba43",
+    "LICENSE": "59b1cedbf79d77b666bf60aac0523244173d2e028da2305a1b999b6987f6854f",
+    "environment.yml": "9306d03bc4f8b3e1c6d1d902d3a249de2da1b81d971bde08ff586f68dbc0f9ee",
+    "Functions_downselection_training_RF.py": "2ec48e26256eb41143cdbf5c72a496356ac5db50901b79f81333c5f274544766",
+    "README.md": "3223242324d07883475b3c4d38e5cd4bc95d3b53d99db839d7ef90b00f496a59"
+  }
+}

@@ -1,0 +1,176 @@
+{
+  "density": "Scott KDE in plotted log2 MIC/error coordinates, clipped to observed support",
+  "summaries": [
+    {
+      "panel": "A Gram+ N=1",
+      "n": 458,
+      "q25": 2.0,
+      "median": 3.6433319005929428,
+      "q75": 5.906890595608519,
+      "units": "plotted coordinates"
+    },
+    {
+      "panel": "A Gram+ N=2",
+      "n": 363,
+      "q25": 1.0,
+      "median": 3.4799388790341856,
+      "q75": 5.977279923499917,
+      "units": "plotted coordinates"
+    },
+    {
+      "panel": "A Gram- N=1",
+      "n": 361,
+      "q25": 4.239124037090736,
+      "median": 5.591414560382034,
+      "q75": 7.435461914479276,
+      "units": "plotted coordinates"
+    },
+    {
+      "panel": "A Gram- N=2",
+      "n": 355,
+      "q25": 3.0837391807057815,
+      "median": 4.983311618808368,
+      "q75": 6.793349970271649,
+      "units": "plotted coordinates"
+    },
+    {
+      "panel": "A Fungal N=1",
+      "n": 176,
+      "q25": 4.378464855522129,
+      "median": 6.039879022139315,
+      "q75": 7.957304566879747,
+      "units": "plotted coordinates"
+    },
+    {
+      "panel": "A Fungal N=2",
+      "n": 135,
+      "q25": 2.1586772622215804,
+      "median": 4.172147953957908,
+      "q75": 6.45408528571922,
+      "units": "plotted coordinates"
+    },
+    {
+      "panel": "B mono",
+      "n": 71,
+      "q25": 0.0,
+      "median": 1.0,
+      "q75": 3.0,
+      "units": "plotted coordinates"
+    },
+    {
+      "panel": "B bis",
+      "n": 218,
+      "q25": 0.0,
+      "median": 1.0,
+      "q75": 2.896240625180289,
+      "units": "plotted coordinates"
+    },
+    {
+      "panel": "B \u22653 cationic N",
+      "n": 115,
+      "q25": 0.0,
+      "median": 0.0,
+      "q75": 2.0,
+      "units": "plotted coordinates"
+    },
+    {
+      "panel": "C molformer expert",
+      "n": 405,
+      "q25": 0.5059234795326024,
+      "median": 1.0056751932648162,
+      "q75": 1.7408322814184314,
+      "units": "plotted coordinates"
+    },
+    {
+      "panel": "C molformer quant-continuous",
+      "n": 405,
+      "q25": 0.48395284767639823,
+      "median": 0.9364917282230488,
+      "q75": 1.5750569372671814,
+      "units": "plotted coordinates"
+    },
+    {
+      "panel": "C c3-molformer expert",
+      "n": 405,
+      "q25": 0.5610451333181639,
+      "median": 1.079231066226518,
+      "q75": 1.8274350921340463,
+      "units": "plotted coordinates"
+    },
+    {
+      "panel": "C c3-molformer quant-continuous",
+      "n": 405,
+      "q25": 0.5211355518825406,
+      "median": 0.9958418618450124,
+      "q75": 1.7042771913701813,
+      "units": "plotted coordinates"
+    },
+    {
+      "panel": "C chemberta100m expert",
+      "n": 405,
+      "q25": 0.6764724502131381,
+      "median": 1.1848933873447942,
+      "q75": 2.0765457766066917,
+      "units": "plotted coordinates"
+    },
+    {
+      "panel": "C chemberta100m quant-continuous",
+      "n": 405,
+      "q25": 0.6774951405896252,
+      "median": 1.3077990269740478,
+      "q75": 2.055667436257514,
+      "units": "plotted coordinates"
+    },
+    {
+      "panel": "C chemfm1b expert",
+      "n": 405,
+      "q25": 0.6339913183750985,
+      "median": 1.1686578469960458,
+      "q75": 1.8387873592745365,
+      "units": "plotted coordinates"
+    },
+    {
+      "panel": "C chemfm1b quant-continuous",
+      "n": 405,
+      "q25": 0.6120845096009822,
+      "median": 1.0890106510030324,
+      "q75": 1.8431163051339048,
+      "units": "plotted coordinates"
+    },
+    {
+      "panel": "D molformer",
+      "n": 405,
+      "q25": -0.2315458553609211,
+      "median": 0.06624604893191965,
+      "q75": 0.3901499837306286,
+      "units": "plotted coordinates"
+    },
+    {
+      "panel": "D c3-molformer",
+      "n": 405,
+      "q25": -0.29561519812683734,
+      "median": 0.016851166654698546,
+      "q75": 0.42928708013799766,
+      "units": "plotted coordinates"
+    },
+    {
+      "panel": "D chemberta100m",
+      "n": 405,
+      "q25": -0.2787204287319479,
+      "median": 0.0024539980385624993,
+      "q75": 0.3341321322118239,
+      "units": "plotted coordinates"
+    },
+    {
+      "panel": "D chemfm1b",
+      "n": 405,
+      "q25": -0.247755852834194,
+      "median": 0.013840797734064991,
+      "q75": 0.38040214105176506,
+      "units": "plotted coordinates"
+    }
+  ],
+  "source_rows": 7138,
+  "source_plot_molecule_class_pairs": 1848,
+  "note": "Molecules may appear in multiple organism classes; classes are not independent. No p-values or biological causal effect inferred."
+}

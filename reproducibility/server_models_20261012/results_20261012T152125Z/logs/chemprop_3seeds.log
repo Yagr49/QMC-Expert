@@ -1,0 +1,463 @@
+FIT chemprop graph_s0_cation_f0 None train 84 test 21
+Seed set to 0
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+You are using a CUDA device ('NVIDIA GeForce RTX 4090') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s0_cation_f0 None 10.0
+FIT chemprop graph_s0_cation_f1 None train 84 test 21
+Seed set to 0
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s0_cation_f1 None 5.6
+FIT chemprop graph_s0_cation_f2 None train 84 test 21
+Seed set to 0
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s0_cation_f2 None 5.6
+FIT chemprop graph_s0_cation_f3 None train 84 test 21
+Seed set to 0
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s0_cation_f3 None 5.5
+FIT chemprop graph_s0_cation_f4 None train 84 test 21
+Seed set to 0
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s0_cation_f4 None 5.6
+FIT chemprop graph_s0_scaffold_f0 None train 84 test 21
+Seed set to 0
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s0_scaffold_f0 None 5.8
+FIT chemprop graph_s0_scaffold_f1 None train 84 test 21
+Seed set to 0
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s0_scaffold_f1 None 5.5
+FIT chemprop graph_s0_scaffold_f2 None train 84 test 21
+Seed set to 0
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s0_scaffold_f2 None 5.5
+FIT chemprop graph_s0_scaffold_f3 None train 84 test 21
+Seed set to 0
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s0_scaffold_f3 None 5.6
+FIT chemprop graph_s0_scaffold_f4 None train 84 test 21
+Seed set to 0
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s0_scaffold_f4 None 5.8
+FIT chemprop graph_s0_full-QAC105_f-1 None train 105 test 17
+Seed set to 0
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s0_full-QAC105_f-1 None 7.2
+FIT chemprop graph_s1_cation_f0 None train 84 test 21
+Seed set to 1
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s1_cation_f0 None 5.6
+FIT chemprop graph_s1_cation_f1 None train 84 test 21
+Seed set to 1
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s1_cation_f1 None 5.7
+FIT chemprop graph_s1_cation_f2 None train 84 test 21
+Seed set to 1
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s1_cation_f2 None 5.7
+FIT chemprop graph_s1_cation_f3 None train 84 test 21
+Seed set to 1
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s1_cation_f3 None 5.7
+FIT chemprop graph_s1_cation_f4 None train 84 test 21
+Seed set to 1
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s1_cation_f4 None 5.7
+FIT chemprop graph_s1_scaffold_f0 None train 84 test 21
+Seed set to 1
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s1_scaffold_f0 None 5.9
+FIT chemprop graph_s1_scaffold_f1 None train 84 test 21
+Seed set to 1
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s1_scaffold_f1 None 5.7
+FIT chemprop graph_s1_scaffold_f2 None train 84 test 21
+Seed set to 1
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s1_scaffold_f2 None 5.5
+FIT chemprop graph_s1_scaffold_f3 None train 84 test 21
+Seed set to 1
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s1_scaffold_f3 None 5.7
+FIT chemprop graph_s1_scaffold_f4 None train 84 test 21
+Seed set to 1
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s1_scaffold_f4 None 5.8
+FIT chemprop graph_s1_full-QAC105_f-1 None train 105 test 17
+Seed set to 1
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s1_full-QAC105_f-1 None 7.3
+FIT chemprop graph_s2_cation_f0 None train 84 test 21
+Seed set to 2
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s2_cation_f0 None 5.8
+FIT chemprop graph_s2_cation_f1 None train 84 test 21
+Seed set to 2
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s2_cation_f1 None 5.7
+FIT chemprop graph_s2_cation_f2 None train 84 test 21
+Seed set to 2
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s2_cation_f2 None 5.8
+FIT chemprop graph_s2_cation_f3 None train 84 test 21
+Seed set to 2
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s2_cation_f3 None 5.7
+FIT chemprop graph_s2_cation_f4 None train 84 test 21
+Seed set to 2
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s2_cation_f4 None 5.7
+FIT chemprop graph_s2_scaffold_f0 None train 84 test 21
+Seed set to 2
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s2_scaffold_f0 None 6.0
+FIT chemprop graph_s2_scaffold_f1 None train 84 test 21
+Seed set to 2
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s2_scaffold_f1 None 5.7
+FIT chemprop graph_s2_scaffold_f2 None train 84 test 21
+Seed set to 2
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s2_scaffold_f2 None 5.5
+FIT chemprop graph_s2_scaffold_f3 None train 84 test 21
+Seed set to 2
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s2_scaffold_f3 None 5.7
+FIT chemprop graph_s2_scaffold_f4 None train 84 test 21
+Seed set to 2
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s2_scaffold_f4 None 5.9
+FIT chemprop graph_s2_full-QAC105_f-1 None train 105 test 17
+Seed set to 2
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/configuration_validator.py:70: You defined a `validation_step` but have no `val_dataloader`. Skipping val loop.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/yagr/coma_models_check_20261012/envs/baselines/lib/python3.11/site-packages/lightning/pytorch/trainer/connectors/data_connector.py:434: The 'predict_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.
+`weights_only` was not set, defaulting to `False`.
+DONE FIT graph_s2_full-QAC105_f-1 None 7.4

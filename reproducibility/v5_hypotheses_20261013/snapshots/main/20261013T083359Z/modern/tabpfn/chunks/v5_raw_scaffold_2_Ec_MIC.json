@@ -1,0 +1,24 @@
+{
+  "rep": "v5_raw",
+  "schema": "scaffold",
+  "fold": 2,
+  "task": "Ec_MIC",
+  "completed": true,
+  "n_train": 84,
+  "n_test": 21,
+  "seconds": 0.21407222747802734,
+  "model": "tabpfn",
+  "info": {
+    "constructor": {
+      "n_estimators": 4,
+      "device": "cuda",
+      "random_state": 1729,
+      "n_preprocessing_jobs": 1
+    },
+    "model_path": "/home/yagr/.cache/tabpfn/tabpfn-v2-regressor.ckpt",
+    "model_version": "v2",
+    "checkpoint_sha256": {
+      "/home/yagr/.cache/tabpfn/tabpfn-v2-regressor.ckpt": "2ab5a07d5c41dfe6db9aa7ae106fc6de898326c2765be66505a07e2868c10736"
+    }
+  }
+}

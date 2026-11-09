@@ -1,0 +1,11 @@
+{
+  "name": "compact_mic_continuous_seed1",
+  "encoding": "categorical",
+  "arm": "mic_continuous",
+  "seed": 1,
+  "provenance": "v5_architecture_matched_source",
+  "completed": true,
+  "fits": 11,
+  "seconds": 62.00900435447693,
+  "predictions": 908
+}

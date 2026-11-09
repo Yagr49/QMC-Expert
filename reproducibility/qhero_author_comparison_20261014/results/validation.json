@@ -1,0 +1,12 @@
+{
+  "completed": true,
+  "metric_rows": 156,
+  "prediction_rows": 10692,
+  "target_molecules": 405,
+  "test_molecules": 81,
+  "test_positives": 72,
+  "test_negatives": 9,
+  "source_target_cation_overlap": 0,
+  "published_421_row_scores_are_not_a_paired_405_row_comparison": true,
+  "manuscript_or_SI_updated": false
+}

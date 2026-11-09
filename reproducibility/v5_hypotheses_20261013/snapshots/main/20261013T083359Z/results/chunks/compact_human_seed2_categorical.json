@@ -1,0 +1,11 @@
+{
+  "name": "compact_human_seed2",
+  "encoding": "categorical",
+  "arm": "human",
+  "seed": 2,
+  "provenance": "v5_architecture_matched_source",
+  "completed": true,
+  "fits": 11,
+  "seconds": 58.3729944229126,
+  "predictions": 908
+}

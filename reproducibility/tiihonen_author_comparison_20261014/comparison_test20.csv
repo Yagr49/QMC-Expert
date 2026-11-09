@@ -1,0 +1,5 @@
+model,train,n_train,n,R2,RMSE
+Author_RF21_refit,author_descriptor_train80,80,20,0.6491613775156464,1.093782292173194
+Author_RF21_refit,matched_valid_smiles_train78,78,20,0.5445628699913481,1.2462105012113736
+v5_raw_CatBoost,matched_valid_smiles_train78,78,20,0.0473371219530268,1.8023818724510567
+v5_human_CatBoost,matched_valid_smiles_train78,78,20,0.2370034289617075,1.613015284255105

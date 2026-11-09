@@ -1,0 +1,115 @@
+
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.5.3 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File "/home/yagr/coma_models_check_20261012/core_frozen/run_extension.py", line 8, in <module>
+    import pandas as pd
+  File "/home/yagr/anaconda3/lib/python3.12/site-packages/pandas/__init__.py", line 49, in <module>
+    from pandas.core.api import (
+  File "/home/yagr/anaconda3/lib/python3.12/site-packages/pandas/core/api.py", line 1, in <module>
+    from pandas._libs import (
+  File "/home/yagr/anaconda3/lib/python3.12/site-packages/pandas/_libs/__init__.py", line 17, in <module>
+    import pandas._libs.pandas_datetime  # noqa: F401 # isort: skip # type: ignore[reportUnusedImport]
+Traceback (most recent call last):
+  File "/home/yagr/.local/lib/python3.12/site-packages/numpy/core/_multiarray_umath.py", line 46, in __getattr__
+    raise ImportError(msg)
+ImportError: 
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.5.3 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+
+Traceback (most recent call last):
+  File "/home/yagr/coma_models_check_20261012/core_frozen/run_extension.py", line 8, in <module>
+    import pandas as pd
+  File "/home/yagr/anaconda3/lib/python3.12/site-packages/pandas/__init__.py", line 49, in <module>
+    from pandas.core.api import (
+  File "/home/yagr/anaconda3/lib/python3.12/site-packages/pandas/core/api.py", line 1, in <module>
+    from pandas._libs import (
+  File "/home/yagr/anaconda3/lib/python3.12/site-packages/pandas/_libs/__init__.py", line 17, in <module>
+    import pandas._libs.pandas_datetime  # noqa: F401 # isort: skip # type: ignore[reportUnusedImport]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ImportError: numpy.core.multiarray failed to import
+baseline raw-molformer 0 [('QAC-104', 'ridge', 2.24), ('Q-HERO-405', 'ridge', 2.187), ('OOD-17', 'ridge', 3.173), ('QAC-104', 'catboost', 2.074), ('Q-HERO-405', 'catboost', 1.602), ('OOD-17', 'catboost', 1.698)]
+matched-pooled expert 0 [('QAC-104', 'ridge', 2.264), ('Q-HERO-405', 'ridge', 2.131), ('OOD-17', 'ridge', 1.584), ('QAC-104', 'catboost', 2.169), ('Q-HERO-405', 'catboost', 1.62), ('OOD-17', 'catboost', 1.935)]
+matched-pooled quant-continuous 0 [('QAC-104', 'ridge', 8.145), ('Q-HERO-405', 'ridge', 2.599), ('OOD-17', 'ridge', 2.63), ('QAC-104', 'catboost', 2.135), ('Q-HERO-405', 'catboost', 1.53), ('OOD-17', 'catboost', 2.08)]
+matched-pooled quant-binary 0 [('QAC-104', 'ridge', 1.987), ('Q-HERO-405', 'ridge', 1.797), ('OOD-17', 'ridge', 1.852), ('QAC-104', 'catboost', 1.912), ('Q-HERO-405', 'catboost', 1.688), ('OOD-17', 'catboost', 1.587)]
+matched-pooled expert-shuffled 0 [('QAC-104', 'ridge', 2.271), ('Q-HERO-405', 'ridge', 2.003), ('OOD-17', 'ridge', 1.841), ('QAC-104', 'catboost', 2.21), ('Q-HERO-405', 'catboost', 1.7), ('OOD-17', 'catboost', 2.198)]
+matched-pooled quant-shuffled 0 [('QAC-104', 'ridge', 3.12), ('Q-HERO-405', 'ridge', 2.263), ('OOD-17', 'ridge', 3.066), ('QAC-104', 'catboost', 2.055), ('Q-HERO-405', 'catboost', 1.544), ('OOD-17', 'catboost', 1.845)]
+matched-pooled quant-binary-shuffled 0 [('QAC-104', 'ridge', 2.308), ('Q-HERO-405', 'ridge', 1.984), ('OOD-17', 'ridge', 2.311), ('QAC-104', 'catboost', 2.055), ('Q-HERO-405', 'catboost', 1.715), ('OOD-17', 'catboost', 2.096)]
+matched-pooled untrained 0 [('QAC-104', 'ridge', 2.295), ('Q-HERO-405', 'ridge', 2.487), ('OOD-17', 'ridge', 51.369), ('QAC-104', 'catboost', 2.024), ('Q-HERO-405', 'catboost', 1.626), ('OOD-17', 'catboost', 1.753)]
+matched-pooled expert 1 [('QAC-104', 'ridge', 2.208), ('Q-HERO-405', 'ridge', 1.595), ('OOD-17', 'ridge', 1.929), ('QAC-104', 'catboost', 2.12), ('Q-HERO-405', 'catboost', 1.647), ('OOD-17', 'catboost', 2.165)]
+matched-pooled quant-continuous 1 [('QAC-104', 'ridge', 2.708), ('Q-HERO-405', 'ridge', 3.584), ('OOD-17', 'ridge', 5.082), ('QAC-104', 'catboost', 2.017), ('Q-HERO-405', 'catboost', 1.489), ('OOD-17', 'catboost', 2.127)]
+matched-pooled quant-binary 1 [('QAC-104', 'ridge', 2.135), ('Q-HERO-405', 'ridge', 1.62), ('OOD-17', 'ridge', 1.617), ('QAC-104', 'catboost', 2.064), ('Q-HERO-405', 'catboost', 1.606), ('OOD-17', 'catboost', 2.136)]
+matched-pooled expert-shuffled 1 [('QAC-104', 'ridge', 2.171), ('Q-HERO-405', 'ridge', 1.873), ('OOD-17', 'ridge', 2.14), ('QAC-104', 'catboost', 2.137), ('Q-HERO-405', 'catboost', 1.723), ('OOD-17', 'catboost', 1.812)]
+matched-pooled quant-shuffled 1 [('QAC-104', 'ridge', 2.071), ('Q-HERO-405', 'ridge', 2.488), ('OOD-17', 'ridge', 1.769), ('QAC-104', 'catboost', 1.95), ('Q-HERO-405', 'catboost', 1.612), ('OOD-17', 'catboost', 1.992)]
+matched-pooled quant-binary-shuffled 1 [('QAC-104', 'ridge', 2.041), ('Q-HERO-405', 'ridge', 1.793), ('OOD-17', 'ridge', 2.7), ('QAC-104', 'catboost', 2.236), ('Q-HERO-405', 'catboost', 1.797), ('OOD-17', 'catboost', 2.222)]
+matched-pooled untrained 1 [('QAC-104', 'ridge', 11.642), ('Q-HERO-405', 'ridge', 2.338), ('OOD-17', 'ridge', 4.398), ('QAC-104', 'catboost', 1.948), ('Q-HERO-405', 'catboost', 1.682), ('OOD-17', 'catboost', 1.87)]
+matched-pooled expert 2 [('QAC-104', 'ridge', 2.438), ('Q-HERO-405', 'ridge', 2.306), ('OOD-17', 'ridge', 3.257), ('QAC-104', 'catboost', 2.222), ('Q-HERO-405', 'catboost', 1.558), ('OOD-17', 'catboost', 1.57)]
+matched-pooled quant-continuous 2 [('QAC-104', 'ridge', 2.565), ('Q-HERO-405', 'ridge', 1.923), ('OOD-17', 'ridge', 6.262), ('QAC-104', 'catboost', 2.022), ('Q-HERO-405', 'catboost', 1.461), ('OOD-17', 'catboost', 1.758)]
+matched-pooled quant-binary 2 [('QAC-104', 'ridge', 2.039), ('Q-HERO-405', 'ridge', 1.632), ('OOD-17', 'ridge', 3.234), ('QAC-104', 'catboost', 2.037), ('Q-HERO-405', 'catboost', 1.61), ('OOD-17', 'catboost', 2.041)]
+matched-pooled expert-shuffled 2 [('QAC-104', 'ridge', 3.482), ('Q-HERO-405', 'ridge', 1.924), ('OOD-17', 'ridge', 1.92), ('QAC-104', 'catboost', 2.201), ('Q-HERO-405', 'catboost', 1.919), ('OOD-17', 'catboost', 2.108)]
+matched-pooled quant-shuffled 2 [('QAC-104', 'ridge', 2.389), ('Q-HERO-405', 'ridge', 2.788), ('OOD-17', 'ridge', 2.615), ('QAC-104', 'catboost', 2.001), ('Q-HERO-405', 'catboost', 1.683), ('OOD-17', 'catboost', 2.135)]
+matched-pooled quant-binary-shuffled 2 [('QAC-104', 'ridge', 2.374), ('Q-HERO-405', 'ridge', 1.776), ('OOD-17', 'ridge', 1.838), ('QAC-104', 'catboost', 2.077), ('Q-HERO-405', 'catboost', 1.765), ('OOD-17', 'catboost', 1.684)]
+matched-pooled untrained 2 [('QAC-104', 'ridge', 2.542), ('Q-HERO-405', 'ridge', 4.052), ('OOD-17', 'ridge', 4.454), ('QAC-104', 'catboost', 2.061), ('Q-HERO-405', 'catboost', 1.788), ('OOD-17', 'catboost', 2.014)]
+matched-pooled expert 3 [('QAC-104', 'ridge', 2.28), ('Q-HERO-405', 'ridge', 1.655), ('OOD-17', 'ridge', 1.524), ('QAC-104', 'catboost', 2.234), ('Q-HERO-405', 'catboost', 1.616), ('OOD-17', 'catboost', 1.724)]
+matched-pooled quant-continuous 3 [('QAC-104', 'ridge', 4.724), ('Q-HERO-405', 'ridge', 2.128), ('OOD-17', 'ridge', 3.242), ('QAC-104', 'catboost', 2.224), ('Q-HERO-405', 'catboost', 1.496), ('OOD-17', 'catboost', 1.988)]
+matched-pooled quant-binary 3 [('QAC-104', 'ridge', 9.345), ('Q-HERO-405', 'ridge', 1.857), ('OOD-17', 'ridge', 1.941), ('QAC-104', 'catboost', 2.255), ('Q-HERO-405', 'catboost', 1.691), ('OOD-17', 'catboost', 1.971)]
+matched-pooled expert-shuffled 3 [('QAC-104', 'ridge', 2.241), ('Q-HERO-405', 'ridge', 1.852), ('OOD-17', 'ridge', 1.951), ('QAC-104', 'catboost', 2.203), ('Q-HERO-405', 'catboost', 1.715), ('OOD-17', 'catboost', 1.813)]
+matched-pooled quant-shuffled 3 [('QAC-104', 'ridge', 3.345), ('Q-HERO-405', 'ridge', 2.639), ('OOD-17', 'ridge', 3.553), ('QAC-104', 'catboost', 2.024), ('Q-HERO-405', 'catboost', 1.537), ('OOD-17', 'catboost', 1.976)]
+matched-pooled quant-binary-shuffled 3 [('QAC-104', 'ridge', 2.053), ('Q-HERO-405', 'ridge', 2.205), ('OOD-17', 'ridge', 2.501), ('QAC-104', 'catboost', 1.897), ('Q-HERO-405', 'catboost', 1.725), ('OOD-17', 'catboost', 2.005)]
+matched-pooled untrained 3 [('QAC-104', 'ridge', 3.512), ('Q-HERO-405', 'ridge', 4.004), ('OOD-17', 'ridge', 6.399), ('QAC-104', 'catboost', 1.973), ('Q-HERO-405', 'catboost', 1.625), ('OOD-17', 'catboost', 1.719)]
+matched-pooled expert 4 [('QAC-104', 'ridge', 2.095), ('Q-HERO-405', 'ridge', 1.658), ('OOD-17', 'ridge', 1.924), ('QAC-104', 'catboost', 2.215), ('Q-HERO-405', 'catboost', 1.619), ('OOD-17', 'catboost', 1.851)]
+matched-pooled quant-continuous 4 [('QAC-104', 'ridge', 2.329), ('Q-HERO-405', 'ridge', 2.55), ('OOD-17', 'ridge', 2.19), ('QAC-104', 'catboost', 1.986), ('Q-HERO-405', 'catboost', 1.54), ('OOD-17', 'catboost', 1.605)]
+matched-pooled quant-binary 4 [('QAC-104', 'ridge', 2.048), ('Q-HERO-405', 'ridge', 1.721), ('OOD-17', 'ridge', 2.132), ('QAC-104', 'catboost', 2.18), ('Q-HERO-405', 'catboost', 1.671), ('OOD-17', 'catboost', 1.864)]
+matched-pooled expert-shuffled 4 [('QAC-104', 'ridge', 2.219), ('Q-HERO-405', 'ridge', 1.729), ('OOD-17', 'ridge', 2.14), ('QAC-104', 'catboost', 2.206), ('Q-HERO-405', 'catboost', 1.838), ('OOD-17', 'catboost', 1.833)]
+matched-pooled quant-shuffled 4 [('QAC-104', 'ridge', 2.694), ('Q-HERO-405', 'ridge', 3.887), ('OOD-17', 'ridge', 2.736), ('QAC-104', 'catboost', 2.046), ('Q-HERO-405', 'catboost', 1.631), ('OOD-17', 'catboost', 1.741)]
+matched-pooled quant-binary-shuffled 4 [('QAC-104', 'ridge', 2.117), ('Q-HERO-405', 'ridge', 1.836), ('OOD-17', 'ridge', 3.183), ('QAC-104', 'catboost', 2.063), ('Q-HERO-405', 'catboost', 1.689), ('OOD-17', 'catboost', 1.742)]
+matched-pooled untrained 4 [('QAC-104', 'ridge', 2.341), ('Q-HERO-405', 'ridge', 3.067), ('OOD-17', 'ridge', 9.671), ('QAC-104', 'catboost', 1.964), ('Q-HERO-405', 'catboost', 1.604), ('OOD-17', 'catboost', 1.75)]
+matched-sa expert 0 [('QAC-104', 'ridge', 5.309), ('Q-HERO-405', 'ridge', 2.302), ('OOD-17', 'ridge', 1.9), ('QAC-104', 'catboost', 1.971), ('Q-HERO-405', 'catboost', 1.877), ('OOD-17', 'catboost', 2.079)]
+matched-sa quant-continuous 0 [('QAC-104', 'ridge', 8.102), ('Q-HERO-405', 'ridge', 2.126), ('OOD-17', 'ridge', 4.42), ('QAC-104', 'catboost', 2.024), ('Q-HERO-405', 'catboost', 1.576), ('OOD-17', 'catboost', 2.455)]
+matched-sa quant-binary 0 [('QAC-104', 'ridge', 2.331), ('Q-HERO-405', 'ridge', 5.565), ('OOD-17', 'ridge', 1.836), ('QAC-104', 'catboost', 2.003), ('Q-HERO-405', 'catboost', 1.72), ('OOD-17', 'catboost', 2.126)]
+matched-sa expert-shuffled 0 [('QAC-104', 'ridge', 2.087), ('Q-HERO-405', 'ridge', 2.635), ('OOD-17', 'ridge', 2.009), ('QAC-104', 'catboost', 2.294), ('Q-HERO-405', 'catboost', 1.773), ('OOD-17', 'catboost', 1.983)]
+matched-sa quant-shuffled 0 [('QAC-104', 'ridge', 3.82), ('Q-HERO-405', 'ridge', 2.911), ('OOD-17', 'ridge', 5.894), ('QAC-104', 'catboost', 2.221), ('Q-HERO-405', 'catboost', 1.773), ('OOD-17', 'catboost', 1.425)]
+matched-sa quant-binary-shuffled 0 [('QAC-104', 'ridge', 2.103), ('Q-HERO-405', 'ridge', 1.836), ('OOD-17', 'ridge', 1.782), ('QAC-104', 'catboost', 2.185), ('Q-HERO-405', 'catboost', 1.84), ('OOD-17', 'catboost', 2.187)]
+matched-sa untrained 0 [('QAC-104', 'ridge', 2.499), ('Q-HERO-405', 'ridge', 2.136), ('OOD-17', 'ridge', 8.55), ('QAC-104', 'catboost', 2.053), ('Q-HERO-405', 'catboost', 1.634), ('OOD-17', 'catboost', 2.029)]
+matched-sa expert 1 [('QAC-104', 'ridge', 15.909), ('Q-HERO-405', 'ridge', 1.736), ('OOD-17', 'ridge', 2.353), ('QAC-104', 'catboost', 2.149), ('Q-HERO-405', 'catboost', 1.695), ('OOD-17', 'catboost', 1.832)]
+matched-sa quant-continuous 1 [('QAC-104', 'ridge', 30.436), ('Q-HERO-405', 'ridge', 2.125), ('OOD-17', 'ridge', 2.446), ('QAC-104', 'catboost', 2.005), ('Q-HERO-405', 'catboost', 1.609), ('OOD-17', 'catboost', 2.074)]
+matched-sa quant-binary 1 [('QAC-104', 'ridge', 2.223), ('Q-HERO-405', 'ridge', 1.822), ('OOD-17', 'ridge', 1.774), ('QAC-104', 'catboost', 2.075), ('Q-HERO-405', 'catboost', 1.769), ('OOD-17', 'catboost', 1.861)]
+matched-sa expert-shuffled 1 [('QAC-104', 'ridge', 1.999), ('Q-HERO-405', 'ridge', 2.635), ('OOD-17', 'ridge', 2.569), ('QAC-104', 'catboost', 2.055), ('Q-HERO-405', 'catboost', 1.76), ('OOD-17', 'catboost', 1.858)]
+matched-sa quant-shuffled 1 [('QAC-104', 'ridge', 6.211), ('Q-HERO-405', 'ridge', 2.078), ('OOD-17', 'ridge', 4.767), ('QAC-104', 'catboost', 2.147), ('Q-HERO-405', 'catboost', 1.604), ('OOD-17', 'catboost', 1.863)]
+matched-sa quant-binary-shuffled 1 [('QAC-104', 'ridge', 2.378), ('Q-HERO-405', 'ridge', 3.52), ('OOD-17', 'ridge', 2.525), ('QAC-104', 'catboost', 2.275), ('Q-HERO-405', 'catboost', 1.799), ('OOD-17', 'catboost', 2.161)]
+matched-sa untrained 1 [('QAC-104', 'ridge', 8.246), ('Q-HERO-405', 'ridge', 2.363), ('OOD-17', 'ridge', 5.567), ('QAC-104', 'catboost', 2.035), ('Q-HERO-405', 'catboost', 1.703), ('OOD-17', 'catboost', 1.723)]
+matched-sa expert 2 [('QAC-104', 'ridge', 3.252), ('Q-HERO-405', 'ridge', 1.786), ('OOD-17', 'ridge', 6.261), ('QAC-104', 'catboost', 2.138), ('Q-HERO-405', 'catboost', 1.801), ('OOD-17', 'catboost', 2.922)]
+matched-sa quant-continuous 2 [('QAC-104', 'ridge', 5.225), ('Q-HERO-405', 'ridge', 2.173), ('OOD-17', 'ridge', 2.595), ('QAC-104', 'catboost', 2.119), ('Q-HERO-405', 'catboost', 1.617), ('OOD-17', 'catboost', 2.174)]
+matched-sa quant-binary 2 [('QAC-104', 'ridge', 2.073), ('Q-HERO-405', 'ridge', 2.645), ('OOD-17', 'ridge', 2.449), ('QAC-104', 'catboost', 1.884), ('Q-HERO-405', 'catboost', 1.697), ('OOD-17', 'catboost', 2.318)]
+matched-sa expert-shuffled 2 [('QAC-104', 'ridge', 2.164), ('Q-HERO-405', 'ridge', 1.684), ('OOD-17', 'ridge', 2.201), ('QAC-104', 'catboost', 1.925), ('Q-HERO-405', 'catboost', 1.77), ('OOD-17', 'catboost', 1.97)]
+matched-sa quant-shuffled 2 [('QAC-104', 'ridge', 2.588), ('Q-HERO-405', 'ridge', 2.24), ('OOD-17', 'ridge', 5.538), ('QAC-104', 'catboost', 2.166), ('Q-HERO-405', 'catboost', 1.669), ('OOD-17', 'catboost', 1.857)]
+matched-sa quant-binary-shuffled 2 [('QAC-104', 'ridge', 2.218), ('Q-HERO-405', 'ridge', 1.948), ('OOD-17', 'ridge', 1.989), ('QAC-104', 'catboost', 2.2), ('Q-HERO-405', 'catboost', 1.795), ('OOD-17', 'catboost', 1.948)]
+matched-sa untrained 2 [('QAC-104', 'ridge', 2.69), ('Q-HERO-405', 'ridge', 5.807), ('OOD-17', 'ridge', 3.582), ('QAC-104', 'catboost', 2.088), ('Q-HERO-405', 'catboost', 1.709), ('OOD-17', 'catboost', 2.033)]
+matched-sa expert 3 [('QAC-104', 'ridge', 27.804), ('Q-HERO-405', 'ridge', 7.746), ('OOD-17', 'ridge', 2.214), ('QAC-104', 'catboost', 2.107), ('Q-HERO-405', 'catboost', 1.863), ('OOD-17', 'catboost', 2.434)]
+matched-sa quant-continuous 3 [('QAC-104', 'ridge', 2.49), ('Q-HERO-405', 'ridge', 2.976), ('OOD-17', 'ridge', 2.314), ('QAC-104', 'catboost', 2.163), ('Q-HERO-405', 'catboost', 1.651), ('OOD-17', 'catboost', 1.653)]
+matched-sa quant-binary 3 [('QAC-104', 'ridge', 2.066), ('Q-HERO-405', 'ridge', 1.82), ('OOD-17', 'ridge', 1.944), ('QAC-104', 'catboost', 2.09), ('Q-HERO-405', 'catboost', 1.746), ('OOD-17', 'catboost', 1.819)]
+matched-sa expert-shuffled 3 [('QAC-104', 'ridge', 2.075), ('Q-HERO-405', 'ridge', 1.783), ('OOD-17', 'ridge', 1.841), ('QAC-104', 'catboost', 2.262), ('Q-HERO-405', 'catboost', 1.811), ('OOD-17', 'catboost', 2.286)]
+matched-sa quant-shuffled 3 [('QAC-104', 'ridge', 11.364), ('Q-HERO-405', 'ridge', 2.491), ('OOD-17', 'ridge', 3.156), ('QAC-104', 'catboost', 2.123), ('Q-HERO-405', 'catboost', 1.597), ('OOD-17', 'catboost', 1.882)]
+matched-sa quant-binary-shuffled 3 [('QAC-104', 'ridge', 2.439), ('Q-HERO-405', 'ridge', 1.81), ('OOD-17', 'ridge', 2.185), ('QAC-104', 'catboost', 2.358), ('Q-HERO-405', 'catboost', 1.732), ('OOD-17', 'catboost', 1.835)]
+matched-sa untrained 3 [('QAC-104', 'ridge', 10.271), ('Q-HERO-405', 'ridge', 3.301), ('OOD-17', 'ridge', 5.013), ('QAC-104', 'catboost', 1.977), ('Q-HERO-405', 'catboost', 1.65), ('OOD-17', 'catboost', 1.957)]
+matched-sa expert 4 [('QAC-104', 'ridge', 21.847), ('Q-HERO-405', 'ridge', 2.085), ('OOD-17', 'ridge', 1.811), ('QAC-104', 'catboost', 1.998), ('Q-HERO-405', 'catboost', 1.734), ('OOD-17', 'catboost', 2.21)]
+matched-sa quant-continuous 4 [('QAC-104', 'ridge', 5.404), ('Q-HERO-405', 'ridge', 2.326), ('OOD-17', 'ridge', 4.788), ('QAC-104', 'catboost', 1.997), ('Q-HERO-405', 'catboost', 1.694), ('OOD-17', 'catboost', 1.849)]
+matched-sa quant-binary 4 [('QAC-104', 'ridge', 3.847), ('Q-HERO-405', 'ridge', 1.804), ('OOD-17', 'ridge', 1.925), ('QAC-104', 'catboost', 2.022), ('Q-HERO-405', 'catboost', 1.725), ('OOD-17', 'catboost', 1.968)]
+matched-sa expert-shuffled 4 [('QAC-104', 'ridge', 2.101), ('Q-HERO-405', 'ridge', 2.032), ('OOD-17', 'ridge', 9.931), ('QAC-104', 'catboost', 2.125), ('Q-HERO-405', 'catboost', 1.759), ('OOD-17', 'catboost', 2.102)]
+matched-sa quant-shuffled 4 [('QAC-104', 'ridge', 3.987), ('Q-HERO-405', 'ridge', 2.184), ('OOD-17', 'ridge', 3.253), ('QAC-104', 'catboost', 2.161), ('Q-HERO-405', 'catboost', 1.685), ('OOD-17', 'catboost', 2.084)]
+matched-sa quant-binary-shuffled 4 [('QAC-104', 'ridge', 2.183), ('Q-HERO-405', 'ridge', 1.693), ('OOD-17', 'ridge', 2.205), ('QAC-104', 'catboost', 2.287), ('Q-HERO-405', 'catboost', 1.751), ('OOD-17', 'catboost', 2.058)]
+matched-sa untrained 4 [('QAC-104', 'ridge', 2.833), ('Q-HERO-405', 'ridge', 2.849), ('OOD-17', 'ridge', 6.343), ('QAC-104', 'catboost', 1.965), ('Q-HERO-405', 'catboost', 1.663), ('OOD-17', 'catboost', 1.712)]
+DONE

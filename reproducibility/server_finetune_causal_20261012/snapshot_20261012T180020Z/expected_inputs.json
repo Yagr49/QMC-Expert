@@ -1,0 +1,9 @@
+{
+  "run_experiments.py": "52cc505b52427511cf0deb4141be384a0f0f033e1ce32a5168730d2f267c6562",
+  "bootstrap.py": "7ec405001fa0a4f43ad3e63d36dcc724868093321438cfd32923c21037144b62",
+  "PROTOCOL_RU.md": "72c4243e1523863087a59662486c299dc28234fa40fe19409221db17ea37092b",
+  "data/OOD17.csv": "b2abafad0bacfc66b3228141175ae2fb0e924cbf95645b5f4d6fa2a0d307d2b2",
+  "data/QAC105.csv": "f88b53777548bdbd79d0eb56128b7d4e18cb7ab2e002ea5ad359c30186f3ded4",
+  "data/endpoint_registry.csv": "8dc37da0240f9de1294d233542de4f4f7c179f2c080c39a5ef5dd4617dd4d129",
+  "data/scaffold_endpoint_registry.csv": "56a084f809df9cd96276cca71393fba98bf84235858219920196fb34ce310d93"
+}

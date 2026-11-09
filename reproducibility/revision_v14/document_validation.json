@@ -1,0 +1,25 @@
+{
+  "completed": true,
+  "documents": [
+    {
+      "path": "/Users/egorilin/Desktop/COMA/2026_10_11_Paper_2_edited-v14_QAC105_OOD17.docx",
+      "sha256": "bceca37ceec300fa505efbaeecdd7ee479668a7a8a0b41969382494a97fd8793",
+      "figures": 5,
+      "xml_styles_relationships_valid": true
+    },
+    {
+      "path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v14/Supplementary_Information_v14.docx",
+      "sha256": "663c02fa672764d2c457e7afc66671bc5fab8be441083b0e021b42b01528f91a",
+      "figures": 21,
+      "xml_styles_relationships_valid": true
+    }
+  ],
+  "coauthor_fields_preserved": true,
+  "full_original_registry": true,
+  "named_OOD_registry": true,
+  "abstract_words": 151,
+  "local_OpenRouter_only": true,
+  "keys_absent_from_project": true,
+  "numerical_validation": "validation.json",
+  "scaffold_validation": "scaffold_validation.json"
+}

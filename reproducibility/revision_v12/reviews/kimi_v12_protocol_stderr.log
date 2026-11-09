@@ -1,0 +1,446 @@
+kimi version 2.1.1
+Warning: [loop_control] 'max_retries_per_step' is deprecated and no longer used; rename it to 'max_attempts_per_step'. Run /update-config to fix it.
+• The user is asking for a read-only scientific critique of a protocol document, implementation note, and two scripts. They've explicitly said: do not execute commands, access additional files, edit anything, or send messages. All evidence is included. Max 700 words. They want concrete errors with quoted wording and corrections, then material limitations. Distinguish factual errors from optional follow-up experiments.
+
+  The superpowers plugin says I must invoke skills if even 1% chance applies. But user instructions take precedence: "Do not execute commands, access additional files, edit anything or send messages." The using-superpowers skill itself says user instructions always take precedence. Invoking a skill via the Skill tool would be a tool call — but is that "executing commands"? The Skill tool loads skill content. However, the user explicitly asked for a read-only critique with all evidence included, and no additional file access. Reading a skill file would arguably violate "do not access additional files." Actually, the plugin instructions say "When you invoke a skill, its content is loaded" — that's not me reading a file, but it is accessing content beyond what's provided. The user said "All evidence is included below." The critique should be based only on the provided text.
+
+  Given the explicit user constraint — read-only, no additional file access, all evidence included — and that user instructions take precedence over skills, the safest and most compliant path is to simply perform the critique directly without invoking any skills. The user's explicit instructions are the highest priority. Also, no skill genuinely applies: this is a scientific protocol audit, not creative work, debugging, implementation, etc. The "receiving-code-review" skill is about receiving code review feedback, not giving it. So no skill applies here in substance.
+
+  Now let me actually do the scientific critique carefully.
+
+  Audit dimensions requested:
+  1. Source-target leakage
+  2. Matching of initial weights/batches/updates/stochastic schedules
+  3. Training-only label transformation and permutation
+  4. Direct versus target-refit evaluation
+  5. Checkpoint reproducibility
+
+  Plus: evaluate without inspecting results. The documented clarification (implementation note) preserves native stochastic training and recovers feature-map buffers; assess separately from changes to training or outcomes.
+
+  Let me go through carefully.
+
+  **1. Source-target leakage**
+
+  Protocol: "Exclude every evaluation cation, including counterion variants, from source training and validation."
+
+  Code check:
+  ```python
+  target_cations = set().union(*(set(d.cation) for d in targets.values()))
+  assert not set(expert.cation) & target_cations
+  ```
+  This asserts no cation overlap. But wait — does it exclude counterion variants? The assertion is exact string equality on cation labels. "Counterion variants" — if a counterion variant has a different cation string (e.g., different salt form), the assertion wouldn't catch it. Actually, the cation IS presumably the charged species; counterion variants would share the same cation. Hmm — actually "cation" here likely refers to the cationic scaffold group. The check is exact-match only. The protocol says "including counterion variants" — the code only checks exact cation identity, not variant-normalized forms. If a target molecule's cation string differs trivially (e.g., protonation state, salt stoichiometry notation), the exact-match assertion misses it. That's a potential gap, but it's a data-formatting concern. It's a limitation at most — we can't verify data contents without accessing files, which we must not do.
+
+  Also: the protocol says "The source validation split and the individual target CV folds are scaffold-disjoint." The code asserts train/val scaffold disjointness within source, and within each target's folds. Fine.
+
+  But one notable leakage-related issue: the binary MIC cutoff. "Binary MIC cutoff is the source-training MIC quantile corresponding to human training-positive prevalence." Code: `cutoff = float(np.quantile(y[tr], float(expert.y.iloc[tr].mean())))`. Here `y` is quant.y (pooled log2 MIC), and the quantile level is the human training-positive prevalence. Fine — computed on training only. No leakage.
+
+  Standardization: `mu = y[tr].mean(); sd = y[tr].std()` — training only. Good.
+
+  Shuffle: `y[tr] = ...permutation(y[tr])` — training only; validation labels unshuffled. The code sets `yt = y[tr]` and `yv = y[va]` — y[va] is never shuffled since shuffle only touches y[tr]. Good. Assert `np.array_equal(np.sort(before), np.sort(y[tr]))` verifies multiset preservation. Good.
+
+  Wait — one subtle point on shuffling. The continuous arms are standardized BEFORE shuffling; shuffling a standardized vector preserves its multiset. Fine.
+
+  **2. Matching of initial weights/batches/updates/stochastic schedules**
+
+  Protocol: "Within each seed, match backbone/scalar-head initial weights, minibatch permutations and stochastic seed across all six arms."
+
+  Code:
+  - `load_net(seed, device)`: calls `torch.manual_seed(seed); np.random.seed(seed)` then `AutoModel.from_pretrained(...)`. So the backbone initial weights are identical across arms for the same seed (loading with same seed). But the scalar head `nn.Linear(768, 1)` is created AFTER `AutoModel.from_pretrained` — its init consumes from the global RNG after backbone loading. Backbone loading presumably consumes random draws? Actually from_pretrained loads pretrained weights; RNG draws during loading are minimal, but the head init draws from the global torch RNG. Since `torch.manual_seed(seed)` is called at the start of `load_net`, and the sequence of RNG consumption between manual_seed and head creation is identical across arms (same loading path), the head init is matched across arms within a seed. OK. `initial_hash = weights_sha(net)` recorded. Good.
+
+  - Minibatch order: `generator = torch.Generator().manual_seed(200000 + seed)`; `order = torch.randperm(len(tr), generator=generator)` per epoch. Same across arms within seed. `batches_hash` recorded. 360 updates per arm (12 batches × 30 epochs). Matches protocol.
+
+  - BUT: the protocol says "match ... stochastic seed across all six arms." Native MolFormer training forward passes refresh random orthogonal feature-map buffers (per the implementation note). These draws come from... which RNG? In the training loop, `net(**batch)` in train mode consumes feature-map draws. The feature-map buffer regeneration uses `torch.randn` presumably on the global torch RNG or a module-specific generator. The training loop never calls `torch.manual_seed` after `load_net` — wait, it does: `torch.manual_seed(300000 + seed)` right before creating the optimizer. That's for dropout RNG. So dropout draws and feature-map draws come from the global torch RNG seeded with 300000+seed at the same point in every arm. Since the sequence of forward passes (batch shapes/order) is identical across arms, the dropout and feature-map draws are matched across arms. Good — matched.
+
+  - However, one real issue: dropout. `nn.Dropout(.1)` in the head, plus MolFormer internal dropout. These consume global RNG draws during training forward. Since batch composition and order are identical across arms, draws match. Fine.
+
+  - The evaluation forward passes (net.eval()) — in eval mode dropout is off, and deterministic_eval=True makes feature maps fixed in eval. Good.
+
+  - Validation: `validation_loss` computed on unshuffled validation labels with the arm's own loss function. Protocol says "Validation is diagnostic... Do not train on its labels." Code doesn't backprop through validation. Good. But note: binary arms' validation loss is BCE against unshuffled binary validation labels; continuous arms MSE. Fine.
+
+  Now, a subtle matching issue: **the scalar head initialization for binary vs continuous arms**. `Net(enc)` head is `nn.Linear(768,1)` initialized identically for all arms of the same seed. Good.
+
+  Another subtle issue: **feature-map buffer draws differ between training and the raw-backbone extraction?** Not relevant for matching.
+
+  **The reconstruction script's RNG replay claim**: "Only shapes and the stochastic forward schedule determine feature-map draws; no gradient or optimiser operation consumes a random draw." During original training, between forward passes, the optimizer steps, gradient clipping, etc. — do any of these consume RNG? AdamW doesn't consume RNG. `clip_grad_norm_` doesn't. OneCycleLR doesn't. Dropout consumes RNG during forward (in train mode). In the replay, `net.train()` with `torch.no_grad()` — dropout still active in train mode and consumes global RNG draws during the replay forwards. In the original training, dropout also consumed draws interleaved with feature-map draws. So the RNG consumption sequence (feature-map draws + dropout draws) is the same in replay as in original, PROVIDED the dropout call pattern is identical (same mask shapes). Batch shapes are identical (order replayed from same generator seed). So the buffer regeneration draws should land identically... 
+
+  Wait, actually there's a subtlety: in the original training loop, RNG consumers per step: dropout in forward (multiple dropout sites), feature-map buffer refresh (each attention layer's feature maps). In replay: same forward with dropout active (train mode, no_grad doesn't disable dropout). So same consumers. The comment says "no gradient or optimiser operation consumes a random draw" — true. So replay should reproduce buffers exactly, and indeed the script asserts `np.allclose(emb, archived_emb, rtol=1e-5, atol=1e-6)`. That's a strong verification — but it's an assertion in a script we can't run; per instructions, evaluate without inspecting results. The claim stands or falls on the RNG-conservation argument. One potential fragility: `torch.use_deterministic_algorithms(True, warn_only=True)` and CUDA nondeterminism don't affect RNG sequence, only kernels. RNG sequence is deterministic given seeds. OK.
+
+  But here's a genuine issue in the reconstruction script: it replays with `torch.manual_seed(300000+seed)` then creates a fresh generator for batch order. But in the ORIGINAL training, the global torch RNG state at the start of training was NOT freshly seeded at 300000+seed — wait, it was: `torch.manual_seed(300000 + seed)` is called in the training loop before optimizer creation. So global RNG state at first forward is identical across arms and identical to replay (which seeds the same). Good.
+
+  Hmm, but wait: in the original, `load_net(seed)` calls `torch.manual_seed(seed)`, then head creation consumes draws, then `torch.manual_seed(300000+seed)` resets. So global RNG at training start = fresh from 300000+seed regardless of what happened during load. In replay, `ft.load_net(seed, device)` then `torch.manual_seed(300000+seed)` — same reset. Good. Matched.
+
+  One more: the number of forward passes in replay must match the original exactly. Original: 30 epochs × 12 batches = 360 training forwards. Replay: `for epoch in range(30)` — hardcoded 30, not `args.epochs`. If the run used a different epoch count (e.g., smoke or a revised run), replay would mismatch. But it asserts allclose against archived embeddings, which would catch a mismatch (buffers would differ → eval embeddings... wait, do eval embeddings depend on the final feature-map buffers? deterministic_eval=True "fixes attention feature maps in evaluation" — does that mean eval uses the current buffer values, or fixed random seed? If eval feature maps are frozen at their current buffer values, then final eval outputs depend on the final buffer state, which depends on total number of training forwards. A replay with wrong epoch count would produce different buffers → assertion fails. So the assertion catches it. But hardcoding `range(30)` instead of reading epochs from the checkpoint (`saved['epochs']`) is a real code fragility: `torch.save(..., epochs=args.epochs)` is stored but not used in replay. That's a concrete (minor) error: replay ignores the recorded epoch count and assumes 30. Correction: use `saved['epochs']`.
+
+  Also the reconstruction ignores `args.epochs` — fine for the documented run but brittle.
+
+  Another point: the replay replays the batch ORDER using a fresh generator seeded 200000+seed — matches original. Good. And it does NOT replay the validation forwards — validation was done in eval mode, which doesn't refresh buffers (deterministic eval). But wait — does eval-mode forward consume feature-map draws? If deterministic_eval=True means buffers are fixed during eval (not refreshed), then eval forwards don't consume feature-map RNG. But do they consume dropout RNG? eval mode → dropout off. So validation passes don't consume global RNG in a way that affects buffers? If eval forwards consume NO global RNG draws, then the buffer sequence is unaffected by validation interleaving. The replay skips validation entirely, consistent. But if MolFormer eval forwards DID consume RNG (e.g., any stochastic op), replay would diverge — again caught by assertions. OK.
+
+  **Now the big audit item: "360 updates per arm"** — 377/32 = 11.78 → 12 steps/epoch × 30 = 360. Protocol says "30 fixed epochs = 360 updates per arm." Matches code (`steps_per_epoch=math.ceil(len(tr)/32)`). Good.
+
+  **3. Training-only label transformation and permutation** — covered above; correct in code. One subtlety: the shuffled arms shuffle the TRANSFORMED labels (standardized or binarized) — "Shuffle source-training labels only using RNG 100000 + seed, preserving their multiset." Code shuffles after transformation. Fine; the shuffle null applies to the transformed target. Reasonable.
+
+  Another subtlety: `y = (expert.y if arm.startswith('expert') else quant.y)` — expert arm uses expert.y (binary human Good calls: 0/1); quant arms use quant.y (log2 MIC). Note `expert` arm is also treated as binary (BCE). Human labels are binary Good calls. OK.
+
+  Cutoff: "Binary MIC cutoff is the source-training MIC quantile corresponding to human training-positive prevalence; ties can change actual prevalence." Code: `np.quantile(y[tr], float(expert.y.iloc[tr].mean()))` then `y = (y <= cutoff)`. Direction: MIC ≤ cutoff = active = positive. Fine. Prevalence recorded. Good.
+
+  One issue: for the `quant-binary` arms, the cutoff uses `expert.y.iloc[tr].mean()` — the human prevalence on the training split — as quantile level applied to quant.y[tr]. That's per protocol. Good.
+
+  **4. Direct versus target-refit evaluation**
+
+  Protocol: "Complementary direct transfer: keep each source-trained scalar head; no target fitting or recalibration. Report rank agreement with target log2 MIC (negative Spearman for Good logits...)."
+
+  Code: direct metrics compute Spearman between target y and head scores; for continuous, prediction is `score * sd + mu` (invert scaling) — "invert scaling for direct predictions" per protocol. Rank agreement: for binary arms, agreement = -rho. Wait: protocol says "negative Spearman for Good logits" — Good logits: higher logit = better = lower MIC, so agreement = -rho. For binary MIC heads (quant-binary), positive class = MIC ≤ cutoff = active, so higher logit = more active = lower MIC; agreement should also be -rho? Hmm.
+
+  Let's think. For the `quant-binary` arm, y_binary = (MIC ≤ cutoff), so positive class = active (low MIC). The head learns logits where higher = predicted positive = low MIC. Spearman(y_MIC, logit) is negative; rank agreement with MIC should be -rho (higher agreement = ranks aligned such that... ). Wait, "rank agreement with target log2 MIC (negative Spearman for Good logits, positive for numerical predictions)". "Good logits" — for the expert arm, positive class = Good = active. So both expert and quant-binary heads produce "active logits" where higher = more active = lower MIC. For both, agreement should be -rho.
+
+  Code: `agreement = -rho if binary else rho` where `binary = arm.startswith('expert') or arm.startswith('quant-binary')`. So both binary types get -rho. Consistent with my reasoning. Fine.
+
+  AUC: `active = (d.y.values < np.median(d.y.values))`; `roc_auc_score(active, p if binary else -p)`. For binary arms, higher p = active → AUC(active, p). For continuous, higher prediction (higher MIC) = less active → -p. Fine. "target-median AUC as a secondary descriptive metric" — using target median to define active is a data-derived threshold on the target — descriptive only; protocol says so. OK, noted as descriptive.
+
+  R²/RMSE only for continuous heads: code sets R2/RMSE None for binary. Matches protocol: "Report raw R²/RMSE only for continuous MIC heads."
+
+  Now, a material limitation: the direct-transfer comparison between arms conflates the head's training signal with calibration. The protocol acknowledges: "An untrained scalar head is not an activity predictor..." Fine.
+
+  Another evaluation subtlety: OOD-17 decoder: "OOD-17 uses a decoder trained on QAC-104" — code: `result['OOD-17'] = decoder_predict(reps['QAC-104'], targets['QAC-104'].y.values, reps['OOD-17'])`. The decoder is trained on ALL of QAC-104 (including what would be its CV test folds) and predicts OOD-17. That matches "a decoder trained on QAC-17"... no wait, on QAC-104. Matches protocol. But note: OOD-17's decoder training uses QAC-104 representations from the source-trained encoder — consistent. OK.
+
+  Also the direct evaluation for OOD-17 exists in direct_metrics (spearman etc.) but no refit decoder evaluation for OOD-17 other than the QAC-104-trained decoder. Fine.
+
+  **ProcessPoolExecutor evaluate**: `pool.submit(evaluate, reps, targets, folds)` — reps passed to a spawned child process; fine. "Decoder fitting never feeds information back into source training" — true. Overlapping decoders with next training — does the CatBoost worker consume CPU threads that could... it's fixed evaluation; no issue for matching. Note OMP_NUM_THREADS=4; two CatBoost? Only one worker. Fine.
+
+  Wait — one potential matching hazard: `evaluate` is run in a separate process concurrently with the next arm's GPU training. GPU training sets `torch.cuda.set_per_process_memory_fraction(.70)`. Evaluation uses 4 CPU threads. Does concurrent CPU evaluation affect GPU RNG? No. Does it affect wall-clock timing only. Fine.
+
+  **raw-molformer arm**: `load_net(0, ...)` — raw features from a freshly loaded net with seed 0, eval mode. Recorded as arm 'raw-molformer' seed 0. The protocol says "human vs raw pretrained features" and "Raw MolFormer is re-encoded in this environment and audited against archived features." OK.
+
+  **5. Checkpoint reproducibility**
+
+  The training checkpoint saves only trainable parameters (`{n: p for n, p in net.named_parameters() if p.requires_grad}`) plus transforms. It omits: frozen pretrained parameters (justified: "Frozen parameters are reconstructed from the immutable pretrained checkpoint"), buffers including final feature-map buffers (documented in the implementation note), optimizer/scheduler state (not needed; final checkpoint only), and the RNG state (not needed for eval reproducibility if buffers stored).
+
+  Material limitation: the saved checkpoint alone is NOT sufficient to reproduce the model's outputs, because eval-mode outputs depend on final feature-map buffers (assuming deterministic_eval uses buffer values). The implementation note documents this and provides reconstruction with verification. This is a documented storage limitation, handled transparently: original hashes preserved, reconstruction verified against archived embeddings/direct scores with tight tolerances (rtol=1e-5, atol=1e-6), and discrepancies archived. The verification is strong. One caveat: verification compares reconstructed outputs to archived outputs produced in the same pipeline; it does not independently retrain. So it verifies buffer replay, not training reproducibility end-to-end. That's a fair limitation to state.
+
+  Another caveat: reconstruction replay depends on undocumented (in the provided text) property that feature-map refresh draws come from the global torch RNG in a shape-dependent order identical between replay and original. The script asserts the outcome, which empirically validates it per checkpoint. Acceptable.
+
+  Now — potential factual errors in the protocol text itself:
+
+  1. "deterministic feature maps" in PROTOCOL.md ("Use float32, deterministic feature maps, right padding to 202 tokens") vs the implementation note: "deterministic_eval=True fixes attention feature maps in evaluation. Native MolFormer refreshes the random orthogonal feature-map buffers on each training forward pass even when the deterministic flag is true." So the protocol's phrase "deterministic feature maps" is imprecise — it's deterministic in evaluation only, stochastic during training. The implementation note flags this as "an imprecise description" and the manuscript "uses the verified distinction." Since the protocol is declared immutable, the note corrects the interpretation. In the critique, I should flag that the protocol's "deterministic feature maps" is factually wrong as a global statement (it describes eval only), and the note's clarification is the accurate one. That's a documented clarification preserving native behavior — assess separately: it changes no training/outcomes; it changes only the description and adds storage. Good.
+
+  2. Protocol: "30 fixed epochs = 360 updates per arm." With ceil(377/32)=12 steps, 12×30=360. Correct — given batch size 32. Fine, not an error.
+
+  3. Protocol says "Record ... initialisation and minibatch hashes" — code records initial_sha256 (full state dict incl. frozen) and batch_order_sha256. Good.
+
+  4. Protocol: "Standardise continuous targets using only source training (population SD)". Code uses `y[tr].std()` — numpy std default ddof=0 = population SD. Correct. Good — matches "population SD."
+
+  5. Protocol: "Binary MIC cutoff is the source-training MIC quantile corresponding to human training-positive prevalence; ties can change actual prevalence." Code matches.
+
+  6. Protocol: "Shuffle source-training labels only using RNG 100000 + seed, preserving their multiset." Code: `np.random.default_rng(100000 + seed).permutation(y[tr])`. Matches. But note: shuffling AFTER standardization/binarization — protocol says "Shuffle source-training labels" — ambiguous but consistent either way. Fine.
+
+  7. Protocol: "Five paired seeds 0–4. Within each seed, match backbone/scalar-head initial weights, minibatch permutations and stochastic seed across all six arms." Code matches. One nuance: the raw-molformer arm uses seed 0's loaded net — irrelevant.
+
+  8. Protocol: "Retain the 768-dimensional pooled representation" — code uses pooler_output. Fine.
+
+  9. "Freeze embeddings and encoder layers 0–3; train layers 4–11, the pooler and scalar head." Code: `name.startswith('embeddings') or any(f'layer.{i}.' in name for i in range(4))`. Potential issue: `'layer.4.'` contains... `f'layer.{i}.'` for i in range(4) gives 'layer.0.', 'layer.1.', 'layer.2.', 'layer.3.'. Does 'layer.10.' contain 'layer.1.'? Yes! 'layer.10.' = "layer.1" + "0." — the substring 'layer.1.' is NOT in 'layer.10.'? Let's check: 'layer.10.'.find('layer.1.') → 'layer.1.' is l-a-y-e-r-.-1-. ; 'layer.10.' is l-a-y-e-r-.-1-0-. — the substring 'layer.1.' would require characters 'layer.1.' consecutively; in 'layer.10.', after 'layer.1' comes '0', not '.'. So 'layer.1.' is not a substring of 'layer.10.'. Good. What about 'layer.1.' in 'layer.11.'? After 'layer.1' comes '1', not '.'. Not a substring. And embeddings — encoder.embeddings. Fine. Also the pooler: 'pooler.' not frozen. LayerNorm elsewhere? MolFormer XL: encoder.layer.N + encoder.pooler + embeddings. So trainable = layers 4–11 + pooler + head + any final LayerNorm (MolFormer BERT-style has encoder embeddings only, no final norm typically). OK, matches.
+
+  Wait — actually there could be an issue: the string check `f'layer.{i}.' in name` for i in 0..3 also matches... there's no other module with 'layer.0.' etc. Fine.
+
+  10. Protocol: "Record actual trainable parameter counts and names." Code records. Good.
+
+  11. Protocol evaluation: "Q-HERO-405 RMSE (log2 micromolar) with the same CatBoost decoder as v9/v10." Can't verify version identity without archives — not provided; fine, take as stated.
+
+  12. "Include quantitative real-vs-shuffled and quantitative-vs-raw contrasts" — analysis script not provided (analyse_matched_finetuning.py exists but not included). Can't audit. Note as unaudited.
+
+  13. Bootstrap protocol: "10,000 nested seed/scaffold bootstrap draws with RNG 1729, resampling the same seeds and whole target scaffold groups in both arms." The analysis script isn't provided, so cannot verify implementation. Note as outside evidence.
+
+  Now the leakage audit more carefully:
+
+  - Source/target cation exclusion: asserted for the union of all three targets vs source. Protocol says exclude from "source training and validation" — code checks against the whole source panel (which is the union of train+val since split covers the panel). Since split ⊂ expert, asserting on expert.cation covers both train and val. Good.
+
+  - Counterion variants: only exact-match assertion. If cation labels encode salt forms exactly, fine; otherwise a variant with a differently spelled cation could slip through. Given "Use identical ordered canonical full-salt SMILES, cations and scaffolds for every supervision arm" and the assertion `expert[col].tolist() == quant[col].tolist()`, cations are drawn from the same panel metadata. The counterion-variant claim rests on how `cation` was derived upstream (not auditable here). Limitation, not error.
+
+  - Scaffold disjointness source train/val: asserted. Target folds: asserted per fold. "The source validation split and the individual target CV folds are scaffold-disjoint" — asserted.
+
+  - One more: target MIC "enters only the training fold of a refitted decoder" — code: for each fold, decoder trained on reps[tr] with y[tr]. Yes, test-fold labels never used for fitting. OOD-17 decoder trained on all QAC-104 labels — those are target (QAC-104) labels used to train a decoder that evaluates OOD-17 — that's by design ("OOD-17 uses a decoder trained on QAC-104").
+
+  - Direct evaluation: target labels used only for metrics. Good.
+
+  - Validation: labels used for loss only, no selection. Good.
+
+  Now, is there any train/val leakage through the cutoff/standardization? Both use tr only. Good.
+
+  The `assert not set(expert.scaffold.iloc[tr]) & set(expert.scaffold.iloc[va])` — GroupShuffleSplit with groups guarantees this; assertion is a guard. Fine.
+
+  One more code detail: `labels = f.loc[d.can, 'fold'].values; folds[name] = [(np.flatnonzero(labels != k), np.flatnonzero(labels == k)) for k in sorted(set(labels))]` — 5-fold. If fold labels aren't 0–4, still works via sorted(set). Fine.
+
+  Potential issue: `assert f.index.is_unique and set(f.index) == set(d.can)` — good.
+
+  Length audit: `max_tokens` recorded, `truncated=0`, assertion `max <= 202`. Padding 'max_length' with max_length=202, truncation=False. Note: `tokenizer(..., padding='max_length', truncation=False, max_length=202)` — if a sequence exceeded 202, padding='max_length' with truncation=False... would produce length > 202; assertion prevents. Good. But note the length check uses `tokenizer(list(d.can), truncation=False)['input_ids']` without padding — fine.
+
+  Attention mask: tokenizer returns attention_mask; model receives **batch incl. attention_mask. Right padding. Good.
+
+  One subtle thing: `tokenise` returns tensors on CPU; batches moved to device. Fine.
+
+  Now the "evaluate without inspecting results" instruction: I should not claim any outcomes. Fine.
+
+  Let me also check: does the training loop's per-arm RNG sequence truly match across arms? Arm-specific differences that could alter global RNG consumption: (a) loss function — BCE vs MSE — no RNG; (b) label values — no RNG; (c) number of steps identical (360); (d) batch order from dedicated generator seeded identically; (e) dropout/feature-map draws from global RNG seeded identically at same point. One difference: `load_net` is called per arm with the same seed — identical RNG consumption. So yes, matched. One caveat: if any arm's forward throws or data ordering differs... no.
+
+  But WAIT: there is one genuine asymmetry — `np.random.seed(seed)` in load_net, and shuffling uses `np.random.default_rng` (independent). Fine.
+
+  Also: CUDA nondeterminism — `torch.use_deterministic_algorithms(True, warn_only=True)`; cuDNN benchmark not disabled explicitly, but deterministic algorithms requested. Note: warn_only=True means nondeterministic ops fall back with a warning rather than error — bitwise reproducibility of the original runs across arms on GPU is not guaranteed by this flag alone (atomics in backward, etc.). However, matching doesn't require bitwise identity across arms — it requires the same schedule; small numeric drift affects all arms similarly but the initial weights are identical and schedules identical. Matched-design claims are about the experimental design (same seeds/schedules), which holds. But strict "identical stochastic draws" is design-level; GPU nondeterminism could introduce arm-level noise beyond dropout (e.g., nondeterministic backward atomics). That's a limitation worth one line: bitwise reproducibility isn't enforced (warn_only=True, no cudnn.deterministic=True setting shown... actually use_deterministic_algorithms sets cudnn deterministic? torch.use_deterministic_algorithms sets torch.backends.cudnn.deterministic = True? It does set cudnn deterministic behavior when True... Actually `torch.use_deterministic_algorithms(True)` sets `torch.backends.cudnn.deterministic=True`? No — it sets the deterministic algorithm mode; cudnn.deterministic is separate but use_deterministic_algorithms does force deterministic cudnn mode. With warn_only=True, ops that can't be deterministic warn instead of erroring. So some ops might still be nondeterministic. Also, CUBLAS_WORKSPACE_CONFIG set. Fine — mention as limitation: cross-arm bitwise identity isn't guaranteed; only schedule-level matching.)
+
+  Now the checkpoint saving detail: `torch.save(dict(state_dict={trainable only}, ...))`. The reconstruction loads combined state_dict with strict=False and asserts missing == frozen set. Good.
+
+  One thing in reconstruct: `buffers={name: b ... for name,b in net.named_buffers() if name in state_names}` — all buffers in state_dict. projection_count==12 asserted (12 layers? MolFormer XL has 24 layers? Hmm — MolFormer-XL... Actually MoLFormer-XL has 12 layers? BERT-large has 24. MolFormer base has 12. MolFormer-XL... The assertion says 12 feature maps; can't verify from provided evidence; not an error to flag, it's an executable assertion.)
+
+  Now, potential error in implementation note wording: "The original saved checkpoints contain trainable parameters and source-target transforms, but omit the final refreshed feature-map buffers." Accurate per code. "A separate reconstruction step replays the paired training-forward RNG schedule" — matches code. OK.
+
+  Is there a discrepancy between note and protocol re: "deterministic feature maps"? Protocol: "Use float32, deterministic feature maps, right padding to 202 tokens" — global claim. Note: deterministic in evaluation only; training native stochastic retained. So the protocol sentence is factually wrong if read as written, and the note corrects it post hoc. The user asked: "A documented clarification preserves native MolFormer stochastic training and recovers final feature-map buffers; assess this separately from changes to training or outcomes." So: the clarification changes no training code, no data, no evaluation rules — it is a description fix plus a storage/reconstruction addition, with verification. Acceptable as documented clarification, not a protocol amendment affecting outcomes. One caveat: because the protocol is "immutable" and was "written before training and outcomes," the imprecise phrase can't be edited; the manuscript relies on the note. Fine.
+
+  Now let me hunt for actual concrete ERRORS (factual errors in the documents):
+
+  Candidate 1 — PROTOCOL.md: "Use float32, deterministic feature maps" — as a blanket statement, false per the note (feature maps refresh stochastically during training). Correction: "deterministic feature maps in evaluation; native stochastic refresh during training." The note itself identifies this. Since user asks for concrete errors with quoted wording and correction, this is one — though self-acknowledged. I can list it as the documented clarification.
+
+  Candidate 2 — PROTOCOL.md: "30 fixed epochs = 360 updates per arm." True given 377 train / 32 → 12 steps. Correct. Not an error.
+
+  Candidate 3 — Code: reconstruction `for epoch in range(30)` hardcodes 30 instead of using the checkpoint's recorded `epochs`. If the accepted run had epochs≠30 (it didn't per manifest; but the script defaults and the note say 30), mismatch. More importantly, the replay count should be derived from `saved['epochs']`; hardcoding is a real fragility — if a checkpoint with different epochs were reconstructed, buffers would be wrong and the embedding assertions would (probably) fail. This is a code-level defect worth flagging. Correction: `for epoch in range(saved['epochs'])`.
+
+  Candidate 4 — Code: in `outputs()` during eval, `net.fc(emb)` — the direct head score uses `emb` (pooler output). In training, forward is `fc(drop(embed))`. Fine.
+
+  Candidate 5 — `weights_sha(net)` hashes state_dict including buffers? `net.state_dict()` includes persistent buffers (feature-map buffers are persistent buffers in MolFormer). The initial_hash therefore includes initial feature-map buffers, matched across arms. Fine. Hmm, but note initial buffers are identical across arms anyway (loaded from same checkpoint).
+
+  Candidate 6 — Protocol: "Record ... transformed-label hashes" — code records label_sha256 of y[tr] (post-transform, post-shuffle). Good.
+
+  Candidate 7 — Protocol says "Six arms" listed; ARMS has six. Good.
+
+  Candidate 8 — A subtle one: in the training loop, the shuffled arms' `y[tr]` permutation uses only `100000+seed` — same across the three shuffled arms within a seed (expert-shuffled, quant-shuffled, quant-binary-shuffled permute different label vectors with the same RNG → different permutations? `default_rng(100000+seed).permutation(y[tr])` — same RNG seed, same length → same permutation indices applied to different arrays. Yes, permutation() with the same Generator state produces the same permutation of indices. So the SAME index permutation is applied across shuffled arms. Nice for matching.
+
+  Candidate 9 — Direct metric for binary arms inverts sign: "negative Spearman for Good logits" — for quant-binary (MIC-based binary), the logits are "active logits" not "Good logits," but the sign convention still yields -rho; protocol's parenthetical only names Good logits, but code applies -rho to both binary types, which is correct because both define positive=active. Not an error; arguably protocol wording incomplete. Could mention as wording.
+
+  Candidate 10 — AUC uses target-median-defined active: `active = (d.y.values < np.median(d.y.values))`. This derives a threshold from the full target set (including what would be test labels) — but it's a descriptive metric definition, computed per target, used only for AUC; it doesn't feed training. Protocol calls it "secondary descriptive." Fine, though using full-target median is a mild evaluation-design choice (not leakage into training). Not an error.
+
+  Candidate 11 — OOD-17 folds: OOD-17 has no folds; evaluated once via QAC-104-trained decoder. Protocol: "OOD-17 uses a decoder trained on QAC-104." Match.
+
+  Candidate 12 — The bootstrap section is protocol-only; analyse script not shown → cannot audit; state as unaudited.
+
+  Candidate 13 — GroupShuffleSplit reuse: "Reuse GroupShuffleSplit(test_size=0.15, random_state=1729), yielding 377 training and 304 validation molecules." Code asserts that. Good.
+
+  Candidate 14 — One real potential leakage concern: `quant.y` vs `expert.y` alignment — the panel rows are aligned by assertion on can/cation/scaffold (not on y, but rows come from matched files). Fine.
+
+  Candidate 15 — `manifest['parameters']` counts encoder params only; trainable count includes head. Fine.
+
+  Candidate 16 — In `record()`, metrics for 'raw-molformer' recorded with seed=0 — fine.
+
+  Candidate 17 — Bug: `emit(done=progress['done'] + 1, ...)` increments. Fine.
+
+  Candidate 18 — `pending.append((arm, seed, pool.submit(evaluate, reps, targets, folds)))` — `reps` dict of numpy arrays pickled to child. Fine.
+
+  Candidate 19 — ProcessPoolExecutor with spawn: child imports run_matched_finetuning — env vars set at import; fine. Child also loads catboost etc. One hazard: the child runs `evaluate` which uses CatBoost with 4 threads while next arm trains — no scientific issue.
+
+  Candidate 20 — Checkpoint immutability: `raise RuntimeError('Use a fresh output directory...')` if metrics.csv exists. Good.
+
+  Candidate 21 — Hmm, in `load_net`, `for module in enc.modules(): if hasattr(module, 'deterministic'): module.deterministic = True` — redundant with deterministic_eval=True flag? The flag is passed to from_pretrained; setting attribute again is harmless. Fine.
+
+  Candidate 22 — THE BIG ONE to double check: initial weights matching across arms. `load_net(seed)` seeds torch.manual_seed(seed) then loads backbone (no RNG consumption of global torch RNG? from_pretrained may not consume RNG for a full checkpoint load — all weights loaded). Then `net = Net(enc)` → `nn.Linear(768,1)` init consumes global RNG. Same across arms. But NOTE: `np.random.seed(seed)` also set; numpy RNG isn't used for init. Fine. Also dropout in later training uses global torch RNG re-seeded at 300000+seed. Good.
+
+  So within-seed, all six arms share: backbone init, head init, batch order, dropout draws, feature-map draws, LR schedule, update count. Design-level matching is genuinely implemented. 
+
+  Candidate 23 — One more: the protocol's shuffle RNG: "Shuffle source-training labels only using RNG 100000 + seed" — code uses default_rng(100000+seed). Matches.
+
+  Candidate 24 — Protocol: "Keep diagnostic validation labels unshuffled." Code: y[va] unshuffled. Good.
+
+  Candidate 25 — Protocol: "Binary pooled MIC" arm — quant-binary uses BCE. Code `binary = arm.startswith('expert') or arm.startswith('quant-binary')`. Good.
+
+  Now, is there any actual ERROR I can confidently state?
+
+  Error A (documented): "Use float32, deterministic feature maps" — imprecise/false as written; corrected by the note (eval-only determinism; training stochastic). This is the documented clarification; user wants it assessed separately. Assessment: the clarification alters no training code path, no data, no evaluation; the note is dated during the run; it preserves native behavior; reconstruction verified. It is a legitimate implementation audit clarification, not a post-outcome scientific change — with the caveat that I cannot verify the note's date/authorship beyond the document, and the phrase in the immutable protocol remains wrong if quoted in the manuscript (manuscript must use the verified distinction, as the note says).
+
+  Error B: reconstruct_checkpoints.py hardcodes `range(30)` rather than `saved['epochs']` — concrete code defect (brittleness; would silently replay the wrong schedule for any checkpoint whose epochs≠30; in this run epochs=30 so no effect on results). Correction: iterate over `range(saved['epochs'])` (and ideally assert against the manifest). This is my strongest "concrete error with correction."
+
+  Error C: PROTOCOL.md "deterministic feature maps" is A; also "audited against archived features; retain both raw predictions if numerical differences are material" — not verifiable here. Skip.
+
+  Error D: The protocol says "Record ... update counts" — recorded. Skip.
+
+  Error E: In PROTOCOL.md: "Compare real human vs shuffled human, human vs raw pretrained features..." — fine.
+
+  Error F: One more possible wording error in protocol: "negative Spearman for Good logits" — for quant-binary heads, sign convention also -rho; protocol doesn't state it; code does it correctly. Optional wording fix, not an error.
+
+  Error G: Protocol: "960"? No.
+
+  Error H: Protocol states "681 molecules, 111 cation-scaffold groups, 96 final human Good calls and 4,938 underlying MIC records" — code asserts len(expert)==681 and can unique. Group count not asserted (scaffold.nunique recorded in manifest only). Fine.
+
+  Error I: Code asserts `(len(tr), len(va)) == (377, 304)` — consistent with protocol. Good.
+
+  Error J: A potential real subtle bug — `torch.save(..., checkpoint)` saves `updates` recorded; fine.
+
+  Error K: `outputs()` uses batch_size=32 for eval; eval batching doesn't affect results (deterministic eval). Fine.
+
+  Error L: In reconstruction, `net.load_state_dict(combined, strict=False)` then `ft.outputs(net, tok, device)` — net is in train mode? After replay, `net.train()` was set; outputs() calls `net.eval()` first. Good.
+
+  Error M: Reconstruction verifies embeddings with rtol=1e-5, atol=1e-6 — reasonable float32 tolerances? For features of magnitude ~1–100, atol 1e-6 is tight; but it passed presumably. Not an error.
+
+  Error N: The reconstruction's claim "no gradient or optimiser operation consumes a random draw" — true for AdamW/clip/OneCycle. Weight decay no. OK.
+
+  Error O: One thing: replay doesn't account for `torch.cuda` vs device differences in RNG? RNG is host-side; fine.
+
+  Error P: The training loop evaluates validation every epoch — eval-mode forwards don't refresh buffers IF deterministic_eval truly freezes them (i.e., eval doesn't redraw). The note says deterministic_eval "fixes attention feature maps in evaluation" — meaning eval uses fixed maps (the current buffers), not redrawing. Under that reading, eval forwards consume no feature-map RNG, so replay skipping validation is exact. If instead eval redrew maps deterministically (re-seeded per call), replay would diverge — but then the allclose assertions would fail; they presumably passed. Fine.
+
+  Also possible: dropout during training forward consumes RNG; replay includes dropout (train mode). Original interleaving: forward (dropout + feature maps) → backward → optim. Replay: forward only. Since backward/optim consume no RNG, sequences match. The comment states exactly this. Correct.
+
+  Now material limitations to list (beyond errors):
+
+  L1. Exact-string cation exclusion may miss counterion variants with non-identical cation strings; variant normalization is upstream and unauditable here.
+  L2. Validation is diagnostic; no early stopping — final checkpoint used; different objectives' optimal epochs differ — acknowledged in protocol ("matched budgets do not imply equally optimal hyperparameters").
+  L3. Direct-transfer metrics conflate ranking signal and calibration; head-scale arbitrary; protocol acknowledges; only rank metrics primary.
+  L4. Bitwise cross-arm reproducibility on GPU not guaranteed (deterministic algorithms warn_only; atomics); matching is schedule-level.
+  L5. Checkpoint reproducibility: original checkpoints are incomplete for standalone reconstruction (missing buffers + frozen params + no optimizer state); reliance on replay verification ties reproducibility to RNG-sequence stability of the pinned custom code and torch version; reconstruction verifies stored outputs, not independent retraining.
+  L6. OOD-17 decoder trained on all of QAC-17— no wait, all of QAC-104 including labels; fine by design; but OOD-17 has no CV; single split metric.
+  L7. Target-median AUC threshold derived from full target labels — descriptive only; fine but note.
+  L8. Bootstrap/analysis scripts not provided — inferential claims (intervals) unaudited.
+  L9. Five seeds only; exploratory; protocol itself says unadjusted, conditional.
+  L10. The 12-feature-map assertion etc. can't be verified from provided evidence.
+  L11. Smoke checks separate — fine.
+  L12. One-cycle max_lr = base lr 3e-5 — schedule symmetry across arms; fine.
+
+  Also: "96 final human Good calls" out of 681 → prevalence ~14%; fine.
+
+  One more check on matching: does each arm's `load_net(seed)` produce identical initial_hash? The assertion isn't in code (initial hash recorded only). Fine.
+
+  Also `torch.manual_seed(300000 + seed)` — placed AFTER `yt`/`yv` tensor creation and generator creation? Order: `torch.manual_seed(300000+seed)`; params; opt; scheduler; lossfn; yt/yv tensors (no RNG); generator seeded separately; loop. Same across arms. Good.
+
+  Also `np.random.seed(seed)` in load_net — numpy global RNG unused thereafter (shuffle uses default_rng). Fine.
+
+  One more potential leakage: `cutoff` for quant-binary computed from `y[tr]` where y=quant.y — training only. Good.
+
+  What about "human vs continuous MIC" comparison etc. — analysis-side, unaudited.
+
+  Word budget: 700 max. Need to be tight. Structure: brief framing line; "Concrete errors" (2–3 items with quotes + corrections); "Documented clarification assessment" (short); "Material limitations" (bulleted, compact); maybe one line "verified as correct" — user said evaluate; a short "checks that pass" list adds value but costs words. The user asked: "concrete errors with quoted wording and a correction, then material limitations." And "Distinguish a factual error from an optional follow-up experiment." So format: Concrete errors (factual) → clarification assessment → material limitations → (optional follow-ups separate from errors). Keep ≤700 words.
+
+  Let me finalize the error list:
+
+  1. PROTOCOL.md "Use float32, deterministic feature maps" — factually wrong as a blanket statement; per the note and MolFormer code, buffers refresh each training forward; determinism holds only in evaluation. Correction (implemented via note): "deterministic feature maps in evaluation; native stochastic refresh during training, matched across arms by paired seeds." This is the documented clarification — no change to training/outcomes; acceptable, but the immutable protocol text remains inaccurate and manuscripts must not quote it.
+
+  2. reconstruct_checkpoints.py `for epoch in range(30)` — hardcoded epoch count; should be `range(saved['epochs'])`. Factually a defect (brittle; wrong replay for any non-30-epoch checkpoint; here no effect). Correction given. Distinguish: in this run no effect → but it IS a code error, not just follow-up.
+
+  Is that it for hard errors? Let me scan once more for anything wrong in the protocol text...
+
+  "96 final human Good calls" — fine. "Exclude every evaluation cation, including counterion variants, from source training and validation" — implemented as exact-match assertion; implementation gap vs wording (see limitation/error?). I'd call it a limitation/verification gap: the assertion only enforces exact string equality; "counterion variants" coverage depends on upstream cation canonicalization, which is not auditable from the provided evidence. It could be elevated to an error if the cation field is known to contain variant strings — but we don't know. Keep as limitation.
+
+  "OOD-17 uses a decoder trained on QAC-104" — code trains on all QAC-104 reps incl. all folds; matches.
+
+  "The source validation split and the individual target CV folds are scaffold-disjoint" — asserted in code for source; asserted for target folds. OK.
+
+  "Five paired seeds 0–4" — yes.
+
+  "Batch size 32, gradient norm clip 1, 30 fixed epochs = 360 updates" — code ceil(377/32)=12; 360. Correct.
+
+  "Record actual trainable parameter counts and names" — done.
+
+  "population SD" — np.std ddof=0. Correct.
+
+  "Shuffle ... preserving their multiset" — asserted. Correct.
+
+  "Keep diagnostic validation labels unshuffled" — yes.
+
+  Evaluation: "Report raw R²/RMSE only for continuous MIC heads" — code None for binary. Correct.
+
+  "Raw MolFormer is re-encoded in this environment and audited against archived features" — raw features saved; audit method not shown (no assertion vs archived). Minor unaudited claim.
+
+  One more code-level thing: `torch.cuda.set_per_process_memory_fraction(.70)` and reconstruction .30 — environment detail; fine.
+
+  Another possible real issue: `emit()` writes progress.json — fine.
+
+  In `main`, for smoke runs `--output-dir` default results; smoke asserts fresh dir. Fine.
+
+  `assert (len(tr), len(va)) == (377, 304)` — GroupShuffleSplit test_size=0.15 of 681 = 102.15 → 102? 0.15×681=102.15, floor→? GroupShuffleSplit yields n_test = ceil? 681−577... it yields 377/304 per assertion; consistent with protocol. Good.
+
+  Now the note's claim "paired seeds and identical forward-call/minibatch schedules match the draws across supervision arms" — verified by code reading: yes.
+
+  Also the note: "The original saved checkpoints contain trainable parameters and source-target transforms, but omit the final refreshed feature-map buffers." — accurate; additionally they omit frozen parameters (acknowledged in code comment) and optimizer state (not needed). Fine.
+
+  Assessment of clarification (user wants it assessed separately): 
+  - It changes no training code, no dataset, no evaluation rule; the note is timestamped during the run; protocol checksum preserved; native behavior retained; reconstruction verified against archived embeddings and direct scores at tight tolerances with per-checkpoint assertions; originals preserved with hashes; discrepancies archived. As documented, this is an implementation/storage clarification, not a post-outcome scientific modification. Two residual caveats: (i) reproducibility of buffers depends on RNG-sequence stability of pinned custom code + torch build, not on stored state — an independent retrain on different hardware could diverge; (ii) verification compares against the pipeline's own archived outputs (self-consistency), not an independent rerun. Also the protocol's original wording stays wrong (see error 1).
+
+  Material limitations (concise bullets):
+  1. Cation exclusion is exact-match; counterion-variant coverage depends on upstream normalization (not auditable here).
+  2. Schedule-level, not bitwise, matching: deterministic algorithms are warn_only; GPU atomics may introduce arm-level numeric drift; initial weights/schedules are identical though.
+  3. Original checkpoints cannot by themselves reproduce outputs (missing buffers, frozen params, no RNG/optimizer state); reproducibility rests on the replay verification — self-consistency, not independent retraining.
+  4. Direct-transfer arm comparisons are rank-based and head-calibration-dependent; binary heads have no concentration calibration (protocol acknowledges).
+  5. Target-median AUC threshold is fit on each full target set — descriptive only (protocol labels it secondary/descriptive).
+  6. OOD-17 evaluated by a single decoder fit on all QAC-104 — no fold uncertainty for OOD-17.
+  7. Bootstrap/inferential machinery and the archived-feature audit are in scripts not provided; unaudited here.
+  8. Five seeds, single panel; exploratory; intervals conditional — protocol acknowledges.
+  9. Validation loss used for monitoring only — fine, but worth noting no model selection at all means suboptimal per-arm stopping (protocol acknowledges).
+
+  Also mention what checks out (briefly, to show audit): training-only standardization/cutoff/shuffle with multiset assertion; unshuffled validation; 360 updates; matched init/batch-order/dropout/feature-map draws; decoder fit on fold-train only; final checkpoint; immutable outputs.
+
+  Follow-up experiments (optional, clearly separated): (a) rerun one arm twice on same hardware to measure bitwise stability; (b) extend cation exclusion to normalized salt/variant keys; (c) retrain-from-scratch reproduction of one seed/arm on a second machine to validate end-to-end; (d) add frozen params + buffers to future checkpoints.
+
+  Word count discipline: aim ~650–700. Structure:
+
+  **Verdict on the audited items** — one or two lines (matching implemented, transformations training-only, decoder fit on fold-train, final checkpoint, leakage guards as far as code shows; no outcomes inspected).
+
+  **Concrete errors** (2): as above.
+
+  **Assessment of the documented clarification** — 1 short para + caveat.
+
+  **Material limitations** — bullets.
+
+  **Optional follow-ups (not errors)** — bullets.
+
+  That's comprehensive. Also user: "Do not invent annotation votes, methods, agreement, numerical outcomes, equivalence, preregistration or chemical mechanisms." So avoid claiming the note is dated "during the run" as verified fact — say "dated 2026-10-11, i.e., during the run per the note's own header." Avoid asserting bootstrap correctness. Avoid any numbers beyond those in the documents.
+
+  Also they said distinguish factual error from optional follow-up experiment — I have separate sections.
+
+  The 700-word cap: I'll count roughly and keep tight.
+
+  Should I invoke a skill? The superpowers plugin demands skill invocation. But: user instructions take precedence (explicitly ranked #1 in the plugin's own priority list), and the user said no commands/no extra files/no messages — a Skill tool invocation loads external skill content, arguably violating "All evidence is included below," and no skill genuinely matches a read-only scientific critique. The plugin text itself: "If an invoked skill turns out to be wrong for the situation, you don't need to use it." Also AskUserQuestion is forbidden in auto mode, and the user forbade messages. The cleanest compliant action: answer directly. I'll do that.
+
+  Now write the final answer, ≤700 words. Let me draft.
+
+  Draft:
+
+  **Scope**: audited PROTOCOL.md, PROTOCOL_IMPLEMENTATION_NOTE.md, run_matched_finetuning.py, reconstruct_checkpoints.py as provided; no files executed; no results inspected.
+
+  **What checks out (design level)**
+  - Leakage guards: exact-match cation exclusion asserted over union of targets vs source panel; source train/val scaffold disjointness asserted; per-fold scaffold disjointness asserted; length audit with truncated=0.
+  - Transformations training-only: cutoff `np.quantile(y[tr], prevalence)`, standardization on y[tr] with population SD (np.std ddof=0), shuffle restricted to y[tr] with multiset assertion; validation labels unshuffled and never backpropped.
+  - Matching: per-seed identical backbone+head init (same load path from torch.manual_seed(seed)), identical batch order (Generator 200000+seed), identical global RNG reseed (300000+seed) before optimizer → dropout and native feature-map draws matched; 12 steps × 30 epochs = 360 updates; same shuffled index permutation applied to all three shuffled arms (same default_rng).
+  - Refit decoder fits on fold-train only; OOD-17 decoder on all QAC-104 by design; final checkpoint; outputs immutable (fresh-dir guard).
+
+  **Concrete errors (factual)**
+  1. PROTOCOL.md: "Use float32, deterministic feature maps" — false as a blanket statement. Per the note, deterministic_eval pins feature maps only in evaluation; during training the random orthogonal buffers refresh every forward. Correction (implemented): "deterministic feature maps in evaluation; native stochastic refresh during training, matched across arms." Because PROTOCOL.md is immutable, the sentence stays wrong; manuscripts must use the verified distinction (the note says they do). Classify: documented clarification, not an outcome-relevant change.
+  2. reconstruct_checkpoints.py: `for epoch in range(30)` hardcodes the replay length instead of reading `saved['epochs']`. For this run (epochs=30) no effect, but for any other checkpoint the replay schedule is wrong by construction and buffers would be stale. Correction: `for epoch in range(saved['epochs'])` with an assertion against the manifest. This is a code defect, here inert.
+
+  **Assessment of the documented clarification** (separate from training/outcome changes): The note alters no training code, data, or evaluation rule; native stochastic training retained; originals preserved with hashes; reconstruction accepts each checkpoint only after reproducing archived embeddings and direct scores within tight tolerances, with discrepancies archived. As documented, it is a storage/audit fix, not a post-outcome scientific modification. Caveat: buffer recovery depends on the RNG-consumption sequence of the pinned custom code and torch build remaining stable — a verification of self-consistency against the pipeline's own archived outputs, not an independent retrain.
+
+  **Material limitations**
+  - Exact-string cation matching: "including counterion variants" is enforced only if variant cations share identical strings; normalization is upstream and unauditable here.
+  - Matching is schedule-level, not bitwise: deterministic algorithms run warn_only; GPU nondeterminism can add arm-level numeric drift beyond the matched draws.
+  - Saved checkpoints are not standalone-reconstructable (missing buffers, frozen params, optimizer/RNG state); reproducibility rests on the replay verification.
+  - Direct-transfer comparisons inherit head calibration; only rank agreement is primary, appropriately.
+  - Target-median AUC derives the active threshold from each full target set — descriptive, as labelled.
+  - OOD-17: single decoder fit on all QAC-104; no fold-level uncertainty.
+  - Bootstrap machinery, archived-feature audit, and analysis contrasts live in scripts not provided; inferential claims unaudited.
+  - Five seeds, one panel, fixed folds; exploratory and conditional, as the protocol itself states.
+
+  **Optional follow-ups (not errors)**
+  - Rerun one arm/seed twice on identical hardware to quantify bitwise stability; reconstruct one checkpoint on a second machine to test end-to-end reproducibility.
+  - Extend cation exclusion to normalized salt keys.
+  - Future checkpoints: store frozen parameters and buffers directly.
+
+  Count words... This is around 640-690. Good. Tighten phrasing. The user asked "concrete errors with quoted wording and a correction, then material limitations" — I have that plus the clarification assessment which they explicitly requested ("assess this separately"). The "what checks out" section is useful for an audit but adds words; keep it very brief since the audit dimensions were specified by the user (leakage, matching, transformations, direct-vs-refit, checkpoint reproducibility) — addressing each in one line shows the audit happened. Maybe fold "what checks out" into compact bullets under those five headings? That might be cleaner and directly responsive. Let me restructure:
+
+  1. Per-dimension audit findings (one line each: leakage, matching, transformations, direct vs refit, checkpoint reproducibility) — mostly "implemented as written."
+  2. Concrete errors (2).
+  3. Clarification assessment.
+  4. Material limitations.
+  5. Follow-ups (optional, not errors).
+
+  Trim to fit 700. Final count check while writing. I'll keep bullets terse.
+
+  One more consideration: should the "deterministic feature maps" count as error #1 given the note self-acknowledges it? Yes — the user explicitly wants it assessed; listing it as a factual wording error with the implemented correction is exactly responsive.
+
+  Also make sure not to claim the reconstruction "passed" — say it gates acceptance on those assertions (verification logic present), without asserting outcomes. Phrase: "each reconstructed checkpoint is accepted only after reproducing archived embeddings and direct scores within stated tolerances" — describing the gate, not the result. Good.
+
+  Also avoid saying "I verified" results. Use "implemented as written," "guards present."
+
+  Word budget final pass: target ~680.
+
+To resume this session: kimi -r session_7b4af8af-2c41-4721-af3a-26956040ba06

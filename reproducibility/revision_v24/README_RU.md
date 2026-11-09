@@ -1,0 +1,19 @@
+Версия v24 продолжает исходный v5 через v21–v23. Новая статья: /Users/egorilin/Desktop/COMA/2026_10_14_Paper_2_edited-v24_section2_2_vertical_figures.docx. Подробный SI: Supplementary_Information_v24.docx.
+
+В §2.1 оставлены только cation/scaffold проверки. Fig. 3 перерисован в классической вертикальной форме: методы по X, средняя абсолютная ошибка по Y. Все данные, пять маршрутов, 420 наблюдений на маршрут/панель, три запуска, медианы/IQR и хвосты сохранены. OOD-панель подготовлена отдельно для будущей правки §2.3 и не вставлена в §2.1. Текст §2.3 сохранён, кроме обновления номеров рисунков.
+
+В §2.2 сохранён рассказ v5 о количественном декодировании human embeddings и task-aware постановке, дополненный восстановленной CV, источниковыми контролями и внешней проверкой. Новые и переработанные абзацы/подписи выделены жёлтым.
+
+Исходные Tables 1–2 перенесены в SI как Tables S45–S46, с неизменными численными ячейками. Они остаются историческими точечными результатами. Восстановленное human/text E. coli MIC R²=0.5918 округляется до0.59; старое0.60 сохранено в исходной таблице с явным пояснением. Полный количественный checkpoint из исходной Table2 не восстановлен: его показатели сохранены как author-reported, а новые завершённые эксперименты показаны отдельно. Новая row-wise CV и её fold SD находятся в существующей Table S40.
+
+Новая Fig. 4 объединяет схему эксперимента и реальные вертикальные violin: одинаковые681 source molecules,377train/304validation,5paired seeds, архитектура externalMLP768→512→384→256, frozenMolFormer, noSMOTE, одинаковый бюджет отдельных CatBoost fits с native categorical task code. На тех же105QAC salts оцениваются4MIC/MBC endpoints. По каждому endpoint усреднены абсолютные ошибки5source runs; raw reference использует1фиксированное представление. Human, quantitative, shuffled-human и raw shown together. Компактный контроль не устанавливает human-content advantage.
+
+Fig. 5 использует реальные Q-HERO ROC curves на общей очищенной когорте405 молекул: randomtest81 иscaffoldOOF405. Это partial-backbone experiment, отличающийся от externalcompactMLP вFig. 4. Curves — среднее отдельных seed ROC, неensemble probabilities; shading — sampleSD, неCI. ТаблицаS47 содержитAUROC/AUPRC;S48 — условные pairedbootstrap contrasts. Human AUROC0.675±0.033 противraw0.595/RF0.565/shuffled0.567±0.070; quantitative0.716±0.010. Сравнение относится к одинаковым405молекулам иscaffoldfolds, не к авторскому421-row randomtest.
+
+Fig. 1 и Fig. 2 сохранены из рабочей версии. Старая parity Fig. 4 перемещена в SI как Fig. S32 с неизменными исходными raster bytes. Бывшие Fig. 5–7 теперь Fig. 6–8. Все предыдущие45native SI tables и31SI figures сохранены; после добавлений SI содержит49tables и32figures, включая четыре исходных author-supplied Supporting_Info graphs.
+
+Графики — пастельная палитра, Aptos, минимальный текст; PDF/SVG +PNG600dpi. Никакие новые модели в этой правке не обучались. Реальные Claude/Kimi вызовы выполнялись наMac; предложения, визуальные рецензии и ответы сохранены вreviews/. Численные проверки:compact_roc_validation.json, figure3_validation.json; проверкаDOCX/SI:document_validation.json.
+
+Просмотр статьи с жёлтыми добавлениями:MANUSCRIPT_REVIEW.html. Данные и происхождение графиков:figure4_compact_error_values.csv,figure4_compact_seed_metrics.csv,figure4_provenance.json,figure5_roc_metrics.csv,figure5_provenance.json. Полные технические подписи сохранены отдельно.
+
+Модель text-embedded task codes теперь названа в §2.2: OpenAI text-embedding-3-small, четыре фиксированных вектора размерности1536. В SI SectionS34 приведены все четыре исходных описания, информация о регенерированном кэше и отличие от недоступного исторического кэша. Апрельские/майские notebooks подтверждают имя модели; May CLASS_DESCRIPTIONS точно совпадают с текущими. Проверка модели и SHA: task_text_embedding_provenance.json.

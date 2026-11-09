@@ -1,0 +1,14 @@
+{
+  "completed": true,
+  "fits": 88,
+  "model": "tabfm",
+  "representations": [
+    "v5_raw",
+    "v5_human"
+  ],
+  "PCA": 32,
+  "train_only_preprocessing": true,
+  "archived_source_overlap": true,
+  "source_training_seeds": "one archived checkpoint",
+  "protocol": "Same v15 model-specific budgets; each endpoint fitted separately; OOD excluded from all selection"
+}

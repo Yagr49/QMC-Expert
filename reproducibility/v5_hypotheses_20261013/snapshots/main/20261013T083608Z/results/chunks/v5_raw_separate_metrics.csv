@@ -1,0 +1,16 @@
+cohort,schema,task,n,RMSE,MAE,R2,name,encoding,arm,seed,provenance
+OOD17,full-QAC105,Sa_MIC,17,1.6519104428272433,1.3940846496925718,0.10788965597944444,v5_raw,separate,v5_raw,-1,v5_archived_grouped_followup
+OOD17,full-QAC105,Sa_MBC,17,2.090062575367781,1.695352324945412,0.02555954323196119,v5_raw,separate,v5_raw,-1,v5_archived_grouped_followup
+OOD17,full-QAC105,Ec_MIC,17,2.549003501478393,2.0555030449410605,-0.9627381366712762,v5_raw,separate,v5_raw,-1,v5_archived_grouped_followup
+OOD17,full-QAC105,Ec_MBC,16,2.4427937441052534,1.9527004989039494,-0.5254072123595517,v5_raw,separate,v5_raw,-1,v5_archived_grouped_followup
+OOD17,full-QAC105,pooled,67,2.2078011802129884,1.7717490793329393,,v5_raw,separate,v5_raw,-1,v5_archived_grouped_followup
+QAC105,cation,Sa_MIC,105,1.7869447844185689,1.3788913626209738,0.16841111141415765,v5_raw,separate,v5_raw,-1,v5_archived_grouped_followup
+QAC105,cation,Sa_MBC,105,1.990632917609572,1.4643123604400272,-0.027923658398041784,v5_raw,separate,v5_raw,-1,v5_archived_grouped_followup
+QAC105,cation,Ec_MIC,105,1.8478227691986722,1.42016790172145,0.12056596356471294,v5_raw,separate,v5_raw,-1,v5_archived_grouped_followup
+QAC105,cation,Ec_MBC,105,2.0274848504602487,1.6052268207696274,0.05828198865030787,v5_raw,separate,v5_raw,-1,v5_archived_grouped_followup
+QAC105,cation,pooled,420,1.9157854055482302,1.4671496113880196,,v5_raw,separate,v5_raw,-1,v5_archived_grouped_followup
+QAC105,scaffold,Sa_MIC,105,1.9962053645508615,1.5860005066333507,-0.037759811273696764,v5_raw,separate,v5_raw,-1,v5_archived_grouped_followup
+QAC105,scaffold,Sa_MBC,105,2.20752733488051,1.687838528813656,-0.2641269172235452,v5_raw,separate,v5_raw,-1,v5_archived_grouped_followup
+QAC105,scaffold,Ec_MIC,105,1.996248702495562,1.5465642438227294,-0.02638887284819713,v5_raw,separate,v5_raw,-1,v5_archived_grouped_followup
+QAC105,scaffold,Ec_MBC,105,2.1362948146396916,1.6847532761003945,-0.04550957348037965,v5_raw,separate,v5_raw,-1,v5_archived_grouped_followup
+QAC105,scaffold,pooled,420,2.086071499792009,1.6262891388425325,,v5_raw,separate,v5_raw,-1,v5_archived_grouped_followup

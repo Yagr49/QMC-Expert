@@ -1,0 +1,34 @@
+{
+  "completed": true,
+  "main": "/Users/egorilin/Desktop/COMA/2026_10_12_Paper_2_edited-v16_finetuning_and_weight_interventions.docx",
+  "supporting_information": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v16/Supplementary_Information_v16.docx",
+  "main_sha256": "788add7847340ab7bc93c882b5a6153cf53131c0c7a0695b583c7e84498f2c1f",
+  "si_sha256": "ff7b13e3f17ddf0be07d98732205fd01c51abbca2063bf728aec80c54635eed4",
+  "input_hashes_unchanged": true,
+  "original_five_tables_preserved": true,
+  "original_media_preserved": true,
+  "coauthor_fields_byte_preserved": true,
+  "chemistry_and_assay_section_preserved": true,
+  "main_figures": 8,
+  "main_tables": 7,
+  "supplementary_figures": 22,
+  "published_metric_rows": 8,
+  "new_direct_fits": 363,
+  "new_decoder_fits": 1331,
+  "original_prediction_sets_reproduced": 93,
+  "metric_recomputation": {
+    "direct": {
+      "predictions": 29964,
+      "metric_rows": 495
+    },
+    "ablation": {
+      "predictions": 109868,
+      "metric_rows": 1815
+    }
+  },
+  "saved_final_OOD_models_reloaded": 33,
+  "human_censor_sensitivity_derived_per_seed": true,
+  "primary_repeated_contrasts_keep_10000draw_intervals": true,
+  "abstract_words": 169,
+  "full_cohorts_preserved": true
+}

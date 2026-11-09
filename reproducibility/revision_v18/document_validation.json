@@ -1,0 +1,31 @@
+{
+  "completed": true,
+  "documents": [
+    {
+      "path": "/Users/egorilin/Desktop/COMA/2026_10_13_Paper_2_edited-v18_v5_based_hypothesis_checks.docx",
+      "sha256": "7afb952362f55019aa532dd2464fcec9cbb218ab2952c415f7fae040f6a360cb",
+      "figures": 8,
+      "xml_relationships_styles_valid": true
+    },
+    {
+      "path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v18/Supplementary_Information_v18.docx",
+      "sha256": "6c30bb38a164f3d8e19f5c98796f29d84b7bc48ba6d0a3bd331e113d609e5985",
+      "figures": 30,
+      "xml_relationships_styles_valid": true
+    }
+  ],
+  "source_v5_unchanged": true,
+  "original_two_tables_preserved_with_documented_edits": true,
+  "native_chemistry_assay_text_preserved": true,
+  "all_original_media_and_Office_objects_byte_preserved": true,
+  "original_SI_four_figures_and_all_prior_tables_preserved": true,
+  "SI_tables": 40,
+  "full_QAC105_OOD17_preserved": true,
+  "all_core_metrics_recomputed_from_predictions": true,
+  "all_264_modern_fits_complete": true,
+  "independent_9_configuration_replay": true,
+  "paired_training_states_and_batches_verified": true,
+  "all_violin_support_and_tails_verified": true,
+  "historical_R2_output_provenance": "Eight May values; not a replay of all original Tables1\u20132",
+  "full_corpus_quantitative_checkpoint": "Unresolved, not replaced by QAC-binned surrogate"
+}

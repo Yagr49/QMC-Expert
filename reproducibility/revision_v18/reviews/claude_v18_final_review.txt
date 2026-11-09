@@ -1,0 +1,48 @@
+---
+
+## Scientific Manuscript and Figure Review
+**Article:** *Expert Judgement as Supervision…* (v18 draft, foundation: v5)
+
+---
+
+### 1. Scientific Corrections
+
+**F1 discrepancy (Section 2.1).** The text cites mean F1 = 0.655 for MolFormer + MLP + StandardScaler but acknowledges the preserved SI plot prints 0.665 (confirmed on visual inspection of `image1.png`). The manuscript correctly flags this as unresolved, but must declare which value is authoritative before submission; the current "requires confirmation" phrasing is insufficient for a results statement.
+
+**Table 3 vs. Section 2.4 OOD RMSE inconsistency.** Section 2.4 states the July notebook gives OOD RMSE 2.133 for the QAC-binned ablation, but Table 3 lists 2.408 for that same arm. The text attributes both to different archive versions, yet Table 3 assigns only "one archived" provenance without specifying which version it uses. The caption must state which archived checkpoint Table 3 draws from, and the July-vs.-Table-3 gap (2.133 vs. 2.408) must be explicitly reconciled in the text or SI.
+
+**Speculative annotation claim (Section 2.2, final paragraph).** The statement "the expert implicitly integrated a broad range of activity data" is a claim about information access during annotation — precisely what H1–H7 are reserved to establish. Without those records, the sentence attributes provenance that is not yet documented. It should be reworded to a conditional: "If annotators integrated a broad range of activity data, the label would constitute…" or moved to a Hypotheses section pending H1–H7.
+
+**Shuffled labels outperform real labels in Table 4.** Shuffled human labels yield lower RMSE than real human labels on all three regimes (cation 1.833 vs. 1.872; scaffold 2.041 vs. 2.158; OOD 2.172 vs. 2.268). Shuffled binary MIC likewise beats real binary MIC in cation and scaffold. The text correctly retains these null/unfavourable findings but does not discuss mechanistic causes. The Discussion should briefly address candidate explanations — BatchNorm running statistics carrying source-distribution information (already noted for the reset experiment), implicit regularisation from random label noise, or encoder capacity mismatch — so readers can evaluate which of these the subsequent weight-reset experiment addresses.
+
+**"Zero-shot" terminology (Section 2.3.5).** The manuscript defines "zero-shot" as no OOD-target adaptation of a QAC-trained predictor. While clarified in the text, this usage conflicts with the now-dominant meaning of zero-shot prompting in foundation-model literature. Substitute "direct transfer" or "source-only inference" throughout to avoid systematic misreading at journal width.
+
+**Table 1 and 2 footnotes.** Both tables share the footnote "Multitask supplies a species/endpoint task code; recovered CatBoost code uses native categorical task_id. Encoded classes supplies OpenAI task-description vectors." The footnote is identical between tables but the two tables present different model hierarchies; Table 2 additionally contains the unresolved full-corpus quantitative checkpoint. The provenance qualifier for the quantitative-guided rows ("original reported values; full-corpus multitarget checkpoint remains unresolved") appears only in Table 2's caption, not its footnote, creating inconsistency. Move the checkpoint-status qualifier into the shared footnote of Table 2 for unambiguous reading.
+
+**Censored endpoint labelling.** Section 2.3.5 states 67 exact values and one right-censored bound for the OOD set. Figures 7 and 8 captions reference "67 exact OOD endpoints" — correct — but should read "67 uncensored" to make explicit that the censored endpoint is excluded from RMSE, not simply that 67 measurements exist.
+
+---
+
+### 2. Figure Corrections
+
+**Figure 7 — legend typo.** The rendered legend reads **"Shufftted labels"** (double t). Correct to "Shuffled labels." This is a production error visible at any print size.
+
+**Figure 6 — missing explained variance on axes.** Both PCA panels display axis tick values but omit explained-variance percentages (e.g., "PC1 (34%)"). Without these, a reader cannot judge how much of the representation change is captured in the 2-D projection or compare spread between panels. Add "(X% var.)" to each axis label; the values are available from the archived PCA fits.
+
+**Figure 6 — redundant top schematic.** The three-box header ("MolFormer features 768-D → Learned projection → Human embedding 256-D") duplicates Figure 1a almost exactly. Remove it from Figure 6 or replace with a single line of caption text to reduce figure height and avoid implied axis alignment between the schematic and the scatter panels.
+
+**Figure 6 — Mono-QAC visibility.** Only approximately two Mono-QAC points are visible across both panels. The caption and legend should state the per-class counts (e.g., "n = 2 Mono-QAC, n = 82 Bis-QAC, n = 21 Multi-QAC" or whatever the correct values are). Without counts, the sparse lavender class appears as an artefact rather than a structurally meaningful subgroup.
+
+**Figure 8 — absence of uncertainty.** All points are single-checkpoint estimates. The caption states this ("one source checkpoint") but does not note that no seed variance is shown. Add a caption sentence: "No seed resampling was performed on the archived checkpoint; error estimates for this panel are in SI Table X."
+
+---
+
+### 3. Style Suggestions
+
+**`image1.png` (SI F1 bar chart).** This figure uses saturated dark navy and forest-green bars inconsistent with the manuscript's soft Aptos / pastel lavender–mint palette. Recommended fixes: (i) recolour bars to the article palette; (ii) remove the numerical annotations printed inside or directly above bars — values belong in the SI table, not inside scientific plots per the stated brief; (iii) the title "F1-score across embeddings (5-fold CV)" uses a heavy sans-serif inconsistent with the body font — match article typography.
+
+**Figure 1 molecule.** The example QAC structure appears drawn at appropriate bond length, but the caption should name or give a SI reference for the specific molecule shown, so the ACS 1996 rendering can be verified against the original structure. No structural identity is currently given.
+
+**Figure 8 x-axis range.** All three panels share the range 1.8–2.2, which is appropriate and facilitates cross-panel comparison. No change needed, but the narrow range means small differences appear visually amplified — the caption should remind readers that the displayed range does not start at zero.
+
+**Narrative continuity note.** Section 2.5 introduces the reconstruction with "The May notebook saves the strong v5 multitask R² values" before explaining what May denotes. A one-clause antecedent ("the recovered May 24 source notebook, as described above") would prevent confusion for readers encountering Section 2.5 in isolation.

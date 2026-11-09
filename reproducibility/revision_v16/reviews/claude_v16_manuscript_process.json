@@ -1,0 +1,44 @@
+{
+  "reviewer": "claude",
+  "cli_version": "2.1.87 (Claude Code)",
+  "execution": "local Mac",
+  "authorised_external_review": true,
+  "read_only_requested": true,
+  "prompt_sha256": "725a4dbc37d4b76bebc9c69332393aaa08130edc7a30330692e35e84c4fd5210",
+  "main_sha256": "3927d610a1ce35bc3491146436242505ffaf215ae87ab8af808b733734bb07d4",
+  "started_utc": "2026-10-13T05:59:30.923271+00:00",
+  "completed": true,
+  "returncode": 0,
+  "model_usage": {
+    "claude-sonnet-4-6": {
+      "inputTokens": 2,
+      "outputTokens": 5882,
+      "cacheReadInputTokens": 0,
+      "cacheCreationInputTokens": 19552,
+      "webSearchRequests": 0,
+      "costUSD": 0.161556,
+      "contextWindow": 200000,
+      "maxOutputTokens": 32000
+    }
+  },
+  "total_cost_usd": 0.161556,
+  "usage": {
+    "input_tokens": 2,
+    "cache_creation_input_tokens": 19552,
+    "cache_read_input_tokens": 0,
+    "output_tokens": 5882,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 19552,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "seconds": 109.71053504943848
+}

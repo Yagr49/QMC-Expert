@@ -1,0 +1,16 @@
+cohort,schema,task,n,RMSE,MAE,R2,name,encoding,arm,seed,provenance
+OOD17,full-QAC105,Sa_MIC,17,1.9965520287968408,1.6316632166565135,-0.3031873088995629,compact_human_seed0,text_permuted,human,0,v5_architecture_task_code_control
+OOD17,full-QAC105,Sa_MBC,17,2.1316303388172293,1.7882145855815708,-0.013585792888672232,compact_human_seed0,text_permuted,human,0,v5_architecture_task_code_control
+OOD17,full-QAC105,Ec_MIC,17,2.5010396941819204,1.9720043943490486,-0.8895686110668088,compact_human_seed0,text_permuted,human,0,v5_architecture_task_code_control
+OOD17,full-QAC105,Ec_MBC,16,2.5084238627790487,1.9406759273145675,-0.6084739971533466,compact_human_seed0,text_permuted,human,0,v5_architecture_task_code_control
+OOD17,full-QAC105,pooled,67,2.292182011910352,1.8315345101345424,,compact_human_seed0,text_permuted,human,0,v5_architecture_task_code_control
+QAC105,cation,Sa_MIC,105,1.8320298432353437,1.4339297149486565,0.12591936410166404,compact_human_seed0,text_permuted,human,0,v5_architecture_task_code_control
+QAC105,cation,Sa_MBC,105,1.9875972692998927,1.4788270162053587,-0.02479095078056215,compact_human_seed0,text_permuted,human,0,v5_architecture_task_code_control
+QAC105,cation,Ec_MIC,105,1.8149097427955074,1.3861338742544314,0.15161553878263,compact_human_seed0,text_permuted,human,0,v5_architecture_task_code_control
+QAC105,cation,Ec_MBC,105,1.9277969270669424,1.531445960511246,0.1486106593154587,compact_human_seed0,text_permuted,human,0,v5_architecture_task_code_control
+QAC105,cation,pooled,420,1.891902126031901,1.457584141479923,,compact_human_seed0,text_permuted,human,0,v5_architecture_task_code_control
+QAC105,scaffold,Sa_MIC,105,2.156341655682645,1.7558951681920156,-0.210937020149486,compact_human_seed0,text_permuted,human,0,v5_architecture_task_code_control
+QAC105,scaffold,Sa_MBC,105,2.2478980858472246,1.7837342186725695,-0.31078581825380436,compact_human_seed0,text_permuted,human,0,v5_architecture_task_code_control
+QAC105,scaffold,Ec_MIC,105,2.1335171446078958,1.729436952153062,-0.17239758643519165,compact_human_seed0,text_permuted,human,0,v5_architecture_task_code_control
+QAC105,scaffold,Ec_MBC,105,2.213507278227843,1.7674837305292217,-0.12245141007256377,compact_human_seed0,text_permuted,human,0,v5_architecture_task_code_control
+QAC105,scaffold,pooled,420,2.188285003004136,1.7591375173867174,,compact_human_seed0,text_permuted,human,0,v5_architecture_task_code_control

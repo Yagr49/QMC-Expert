@@ -1,0 +1,55 @@
+{
+  "new_experiments_run": false,
+  "source_validation": "../revision_v10/validation.json",
+  "existing_prediction_metric_validation": 687,
+  "documents": [
+    {
+      "path": "/Users/egorilin/Desktop/COMA/2026_10_11_Paper_2_edited-v11_JCIM_author_draft.docx",
+      "sha256": "25d4a130d7154b4040613de17989880940ab65141a2ba33473eb37bdb2c47bdd",
+      "xml_relationships_styles_valid": true,
+      "coauthor_fields": [
+        "A1",
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6",
+        "H7",
+        "D1",
+        "D2"
+      ],
+      "figure_count": 4
+    },
+    {
+      "path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v11/Supplementary_Information_v11.docx",
+      "sha256": "719d964b7a4e91b41b711c9278f369c85bb9f08c941aca3509c564b2ca9a89f5",
+      "xml_relationships_styles_valid": true,
+      "coauthor_fields": [
+        "C1"
+      ],
+      "figure_count": 16
+    },
+    {
+      "path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v11/Human_annotation_methods_for_coauthors.docx",
+      "sha256": "04283f31f64036a3ce0c27a0ba70875db2ac6eeabeb702db65ba9b837f037674",
+      "xml_relationships_styles_valid": true,
+      "coauthor_fields": [
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6",
+        "H7"
+      ],
+      "figure_count": 0
+    }
+  ],
+  "title_words": 9,
+  "abstract_sentences": 4,
+  "abstract_words": 160,
+  "new_figure_uses_archived_three_seed_results": true,
+  "modern_and_context_tables_match_original_results": true,
+  "status": "author draft; annotation, archive and primary chemistry fields pending"
+}

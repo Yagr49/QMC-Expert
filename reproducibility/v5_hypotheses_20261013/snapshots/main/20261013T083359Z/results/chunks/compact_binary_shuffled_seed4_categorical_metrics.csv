@@ -1,0 +1,16 @@
+cohort,schema,task,n,RMSE,MAE,R2,name,encoding,arm,seed,provenance
+OOD17,full-QAC105,Sa_MIC,17,1.595608124835115,1.391258655168491,0.16766519429467042,compact_binary_shuffled_seed4,categorical,binary_shuffled,4,v5_architecture_matched_source
+OOD17,full-QAC105,Sa_MBC,17,1.7983985337615134,1.5016387057369753,0.2785460615498083,compact_binary_shuffled_seed4,categorical,binary_shuffled,4,v5_architecture_matched_source
+OOD17,full-QAC105,Ec_MIC,17,2.6315467971758046,2.2165233829331465,-1.0919133527103289,compact_binary_shuffled_seed4,categorical,binary_shuffled,4,v5_architecture_matched_source
+OOD17,full-QAC105,Ec_MBC,16,2.7416807137847896,2.15086831252194,-0.9215246110103064,compact_binary_shuffled_seed4,categorical,binary_shuffled,4,v5_architecture_matched_source
+OOD17,full-QAC105,pooled,67,2.240262875105066,1.8100603827702608,,compact_binary_shuffled_seed4,categorical,binary_shuffled,4,v5_architecture_matched_source
+QAC105,cation,Sa_MIC,105,1.7949356289943743,1.3925759358347904,0.16095709787857992,compact_binary_shuffled_seed4,categorical,binary_shuffled,4,v5_architecture_matched_source
+QAC105,cation,Sa_MBC,105,1.8850657623342821,1.3939621140789127,0.07821102354105436,compact_binary_shuffled_seed4,categorical,binary_shuffled,4,v5_architecture_matched_source
+QAC105,cation,Ec_MIC,105,1.6871746772063778,1.3288862906750454,0.26683328815364726,compact_binary_shuffled_seed4,categorical,binary_shuffled,4,v5_architecture_matched_source
+QAC105,cation,Ec_MBC,105,1.830189056615674,1.4827952381471792,0.2326428401932179,compact_binary_shuffled_seed4,categorical,binary_shuffled,4,v5_architecture_matched_source
+QAC105,cation,pooled,420,1.8007926876045846,1.399554894683982,,compact_binary_shuffled_seed4,categorical,binary_shuffled,4,v5_architecture_matched_source
+QAC105,scaffold,Sa_MIC,105,2.0280946058920817,1.6231464769462727,-0.07118092698714062,compact_binary_shuffled_seed4,categorical,binary_shuffled,4,v5_architecture_matched_source
+QAC105,scaffold,Sa_MBC,105,2.1327332995211337,1.656035355665352,-0.17991738126395362,compact_binary_shuffled_seed4,categorical,binary_shuffled,4,v5_architecture_matched_source
+QAC105,scaffold,Ec_MIC,105,1.9914684027402298,1.6356356501805305,-0.021479091935895145,compact_binary_shuffled_seed4,categorical,binary_shuffled,4,v5_architecture_matched_source
+QAC105,scaffold,Ec_MBC,105,2.0134957643458753,1.6217241727096712,0.07123234598485984,compact_binary_shuffled_seed4,categorical,binary_shuffled,4,v5_architecture_matched_source
+QAC105,scaffold,pooled,420,2.04216984170553,1.6341354138754565,,compact_binary_shuffled_seed4,categorical,binary_shuffled,4,v5_architecture_matched_source

@@ -1,0 +1,71 @@
+{
+  "completed": true,
+  "source": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figure4_compact_error_values.csv",
+  "source_sha256": "aa5e79578a7a98c1ccd96029225f1db536a5389246457d95d70df30485b89e62",
+  "no_error_values_or_statistics_changed": true,
+  "checks": [
+    {
+      "arm": "human",
+      "schema": "cation",
+      "n": 420,
+      "median": 1.176772839591227,
+      "maximum": 6.604078858484224
+    },
+    {
+      "arm": "mic_continuous",
+      "schema": "cation",
+      "n": 420,
+      "median": 1.0838758847841978,
+      "maximum": 6.585591818399688
+    },
+    {
+      "arm": "human_shuffled",
+      "schema": "cation",
+      "n": 420,
+      "median": 1.1429055749192338,
+      "maximum": 6.068327773302422
+    },
+    {
+      "arm": "matched_raw",
+      "schema": "cation",
+      "n": 420,
+      "median": 1.1760225085506724,
+      "maximum": 6.454376797433778
+    },
+    {
+      "arm": "human",
+      "schema": "scaffold",
+      "n": 420,
+      "median": 1.4240287690577982,
+      "maximum": 6.981193492808133
+    },
+    {
+      "arm": "mic_continuous",
+      "schema": "scaffold",
+      "n": 420,
+      "median": 1.3566110322675695,
+      "maximum": 6.81483919985998
+    },
+    {
+      "arm": "human_shuffled",
+      "schema": "scaffold",
+      "n": 420,
+      "median": 1.2966452223512146,
+      "maximum": 6.618213488085741
+    },
+    {
+      "arm": "matched_raw",
+      "schema": "scaffold",
+      "n": 420,
+      "median": 1.3758955151014296,
+      "maximum": 6.7893449147099645
+    }
+  ],
+  "font": "Aptos",
+  "width_mm": 180,
+  "png_dpi": 600,
+  "figures": [
+    "figure5_matched_supervision_design",
+    "figure6_matched_supervision_violins"
+  ]
+}

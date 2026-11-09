@@ -1,0 +1,39 @@
+{
+  "original_SI": "/Users/egorilin/Downloads/Supporting_Info.docx",
+  "original_figures": "S1\u2013S4",
+  "preceding_SI_figure_offset": 4,
+  "moved_main_figures": {
+    "3": "S27",
+    "6": "S28",
+    "7": "S29"
+  },
+  "kept_main_figures": {
+    "1": 1,
+    "2": 2,
+    "4": 3,
+    "5": 4,
+    "8": 5
+  },
+  "moved_tables": {
+    "5": "S23",
+    "6": "S28"
+  },
+  "old_main_weight_table": "Table 6",
+  "bibliography_old_to_new": {
+    "14": 1,
+    "2": 2,
+    "1": 3,
+    "4": 4,
+    "6": 5,
+    "13": 6,
+    "9": 7,
+    "10": 8,
+    "11": 9,
+    "12": 10,
+    "8": 11,
+    "3": 12,
+    "5": 13,
+    "7": 14
+  },
+  "original_intro_source": "2026_07_09_Paper_2_edited-v5_NF_3.docx"
+}

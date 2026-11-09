@@ -1,0 +1,17 @@
+{
+  "device": "cpu",
+  "torch": "2.14.0+cu130",
+  "epochs": 80,
+  "seeds": 5,
+  "protocol_sha256": "7d635559bac2c4ef43314f6b5cd93fe0e3ab9afd1c28039b744e4fa71d9d0cc6",
+  "features_sha256": "ed127bf2a453edab5925552f818129369f42c3978b26d7377365cc39d8e7f3c0",
+  "script_sha256": "996bcd1785d132f83c4eeb48d71b73f575d34a4f3ea048a7c9360bc2549e4e84",
+  "heads": [
+    "ridge",
+    "catboost"
+  ],
+  "arms": null,
+  "backbone": "chemberta100m",
+  "input_dim": 768,
+  "fixed_folds_sha256": "2a0230bad541e89973df133d96be8d59a13fc1d22453ffb0cc925a023719a815"
+}

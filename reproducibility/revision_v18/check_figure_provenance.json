@@ -1,0 +1,135 @@
+{
+  "font": "Aptos",
+  "qualifier": "Exact endpoints only; IT505 E. coli MBC remains a bound",
+  "violin": [
+    {
+      "schema": "cation",
+      "arm": "human",
+      "n": 420,
+      "median": 1.176772839591227,
+      "max": 6.604078858484224
+    },
+    {
+      "schema": "cation",
+      "arm": "human_shuffled",
+      "n": 420,
+      "median": 1.1429055749192338,
+      "max": 6.068327773302422
+    },
+    {
+      "schema": "cation",
+      "arm": "mic_binary",
+      "n": 420,
+      "median": 1.2176330067500896,
+      "max": 6.265906993448889
+    },
+    {
+      "schema": "cation",
+      "arm": "binary_shuffled",
+      "n": 420,
+      "median": 1.1143324473061331,
+      "max": 6.028377866416726
+    },
+    {
+      "schema": "cation",
+      "arm": "mic_continuous",
+      "n": 420,
+      "median": 1.0838758847841978,
+      "max": 6.5855918183996875
+    },
+    {
+      "schema": "cation",
+      "arm": "continuous_shuffled",
+      "n": 420,
+      "median": 1.2284055183603664,
+      "max": 6.489857710608123
+    },
+    {
+      "schema": "scaffold",
+      "arm": "human",
+      "n": 420,
+      "median": 1.4240287690577982,
+      "max": 6.981193492808133
+    },
+    {
+      "schema": "scaffold",
+      "arm": "human_shuffled",
+      "n": 420,
+      "median": 1.2966452223512146,
+      "max": 6.618213488085741
+    },
+    {
+      "schema": "scaffold",
+      "arm": "mic_binary",
+      "n": 420,
+      "median": 1.3441156553198175,
+      "max": 6.274689524138839
+    },
+    {
+      "schema": "scaffold",
+      "arm": "binary_shuffled",
+      "n": 420,
+      "median": 1.3731816088490585,
+      "max": 6.159665828785895
+    },
+    {
+      "schema": "scaffold",
+      "arm": "mic_continuous",
+      "n": 420,
+      "median": 1.3566110322675695,
+      "max": 6.81483919985998
+    },
+    {
+      "schema": "scaffold",
+      "arm": "continuous_shuffled",
+      "n": 420,
+      "median": 1.3650310890114143,
+      "max": 6.781104874740872
+    },
+    {
+      "schema": "full-QAC105",
+      "arm": "human",
+      "n": 67,
+      "median": 1.5191036876968576,
+      "max": 5.493449913614693
+    },
+    {
+      "schema": "full-QAC105",
+      "arm": "human_shuffled",
+      "n": 67,
+      "median": 1.5680733160898805,
+      "max": 5.272191500068682
+    },
+    {
+      "schema": "full-QAC105",
+      "arm": "mic_binary",
+      "n": 67,
+      "median": 1.5504668565466706,
+      "max": 5.699959105625827
+    },
+    {
+      "schema": "full-QAC105",
+      "arm": "binary_shuffled",
+      "n": 67,
+      "median": 1.5289429774462706,
+      "max": 5.556132490898503
+    },
+    {
+      "schema": "full-QAC105",
+      "arm": "mic_continuous",
+      "n": 67,
+      "median": 1.5933013991412317,
+      "max": 6.3347876960727625
+    },
+    {
+      "schema": "full-QAC105",
+      "arm": "continuous_shuffled",
+      "n": 67,
+      "median": 1.619312104618285,
+      "max": 5.639524123052686
+    }
+  ],
+  "violin_unit": "Per compound/endpoint mean absolute error across five source seeds; not ensemble error",
+  "CIs": "Pointwise 95% paired source-seed and scaffold bootstrap, including four OOD scaffolds",
+  "modern": "One saved v5 checkpoint; separate four endpoint models for every decoder; PCA32 only for modern models"
+}

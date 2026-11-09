@@ -1,0 +1,15 @@
+{
+  "2026_10_11_Paper_2_edited-v14_QAC105_OOD17.docx": "bceca37ceec300fa505efbaeecdd7ee479668a7a8a0b41969382494a97fd8793",
+  "reproducibility/revision_v14/Supplementary_Information_v14.docx": "663c02fa672764d2c457e7afc66671bc5fab8be441083b0e021b42b01528f91a",
+  "reproducibility/server_models_20261012/analysis/comparison_pooled.csv": "07ee069226acc8cddde03e1ae45cfa7b8bc7b0e21b6a24470dd29a952df13e80",
+  "reproducibility/server_models_20261012/analysis/all_model_metrics.csv": "844711316fc5258f7e720302a3b9469438cb36d05cd83cebe08a8244c4f3e35b",
+  "reproducibility/server_models_20261012/analysis/paired_cluster_bootstrap.csv": "4ad6b7e12f0d9507da033ab1d4298e6050ef43cce8c9bb9f80f5ec9651ec687c",
+  "reproducibility/server_models_20261012/analysis/verification.json": "5d495638356d237c510110233ec1cdda6729eb2237e4aaa90fcedcd8b6602e3a",
+  "reproducibility/server_models_20261012/analysis/layout_audit.json": "9ab79cd8963ed2a0d58c5e38410060104d5b216687588c55f8497167444f1b1d",
+  "reproducibility/server_models_20261012/analysis/source_repeat_array_audit.json": "88de14c572566db6e81b7e7b1b7d075278b673dfd431bfc00a0a494e8f0aeae9",
+  "reproducibility/server_models_20261012/analysis/new_decoder_error_violins.pdf": "6570fcc74861af01ae3a0a90b35b8243bbd7ebf89e6f0ce0576819456bcf27e7",
+  "reproducibility/server_models_20261012/analysis/new_decoder_error_violins.png": "fa9ff9473dcbdcca1d4644193002d3295998f7a17cb3accf9d006508e2a7bfb2",
+  "reproducibility/notebook_recovery_20261012/README_RU.md": "b8a01a0629e868055e38d0c9cf2033b017faa1b4bd79a1447f834f983c5477a6",
+  "reproducibility/notebook_recovery_20261012/article_number_provenance.csv": "7a3dbc610625f6005541911516c75cef00b2497b537698c2d78b2be472d10e89",
+  "reproducibility/server_models_20261012/results_20261012T152125Z/audit_repeats.json": "6c33fff1f545e49c115e5fedf97c29008a0dd9d4e75bab337c791f43f6f07ced"
+}

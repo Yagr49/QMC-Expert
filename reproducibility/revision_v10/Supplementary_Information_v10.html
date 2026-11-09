@@ -1,0 +1,443 @@
+<html><meta charset="utf-8"><title>COMA Supplement v10</title><body><pre style="white-space:pre-wrap">Supporting Information — Human Supervision and Controlled Quantitative Comparisons
+
+Expert Judgement as Supervision: Binary Human Labels Yield Comparable Molecular Representations under Downstream Refitting
+
+Scope and submission note
+
+This supporting-information version accompanies the scientifically revised v8 manuscript. It preserves the available audit figures and source tables while distinguishing controlled comparisons from externally validated claims.
+
+Key corrections: the model is partially fine-tuned (16.0 of 44.4 M parameters remain frozen); 9,338 quantitative MIC records correspond to 1,153 unique molecules; the descriptor baseline reaches R² = +0.057 on Q-HERO; OOD-17 contains 17 compounds; affine recalibration is in-sample and exploratory; and individual expert votes, full SHAP provenance, and a pre-specified equivalence protocol are unavailable.
+
+S1. Dataset audit and annotation provenance
+
+The expert archive contains 1,103 final labels (859 Bad, 244 Good). Individual votes and adjudication records are absent, so the historical three-expert majority-vote procedure cannot be independently verified and inter-rater agreement cannot be calculated. The expert and quantitative collections substantially overlap at molecule level. This produces a controlled comparison of coarse and quantitative supervision on related chemical space, not a comparison of independent datasets.
+
+Table S1. Canonical-molecule overlap (from reproducibility/leakage_check.py).
+
+| Collection | Canonical molecules | ∩ expert | ∩ quantitative | Role in v8 |
+| --- | --- | --- | --- | --- |
+| Expert final labels | 1,066 | 1,066 | 1,035 | supervision source |
+| Quantitative corpus | 1,515 | 1,035 | 1,515 | supervision source |
+| QAC-105 | 105 | 105 | 99 | in-domain / historical |
+| Q-HERO | 411 | 222 | 255 | external benchmark |
+| OOD-17 | 17 | 0 | 0 | small case study |
+
+
+Figure S1. Expert-label audit: class balance and annotation-round drift. The final labels are the available supervision artifact; individual votes are not archived.
+
+
+Figure S2. Molecule-level overlap. The overlap is a design feature for a controlled supervision comparison but limits claims of independent dataset superiority.
+
+S2. Q-HERO external benchmark and residual distributions
+
+Q-HERO provides 411 structures with a matched S. aureus MIC endpoint. The violin plot below is intentionally retained because it is visually clear and accurately shows near-identical residual distributions for expert, regression, and raw MolFormer representations. It does not show a decisive expert advantage.
+
+
+Figure S3. Distribution of absolute residuals on Q-HERO under scaffold-grouped five-fold CV. The three representations have near-identical distributions on the full collection and on the subset unseen by the expert encoder.
+
+
+Figure S4. Q-HERO benchmark results. Interpret representation differences with the reported seed variation and the controlled overlap design.
+
+S3. Historical OOD comparison
+
+The 17 newly synthesised compounds are structurally held out, but n = 17 limits precision. The matched-ablation result suggests no resolved mean residual advantage (expert − regression ΔRMSE = −0.086, 95% bootstrap CI [−0.227, +0.054]); it is not presented as a pre-specified statistical-equivalence result.
+
+
+Figure S5. Historical residual and TOST analysis, retained for transparency. In v8 it is exploratory because the sample is small and no equivalence margin was pre-specified.
+
+
+Figure S6. Split-design effect. Pair-level splitting can place the same molecule in train and test; molecule-grouped splits are required for conservative inference.
+
+S4. Partial fine-tuning and downstream refitting
+
+MolFormer-XL was partially fine-tuned: the embedding layer and four lower encoder layers remain frozen (16.0/44.4 M parameters). Evaluation molecules were excluded from all fine-tuning sources. Under downstream refitting, mean Q-HERO R² is +0.269 for 740 final expert labels, +0.312 for 1,153 molecule-level MIC values, and +0.308 for 9,338 MIC records. This supports comparable representation quality under this protocol, not equivalence of individual labels.
+
+Table S2. Representation quality, mean ± SD across three seeds (from finetune/runs.jsonl).
+
+| Representation | QAC-105 R² | Q-HERO R² | OOD-17 R² | Protocol |
+| --- | --- | --- | --- | --- |
+| Predict-the-mean | +0.000 | +0.000 | −0.058 | null baseline |
+| 6 descriptors | −0.310 | +0.057 | −0.486 | null baseline |
+| Frozen MolFormer | −0.105 ± 0.03 | +0.134 ± 0.02 | −0.289 ± 0.09 | no FT |
+| Partial FT expert | +0.053 ± 0.09 | +0.269 ± 0.02 | −0.174 ± 0.19 | 740 labels |
+| Partial FT quantitative | −0.004 ± 0.04 | +0.312 ± 0.06 | −0.191 ± 0.21 | 1,153 molecules |
+| Partial FT quantitative | +0.048 ± 0.07 | +0.308 ± 0.03 | −0.027 ± 0.09 | 9,338 records |
+
+
+Figure S7. Downstream representation quality, mean ± SD over three seeds. This is partial—not end-to-end—fine-tuning. The descriptor baseline is positive on Q-HERO (R² = +0.057); absolute values remain modest.
+
+S5. Direct zero-shot transfer and exploratory calibration
+
+Without target refitting, quantitative supervision produces stronger rank agreement than expert supervision on Q-HERO and OOD-17, while raw R² remains negative. The highest OOD-17 mean rank agreement is ρ = 0.75 for the 9,338-record model; this estimate has n = 17. Expert scores still carry positive potency-related rank signal despite never observing concentrations.
+
+Table S3. Direct-transfer rank agreement and AUC, means across three seeds (from finetune/runs_direct.jsonl).
+
+| Source | QAC-105 ρ / AUC | Q-HERO ρ / AUC | OOD-17 ρ / AUC | Interpretation |
+| --- | --- | --- | --- | --- |
+| Expert (740 labels) | +0.221 / 0.644 | +0.397 / 0.688 | +0.295 / 0.597 | rank signal only |
+| Quant. 1,153 molecules | +0.210 / 0.652 | +0.547 / 0.780 | +0.619 / 0.852 | stronger ranking |
+| Quant. 9,338 records | +0.176 / 0.630 | +0.612 / 0.814 | +0.752 / 0.866 | strongest; OOD n=17 |
+
+
+Figure S8. Direct zero-shot transfer. These predictions are best interpreted as rankings, not calibrated absolute MIC estimates.
+
+Affine recalibration was fitted and evaluated on the same target predictions. It is included only as an exploratory diagnostic of scale mismatch; it does not demonstrate generalisable target calibration.
+
+Table S4. Exploratory in-sample affine recalibration (from finetune/recalibration.csv).
+
+| Target | Raw R² | In-sample affine R² | Mean slope | Mean offset log₂ |
+| --- | --- | --- | --- | --- |
+| QAC-105 | −0.83 | +0.03 | 0.23 | +1.20 |
+| Q-HERO | −1.62 | +0.36 | 0.47 | +2.11 |
+| OOD-17 | −2.92 | +0.49 | 0.98 | +3.01 |
+
+
+Figure S9. Exploratory in-sample affine recalibration. A held-out or nested target-calibration protocol is required before reporting calibrated generalisation.
+
+S6. Reproducibility inventory and limitations
+
+Primary artifacts: reproducibility/finetune/runs.jsonl (partial-fine-tuning matrix), runs_direct.jsonl (direct transfer), recalibration.csv (exploratory recalibration), qhero/qhero_metrics.csv and qhero_residuals.csv (Q-HERO), analysis/ablation_bootstrap.csv (matched OOD ablation), and FINDINGS.md (audit). CKA/probing and SHAP summary provenance is incomplete, so they are not used for causal or mechanistic claims in v8.
+
+S7. New controlled supervision experiments
+
+The new experiment holds source molecules, source cation-scaffold split, frozen MolFormer features, initial weights and training budget constant within each matched panel. Source sizes: 681 pooled-MIC common molecules (4,938 underlying records) and 529 exact S. aureus-MIC common molecules (855 records). Evaluation sizes: QAC-104 = 104, Q-HERO-405 = 405, OOD-17 = 17. Every evaluation cation, including counterion variants, is absent from all new sources. Binary source labels use BCE-with-logits; quantitative source targets use source-training standardised MSE. A 768→256→128 neural encoder is trained for 80 epochs with five paired seeds. Target decoders refit on fixed target folds, so this is representation evaluation rather than direct transfer. Bootstrap intervals condition on those folds and trained seeds. The Ridge decoder with target-training standardisation can extrapolate unstably; all extreme results remain available. No non-inferiority or equivalence margin is introduced.
+
+
+Figure S10. Supervision comparisons. This is Figure 7 from the revised manuscript; the partial-fine-tuning and frozen-head panels have different cohorts and architectures.
+
+Table S5. New experiment RMSE in log2 µM, mean ± SD across five source-training seeds (one raw baseline run). Both CatBoost and Ridge are reported. Extreme Ridge errors are retained as sensitivity results rather than removed.
+
+| Panel | Supervision / decoder | QAC-104 RMSE | Q-HERO-405 RMSE | OOD-17 RMSE |
+| --- | --- | --- | --- | --- |
+| baseline | raw-molformer / catboost | 2.074 | 1.602 | 1.698 |
+| baseline | raw-molformer / ridge | 2.240 | 2.187 | 3.173 |
+| matched-pooled | expert / catboost | 2.207 ± 0.037 | 1.607 ± 0.032 | 1.836 ± 0.203 |
+| matched-pooled | expert / ridge | 2.364 ± 0.273 | 2.412 ± 1.391 | 2.048 ± 0.699 |
+| matched-pooled | expert-shuffled / catboost | 2.192 ± 0.049 | 1.780 ± 0.105 | 1.916 ± 0.182 |
+| matched-pooled | expert-shuffled / ridge | 2.525 ± 0.656 | 1.877 ± 0.102 | 2.030 ± 0.184 |
+| matched-pooled | quant-binary / catboost | 2.064 ± 0.108 | 1.646 ± 0.041 | 1.927 ± 0.214 |
+| matched-pooled | quant-binary / ridge | 2.049 ± 0.054 | 1.738 ± 0.124 | 2.318 ± 0.664 |
+| matched-pooled | quant-continuous / catboost | 2.033 ± 0.047 | 1.497 ± 0.052 | 1.986 ± 0.177 |
+| matched-pooled | quant-continuous / ridge | 3612.647 ± 8059.806 | 2.559 ± 0.786 | 7.191 ± 5.484 |
+| matched-pooled | quant-shuffled / catboost | 2.068 ± 0.095 | 1.605 ± 0.050 | 1.909 ± 0.165 |
+| matched-pooled | quant-shuffled / ridge | 3.206 ± 0.908 | 3.978 ± 1.342 | 7.624 ± 11.194 |
+| matched-pooled | untrained / catboost | 1.994 ± 0.047 | 1.666 ± 0.074 | 1.821 ± 0.122 |
+| matched-pooled | untrained / ridge | 4.466 ± 4.042 | 3.190 ± 0.813 | 15.258 ± 20.300 |
+| matched-sa | expert / catboost | 2.092 ± 0.073 | 1.785 ± 0.075 | 2.257 ± 0.416 |
+| matched-sa | expert / ridge | 11.183 ± 11.272 | 3.517 ± 2.538 | 2.909 ± 1.886 |
+| matched-sa | expert-shuffled / catboost | 2.141 ± 0.137 | 1.761 ± 0.040 | 2.078 ± 0.201 |
+| matched-sa | expert-shuffled / ridge | 2.404 ± 0.638 | 1.987 ± 0.415 | 5.493 ± 7.625 |
+| matched-sa | quant-binary / catboost | 2.030 ± 0.088 | 1.730 ± 0.022 | 1.959 ± 0.209 |
+| matched-sa | quant-binary / ridge | 2.457 ± 0.779 | 2.017 ± 0.360 | 1.984 ± 0.269 |
+| matched-sa | quant-continuous / catboost | 2.075 ± 0.059 | 1.617 ± 0.016 | 2.047 ± 0.168 |
+| matched-sa | quant-continuous / ridge | 5.557 ± 2.448 | 2.237 ± 0.188 | 4.191 ± 1.787 |
+| matched-sa | quant-shuffled / catboost | 2.229 ± 0.117 | 1.670 ± 0.069 | 1.818 ± 0.276 |
+| matched-sa | quant-shuffled / ridge | 6.942 ± 5.095 | 32.905 ± 42.839 | 5.285 ± 0.886 |
+| matched-sa | untrained / catboost | 2.022 ± 0.053 | 1.677 ± 0.032 | 1.891 ± 0.161 |
+| matched-sa | untrained / ridge | 5.308 ± 3.679 | 3.291 ± 1.476 | 5.811 ± 1.834 |
+| full | expert-full / catboost | 2.065 ± 0.017 | 1.631 ± 0.060 | 2.112 ± 0.232 |
+| full | expert-full / ridge | 2.213 ± 0.092 | 1.853 ± 0.226 | 1.808 ± 0.285 |
+| full | quant-iltox-full / catboost | 1.944 ± 0.084 | 1.641 ± 0.059 | 1.719 ± 0.146 |
+| full | quant-iltox-full / ridge | 4.187 ± 2.603 | 3.204 ± 0.496 | 8.874 ± 12.739 |
+| full | quant-pooled-full / catboost | 2.091 ± 0.114 | 1.489 ± 0.027 | 1.779 ± 0.125 |
+| full | quant-pooled-full / ridge | 7.313 ± 7.252 | 2.494 ± 1.162 | 2.654 ± 0.588 |
+| full | quant-sa-full / catboost | 2.041 ± 0.065 | 1.547 ± 0.064 | 1.906 ± 0.134 |
+| full | quant-sa-full / ridge | 5.224 ± 4.519 | 9.759 ± 16.934 | 41.728 ± 75.709 |
+
+S8. Paired supervision contrasts
+
+Table S6. Q-HERO-405 CatBoost expert-minus-comparator ΔRMSE with 95% whole-scaffold bootstrap intervals. Negative values favour expert supervision. Contrasts average squared errors across seeds before forming RMSE; they therefore differ slightly from subtracting the means of seed-specific RMSE.
+
+| Panel | Expert minus | ΔRMSE | 95% lower | 95% upper |
+| --- | --- | --- | --- | --- |
+| matched-pooled | quant-continuous | +0.109 | +0.007 | +0.210 |
+| matched-pooled | quant-binary | -0.039 | -0.139 | +0.136 |
+| matched-pooled | expert-shuffled | -0.175 | -0.258 | -0.058 |
+| matched-pooled | quant-shuffled | +0.002 | -0.100 | +0.097 |
+| matched-pooled | untrained | -0.060 | -0.138 | +0.037 |
+| matched-pooled | raw-molformer | +0.005 | -0.092 | +0.109 |
+| matched-sa | quant-continuous | +0.169 | -0.004 | +0.454 |
+| matched-sa | quant-binary | +0.056 | -0.126 | +0.346 |
+| matched-sa | expert-shuffled | +0.025 | -0.139 | +0.311 |
+| matched-sa | quant-shuffled | +0.116 | -0.035 | +0.359 |
+| matched-sa | untrained | +0.109 | -0.051 | +0.354 |
+| matched-sa | raw-molformer | +0.185 | +0.056 | +0.380 |
+
+S9. Quantitative-source provenance and interpretation
+
+The full eligible sources contain 712 final expert-labelled molecules, 1,120 pooled-MIC molecules, 888 exact S. aureus-MIC molecules and 273 ILToxDB molecules. The QMR source is one corpus represented with different filters and aggregation, not multiple independent datasets. The three earlier Veresh workbooks are corpus versions. Q-HERO is the external antibacterial evaluation collection in the new experiment. Full-source comparisons vary chemistry and sample size and cannot identify endpoint/provenance effects.
+
+QMR same-compound/same-strain repeated-report audit: 38 strata over 23 compounds and five strains, median range 0 log2, 94.7% within one dilution. Within-group strain sensitivity: 279 strata, median range 1 log2. These results do not support assigning all discordant pooled records to laboratory error. The cytotoxicity export mixes CC50/IC50/EC50 in one field, even after restricting to 24h MTT. Source-comparison and repeat-range results are descriptive.
+
+S10. What the experiment identifies
+
+The manipulated variable is supervision inside a fixed training algorithm. Expert versus shuffled expert contrasts preserve sample identities, initialisation, source split, architecture, objective and training budget. Expert versus continuous MIC also changes the loss objective. The paired effect is conditional on the declared source chemistry, architecture and transfer protocol. The real-label advantage appears in the 681-molecule pooled panel, and does not replicate in the 529-molecule organism-matched panel. No antibacterial mechanism, universal denoising effect, non-inferiority margin or economic saving is identified.
+
+The quantitative continuous arm is stronger than expert supervision in the pooled frozen-head panel. The historical partial-fine-tuning analysis still shows practical competition. These observations answer different questions and must be reported together. A successful label-versus-shuffled-label contrast does not by itself demonstrate an improvement over the raw backbone or over the best quantitative source.
+
+S11. Reproducibility and artifact inventory
+
+Reproducibility files: revision_v9/PROTOCOL.md; prepare_experiment.py; run_interventions.py; analyse_interventions.py; data/meta.json; data/smiles.json and molformer.npy; results_*/training.csv, target_folds.csv, metrics.csv and predictions.csv; analysis/summary.csv and paired_bootstrap.csv. Input workbook hashes, feature hashes, initial-weight hashes and matched-source-identity hashes are recorded. The protocol was written before inspecting new prediction results, but follows earlier exploratory work and is not formal preregistration.
+
+The historical direct expert seed-0 predictions provide Spearman ρ = 0.453 on Q-HERO, with a molecule-bootstrap interval [0.373, 0.526]. This interval is conditional on one checkpoint and does not account for scaffold dependence; the manuscript therefore leads with the three-seed mean rank result and treats this additional interval as a descriptive sensitivity analysis. Corresponding OOD-17 and QAC-105 intervals are retained in analysis/archived_direct_expert_rank.csv.
+
+Original v8 sections remain the supporting record for the historical analyses. Their revision labels refer to the archived experiment. The new results do not retrospectively repair the historical few-shot scan, make in-sample calibration external, or recover individual expert votes.
+
+S12. Modern checkpoint and context extension
+
+# Exploratory extension fixed before inspecting new outputs (11 October 2026)
+This extension follows already inspected v9 and Mendeley results and Kimi review. It is not preregistered. No performance-based model or checkpoint selection.
+
+Models selected by publication/availability: ChemFM/ChemFM-1B (ChemFM, Communications Chemistry, online Dec 2025); DeepChem/MoLFormer-c3-1.1B and DeepChem/ChemBERTa-100M-MLM (ChemBERTa-3, Digital Discovery 2026). Hugging Face commit SHA pinned before extraction. The c3 name counts pretraining molecules, not parameters.
+All 1939 canonical full salts from v9 are encoded, without concentration labels, on the supplied server. ChemFM uses last non-padding token (causal encoder, compatible with sequence-classification convention); RoBERTa/ChemBERTa uses attention-masked mean hidden states (avoids randomly initialized pooler); c3 uses deterministic MoLFormer pooler. Verify no truncation; abort if a molecule exceeds model context. These are frozen-feature probes, not reproductions of fully fine-tuned published leaderboards. Unsupervised pretraining membership of evaluation compounds is unknown.
+
+Identical archived target-cation exclusions and target folds. CatBoost decoder unchanged. Within each backbone, source matched-pooled panel (681 molecules), source scaffold train/validation, five seeds, 80 epochs, minibatch and initial weights paired. Arms: expert, continuous MIC, binary MIC prevalence-matched, expert shuffled, continuous shuffled, binary MIC shuffled, untrained encoder, raw backbone. Network input dimension follows the backbone, remaining layers 256 and128. Training architecture capacity thus differs across backbones; compare supervision contrasts within backbone, not as a pure parameter-count effect. CPU encoder training keeps RNG convention consistent with v9. Fixed learning parameters, no target-driven tuning.
+
+Context sensitivity uses the identical 529 common molecules with expert labels, pooled quantitative MIC and exact S. aureus MIC and respective shuffled controls. Input MolFormer features/initial weights/source split/budget identical. This is an algorithmic intervention in the target definition and aggregation policy, not an isolated effect of provenance: organism mixture, censoring, number of observations and aggregation all vary.
+
+Primary descriptive focus Q-HERO-405 scaffold-held-out predictions. Report all targets and arms. Bootstrap whole scaffolds conditional on trained seeds plus nested seed/scaffold sensitivity; designate all extension comparisons exploratory with no multiplicity-adjusted significance claims. Existing v9 raw results retained. Repeated scaffold assignments and leave-one-scaffold-out loss sensitivity quantify evaluation dependence. Do not claim human denoising, equivalence/noninferiority, or biological causal mechanism.
+
+| Backbone / panel | Supervision / target | Seeds | R² ± seed SD | RMSE ± seed SD |
+| --- | --- | --- | --- | --- |
+| c3-MoLFormer / baseline | raw-c3-molformer / OOD-17 | 1 | -0.269 ± nan | 1.852 ± nan |
+| c3-MoLFormer / baseline | raw-c3-molformer / Q-HERO-405 | 1 | +0.076 ± nan | 1.649 ± nan |
+| c3-MoLFormer / baseline | raw-c3-molformer / QAC-104 | 1 | -0.076 ± nan | 1.984 ± nan |
+| c3-MoLFormer / matched-pooled | expert / OOD-17 | 5 | -0.796 ± 0.152 | 2.201 ± 0.092 |
+| c3-MoLFormer / matched-pooled | expert / Q-HERO-405 | 5 | +0.010 ± 0.055 | 1.705 ± 0.047 |
+| c3-MoLFormer / matched-pooled | expert / QAC-104 | 5 | -0.193 ± 0.045 | 2.089 ± 0.040 |
+| c3-MoLFormer / matched-pooled | expert-shuffled / OOD-17 | 5 | -0.261 ± 0.357 | 1.832 ± 0.256 |
+| c3-MoLFormer / matched-pooled | expert-shuffled / Q-HERO-405 | 5 | -0.125 ± 0.076 | 1.818 ± 0.061 |
+| c3-MoLFormer / matched-pooled | expert-shuffled / QAC-104 | 5 | -0.313 ± 0.110 | 2.190 ± 0.092 |
+| c3-MoLFormer / matched-pooled | quant-binary / OOD-17 | 5 | -0.266 ± 0.161 | 1.847 ± 0.117 |
+| c3-MoLFormer / matched-pooled | quant-binary / Q-HERO-405 | 5 | +0.004 ± 0.045 | 1.711 ± 0.039 |
+| c3-MoLFormer / matched-pooled | quant-binary / QAC-104 | 5 | -0.140 ± 0.017 | 2.043 ± 0.015 |
+| c3-MoLFormer / matched-pooled | quant-binary-shuffled / OOD-17 | 5 | -0.445 ± 0.184 | 1.973 ± 0.122 |
+| c3-MoLFormer / matched-pooled | quant-binary-shuffled / Q-HERO-405 | 5 | -0.053 ± 0.080 | 1.759 ± 0.066 |
+| c3-MoLFormer / matched-pooled | quant-binary-shuffled / QAC-104 | 5 | -0.263 ± 0.114 | 2.148 ± 0.098 |
+| c3-MoLFormer / matched-pooled | quant-continuous / OOD-17 | 5 | -0.096 ± 0.182 | 1.716 ± 0.140 |
+| c3-MoLFormer / matched-pooled | quant-continuous / Q-HERO-405 | 5 | +0.145 ± 0.052 | 1.585 ± 0.048 |
+| c3-MoLFormer / matched-pooled | quant-continuous / QAC-104 | 5 | -0.077 ± 0.072 | 1.985 ± 0.067 |
+| c3-MoLFormer / matched-pooled | quant-shuffled / OOD-17 | 5 | -0.140 ± 0.307 | 1.744 ± 0.225 |
+| c3-MoLFormer / matched-pooled | quant-shuffled / Q-HERO-405 | 5 | -0.062 ± 0.080 | 1.767 ± 0.067 |
+| c3-MoLFormer / matched-pooled | quant-shuffled / QAC-104 | 5 | -0.159 ± 0.112 | 2.058 ± 0.101 |
+| c3-MoLFormer / matched-pooled | untrained / OOD-17 | 5 | -0.153 ± 0.092 | 1.764 ± 0.071 |
+| c3-MoLFormer / matched-pooled | untrained / Q-HERO-405 | 5 | +0.009 ± 0.058 | 1.706 ± 0.050 |
+| c3-MoLFormer / matched-pooled | untrained / QAC-104 | 5 | -0.191 ± 0.089 | 2.087 ± 0.077 |
+| ChemBERTa-100M / baseline | raw-chemberta100m / OOD-17 | 1 | -0.056 ± nan | 1.690 ± nan |
+| ChemBERTa-100M / baseline | raw-chemberta100m / Q-HERO-405 | 1 | -0.127 ± nan | 1.821 ± nan |
+| ChemBERTa-100M / baseline | raw-chemberta100m / QAC-104 | 1 | -0.011 ± nan | 1.923 ± nan |
+| ChemBERTa-100M / matched-pooled | expert / OOD-17 | 5 | -0.122 ± 0.093 | 1.740 ± 0.072 |
+| ChemBERTa-100M / matched-pooled | expert / Q-HERO-405 | 5 | -0.157 ± 0.054 | 1.844 ± 0.043 |
+| ChemBERTa-100M / matched-pooled | expert / QAC-104 | 5 | -0.218 ± 0.121 | 2.109 ± 0.105 |
+| ChemBERTa-100M / matched-pooled | expert-shuffled / OOD-17 | 5 | -0.108 ± 0.220 | 1.723 ± 0.176 |
+| ChemBERTa-100M / matched-pooled | expert-shuffled / Q-HERO-405 | 5 | -0.139 ± 0.062 | 1.830 ± 0.051 |
+| ChemBERTa-100M / matched-pooled | expert-shuffled / QAC-104 | 5 | -0.123 ± 0.200 | 2.021 ± 0.185 |
+| ChemBERTa-100M / matched-pooled | quant-binary / OOD-17 | 5 | +0.003 ± 0.131 | 1.639 ± 0.112 |
+| ChemBERTa-100M / matched-pooled | quant-binary / Q-HERO-405 | 5 | -0.141 ± 0.025 | 1.832 ± 0.020 |
+| ChemBERTa-100M / matched-pooled | quant-binary / QAC-104 | 5 | -0.365 ± 0.135 | 2.233 ± 0.112 |
+| ChemBERTa-100M / matched-pooled | quant-binary-shuffled / OOD-17 | 5 | -0.291 ± 0.445 | 1.849 ± 0.302 |
+| ChemBERTa-100M / matched-pooled | quant-binary-shuffled / Q-HERO-405 | 5 | -0.112 ± 0.023 | 1.808 ± 0.018 |
+| ChemBERTa-100M / matched-pooled | quant-binary-shuffled / QAC-104 | 5 | -0.133 ± 0.158 | 2.032 ± 0.139 |
+| ChemBERTa-100M / matched-pooled | quant-continuous / OOD-17 | 5 | +0.043 ± 0.138 | 1.605 ± 0.114 |
+| ChemBERTa-100M / matched-pooled | quant-continuous / Q-HERO-405 | 5 | -0.163 ± 0.065 | 1.848 ± 0.053 |
+| ChemBERTa-100M / matched-pooled | quant-continuous / QAC-104 | 5 | -0.091 ± 0.113 | 1.996 ± 0.103 |
+| ChemBERTa-100M / matched-pooled | quant-shuffled / OOD-17 | 5 | -0.065 ± 0.150 | 1.693 ± 0.118 |
+| ChemBERTa-100M / matched-pooled | quant-shuffled / Q-HERO-405 | 5 | -0.123 ± 0.069 | 1.816 ± 0.057 |
+| ChemBERTa-100M / matched-pooled | quant-shuffled / QAC-104 | 5 | -0.079 ± 0.127 | 1.984 ± 0.118 |
+| ChemBERTa-100M / matched-pooled | untrained / OOD-17 | 5 | -0.304 ± 0.373 | 1.863 ± 0.260 |
+| ChemBERTa-100M / matched-pooled | untrained / Q-HERO-405 | 5 | -0.115 ± 0.051 | 1.810 ± 0.042 |
+| ChemBERTa-100M / matched-pooled | untrained / QAC-104 | 5 | -0.015 ± 0.068 | 1.927 ± 0.065 |
+| ChemFM-1B / baseline | raw-chemfm1b / OOD-17 | 1 | -0.050 ± nan | 1.685 ± nan |
+| ChemFM-1B / baseline | raw-chemfm1b / Q-HERO-405 | 1 | +0.039 ± nan | 1.681 ± nan |
+| ChemFM-1B / baseline | raw-chemfm1b / QAC-104 | 1 | -0.058 ± nan | 1.968 ± nan |
+| ChemFM-1B / matched-pooled | expert / OOD-17 | 5 | +0.040 ± 0.104 | 1.609 ± 0.085 |
+| ChemFM-1B / matched-pooled | expert / Q-HERO-405 | 5 | -0.084 ± 0.081 | 1.784 ± 0.066 |
+| ChemFM-1B / matched-pooled | expert / QAC-104 | 5 | -0.045 ± 0.079 | 1.954 ± 0.074 |
+| ChemFM-1B / matched-pooled | expert-shuffled / OOD-17 | 5 | -0.044 ± 0.120 | 1.678 ± 0.095 |
+| ChemFM-1B / matched-pooled | expert-shuffled / Q-HERO-405 | 5 | -0.111 ± 0.021 | 1.808 ± 0.017 |
+| ChemFM-1B / matched-pooled | expert-shuffled / QAC-104 | 5 | -0.168 ± 0.111 | 2.065 ± 0.098 |
+| ChemFM-1B / matched-pooled | quant-binary / OOD-17 | 5 | -0.043 ± 0.164 | 1.675 ± 0.131 |
+| ChemFM-1B / matched-pooled | quant-binary / Q-HERO-405 | 5 | -0.070 ± 0.072 | 1.773 ± 0.059 |
+| ChemFM-1B / matched-pooled | quant-binary / QAC-104 | 5 | -0.018 ± 0.039 | 1.930 ± 0.037 |
+| ChemFM-1B / matched-pooled | quant-binary-shuffled / OOD-17 | 5 | -0.109 ± 0.181 | 1.727 ± 0.139 |
+| ChemFM-1B / matched-pooled | quant-binary-shuffled / Q-HERO-405 | 5 | -0.120 ± 0.024 | 1.814 ± 0.019 |
+| ChemFM-1B / matched-pooled | quant-binary-shuffled / QAC-104 | 5 | -0.155 ± 0.099 | 2.054 ± 0.088 |
+| ChemFM-1B / matched-pooled | quant-continuous / OOD-17 | 5 | -0.073 ± 0.215 | 1.697 ± 0.169 |
+| ChemFM-1B / matched-pooled | quant-continuous / Q-HERO-405 | 5 | -0.010 ± 0.059 | 1.722 ± 0.050 |
+| ChemFM-1B / matched-pooled | quant-continuous / QAC-104 | 5 | -0.226 ± 0.114 | 2.116 ± 0.098 |
+| ChemFM-1B / matched-pooled | quant-shuffled / OOD-17 | 5 | -0.261 ± 0.366 | 1.833 ± 0.249 |
+| ChemFM-1B / matched-pooled | quant-shuffled / Q-HERO-405 | 5 | -0.138 ± 0.066 | 1.828 ± 0.052 |
+| ChemFM-1B / matched-pooled | quant-shuffled / QAC-104 | 5 | -0.248 ± 0.166 | 2.133 ± 0.146 |
+| ChemFM-1B / matched-pooled | untrained / OOD-17 | 5 | -0.191 ± 0.221 | 1.788 ± 0.163 |
+| ChemFM-1B / matched-pooled | untrained / Q-HERO-405 | 5 | -0.037 ± 0.025 | 1.746 ± 0.021 |
+| ChemFM-1B / matched-pooled | untrained / QAC-104 | 5 | -0.083 ± 0.104 | 1.989 ± 0.097 |
+| MolFormer-XL / baseline | raw-molformer / OOD-17 | 1 | -0.067 ± nan | 1.698 ± nan |
+| MolFormer-XL / baseline | raw-molformer / Q-HERO-405 | 1 | +0.128 ± nan | 1.602 ± nan |
+| MolFormer-XL / baseline | raw-molformer / QAC-104 | 1 | -0.176 ± nan | 2.074 ± nan |
+| MolFormer-XL / context | expert / OOD-17 | 5 | -0.935 ± 0.742 | 2.257 ± 0.416 |
+| MolFormer-XL / context | expert / Q-HERO-405 | 5 | -0.085 ± 0.090 | 1.785 ± 0.075 |
+| MolFormer-XL / context | expert / QAC-104 | 5 | -0.197 ± 0.082 | 2.092 ± 0.073 |
+| MolFormer-XL / context | expert-shuffled / OOD-17 | 5 | -0.609 ± 0.314 | 2.078 ± 0.201 |
+| MolFormer-XL / context | expert-shuffled / Q-HERO-405 | 5 | -0.055 ± 0.048 | 1.761 ± 0.040 |
+| MolFormer-XL / context | expert-shuffled / QAC-104 | 5 | -0.257 ± 0.157 | 2.141 ± 0.137 |
+| MolFormer-XL / context | quant-pooled / OOD-17 | 5 | -0.529 ± 0.210 | 2.029 ± 0.140 |
+| MolFormer-XL / context | quant-pooled / Q-HERO-405 | 5 | +0.209 ± 0.049 | 1.525 ± 0.048 |
+| MolFormer-XL / context | quant-pooled / QAC-104 | 5 | -0.186 ± 0.037 | 2.083 ± 0.033 |
+| MolFormer-XL / context | quant-pooled-shuffled / OOD-17 | 5 | -0.416 ± 0.297 | 1.947 ± 0.215 |
+| MolFormer-XL / context | quant-pooled-shuffled / Q-HERO-405 | 5 | +0.018 ± 0.050 | 1.699 ± 0.043 |
+| MolFormer-XL / context | quant-pooled-shuffled / QAC-104 | 5 | -0.184 ± 0.065 | 2.081 ± 0.057 |
+| MolFormer-XL / context | quant-sa / OOD-17 | 5 | -0.559 ± 0.255 | 2.047 ± 0.168 |
+| MolFormer-XL / context | quant-sa / Q-HERO-405 | 5 | +0.110 ± 0.017 | 1.617 ± 0.016 |
+| MolFormer-XL / context | quant-sa / QAC-104 | 5 | -0.177 ± 0.067 | 2.075 ± 0.059 |
+| MolFormer-XL / context | quant-sa-shuffled / OOD-17 | 5 | -0.246 ± 0.352 | 1.818 ± 0.276 |
+| MolFormer-XL / context | quant-sa-shuffled / Q-HERO-405 | 5 | +0.051 ± 0.079 | 1.670 ± 0.069 |
+| MolFormer-XL / context | quant-sa-shuffled / QAC-104 | 5 | -0.361 ± 0.145 | 2.229 ± 0.117 |
+| MolFormer-XL / context | untrained / OOD-17 | 5 | -0.330 ± 0.223 | 1.891 ± 0.161 |
+| MolFormer-XL / context | untrained / Q-HERO-405 | 5 | +0.043 ± 0.037 | 1.677 ± 0.032 |
+| MolFormer-XL / context | untrained / QAC-104 | 5 | -0.118 ± 0.059 | 2.022 ± 0.053 |
+| MolFormer-XL / matched-pooled | expert / OOD-17 | 5 | -0.259 ± 0.286 | 1.836 ± 0.203 |
+| MolFormer-XL / matched-pooled | expert / Q-HERO-405 | 5 | +0.122 ± 0.035 | 1.607 ± 0.032 |
+| MolFormer-XL / matched-pooled | expert / QAC-104 | 5 | -0.331 ± 0.045 | 2.207 ± 0.037 |
+| MolFormer-XL / matched-pooled | expert-shuffled / OOD-17 | 5 | -0.368 ± 0.264 | 1.916 ± 0.182 |
+| MolFormer-XL / matched-pooled | expert-shuffled / Q-HERO-405 | 5 | -0.080 ± 0.129 | 1.780 ± 0.105 |
+| MolFormer-XL / matched-pooled | expert-shuffled / QAC-104 | 5 | -0.314 ± 0.058 | 2.192 ± 0.049 |
+| MolFormer-XL / matched-pooled | quant-binary / OOD-17 | 5 | -0.388 ± 0.293 | 1.927 ± 0.214 |
+| MolFormer-XL / matched-pooled | quant-binary / Q-HERO-405 | 5 | +0.079 ± 0.046 | 1.646 ± 0.041 |
+| MolFormer-XL / matched-pooled | quant-binary / QAC-104 | 5 | -0.167 ± 0.121 | 2.064 ± 0.108 |
+| MolFormer-XL / matched-pooled | quant-binary-shuffled / OOD-17 | 5 | -0.540 ± 0.478 | 2.019 ± 0.329 |
+| MolFormer-XL / matched-pooled | quant-binary-shuffled / Q-HERO-405 | 5 | -0.037 ± 0.071 | 1.746 ± 0.060 |
+| MolFormer-XL / matched-pooled | quant-binary-shuffled / QAC-104 | 5 | -0.170 ± 0.127 | 2.066 ± 0.114 |
+| MolFormer-XL / matched-pooled | quant-continuous / OOD-17 | 5 | -0.469 ± 0.259 | 1.986 ± 0.177 |
+| MolFormer-XL / matched-pooled | quant-continuous / Q-HERO-405 | 5 | +0.237 ± 0.052 | 1.497 ± 0.052 |
+| MolFormer-XL / matched-pooled | quant-continuous / QAC-104 | 5 | -0.129 ± 0.052 | 2.033 ± 0.047 |
+| MolFormer-XL / matched-pooled | quant-shuffled / OOD-17 | 5 | -0.356 ± 0.235 | 1.909 ± 0.165 |
+| MolFormer-XL / matched-pooled | quant-shuffled / Q-HERO-405 | 5 | +0.124 ± 0.054 | 1.605 ± 0.050 |
+| MolFormer-XL / matched-pooled | quant-shuffled / QAC-104 | 5 | -0.170 ± 0.110 | 2.068 ± 0.095 |
+| MolFormer-XL / matched-pooled | untrained / OOD-17 | 5 | -0.231 ± 0.169 | 1.821 ± 0.122 |
+| MolFormer-XL / matched-pooled | untrained / Q-HERO-405 | 5 | +0.055 ± 0.086 | 1.666 ± 0.074 |
+| MolFormer-XL / matched-pooled | untrained / QAC-104 | 5 | -0.087 ± 0.051 | 1.994 ± 0.047 |
+
+Table S7. Complete CatBoost extension results, including all secondary targets and negative controls. Raw-backbone values come from one fixed decoder run. Seed standard deviations are descriptive. Older partial-fine-tuning and new frozen-feature results use different cohorts and are not one leaderboard.
+
+S13. Nested uncertainty and scaffold influence
+
+| Backbone / panel | Comparison | Bootstrap unit | ΔRMSE | 95% interval |
+| --- | --- | --- | --- | --- |
+| c3-MoLFormer / matched-pooled | expert minus expert-shuffled | scaffold | -0.113 | [-0.218, -0.052] |
+| c3-MoLFormer / matched-pooled | expert minus expert-shuffled | seed+scaffold | -0.113 | [-0.246, -0.012] |
+| c3-MoLFormer / matched-pooled | expert minus quant-continuous | scaffold | +0.120 | [-0.007, +0.216] |
+| c3-MoLFormer / matched-pooled | expert minus quant-continuous | seed+scaffold | +0.120 | [-0.010, +0.228] |
+| c3-MoLFormer / matched-pooled | expert minus quant-binary | scaffold | -0.005 | [-0.107, +0.169] |
+| c3-MoLFormer / matched-pooled | expert minus quant-binary | seed+scaffold | -0.005 | [-0.115, +0.172] |
+| c3-MoLFormer / matched-pooled | expert minus untrained | scaffold | -0.001 | [-0.063, +0.086] |
+| c3-MoLFormer / matched-pooled | expert minus untrained | seed+scaffold | -0.001 | [-0.084, +0.093] |
+| c3-MoLFormer / matched-pooled | expert minus raw-c3-molformer | scaffold | +0.057 | [-0.011, +0.159] |
+| c3-MoLFormer / matched-pooled | expert minus raw-c3-molformer | seed+scaffold | +0.057 | [-0.024, +0.162] |
+| c3-MoLFormer / matched-pooled | quant-continuous minus quant-shuffled | scaffold | -0.182 | [-0.285, -0.041] |
+| c3-MoLFormer / matched-pooled | quant-continuous minus quant-shuffled | seed+scaffold | -0.182 | [-0.299, -0.029] |
+| c3-MoLFormer / matched-pooled | quant-binary minus quant-binary-shuffled | scaffold | -0.049 | [-0.276, +0.046] |
+| c3-MoLFormer / matched-pooled | quant-binary minus quant-binary-shuffled | seed+scaffold | -0.049 | [-0.275, +0.065] |
+| c3-MoLFormer / matched-pooled | quant-binary-shuffled minus expert-shuffled | scaffold | -0.059 | [-0.096, -0.011] |
+| c3-MoLFormer / matched-pooled | quant-binary-shuffled minus expert-shuffled | seed+scaffold | -0.059 | [-0.164, +0.058] |
+| c3-MoLFormer / matched-pooled | quant-continuous minus raw-c3-molformer | scaffold | -0.063 | [-0.127, +0.039] |
+| c3-MoLFormer / matched-pooled | quant-continuous minus raw-c3-molformer | seed+scaffold | -0.063 | [-0.140, +0.052] |
+| ChemBERTa-100M / matched-pooled | expert minus expert-shuffled | scaffold | +0.014 | [-0.107, +0.079] |
+| ChemBERTa-100M / matched-pooled | expert minus expert-shuffled | seed+scaffold | +0.014 | [-0.115, +0.098] |
+| ChemBERTa-100M / matched-pooled | expert minus quant-continuous | scaffold | -0.004 | [-0.122, +0.077] |
+| ChemBERTa-100M / matched-pooled | expert minus quant-continuous | seed+scaffold | -0.004 | [-0.138, +0.122] |
+| ChemBERTa-100M / matched-pooled | expert minus quant-binary | scaffold | +0.013 | [-0.111, +0.081] |
+| ChemBERTa-100M / matched-pooled | expert minus quant-binary | seed+scaffold | +0.013 | [-0.119, +0.108] |
+| ChemBERTa-100M / matched-pooled | expert minus untrained | scaffold | +0.034 | [-0.043, +0.082] |
+| ChemBERTa-100M / matched-pooled | expert minus untrained | seed+scaffold | +0.034 | [-0.058, +0.113] |
+| ChemBERTa-100M / matched-pooled | expert minus raw-chemberta100m | scaffold | +0.024 | [-0.055, +0.086] |
+| ChemBERTa-100M / matched-pooled | expert minus raw-chemberta100m | seed+scaffold | +0.024 | [-0.068, +0.096] |
+| ChemBERTa-100M / matched-pooled | quant-continuous minus quant-shuffled | scaffold | +0.032 | [-0.028, +0.098] |
+| ChemBERTa-100M / matched-pooled | quant-continuous minus quant-shuffled | seed+scaffold | +0.032 | [-0.077, +0.140] |
+| ChemBERTa-100M / matched-pooled | quant-binary minus quant-binary-shuffled | scaffold | +0.024 | [-0.054, +0.087] |
+| ChemBERTa-100M / matched-pooled | quant-binary minus quant-binary-shuffled | seed+scaffold | +0.024 | [-0.068, +0.108] |
+| ChemBERTa-100M / matched-pooled | quant-binary-shuffled minus expert-shuffled | scaffold | -0.022 | [-0.060, +0.013] |
+| ChemBERTa-100M / matched-pooled | quant-binary-shuffled minus expert-shuffled | seed+scaffold | -0.022 | [-0.091, +0.049] |
+| ChemBERTa-100M / matched-pooled | quant-continuous minus raw-chemberta100m | scaffold | +0.028 | [-0.067, +0.167] |
+| ChemBERTa-100M / matched-pooled | quant-continuous minus raw-chemberta100m | seed+scaffold | +0.028 | [-0.090, +0.175] |
+| ChemFM-1B / matched-pooled | expert minus expert-shuffled | scaffold | -0.022 | [-0.152, +0.054] |
+| ChemFM-1B / matched-pooled | expert minus expert-shuffled | seed+scaffold | -0.022 | [-0.183, +0.074] |
+| ChemFM-1B / matched-pooled | expert minus quant-continuous | scaffold | +0.062 | [-0.071, +0.128] |
+| ChemFM-1B / matched-pooled | expert minus quant-continuous | seed+scaffold | +0.062 | [-0.091, +0.163] |
+| ChemFM-1B / matched-pooled | expert minus quant-binary | scaffold | +0.011 | [-0.111, +0.098] |
+| ChemFM-1B / matched-pooled | expert minus quant-binary | seed+scaffold | +0.011 | [-0.138, +0.131] |
+| ChemFM-1B / matched-pooled | expert minus untrained | scaffold | +0.039 | [-0.050, +0.093] |
+| ChemFM-1B / matched-pooled | expert minus untrained | seed+scaffold | +0.039 | [-0.073, +0.135] |
+| ChemFM-1B / matched-pooled | expert minus raw-chemfm1b | scaffold | +0.104 | [-0.002, +0.179] |
+| ChemFM-1B / matched-pooled | expert minus raw-chemfm1b | seed+scaffold | +0.104 | [-0.017, +0.202] |
+| ChemFM-1B / matched-pooled | quant-continuous minus quant-shuffled | scaffold | -0.106 | [-0.149, -0.046] |
+| ChemFM-1B / matched-pooled | quant-continuous minus quant-shuffled | seed+scaffold | -0.106 | [-0.176, -0.021] |
+| ChemFM-1B / matched-pooled | quant-binary minus quant-binary-shuffled | scaffold | -0.041 | [-0.117, +0.048] |
+| ChemFM-1B / matched-pooled | quant-binary minus quant-binary-shuffled | seed+scaffold | -0.041 | [-0.139, +0.065] |
+| ChemFM-1B / matched-pooled | quant-binary-shuffled minus expert-shuffled | scaffold | +0.007 | [-0.057, +0.062] |
+| ChemFM-1B / matched-pooled | quant-binary-shuffled minus expert-shuffled | seed+scaffold | +0.007 | [-0.099, +0.095] |
+| ChemFM-1B / matched-pooled | quant-continuous minus raw-chemfm1b | scaffold | +0.042 | [-0.039, +0.133] |
+| ChemFM-1B / matched-pooled | quant-continuous minus raw-chemfm1b | seed+scaffold | +0.042 | [-0.049, +0.151] |
+| MolFormer-XL / context | expert minus expert-shuffled | scaffold | +0.025 | [-0.139, +0.311] |
+| MolFormer-XL / context | expert minus expert-shuffled | seed+scaffold | +0.025 | [-0.150, +0.347] |
+| MolFormer-XL / context | expert minus quant-pooled | scaffold | +0.261 | [+0.084, +0.511] |
+| MolFormer-XL / context | expert minus quant-pooled | seed+scaffold | +0.261 | [+0.067, +0.537] |
+| MolFormer-XL / context | expert minus quant-sa | scaffold | +0.169 | [-0.004, +0.454] |
+| MolFormer-XL / context | expert minus quant-sa | seed+scaffold | +0.169 | [-0.015, +0.471] |
+| MolFormer-XL / context | quant-pooled minus quant-sa | scaffold | -0.092 | [-0.142, -0.026] |
+| MolFormer-XL / context | quant-pooled minus quant-sa | seed+scaffold | -0.092 | [-0.159, -0.001] |
+| MolFormer-XL / context | quant-pooled minus quant-pooled-shuffled | scaffold | -0.174 | [-0.259, -0.061] |
+| MolFormer-XL / context | quant-pooled minus quant-pooled-shuffled | seed+scaffold | -0.174 | [-0.282, -0.040] |
+| MolFormer-XL / context | quant-sa minus quant-sa-shuffled | scaffold | -0.053 | [-0.172, +0.056] |
+| MolFormer-XL / context | quant-sa minus quant-sa-shuffled | seed+scaffold | -0.053 | [-0.187, +0.075] |
+| MolFormer-XL / context | expert minus raw-molformer | scaffold | +0.185 | [+0.056, +0.380] |
+| MolFormer-XL / context | expert minus raw-molformer | seed+scaffold | +0.185 | [+0.050, +0.404] |
+| MolFormer-XL / context | quant-pooled minus raw-molformer | scaffold | -0.076 | [-0.178, +0.047] |
+| MolFormer-XL / context | quant-pooled minus raw-molformer | seed+scaffold | -0.076 | [-0.186, +0.057] |
+| MolFormer-XL / matched-pooled | expert minus expert-shuffled | scaffold | -0.175 | [-0.258, -0.058] |
+| MolFormer-XL / matched-pooled | expert minus expert-shuffled | seed+scaffold | -0.175 | [-0.322, -0.024] |
+| MolFormer-XL / matched-pooled | expert minus quant-continuous | scaffold | +0.109 | [+0.007, +0.210] |
+| MolFormer-XL / matched-pooled | expert minus quant-continuous | seed+scaffold | +0.109 | [-0.001, +0.226] |
+| MolFormer-XL / matched-pooled | expert minus quant-binary | scaffold | -0.039 | [-0.139, +0.136] |
+| MolFormer-XL / matched-pooled | expert minus quant-binary | seed+scaffold | -0.039 | [-0.149, +0.148] |
+| MolFormer-XL / matched-pooled | expert minus untrained | scaffold | -0.060 | [-0.138, +0.037] |
+| MolFormer-XL / matched-pooled | expert minus untrained | seed+scaffold | -0.060 | [-0.187, +0.057] |
+| MolFormer-XL / matched-pooled | expert minus raw-molformer | scaffold | +0.005 | [-0.092, +0.109] |
+| MolFormer-XL / matched-pooled | expert minus raw-molformer | seed+scaffold | +0.005 | [-0.102, +0.115] |
+| MolFormer-XL / matched-pooled | quant-continuous minus quant-shuffled | scaffold | -0.107 | [-0.201, -0.042] |
+| MolFormer-XL / matched-pooled | quant-continuous minus quant-shuffled | seed+scaffold | -0.107 | [-0.228, -0.016] |
+| MolFormer-XL / matched-pooled | quant-binary minus quant-binary-shuffled | scaffold | -0.100 | [-0.290, -0.003] |
+| MolFormer-XL / matched-pooled | quant-binary minus quant-binary-shuffled | seed+scaffold | -0.100 | [-0.314, +0.033] |
+| MolFormer-XL / matched-pooled | quant-binary-shuffled minus expert-shuffled | scaffold | -0.036 | [-0.086, +0.051] |
+| MolFormer-XL / matched-pooled | quant-binary-shuffled minus expert-shuffled | seed+scaffold | -0.036 | [-0.148, +0.112] |
+| MolFormer-XL / matched-pooled | quant-continuous minus raw-molformer | scaffold | -0.104 | [-0.196, -0.012] |
+| MolFormer-XL / matched-pooled | quant-continuous minus raw-molformer | seed+scaffold | -0.104 | [-0.208, -0.003] |
+| MolFormer-XL / matched-sa | expert minus expert-shuffled | scaffold | +0.025 | [-0.139, +0.311] |
+| MolFormer-XL / matched-sa | expert minus expert-shuffled | seed+scaffold | +0.025 | [-0.150, +0.347] |
+| MolFormer-XL / matched-sa | expert minus quant-continuous | scaffold | +0.169 | [-0.004, +0.454] |
+| MolFormer-XL / matched-sa | expert minus quant-continuous | seed+scaffold | +0.169 | [-0.015, +0.471] |
+| MolFormer-XL / matched-sa | expert minus quant-binary | scaffold | +0.056 | [-0.126, +0.346] |
+| MolFormer-XL / matched-sa | expert minus quant-binary | seed+scaffold | +0.056 | [-0.143, +0.368] |
+| MolFormer-XL / matched-sa | expert minus untrained | scaffold | +0.109 | [-0.051, +0.354] |
+| MolFormer-XL / matched-sa | expert minus untrained | seed+scaffold | +0.109 | [-0.067, +0.392] |
+| MolFormer-XL / matched-sa | expert minus raw-molformer | scaffold | +0.185 | [+0.056, +0.380] |
+| MolFormer-XL / matched-sa | expert minus raw-molformer | seed+scaffold | +0.185 | [+0.050, +0.404] |
+| MolFormer-XL / matched-sa | quant-continuous minus quant-shuffled | scaffold | -0.053 | [-0.172, +0.056] |
+| MolFormer-XL / matched-sa | quant-continuous minus quant-shuffled | seed+scaffold | -0.053 | [-0.187, +0.075] |
+| MolFormer-XL / matched-sa | quant-continuous minus raw-molformer | scaffold | +0.016 | [-0.126, +0.144] |
+| MolFormer-XL / matched-sa | quant-continuous minus raw-molformer | seed+scaffold | +0.016 | [-0.127, +0.146] |
+
+Table S8. All Q-HERO extension contrasts with conditional-scaffold and nested seed/scaffold intervals. No multiplicity adjustment or post-hoc equivalence margin. Other targets and leave-one-scaffold-out loss ranges are supplied in analysis/contrasts.csv. Nested resampling of five seeds has limited precision and is a sensitivity analysis, not evidence from five independent datasets.
+
+S14. Cross-environment checks and descriptive visual comparisons
+
+All 486 v9 metric rows and paired scaffold-bootstrap intervals were independently recalculated on the second supplied server. A training reproduction on the first server gives small Q-HERO differences across PyTorch/scikit-learn versions; individual seed outputs are not bitwise reproducible. All original results remain authoritative, with server comparisons archived separately.
+
+Q-HERO row-level strain/protocol provenance is absent from the provided worksheet. Public programme-level descriptions support coordinated collection, without certifying identical assay conditions for every historical compound. Same-molecule context sensitivity changes organism mixture, censoring policy, record count and numerical aggregation together. Human denoising and laboratory-bias removal are not identified. Checkpoint metadata, feature hashes, target-fold assignments, paired initialisation hashes, source-identity hashes and complete prediction files accompany the extension.
+
+Figure S10. Chemical-space illustration from frozen MolFormer features, with per-molecule L2 normalisation and PCA fitted on source-training molecules. Joint t-SNE uses held-out structures solely for illustration; proximity does not establish transferability or causal mechanisms. Source validation reserves 15% of scaffold groups rather than 15% of molecules: in the pooled panel, 377 molecules are in training and 304 in validation.
+
+
+Figure S11. (a) Measured external MIC distributions by the predicted Good/Bad class of one archived direct expert checkpoint, threshold logit=0 fixed without target labels; Q-HERO-405 subset, descriptive and conditional on seed 0. These are model-predicted classes, not human annotations of external compounds. (b) Three-seed direct rank agreement from the original Q-HERO-411 cohort, with mean and seed standard deviation. No downstream target refitting in either panel; cohorts differ, and raw direct MIC calibration remains unvalidated.
+
+
+</pre></body></html>

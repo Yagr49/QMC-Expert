@@ -1,0 +1,23 @@
+{
+  "reviewer": "actual Claude CLI",
+  "execution": "local Mac",
+  "authorised": true,
+  "started_utc": "2026-10-14T09:33:05.739127+00:00",
+  "completed": true,
+  "prompt_sha256": "6cd63e0a85d1978db9c1191f2cb4c22442949215f807d6010e19034668e0387d",
+  "returncode": 0,
+  "model_usage": {
+    "claude-sonnet-4-6": {
+      "inputTokens": 3,
+      "outputTokens": 3762,
+      "cacheReadInputTokens": 0,
+      "cacheCreationInputTokens": 3349,
+      "webSearchRequests": 0,
+      "costUSD": 0.06899775,
+      "contextWindow": 200000,
+      "maxOutputTokens": 32000
+    }
+  },
+  "cost_usd": 0.06899775,
+  "seconds": 58.405421018600464
+}

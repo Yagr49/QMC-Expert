@@ -1,0 +1,52 @@
+{
+  "completed": true,
+  "native_rf_matches_archived_paper_code_to_1e_12": true,
+  "references_and_descriptor_frame_all107_smiles_identical": true,
+  "target_censoring_substitution_matches": true,
+  "test20_censored_as_exact_by_author": 2,
+  "conservative_source_overlap": [
+    {
+      "source": "expert1103",
+      "split": "newdata",
+      "comparison": "counterion-free and stereochemistry ignored",
+      "n_target_overlap": 1,
+      "author_indices": [
+        136
+      ],
+      "names": [
+        "Amethyl"
+      ]
+    },
+    {
+      "source": "expert1103",
+      "split": "test",
+      "comparison": "counterion-free and stereochemistry ignored",
+      "n_target_overlap": 0,
+      "author_indices": [],
+      "names": []
+    },
+    {
+      "source": "expert1103",
+      "split": "train",
+      "comparison": "counterion-free and stereochemistry ignored",
+      "n_target_overlap": 2,
+      "author_indices": [
+        119,
+        118
+      ],
+      "names": [
+        "COE2-3C-C3A-HEXYL",
+        "COE2-3C-C3A-PROPYL"
+      ]
+    }
+  ],
+  "scaler_stored_affine_max_abs_error": 4.76837158203125e-07,
+  "source_checkpoint_retrained_on_COE": false,
+  "catboost_test_tuning": false,
+  "old_quantitative_ft_not_used": "3/20 test cations overlap old quantitative FT sources",
+  "original_manuscript_modified": false,
+  "v20_files_unchanged_sha256": {
+    "2026_10_13_Paper_2_edited-v20_soft_contrastive_figure.docx": "ec04c62b29d7305a6c29711d2efe70780c663d04bc45d93d3389a08d27c27847",
+    "reproducibility/revision_v20/Supplementary_Information_v20.docx": "04f95ec9224f994c881c5d09c8f5036bbd607ffa1a28ec3c884a238c7d4af048"
+  }
+}

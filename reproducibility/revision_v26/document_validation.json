@@ -1,0 +1,33 @@
+{
+  "completed": true,
+  "documents": [
+    {
+      "path": "/Users/egorilin/Desktop/COMA/2026_10_14_Paper_2_edited-v26_OOD_and_interpretation.docx",
+      "drawings": 9,
+      "sha256": "05b8e299c203d21481eeecbee518e4801c5e3f86b9228e1953c793280240e4eb",
+      "XML_relationships_styles_valid": true
+    },
+    {
+      "path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v26/Supplementary_Information_v26.docx",
+      "drawings": 35,
+      "sha256": "5458eb442d4a40216e99ddf813343df8cf8c238c584119915135154deaf3cf4a",
+      "XML_relationships_styles_valid": true
+    }
+  ],
+  "original_v5_unmodified": true,
+  "introduction_sections2_1_2_2_verbatim_preserved": true,
+  "chemistry_and_synthesis_schemes_verbatim_preserved": true,
+  "experimental_section_and_references_verbatim_preserved": true,
+  "all_prior_SI_blocks_preserved": true,
+  "SI_tables": 51,
+  "SI_figures": 35,
+  "main_figures": 9,
+  "original_OOD_and_information_flow_bitmaps_archived_exactly": true,
+  "OOD_exact_67_bound_retained": true,
+  "all_603_violin_values_verified": true,
+  "compact_OOD_mean_sampleSD_recomputed": true,
+  "CKA_and_probe_statements_verified": true,
+  "unsupported_causal_equivalence_removed_from_main": true,
+  "conclusion_consistent_with_revised_evidence": true,
+  "no_new_model_fits": true
+}

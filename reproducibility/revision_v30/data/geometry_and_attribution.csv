@@ -1,0 +1,8 @@
+analysis,value,SD
+CKA reference,0.933243,
+CKA OOD,0.945559,
+Probe raw to human,0.890919,0.036773
+Probe human to raw,0.844077,0.060385
+SHAP raw,2.9301,
+SHAP human,0.6359,
+SHAP task,0.7605,

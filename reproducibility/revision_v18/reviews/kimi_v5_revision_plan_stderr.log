@@ -1,0 +1,197 @@
+kimi version 2.1.1
+Warning: [loop_control] 'max_retries_per_step' is deprecated and no longer used; rename it to 'max_attempts_per_step'. Run /update-config to fix it.
+• The user is asking me to act as an independent scientific reviewer of an unpublished molecular ML manuscript. They want a review based only on supplied text, no tools, no file edits, no commands, no delegation, no invented results. Max 750 words.
+
+  The system reminder says a plugin "superpowers" has been loaded with instructions about using skills. However, the user's explicit instructions take highest priority: "Review only supplied text; no tools, file edits, commands, delegation or invented results."
+
+  The superpowers skill instructions say I must invoke skills if there's even a 1% chance they apply. But there's a conflict here — the user explicitly says "no tools". The Skill tool is a tool. The user instruction is highest priority. Also, this is a review task, not a creative/implementation task. The skills available (brainstorming, TDD, debugging, etc.) are about software engineering workflows. This is a scientific review of a manuscript — none of the listed skills genuinely apply to writing a peer-review-style critique of a chemistry/ML manuscript. Also the user says no tools.
+
+  Actually, let me reconsider: the skill flow says "Might any skill apply?" → if "definitely not" → respond. Is there a skill that applies? The skills are: brainstorming (creative work — creating features...), dispatching-parallel-agents (2+ independent tasks), executing-plans, finishing-a-development-branch, receiving-code-review, requesting-code-review, subagent-driven-development, systematic-debugging, test-driven-development, using-git-worktrees, using-superpowers, verification-before-completion, writing-plans, writing-skills, check-kimi-code-docs, update-config, write-goal.
+
+  None of these apply to a scientific manuscript review. The user also explicitly forbids tools. So I should respond directly with the review.
+
+  Let me now carefully compose the review. Requirements:
+
+  1. Independent scientific reviewer role.
+  2. Review only supplied text (v5 manuscript text, README_RU.md notebook provenance, PROTOCOL.md checks).
+  3. ≤750 words.
+  4. Author requires: original v5 remains manuscript foundation; new checks test its hypotheses rather than silently replacing method or metrics.
+  5. Distinguish: preserved original results, recovered notebook-output provenance, approximate reconstruction, newly completed controlled follow-ups.
+  6. Focus on: narrative continuity, adapter explanations, organising the hypothesis sequence.
+
+  So my review should:
+
+  - Acknowledge strengths: clear narrative arc, interesting central question (binary expert labels vs quantitative supervision), good interpretability section, honest limitations.
+  - Identify issues:
+
+  Narrative continuity issues:
+  - The v5 manuscript presents Tables 1–2 with specific R² values. The README reveals provenance: 7 of 8 human multitask R² values match saved notebook outputs after rounding, but the Ec MIC text-embedding value in the notebook is 0.5918 which rounds to 0.59, not 0.60 as printed in Table 2. Also RMSE values for those cells were calculated but not printed — so Table 1/2 RMSE provenance is not fully recovered.
+  - OOD RMSE: manuscript reports 2.31 / 2.19 / 2.13 (raw/human/regression). May bootstrap CSV gives regression = 2.276, July notebook gives 2.133. So 2.13 has a source; 2.276 vs 2.133 discrepancy must be disclosed — two archival calculations with different results.
+  - One-hot vs categorical: caption says one-hot encoding, but the recovered notebook cell 20 passes task_id to CatBoost as a categorical feature, not one-hot. Text–caption mismatch.
+  - April seed-selection notebook (best seed 79 chosen among 0–99) — post-selection bias risk; not yet established to be involved in Table 1/2 numbers, but needs disclosure if it was.
+  - The "one-hot" explanation for adapters: the text says one-hot categorical labels; the notebook shows a single categorical task_id column. Also "encoded classes" uses OpenAI text embeddings — but the old OpenAI cache is absent; H1 uses reconstructed cell-8 task vectors, explicitly different from the cell-17 descriptions behind some saved outputs. So the adapter explanation in v5 conflates at least three things: (a) adding task identity at all, (b) one-hot vs categorical encoding, (c) text embeddings of class descriptions. The "encoded classes" row may not be reproducible as described without the original cache.
+
+  Adapter explanations (the "encoded classes" / class-description embeddings):
+  - The manuscript claims text embeddings of class descriptions outperform one-hot, attributed to semantic proximity of species/activity types. But with only four endpoints, a 1536-d embedding of a short description risks carrying mostly nuisance variation; H4 will test encoding-dependent prediction with random codes and permuted codes — good. The v5 explanation ("semantic proximity precisely what one-hot discards") is plausible but untested; recommend presenting it as hypothesis and citing the follow-up.
+  - Also, "OpenAI text-embedding model" is unspecified (which model? ada-002? 3-small? 1536-d? version-dependent, non-reproducible). Version pinning and availability matter.
+  - The TwinBooster citation needs full reference.
+
+  Organising the hypothesis sequence:
+  - The current Results flow: 2.1 guidance models → 2.2 QAC training incl. the quantitative corpus comparison → 2.3 OOD → 2.4 understanding embeddings. The interpretability section (2.4) includes the equivalence ablation, which is the strongest causal claim, but it's placed after the OOD narrative and partially repeats conclusion material. Recommend reordering: (i) representation/adapter ablations (one-hot vs text vs categorical) as hypothesis tests; (ii) supervision-source equivalence; (iii) OOD generalization; (iv) interpretability synthesis. Or keep but explicitly signpost.
+  - The Conclusion has three "conclusions" but the text labels First, then an unlabeled second paragraph (the equivalence), then Third. Numbering inconsistency: "First... Third..." with an unnumbered second.
+  - H1–H6 protocol is clear; recommend mapping each manuscript claim to H1–H6 explicitly in a provenance table (claim → source class: preserved original / recovered notebook output / approximate reconstruction / controlled follow-up). E.g., Table 2 human rows = recovered notebook outputs (cell 20); the multi-regression encoder row in Table 2 = the unlocated checkpoint — Protocol itself says the saved QAC-binned encoder is NOT the checkpoint behind Table 2's multi-regression numbers. That's a significant provenance gap: Table 2's quantitative-trained embedding rows cannot currently be traced to a recovered artifact; they are preserved original results without recovered provenance.
+  - Also class imbalance: 2.1 says Borderline SMOTE (strategy 0.8) during encoder training; H3 says controlled follow-up uses no SMOTE. Fine, but v5 text must remain explicit that SMOTE was used in the original (it is).
+  - Numbers: "1,500 binary judgements" vs "1,100 expert binary annotations" (2.2 says embeddings trained on 1,100 expert binary annotations) vs abstract "1,500". Discrepancy: 1,500 dataset vs 1,100 used in encoder training. Needs explanation (train/val split?).
+  - "~10,000 quantitative measurements" vs "more than 18000 individual entries" vs "1559 unique molecules". Clarify which number anchors the comparison.
+  - Abstract claims "1,500 binary human judgements rival ~10,000 quantitative measurements... surpassing on Gram-negative endpoint" but the saved notebook value 0.5918 rounds to 0.59, while 0.60 is printed — so the "surpass" claim (0.60 vs 0.58) depends on a rounding-up discrepancy. Must be corrected or justified (maybe a different cell/variant). This is the single most important numeric integrity point.
+  - CKA 0.93/0.95, probing ~90%, SHAP totals — from causal_final notebook (May 25, 05:10) — recovered provenance, good.
+  - Causal forest: negative ATE −0.015 with CI [−0.43, +0.32] claimed as equivalence (TOST argument). But equivalence bounds should be prespecified ±0.5 (half of ±1 dilution?). Actually text says "any difference smaller than half the assay resolution" — CI width ±0.43 within ±0.5. The argument is okay but note the bootstrap function resamples endpoint residuals not molecule clusters, while the causal forest clusters at molecule level — minor inconsistency worth noting; Protocol notes paired intervals should resample whole scaffold groups and paired source seeds. Recommend aligning resampling unit.
+  - Manuscript says causal-forest CATE no dependence on subtype — with 17 molecules, 4 families, CATE estimation is fragile; temper claims.
+  - The v5 text says 17 OOD compounds; the label-free OOD performance claims rest on 17 molecules × 4 endpoints = 68 points (Protocol says 67 exact endpoints + 1 bound). Small-sample caution.
+
+  Also narrative continuity between v5 and the revision:
+  - The manuscript's contribution numbering (three contributions) vs conclusion's First/Third mismatch.
+  - "Guidance learning, Causal Inference" keywords fine.
+  - The reference 53 (previous work) cited as "53." with a stray period.
+  - Author list typos: "ioc.ac,ru", "Elizabeth Sonc" (incomplete name?), stray "a,b" superscript issues. Minor.
+  - Title mentions "Guidance learning"; consistent.
+
+  Structure of my review (≤750 words). Let me draft sections:
+
+  1. Summary/overall assessment (2-3 sentences).
+  2. Provenance integrity — what must be flagged (distinguish four classes). Key points: 0.60 vs 0.5918; one-hot vs categorical; 2.276 vs 2.133 two archival calculations; Table 2 multi-regression checkpoint unlocated; seed-79 selection disclosure.
+  3. Narrative continuity: numbering of conclusions; 1,500 vs 1,100; 10,000 vs 18,000; adapter explanation needs reframing as hypothesis with H4 follow-up; OpenAI model unspecified.
+  4. Hypothesis sequence organisation: recommend explicit claim→evidence→check mapping; reorder or signpost 2.4; keep Tables 1–2 in main paper (per author's constraint) with a provenance note; resampling unit alignment; temper 17-molecule CATE claims.
+  5. Minor: typos, references.
+
+  Word budget ~750. Let me write concisely.
+
+  Also I should respect "Review only supplied text" — everything I reference comes from the three supplied sources. Good.
+
+  Let me be careful with the rounding point: README says cell 20 saved human contrastive + OpenAI class vectors: Ec MIC R² = 0.5918; manuscript Table 2 says 0.60. "Обычное округление даёт 0.59, а не 0.60" — normal rounding gives 0.59. So manuscript's 0.60 either comes from a different variant/cell or is a transcription error. The "surpasses quantitative (0.58)" claim hinges on this. Must flag.
+
+  Also Table 1's first multitask Catboost row (0.43 for Ec MIC) matches 0.4269. Fine.
+
+  Another continuity item: Abstract says "roughly 10,000 quantitative measurements" but 2.2 describes ~18,000 entries; and "1,500 binary judgements" vs "1,100 expert binary annotations". Also "an order of magnitude larger" — 10,000 vs 1,500 is ~6.7×; vs 1,100 ~9×. "Order of magnitude" is loose; with 1,100 it's defensible, with 1,500 less so. Flag.
+
+  Also H1 mentions "original 108 worksheet rows" and decoder 500/depth6/.05/42 — the manuscript doesn't describe this GBM hyperparameterization (Table says CatBoost). Actually the manuscript's Table 1/2 models are "Catboost"; H1's "decoder 500/depth6/.05/42" sounds like LightGBM/XGBoost params. Hmm — 500 estimators, depth 6, learning rate 0.05, seed 42 — those could be LightGBM params. But manuscript says Catboost. That could be a naming discrepancy between the manuscript's "Catboost" label and the actual notebook model. The README doesn't state the model type in cell 20. I can't verify; but I can note: Protocol H1's decoder spec (500/depth6/.05/42) should be reconciled with the manuscript's "Catboost" label — flag as a check, not an accusation. Good, cautious phrasing.
+
+  Also "Multitask MLP" row in Table 1: manuscript text says "re-evaluated our previously reported approach while including species and activity type as inputs" — narrative continuity with previous work is good there.
+
+  The adapter explanation: The manuscript frames one-hot → text embeddings as a progression ("even better performance"). The recovered code shows a categorical task_id; so the "one-hot" story is inaccurate as told. H4 will compare categorical/one-hot/text/random/permutation — so the revision can present the v5 result, note the encoding discrepancy in a provenance note, and let H4 adjudicate. Recommend explicitly: keep the original numbers (author constraint), add a methods footnote.
+
+  Also "encoded classes" uses OpenAI embeddings of what text exactly? Cell 8 vs cell 17 descriptions differ; H1 uses reconstructed cell-8 vectors. The manuscript never quotes the class-description strings. Recommend publishing the four description strings in SI — crucial for reproducibility and for the H4 permutation test.
+
+  Equivalence claim: the manuscript presents TOST-style reasoning; recommend also reporting the actual TOST p-values or keeping CI framing, and prespecifying the margin (half dilution = ±0.5 log2 units... actually one two-fold dilution = 1.0 log2 unit; half = 0.5). CI [−0.43, 0.32] within ±0.5 → passes at 95%? TOST at α=0.05 corresponds to 90% CI. The text says "conservative relative to the 90% interval required by TOST" — fine.
+
+  Resampling unit: boot_delta_rmse resamples endpoint residuals, not molecule clusters; the causal analysis clusters at molecule level. The manuscript's bootstrap CIs on RMSE deltas (where reported) should use molecule-cluster resampling per Protocol. Flag.
+
+  Also the "66% of pairs favour expert encoder" descriptive stat — with molecule-cluster correlation, binomial framing invalid; minor.
+
+  Conclusion duplicate paragraph issue: the Conclusion contains what looks like a duplicated/merged draft: "First... 1500..." paragraph then another long paragraph re-stating equivalence with "This is not a failure to detect a difference..." then "Third...". There are three conclusions but the second lacks a "Second" label. Flag as editorial.
+
+  Also Figure 5 text: "translucent bars indicate accuracy within the range of 1 nearest class" — fine.
+
+  Also "S. aureus ATCC 4300" in table headers vs "ATCC 43300" in intro — typo (4300 vs 43300). Flag! The table headers say "S. aureus ATCC 4300" but the introduction says ATCC 43300. That's a real inconsistency. E. coli ATCC 25922 consistent.
+
+  Also strain note: ATCC 43300 is MRSA; fine.
+
+  Also "1.36(R2=0.20)" missing space — trivial, skip.
+
+  Keywords: "Antibacterials, Guidance learning, Causal Inference" capitalization inconsistent; skip or one line.
+
+  Now the hypothesis sequence organisation recommendation:
+
+  Current Results order is acceptable narratively (representation → task adapters → supervision source → OOD → interpretability), but the interpretability section contains a second, stronger supervision experiment (binned-regression ablation) that duplicates the 2.2 comparison at a different scale. Recommend one of two structures:
+
+  Option A (keep order): add explicit signposting in 2.2 that the equivalence claim is revisited under controlled ablation in 2.4; in 2.4 reference back rather than re-derive.
+  Option B (reorder): 2.2a task-adapter comparison (one-hot/categorical/text) framed as H2/H4 test; 2.2b supervision-source comparison (H3); then OOD (H1/H2); then interpretability (H5/H6) as synthesis.
+
+  Recommend a claim→check table in SI mapping each v5 claim to H1–H6 and provenance class. This directly satisfies the "distinguish preserved original / recovered provenance / approximate reconstruction / new follow-ups" requirement.
+
+  Also recommend: label the 2.13 vs 2.276 issue in text or SI ("two archival computations of the regression-encoder OOD RMSE exist; the manuscript value derives from the July recalculation").
+
+  Also the manuscript says "roughly 90% of the variance in the embedding can be recovered by a linear function of the MolFormer features, and vice versa" — fine, recovered from causal_final.
+
+  Also note: 2.4 says SHAP on "multitask gradient-boosting model on MolFormer features and human embeddings together" — block attribution ratio 0.22; the explanation about dimensionality (3× lower dimension → 3× lower total attribution; 2.93/768=0.0038 per coord; 0.64/256=0.0025 per coord — "comparable weight" is approximately right, ~65%). Fine, but the phrase "per coordinate comparable" could be stated with numbers.
+
+  Also potential circularity: "the encoder preserves geometry (CKA 0.93)" yet "contrastive refinement raised silhouette 15-fold" — both can be true (local reorganization within preserved global geometry), but the manuscript should state this reconciliation explicitly to avoid reader confusion. Good narrative-continuity point.
+
+  Also: 2.1 says MolFormer best F1 0.655 and accuracy 0.856; "near-random F1 ≤0.50" for others despite moderate accuracy — flagged as majority-class bias; fine.
+
+  The expert label criteria mention cytotoxicity/cost "considered where possible" — but the parity claim then partly reflects non-model features (toxicity etc.) — the manuscript itself acknowledges this in 2.2 ("occasionally considerations outside the model's feature space"). Good; keep, but make sure the "harmonisation operator" claim in the Conclusion doesn't overreach: the equivalence bound is on the 17-molecule OOD set only for the ablation, while parity on Table 2 is in-domain 105 salts. Distinguish scopes. The Conclusion's "statistically equivalent" refers to OOD ablation; the "rivals on three of four endpoints" refers to Table 2 in-domain. The narrative sometimes blends them ("corroborating, from the causal side, the equivalence already observed against the ten-fold larger corpus") — acceptable but scope should be crisp.
+
+  Now, length. 750 words max. Let me allocate:
+
+  - Overall assessment: ~60 words
+  - Provenance & numeric integrity: ~220 words
+  - Narrative continuity & adapter explanation: ~180 words
+  - Hypothesis sequence: ~180 words
+  - Minor/editorial: ~60 words
+
+  Total ~700. Good.
+
+  Format: The user says text replies render as Markdown in terminal; keep structure light. Use a few bolded section labels or short headings, bullets where helpful. Cite locations as section numbers of the manuscript.
+
+  I must not use tools. The system says "Review only supplied text; no tools..." — so my final message is the review itself. No tool calls. The superpowers instructions demand skill invocation, but no listed skill applies to a manuscript review, and the user forbids tools. I'll proceed directly.
+
+  Let me write the review now, watching word count.
+
+  Draft:
+
+  **Overall assessment**
+
+  The manuscript poses a genuine, well-motivated question — whether coarse expert binary judgements can substitute for quantitative supervision in learning molecular representations — and answers it with an unusual combination of representation learning, controlled comparison, and interpretability. The narrative arc from prior work (ref 53) to guidance learning to mechanistic analysis is compelling, and the interpretability section is a strength. My comments concern integrity of the number–code linkage, accuracy of the "adapter" story, and sequencing of the follow-up hypotheses; none undermines the core claims, but several require explicit provenance notes to remain defensible.
+
+  **Provenance: what the v5 numbers can and cannot claim**
+
+  Recovered notebook outputs support most, not all, of Table 1/2. In the 24 May notebook cell 20, the saved human-embedding multitask R² values match the manuscript on 7/8 endpoints; the exception is critical: the saved E. coli MIC value for the OpenAI-encoded variant is 0.5918, which rounds to 0.59, not the 0.60 printed in Table 2. Since the manuscript's "surpasses the quantitative corpus on the hardest endpoint" claim rests on 0.60 vs 0.58, this must be resolved — trace 0.60 to its cell/variant or correct it — before the abstract's claim can stand. The corresponding RMSEs were computed but never printed, so Table 1/2 RMSE values remain preserved original results without recovered provenance.
+
+  For OOD RMSE 2.31/2.19/2.13: the manuscript's 2.13 derives from the later (July) recalculation; the May bootstrap CSV yields 2.276. Both are archival; the discrepancy must be disclosed, not silently resolved toward either. Similarly, Table 2's quantitative-trained embedding row comes from a checkpoint that has not been located; the archived binned-regression encoder is a different artifact. The seed-selection notebook (best seed 79 of 0–99) must be disclosed wherever its split influenced evaluation.
+
+  **Narrative continuity and the adapter explanation**
+
+  The manuscript's adapter progression — descriptors → one-hot task labels → text-embedded class descriptions — is told inaccurately. The recovered code passes a single categorical task_id column to CatBoost, not one-hot indicators; the one-hot story is therefore a reconstruction, not the preserved method. Recommend: keep the original numbers (per your constraint), add a methods footnote stating the encoding as actually implemented, publish the four class-description strings in SI, specify the OpenAI model/version, and let H4 (categorical/one-hot/text/random/permuted codes) adjudicate the semantic-proximity explanation, which is currently asserted rather than tested.
+
+  Other continuity items: the dataset is 1,500 labels but the encoder used 1,100 — reconcile; the quantitative corpus is described as ~10,000 measurements in the headline claim but >18,000 entries in 2.2 — anchor one number; "order of magnitude" is loose against 1,500; Table headers give S. aureus ATCC 4300 vs ATCC 43300 in the text; the Conclusion's three conclusions are numbered First and Third with an unlabeled middle paragraph — one of which partially duplicates 2.4.
+
+  **Organising the hypothesis sequence**
+
+  The Results order is broadly right, but 2.4 silently re-runs the supervision-source comparison (binned-regression ablation) at a different scale than 2.2, and the strongest causal claim is buried after the OOD narrative. Recommend either (a) signposting 2.2 → 2.4 explicitly, or (b) reordering: task-adapter comparison (H2/H4) → supervision-source equivalence (H3) → OOD generalisation (H1/H2) → interpretability synthesis (H5/H6). Add an SI claim→check table mapping each v5 claim to its H-number and provenance class (preserved original / recovered output / approximate reconstruction / controlled follow-up) — this satisfies your own provenance requirement and pre-empts reviewer suspicion.
+
+  Two statistical points: the bootstrap behind the RMSE deltas resamples endpoint residuals while the causal analysis clusters at molecule level — align resampling to whole molecules/scaffold groups per the protocol; and CATE/subtype claims rest on 17 molecules (67 exact endpoints), so the "no subpopulation" conclusion should be stated as a bound, not an absence. Finally, the CKA-0.93 "preserved geometry" and silhouette 0.007→0.108 "reorganisation" results should be explicitly reconciled (global preservation, local sharpening) to avoid apparent self-contradiction.
+
+  **Minor**: complete the TwinBooster reference; fix "ioc.ac,ru"; check author name "Elizabeth Sonc"; the H1 decoder spec (500/depth6/.05/42) should be reconciled with the manuscript's "Catboost" label.
+
+  Let me count words roughly. I'll estimate: overall ~75; provenance ~230; narrative ~210; hypothesis ~210; minor ~35. Total ~760. Slightly over; trim. Target ≤750. I'll tighten a few sentences.
+
+  I need to double check facts I'm citing:
+  - 0.5918 → 0.59 not 0.60 ✓ (README)
+  - RMSE not printed in cell 20 ✓
+  - July notebook regression = 2.133; May CSV regression = 2.276 ✓
+  - one-hot caption vs categorical feature in cell 20 ✓
+  - seed 79 ✓
+  - 1,100 vs 1,500 ✓ (manuscript 2.2 says "embeddings trained on 1,100 expert binary annotations"; abstract/conclusion say 1,500)
+  - ~10,000 vs 18,000 ✓
+  - ATCC 4300 in table headers ✓ ("S. aureus ATCC 4300" in Table 1 and Table 2 headers) vs 43300 in intro ✓
+  - Conclusion numbering: "First... ", then a paragraph starting "Embeddings trained on only 1,500..." (unlabeled, would be Second), then "Third..." ✓
+  - boot_delta_rmse resamples endpoint residuals, not molecule clusters ✓ (README); Protocol says paired intervals resample whole scaffold groups ✓
+  - 17 OOD molecules, 67 exact endpoints + 1 bound ✓ (Protocol)
+  - CKA 0.93/0.95, silhouette 0.007→0.108 ✓ (manuscript)
+  - Table 2 multi-regression checkpoint unlocated; analysis/encoder_reg_only.pth is a distinct QAC-binned ablation ✓ (Protocol)
+  - Cell 8 vs cell 17 task vectors; old OpenAI cache absent ✓ (Protocol)
+  - TwinBooster cited as "[TwinBooster, JCIM 2024]" inline, needs full ref ✓
+  - "Elizabeth Sonc" — appears incomplete; cautious "check" ✓
+  - H1 decoder 500/depth6/.05/42 — Protocol; manuscript says Catboost ✓
+
+  All grounded in supplied text. Good.
+
+  One more: the manuscript says bootstrap for SHAP CI [0.62,0.65] "stable across bootstrap resampling" — fine.
+
+  Also "Guidance learning" keyword capitalization — skip for space.
+
+  Trim to ≤750. Let me finalize with modest tightening. I'll aim ~730.
+
+  Format check: light headings (bold), bullets in one section maybe. Keep it readable in terminal. I'll use short bold section headers and mostly paragraphs, one bullet list for continuity items.
+
+To resume this session: kimi -r session_05ca298a-3e45-41be-a9b3-75f13645457b

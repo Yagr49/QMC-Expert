@@ -1,0 +1,13 @@
+{
+  "kimi": "two completed external reviews, v9 and extension",
+  "claude": "awaiting user login; CLI installed, auth status false; approval already granted",
+  "kimi_review_corrections": [
+    "Protocol was exploratory and not preregistered; referee introductory claim is incorrect",
+    "Direct three-seed means exist in runs_direct.jsonl; seed-0 bootstrap is a separate sensitivity",
+    "Non-significant difference does not establish equality; wording strictly dominated limited to one panel and decoder",
+    "No blinded independent reanalysis was performed by Kimi; prompt contained code and summaries",
+    "v10 reviewer misattributes QMR replicate audit to Wuest/Minbiole; rejected",
+    "MolFormer and c3 are separate pretrained checkpoints of one architecture, not independent architectures",
+    "Context expert/SA/untrained runs deterministically repeat prior529panel; not independent replication"
+  ]
+}

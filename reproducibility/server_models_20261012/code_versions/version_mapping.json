@@ -1,0 +1,27 @@
+[
+  {
+    "model": "catboost",
+    "code": "run_baselines_b5625ff835c9b7e67210341481ea101d8ad21182aafb4793e3799032876e6e4c.py",
+    "protocol": "PROTOCOL_5f594657f0f57f27e3b61d041771286405dc01bc4460ebd198c5b88b462f52f3.md"
+  },
+  {
+    "model": "autogluon",
+    "code": "run_baselines_03d6f0d5784a582bbd1de5b8533effdf210cfb49be93814cfa3f9fa2d5901bef.py",
+    "protocol": "PROTOCOL_a5ad414626a61856249aa0177412ae1ab895ce2f720a9ade8d6d758a5c800ae1.md"
+  },
+  {
+    "model": "tabpfn",
+    "code": "run_baselines_201176cb299627ff78ecaad834ce82b94df0759d4481a369566239537bd48c32.py",
+    "protocol": "PROTOCOL_ddace39f9ac8af5277fcee6b48118a687ecc39d53da515f023513603d61a52ba.md"
+  },
+  {
+    "model": "tabfm",
+    "code": "run_baselines_201176cb299627ff78ecaad834ce82b94df0759d4481a369566239537bd48c32.py",
+    "protocol": "PROTOCOL_de8915b2aa6674902e3e0719b7be57491284316a3478d3d8e174a3359fc2ec1a.md"
+  },
+  {
+    "model": "chemprop",
+    "code": "run_baselines_201176cb299627ff78ecaad834ce82b94df0759d4481a369566239537bd48c32.py",
+    "protocol": "PROTOCOL_ddace39f9ac8af5277fcee6b48118a687ecc39d53da515f023513603d61a52ba.md"
+  }
+]

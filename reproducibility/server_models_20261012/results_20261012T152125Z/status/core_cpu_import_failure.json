@@ -1,0 +1,181 @@
+{
+  "jobs": {
+    "repeat_qac105_cation": {
+      "state": "failed",
+      "started": "2026-10-12T01:39:23.231022+00:00",
+      "command": [
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/core_v14/run_comparisons.py"
+      ],
+      "pid": 2459572,
+      "exit_code": 1,
+      "finished": "2026-10-12T01:39:23.335393+00:00"
+    },
+    "repeat_qac105_scaffold": {
+      "state": "failed",
+      "started": "2026-10-12T01:39:23.335577+00:00",
+      "command": [
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/core_v14/run_scaffold_sensitivity.py"
+      ],
+      "pid": 2459587,
+      "exit_code": 1,
+      "finished": "2026-10-12T01:39:23.437173+00:00"
+    },
+    "repeat_frozen_molformer": {
+      "state": "failed",
+      "started": "2026-10-12T01:39:23.437429+00:00",
+      "command": [
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/core_frozen/run_extension.py",
+        "--panels",
+        "matched-pooled",
+        "matched-sa",
+        "--features",
+        "/home/yagr/coma_models_check_20261012/core_frozen/data/molformer.npy",
+        "--backbone",
+        "molformer",
+        "--device",
+        "cpu",
+        "--seeds",
+        "5",
+        "--fold-file",
+        "/home/yagr/coma_models_check_20261012/core_frozen/data/target_folds.csv",
+        "--output-dir",
+        "/home/yagr/coma_models_check_20261012/core_frozen/results_molformer"
+      ],
+      "pid": 2459596,
+      "exit_code": 1,
+      "finished": "2026-10-12T01:39:23.539594+00:00"
+    },
+    "repeat_frozen_c3-molformer": {
+      "state": "failed",
+      "started": "2026-10-12T01:39:23.539881+00:00",
+      "command": [
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/core_frozen/run_extension.py",
+        "--panels",
+        "matched-pooled",
+        "matched-sa",
+        "--features",
+        "/home/yagr/coma_models_check_20261012/core_frozen/data/c3-molformer.npy",
+        "--backbone",
+        "c3-molformer",
+        "--device",
+        "cpu",
+        "--seeds",
+        "5",
+        "--fold-file",
+        "/home/yagr/coma_models_check_20261012/core_frozen/data/target_folds.csv",
+        "--output-dir",
+        "/home/yagr/coma_models_check_20261012/core_frozen/results_c3-molformer"
+      ],
+      "pid": 2459602,
+      "exit_code": 1,
+      "finished": "2026-10-12T01:39:23.645033+00:00"
+    },
+    "repeat_frozen_chemberta100m": {
+      "state": "failed",
+      "started": "2026-10-12T01:39:23.645355+00:00",
+      "command": [
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/core_frozen/run_extension.py",
+        "--panels",
+        "matched-pooled",
+        "matched-sa",
+        "--features",
+        "/home/yagr/coma_models_check_20261012/core_frozen/data/chemberta100m.npy",
+        "--backbone",
+        "chemberta100m",
+        "--device",
+        "cpu",
+        "--seeds",
+        "5",
+        "--fold-file",
+        "/home/yagr/coma_models_check_20261012/core_frozen/data/target_folds.csv",
+        "--output-dir",
+        "/home/yagr/coma_models_check_20261012/core_frozen/results_chemberta100m"
+      ],
+      "pid": 2459607,
+      "exit_code": 1,
+      "finished": "2026-10-12T01:39:23.747651+00:00"
+    },
+    "repeat_frozen_chemfm1b": {
+      "state": "failed",
+      "started": "2026-10-12T01:39:23.747953+00:00",
+      "command": [
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/core_frozen/run_extension.py",
+        "--panels",
+        "matched-pooled",
+        "matched-sa",
+        "--features",
+        "/home/yagr/coma_models_check_20261012/core_frozen/data/chemfm1b.npy",
+        "--backbone",
+        "chemfm1b",
+        "--device",
+        "cpu",
+        "--seeds",
+        "5",
+        "--fold-file",
+        "/home/yagr/coma_models_check_20261012/core_frozen/data/target_folds.csv",
+        "--output-dir",
+        "/home/yagr/coma_models_check_20261012/core_frozen/results_chemfm1b"
+      ],
+      "pid": 2459612,
+      "exit_code": 1,
+      "finished": "2026-10-12T01:39:23.851229+00:00"
+    },
+    "repeat_context529": {
+      "state": "failed",
+      "started": "2026-10-12T01:39:23.851526+00:00",
+      "command": [
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/core_frozen/run_extension.py",
+        "--panels",
+        "context",
+        "--device",
+        "cpu",
+        "--seeds",
+        "5",
+        "--fold-file",
+        "/home/yagr/coma_models_check_20261012/core_frozen/data/target_folds.csv",
+        "--output-dir",
+        "/home/yagr/coma_models_check_20261012/core_frozen/results_context"
+      ],
+      "pid": 2459617,
+      "exit_code": 1,
+      "finished": "2026-10-12T01:39:23.941531+00:00"
+    },
+    "retrained_qac105_cation": {
+      "state": "running",
+      "started": "2026-10-12T01:39:23.941851+00:00",
+      "command": [
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/wait_and_run.py",
+        "--marker",
+        "status/retrained_vectors.ready",
+        "--lane",
+        "gpu",
+        "--",
+        "/home/yagr/anaconda3/bin/python",
+        "-s",
+        "/home/yagr/coma_models_check_20261012/retrained_v14/run_comparisons.py"
+      ],
+      "pid": 2459622
+    }
+  },
+  "lane": "core_cpu",
+  "pid": 2459567,
+  "started": "2026-10-12T01:39:23.230930+00:00",
+  "state": "running",
+  "current_job": "retrained_qac105_cation"
+}

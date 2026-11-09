@@ -1,0 +1,37 @@
+{
+  "model": "text-embedding-3-small",
+  "provider": "OpenAI",
+  "requested_via": "OpenRouter",
+  "shape": [
+    4,
+    1536
+  ],
+  "dtype": "float32",
+  "tasks": [
+    {
+      "id": "Sa_MIC",
+      "text": "Minimum Inhibitory Concentration against Staphylococcus aureus ATCC 43300, a methicillin-resistant Gram-positive bacterium. MIC measures the lowest concentration that inhibits visible bacterial growth."
+    },
+    {
+      "id": "Sa_MBC",
+      "text": "Minimum Bactericidal Concentration against Staphylococcus aureus ATCC 43300, a methicillin-resistant Gram-positive bacterium. MBC measures the lowest concentration that kills 99.9% of bacteria."
+    },
+    {
+      "id": "Ec_MIC",
+      "text": "Minimum Inhibitory Concentration against Escherichia coli ATCC 25922, a Gram-negative reference strain. MIC measures the lowest concentration that inhibits visible bacterial growth."
+    },
+    {
+      "id": "Ec_MBC",
+      "text": "Minimum Bactericidal Concentration against Escherichia coli ATCC 25922, a Gram-negative reference strain. MBC measures the lowest concentration that kills 99.9% of bacteria."
+    }
+  ],
+  "cache": "/Users/egorilin/Desktop/COMA/reproducibility/v5_hypotheses_20261013/data/task_text_embeddings.npy",
+  "cache_sha256": "58f5b9417d437c18f69503322aec6923d03bbf05441d53e355cc1910600c1ff6",
+  "metadata": "/Users/egorilin/Desktop/COMA/reproducibility/v5_hypotheses_20261013/data/task_text_embeddings.json",
+  "metadata_sha256": "0fb3cbbae1d6955c0df4af956383e5540336a820b0f26b5e5ccb56ed32317d4e",
+  "historical_notebook": "/Users/egorilin/Desktop/COMA/reproducibility/notebook_recovery_20261012/notebooks/2026-05-24_descriptors_and_embeddings_comparison_with_labels_to_git.ipynb",
+  "historical_notebook_sha256": "5e30675b711b43aea3e7dc50ecf49218d675bdea5c9be769ceea7eca4c6bc65f",
+  "descriptions_exactly_match_recovered_May_notebook": true,
+  "original_historical_vector_cache_unavailable": true,
+  "execution": "local Mac"
+}

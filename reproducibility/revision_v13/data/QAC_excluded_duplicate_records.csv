@@ -1,0 +1,3 @@
+Unnamed: 0,General formula,Molecular weight,Gram_aureus,Gram_coli,LogP,"S. aureus ATCC 43300 Activity MIC, мг/л","S. aureus ATCC 43300 Activity MBC, мг/л","E. coli ATCC 25922 Activity MIC, мг/л","E. coli ATCC 25922 Activity MBC, мг/л",_can
+75,CCCCCCCCCC[N+]1=CC(C2OCC3(COC(C4=C[N+](CCCCCCCCCC)=CC=C4)OC3)CO2)=CC=C1.[Br-].[Br-],756.7,0,1,1.252,0.25,2.0,2.0,8.0,CCCCCCCCCC[n+]1cccc(C2OCC3(CO2)COC(c2ccc[n+](CCCCCCCCCC)c2)OC3)c1.[Br-].[Br-]
+76,CCCCCCCCCC[N+]1=CC(C2OCC3(COC(C4=C[N+](CCCCCCCCCC)=CC=C4)OC3)CO2)=CC=C1.[Br-].[Br-],812.8,0,1,3.03,0.5,0.5,2.0,2.0,CCCCCCCCCC[n+]1cccc(C2OCC3(CO2)COC(c2ccc[n+](CCCCCCCCCC)c2)OC3)c1.[Br-].[Br-]

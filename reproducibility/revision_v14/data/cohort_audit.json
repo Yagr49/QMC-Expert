@@ -1,0 +1,29 @@
+{
+  "QAC_full_salts": 105,
+  "QAC_cations": 103,
+  "QAC_scaffolds": 29,
+  "QAC_conflicting_duplicates": 1,
+  "OOD_molecules": 17,
+  "OOD_scaffolds": 4,
+  "QAC_exact_pairs": 420,
+  "OOD_exact_pairs": 67,
+  "OOD_right_censored_pairs": 1,
+  "source_target_cation_overlap": 0,
+  "OOD_source_scaffold_overlap": 0,
+  "OOD_QAC_scaffold_overlap": 0,
+  "fold_counts": {
+    "0": 21,
+    "1": 21,
+    "2": 21,
+    "3": 21,
+    "4": 21
+  },
+  "protocol_sha256": "7c13c7df7a6b0f38428fd7b3d9465db04af4f12a9e984480d68f780560eb970a",
+  "legacy_encoder_sha256": {
+    "legacy-human": "05a54c4f1d49d7b4347cd7f200ba49e16557e7f43707fa7a6461092064cc0aed",
+    "legacy-quantitative": "358ccc8f54bd2bef12cec052130beb4d924030ee4f54292434af4c8fa41094d1"
+  },
+  "scaler_sha256": "a2e0c5261bd40507de551391696084400a98ee9eaae444c51c8407ce8baa372e",
+  "original_workbook_sha256": "e1c24713be34d9a2f689f1e93ff0004a76d82b3bd138c454a91359199e86f44e",
+  "archived_vectors_note": "Historical encoders overlap original cohort; strictly matched v12 vectors are primary."
+}

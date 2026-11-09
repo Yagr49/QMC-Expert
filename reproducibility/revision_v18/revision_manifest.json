@@ -1,0 +1,36 @@
+{
+  "source_v5": "/Users/egorilin/Desktop/COMA/2026_07_09_Paper_2_edited-v5_NF_3.docx",
+  "source_sha256": "0dd55e7b9ef5125dd938fdb04e9c2d0a430cc4b86fc099b85e9f6e5e6d1c2bfb",
+  "original_tables_in_main": true,
+  "retained_original_results": "Reported values; eight R\u00b2 notebook outputs verified, rounding corrected, other historical provenance unresolved",
+  "original_media_byte_preserved": true,
+  "chemistry_assay_text_preserved": true,
+  "explicit_table_edits": [
+    {
+      "before": "S. aureus ATCC 4300",
+      "after": "S. aureus ATCC 43300"
+    },
+    {
+      "before": "0.95 (R2=0.60)",
+      "after": "0.95 (R2=0.59)"
+    },
+    {
+      "before": "S. aureus ATCC 4300",
+      "after": "S. aureus ATCC 43300"
+    },
+    {
+      "before": "0.95 (R2=0.60)",
+      "after": "0.95 (R2=0.59)"
+    }
+  ],
+  "coauthor_fields_H1_H7_D1_D2_preserved": true,
+  "compact_encoder": 691584,
+  "source_contrastive_parameters": 741504,
+  "source_regression_parameters": 691841,
+  "primary_new_analysis": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v18/analysis/manifest.json",
+  "main": "/Users/egorilin/Desktop/COMA/2026_10_13_Paper_2_edited-v18_v5_based_hypothesis_checks.docx",
+  "main_sha256": "7afb952362f55019aa532dd2464fcec9cbb218ab2952c415f7fae040f6a360cb",
+  "SI": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v18/Supplementary_Information_v18.docx",
+  "SI_sha256": "6c30bb38a164f3d8e19f5c98796f29d84b7bc48ba6d0a3bd331e113d609e5985",
+  "source_methods_and_all_prior_results_retained": true
+}

@@ -1,0 +1,16 @@
+{
+  "started": 1791813936.273382,
+  "completed": true,
+  "jobs": 31,
+  "protocol_sha256": "354084456ca8bc2fed824a13d2d0eef082cd6d95655c20b973ab51c7ceff5bf7",
+  "python": "3.12.7",
+  "thread_count": 2,
+  "workers": 6,
+  "script_sha256": "7715e5683a760f0a0d038cd834d3d1d2453af4a29bc32a15d99c7253c283bc86",
+  "input_sha256": {
+    "configurations.json": "14eb950c0c243740e784af7d7a6e607982f68cbcd14cae1bcb04d828a19c9567",
+    "endpoint_registry.csv": "56a084f809df9cd96276cca71393fba98bf84235858219920196fb34ce310d93"
+  },
+  "elapsed_s": 161.69849348068237,
+  "prediction_rows": 15616
+}

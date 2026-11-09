@@ -1,0 +1,9 @@
+DECODE 1 / 9 v5_human categorical fits 1
+DECODE 2 / 9 v5_human separate fits 4
+DECODE 3 / 9 v5_human text fits 1
+DECODE 4 / 9 v5_qac_ablation categorical fits 1
+DECODE 5 / 9 v5_qac_ablation text fits 1
+DECODE 6 / 9 v5_raw categorical fits 1
+DECODE 7 / 9 v5_qac_ablation separate fits 4
+DECODE 8 / 9 v5_raw text fits 1
+DECODE 9 / 9 v5_raw separate fits 4

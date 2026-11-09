@@ -1,0 +1,84 @@
+{
+  "actual_reviewer": "Claude CLI",
+  "execution": "local Mac",
+  "authorised": true,
+  "completed": true,
+  "started_utc": "2026-10-14T10:40:21.066388+00:00",
+  "prompt_sha256": "008fdc801210913c1c2a7a7c76db4ca797359916b5ed398be0db9ca10fa9d9b1",
+  "files_sha256": {
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figures/figure3_backbone_route_error_violins.png": "1213ad818444343d4cc34d59c10d90236e9d79ebddbd8496b378b63b1ec619d6",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figures/figure4_human_quantitative_compact.png": "ca7351f21ef5283987527c2b8c0b019a3d5f4b3c2b8c2b4510c163de136117a2",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/make_FT_violins.py": "fc08439aeee9bc713ca3d5af531f44be72cdecac44c3b19322788c60b815ab99",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/make_human_quantitative.py": "bdb56b7c55560768f16c1c2b1483e62349c05de620d1634f6fa72d95a5af4008",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figure3_caption_EN.txt": "1b3ca0d9a979d36c07f54ec5d50b273a2013d02317d6dbddbddb53bd7d33f5f0",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figure4_caption_EN.txt": "6e5e07c0123d7d767aa24c11fe205c45ade141b9c9f513ae210fc3a4c0e3d052",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figure3_FT_manifest.json": "138d81b2bf7d6cb22eb38c47ab646e000618b668f73a9e879f2e1b314a1c2f29",
+    "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figure4_provenance.json": "5b9f6df70b85110ebc777770d42a7c7a0eca2ba1bc3856785397390ed31c23a1"
+  },
+  "returncode": 0,
+  "tool_calls": [
+    {
+      "name": "Read",
+      "input": {
+        "file_path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figures/figure3_backbone_route_error_violins.png"
+      }
+    },
+    {
+      "name": "Read",
+      "input": {
+        "file_path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figures/figure4_human_quantitative_compact.png"
+      }
+    },
+    {
+      "name": "Read",
+      "input": {
+        "file_path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/make_FT_violins.py"
+      }
+    },
+    {
+      "name": "Read",
+      "input": {
+        "file_path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/make_human_quantitative.py"
+      }
+    },
+    {
+      "name": "Read",
+      "input": {
+        "file_path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figure3_caption_EN.txt"
+      }
+    },
+    {
+      "name": "Read",
+      "input": {
+        "file_path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figure4_caption_EN.txt"
+      }
+    },
+    {
+      "name": "Read",
+      "input": {
+        "file_path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figure3_FT_manifest.json"
+      }
+    },
+    {
+      "name": "Read",
+      "input": {
+        "file_path": "/Users/egorilin/Desktop/COMA/reproducibility/revision_v24/figure4_provenance.json"
+      }
+    }
+  ],
+  "model_usage": {
+    "claude-sonnet-4-6": {
+      "inputTokens": 4,
+      "outputTokens": 4706,
+      "cacheReadInputTokens": 2387,
+      "cacheCreationInputTokens": 20705,
+      "webSearchRequests": 0,
+      "costUSD": 0.14896185,
+      "contextWindow": 200000,
+      "maxOutputTokens": 32000
+    }
+  },
+  "cost_usd": 0.14896185,
+  "visually_read_both_final_figures": true,
+  "seconds": 93.13943099975586
+}

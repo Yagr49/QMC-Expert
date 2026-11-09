@@ -1,0 +1,262 @@
+[
+  {
+    "number": 1,
+    "section": "1. Introduction",
+    "text": "Antimicrobial resistance remains a major challenge for healthcare, while the limited pipeline of new antimicrobial medicines sustains the need for reliable experimental and computational discovery strategies (1). Quaternary ammonium compounds (QACs) provide a chemically diverse class of cationic biocides relevant to infection prevention. Predicting their antibacterial activity offers a focused setting in which to examine how molecular learning can guide the evaluation of candidate structures (2)."
+  },
+  {
+    "number": 2,
+    "section": "1. Introduction",
+    "text": "Machine learning can support compound prioritisation, but the quality of the available supervision remains central to the modelling workflow. In a specialised chemical series, activity data can be sparse and distributed across organisms, strains and assay protocols. Repeated literature records are not independent molecules, and a larger record count does not directly measure the amount of new information supplied to a representation. The question is therefore which supervisory signal transfers to measurements on compounds excluded from source training."
+  },
+  {
+    "number": 3,
+    "section": "1. Introduction",
+    "text": "Domain knowledge can enter molecular models through structural constraints, task descriptions or evaluations supplied by chemists. We focus on human evaluations as supervision. Preference-learning work such as MolSkill shows that medicinal chemists’ judgements can be learned for compound prioritisation and design (3). Here we ask whether coarse Good/Bad calls also guide a representation used to predict quantitative antibacterial endpoints. A call may summarise several observations, but its information access, aggregation and independence from numerical measurements require a documented annotation protocol. We do not infer assay denoising from categorical labels alone."
+  },
+  {
+    "number": 4,
+    "section": "1. Introduction",
+    "text": "The choice of supervision should be separated from the amount of model adaptation. Molecular foundation models supply reusable features, and fine-tuning can improve property prediction (4). Low-rank adaptation provides another way to learn task-specific updates with fewer trainable parameters (5,6). These alternatives motivate an experimental comparison of frozen heads, LoRA, partial and full fine-tuning. Their performance under a declared budget, rather than parameter count alone, determines which adaptation procedure is useful for this small cohort."
+  },
+  {
+    "number": 5,
+    "section": "1. Introduction",
+    "text": "Our previous QAC framework used MolFormer-derived embeddings to predict MIC and MBC against S. aureus and E. coli (2). The present work asks where useful representation guidance comes from. We compare human calls, continuous pooled MIC and binarised MIC on identical source molecules using paired initialisations, splits and training budgets. Raw pretrained features and source-training-only shuffled labels provide complementary controls. The binary-MIC arm shares the human arm’s binary objective, helping separate quantitative resolution from the generic effect of an added training stage."
+  },
+  {
+    "number": 6,
+    "section": "1. Introduction",
+    "text": "We retain the original 105 QACs and 17 named compounds from four new scaffold families as the target setting. We first report predictive performance under cation and scaffold holdout, then compare graph and tabular models (7–10) and both direct target prediction and a guided encoder followed by a decoder. Finally, restoring selected encoder weights while retaining feature-map buffers tests the contribution of learned updates to held-out loss. This computational intervention does not identify a molecular antibacterial mechanism or semantic understanding (11). The focus was selected after earlier analyses; Q-HERO and backbone/context results (12,13,5,14), including quantitative advantages in those settings, remain in the supplement."
+  },
+  {
+    "number": 7,
+    "section": "2.1. Learning guidance under matched source chemistry",
+    "text": "The expert archive contains 1,103 final annotation entries, comprising 244 Good and 859 Bad calls before standardisation and exclusions. After matching eligible expert and quantitative records and excluding all evaluation cations, the common panel contains 681 source molecules with 4,938 underlying MIC records and 96 positive human calls. The fixed scaffold-disjoint source split contains 377 training and 304 validation molecules; 52 training calls are positive. Records repeat molecules and are not independent training compounds (Table 1)."
+  },
+  {
+    "number": 8,
+    "section": "2.1. Learning guidance under matched source chemistry",
+    "text": "The primary controlled comparison uses the same partial MolFormer adaptation for each source arm. Human and binary-MIC targets share a binary objective, while continuous MIC uses regression. Shuffling occurs only within source training and preserves the marginal label distribution. Within seed, initial weights, molecule order, stochastic schedule and 360 gradient-update budget are shared. These controls isolate a replacement of supervision within a specified algorithm; they do not turn the labels into randomised biological treatments."
+  },
+  {
+    "number": 9,
+    "section": "2.2. Prediction on the original 105 QACs",
+    "text": "The original four targets are MIC and MBC against S. aureus ATCC 43300 and E. coli ATCC 25922. A fixed CatBoost decoder produces one out-of-fold prediction per compound and endpoint under five cation-grouped folds. Different counterion forms of the same cation remain together. The main comparison uses shared one-hot task metadata (Figure 2; Table 2)."
+  },
+  {
+    "number": 10,
+    "section": "2.2. Prediction on the original 105 QACs",
+    "text": "Across all four endpoint losses, human-guided representations yield mean pooled RMSE 1.737, compared with 1.715 for continuous MIC, 1.806 for binary MIC and 1.858 for raw features. Human minus shuffled-human ΔRMSE is -0.120 [-0.217, -0.043]; human minus raw is -0.121 [-0.214, -0.044]. These exploratory, unadjusted seed/scaffold intervals support a contribution from the real label assignment and an improvement over raw features in this cation-held-out, pooled-loss setting."
+  },
+  {
+    "number": 11,
+    "section": "2.2. Prediction on the original 105 QACs",
+    "text": "The quantitative controls also carry signal: continuous-MIC minus shuffled-continuous ΔRMSE is -0.157 [-0.242, -0.086], and binary-MIC minus shuffled-binary is -0.083 [-0.231, +0.046]. The continuous real-versus-shuffled improvement has a larger point magnitude than the human improvement; the binary-MIC interval includes zero. Real-label benefits therefore do not uniquely privilege human supervision."
+  },
+  {
+    "number": 12,
+    "section": "2.2. Prediction on the original 105 QACs",
+    "text": "Human minus continuous MIC is +0.022 [-0.053, +0.101], and human minus binary MIC is -0.069 [-0.157, +0.009]. Their intervals include zero, so the point estimates show practical proximity under this protocol without establishing statistical equivalence. The result concerns prediction losses on measured endpoints, not replacement of experimental assays by annotations. Pooled R² is not used to claim within-task accuracy because differences between species and MIC/MBC can inflate a pooled score. Endpoint-specific R² and errors are reported throughout."
+  },
+  {
+    "number": 13,
+    "section": "2.2. Prediction on the original 105 QACs",
+    "text": "The conflicting duplicate is target_25e7bff606cb (original rows 75 and 76). Its supplied S. aureus MIC values are 0.25/0.5 mg/L, S. aureus MBC values 2/0.5 mg/L, and E. coli MBC values 8/2 mg/L; E. coli MIC is 2 mg/L in both rows. The historical full-salt median rule yields 0.375, 1.25, 5 and 2 mg/L, respectively. Retaining it makes the full original cohort traceable rather than asserting that the median is a new measurement. Excluding its already-held-out predictions changes the main-arm pooled RMSE by at most 0.0044 log2 units; this post-exclusion score sensitivity does not retrain folds and is distinguished from the independently curated QAC-104 analysis in Supporting Information."
+  },
+  {
+    "number": 14,
+    "section": "2.3. Transfer to held-out scaffolds",
+    "text": "New-cation interpolation and new-scaffold transfer are different demands. An additional five-fold validation groups all 105 structures by their 29 cation Murcko scaffolds, keeping entire families outside each decoder training fold (Table 3). It was added after inspecting this extension and receiving protocol reviews, with fixed source checkpoints, hyperparameters and one-hot encoding. Human endpoint R² values under scaffold holdout are 0.129, -0.017, 0.235 and 0.236, respectively. These results delimit how far the gains in cation-held-out prediction transfer. The complete source arms, adverse results and fold assignments are retained."
+  },
+  {
+    "number": 15,
+    "section": "2.3. Transfer to held-out scaffolds",
+    "text": "Under scaffold holdout, pooled RMSE is 1.842 for human supervision, 1.814 for continuous MIC, 1.856 for binary MIC and 1.978 for raw features. The human-minus-raw contrast is -0.136 [-0.269, -0.019], retaining an exploratory pooled-loss benefit. The real-minus-shuffled-human interval is [-0.2591, -0.0001], with its upper limit only just below zero. This boundary result is especially sensitive to the fixed folds, five seeds and unadjusted comparisons and is not an independent confirmation."
+  },
+  {
+    "number": 16,
+    "section": "2.4. Named out-of-domain compounds",
+    "text": "The 17 newly synthesised QACs form four scaffold families (Figure 3), with no cation or cation-scaffold overlap with either the matched source panel or QAC-105. The CF3-dihydropyran mono-QACs are IT505, IT502 and IT499; kojic-acid-derived bis-QACs are DA253, PDD13, PDD14 and PDD11; tetrahydropyridine bis-QACs are IT442, IT469, IT452, IT493 and IT380; and glycoluril tetra-QACs are SEV-0338, SEV-035, SEV-036, SEV-030 and SEV-033. Codes follow the source spreadsheet, including SEV-0338."
+  },
+  {
+    "number": 17,
+    "section": "2.4. Named out-of-domain compounds",
+    "text": "This collection preserves the chemical scope of the original work. Kojic-acid-linked precursors are converted to bis-pyridinium salts through chlorination and quaternisation. A multicomponent tetrahydropyridine preparation supplies another bis-pyridinium family; the source synthesis records also describe competing pyran formation and epimerisation. The fluorinated dihydropyran precursors yield mono-QACs after N-alkylation, while a glycoluril-based multistep route supplies four-cation products. Reaction schemes, available characterisation and microbiological procedures are retained in Supporting Information Section S16, with missing primary spectra and assay provenance reserved for the chemistry coauthors. Scaffold novelty is verified from supplied structures and does not establish an independently blinded prospective discovery trial."
+  },
+  {
+    "number": 18,
+    "section": "2.4. Named out-of-domain compounds",
+    "text": "A final decoder trained on all 105 QACs predicts every OOD endpoint without using OOD activities in fitting or hyperparameter selection. Exact-value scoring retains 17 values for each task except E. coli MBC, where IT505 is reported as >500 mg/L and supplies only a lower bound. Table 4 reports endpoint MAE; RMSE, R², seed dispersion, per-family losses and every named prediction remain in Supporting Information. Averaging across the 67 exact pairs gives human MAE 1.649 and RMSE 2.054, versus continuous-MIC MAE 1.744/RMSE 2.237, binary-MIC 1.706/2.099, and raw-feature 1.854/2.265, all in log2(mg/L)."
+  },
+  {
+    "number": 19,
+    "section": "2.4. Named out-of-domain compounds",
+    "text": "Human representations have lower pooled error point estimates than the numerical and raw references in this small collection, but endpoint concentration accuracy remains limited: three of four human endpoint R² means are negative, with S. aureus MBC close to zero. The S. aureus MIC task-median reference has lower mean absolute error than the human-guided decoder. Moreover, all five human-guided E. coli MBC predictions for IT505 lie below its >500 mg/L bound (21.2–37.0 mg/L), an explicit extrapolation failure retained in the named prediction table."
+  },
+  {
+    "number": 20,
+    "section": "2.4. Named out-of-domain compounds",
+    "text": "The censored observation also bounds its error: IT505's E. coli MBC absolute error exceeds 3.76–4.56 log2 units across the human-guided seeds. Using its bound only as a minimum error contribution raises the human mean E. coli MBC RMSE lower bound to 2.356 and pooled 68-pair RMSE lower bound to 2.101. The true errors can be larger; this sensitivity does not replace >500 by an exact measurement. All arms' minimum-error sensitivities are retained. Each source seed combines its own exact squared residuals and its own bound-error contribution before taking the square root; the reported values then average the five seed-specific roots. The complete derivation is given in Table S33."
+  },
+  {
+    "number": 21,
+    "section": "2.4. Named out-of-domain compounds",
+    "text": "Four OOD scaffold groups provide little basis for stable interval estimation. The paired pooled human-minus-continuous ΔRMSE is -0.183 [-0.415, -0.004], and human-minus-shuffled is -0.282 [-0.611, -0.024]. These are exploratory percentile intervals conditional on the four observed families, not confirmatory population bounds; their apparent separation from zero cannot resolve general OOD superiority. A supplementary sensitivity omits each family in turn. Individual compounds and endpoint failures carry more practical information here than a single pooled score."
+  },
+  {
+    "number": 22,
+    "section": "2.4. Named out-of-domain compounds",
+    "text": "Direct source-only scoring asks a different question. The earlier matched human head, with no QAC decoder fitting, has mean OOD S. aureus MIC potency-rank agreement 0.667 ± 0.120 across five source seeds, compared with 0.399 ± 0.192 for continuous MIC. The paired human-minus-continuous and human-minus-shuffled rank intervals include zero. This is a suggestive ordering signal in 17 compounds, not an absolute concentration prediction: a binary human logit has no MIC units. Its outcomes are reported separately from the target-trained decoder and are not counted as replication."
+  },
+  {
+    "number": 23,
+    "section": "2.5. Transfer across graph and tabular models",
+    "text": "Chemprop D-MPNN, TabPFN-V2, TabFM and AutoGluon provide additional checks of decoder dependence (7–10). In the fixed one-source-seed comparison, human-guided features have lower pooled point errors than raw features for each tabular decoder in all three regimes. Quantitative guidance has some scaffold-CV advantages, and RDKit descriptors remain a strong independent reference. The complete 21-row comparison, endpoint scores and model budgets are in Table S23, S21 and Figure S28."
+  },
+  {
+    "number": 24,
+    "section": "2.5. Transfer across graph and tabular models",
+    "text": "On OOD-17, human/RDKit RMSE is 1.966/1.978 for TabPFN-V2 and 1.992/2.027 for TabFM; their paired intervals include zero. Chemprop gives 2.031/2.003/2.375 under cation/scaffold/OOD evaluation. These exploratory fixed-budget results support useful transfer across decoder choices and retain competing descriptor and quantitative outcomes; they do not establish a general ranking of model classes."
+  },
+  {
+    "number": 25,
+    "section": "2.6. Direct prediction and model adaptation",
+    "text": "We tested direct MIC/MBC prediction with frozen linear and MLP heads, query/value LoRA, partial and full fine-tuning, plus all real and shuffled source initialisations. All 363 fits use three paired target seeds, train-only target standardisation and a fixed 30-epoch budget. Complete scores and parameter counts are in Tables S28–S29 and Figure S29. From pretrained initialisation, cation-CV RMSE is 1.863 for full fine-tuning, 2.013 for a frozen linear head and 2.040 for LoRA. LoRA minus full ΔRMSE is +0.177 [+0.071, +0.286]; this procedure does not support universal small-adapter superiority."
+  },
+  {
+    "number": 26,
+    "section": "2.6. Direct prediction and model adaptation",
+    "text": "Human source initialisation yields direct cation/scaffold/OOD RMSE 1.797/1.834/2.412. Real numerical initialisations have lower cation point errors (continuous MIC 1.737; binary MIC 1.745), while human guidance has lower scaffold and OOD point errors. The direct human-minus-shuffled scaffold contrast is −0.156 [−0.311, −0.009]. On OOD, human direct prediction versus the frozen-encoder route differs by +0.306 [−0.278, +0.971]. The observed benefit of source guidance and the choice of target predictor remain conditional on the declared budget and evaluation regime."
+  },
+  {
+    "number": 27,
+    "section": "2.7. What label and weight interventions identify",
+    "text": "Learned signal is defined here as the contribution of adapted encoder parameters to held-out MIC/MBC loss. We restore the pretrained outer LayerNorm, upper eight blocks or all encoder parameters, retain source feature-map buffers, and refit the same decoder for every representation. Within seed, buffers are shared across source arms; restoring all weights makes their representations and predictions identical. The pure raw reference retains its original buffers and is evaluated separately."
+  },
+  {
+    "number": 28,
+    "section": "2.7. What label and weight interventions identify",
+    "text": "For human guidance, restoring all weights raises cation-CV RMSE by +0.109 [+0.037, +0.201]. Scaffold and OOD contrasts are +0.097 [−0.004, +0.228] and +0.243 [−0.067, +0.582], respectively, and include zero. The numerical arms and component-specific controls are reported alongside the human arm in Table 6, Figure 5 and S25–S26. The supported result is a learned-weight contribution to the specified cation-held-out prediction procedure, with unresolved scaffold/OOD effects."
+  },
+  {
+    "number": 29,
+    "section": "2.7. What label and weight interventions identify",
+    "text": "Real-versus-shuffled labels test supervision assignment; weight rewinds test sensitivity to learned parameter updates. Neither identifies the causal action of a chemical fragment or a named human concept. Whether the labels constitute an independent human-information channel remains conditional on the collection and information-access records in H1–H7. Geometry and attribution analyses, earlier overlapping-source encoders and further component interpretation remain separately documented in S15, S22 and S28."
+  },
+  {
+    "number": 30,
+    "section": "2.8. Reproducibility and historical-score provenance",
+    "text": "Independent repeats recover all 30 matched source-training runs and the archived target representations under the original encoding layout. All 93 intact/raw prediction sets and all 33 reloaded final-OOD target models reproduce saved predictions. Changed encoding batches expose numerical sensitivity; some historical Mac-to-Linux branches remain unresolved. Recovered notebook outputs support earlier scores under different validation protocols. Full audit results, historical numbers and replay conditions are retained in S22, S27 and S28."
+  },
+  {
+    "number": 31,
+    "section": "3. Conclusions",
+    "text": "Human Good/Bad calls can serve as molecular supervision for antibacterial QAC prediction. Under identical source chemistry and matched partial MolFormer training, their pooled cation-held-out QAC loss improves over raw features and shuffled-human controls, while remaining close to the continuous- and binary-MIC competitors. The exploratory scaffold-held-out follow-up retains a pooled-loss benefit over raw features, with a borderline real-versus-shuffled interval. This preserves the original question of economical human guidance without claiming that a label substitutes for a fixed number of assays."
+  },
+  {
+    "number": 32,
+    "section": "3. Conclusions",
+    "text": "Interpretation of the final labels as independent human knowledge remains provisional pending the annotation information-access and adjudication records in H1–H7. If annotators saw the quantitative endpoints, the comparison must be described as learning from human-compressed measurement information rather than an independent channel. The post-hoc scaffold follow-up and its borderline interval are hypothesis-generating."
+  },
+  {
+    "number": 33,
+    "section": "3. Conclusions",
+    "text": "Changing the target decoder retains competitive human-guided predictions in the one-source-seed extension, while descriptor models remain strong competitors and Chemprop provides a graph-based reference. Holding out entire scaffold families is harder than holding out new cations; the 17-compound OOD collection does not establish accurate absolute concentrations. Text embeddings of four fixed task descriptions provide no consistently resolved advantage over one-hot metadata. Compact projections merit evaluation as a lower-parameter design choice, but the current comparisons do not identify a generally superior adaptation strategy. The contribution is a controlled comparison of supervisory signals, supported by independent training repeats and explicitly delimited by validation regime, decoder and chemical scope. The new direct-target comparison tests LoRA and backbone fine-tuning explicitly, while weight rewinds delimit the contribution of learned encoder updates from feature-map state. These additions strengthen the controlled computational interpretation; they do not establish general adapter superiority or semantic and biological causality."
+  },
+  {
+    "number": 34,
+    "section": "4.1. Human annotation collection and source curation",
+    "text": "The final expert archive supplies 1,103 entries (244 Good, 859 Bad). Structure repairs, duplicate handling, eligibility counts, source-target exclusions and hashes are retained in the reproducibility manifests. Individual votes and adjudication logs are absent from the supplied computational archive; no inter-rater agreement is inferred from final calls. The following collection-method fields are reserved for the coauthors."
+  },
+  {
+    "number": 35,
+    "section": "4.1. Human annotation collection and source curation",
+    "text": "Pooled quantitative source MIC follows the archive's unified cross-organism field, including encoded censoring bounds, before molecule-level aggregation. It is not a homogeneous strain-specific measurement or the four target endpoints. This source definition is retained across real and shuffled quantitative arms and is separate from the explicit exact/bound treatment of the target workbooks."
+  },
+  {
+    "number": 36,
+    "section": "4.2. Matched representation learning",
+    "text": "MolFormer-XL uses revision 7b12d946c181a37f6012b9dc3b002275de070314 (4). Embeddings and layers 0–3 remain frozen; layers 4–11, the outer encoder LayerNorm and dropout-0.1 scalar head are trained, totalling 28,375,297 trainable parameters. The 681-molecule panel and fixed 377/304 scaffold-disjoint source split are identical across human, continuous pooled MIC, binary MIC and their source-training-only shuffled controls. Five paired seeds (0–4) use identical initial weights, minibatch permutations and stochastic forward schedules. Binary MIC targets use a training-only threshold chosen to match human positive prevalence; both binary training arms contain 52 positive calls. Continuous source targets are standardised on source training and inverted for direct scores. The pooler computes a parameter-free mean over token features; it is not a trained pooling layer. This architectural correction changes no source fit or numerical result. The partial encoder has 28,374,528 trainable parameters. Its scalar source head adds 769, giving 28,375,297 during source training. Direct target fitting discards that scalar head and trains a new LayerNorm plus four-output head with 4,612 parameters, giving the 28,379,140 total in Table S28."
+  },
+  {
+    "number": 37,
+    "section": "4.2. Matched representation learning",
+    "text": "The reused source panel follows the archived v12 eligibility rules and excludes the cations of QAC, OOD and the supplementary Q-HERO cohort. This exclusion history is part of the panel definition even though the new main narrative centres QAC-105 and OOD-17."
+  },
+  {
+    "number": 38,
+    "section": "4.2. Matched representation learning",
+    "text": "Every source arm trains on exactly 377 molecule-level examples per epoch, with one equally weighted target per molecule. Continuous source MIC is the within-molecule median of log2 µM values from the pooled archive; binary MIC is derived from those molecule-level values. The 4,938 records contribute to aggregation across the full eligible panel and are not presented as repeated gradient examples in this matched experiment."
+  },
+  {
+    "number": 39,
+    "section": "4.2. Matched representation learning",
+    "text": "AdamW uses weight decay 0.01, a one-cycle schedule with peak learning rate 3 × 10−5, batch size 32 and norm-one gradient clipping. All arms use float32 and their final checkpoint after 30 epochs/360 updates; validation is diagnostic without early stopping. Native stochastic attention feature maps are refreshed during training and deterministic in evaluation. Reconstruction checkpoints retain trained parameters and replayed final persistent buffers, with all 30 full target-vector reproductions previously audited. This extension reuses those vectors and encodes the one previously omitted conflicting target. Three reference structures verify each restored model to a maximum vector difference below 4 × 10−6. No upstream retraining or target-based checkpoint selection occurs."
+  },
+  {
+    "number": 40,
+    "section": "4.2. Matched representation learning",
+    "text": "The raw reference is re-encoded from the same pinned model and environment. Historical human/quantitative 256-d encoder checkpoints, their common archived scaler and original raw features are kept as a separate overlapping-source reconstruction. They are not the matched intervention, an internal adapter, or a LoRA experiment."
+  },
+  {
+    "number": 41,
+    "section": "4.3. Task encoding, target learning and validation",
+    "text": "Target values are log2(MIC or MBC in mg/L), matching the original endpoint tables. This differs from earlier log2 µM analyses, which remain explicitly labelled in Supporting Information. Duplicate full-salt targets use the prepared historical median rule; the conflicting identity is named in Section 2.2. All 420 QAC training values are numeric and uncensored in the supplied workbook. OOD IT505 E. coli MBC is right-censored and is excluded from exact-value metrics without removing its molecule or bound."
+  },
+  {
+    "number": 42,
+    "section": "4.3. Task encoding, target learning and validation",
+    "text": "CatBoost uses 300 iterations, depth five, learning rate 0.05, seed 1729 and two threads, without additional hand-selected descriptors or tuning. Cation-held-out GroupKFold supplies five folds of 21 salts each, grouping all four endpoints and all counterion variants. The follow-up scaffold GroupKFold instead groups the 29 canonical cation Murcko scaffolds. Fold assignment uses identities only. The final OOD decoder fits all QAC-105 rows and no OOD measurements. A task-median reference uses each task's training-fold median, or the full QAC median for OOD."
+  },
+  {
+    "number": 43,
+    "section": "4.3. Task encoding, target learning and validation",
+    "text": "The cation counts in folds 0–4 are 20, 20, 21, 21 and 21, respectively. Folds 0 and 1 each contain one cation represented by two salt identities, yielding 21 salts per fold while preserving all 103 cation groups. No manual fold reassignment or outcome balancing is used."
+  },
+  {
+    "number": 44,
+    "section": "4.3. Task encoding, target learning and validation",
+    "text": "One-hot metadata uses four species/endpoint indicators. Text metadata uses four fixed archived English descriptions, freshly reconstructed with openai/text-embedding-3-small via OpenRouter on the local computer and cached as a 4 × 1,536 float32 array. The request contains no measured activities or molecular structures. The cache SHA256 is 58f5b9417d437c18f69503322aec6923d03bbf05441d53e355cc1910600c1ff6; exact texts, model response metadata and checksums are archived. All primary real-label seeds and raw features use both encodings, while matched shuffled controls use one-hot. Historical encoders also use four separate endpoint decoders as a no-pooling comparison; these are not a reconstruction of every v5 hyperparameter."
+  },
+  {
+    "number": 45,
+    "section": "4.4. Metrics, intervals and exploratory scope",
+    "text": "RMSE, MAE, R² and Spearman correlation are recomputed from saved out-of-fold or OOD predictions for each seed and endpoint. Trained-arm tables report mean ± source-seed SD; plotted mean predictions do not replace mean seed-specific metrics. Pooled losses combine exact endpoint errors on a common log2 mg/L scale. Pooled R² is retained only in machine-readable tables and cannot establish within-task prediction skill. Within each seed, pooled RMSE is the square root of the mean squared residual over all exact compound–endpoint pairs. The reported multi-seed pooled score averages these seed-specific roots; it does not average four endpoint RMSEs or score an ensemble prediction."
+  },
+  {
+    "number": 46,
+    "section": "4.4. Metrics, intervals and exploratory scope",
+    "text": "Ten thousand paired bootstrap draws sample the observed scaffold groups with replacement and the five source-seed indices with replacement. The same group weights and sampled seed indices are applied to both arms in each contrast; all endpoints within a sampled group remain together. Each draw averages seed-specific RMSE, rather than evaluating an ensemble mean. Raw-feature predictions repeat the same fixed prediction across seed draws. Intervals are exploratory, unadjusted for multiple comparisons and conditional on fixed folds; OOD has only four groups. Five shuffled runs are diagnostic controls, not a calibrated permutation test. Frozen-feature, architecture, context and direct-score studies remain separate supplementary analyses."
+  },
+  {
+    "number": 47,
+    "section": "4.4. Metrics, intervals and exploratory scope",
+    "text": "The decoder seed is fixed for every arm; decoder-randomness variability is not represented in these intervals. Source-seed variability applies to the adapted representations, while the raw pretrained reference is fixed. Accordingly, the reported gains are conditional on this common decoder rather than a claim over all decoder initialisations."
+  },
+  {
+    "number": 48,
+    "section": "4.4. Metrics, intervals and exploratory scope",
+    "text": "The QAC-105/OOD-17 narrative was selected after inspecting earlier outcomes. The first extension protocol preceded its own decoder predictions; the all-endpoint scaffold sensitivity followed inspection and protocol reviews. Neither is a confirmatory preregistration. No new OOD families were selected by optimising these scores, and the prior Q-HERO outcomes remain available in Supporting Information rather than being discarded. Annotation blinding and the chronology of design, measurement and model access remain unresolved until the coauthors complete the collection and assay records."
+  },
+  {
+    "number": 49,
+    "section": "4.5. Chemistry and microbiological measurements",
+    "text": "The available synthetic procedures, characterisation descriptions, bacterial-strain information and MIC/MBC protocols are preserved in Supporting Information Section S16. Newly redrawn exact structures use ACS 1996 bond and atom-label settings. Primary spectra, optimisation material, assay controls and replicate records are reserved in field C1; the computational revision does not create new chemical or microbiological observations."
+  },
+  {
+    "number": 50,
+    "section": "4.6. Graph and tabular decoder comparison",
+    "text": "All graph and tabular comparisons use the same target folds and concentration units. Preprocessing is fitted only on outer training data; guided tabular features use source seed 0, and Chemprop uses three graph-training seeds. The 913-fit configuration, train-only PCA, exact checkpoints, inner selection and model-specific budgets are specified in S21 and S28."
+  },
+  {
+    "number": 51,
+    "section": "4.7. Reproduction and notebook provenance",
+    "text": "Reproduction checks retain source identities, label and weight hashes, minibatch order and all evaluation buffers. Archived encoding layout and independently reloaded checkpoints are verified separately from recovery of historical notebook outputs. The complete records and unresolved branches are described in S22 and S27."
+  },
+  {
+    "number": 52,
+    "section": "4.8. Direct target prediction and weight controls",
+    "text": "Direct fits use three paired source/target seeds, a four-output head, train-only target scaling and 30 fixed epochs without OOD-based selection. LoRA uses query/value rank-eight updates (6). Weight controls use five source seeds, fixed checkpoint buffers and a refitted one-hot CatBoost decoder for each intervention. New contrasts use 5,000 paired seed/group draws; three paired seeds and four OOD families limit uncertainty estimation. All settings, 363 direct fits, 1,331 weight-control fits and checkpoint retention details are in S24–S28."
+  }
+]

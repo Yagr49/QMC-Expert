@@ -1,0 +1,440 @@
+FIT catboost rdkit_s1729_cation_f0 Sa_MIC train 84 test 21
+DONE FIT rdkit_s1729_cation_f0 Sa_MIC 0.5
+FIT catboost rdkit_s1729_cation_f0 Sa_MBC train 84 test 21
+DONE FIT rdkit_s1729_cation_f0 Sa_MBC 0.4
+FIT catboost rdkit_s1729_cation_f0 Ec_MIC train 84 test 21
+DONE FIT rdkit_s1729_cation_f0 Ec_MIC 0.3
+FIT catboost rdkit_s1729_cation_f0 Ec_MBC train 84 test 21
+DONE FIT rdkit_s1729_cation_f0 Ec_MBC 0.4
+FIT catboost rdkit_s1729_cation_f1 Sa_MIC train 84 test 21
+DONE FIT rdkit_s1729_cation_f1 Sa_MIC 0.4
+FIT catboost rdkit_s1729_cation_f1 Sa_MBC train 84 test 21
+DONE FIT rdkit_s1729_cation_f1 Sa_MBC 0.4
+FIT catboost rdkit_s1729_cation_f1 Ec_MIC train 84 test 21
+DONE FIT rdkit_s1729_cation_f1 Ec_MIC 0.4
+FIT catboost rdkit_s1729_cation_f1 Ec_MBC train 84 test 21
+DONE FIT rdkit_s1729_cation_f1 Ec_MBC 0.4
+FIT catboost rdkit_s1729_cation_f2 Sa_MIC train 84 test 21
+DONE FIT rdkit_s1729_cation_f2 Sa_MIC 0.4
+FIT catboost rdkit_s1729_cation_f2 Sa_MBC train 84 test 21
+DONE FIT rdkit_s1729_cation_f2 Sa_MBC 0.4
+FIT catboost rdkit_s1729_cation_f2 Ec_MIC train 84 test 21
+DONE FIT rdkit_s1729_cation_f2 Ec_MIC 0.4
+FIT catboost rdkit_s1729_cation_f2 Ec_MBC train 84 test 21
+DONE FIT rdkit_s1729_cation_f2 Ec_MBC 0.4
+FIT catboost rdkit_s1729_cation_f3 Sa_MIC train 84 test 21
+DONE FIT rdkit_s1729_cation_f3 Sa_MIC 0.3
+FIT catboost rdkit_s1729_cation_f3 Sa_MBC train 84 test 21
+DONE FIT rdkit_s1729_cation_f3 Sa_MBC 0.4
+FIT catboost rdkit_s1729_cation_f3 Ec_MIC train 84 test 21
+DONE FIT rdkit_s1729_cation_f3 Ec_MIC 0.4
+FIT catboost rdkit_s1729_cation_f3 Ec_MBC train 84 test 21
+DONE FIT rdkit_s1729_cation_f3 Ec_MBC 0.4
+FIT catboost rdkit_s1729_cation_f4 Sa_MIC train 84 test 21
+DONE FIT rdkit_s1729_cation_f4 Sa_MIC 0.4
+FIT catboost rdkit_s1729_cation_f4 Sa_MBC train 84 test 21
+DONE FIT rdkit_s1729_cation_f4 Sa_MBC 0.4
+FIT catboost rdkit_s1729_cation_f4 Ec_MIC train 84 test 21
+DONE FIT rdkit_s1729_cation_f4 Ec_MIC 0.4
+FIT catboost rdkit_s1729_cation_f4 Ec_MBC train 84 test 21
+DONE FIT rdkit_s1729_cation_f4 Ec_MBC 0.4
+FIT catboost rdkit_s1729_scaffold_f0 Sa_MIC train 84 test 21
+DONE FIT rdkit_s1729_scaffold_f0 Sa_MIC 0.4
+FIT catboost rdkit_s1729_scaffold_f0 Sa_MBC train 84 test 21
+DONE FIT rdkit_s1729_scaffold_f0 Sa_MBC 0.5
+FIT catboost rdkit_s1729_scaffold_f0 Ec_MIC train 84 test 21
+DONE FIT rdkit_s1729_scaffold_f0 Ec_MIC 0.4
+FIT catboost rdkit_s1729_scaffold_f0 Ec_MBC train 84 test 21
+DONE FIT rdkit_s1729_scaffold_f0 Ec_MBC 0.4
+FIT catboost rdkit_s1729_scaffold_f1 Sa_MIC train 84 test 21
+DONE FIT rdkit_s1729_scaffold_f1 Sa_MIC 0.4
+FIT catboost rdkit_s1729_scaffold_f1 Sa_MBC train 84 test 21
+DONE FIT rdkit_s1729_scaffold_f1 Sa_MBC 0.4
+FIT catboost rdkit_s1729_scaffold_f1 Ec_MIC train 84 test 21
+DONE FIT rdkit_s1729_scaffold_f1 Ec_MIC 0.4
+FIT catboost rdkit_s1729_scaffold_f1 Ec_MBC train 84 test 21
+DONE FIT rdkit_s1729_scaffold_f1 Ec_MBC 0.4
+FIT catboost rdkit_s1729_scaffold_f2 Sa_MIC train 84 test 21
+DONE FIT rdkit_s1729_scaffold_f2 Sa_MIC 0.4
+FIT catboost rdkit_s1729_scaffold_f2 Sa_MBC train 84 test 21
+DONE FIT rdkit_s1729_scaffold_f2 Sa_MBC 0.4
+FIT catboost rdkit_s1729_scaffold_f2 Ec_MIC train 84 test 21
+DONE FIT rdkit_s1729_scaffold_f2 Ec_MIC 0.4
+FIT catboost rdkit_s1729_scaffold_f2 Ec_MBC train 84 test 21
+DONE FIT rdkit_s1729_scaffold_f2 Ec_MBC 0.4
+FIT catboost rdkit_s1729_scaffold_f3 Sa_MIC train 84 test 21
+DONE FIT rdkit_s1729_scaffold_f3 Sa_MIC 0.4
+FIT catboost rdkit_s1729_scaffold_f3 Sa_MBC train 84 test 21
+DONE FIT rdkit_s1729_scaffold_f3 Sa_MBC 0.4
+FIT catboost rdkit_s1729_scaffold_f3 Ec_MIC train 84 test 21
+DONE FIT rdkit_s1729_scaffold_f3 Ec_MIC 0.4
+FIT catboost rdkit_s1729_scaffold_f3 Ec_MBC train 84 test 21
+DONE FIT rdkit_s1729_scaffold_f3 Ec_MBC 0.4
+FIT catboost rdkit_s1729_scaffold_f4 Sa_MIC train 84 test 21
+DONE FIT rdkit_s1729_scaffold_f4 Sa_MIC 0.4
+FIT catboost rdkit_s1729_scaffold_f4 Sa_MBC train 84 test 21
+DONE FIT rdkit_s1729_scaffold_f4 Sa_MBC 0.4
+FIT catboost rdkit_s1729_scaffold_f4 Ec_MIC train 84 test 21
+DONE FIT rdkit_s1729_scaffold_f4 Ec_MIC 0.4
+FIT catboost rdkit_s1729_scaffold_f4 Ec_MBC train 84 test 21
+DONE FIT rdkit_s1729_scaffold_f4 Ec_MBC 0.4
+FIT catboost rdkit_s1729_full-QAC105_f-1 Sa_MIC train 105 test 17
+DONE FIT rdkit_s1729_full-QAC105_f-1 Sa_MIC 0.5
+FIT catboost rdkit_s1729_full-QAC105_f-1 Sa_MBC train 105 test 17
+DONE FIT rdkit_s1729_full-QAC105_f-1 Sa_MBC 0.4
+FIT catboost rdkit_s1729_full-QAC105_f-1 Ec_MIC train 105 test 17
+DONE FIT rdkit_s1729_full-QAC105_f-1 Ec_MIC 0.4
+FIT catboost rdkit_s1729_full-QAC105_f-1 Ec_MBC train 105 test 17
+DONE FIT rdkit_s1729_full-QAC105_f-1 Ec_MBC 0.5
+FIT catboost raw-molformer_s1729_cation_f0 Sa_MIC train 84 test 21
+DONE FIT raw-molformer_s1729_cation_f0 Sa_MIC 0.3
+FIT catboost raw-molformer_s1729_cation_f0 Sa_MBC train 84 test 21
+DONE FIT raw-molformer_s1729_cation_f0 Sa_MBC 0.3
+FIT catboost raw-molformer_s1729_cation_f0 Ec_MIC train 84 test 21
+DONE FIT raw-molformer_s1729_cation_f0 Ec_MIC 0.3
+FIT catboost raw-molformer_s1729_cation_f0 Ec_MBC train 84 test 21
+DONE FIT raw-molformer_s1729_cation_f0 Ec_MBC 0.3
+FIT catboost raw-molformer_s1729_cation_f1 Sa_MIC train 84 test 21
+DONE FIT raw-molformer_s1729_cation_f1 Sa_MIC 0.3
+FIT catboost raw-molformer_s1729_cation_f1 Sa_MBC train 84 test 21
+DONE FIT raw-molformer_s1729_cation_f1 Sa_MBC 0.3
+FIT catboost raw-molformer_s1729_cation_f1 Ec_MIC train 84 test 21
+DONE FIT raw-molformer_s1729_cation_f1 Ec_MIC 0.3
+FIT catboost raw-molformer_s1729_cation_f1 Ec_MBC train 84 test 21
+DONE FIT raw-molformer_s1729_cation_f1 Ec_MBC 0.4
+FIT catboost raw-molformer_s1729_cation_f2 Sa_MIC train 84 test 21
+DONE FIT raw-molformer_s1729_cation_f2 Sa_MIC 0.3
+FIT catboost raw-molformer_s1729_cation_f2 Sa_MBC train 84 test 21
+DONE FIT raw-molformer_s1729_cation_f2 Sa_MBC 0.3
+FIT catboost raw-molformer_s1729_cation_f2 Ec_MIC train 84 test 21
+DONE FIT raw-molformer_s1729_cation_f2 Ec_MIC 0.3
+FIT catboost raw-molformer_s1729_cation_f2 Ec_MBC train 84 test 21
+DONE FIT raw-molformer_s1729_cation_f2 Ec_MBC 0.3
+FIT catboost raw-molformer_s1729_cation_f3 Sa_MIC train 84 test 21
+DONE FIT raw-molformer_s1729_cation_f3 Sa_MIC 0.3
+FIT catboost raw-molformer_s1729_cation_f3 Sa_MBC train 84 test 21
+DONE FIT raw-molformer_s1729_cation_f3 Sa_MBC 0.3
+FIT catboost raw-molformer_s1729_cation_f3 Ec_MIC train 84 test 21
+DONE FIT raw-molformer_s1729_cation_f3 Ec_MIC 0.3
+FIT catboost raw-molformer_s1729_cation_f3 Ec_MBC train 84 test 21
+DONE FIT raw-molformer_s1729_cation_f3 Ec_MBC 0.3
+FIT catboost raw-molformer_s1729_cation_f4 Sa_MIC train 84 test 21
+DONE FIT raw-molformer_s1729_cation_f4 Sa_MIC 0.3
+FIT catboost raw-molformer_s1729_cation_f4 Sa_MBC train 84 test 21
+DONE FIT raw-molformer_s1729_cation_f4 Sa_MBC 0.3
+FIT catboost raw-molformer_s1729_cation_f4 Ec_MIC train 84 test 21
+DONE FIT raw-molformer_s1729_cation_f4 Ec_MIC 0.3
+FIT catboost raw-molformer_s1729_cation_f4 Ec_MBC train 84 test 21
+DONE FIT raw-molformer_s1729_cation_f4 Ec_MBC 0.3
+FIT catboost raw-molformer_s1729_scaffold_f0 Sa_MIC train 84 test 21
+DONE FIT raw-molformer_s1729_scaffold_f0 Sa_MIC 0.3
+FIT catboost raw-molformer_s1729_scaffold_f0 Sa_MBC train 84 test 21
+DONE FIT raw-molformer_s1729_scaffold_f0 Sa_MBC 0.3
+FIT catboost raw-molformer_s1729_scaffold_f0 Ec_MIC train 84 test 21
+DONE FIT raw-molformer_s1729_scaffold_f0 Ec_MIC 0.3
+FIT catboost raw-molformer_s1729_scaffold_f0 Ec_MBC train 84 test 21
+DONE FIT raw-molformer_s1729_scaffold_f0 Ec_MBC 0.3
+FIT catboost raw-molformer_s1729_scaffold_f1 Sa_MIC train 84 test 21
+DONE FIT raw-molformer_s1729_scaffold_f1 Sa_MIC 0.3
+FIT catboost raw-molformer_s1729_scaffold_f1 Sa_MBC train 84 test 21
+DONE FIT raw-molformer_s1729_scaffold_f1 Sa_MBC 0.4
+FIT catboost raw-molformer_s1729_scaffold_f1 Ec_MIC train 84 test 21
+DONE FIT raw-molformer_s1729_scaffold_f1 Ec_MIC 0.3
+FIT catboost raw-molformer_s1729_scaffold_f1 Ec_MBC train 84 test 21
+DONE FIT raw-molformer_s1729_scaffold_f1 Ec_MBC 0.3
+FIT catboost raw-molformer_s1729_scaffold_f2 Sa_MIC train 84 test 21
+DONE FIT raw-molformer_s1729_scaffold_f2 Sa_MIC 0.3
+FIT catboost raw-molformer_s1729_scaffold_f2 Sa_MBC train 84 test 21
+DONE FIT raw-molformer_s1729_scaffold_f2 Sa_MBC 0.3
+FIT catboost raw-molformer_s1729_scaffold_f2 Ec_MIC train 84 test 21
+DONE FIT raw-molformer_s1729_scaffold_f2 Ec_MIC 0.4
+FIT catboost raw-molformer_s1729_scaffold_f2 Ec_MBC train 84 test 21
+DONE FIT raw-molformer_s1729_scaffold_f2 Ec_MBC 0.3
+FIT catboost raw-molformer_s1729_scaffold_f3 Sa_MIC train 84 test 21
+DONE FIT raw-molformer_s1729_scaffold_f3 Sa_MIC 0.4
+FIT catboost raw-molformer_s1729_scaffold_f3 Sa_MBC train 84 test 21
+DONE FIT raw-molformer_s1729_scaffold_f3 Sa_MBC 0.3
+FIT catboost raw-molformer_s1729_scaffold_f3 Ec_MIC train 84 test 21
+DONE FIT raw-molformer_s1729_scaffold_f3 Ec_MIC 0.4
+FIT catboost raw-molformer_s1729_scaffold_f3 Ec_MBC train 84 test 21
+DONE FIT raw-molformer_s1729_scaffold_f3 Ec_MBC 0.4
+FIT catboost raw-molformer_s1729_scaffold_f4 Sa_MIC train 84 test 21
+DONE FIT raw-molformer_s1729_scaffold_f4 Sa_MIC 0.3
+FIT catboost raw-molformer_s1729_scaffold_f4 Sa_MBC train 84 test 21
+DONE FIT raw-molformer_s1729_scaffold_f4 Sa_MBC 0.4
+FIT catboost raw-molformer_s1729_scaffold_f4 Ec_MIC train 84 test 21
+DONE FIT raw-molformer_s1729_scaffold_f4 Ec_MIC 0.3
+FIT catboost raw-molformer_s1729_scaffold_f4 Ec_MBC train 84 test 21
+DONE FIT raw-molformer_s1729_scaffold_f4 Ec_MBC 0.4
+FIT catboost raw-molformer_s1729_full-QAC105_f-1 Sa_MIC train 105 test 17
+DONE FIT raw-molformer_s1729_full-QAC105_f-1 Sa_MIC 0.4
+FIT catboost raw-molformer_s1729_full-QAC105_f-1 Sa_MBC train 105 test 17
+DONE FIT raw-molformer_s1729_full-QAC105_f-1 Sa_MBC 0.4
+FIT catboost raw-molformer_s1729_full-QAC105_f-1 Ec_MIC train 105 test 17
+DONE FIT raw-molformer_s1729_full-QAC105_f-1 Ec_MIC 0.4
+FIT catboost raw-molformer_s1729_full-QAC105_f-1 Ec_MBC train 105 test 17
+DONE FIT raw-molformer_s1729_full-QAC105_f-1 Ec_MBC 0.4
+FIT catboost expert_seed0_s1729_cation_f0 Sa_MIC train 84 test 21
+DONE FIT expert_seed0_s1729_cation_f0 Sa_MIC 0.4
+FIT catboost expert_seed0_s1729_cation_f0 Sa_MBC train 84 test 21
+DONE FIT expert_seed0_s1729_cation_f0 Sa_MBC 0.4
+FIT catboost expert_seed0_s1729_cation_f0 Ec_MIC train 84 test 21
+DONE FIT expert_seed0_s1729_cation_f0 Ec_MIC 0.4
+FIT catboost expert_seed0_s1729_cation_f0 Ec_MBC train 84 test 21
+DONE FIT expert_seed0_s1729_cation_f0 Ec_MBC 0.4
+FIT catboost expert_seed0_s1729_cation_f1 Sa_MIC train 84 test 21
+DONE FIT expert_seed0_s1729_cation_f1 Sa_MIC 0.4
+FIT catboost expert_seed0_s1729_cation_f1 Sa_MBC train 84 test 21
+DONE FIT expert_seed0_s1729_cation_f1 Sa_MBC 0.4
+FIT catboost expert_seed0_s1729_cation_f1 Ec_MIC train 84 test 21
+DONE FIT expert_seed0_s1729_cation_f1 Ec_MIC 0.4
+FIT catboost expert_seed0_s1729_cation_f1 Ec_MBC train 84 test 21
+DONE FIT expert_seed0_s1729_cation_f1 Ec_MBC 0.4
+FIT catboost expert_seed0_s1729_cation_f2 Sa_MIC train 84 test 21
+DONE FIT expert_seed0_s1729_cation_f2 Sa_MIC 0.4
+FIT catboost expert_seed0_s1729_cation_f2 Sa_MBC train 84 test 21
+DONE FIT expert_seed0_s1729_cation_f2 Sa_MBC 0.4
+FIT catboost expert_seed0_s1729_cation_f2 Ec_MIC train 84 test 21
+DONE FIT expert_seed0_s1729_cation_f2 Ec_MIC 0.3
+FIT catboost expert_seed0_s1729_cation_f2 Ec_MBC train 84 test 21
+DONE FIT expert_seed0_s1729_cation_f2 Ec_MBC 0.4
+FIT catboost expert_seed0_s1729_cation_f3 Sa_MIC train 84 test 21
+DONE FIT expert_seed0_s1729_cation_f3 Sa_MIC 0.4
+FIT catboost expert_seed0_s1729_cation_f3 Sa_MBC train 84 test 21
+DONE FIT expert_seed0_s1729_cation_f3 Sa_MBC 0.4
+FIT catboost expert_seed0_s1729_cation_f3 Ec_MIC train 84 test 21
+DONE FIT expert_seed0_s1729_cation_f3 Ec_MIC 0.4
+FIT catboost expert_seed0_s1729_cation_f3 Ec_MBC train 84 test 21
+DONE FIT expert_seed0_s1729_cation_f3 Ec_MBC 0.4
+FIT catboost expert_seed0_s1729_cation_f4 Sa_MIC train 84 test 21
+DONE FIT expert_seed0_s1729_cation_f4 Sa_MIC 0.4
+FIT catboost expert_seed0_s1729_cation_f4 Sa_MBC train 84 test 21
+DONE FIT expert_seed0_s1729_cation_f4 Sa_MBC 0.4
+FIT catboost expert_seed0_s1729_cation_f4 Ec_MIC train 84 test 21
+DONE FIT expert_seed0_s1729_cation_f4 Ec_MIC 0.4
+FIT catboost expert_seed0_s1729_cation_f4 Ec_MBC train 84 test 21
+DONE FIT expert_seed0_s1729_cation_f4 Ec_MBC 0.4
+FIT catboost expert_seed0_s1729_scaffold_f0 Sa_MIC train 84 test 21
+DONE FIT expert_seed0_s1729_scaffold_f0 Sa_MIC 0.4
+FIT catboost expert_seed0_s1729_scaffold_f0 Sa_MBC train 84 test 21
+DONE FIT expert_seed0_s1729_scaffold_f0 Sa_MBC 0.4
+FIT catboost expert_seed0_s1729_scaffold_f0 Ec_MIC train 84 test 21
+DONE FIT expert_seed0_s1729_scaffold_f0 Ec_MIC 0.4
+FIT catboost expert_seed0_s1729_scaffold_f0 Ec_MBC train 84 test 21
+DONE FIT expert_seed0_s1729_scaffold_f0 Ec_MBC 0.4
+FIT catboost expert_seed0_s1729_scaffold_f1 Sa_MIC train 84 test 21
+DONE FIT expert_seed0_s1729_scaffold_f1 Sa_MIC 0.4
+FIT catboost expert_seed0_s1729_scaffold_f1 Sa_MBC train 84 test 21
+DONE FIT expert_seed0_s1729_scaffold_f1 Sa_MBC 0.4
+FIT catboost expert_seed0_s1729_scaffold_f1 Ec_MIC train 84 test 21
+DONE FIT expert_seed0_s1729_scaffold_f1 Ec_MIC 0.4
+FIT catboost expert_seed0_s1729_scaffold_f1 Ec_MBC train 84 test 21
+DONE FIT expert_seed0_s1729_scaffold_f1 Ec_MBC 0.4
+FIT catboost expert_seed0_s1729_scaffold_f2 Sa_MIC train 84 test 21
+DONE FIT expert_seed0_s1729_scaffold_f2 Sa_MIC 0.4
+FIT catboost expert_seed0_s1729_scaffold_f2 Sa_MBC train 84 test 21
+DONE FIT expert_seed0_s1729_scaffold_f2 Sa_MBC 0.4
+FIT catboost expert_seed0_s1729_scaffold_f2 Ec_MIC train 84 test 21
+DONE FIT expert_seed0_s1729_scaffold_f2 Ec_MIC 0.4
+FIT catboost expert_seed0_s1729_scaffold_f2 Ec_MBC train 84 test 21
+DONE FIT expert_seed0_s1729_scaffold_f2 Ec_MBC 0.4
+FIT catboost expert_seed0_s1729_scaffold_f3 Sa_MIC train 84 test 21
+DONE FIT expert_seed0_s1729_scaffold_f3 Sa_MIC 0.4
+FIT catboost expert_seed0_s1729_scaffold_f3 Sa_MBC train 84 test 21
+DONE FIT expert_seed0_s1729_scaffold_f3 Sa_MBC 0.4
+FIT catboost expert_seed0_s1729_scaffold_f3 Ec_MIC train 84 test 21
+DONE FIT expert_seed0_s1729_scaffold_f3 Ec_MIC 0.4
+FIT catboost expert_seed0_s1729_scaffold_f3 Ec_MBC train 84 test 21
+DONE FIT expert_seed0_s1729_scaffold_f3 Ec_MBC 0.4
+FIT catboost expert_seed0_s1729_scaffold_f4 Sa_MIC train 84 test 21
+DONE FIT expert_seed0_s1729_scaffold_f4 Sa_MIC 0.4
+FIT catboost expert_seed0_s1729_scaffold_f4 Sa_MBC train 84 test 21
+DONE FIT expert_seed0_s1729_scaffold_f4 Sa_MBC 0.4
+FIT catboost expert_seed0_s1729_scaffold_f4 Ec_MIC train 84 test 21
+DONE FIT expert_seed0_s1729_scaffold_f4 Ec_MIC 0.4
+FIT catboost expert_seed0_s1729_scaffold_f4 Ec_MBC train 84 test 21
+DONE FIT expert_seed0_s1729_scaffold_f4 Ec_MBC 0.4
+FIT catboost expert_seed0_s1729_full-QAC105_f-1 Sa_MIC train 105 test 17
+DONE FIT expert_seed0_s1729_full-QAC105_f-1 Sa_MIC 0.4
+FIT catboost expert_seed0_s1729_full-QAC105_f-1 Sa_MBC train 105 test 17
+DONE FIT expert_seed0_s1729_full-QAC105_f-1 Sa_MBC 0.4
+FIT catboost expert_seed0_s1729_full-QAC105_f-1 Ec_MIC train 105 test 17
+DONE FIT expert_seed0_s1729_full-QAC105_f-1 Ec_MIC 0.4
+FIT catboost expert_seed0_s1729_full-QAC105_f-1 Ec_MBC train 105 test 17
+DONE FIT expert_seed0_s1729_full-QAC105_f-1 Ec_MBC 0.5
+FIT catboost quant-continuous_seed0_s1729_cation_f0 Sa_MIC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_cation_f0 Sa_MIC 0.4
+FIT catboost quant-continuous_seed0_s1729_cation_f0 Sa_MBC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_cation_f0 Sa_MBC 0.4
+FIT catboost quant-continuous_seed0_s1729_cation_f0 Ec_MIC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_cation_f0 Ec_MIC 0.4
+FIT catboost quant-continuous_seed0_s1729_cation_f0 Ec_MBC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_cation_f0 Ec_MBC 0.4
+FIT catboost quant-continuous_seed0_s1729_cation_f1 Sa_MIC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_cation_f1 Sa_MIC 0.4
+FIT catboost quant-continuous_seed0_s1729_cation_f1 Sa_MBC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_cation_f1 Sa_MBC 0.4
+FIT catboost quant-continuous_seed0_s1729_cation_f1 Ec_MIC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_cation_f1 Ec_MIC 0.5
+FIT catboost quant-continuous_seed0_s1729_cation_f1 Ec_MBC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_cation_f1 Ec_MBC 0.4
+FIT catboost quant-continuous_seed0_s1729_cation_f2 Sa_MIC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_cation_f2 Sa_MIC 0.4
+FIT catboost quant-continuous_seed0_s1729_cation_f2 Sa_MBC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_cation_f2 Sa_MBC 0.4
+FIT catboost quant-continuous_seed0_s1729_cation_f2 Ec_MIC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_cation_f2 Ec_MIC 0.4
+FIT catboost quant-continuous_seed0_s1729_cation_f2 Ec_MBC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_cation_f2 Ec_MBC 0.4
+FIT catboost quant-continuous_seed0_s1729_cation_f3 Sa_MIC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_cation_f3 Sa_MIC 0.5
+FIT catboost quant-continuous_seed0_s1729_cation_f3 Sa_MBC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_cation_f3 Sa_MBC 0.5
+FIT catboost quant-continuous_seed0_s1729_cation_f3 Ec_MIC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_cation_f3 Ec_MIC 0.4
+FIT catboost quant-continuous_seed0_s1729_cation_f3 Ec_MBC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_cation_f3 Ec_MBC 0.4
+FIT catboost quant-continuous_seed0_s1729_cation_f4 Sa_MIC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_cation_f4 Sa_MIC 0.4
+FIT catboost quant-continuous_seed0_s1729_cation_f4 Sa_MBC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_cation_f4 Sa_MBC 0.4
+FIT catboost quant-continuous_seed0_s1729_cation_f4 Ec_MIC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_cation_f4 Ec_MIC 0.5
+FIT catboost quant-continuous_seed0_s1729_cation_f4 Ec_MBC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_cation_f4 Ec_MBC 0.4
+FIT catboost quant-continuous_seed0_s1729_scaffold_f0 Sa_MIC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_scaffold_f0 Sa_MIC 0.4
+FIT catboost quant-continuous_seed0_s1729_scaffold_f0 Sa_MBC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_scaffold_f0 Sa_MBC 0.4
+FIT catboost quant-continuous_seed0_s1729_scaffold_f0 Ec_MIC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_scaffold_f0 Ec_MIC 0.5
+FIT catboost quant-continuous_seed0_s1729_scaffold_f0 Ec_MBC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_scaffold_f0 Ec_MBC 0.4
+FIT catboost quant-continuous_seed0_s1729_scaffold_f1 Sa_MIC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_scaffold_f1 Sa_MIC 0.5
+FIT catboost quant-continuous_seed0_s1729_scaffold_f1 Sa_MBC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_scaffold_f1 Sa_MBC 0.4
+FIT catboost quant-continuous_seed0_s1729_scaffold_f1 Ec_MIC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_scaffold_f1 Ec_MIC 0.5
+FIT catboost quant-continuous_seed0_s1729_scaffold_f1 Ec_MBC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_scaffold_f1 Ec_MBC 0.4
+FIT catboost quant-continuous_seed0_s1729_scaffold_f2 Sa_MIC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_scaffold_f2 Sa_MIC 0.5
+FIT catboost quant-continuous_seed0_s1729_scaffold_f2 Sa_MBC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_scaffold_f2 Sa_MBC 0.5
+FIT catboost quant-continuous_seed0_s1729_scaffold_f2 Ec_MIC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_scaffold_f2 Ec_MIC 0.5
+FIT catboost quant-continuous_seed0_s1729_scaffold_f2 Ec_MBC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_scaffold_f2 Ec_MBC 0.5
+FIT catboost quant-continuous_seed0_s1729_scaffold_f3 Sa_MIC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_scaffold_f3 Sa_MIC 0.5
+FIT catboost quant-continuous_seed0_s1729_scaffold_f3 Sa_MBC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_scaffold_f3 Sa_MBC 0.5
+FIT catboost quant-continuous_seed0_s1729_scaffold_f3 Ec_MIC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_scaffold_f3 Ec_MIC 0.4
+FIT catboost quant-continuous_seed0_s1729_scaffold_f3 Ec_MBC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_scaffold_f3 Ec_MBC 0.5
+FIT catboost quant-continuous_seed0_s1729_scaffold_f4 Sa_MIC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_scaffold_f4 Sa_MIC 0.5
+FIT catboost quant-continuous_seed0_s1729_scaffold_f4 Sa_MBC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_scaffold_f4 Sa_MBC 0.5
+FIT catboost quant-continuous_seed0_s1729_scaffold_f4 Ec_MIC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_scaffold_f4 Ec_MIC 0.5
+FIT catboost quant-continuous_seed0_s1729_scaffold_f4 Ec_MBC train 84 test 21
+DONE FIT quant-continuous_seed0_s1729_scaffold_f4 Ec_MBC 0.5
+FIT catboost quant-continuous_seed0_s1729_full-QAC105_f-1 Sa_MIC train 105 test 17
+DONE FIT quant-continuous_seed0_s1729_full-QAC105_f-1 Sa_MIC 0.6
+FIT catboost quant-continuous_seed0_s1729_full-QAC105_f-1 Sa_MBC train 105 test 17
+DONE FIT quant-continuous_seed0_s1729_full-QAC105_f-1 Sa_MBC 0.5
+FIT catboost quant-continuous_seed0_s1729_full-QAC105_f-1 Ec_MIC train 105 test 17
+DONE FIT quant-continuous_seed0_s1729_full-QAC105_f-1 Ec_MIC 0.5
+FIT catboost quant-continuous_seed0_s1729_full-QAC105_f-1 Ec_MBC train 105 test 17
+DONE FIT quant-continuous_seed0_s1729_full-QAC105_f-1 Ec_MBC 0.5
+FIT catboost quant-binary_seed0_s1729_cation_f0 Sa_MIC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_cation_f0 Sa_MIC 0.5
+FIT catboost quant-binary_seed0_s1729_cation_f0 Sa_MBC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_cation_f0 Sa_MBC 0.5
+FIT catboost quant-binary_seed0_s1729_cation_f0 Ec_MIC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_cation_f0 Ec_MIC 0.5
+FIT catboost quant-binary_seed0_s1729_cation_f0 Ec_MBC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_cation_f0 Ec_MBC 0.5
+FIT catboost quant-binary_seed0_s1729_cation_f1 Sa_MIC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_cation_f1 Sa_MIC 0.5
+FIT catboost quant-binary_seed0_s1729_cation_f1 Sa_MBC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_cation_f1 Sa_MBC 0.6
+FIT catboost quant-binary_seed0_s1729_cation_f1 Ec_MIC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_cation_f1 Ec_MIC 0.5
+FIT catboost quant-binary_seed0_s1729_cation_f1 Ec_MBC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_cation_f1 Ec_MBC 0.5
+FIT catboost quant-binary_seed0_s1729_cation_f2 Sa_MIC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_cation_f2 Sa_MIC 0.5
+FIT catboost quant-binary_seed0_s1729_cation_f2 Sa_MBC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_cation_f2 Sa_MBC 0.5
+FIT catboost quant-binary_seed0_s1729_cation_f2 Ec_MIC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_cation_f2 Ec_MIC 0.6
+FIT catboost quant-binary_seed0_s1729_cation_f2 Ec_MBC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_cation_f2 Ec_MBC 0.5
+FIT catboost quant-binary_seed0_s1729_cation_f3 Sa_MIC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_cation_f3 Sa_MIC 0.5
+FIT catboost quant-binary_seed0_s1729_cation_f3 Sa_MBC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_cation_f3 Sa_MBC 0.5
+FIT catboost quant-binary_seed0_s1729_cation_f3 Ec_MIC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_cation_f3 Ec_MIC 0.5
+FIT catboost quant-binary_seed0_s1729_cation_f3 Ec_MBC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_cation_f3 Ec_MBC 0.5
+FIT catboost quant-binary_seed0_s1729_cation_f4 Sa_MIC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_cation_f4 Sa_MIC 0.5
+FIT catboost quant-binary_seed0_s1729_cation_f4 Sa_MBC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_cation_f4 Sa_MBC 0.5
+FIT catboost quant-binary_seed0_s1729_cation_f4 Ec_MIC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_cation_f4 Ec_MIC 0.5
+FIT catboost quant-binary_seed0_s1729_cation_f4 Ec_MBC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_cation_f4 Ec_MBC 0.6
+FIT catboost quant-binary_seed0_s1729_scaffold_f0 Sa_MIC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_scaffold_f0 Sa_MIC 0.5
+FIT catboost quant-binary_seed0_s1729_scaffold_f0 Sa_MBC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_scaffold_f0 Sa_MBC 0.5
+FIT catboost quant-binary_seed0_s1729_scaffold_f0 Ec_MIC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_scaffold_f0 Ec_MIC 0.5
+FIT catboost quant-binary_seed0_s1729_scaffold_f0 Ec_MBC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_scaffold_f0 Ec_MBC 0.6
+FIT catboost quant-binary_seed0_s1729_scaffold_f1 Sa_MIC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_scaffold_f1 Sa_MIC 0.5
+FIT catboost quant-binary_seed0_s1729_scaffold_f1 Sa_MBC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_scaffold_f1 Sa_MBC 0.5
+FIT catboost quant-binary_seed0_s1729_scaffold_f1 Ec_MIC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_scaffold_f1 Ec_MIC 0.5
+FIT catboost quant-binary_seed0_s1729_scaffold_f1 Ec_MBC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_scaffold_f1 Ec_MBC 0.6
+FIT catboost quant-binary_seed0_s1729_scaffold_f2 Sa_MIC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_scaffold_f2 Sa_MIC 0.5
+FIT catboost quant-binary_seed0_s1729_scaffold_f2 Sa_MBC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_scaffold_f2 Sa_MBC 0.5
+FIT catboost quant-binary_seed0_s1729_scaffold_f2 Ec_MIC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_scaffold_f2 Ec_MIC 0.5
+FIT catboost quant-binary_seed0_s1729_scaffold_f2 Ec_MBC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_scaffold_f2 Ec_MBC 0.5
+FIT catboost quant-binary_seed0_s1729_scaffold_f3 Sa_MIC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_scaffold_f3 Sa_MIC 0.6
+FIT catboost quant-binary_seed0_s1729_scaffold_f3 Sa_MBC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_scaffold_f3 Sa_MBC 0.5
+FIT catboost quant-binary_seed0_s1729_scaffold_f3 Ec_MIC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_scaffold_f3 Ec_MIC 0.5
+FIT catboost quant-binary_seed0_s1729_scaffold_f3 Ec_MBC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_scaffold_f3 Ec_MBC 0.5
+FIT catboost quant-binary_seed0_s1729_scaffold_f4 Sa_MIC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_scaffold_f4 Sa_MIC 0.6
+FIT catboost quant-binary_seed0_s1729_scaffold_f4 Sa_MBC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_scaffold_f4 Sa_MBC 0.5
+FIT catboost quant-binary_seed0_s1729_scaffold_f4 Ec_MIC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_scaffold_f4 Ec_MIC 0.5
+FIT catboost quant-binary_seed0_s1729_scaffold_f4 Ec_MBC train 84 test 21
+DONE FIT quant-binary_seed0_s1729_scaffold_f4 Ec_MBC 0.5
+FIT catboost quant-binary_seed0_s1729_full-QAC105_f-1 Sa_MIC train 105 test 17
+DONE FIT quant-binary_seed0_s1729_full-QAC105_f-1 Sa_MIC 0.6
+FIT catboost quant-binary_seed0_s1729_full-QAC105_f-1 Sa_MBC train 105 test 17
+DONE FIT quant-binary_seed0_s1729_full-QAC105_f-1 Sa_MBC 0.6
+FIT catboost quant-binary_seed0_s1729_full-QAC105_f-1 Ec_MIC train 105 test 17
+DONE FIT quant-binary_seed0_s1729_full-QAC105_f-1 Ec_MIC 0.6
+FIT catboost quant-binary_seed0_s1729_full-QAC105_f-1 Ec_MBC train 105 test 17
+DONE FIT quant-binary_seed0_s1729_full-QAC105_f-1 Ec_MBC 0.6

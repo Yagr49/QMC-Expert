@@ -1,0 +1,209 @@
+You are an independent read-only reviewer of a QAC molecular ML manuscript. All material below is explicitly authorised for this external review. Do not use tools, execute commands, inspect additional files or invent measurements/annotation methods. Give a concise scientific critique (under 800 words), prioritising concrete defects and fixes. The authors are moving Q-HERO out of the main narrative AFTER inspecting earlier results and centring the original 105 molecules and their named 17-compound structural OOD. This selection must be disclosed. Human annotation methods H1-H7 are reserved for coauthors. Text-embedding-3-small embeds four strain/endpoint descriptions, not molecular activities. No equivalence or biological causal claim should be inferred. Historical encoders saw original-cohort structures; new matched-source encoders excluded all target cations. Evaluate validity of molecule grouping, censored endpoints, task encoding, controls, and bounded conclusions.
+
+PROTOCOL.md
+# Original QAC-105 and named OOD-17: exploratory narrative revision
+
+Written before this extension's predictions. Earlier QAC/OOD outcomes and v5 were
+already inspected. Cohorts, figures and narrative were selected after those
+analyses; this is an exploratory extension, not a preregistered confirmation.
+Q-HERO is retained as an archived sensitivity study in Supporting Information.
+No assertion that its measurements are erroneous is made.
+
+## Cohorts and units
+
+Retain all 105 canonical full-salt structures from the original 108-row workbook.
+Use the previously prepared median endpoints for duplicate identities, including
+one flagged conflicting duplicate. Identify it explicitly. The strict 104-molecule
+analysis and original duplicate records remain a curation sensitivity.
+Retain all 17 named OOD compounds (four cation-scaffold families). No OOD value is
+used for model fitting, tuning or encoding selection. Four tasks: S. aureus ATCC
+43300 MIC/MBC and E. coli ATCC 25922 MIC/MBC. Targets are log2 concentration in
+mg/L, matching the original v5 endpoint definition. Do not mix these errors with
+previous log2-micromolar results. OOD IT505 E. coli MBC is right-censored (>500
+mg/L); exclude it from exact-value RMSE/R2, retain the molecule and report its
+bound and prediction separately. All other OOD values are used as supplied.
+
+## Representations and supervision
+
+Primary matched-source representations reuse the completed v12 experiment:
+681 shared molecules; strict exclusion of all evaluation cations and salts;
+377 training/304 validation; five paired source seeds; human, continuous MIC,
+binary MIC, and each corresponding shuffled-label control. Fixed final 30-epoch
+partial MolFormer fine-tuning, common initial weights/batches/updates within seed.
+Recover the omitted conflicting target's vectors from the audited reconstructed
+checkpoints; verify reference molecules against saved vectors before use.
+No upstream training or checkpoint selection occurs in this extension.
+
+Historical 256-dimensional human and quantitative encoders plus their 768-d raw
+features are secondary descriptive reconstructions. They had source/target overlap
+on the original collection and cannot identify out-of-source supervision benefits.
+Historical raw and freshly encoded raw features are distinct references.
+
+## Decoder and task encoding
+
+Fixed CatBoost: 300 iterations, depth 5, learning rate .05, seed 1729, two threads.
+No additional hand-selected molecular descriptors or target-based tuning.
+Task encodings: (1) four independent endpoint models, matching the meaningful
+single-task interpretation of no task metadata; (2) a shared model with species
+and MIC/MBC one-hot (four indicators); (3) a shared model with 1536-dimensional
+OpenAI text-embedding-3-small vectors for four fixed archived task descriptions.
+Text describes only strain and endpoint, without compounds or target values.
+It is reconstructed on the local computer via OpenRouter and cached with hashes.
+No claim of a generative GPT predicting MIC is made.
+
+Primary matched arms and fresh raw use one-hot. Human/continuous/binary arms
+(all five seeds) and fresh raw additionally use text encoding. Historical three
+representations use all three encodings as a limited reconstruction of the v5
+comparison, without claiming to reproduce its exact hyperparameters or split.
+
+## Validation
+
+Five fixed GroupKFold folds group all salts of each canonical cation. All four
+endpoints of a compound remain in one fold. Fold assignment uses identities only,
+not measured targets. Produce one out-of-fold prediction per QAC task/structure.
+Fit a final decoder on all QAC-105 data only to predict the named OOD-17.
+The same folds and endpoint rows are used for every representation/encoding.
+Existing strict scaffold-CV QAC-104 outcomes remain a separate pre-existing
+transfer sensitivity. Ordinary cation-held-out CV allows scaffold overlap.
+Save every prediction, fold membership, censoring qualifier, input hash, and
+per-seed R2/RMSE/MAE/Spearman rank. Display seed means rather than metrics of an
+ensemble mean. Baseline predicts each task's training-fold median (full QAC median
+for OOD); negative R2 remains visible.
+
+Exploratory matched contrasts resample source seeds and entire cation-scaffold
+groups, retaining fixed predictions and identical paired rows. Use 10,000 draws
+and 95% percentile intervals. OOD has only four groups; intervals are unstable
+and do not imply confirmatory inference. No equivalence margin or measurement
+exchange rate is inferred. A binary source logit is not a concentration.
+Human annotation collection fields H1-H7 remain for coauthors. Biological
+causality, independent intuition and human denoising are not identified.
+
+
+data/cohort_audit.json
+{
+  "QAC_full_salts": 105,
+  "QAC_cations": 103,
+  "QAC_scaffolds": 29,
+  "QAC_conflicting_duplicates": 1,
+  "OOD_molecules": 17,
+  "OOD_scaffolds": 4,
+  "QAC_exact_pairs": 420,
+  "OOD_exact_pairs": 67,
+  "OOD_right_censored_pairs": 1,
+  "source_target_cation_overlap": 0,
+  "OOD_source_scaffold_overlap": 0,
+  "OOD_QAC_scaffold_overlap": 0,
+  "fold_counts": {
+    "0": 21,
+    "1": 21,
+    "2": 21,
+    "3": 21,
+    "4": 21
+  },
+  "protocol_sha256": "7c13c7df7a6b0f38428fd7b3d9465db04af4f12a9e984480d68f780560eb970a",
+  "legacy_encoder_sha256": {
+    "legacy-human": "05a54c4f1d49d7b4347cd7f200ba49e16557e7f43707fa7a6461092064cc0aed",
+    "legacy-quantitative": "358ccc8f54bd2bef12cec052130beb4d924030ee4f54292434af4c8fa41094d1"
+  },
+  "scaler_sha256": "a2e0c5261bd40507de551391696084400a98ee9eaae444c51c8407ce8baa372e",
+  "original_workbook_sha256": "e1c24713be34d9a2f689f1e93ff0004a76d82b3bd138c454a91359199e86f44e",
+  "archived_vectors_note": "Historical encoders overlap original cohort; strictly matched v12 vectors are primary."
+}
+
+run_comparisons.py
+"""Fixed cation-grouped QAC CV and untouched OOD prediction, all tasks."""
+from pathlib import Path
+import os
+for var in ['OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS']:os.environ[var]='2'
+import json, time, hashlib, platform
+from concurrent.futures import ProcessPoolExecutor, as_completed
+import numpy as np
+import pandas as pd
+from catboost import CatBoostRegressor
+from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
+from scipy.stats import spearmanr
+ROOT=Path(__file__).resolve().parent
+TASKS=['Sa_MIC','Sa_MBC','Ec_MIC','Ec_MBC']
+
+def decoder(x,y,test):
+    model=CatBoostRegressor(iterations=300,depth=5,learning_rate=.05,random_seed=1729,
+        thread_count=2,verbose=False,allow_writing_files=False)
+    model.fit(x,y);return model.predict(test)
+
+def design(vectors,pairs,mode):
+    x=vectors[pairs.molecule_index.values]
+    if mode=='onehot':
+        idx=np.asarray([TASKS.index(t) for t in pairs.task])
+        metadata=np.column_stack([idx<2,idx>=2,idx%2==0,idx%2==1]).astype(np.float32)
+        x=np.hstack([x,metadata])
+    elif mode=='text':
+        metadata=np.load(ROOT/'data/task_text_embeddings.npy')[[TASKS.index(t) for t in pairs.task]]
+        x=np.hstack([x,metadata])
+    return x
+
+def run(configuration,encoding):
+    registry=pd.read_csv(ROOT/'data/endpoint_registry.csv')
+    q=registry[registry.cohort=='QAC105'].reset_index(drop=True)
+    o=registry[registry.cohort=='OOD17'].reset_index(drop=True)
+    x=design(np.load(ROOT/'representations'/(configuration['name']+'_QAC105.npy')),q,encoding)
+    xo=design(np.load(ROOT/'representations'/(configuration['name']+'_OOD17.npy')),o,encoding)
+    pred=np.full(len(q),np.nan);po=np.full(len(o),np.nan)
+    for task in TASKS if encoding=='separate' else ['all']:
+        select=np.ones(len(q),dtype=bool) if task=='all' else q.task.values==task
+        osel=np.ones(len(o),dtype=bool) if task=='all' else o.task.values==task
+        for fold in sorted(q.fold.unique()):
+            tr=select&(q.fold.values!=fold);te=select&(q.fold.values==fold)
+            assert not set(q.cation[tr])&set(q.cation[te])
+            assert not set(q.can[tr])&set(q.can[te])
+            pred[te]=decoder(x[tr],q.y.values[tr],x[te])
+        po[osel]=decoder(x[select],q.y.values[select],xo[osel])
+    assert np.isfinite(pred).all() and np.isfinite(po).all()
+    rows=[];metrics=[]
+    for df,pr in [(q,pred),(o,po)]:
+        output=df.copy();output['prediction']=pr
+        for k,v in configuration.items():
+            if k!='encodings':output[k]=v
+        output['encoding']=encoding;rows.append(output)
+        for task in TASKS+['pooled']:
+            subset=np.ones(len(df),dtype=bool) if task=='pooled' else df.task.values==task
+            subset&=df.qualifier.values=='='
+            y=df.y.values[subset];p=pr[subset]
+            metrics.append(dict(name=configuration['name'],arm=configuration['arm'],seed=configuration['seed'],
+                provenance=configuration['provenance'],encoding=encoding,cohort=df.cohort.iloc[0],task=task,n=len(y),
+                RMSE=float(np.sqrt(mean_squared_error(y,p))),R2=float(r2_score(y,p)),
+                MAE=float(mean_absolute_error(y,p)),rho=float(spearmanr(y,p).statistic)))
+    return pd.concat(rows,ignore_index=True),metrics
+
+def baseline():
+    registry=pd.read_csv(ROOT/'data/endpoint_registry.csv');q=registry[registry.cohort=='QAC105'].copy();o=registry[registry.cohort=='OOD17'].copy()
+    for task in TASKS:
+        for fold in q.fold.unique():
+            q.loc[(q.task==task)&(q.fold==fold),'prediction']=q.loc[(q.task==task)&(q.fold!=fold),'y'].median()
+        o.loc[o.task==task,'prediction']=q.loc[q.task==task,'y'].median()
+    d=pd.concat([q,o]);d['name']='task-median';d['arm']='task-median';d['seed']=-1;d['encoding']='baseline';d['provenance']='target-training-only'
+    return d
+
+def main():
+    out=ROOT/'results';out.mkdir(exist_ok=True);start=time.time()
+    jobs=[(c,e) for c in json.loads((ROOT/'data/configurations.json').read_text()) for e in c['encodings']]
+    manifest=dict(started=start,completed=False,jobs=len(jobs),protocol_sha256=hashlib.sha256((ROOT/'PROTOCOL.md').read_bytes()).hexdigest(),
+        python=platform.python_version(),thread_count=2,workers=6,script_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        input_sha256={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (ROOT/'data').glob('*') if p.is_file()})
+    (out/'manifest.json').write_text(json.dumps(manifest,indent=2))
+    allpred=[];allmetrics=[]
+    with ProcessPoolExecutor(max_workers=6) as pool:
+        futures={pool.submit(run,c,e):(c['name'],e) for c,e in jobs}
+        for future in as_completed(futures):
+            name,encoding=futures[future];pred,metrics=future.result();allpred.append(pred);allmetrics+=metrics
+            pred.to_csv(out/(name+'_'+encoding+'_predictions.csv'),index=False)
+            pd.DataFrame(allmetrics).to_csv(out/'metrics.csv',index=False)
+            (out/'progress.json').write_text(json.dumps(dict(done=len(allpred),total=len(jobs),elapsed_s=time.time()-start)))
+            print('COMPLETED',len(allpred),'/',len(jobs),name,encoding,'elapsed',round(time.time()-start),flush=True)
+    allpred.append(baseline());pd.concat(allpred,ignore_index=True).to_csv(out/'predictions.csv',index=False)
+    manifest.update(completed=True,elapsed_s=time.time()-start,prediction_rows=sum(len(d) for d in allpred))
+    (out/'manifest.json').write_text(json.dumps(manifest,indent=2))
+    print('DONE',json.dumps(manifest),flush=True)
+
+if __name__=='__main__':main()
+
+

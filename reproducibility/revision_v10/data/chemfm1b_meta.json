@@ -1,0 +1,27 @@
+{
+  "model": "ChemFM/ChemFM-1B",
+  "revision": "f99dc2e89726539bb9cf31b2e2b4360650bac6a8",
+  "remote_code_revision": null,
+  "pooling": "last",
+  "shape": [
+    1939,
+    2048
+  ],
+  "max_tokens": 213,
+  "context": 512,
+  "truncated": 0,
+  "dtype": "torch.float16",
+  "parameters": 969631744,
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [
+      "lm_head.weight"
+    ],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "torch": "2.14.0+cu130",
+  "seconds": 5.225128650665283,
+  "smiles_sha256": "3090ee80929898fd4eaaeb4f3085d994464b25041dacb45205f0454238691237",
+  "features_sha256": "6bcc71ca114b6aa3b26b0704d8aca6f2d778235c59d0bb965c9ef27c49c7fd27"
+}

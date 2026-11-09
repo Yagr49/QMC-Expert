@@ -1,0 +1,356 @@
+kimi version 2.1.1
+Warning: [loop_control] 'max_retries_per_step' is deprecated and no longer used; rename it to 'max_attempts_per_step'. Run /update-config to fix it.
+• The user asks for a read-only editorial/scientific critique of a manuscript draft intended for JCIM. All evidence is provided inline. I should not execute commands or access files. I need to produce a concise review (max 800 words) with sections: (1) concrete corrections, (2) remaining limits, (3) positioning for JCIM.
+
+  The superpowers skill says to invoke skills — but this is a read-only review task with all evidence provided. Is there a skill that applies? "receiving-code-review" — no, that's for receiving feedback. "requesting-code-review" — no. "brainstorming" — creative work? Not really; this is a review task. The user explicitly says: do not execute commands, access files, edit files, or submit anything. The user's explicit instructions take precedence. The task is a text review. I could invoke `receiving-code-review`? No. This isn't code review. I think no skill genuinely applies — this is a document review. The skill instructions say "if you think there is even a 1% chance a skill might apply, invoke it." Hmm. Is there any review skill? "requesting-code-review" — use when completing tasks, implementing major features... not applicable to reviewing a manuscript. Brainstorming — for creative work; the user gave a very specific structured task, not open-ended design. I'll proceed without skills, as none applies to a read-only editorial review of provided text. Actually, let me think — could "receiving-code-review" apply because I'm "receiving" a draft to review? No — that skill is about receiving feedback before implementing suggestions. Not applicable. Proceed.
+
+  Now, let me carefully read the draft and identify concrete issues with quoted wording and suggested corrections. Focus areas per user:
+
+  1. Unsupported scientific claims
+  2. Distinctions between direct source-only ranking and target-refitted scaffold CV
+  3. Unmatched partial fine-tuning vs matched frozen-feature interventions
+  4. Human-vs-shuffled control vs incremental value over raw features
+  5. Definition of causal intervention
+  6. Coherence of the manuscript
+  7. Constraints: no new numerical results, no claims of preregistration, equivalence, universally superior quantitative supervision, human denoising, or independent architecture replication may be inferred. Future work recommendations distinguished from errors.
+
+  Let me go through the draft carefully.
+
+  **Title/Abstract**: "partial MolFormer fine-tuning followed by scaffold-grouped downstream refitting on Q-HERO yields R² = 0.269 with expert supervision versus 0.312 and 0.308 with molecule-level and record-level MIC supervision, respectively, while the direct expert score ranks measured potency without target refitting (Spearman rank agreement 0.397)." Good — careful.
+
+  "on identical source molecules, pooled MIC also transfers better than exact S. aureus MIC" — that's supported by Table 3: 1.525 vs 1.617, ΔRMSE −0.092 [−0.159, −0.001]. OK. Though "transfers better" — in frozen-feature protocol. The abstract says "transfers better than exact S. aureus MIC" — should perhaps specify frozen-feature protocol. Actually abstract says "on identical source molecules" which distinguishes it. Fine.
+
+  **Section 1 Introduction**: "Preference-learning studies have demonstrated that such decisions can be learned and used in molecular prioritisation and design (1)." Supported by ref 1. OK.
+
+  "The latter compares expert labels with continuous and binarised MIC, their shuffled controls and untrained representations." OK.
+
+  **Section 3.1**: "partial fine-tuning raises mean downstream R² from 0.134 for frozen MolFormer to 0.269 with expert labels" — "raises ... from frozen MolFormer" — careful: frozen MolFormer raw R² 0.134, and fine-tuned expert 0.269. But this is not a matched intervention; the fine-tuned vs frozen comparison isn't matched either. The wording "raises" implies an improvement attributable to fine-tuning, which is an unmatched comparison (frozen vs fine-tuned with unequal... well, frozen is just raw features). It's descriptive but could be misread as causal. Suggest rewording "increases to" instead of "raises" or note the contrast is descriptive.
+
+  "The expert and quantitative sources therefore produce practically competitive representations in this refitting protocol." — Hmm. R² 0.269 vs 0.312/0.308. "Practically competitive" — is that supported? The gap is ~0.04 R². No equivalence test claimed. The abstract says "practically competitive" as well. This is borderline; the draft explicitly says no equivalence established. "Competitive" without a threshold is vague — it's an interpretive claim. I might flag it as needing a criterion or softening to "comparable in magnitude under this protocol."
+
+  Direct transfer: "The expert model, trained with binary targets, has mean Q-HERO rank agreement 0.397 ± 0.050 across three seeds, compared with 0.547 ± 0.071 for molecule-level MIC and 0.612 ± 0.030 for record-level MIC. Human targets thus encode learnable potency-related information, while numerical supervision provides stronger direct ordering."
+
+  Issue: "Human targets thus encode learnable potency-related information" — the direct rank agreement of 0.397 vs what baseline? For a binary-target model ranking a held-out collection, 0.397 above zero indicates some signal, but "thus" implies the comparison with MIC supports learnability; actually learnability is supported vs a null (0) but the draft doesn't provide a shuffled control for direct transfer. 0.397 could partly reflect scaffold distribution overlap rather than potency signal. Hmm — but is there any baseline? "Expert scores are oriented so that greater agreement means higher scores accompany lower MIC." Rank agreement 0.397 > 0. It's positive. But strictly, without a shuffled/permutation baseline for direct transfer, the claim "encode learnable potency-related information" is weakly supported. Also the frozen-feature human-vs-shuffled supports label signal. I can note the inference chain: the direct-transfer number alone lacks a null baseline; recommend citing the shuffled-control evidence or a permutation null rather than implying the MIC comparison establishes it.
+
+  "numerical supervision provides stronger direct ordering" — descriptive, fine.
+
+  **Section 3.2**: "This supports an effect of the structure–label assignment in this specified algorithm." OK, matches causal definition.
+
+  "The quantitative point estimate is better, but the nested interval includes zero." Careful: includes −0.001 (just below zero). "includes zero" — [−0.001, +0.226] — technically includes zero? −0.001 is less than 0, so the interval [−0.001, 0.226] contains 0. Yes, contains zero. OK.
+
+  "The expert-versus-binary-MIC contrast likewise does not establish equivalence." OK.
+
+  **Section 3.3**: "The positive expert-versus-shuffled contrast also appears with c3-MoLFormer: ΔRMSE −0.113 [−0.246, −0.012]. It is unresolved with ChemBERTa-100M (+0.014 [−0.115, +0.098]) and ChemFM-1B (−0.022 [−0.183, +0.074])." OK. "MolFormer and c3-MoLFormer are checkpoints of the same architecture with different pretraining, so this is evidence across two representations rather than independent architectural replication." Good, matches constraint.
+
+  Wait — is c3-MoLFormer actually the same architecture as MolFormer-XL? The draft says "The c3 checkpoint's '1.1B' name refers to pretraining molecules; its encoder has 44.4 million parameters" — same as MolFormer-XL's 44.4M. OK, consistent internally.
+
+  **Section 3.4**: "Restricting numerical supervision to the target organism therefore does not automatically improve transfer in this setting." Hmm — "target organism": Q-HERO's organism... Q-HERO is a chemical collection; the target is Q-HERO MIC. Exact S. aureus MIC is organism-matched to Q-HERO? Actually Q-HERO — quaternary ammonium... I don't know its assay organism. The phrase "target organism" is loaded: Q-HERO's measured MIC organism may be S. aureus (from Ghaemi paper, Q-HERO activity was vs S. aureus I believe). The draft says "organism-matched source requires an exact S. aureus MIC qualifier," implying Q-HERO target is S. aureus. So "target organism" is OK. But "does not automatically improve transfer" — the composite intervention (organism mixture, censoring, record count, aggregation) — the draft itself says "cannot be attributed to laboratory heterogeneity alone" and the intervention is composite. The sentence "Restricting numerical supervision to the target organism therefore does not automatically improve transfer" attributes the effect to organism restriction, but the intervention changes multiple things together (fewer records: 4,049 vs 855). Actually the direction: pooled (more records, mixed organisms) transfers better. Attributing to organism restriction is one interpretation; record count / data quantity is a confound. The draft says "Organism mixture, censoring, record count and aggregation change together, so this intervention estimates an effect of the composite target-definition policy." So the sentence "Restricting numerical supervision to the target organism therefore does not automatically improve transfer in this setting" is a fair summary — it's about the policy, not organism alone. It's OK-ish, though a reader could misread. Maybe minor.
+
+  "The QMR audit identifies 38 same-compound/same-strain replicate strata over 23 compounds and five strains; their median log2 range is zero and 94.7% lie within one dilution." Wait — "94.7% lie within one dilution": 38 strata, 94.7% — 36/38 = 94.7%. OK internally plausible.
+
+  "These selective replicates preclude interpreting every pooled disagreement as an inter-laboratory error, while not establishing universal assay reproducibility." Fine.
+
+  "Human denoising remains a hypothesis requiring richer annotation and assay metadata." Fine.
+
+  **Section 3.5**: "These distributions reflect changes in molecular structure and sampling alongside charge count; they do not estimate the causal effect of adding a cationic centre." OK.
+
+  "The main methodological contribution is the separation of transferable label signal, practical competition and incremental value over pretrained representations." Positioning claim — fine.
+
+  **Conclusions**: "Quantitative supervision remains the stronger point estimate in several comparisons" — careful. Which comparisons? Partial fine-tuning R² (0.312/0.308 vs 0.269), direct rank agreement (0.547/0.612 vs 0.397), frozen panel RMSE (1.497 vs 1.607), exact panel (1.785 expert vs... exact MIC 1.617; raw 1.602). So in several comparisons yes, quantitative point estimates are better. But "remains the stronger point estimate in several comparisons" is acceptable — descriptive, "point estimate," no universality. But the phrase "Quantitative supervision remains the stronger" could be read as general; given constraints "no universally superior quantitative supervision may be inferred," the draft should say "stronger point estimate in the reported comparisons" — but they say "in several comparisons," which is bounded. OK. Hmm, but wait: is it true in "several" comparisons? Let's count: (1) Q-HERO R² partial FT: MIC higher. (2) Direct rank: MIC higher. (3) Frozen 681 panel RMSE: continuous MIC 1.497 < expert 1.607. (4) Frozen exact 529: exact MIC 1.617 < expert 1.785. (5) Full-source R²: pooled 0.246 vs expert 0.095. Yes, several. But also in some comparisons quantitative is worse than raw features, and pooled vs exact shows organism-matched is worse. Fine, bounded claim.
+
+  "Partial MolFormer fine-tuning produces practically competitive downstream Q-HERO representations with human and numerical supervision" — again "practically competitive."
+
+  **Causal language check**: "locate the causal interpretation in controlled changes to the training procedure" (abstract). Section 2.6 defines estimand: "The causal estimand is the change in predictive loss under a specified replacement of supervision within a fixed computational procedure." Good. Uses "causal intervention" for real-vs-shuffled. This is a reasonable use (interventional, not observational). But "causal" claims: the intervention disrupts structure–label relation; effect attributable to label assignment. That's defensible as a controlled intervention. However, one nuance: with five shuffled runs as "diagnostic controls, rather than a calibrated multi-permutation significance test" — fine.
+
+  **Coherence issues to check**:
+
+  - Abstract: "For quaternary ammonium compounds, partial MolFormer fine-tuning followed by scaffold-grouped downstream refitting on Q-HERO yields R² = 0.269 ... while the direct expert score ranks measured potency without target refitting (Spearman rank agreement 0.397)." Good separation.
+
+  - Inconsistency in naming: "Q-HERO" cohort size: 411 in partial FT (Q-HERO-411) vs 405 in frozen protocol (Q-HERO-405). Draft does explain: cohort sizes differ between protocols because matched-molecule additionally excludes evaluation cation identities and counterion variants. Q-HERO-405 contains 386 unique cations in 29 groups. Wait — 405 structures but 386 unique cations? "Q-HERO-405 contains 386 unique cations in 29 cation-scaffold groups." OK.
+
+  - Table 1: "Record MIC (9,338 records)" — 9,338 records over 1,153 molecules. OK.
+
+  - Section 2.3: "The eligible sources contain 740 expert-labelled molecules, 1,153 molecule-level MIC targets and 9,338 MIC records over those 1,153 molecules." OK.
+
+  - Section 2.1: 1,103 annotation entries (244 Good/859 Bad) before dedup; eligible source 740 expert-labelled molecules after exclusions. OK.
+
+  - One potential coherence issue: In 3.2, expert on exact 529 panel yields RMSE 1.785 vs shuffled 1.761 — real worse than shuffled. And "Relative to raw MolFormer, expert supervision increases error by +0.185 [+0.050, +0.404]." Check: raw 1.602; expert 1.785; 1.785−1.602 = 0.183 ≈ +0.185 (paired contrast can differ from difference of means). OK consistent.
+
+  - c3 raw RMSE 1.649 vs human 1.705 — human worse than raw for c3 too. Table 2 shows human RMSE higher than raw for all four backbones. Consistent with "no established added value over raw features."
+
+  - Coherence: Figure 2b says "Quantitative direct predictions have negative raw R²" — fine.
+
+  - One more: Section 3.1 says "On QAC-105, partially fine-tuned R² values range from −0.004 to +0.053" — three sources presumably. Fine.
+
+  - "The six-descriptor reference reaches Q-HERO R² = 0.057." Descriptive reference; appears without much context. Where does six-descriptor reference come from? It's mentioned without introduction in Methods (not described in methods as far as I can see). Actually scanning methods — I don't see a description of the six-descriptor reference in Methods. It's in 3.1 without methods description. That's a coherence/methods gap: a reader can't tell what the six-descriptor baseline is. Good concrete issue: the "six-descriptor reference" appears in Results (§3.1) but is not defined in Methods; either define it in §2 or drop it. Yes — searching my memory of the draft: Methods mention Ridge sensitivity, CatBoost, but no "six-descriptor reference." Good catch.
+
+  - OOD-17: "all OOD-17 R² values remain negative." OK.
+
+  - Methods 2.2: "Its evaluation collections contain 105 QAC structures, 411 Q-HERO structures and 17 newly synthesised QACs." Then frozen: "QAC-104, Q-HERO-405 and OOD-17." QAC 105 vs 104 — because matched additionally excludes one conflicting? "removes conflicting expert and target labels" — fine.
+
+  - Another coherence check: Section 2.4 pooled panel "681 shared source molecules, 111 cation-scaffold groups and 96 positive expert calls, with 4,938 underlying MIC records." Exact panel "529 shared source molecules, 91 groups and 78 positive calls, with 855 records." Table 3: pooled on 529 = 4,049 records; exact = 855. Consistent.
+
+  - GroupShuffleSplit: "the pooled split contains 377 training and 304 validation molecules" — 377+304 = 681. Good. Validation 304 molecules?? "reserves 15% of scaffold groups for source validation. Group sizes are unequal: the pooled split contains 377 training and 304 validation molecules." 15% of 111 groups ≈ 17 groups containing 304 molecules — unequal group sizes, plausible.
+
+  Wait — actually this seems off: validation has 304/681 ≈ 45% of molecules despite 15% of groups. That's what "group sizes are unequal" addresses. OK.
+
+  - Causal interpretation coherence: The paper calls real-vs-shuffled a "causal intervention" and says "locate the causal interpretation in controlled changes to the training procedure." Some reviewers may object that label shuffling tests whether the model uses label information (a control/abolition test), and "causal" here means intervention on the training input — the draft's definition is explicit, which is good. A concrete correction could be: in §1 the phrase "A real-versus-shuffled label intervention addresses the third question" is fine. But the title of §2.6 "causal interpretation" and claim "This supports an effect of the structure–label assignment in this specified algorithm" — fine.
+
+  However, one subtle point: with five shuffled runs, the ΔRMSE interval [−0.322, −0.024] excludes zero, but the draft says "Five shuffled runs are diagnostic controls, rather than a calibrated multi-permutation significance test." OK.
+
+  - Potential overclaim: §3.2 "This supports an effect of the structure–label assignment in this specified algorithm." Supported.
+
+  - Now "practically competitive" — I want to scrutinize. R² 0.269 vs 0.312 — about 0.04 lower; absolute R² modest (0.13–0.31). "Practically competitive" without a practical threshold... The authors hedge ("unequal molecule counts... prevent interpreting as isolated causal effect... no statistical equivalence"). But "competitive" is an evaluative claim with no stated criterion. Suggest: soften to "numerically close under this protocol" or state the criterion. This is a fair editorial point: the abstract and §3.1 and conclusions use "practically competitive" three times. Given no equivalence test and unequal budgets, "competitive" should be tied to a stated margin or reworded.
+
+  - Another possible overreach: "Human targets thus encode learnable potency-related information" (§3.1). As noted, direct rank agreement 0.397 vs MIC 0.547/0.612 — the inference "thus" follows from positive agreement; but no null baseline given for direct transfer. A positive Spearman could arise from scaffold/series structure correlation... actually rank agreement with measured MIC on Q-HERO — if the model's scores correlate 0.397 with measured MIC, that does indicate potency-related ordering signal beyond chance (chance ~0). Without a CI/null it's still evidence, though weakly quantified. The stronger support comes from the human-vs-shuffled frozen experiments. Suggest citing the shuffled control as the basis, or adding "consistent with the matched-panel label-assignment effect." Minor.
+
+  - Check the abstract sentence: "Matched-molecule frozen-backbone experiments show lower Q-HERO error with real than with shuffled expert labels for MolFormer-XL and c3-MoLFormer, but no established improvement over raw pretrained features or consistent effect across ChemBERTa and ChemFM" — accurate.
+
+  - "on identical source molecules, pooled MIC also transfers better than exact S. aureus MIC" — "transfers better" — in which metric? RMSE on Q-HERO via frozen-feature protocol. The abstract compresses; the phrase "transfers better" might be misread as direct transfer (source-only), whereas it's downstream-refit RMSE in the frozen protocol. Actually in §3.4, the context comparison reports Q-HERO RMSE with target-trained CatBoost decoder — yes, downstream refitting. "Transfers" is ambiguous with "direct transfer" which the paper uses as a term of art for source-only ranking. Suggest: specify "under matched frozen-feature downstream refitting" in abstract. That's a good concrete point given the user's focus on "distinctions between direct source-only ranking and target-refitted scaffold CV."
+
+  - Similarly, "direct expert score ranks measured potency without target refitting" is good.
+
+  - Check §3.1: "partial fine-tuning raises mean downstream R² from 0.134 for frozen MolFormer to 0.269" — again the frozen→fine-tuned contrast: fine-tuning changed representation and then refit; it's unmatched (no frozen-with-refit shuffled control). "Raises" implies causal. Suggest "increases to" and note not an isolated fine-tuning effect. Actually raw features also get downstream refit: frozen MolFormer 0.134 is raw features + CatBoost. Partial FT expert 0.269. Fine-tuning improved over frozen raw features — but this comparison confounds... it's just a comparison of two arms; fine-tuning is the only difference (same target regressor protocol). Hmm, actually that's nearly matched: same downstream refitting, same Q-HERO; the difference is frozen vs partially fine-tuned. That's a fair descriptive contrast. But "raises" implies improvement due to fine-tuning — that IS the difference between arms. OK it's fine, though unequal source supervision sizes across arms. Eh — the frozen baseline uses no supervision. "Raises ... from frozen MolFormer to 0.269 with expert labels" — fine descriptively. Maybe not flag.
+
+  - Now check for the constraint "No ... claims of ... independent architecture replication may be inferred": the draft explicitly disclaims it in 3.3. Good — reviewer should note it as a strength, maybe in positioning.
+
+  - Any place where the draft inadvertently implies universal superiority of quantitative supervision? §3.2: "The quantitative point estimate is better, but the nested interval includes zero." Fine. Conclusions: "Quantitative supervision remains the stronger point estimate in several comparisons" — fine but "remains the stronger" + "in several comparisons" is OK. Could suggest "in most reported contrasts" — no, don't invent. It's fine.
+
+  - Title check: "Human versus Quantitative Supervision..." fine.
+
+  - Reference 3: "Journal of Chemical Information and Modeling 2026, 66, 3117-3128." — 2026 volume 66? JCIM volume 66 would be 2026 (vol 65 = 2025). Plausible. Can't verify; not a content issue to flag strongly. Maybe skip.
+
+  - Reference 5: ChemBERTa-3 Digital Discovery 2026 — plausible.
+
+  - Figure 3 caption: "(a) Expert versus shuffled expert labels across four frozen backbones on the 681-molecule panel." OK.
+
+  - One more coherence item: §2.3 says "Maximum epochs are 30 for expert and molecule-level MIC training and 10 for record-level MIC training." And "These source-size and update-budget differences are part of the practical comparison, rather than a matched-budget intervention." Transparent. Good.
+
+  - "Target-median-split AUC and raw numerical regression metrics are secondary." OK.
+
+  - Potential issue in §2.4: "The controls comprise real expert labels, continuous MIC, binary MIC, each corresponding shuffled-label arm, an untrained encoder and the original pretrained features." Good.
+
+  - "Binary MIC uses a source-training-only threshold targeting the expert positive prevalence; MIC ties prevent exact prevalence matching." OK.
+
+  - §2.5: "All 1,939 prepared structures are encoded without truncation." 1,939 = 740+1,153+... 740+1153 = 1893; +46? Cytotoxicity 273? Overlap... skip; can't verify.
+
+  - Now the "causal intervention" focus: The user wants me to examine "the definition of causal intervention." The draft's definition: "The causal estimand is the change in predictive loss under a specified replacement of supervision within a fixed computational procedure." That's a sound, bounded definition (intervention on training procedure). One concern: the term "causal" without invoking a causal model may draw reviewer criticism, but the draft explicitly limits it (does not identify mechanism, expert status effect, or bias removal). I should affirm this as well-handled, and perhaps suggest one tightening: in the abstract, "locate the causal interpretation in controlled changes to the training procedure" is awkward; suggest "restrict causal claims to controlled replacements of supervision within the training procedure." Minor wording.
+
+  - Another possible unsupported claim: §1 "Preference-learning studies have demonstrated that such decisions can be learned and used in molecular prioritisation and design (1)." Supported by ref 1 (Choung et al. preference learning). OK.
+
+  - §3.5: "Similar median absolute errors can coexist with different RMSE because large residuals contribute disproportionately to squared loss. The violins therefore complement the paired contrasts rather than establish statistical equivalence." Good.
+
+  - Missing: In §3.1 the claim "The expert and quantitative sources therefore produce practically competitive representations" — I flagged.
+
+  - Also check Table 2 vs text: "None of the four backbones establishes an expert-supervision benefit over its raw features." Table 2: raw 1.602 vs human 1.607 (MolFormer); 1.649 vs 1.705 (c3); 1.821 vs 1.844 (ChemBERTa); 1.681 vs 1.784 (ChemFM). Human worse in all four point estimates. OK.
+
+  - Check untrained encoder mentioned but no numbers in main text — fine, SI.
+
+  Now the second required section: "Remaining limits" — things the draft already acknowledges (annotation provenance placeholders H1–H7, no inter-rater agreement, exploratory unadjusted intervals, small seeds (3–5), fixed target folds, small OOD cohort, Q-HERO lacks row-level provenance, missing spectra in chemistry appendix, selective replicate audit). I should note these as limits, plus any not fully acknowledged: e.g., three source seeds only for partial FT; bootstrap conditional on fixed folds; unequal group sizes in validation; shuffled control is a null-model (label destruction) not a positive control for "human-specific" signal — shuffled expert preserves marginals, so the contrast shows the model uses the real mapping, but a continuous-MIC-shuffled arm shows MIC also matters; i.e., the human-vs-shuffled effect size (−0.175) is comparable in magnitude to continuous MIC vs its shuffle (−0.107); the paper doesn't directly compare these effect sizes. Not necessarily an error.
+
+  Also: the shuffled-label control tests necessity of correct labels but doesn't establish that human labels add information beyond MIC — the draft acknowledges via separate expert-minus-continuous contrast (interval includes zero). OK.
+
+  Another limit: expert annotations may encode the same MIC data (annotators may have seen measurements — H4 placeholder). The draft flags this in §2.1 and §3.1. Good.
+
+  Third section: "Positioning for JCIM" — fit: methods-heavy, reproducibility focus, honest limits; the matched-molecule frozen-feature intervention design and separation of estimands is a methodological contribution suited to JCIM; recommend tightening title/abstract claims, moving some SI material, ensure data availability placeholders resolved before submission (D1/D2), the chemistry appendix with missing spectra reserved for coauthors — flag that JCIM requires complete SI at submission; coauthor placeholders must be filled. Also the human annotation methods doc reserved for coauthors — JCIM requires reporting of annotation protocol; placeholders are a submission blocker. Note: user says treat annotation fields as intentional — so I say: these must be completed before submission; the review treats them as pending, not as errors.
+
+  Also positioning: the claim "The main methodological contribution is the separation of transferable label signal, practical competition and incremental value" — good for JCIM; suggest abstract foregrounds design rather than QAC-specific result.
+
+  Also: reference formatting — "Tackling the challenge of ML-assisted antibacterial activity prediction..." ref 2 has inconsistent author listing style with ", Tackling" — minor.
+
+  One more concrete error check: affiliations — "Elizabeth Sonc" — "Sonc"? Probably "Son, E." Actually Author Contributions says "Elizabeth Son". The author line says "Elizabeth Sonc" with affiliation c marker? "Elena V. Detusheva,c" and "Elizabeth Sonc" — looks like a typo: "Elizabeth Son" with superscript "c". In the author list: "Elena V. Detusheva,c, Elizabeth Sonc, Michael G. Medvedev*a,d" — the "c" after "Son" is affiliation marker rendered without comma: "Elizabeth Son^c". And email line includes vereshchagin, egor22366, nfrolov. Author contributions lists "Elizabeth Son". So "Sonc" is a typographic artifact — worth flagging as coherence/typo. Good concrete catch.
+
+  Also corresponding authors: Michael G. Medvedev*a,d and Anatoly N. Vereshchagin*a — asterisks but no email for Medvedev listed? Emails: vereshchagin@ioc.ac.ru (A.N.V.); egor22366@gmail.com (E.A.I.); nfrolov@ioc.ac.ru (N.A.F.). Medvedev has * but no email given. Flag: corresponding-author emails incomplete (Medvedev * without address; or clarify * denotes something else). Concrete.
+
+  Abstract: "Egor V. Sinikina,b" — "Sinikin" in contributions; "Sinikina,b" is "Sinikin" + affiliation b. OK.
+
+  Also "Mary A. Seferyana" vs contributions "Mary A. Seferyan" — inconsistent spelling: header "Seferyana" vs contributions "Seferyan". Minor typo. Hmm: author line "Mary A. Seferyana" — could be "Seferyan" + "a"? No — "a" affiliation would be after first authors. "Egor A. Ilina" is Ilina + a? Actually "Egor A. Ilina, Nikita A. Frolova" — hmm! "Ilina" vs contributions "Egor A. Ilin". And "Frolova" vs "Nikita A. Frolov". So pattern: surname + affiliation letter concatenated: "Ilin" + "a" = "Ilina"; "Frolov" + "a" = "Frolova"; "Seferyan" + "a" = "Seferyana"; "Detusheva,c" = Detushev + a + ,c; "Sinikina,b" = Sinikin + a + ,b; "Sonc" = Son + c. So these are affiliation markers glued to names due to formatting. OK — so not typos per se, but a formatting/coherence issue: affiliation superscripts run into surnames producing apparent misspellings ("Ilina", "Frolova", "Seferyana", "Sonc"). Worth a one-line note to fix superscript formatting. And the mismatch "Egor A. Ilin" (contributions) vs "Ilina" (header) is then consistent. Fine — one bullet.
+
+  Word count: max 800 words. Must be concise. Structure: (1) concrete corrections, (2) remaining limits, (3) positioning for JCIM. Each with quoted wording + suggested correction.
+
+  Let me pick the strongest concrete issues:
+
+  1. §3.1 + abstract + conclusions: "practically competitive" — unsupported evaluative claim without a stated practical margin; no equivalence test; sources unequal. Correction: replace with magnitude statement, e.g., "expert-supervision R² of 0.269 versus 0.312/0.308 under the same refitting protocol" and reserve "competitive" for contexts with a prespecified criterion, or define the criterion.
+
+  2. §3.1: "partial fine-tuning raises mean downstream R² from 0.134 for frozen MolFormer to 0.269" — "raises" suggests fine-tuning benefit; this arm contrast is descriptive and confounded by supervision-source differences across arms? Actually frozen baseline has no supervision. The contrast frozen→expert conflates "fine-tuning with expert labels." Minor. Maybe fold into a broader point about causal verbs in unmatched comparisons: also "raises" vs §2.3 statement that source-size/budget differences are part of the practical comparison. The frozen→fine-tuned contrast is fine (only difference is fine-tuning), but the expert-vs-MIC contrast isn't matched. The draft says so. Perhaps skip #2 or merge.
+
+  Better #2: §3.1 "Human targets thus encode learnable potency-related information" — inference drawn from direct rank agreement alone (no null/permutation baseline reported for direct transfer). Correction: anchor this claim in the matched human-vs-shuffled contrast, e.g., "consistent with the label-assignment effect in §3.2," or report the direct-transfer null baseline if available (but no new numbers allowed — so reword).
+
+  3. Abstract: "pooled MIC also transfers better than exact S. aureus MIC" — ambiguous "transfers" collides with the paper's term of art "direct transfer" (source-only, no refitting), whereas §3.4's contrast is frozen-feature supervision with downstream scaffold-CV refitting. Correction: "under matched frozen-feature downstream refitting, pooled-MIC supervision yields lower Q-HERO RMSE (1.525) than exact S. aureus MIC (1.617)."
+
+  4. §3.4 heading "Quantitative context changes transfer on identical source chemistry" — same ambiguity; "transfer" here means downstream-refit Q-HERO error. Suggest "changes downstream-refit Q-HERO error."
+
+  5. Six-descriptor reference (§3.1) undefined in Methods. Correction: define in §2.3 or remove; a results claim without a methods definition.
+
+  6. "This supports an effect of the structure–label assignment in this specified algorithm." — fine, keep. Not an error.
+
+  7. §2.6/abstract "causal": affirm the bounded estimand; suggest abstract phrasing tighten ("locate the causal interpretation in controlled changes to the training procedure" is vague). Correction: "we restrict causal claims to controlled replacements of supervision within a fixed training procedure." Also note real-vs-shuffled is an abolition (null) intervention: it demonstrates the model exploits the label mapping; reviewers may prefer "interventional control." Suggest renaming "causal intervention" to "controlled label-assignment intervention" in §1 to avoid overreach. Optional.
+
+  8. Corresponding author/affiliation formatting: "Medvedev*a,d" but no email; affiliation letters fused to surnames ("Ilina", "Frolova", "Seferyana", "Sonc"). Correction: fix superscripts, add corresponding email.
+
+  9. §3.3 "so this is evidence across two representations rather than independent architectural replication" — good; ensure similar caveat for "Modern backbones reveal protocol dependence" heading — the heading says "reveal," fine.
+
+  10. Coherence: §1 says "The latter compares expert labels with continuous and binarised MIC..." fine.
+
+  11. Maybe: Table 1 row "Frozen-feature context comparison | 529 | Pooled / exact MIC + controls" — fine.
+
+  12. Also: "The analyses followed earlier inspected experiments and are exploratory; no non-inferiority margin or confirmatory preregistration is claimed." Good.
+
+  Remaining limits (to list briefly):
+  - Annotation provenance placeholders H1–H7 and D1–D2: inter-rater agreement not estimable from final labels; whether annotators saw the MIC used for quantitative supervision unresolvable until H4 — this directly bounds claims that human labels are "independent chemical intuition."
+  - Only 3 source seeds (partial FT) / 5 (frozen); bootstrap intervals conditional on fixed target folds; exploratory, unadjusted.
+  - Human-vs-shuffled is a null-model control; it does not quantify human-specific information beyond MIC (expert-minus-continuous interval includes zero).
+  - Q-HERO row-level provenance absent; replicate audit selective (38 strata).
+  - OOD-17 tiny (17), all R² negative — external validity limited.
+  - Chemistry appendix: original spectra missing; SI must be complete at JCIM submission (flag as submission blocker, coauthor-reserved).
+  - No matched-budget partial fine-tuning; the two protocols can't be pooled (the draft says this; keep).
+
+  Positioning for JCIM:
+  - Strengths: explicit estimand separation; honest null results; reproducibility manifests; suited to JCIM's methods audience.
+  - Recommend: foreground the matched-molecule intervention design in abstract; ensure claims bounded (done mostly); fill placeholders before submission; consider emphasizing that contribution is protocol/evaluation methodology, not a new SOTA model; the QAC domain provides testbed.
+  - Note: recommendations for future work (matched partial-FT experiment, richer annotation metadata) are already in §3.5 last paragraph — fine, distinguish from errors.
+
+  Also check the "no new numerical results... may be inferred" instruction: my review must not introduce new numbers beyond those quoted. I'll quote only draft numbers.
+
+  Also the instruction "No ... claims of preregistration, equivalence, universally superior quantitative supervision, human denoising, or independent architecture replication may be inferred" — my suggested corrections must not add such claims. E.g., for "practically competitive," my correction should not assert equivalence.
+
+  Word budget: 800 max. Aim ~750.
+
+  Also style: The review should quote draft wording and give suggested corrections. Use the three numbered sections.
+
+  One more check — "94.7% lie within one dilution" — 36/38=94.73% OK. And "38 same-compound/same-strain replicate strata over 23 compounds and five strains." OK.
+
+  Another possible concrete issue: §2.2 "The matched-molecule protocol additionally excludes all evaluation cation identities and their counterion variants, and removes conflicting expert and target labels." vs §2.2 "Full-salt identity exclusion does not establish exclusion of every counterion variant." Transparent. Good.
+
+  Another: §3.1 "Direct transfer supplies a complementary test (Figure 2b)." fine.
+
+  Also Figure 1 caption: "Partial backbone fine-tuning compares eligible sources of unequal size and uses both downstream refitting and direct ranking on the 411-structure Q-HERO cohort. Matched-molecule frozen-feature interventions hold source identities and training conditions fixed, exclude evaluation cations, and use the separate 405-structure cohort." Good.
+
+  Now check the sentence in Conclusions: "Partial MolFormer fine-tuning produces practically competitive downstream Q-HERO representations with human and numerical supervision, and direct expert scores track measured potency without target refitting." "track" — 0.397 Spearman — "track" is a bit strong but acceptable? "Track measured potency" could be softened to "rank measured potency above chance-level agreement (ρ = 0.397)". Hmm, "above chance" — is that inferring? 0.397 is clearly above 0; describing as positive rank agreement is fine. Suggest: "direct expert scores show positive rank agreement (ρ = 0.397) with measured potency without target refitting." I can include in the "practically competitive/track" bullet.
+
+  Also check: does the abstract claim "expert supervision versus 0.312 and 0.308 with molecule-level and record-level MIC supervision, respectively" — fine.
+
+  I think I have ~8 concrete corrections. Let me also double check the "raises" one and decide. §3.1: "partial fine-tuning raises mean downstream R² from 0.134 for frozen MolFormer to 0.269 with expert labels, 0.312 with molecule-level MIC and 0.308 with record-level MIC (Figure 2a)." The verb "raises" attributes direction of change from a no-supervision baseline; since the only difference between the frozen arm and fine-tuned arms is the fine-tuning (plus supervision source), "raises" is roughly supported descriptively. But different supervision arms differ from frozen by different amounts. It's OK. I'll skip or mention briefly within causal-language bullet: prefer "increases to" — no, weak. Skip; keep stronger items.
+
+  Actually, one more potentially important one: §3.1 "The expert and quantitative sources therefore produce practically competitive representations in this refitting protocol. Their unequal molecule counts and update budgets prevent interpreting the comparison as an isolated causal effect of label type" — good hedging. But the word "therefore... practically competitive" still hangs. Keep as main correction #1.
+
+  Also the abstract's first sentence "Human Good/Bad annotations may provide activity-related supervision... but their competitiveness with numerical measurements and their added value over pretrained features require separate tests." Good framing.
+
+  Also check §3.2 last sentence: "It nevertheless provides an adverse result that limits generalisation of the positive pooled-panel finding." Good.
+
+  One more check on causal: "Real-versus-shuffled labels preserve class counts and source chemistry while disrupting the structure–label relation." Note: permutation "occurs within source training" — shuffling within the training subset only. Fine.
+
+  Also §2.6: "Five shuffled runs are diagnostic controls, rather than a calibrated multi-permutation significance test." Good.
+
+  Potential coherence issue: In §3.4, "Expert, exact S. aureus and untrained runs reuse the deterministic 529-molecule experiment and are anchors rather than independent replications." — stated in Methods 2.5 too. Good.
+
+  Now — the "human-versus-shuffled control versus incremental value over raw features" focus: the draft handles this carefully (§3.2 explicitly separates). Affirm. But one subtlety: Table 2 "Raw features: one fixed decoder run." The raw-feature arm has no seed variability (single run), so expert-vs-raw intervals (e.g., +0.005 [−0.102, +0.115]) — how was the interval computed for a single-run arm? Bootstrap resamples "source initialisation seeds and whole target cation-scaffold groups" — with one raw run, seed resampling contributes nothing for that arm; the interval comes from target-fold resampling only. The draft doesn't explain this asymmetry. Hmm — "Ten thousand paired bootstrap replicates resample source initialisation seeds and whole target cation-scaffold groups." For the raw arm, resampling seeds is degenerate (n=1). That's a methods-clarity gap worth one line: state how uncertainty is computed when an arm has a single run (fold-level resampling only), since seed SD cannot exist for raw features. Good, concrete, and doesn't invent numbers. Also "Raw RMSE" column has no ± in Table 2, consistent with single run. The paired interval for expert-minus-raw presumably resamples folds only. A reader can't tell. Suggest one clarifying sentence in §2.6. That's a legit coherence point.
+
+  Also paired ΔRMSE for expert vs raw MolFormer in §3.2: "+0.005 [−0.102, +0.115]" — if only folds resampled, fine. OK.
+
+  Also, Table 2 caption says "Raw features: one fixed decoder run." — consistent.
+
+  Alright. Also for JCIM positioning: note the Acknowledgments disclose OpenAI Codex and Kimi Code assistance — good practice; keep. Also conflicts fine.
+
+  JCIM fit: the manuscript is candid, methods-focused, moderate novelty (protocol/evaluation design rather than new model or data). Suggest emphasizing the evaluation-framework contribution and ensuring the title/abstract don't overpromise; also JCIM reviewers will ask about annotation protocol completeness (H1–H7 must be filled), data availability (D1/D2) before review. Also spectra missing from chemistry appendix — the draft says protocols preserved; flag that JCIM requires characterization data for synthesized compounds; the reserved coauthor completion is a submission prerequisite, not optional.
+
+  Also mention: reference 2 formatting inconsistent ("Vereshchagin, A. N., Tackling" — comma splice in author list). Minor; may skip for word count. I'll include as a one-liner in corrections (coherence).
+
+  Let me now also scan for any actual scientific inconsistency I might have missed:
+
+  - §2.3: "Early stopping uses a scaffold-disjoint source-validation partition with patience six." OK.
+  - §2.4: "80 fixed epochs" and "This validation partition records diagnostics without checkpoint selection." OK.
+  - §2.5: "The encoder input dimension follows the backbone; its hidden dimensions and source-training budget remain fixed." OK.
+  - Numbers: 1,103 entries (244+859=1,103 ✓). 740 expert source molecules; 244 Good entries before standardization → 96 positive calls in 681 panel; plausible after dedup/exclusions.
+  - 9,338 records / 1,153 molecule targets; 4,938 records in 681 panel; 4,049 records in 529 pooled; 855 exact. Consistent subsets.
+  - Table 3 R² values: expert −0.085, pooled +0.209, exact +0.110, shuffled pooled +0.018, shuffled exact +0.051. Note shuffled pooled R² +0.018 near zero — plausible.
+  - §3.1 QAC-105 R² −0.004 to +0.053; six-descriptor Q-HERO 0.057 vs fine-tuned 0.269–0.312 — so fine-tuned beat descriptor baseline on Q-HERO. Fine.
+
+  One more: §3.1 says "(Figure 2a)" bars "show mean ± seed standard deviation, not confidence intervals across independent datasets." Good.
+
+  Also the phrase in abstract: "locate the causal interpretation in controlled changes to the training procedure" — I flagged for tightening.
+
+  I think the corrections list (strongest, concrete):
+
+  C1. "practically competitive" (abstract: "support human annotations as a learnable, protocol-dependent supervision signal" is fine; but §3.1 "The expert and quantitative sources therefore produce practically competitive representations in this refitting protocol" and Conclusions "produces practically competitive downstream Q-HERO representations with human and numerical supervision"). Problem: no prespecified margin/equivalence test; R² gap 0.04 with 3 seeds, unadjusted. Correction: state the contrast descriptively ("expert supervision attains R² 0.269 versus 0.312/0.308 for MIC under identical refitting") and drop "competitive," or define the practical criterion. Also Conclusions "direct expert scores track measured potency" → "show positive rank agreement (ρ = 0.397)".
+
+  C2. §3.1 "Human targets thus encode learnable potency-related information" — the direct-transfer comparison (0.397 vs 0.547/0.612) shows weaker ordering, not learnability; no shuffled/permutation null reported for direct transfer. Correction: support the claim by referencing the matched human-vs-shuffled contrast (§3.2) or add the null if computed; reword to "expert scores retain positive rank agreement with measured potency (ρ = 0.397), consistent with the label-assignment effect observed under matched frozen-feature training."
+
+  C3. Abstract "pooled MIC also transfers better than exact S. aureus MIC" and §3.4 heading "Quantitative context changes transfer on identical source chemistry" — "transfer" collides with the defined term "direct transfer" (source-only head, no refitting); the actual contrast is frozen-feature supervision + downstream scaffold-CV refit. Correction: "under matched frozen-feature training and downstream scaffold-CV refitting, pooled-MIC supervision gives lower Q-HERO RMSE (1.525) than exact S. aureus MIC (1.617)."
+
+  C4. Six-descriptor reference in §3.1 ("The six-descriptor reference reaches Q-HERO R² = 0.057") is not defined in Methods. Correction: add its definition in §2.3 (descriptors, fitting protocol) or delete.
+
+  C5. Single-run raw-feature arm vs bootstrap over seeds: §2.6 "bootstrap replicates resample source initialisation seeds and whole target cation-scaffold groups," but Table 2 gives raw features as "one fixed decoder run." Correction: state explicitly that for single-run arms (raw features, untrained?) intervals derive from scaffold-group resampling only, and that seed-resampling is degenerate; otherwise §3.2 intervals like expert-vs-raw [−0.102, +0.115] are ambiguous.
+
+  C6. Causal wording: abstract "locate the causal interpretation in controlled changes to the training procedure" is vague; §1 "A real-versus-shuffled label intervention addresses the third question." The estimand in §2.6 is well-bounded; suggest aligning terms: call it a "controlled label-assignment (abolition) intervention," and in the abstract write "we restrict causal claims to controlled replacements of supervision within a fixed training procedure." (Avoid implying mechanism-level causality — the draft already disclaims; keep.)
+
+  C7. Front-matter formatting: corresponding author Medvedev marked "*" but no email; affiliation letters fused to surnames ("Ilina", "Frolova", "Seferyana", "Sonc") inconsistent with Contributions ("Ilin", "Frolov", "Seferyan", "Son"). Correction: fix superscript rendering and complete corresponding-author emails.
+
+  C8. Reference 2 author list formatting (", Tackling the challenge..." with comma before title after "A. N.,") — inconsistent with house style. Optional. Maybe skip or one clause.
+
+  That's plenty. Prioritize C1–C6 in detail, C7 briefly, skip C8 or fold into C7 as "minor".
+
+  Remaining limits section: annotation provenance pending (H1–H7; inter-rater agreement not estimable; H4 visibility of MIC unresolved — bounds "independent chemical intuition"); small seed counts (3/5), intervals conditional on fixed folds, exploratory/unadjusted; human-vs-shuffled is an abolition control (does not show human-specific signal beyond MIC — the expert-minus-continuous interval includes zero); Q-HERO lacks row-level provenance; replicate audit selective (38 strata); OOD-17 small with negative R²; missing original spectra for synthesized compounds — SI completeness required at submission (coauthor-reserved); no matched-budget partial fine-tuning.
+
+  Positioning for JCIM: strengths — estimand separation, honest negative results, reproducibility archives; good fit for JCIM's methods/reproducibility audience; recommend abstract foreground the three-question design; the QAC testbed is narrow — position as evaluation methodology; ensure D1/D2 and H1–H7 completed before submission since JCIM requires data availability and the annotation protocol for review; future-work items (matched partial-FT experiment, richer annotation/assay metadata) are appropriately framed as motivations, not evidence.
+
+  Also mention one positive: the explicit disclaimers (no equivalence, no preregistration, no denoising, not independent replication) should be preserved — they preempt overclaiming; keep them even if reviewers push.
+
+  Word count control: aim for ~700-780 words. Let me draft.
+
+  Draft:
+
+  **Review: ...**
+
+  **(1) Concrete corrections**
+
+  1. "Practically competitive" (§3.1; echoed in Abstract and Conclusions: "produces practically competitive downstream Q-HERO representations"). No practical margin or equivalence test is defined, and sources differ in size/budget; with three seeds and exploratory intervals, "competitive" is an evaluative label the evidence doesn't pin down. Correction: report descriptively — "expert supervision attains Q-HERO R² = 0.269 versus 0.312 (molecule MIC) and 0.308 (record MIC) under identical refitting" — and either define the criterion for "competitive" or delete the term. Similarly, Conclusions' "direct expert scores track measured potency" → "show positive rank agreement (Spearman 0.397) with measured potency."
+
+  2. §3.1: "Human targets thus encode learnable potency-related information, while numerical supervision provides stronger direct ordering." The 0.397 vs 0.547/0.612 comparison shows weaker ordering, not learnability; no shuffled/permutation null is reported for direct transfer. Correction: anchor the claim in the matched human-vs-shuffled contrast of §3.2 — e.g., "direct expert scores show positive rank agreement (0.397), consistent with the label-assignment effect demonstrated under matched frozen-feature training."
+
+  3. Abstract: "pooled MIC also transfers better than exact S. aureus MIC"; §3.4 heading "Quantitative context changes transfer on identical source chemistry." "Transfer" collides with the paper's term of art "direct transfer" (source-trained head, no refitting); the §3.4 contrast is frozen-feature supervision followed by downstream scaffold-CV refitting. Correction: "under matched frozen-feature training and downstream scaffold-CV refitting, pooled-MIC supervision yields lower Q-HERO RMSE (1.525) than exact S. aureus MIC (1.617)."
+
+  4. §3.1: "The six-descriptor reference reaches Q-HERO R² = 0.057" — no such baseline is defined in Methods. Correction: define it in §2.3 (descriptor set, fitting protocol) or remove; results should not depend on an undefined comparator.
+
+  5. §2.6 vs Table 2: bootstrap "resample source initialisation seeds and whole target cation-scaffold groups," but raw features are "one fixed decoder run"; untrained likewise. Seed resampling is degenerate for single-run arms, yet §3.2 reports expert-vs-raw intervals ([+0.005, −...]). Correction: state explicitly how uncertainty is computed for single-run arms (scaffold-group resampling only), or the paired intervals are ambiguous.
+
+  6. Causal terminology: the bounded estimand in §2.6 ("change in predictive loss under a specified replacement of supervision within a fixed computational procedure") is appropriate, but Abstract's "locate the causal interpretation in controlled changes to the training procedure" is vague, and §1's "label intervention" would be more precisely a controlled label-assignment (abolition) intervention. Correction: "we restrict causal claims to controlled replacements of supervision within a fixed training procedure; these interventions do not identify mechanism, expert status, or denoising effects." (The existing disclaimers should be retained verbatim.)
+
+  7. Front matter: affiliation markers are fused to surnames ("Ilina," "Frolova," "Seferyana," "Sonc") and mismatch the Contributions ("Ilin," "Frolov," "Seferyan," "Son"); Medvedev carries "*" but no corresponding email is given. Correction: fix superscript rendering; supply corresponding-author emails.
+
+  **(2) Remaining limits**
+
+  - Annotation provenance (H1–H7) pending: with only final labels, inter-rater agreement is uncomputable, and whether annotators saw the MIC later used for quantitative supervision (H4) is unresolved — this bounds any reading of human labels as independent intuition, as the draft itself notes (§1, §3.1).
+  - Three (partial FT) and five (frozen) source seeds; intervals conditional on fixed target folds; exploratory and multiplicity-unadjusted — variance estimates are fragile.
+  - The human-vs-shuffled contrast is an abolition control: it shows the training procedure exploits the real mapping, but with the expert-minus-continuous interval spanning zero, human-specific information beyond MIC is unestablished — keep the two questions separated as §3.2 does.
+  - Q-HERO lacks row-level strain/lab provenance; the replicate audit (38 strata) is selective and cannot support broad reproducibility claims in either direction.
+  - OOD-17 is 17 compounds with negative R²; external validity is minimal.
+  - The chemistry appendix lacks original spectra (reserved for coauthors); JCIM requires complete characterization data for synthesized compounds at submission.
+
+  **(3) Positioning for JCIM**
+
+  The manuscript's real contribution is methodological: a clean separation of transferable signal, practical competition, and incremental value over pretrained features, with matched interventions and archived reproducibility — well matched to JCIM's methods audience, and the explicit disclaimers (no equivalence, no preregistration, no denoising, no independent architectural replication) are strengths to preserve. Recommendations: (i) foreground the three-question design in the abstract rather than the QAC-specific numbers; (ii) complete H1–H7 and D1–D2 before submission, since annotation protocol and data availability are review blockers; (iii) frame the QAC testbed as a case study for the evaluation framework, not as a domain-general result; (iv) the §3.5 suggestion of a matched-bolecule partial-fine-tuning experiment and richer annotation/assay metadata are appropriate future work — keep them clearly marked as motivation, not evidence.
+
+  Count words later; trim. Note instruction: "No new numerical results... may be inferred" — my review quotes draft numbers only (0.269, 0.312, 0.308, 0.397, 0.547, 0.612, 1.525, 1.617, 38 strata) — all from the draft. OK.
+
+  "universally superior quantitative supervision" — my item on "Quantitative supervision remains the stronger point estimate in several comparisons" — I didn't flag it; it's bounded ("point estimate," "several comparisons"). Fine; could affirm it's acceptable. Maybe include a line affirming correct bounded claims. Word budget permitting.
+
+  Also check user's focus list: "distinctions between direct source-only ranking and target-refitted scaffold CV" — C3 covers; also affirm Figure 2 caption handles it. "unmatched partial fine-tuning versus matched frozen-feature interventions" — affirm the draft handles (Table 1, §2.3 note); C1 partially. Maybe add an affirmation sentence in positioning: the draft's explicit non-pooling of protocols is correct. "human-versus-shuffled control versus incremental value over raw features" — affirm §3.2 separation is correct; limit bullet covers. "definition of causal intervention" — C6. "coherence" — C4, C7.
+
+  Trim to ≤800 words. Let me count roughly while finalizing. I'll write it now, moderately tight.
+
+  Also: should I include a header with recommendation? User asked for the three sections; keep exactly those three headings. No salutation needed. Maybe a one-line overall assessment at top? User said "Return a concise review (maximum 800 words), using (1) concrete corrections, (2) remaining limits, (3) positioning for JCIM." So structure with those three headings. Maybe a single-sentence overall verdict is fine but optional; skip to save words, or one short line. I'll skip.
+
+  Word count check: I'll draft and estimate. Section 1 with 7 items ~ 420 words; section 2 ~ 160; section 3 ~ 150. Total ~730 + headings. OK.
+
+  Note also: "matched-bolecule" typo — avoid. 
+
+  Also in correction 5, quote: §3.2 "The human representation is close to raw MolFormer (mean RMSE 1.602), with paired ΔRMSE +0.005 [−0.102, +0.115]." Good.
+
+  One caution: correction 2 suggests rewording that includes "consistent with..." — fine, no new claims.
+
+  Also ensure I do not instruct to "add experiments" as corrections — for C2, the null baseline "if computed" — better to just reword. Keep: "anchor in §3.2 contrast; do not present the MIC comparison as the basis."
+
+  Final formatting: numbered lists under headings, bold sparingly. Cite section numbers. No emoji. Keep within 800 words.
+
+To resume this session: kimi -r session_06d62394-c62b-46d6-b5fb-970a301f82aa

@@ -1,0 +1,54 @@
+Traceback (most recent call last):
+  File "/home/yagr/coma_models_check_20261012/wait_and_run.py", line 31, in <module>
+    main()
+  File "/home/yagr/coma_models_check_20261012/wait_and_run.py", line 22, in main
+    raise RuntimeError('Dependency lane finished without the required marker')
+RuntimeError: Dependency lane finished without the required marker
+COMPLETED 1 / 47 raw-molformer onehot elapsed 35
+COMPLETED 2 / 47 quant-continuous_seed0 onehot elapsed 36
+COMPLETED 3 / 47 expert_seed0 onehot elapsed 36
+COMPLETED 4 / 47 expert_seed0 text elapsed 45
+COMPLETED 5 / 47 raw-molformer text elapsed 46
+COMPLETED 6 / 47 quant-continuous_seed0 text elapsed 47
+COMPLETED 7 / 47 quant-binary_seed0 onehot elapsed 64
+COMPLETED 8 / 47 expert-shuffled_seed0 onehot elapsed 65
+COMPLETED 9 / 47 quant-shuffled_seed0 onehot elapsed 72
+COMPLETED 10 / 47 quant-binary-shuffled_seed0 onehot elapsed 74
+COMPLETED 11 / 47 expert_seed1 onehot elapsed 77
+COMPLETED 12 / 47 quant-binary_seed0 text elapsed 77
+COMPLETED 13 / 47 quant-continuous_seed1 onehot elapsed 94
+COMPLETED 14 / 47 quant-binary_seed1 onehot elapsed 103
+COMPLETED 15 / 47 expert_seed1 text elapsed 103
+COMPLETED 16 / 47 expert-shuffled_seed1 onehot elapsed 105
+COMPLETED 17 / 47 quant-continuous_seed1 text elapsed 112
+COMPLETED 18 / 47 quant-binary_seed1 text elapsed 118
+COMPLETED 19 / 47 quant-shuffled_seed1 onehot elapsed 123
+COMPLETED 20 / 47 quant-binary-shuffled_seed1 onehot elapsed 132
+COMPLETED 21 / 47 expert_seed2 onehot elapsed 134
+COMPLETED 22 / 47 quant-continuous_seed2 onehot elapsed 140
+COMPLETED 23 / 47 expert_seed2 text elapsed 145
+COMPLETED 24 / 47 quant-binary_seed2 onehot elapsed 151
+COMPLETED 25 / 47 quant-continuous_seed2 text elapsed 158
+COMPLETED 26 / 47 expert-shuffled_seed2 onehot elapsed 163
+COMPLETED 27 / 47 quant-shuffled_seed2 onehot elapsed 169
+COMPLETED 28 / 47 quant-binary_seed2 text elapsed 171
+COMPLETED 29 / 47 quant-binary-shuffled_seed2 onehot elapsed 174
+COMPLETED 30 / 47 expert_seed3 onehot elapsed 181
+COMPLETED 31 / 47 quant-continuous_seed3 onehot elapsed 190
+COMPLETED 32 / 47 expert_seed3 text elapsed 196
+COMPLETED 33 / 47 quant-binary_seed3 onehot elapsed 200
+COMPLETED 34 / 47 quant-continuous_seed3 text elapsed 208
+COMPLETED 35 / 47 expert-shuffled_seed3 onehot elapsed 211
+COMPLETED 36 / 47 quant-binary_seed3 text elapsed 215
+COMPLETED 37 / 47 quant-shuffled_seed3 onehot elapsed 221
+COMPLETED 38 / 47 quant-binary-shuffled_seed3 onehot elapsed 227
+COMPLETED 39 / 47 expert_seed4 onehot elapsed 227
+COMPLETED 40 / 47 quant-continuous_seed4 onehot elapsed 239
+COMPLETED 41 / 47 expert_seed4 text elapsed 249
+COMPLETED 42 / 47 quant-binary_seed4 onehot elapsed 249
+COMPLETED 43 / 47 expert-shuffled_seed4 onehot elapsed 253
+COMPLETED 44 / 47 quant-continuous_seed4 text elapsed 255
+COMPLETED 45 / 47 quant-binary_seed4 text elapsed 262
+COMPLETED 46 / 47 quant-shuffled_seed4 onehot elapsed 263
+COMPLETED 47 / 47 quant-binary-shuffled_seed4 onehot elapsed 269
+DONE {"started": 1791813665.8681889, "completed": true, "jobs": 47, "protocol_sha256": "7c13c7df7a6b0f38428fd7b3d9465db04af4f12a9e984480d68f780560eb970a", "python": "3.12.7", "thread_count": 2, "workers": 6, "script_sha256": "7715e5683a760f0a0d038cd834d3d1d2453af4a29bc32a15d99c7253c283bc86", "input_sha256": {"configurations.json": "6bec2545d49a4ad84e715e384c6f4e49c6f8c9d6a8447d5be6f45f3bf50cd2ea", "QAC105.csv": "f88b53777548bdbd79d0eb56128b7d4e18cb7ab2e002ea5ad359c30186f3ded4", "cohort_audit.json": "14bb15746115c56d4b72c240517a864ff0c7dabdce4ba995c390502dc8425a38", "._legacy_configurations.json": "6738cc607de5e7e9bffafb2467e60876b587def8a880d781d681ed42cb861d48", "._task_text_embeddings.json": "6738cc607de5e7e9bffafb2467e60876b587def8a880d781d681ed42cb861d48", "task_text_embeddings.json": "0fb3cbbae1d6955c0df4af956383e5540336a820b0f26b5e5ccb56ed32317d4e", "._endpoint_registry.csv": "6738cc607de5e7e9bffafb2467e60876b587def8a880d781d681ed42cb861d48", "OOD17.csv": "b2abafad0bacfc66b3228141175ae2fb0e924cbf95645b5f4d6fa2a0d307d2b2", "._OOD17.csv": "6738cc607de5e7e9bffafb2467e60876b587def8a880d781d681ed42cb861d48", "._QAC105.csv": "6738cc607de5e7e9bffafb2467e60876b587def8a880d781d681ed42cb861d48", "._cohort_audit.json": "6738cc607de5e7e9bffafb2467e60876b587def8a880d781d681ed42cb861d48", "task_text_embeddings.npy": "58f5b9417d437c18f69503322aec6923d03bbf05441d53e355cc1910600c1ff6", "retraining_vector_audit.json": "a5f874da1ea2656d9e64c26a5b4f6ff4e86fc405a7696c817bd1f10c8f2d714a", "vector_extension_audit.json": "7b51ee0232b1b98be08a25d00b8ca433e1e2183aec16a922a2bd96bf0152062a", "legacy_configurations.json": "503291670a8acf98cc1f542f7cea338fa3b636b5aaa99a18d6b11ab7e50c4417", "endpoint_registry.csv": "8dc37da0240f9de1294d233542de4f4f7c179f2c080c39a5ef5dd4617dd4d129", "._task_text_embeddings.npy": "6738cc607de5e7e9bffafb2467e60876b587def8a880d781d681ed42cb861d48"}, "elapsed_s": 268.98294830322266, "prediction_rows": 23424}

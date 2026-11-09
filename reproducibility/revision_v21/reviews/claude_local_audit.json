@@ -1,0 +1,172 @@
+{
+  "actual_Claude_completed": true,
+  "model_usage": {
+    "claude-sonnet-4-6": {
+      "inputTokens": 3,
+      "outputTokens": 3762,
+      "cacheReadInputTokens": 0,
+      "cacheCreationInputTokens": 3349,
+      "webSearchRequests": 0,
+      "costUSD": 0.06899775,
+      "contextWindow": 200000,
+      "maxOutputTokens": 32000
+    }
+  },
+  "mean_sd_checks": [
+    {
+      "arm": "expert",
+      "mode": "partial",
+      "schema": "cation",
+      "seed_mean_and_sample_sd_verified": true,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "arm": "expert",
+      "mode": "partial",
+      "schema": "full-QAC105",
+      "seed_mean_and_sample_sd_verified": true,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "arm": "expert",
+      "mode": "partial",
+      "schema": "scaffold",
+      "seed_mean_and_sample_sd_verified": true,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "arm": "raw-molformer",
+      "mode": "full",
+      "schema": "cation",
+      "seed_mean_and_sample_sd_verified": true,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "arm": "raw-molformer",
+      "mode": "full",
+      "schema": "full-QAC105",
+      "seed_mean_and_sample_sd_verified": true,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "arm": "raw-molformer",
+      "mode": "full",
+      "schema": "scaffold",
+      "seed_mean_and_sample_sd_verified": true,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "arm": "raw-molformer",
+      "mode": "linear",
+      "schema": "cation",
+      "seed_mean_and_sample_sd_verified": true,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "arm": "raw-molformer",
+      "mode": "linear",
+      "schema": "full-QAC105",
+      "seed_mean_and_sample_sd_verified": true,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "arm": "raw-molformer",
+      "mode": "linear",
+      "schema": "scaffold",
+      "seed_mean_and_sample_sd_verified": true,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "arm": "raw-molformer",
+      "mode": "lora",
+      "schema": "cation",
+      "seed_mean_and_sample_sd_verified": true,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "arm": "raw-molformer",
+      "mode": "lora",
+      "schema": "full-QAC105",
+      "seed_mean_and_sample_sd_verified": true,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "arm": "raw-molformer",
+      "mode": "lora",
+      "schema": "scaffold",
+      "seed_mean_and_sample_sd_verified": true,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    }
+  ],
+  "source_experiment_not_relabelled_as_compact": true,
+  "DOCX_modified_by_this_agent": false,
+  "main_insertions_are_additions_only": true,
+  "frozen_human_CatBoost_3source_seed_recomputed": [
+    {
+      "schema": "cation",
+      "RMSE": 1.742822166227841,
+      "RMSE_SD": 0.03057220783492055,
+      "runs": 3
+    },
+    {
+      "schema": "full-QAC105",
+      "RMSE": 2.106199085904346,
+      "RMSE_SD": 0.07096112650525102,
+      "runs": 3
+    },
+    {
+      "schema": "scaffold",
+      "RMSE": 1.8188011559271808,
+      "RMSE_SD": 0.04368478638877194,
+      "runs": 3
+    }
+  ]
+}

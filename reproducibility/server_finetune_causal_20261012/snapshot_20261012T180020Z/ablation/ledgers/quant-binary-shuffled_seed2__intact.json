@@ -1,0 +1,15 @@
+{
+  "arm": "quant-binary-shuffled",
+  "seed": 2,
+  "variant": "intact",
+  "name": "quant-binary-shuffled_seed2__intact",
+  "encoder_buffer_sha256": "da4c45ca5803972ca1b30d8db6715ca07b46a4d7d8a54f9b6a85a53ef0a0b58b",
+  "changed_parameter_names": [],
+  "checkpoint_sha256": "303ebbb15f15297663883a4c2dfc9ad5fa38643a2a99dd3a98f5fcf4303b7cf2",
+  "intact_replay_exact": {
+    "QAC105": true,
+    "OOD17": true
+  },
+  "script_sha256": "52cc505b52427511cf0deb4141be384a0f0f033e1ce32a5168730d2f267c6562",
+  "protocol_sha256": "72c4243e1523863087a59662486c299dc28234fa40fe19409221db17ea37092b"
+}

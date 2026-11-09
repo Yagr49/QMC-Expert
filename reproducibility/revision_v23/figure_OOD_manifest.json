@@ -1,0 +1,147 @@
+{
+  "figure": "figure_OOD_routes_for_section2_3",
+  "font": "Aptos",
+  "width_mm": 105,
+  "height_mm": 88,
+  "dpi_png": 600,
+  "inserted_into_DOCX": false,
+  "purpose": "Prepared separately for future Section2.3 discussion",
+  "primary_statistic": "Mean of absolute errors within each molecule\u00d7endpoint over the same three runs",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "plotted_summary": [
+    {
+      "route": "frozen_head",
+      "schema": "full-QAC105",
+      "n": 67,
+      "minimum": 0.0812822977701823,
+      "maximum": 7.120145691624164,
+      "median": 1.4179298480351765,
+      "q25": 0.6383534967899323,
+      "q75": 3.004387080669403
+    },
+    {
+      "route": "lora",
+      "schema": "full-QAC105",
+      "n": 67,
+      "minimum": 0.27906662225723267,
+      "maximum": 7.338735116711139,
+      "median": 1.674428383509318,
+      "q25": 1.0283321936925254,
+      "q75": 2.88001145919164
+    },
+    {
+      "route": "full_FT",
+      "schema": "full-QAC105",
+      "n": 67,
+      "minimum": 0.06530984242757161,
+      "maximum": 7.131779087772846,
+      "median": 1.8674899737040203,
+      "q25": 1.0897595087687173,
+      "q75": 3.423737744490306
+    },
+    {
+      "route": "human_direct",
+      "schema": "full-QAC105",
+      "n": 67,
+      "minimum": 0.334165096282959,
+      "maximum": 6.431734336605548,
+      "median": 1.8540756702423093,
+      "q25": 1.0088260372479756,
+      "q75": 2.6473872925792534
+    },
+    {
+      "route": "human_CatBoost",
+      "schema": "full-QAC105",
+      "n": 67,
+      "minimum": 0.18710765270840213,
+      "maximum": 5.206972671106875,
+      "median": 1.4022651807539248,
+      "q25": 0.6182348132803198,
+      "q75": 2.4656978571109414
+    }
+  ],
+  "checks": [
+    {
+      "route": "frozen_head",
+      "schema": "full-QAC105",
+      "n_endpoint_summaries": 67,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "n_seed_predictions": 201,
+      "all_three_seeds_present": true,
+      "exact_only": true
+    },
+    {
+      "route": "lora",
+      "schema": "full-QAC105",
+      "n_endpoint_summaries": 67,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "n_seed_predictions": 201,
+      "all_three_seeds_present": true,
+      "exact_only": true
+    },
+    {
+      "route": "full_FT",
+      "schema": "full-QAC105",
+      "n_endpoint_summaries": 67,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "n_seed_predictions": 201,
+      "all_three_seeds_present": true,
+      "exact_only": true
+    },
+    {
+      "route": "human_direct",
+      "schema": "full-QAC105",
+      "n_endpoint_summaries": 67,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "n_seed_predictions": 201,
+      "all_three_seeds_present": true,
+      "exact_only": true
+    },
+    {
+      "route": "human_CatBoost",
+      "schema": "full-QAC105",
+      "n_endpoint_summaries": 67,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "n_seed_predictions": 201,
+      "all_three_seeds_present": true,
+      "exact_only": true
+    }
+  ],
+  "source_checkpoint_vs_compact_v5_distinct": true,
+  "all_tails_preserved": true,
+  "bound_retained_separately": "IT505/Ec_MBC>500mg/L",
+  "input_sha256": {
+    "/Users/egorilin/Desktop/COMA/reproducibility/server_finetune_causal_20261012/analysis/direct_predictions.csv": "a6f4e6f6ad205852e830e10f9d0fadd2b560d5de9af591bed1e216dd397786b8",
+    "/Users/egorilin/Desktop/COMA/reproducibility/server_finetune_causal_20261012/analysis/ablation_predictions.csv": "3e477e162ee147a39fdcfd06eb895e7e9f51c67f99877e0f34729a4f8dda8adf"
+  },
+  "outputs_sha256": {
+    "pdf": "e844641911d4219a9bee462f4266c79972eaf1578c44589b0fca34aca61a6a0a",
+    "svg": "81d303568246ce304be617fae37ee63916f792c7662de98373c5a8b98e60c097",
+    "png": "9f9ddd3bd126a2c5406eb4ff7c6f7097ab8246fed39fe999a5a2ffb7d2dc1d15"
+  },
+  "script_sha256": "bf9ec3c762bd075b3436049daa2b97fc39bf8456cbd0eb7d7dffe7da7eac84aa"
+}

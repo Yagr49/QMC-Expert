@@ -1,0 +1,11 @@
+{
+  "completed": true,
+  "repeats": 2000,
+  "skipped_single_class": 0,
+  "scaffold_clusters": 29,
+  "source_seed_pairing": true,
+  "source_and_target_models_refit": false,
+  "overlapping_training_sets_in_OOF_not_resampled": true,
+  "limitation": "Exploratory conditional intervals; not full training uncertainty or biological causality",
+  "manuscript_or_SI_updated": false
+}

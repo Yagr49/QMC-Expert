@@ -1,0 +1,11 @@
+{
+  "initial_sha256": "6f8d7c04448d93acc454da2aff2f02a55d92dc1a93bdc7c0788f0ca01af435b4",
+  "resumable_sha256": "38a2e303168e01b787c5c6afc9addabb2d2c7cb16c76ac4786774d6a2c047f09",
+  "model_and_scoring_functions_unchanged": {
+    "scores": true,
+    "fit_predict": true,
+    "run_one": true,
+    "reproduce_public_rf": true
+  },
+  "change": "Resume completed configurations and increase worker count only"
+}

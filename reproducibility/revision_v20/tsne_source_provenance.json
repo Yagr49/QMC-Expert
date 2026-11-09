@@ -1,0 +1,22 @@
+{
+  "source": "/Users/egorilin/Desktop/COMA/publication_tsne_before_after.pdf",
+  "source_sha256": "659e648158324b133462c13b65c8d09b86d221c9600998c24ae2b3d97200e3bf",
+  "extraction": "PDF Form XObject marker centres, exact graphics-state affine transforms",
+  "points_per_panel": 221,
+  "classes": {
+    "Bad": 172,
+    "Good": 49
+  },
+  "source_reported_silhouette": {
+    "before": 0.007,
+    "after": 0.107
+  },
+  "manuscript_raster_reported_after": 0.108,
+  "archive_variant_discrepancy": true,
+  "no_TSNE_recomputation": true,
+  "no_points_selected_or_added": true,
+  "coordinate_units": "PDF display points, not original high-dimensional features",
+  "molecular_identity_not_recovered": true,
+  "original_filename": "publication_tsne_before_after.pdf",
+  "coordinate_sha256": "35a6d9acc903c06680d7e4b70c255f3a9d7283d1c59a4ac45322b0f22c83340c"
+}

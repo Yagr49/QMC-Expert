@@ -1,0 +1,36 @@
+{
+  "metric_rows": 486,
+  "prediction_rows": 85212,
+  "max_metric_error": 1.4901161193847656e-08,
+  "numpy": "2.4.4",
+  "pandas": "3.0.1",
+  "paired_scaffold_audit": [
+    {
+      "comparison": "expert minus expert-shuffled",
+      "delta": -0.17521574578133903,
+      "ci": [
+        -0.25798648678720015,
+        -0.058067465100186795
+      ],
+      "scaffolds": 29
+    },
+    {
+      "comparison": "expert minus quant-continuous",
+      "delta": 0.10888273993060094,
+      "ci": [
+        0.006664794973637924,
+        0.21045439324103685
+      ],
+      "scaffolds": 29
+    },
+    {
+      "comparison": "quant-continuous minus quant-shuffled",
+      "delta": -0.10702145773467309,
+      "ci": [
+        -0.20112086090268985,
+        -0.041739094962050034
+      ],
+      "scaffolds": 29
+    }
+  ]
+}

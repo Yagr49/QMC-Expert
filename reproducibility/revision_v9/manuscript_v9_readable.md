@@ -1,0 +1,645 @@
+Human Binary Annotations Compete with Quantitative MIC Supervision: Controlled Tests of Molecular Representation Learning for QAC Biocides
+
+Egor A. Ilina, Nikita A. Frolova, Mary A. Seferyana, Anvar B. Valeeva, Egor V. Sinikina,b, Taygib M. Iliyasova, Andrey D. Vinokurova, Elena V. Detushevaa,c, Elizabeth Sonc, Michael G. Medvedev*a,d, Anatoly N. Vereshchagin*a
+
+a N. D. Zelinsky Institute of Organic Chemistry, Russian Academy of Sciences, Leninsky prospect 47, Moscow 119991, Russian Federation; vereshchagin@ioc.ac.ru (A. N. V.); egor22366@gmail.com (E.A.I.); nfrolov@ioc.ac,ru (N. A. F.)
+
+b Mendeleev University of Chemical Technology of Russia, Miusskaya square 9, Moscow, 125047, Russian Federation
+
+c State Research Center for Applied Microbiology and Biotechnology, Territory “Quarter A”, no. 24, Obolensk, 142279 Serpukhov, Moscow Region, Russian Federation.
+
+d National Research University Higher School of Economics, 101000 Moscow, Russian Federation
+
+Table of contents
+
+Update this table of contents in Word to refresh headings and page numbers.
+
+Abstract
+
+Binary human annotations can provide useful supervision for molecular activity modelling, but useful signal, competitive prediction and causal attribution require different tests. We compare final expert Good/Bad labels with molecule-level and record-level quantitative MIC supervision, organism-matched MIC, and quantitative mammalian-cell cytotoxicity for quaternary ammonium compounds. In an archived partial-fine-tuning experiment excluding evaluation structures from all sources, downstream Q-HERO R² was 0.269 with 740 expert labels and 0.312/0.308 with 1,153 molecule-level MIC values/9,338 MIC records. New frozen-backbone interventions use identical source molecules, scaffold splits, initial weights and training budgets. On 681 common molecules, real expert labels improved external Q-HERO RMSE relative to shuffled expert labels by 0.175 log2 µM (95% scaffold-bootstrap interval −0.258 to −0.058), while continuous pooled MIC was stronger by 0.109 (0.007 to 0.210). This expert-label benefit was not reproduced on the smaller 529-molecule organism-matched panel. Direct expert scores also ranked measured potency without numerical concentrations as model targets. The evidence establishes a useful, protocol-dependent human supervision signal and practical competition under partial fine-tuning. The controlled intervention identifies an effect of supervision within the specified algorithm; it does not identify an antibacterial mechanism, a general effect of human expertise, or equivalence between individual labels and measurements.
+
+Keywords
+
+Cationic biocides; quaternary ammonium compounds; human supervision; quantitative MIC; controlled ablation; molecular representation learning; transfer learning
+
+
+
+1. Introduction
+
+The antimicrobial resistance (AMR) is a crucial challenge for modern society which is further exacerbated by nearly 40 years long period of “antibiotic discovery void” 1, 2. The WHO notes stagnant pipelines with 27 clinical agents against priorities in 2021 down from 31 in 2017, with 6 candidates fulfilling criteria for innovation 3. Overall, 13 new antimicrobials targeting priority pathogens were approved for the global market between 2017 and 2023 4. As of 2025 only 15 out of 90 clinical agents were innovative with just 5 targeting critical strains from WHO Bacterial Priority Pathogens List 5-7. Major shortages persist in oral outpatient therapies, pediatric formulations, and Gram-negative solutions, while preclinical volatility underscores need for sustained funding and innovation 7.
+
+The twenty-first-century tool to boost innovation in antimicrobial pipelines is machine learning (ML) which is increasingly used to accelerate discovery, optimize efficacy–toxicity trade‑offs, and understand resistance mechanisms 8-17. Moreover, global trends indicate rapid ML incorporation in antimicrobial stewardship practices bringing innovative approaches to antimicrobial use optimization, personalized therapy and AMR reduction 18. There are now several case studies where ML has measurably shortened timelines for antimicrobial‑class discovery, including biocide‑related scaffolds and peptide‑based agents 19-21.
+
+A particularly compelling strategy to overcome the limitations of purely data-driven approaches lies in the incorporation of domain knowledge and expert guidance into the modelling workflow. The concept, rooted in the physics-informed neural network (PINN) paradigm pioneered by Raissi, Perdikaris and Karniadakis 22, posits that encoding structured prior knowledge into a learning algorithm constrains the space of admissible solutions, amplifying the information content of the data and enabling effective generalization even when training examples are scarce 22, 23. In the molecular sciences, this principle has been validated in multiple contexts: integrating substructure and physicochemical knowledge into deep learning architectures has been shown to improve molecular property prediction by up to 4% in regression and 13% in classification tasks 24; physics-informed graph neural networks have achieved thermodynamically consistent extrapolation in chemical systems 25; and biologically-informed neural network architectures that embed ontological relationships have demonstrated enhanced interpretability and performance in drug sensitivity prediction 26. The common thread across these advances is that expert-curated information—whether it takes the form of physical constraints, biological priors, or cross-domain annotations—can compensate for the limited size and diversity of chemical datasets, steering models toward physically and biologically plausible solutions.
+
+Expert knowledge can also enter a model as a supervision target. Human preference learning has already shown that chemists’ decisions can be captured and used in molecular prioritisation and design (77). The question addressed here is more specific: can coarse Good/Bad judgements compete with numerical biological measurements when learning a representation for antibacterial QAC modelling? We distinguish three propositions: the labels contain transferable activity-related information; the resulting representation is practically competitive with quantitative supervision; and changing the supervision causes a performance change under a fixed computational protocol. These propositions require separate evidence. In particular, a controlled intervention on a training procedure is distinct from identifying causal variables in molecular antibacterial action (78).
+
+Transfer across biological tasks can be informative when the relevant signals are aligned, but shared charge or a membrane-active phenotype alone does not guarantee transferability. Antimicrobial peptide fine-tuning and BERT-based MIC regression illustrate quantitative supervision strategies (35,36). Here cross-endpoint cytotoxicity supervision is evaluated empirically rather than assumed to encode antibacterial potency. Numerical performance, direct potency ranking and a causal explanation of transfer are treated as separate outcomes.
+
+The bottleneck in this domain includes the definition and context of supervision. A pooled MIC value can combine different organisms, strains and assay conditions; repeated records are not independent molecules. A binary expert judgement may compress multiple observations and other considerations, but that possibility is a hypothesis rather than a demonstrated denoising mechanism. We therefore compare broad quantitative MIC, exact S. aureus MIC and 24h MTT mammalian-cell cytotoxicity as distinct numerical supervision sources. Cytotoxicity is represented by a merged CC50/IC50/EC50 field in the available ILToxDB export (79); it is a cross-endpoint comparison rather than an antibacterial measurement. No single scalar endpoint is assumed to contain the same information as an expert judgement.
+
+In this paper, we will mainly focus on development and property predictions of cationic biocides, particularly membrane-targeting quaternary ammonium compounds (QACs), as antiseptics and disinfectants which are essential for prevention and treatment of microbial infections, especially healthcare-associated infections (HAIs). The main applications include variety of target objects from hand hygiene and surgical site preparation to surface cleaning providing rapid persistent antimicrobial action 40, 41. Previously, ML procedures were implemented in the chemistry workflow for antimicrobial activity estimation of cationic biocides derived from pyridine, cinchonine, imidazole, and bis-imidazole 42-48. Predictive ML model was developed for conjugated oligoelectrolytes utilizing domain-agnostic framework with a limited database of bis- and multi-QACs 49. Associative Neural Network was successfully employed to predict the MIC of ionic liquids 50, 51. Recent progress in QACs discovery was imbued by topology-aware generative model further highlighting practical validity of ML application 52.
+
+Building on our MolFormer-based QAC modelling framework, we test expert supervision at two levels. First, the partial-fine-tuning analysis compares final expert labels with molecule-level and record-level quantitative MIC under a shared downstream-refitting protocol. Second, new matched-molecule interventions hold the source identities, input features, initial weights, scaffold partition and training budget constant while changing supervision. Continuous MIC, binary MIC, shuffled-label and untrained-encoder controls separate label content from quantitative resolution and architecture. A further comparison of full eligible sources assesses practical performance, while explicitly retaining the effects of source size and composition. The study therefore tests the value and limits of human supervision without treating predictive attribution as a molecular causal explanation.
+
+
+
+
+
+Figure 1. Expert guidance activity prediction.
+
+2. Results and Discussion
+
+2.1 Frozen versus fine-tuned representations
+
+The encoder described below adapts a frozen foundation model: MolFormer weights are held fixed and only a small contrastive head is trained on top. That configuration limits what either supervision source can express, because the head can only recombine features already computed by the frozen backbone. We therefore repeated the controlled comparison with partial fine-tuning of the upper backbone layers, while keeping the embedding layer and lowest four encoder layers frozen.
+
+MolFormer-XL was partially fine-tuned on each supervision source in turn: final expert "Good/Bad" annotations, quantitative MIC values aggregated to one value per molecule, and the full quantitative record collection. The embedding layer and the lowest four encoder layers remained frozen (16.0 of 44.4 M parameters); the remaining parameters were trainable. Training used a one-cycle schedule at a peak learning rate of 3e-5, with early stopping on a Bemis-Murcko-scaffold-disjoint validation split. Every molecule belonging to any evaluation set—the QAC-105 benchmark, Q-HERO, and the 17 newly synthesised compounds, 532 structures in total—was removed from all three fine-tuning sources. After this exclusion the sources contained 740 expert-labelled molecules, 1,153 unique quantitative molecules, and 9,338 quantitative MIC records. The expert and quantitative collections overlap substantially, so this is best interpreted as a controlled comparison of coarse and quantitative supervision on related chemical space. Results are averaged over three seeds and are reported against predict-the-mean and six-descriptor baselines.
+
+Partial fine-tuning improves the mean R² over frozen MolFormer on all three targets in this experiment (Table 1), but the absolute results remain modest. On Q-HERO, mean R² rises from 0.134 for the frozen encoder to 0.269–0.312 after partial fine-tuning. On QAC-105 the values remain close to zero, and all OOD-17 values should be interpreted cautiously because n = 17. The descriptor baseline is positive on Q-HERO (R² = +0.057), so it is not correct to describe both baselines as non-positive throughout. These results support comparing supervision sources under the same protocol; they do not demonstrate high-accuracy absolute MIC prediction.
+
+Under this controlled setup, expert and quantitative supervision yield comparable downstream representation quality rather than demonstrably identical performance. The expert arm has mean R² = +0.053 on QAC-105 and +0.269 on Q-HERO; the molecule-level and record-level quantitative arms reach −0.004/+0.312 and +0.048/+0.308, respectively. The differences are small relative to the observed seed variation, but this study was not designed as a pre-specified non-inferiority trial. Accordingly, the supported claim is comparability under downstream refitting, not statistical equivalence of labels or a conversion rate between human calls and measurements.
+
+A second experiment evaluated direct transfer, with no refitting on the target. Quantitative heads output log2 MIC in micromolar units; the expert head outputs a Good/Bad score, so all arms are compared primarily by rank agreement and AUC after a target-specific median split. Quantitative supervision gives stronger direct ranking on Q-HERO and OOD-17 than expert supervision. The highest mean OOD-17 rank agreement (ρ = 0.75, AUC = 0.87) comes from the 9,338-record model, but the OOD estimate is based on only 17 compounds. The R² of the same direct predictions is negative, so direct transfer should not be interpreted as calibrated absolute MIC prediction.
+
+For exploratory diagnosis only, we fit an intercept and slope on the same target predictions used for evaluation. This in-sample recalibration cannot test generalisation, but it illustrates the scale mismatch in direct quantitative transfer. For the 9,338-record model, the average in-sample recalibrated R² is 0.36 on Q-HERO and 0.49 on OOD-17, compared with raw values of −1.62 and −2.92. These fitted values should not be presented as externally validated calibration or as proof that calibration, rather than other factors, is the sole limitation. A nested or held-out target calibration protocol is required for that claim.
+
+One result deserves separate emphasis. The partially fine-tuned expert model has never been shown a concentration, yet its direct score is positively associated with measured MIC ordering on the evaluated collections (mean rank agreement 0.22, 0.40, and 0.30 for QAC-105, Q-HERO, and OOD-17; AUC 0.64, 0.69, and 0.60). This is evidence that the final binary labels contain transferable potency-related signal; it does not establish quantitative MIC prediction.
+
+Two consequences follow for the sections that follow. First, frozen-encoder results are a lower-capacity reference, while the primary comparison is between supervision sources under the identical partially fine-tuned protocol. Second, direct predictions are best read as rankings, not as calibrated MIC estimates. Full fine-tuning, direct-transfer, and exploratory recalibration tables are supplied in the Supporting Information (Tables S2–S4; Figures S7–S9).
+
+Table 1. Variance explained on three evaluation sets by representations differing in partial fine-tuning and supervision source, mean over three seeds. All 532 evaluation molecules were excluded from the fine-tuning sources. Downstream models are gradient-boosted regressors under scaffold-grouped cross-validation for QAC-105 and Q-HERO; OOD-17 is predicted from a model trained on QAC-105. OOD-17 contains 17 compounds.
+
+| Representation | Supervision | QAC-105 | Q-HERO | OOD-17 |
+
+| --- | --- | --- | --- | --- |
+
+| predict-the-mean | none | 0.000 | 0.000 | -0.058 |
+
+| descriptors | none | -0.310 | +0.057 | -0.486 |
+
+| MolFormer, frozen | none | -0.105 | +0.134 | -0.289 |
+
+| MolFormer, partially fine-tuned | 740 expert binary | +0.053 | +0.269 | -0.174 |
+
+| MolFormer, partially fine-tuned | 1153 MIC values (molecules) | -0.004 | +0.312 | -0.191 |
+
+| MolFormer, partially fine-tuned | 9338 MIC records (1153 molecules) | +0.048 | +0.308 | -0.027 |
+
+
+
+2.2 Training guidance NN models
+
+
+
+The expert-guidance dataset contains 1,103 final Good/Bad annotations. Repository artifacts retain the final label but not the individual annotator votes or adjudication records. The historical description of three independent experts and majority resolution therefore cannot be independently verified from the archived files, and inter-rater agreement cannot be calculated. We analyse the final labels as the available supervision signal. The class balance is 859 Bad and 244 Good; annotation-round drift and SMILES quality-control limitations are reported in the Supporting Information.
+
+For exploratory model selection, we benchmarked MolFormer, ChemBERTa, Morgan, and MACCS representations under a five-fold stratified protocol. MolFormer produced the highest archived mean F1-score (0.655 with an MLP and StandardScaler) and accuracy (0.856). Because the expert-label set is imbalanced, accuracy alone is not interpreted as a performance claim; these internal model-selection diagnostics are separate from external validation.
+
+Building on the MolFormer baseline, we trained a dedicated MLP-based encoder (512 → 384 → 256 neurons) with a supervised contrastive objective to distill the implicit “chemical intuition” embedded in the expert labels into a compact, task-specific latent space. To address the inherent class imbalance of the expert-annotated dataset, we employed Borderline SMOTE (sampling strategy = 0.8) during encoder training. The model was optimized with a hard-negative contrastive loss, which explicitly pushes hard misclassified negatives away from the anchor embedding, thereby sharpening inter-class boundaries. The resulting 256-dimensional representations are referred to as human embeddings hereafter.
+
+Figure 2 presents t-SNE projections (perplexity = 30) of a held-out fold before and after contrastive refinement. The internal clustering diagnostics changed from silhouette 0.007 to 0.108, Davies–Bouldin 6.54 to 2.58, and Calinski–Harabasz 3.60 to 22.08. These visual and internal diagnostics indicate separation of the final label classes within this analysis; they are not evidence of external antibacterial-prediction performance.
+
+
+
+Figure 2. t-SNE visualization of classification patterns in MolFormer embeddings versus human-labeled embeddings.
+
+
+
+2.3 Training on QACs
+
+The historical architecture table is not used for comparative inference because its RMSE and R² entries combine different pipelines and split definitions. Table 2 retains the audited molecule-grouped comparison; the new cation-clean supervision interventions are reported separately in Table 3.
+
+Historical analyses of one-hot and text-encoded task labels are exploratory because the corresponding metrics were generated under incompatible pipelines and splits. They are not evidence for the controlled supervision comparisons reported here.
+
+
+
+
+
+Table 2 reports the audited molecule-grouped comparison on QAC-105. Under this conservative split, expert, quantitative, and raw MolFormer representations are within seed variation. This in-domain result is descriptive and should be read with the external Q-HERO and partial-fine-tuning analyses.
+
+
+
+A natural objection to using expert Good/Bad labels is that a larger body of quantitative data should be preferable when it is available. The original in-domain comparison is retained as a descriptive analysis, but its absolute values are not used as primary evidence: QAC-105 molecules overlap the representation-training collections and the historical table combines outputs from different pipelines and split definitions. The externally held-out and controlled partial-fine-tuning results in Section 2.1 provide the principal current comparison.
+
+The quantitative corpus used in the historical comparison was assembled from broad QAC activity records. Its record count must not be interpreted as the number of independent molecules: the fine-tuning subset used in Section 2.1 contains 9,338 MIC records over 1,153 unique molecules. The expert and quantitative collections have substantial molecule-level overlap, which makes their comparison controlled but not independent.
+
+Both embedding types were subsequently evaluated on the same QAC collection. This retrospective in-domain result is consistent with similar downstream behaviour of the two supervision sources, but it is not a clean external validation. The molecule-level overlap and pair-level split inflate absolute performance, and raw MolFormer is also competitive under the audited re-run. We therefore do not use this table to claim that human annotations outperform or are statistically equivalent to quantitative measurements.
+
+Similarity in one downstream protocol does not mean that a binary label is informationally equivalent to a quantitative measurement. A final expert call may reflect multiple activity reports and additional considerations, while pooled quantitative records contain repeated molecules and heterogeneous assay contexts. The appropriate conclusion is limited to comparable representation quality under the evaluated refitting protocol.
+
+
+
+Table 2. Audited QAC-105 molecule-grouped comparison: CatBoost R² (mean ± SD, 10 seeds). The same molecule is never present in both training and test. Values are reproduced from reproducibility/table2/table2_rebuild.csv; this table replaces the prior non-comparable central expert-versus-quantitative table.
+
+| Representation | S. aureus MIC | S. aureus MBC | E. coli MIC | E. coli MBC |
+
+| --- | --- | --- | --- | --- |
+
+| Raw MolFormer | 0.19 ± 0.19 | 0.00 ± 0.30 | 0.12 ± 0.19 | 0.08 ± 0.22 |
+
+| Expert (Good/Bad) | 0.27 ± 0.16 | 0.06 ± 0.27 | 0.09 ± 0.19 | 0.06 ± 0.27 |
+
+| Quantitative regression | 0.31 ± 0.13 | 0.08 ± 0.22 | 0.16 ± 0.22 | 0.08 ± 0.26 |
+
+
+
+2.4 Out of domain inference
+
+To examine out-of-domain behaviour, we assembled an OOD test set of 17 newly synthesized QACs from previously unrepresented structural subtypes and measured them under independent assay conditions. This set is chemically held out from the training collections, but n = 17 makes all effect estimates imprecise. It is therefore used as a small confirmatory case study rather than as decisive evidence of generalisation.
+
+
+
+Figure 4. Molecular classes represented in each dataset.
+
+The QAC's architecture follows the principle of core, tail and linker interconnection. While QACs can be classified in variety of ways, the usual approach is division by quantity of charged cores. Within the framework of current study, we sought to utilize three main subclasses of QACs (mono-, bis-, and multi-QACs) for a thorough assessment of predictive potential of the developed ML model.
+
+Heterocycles are among the most well-known and diverse classes of compounds in organic chemistry, forming the basic structural backbones of most modern drugs, including QACs, which often have a heterocyclic nature 54-57. For the purposes of this study, we selected four suitable scaffolds to obtain the target structures: kojic acid, tetrahydropyridine, dihydropyran, and glycoluril derivatives. All 17 novel obtained compounds were subjected to MIC and MBC evaluation via broth microdilution assay. Detailed representation of the synthesis methodologies, microbiological results and compounds description can be found in the experimental section and supplementary materials. The synthetic approaches are described below.
+
+2.4.1 Kojic acid-based bis-QACs
+
+Kojic acid (KA) is a multifunctional natural low toxic organic compound used in cosmetics as skin-depigmenting agent 58, 59. KA itself possesses moderate antibacterial activity, but several synthetically derived classes show significantly enhanced potency against a broad spectrum of bacteria 60-65. Here we used the functionalization of KA to obtain bis-QACs architectures in similar fashion to the commercially available antiseptic octenidine with alkylaminopyridine pharmacophore group. First, dimerization of KA with 1,5-dibromopentane afforded the dihydroxy-platform. Chlorination of dimer 1 and subsequent quaternization with 4-(alkylamino)pyridines occurred at the pyridine nitrogen atom led to the target bis-QACs 1-4 (Scheme 1). The required 4-(alkylamino)pyridines were obtained separately in three steps from carboxylic acids as reported previously 66.
+
+
+
+Scheme 1. Synthesis of KA-based bis-QACs.
+
+
+
+2.4.2 Tetrahydropyridine-based bis-QACs
+
+Tetrahydropyridine (THP) scaffold is a versatile nitrogen-containing heterocycle widely used in medicinal chemistry as a bioactive ring system and pharmacophore 67. One of the key features of THP-based drug design is efficient and fast synthesis through multicomponent reactions (MCR) 68. Previously, we found that 1,4,5,6-THP are produced through a MCR between aromatic aldehydes, malononitrile, methyl acetoacetate, and ammonium acetate in methanol at 64 ℃ for 2 h 69. When using 3-pyridinecarboxaldehyde as the aromatic moiety, MCR is a convenient method for creating bis-pyridine platforms which are known precursors of bis-QACs. The followed Menshutkin reaction yielded the second set of bis-QACs 5-9 (Scheme 2).
+
+
+
+Scheme 2. Synthesis of THP-based bis-QACs.
+
+However, despite the well-known nature of the method, we encountered several unexpected difficulties during the implementation of the process requiring optimization of the MCR synthesis conditions. First, the desired THP was produced in mixture with 4H-pyran as a result of a competitive process of intramolecular cyclization via the attack of carbonyl on the nitrile group after Michael addition (Scheme S1). The MCR conditions for a 3-pyridinecarboxaldehyde, malononitrile, methyl acetoacetate and ammonium acetate were optimized by varying the solvent, temperature, and the equivalents of ammonium acetate (Table S1). 4H-Pyran was the primary product during the reaction at room temperature, while at 64 ℃ and increased solvent load the quantity of the by-product slightly decreased (Table S1 entry 3). As the amount of NH4OAc increases to 4.0 mol. equiv., the reaction’s sole product is desired THP. Consequently, we attempted to conduct the reaction using ethanol, which is less hazardous to human health and is classified as a green solvent 70. Carrying out a similar reaction in ethanol at 78 ℃ resulted in 62% yield of the desired THP (Table S1 entry 7). Second, the Menshutkin reaction led to the formation of bis-QAC in the form of a pair of diastereoisomers (Scheme S2). In our previous study, we found that 4SR,6RS-THP convert to more stable epimers when heated in DMSO. Thus, we carried out additional epimerization step in order to obtain a more diastereoselectively pure product. The subsequent Menshutkin reaction yielded bis-pyridinium salts in the form of a single diastereomer.
+
+2.4.3 Dihydropyran-based mono-QACs
+
+Next, we decided to use the obtained data on the pyran derivatives formation during the MCR to optimize the synthesis of dihydropyrans with trifluoro-substituted groups as a basis for the mono-QACs. The trifluoromethyl group serves as a crucial structural component in numerous fluorinated compounds that possess significant biological and pharmaceutical relevance. As a result, fluorine-containing heterocyclic compounds are now acknowledged as organic molecules exhibiting noteworthy biological activity, with potential utility in both medical and agricultural fields 71, 72. The CF3-dihydropyran was synthesized through a similar MCR involving ethyl 4,4,4-trifluoroacetoacetate as Michael addition component. The method is simple to operate, since the reaction can be carried out at room temperature, and the target product is isolated by simple filtration. N-alkylation of dihydropyran via Menshutkin reaction led to mono-QACs 10-12 (Scheme 3).
+
+
+
+Scheme 3. Synthesis of dihydropyrans -based mono-QACs.
+
+
+
+2.4.4 Glycoluril-based multi-QACs
+
+Finally, a series of glycoluril-based multi-QACs was synthesized through a four-step synthetic route starting from 2-(2-aminoethoxy)ethan-1-ol (AmEtO). Glycoluril (GU) is a rigid bicyclic bis-urea heterocycle that serves as a key industrial and pharmaceutical building block — most notably as the classical precursor of cucurbituril macrocycles and as the core of the clinically used tranquilizer/nootropic drug mebicar (N,N,N′,N′-tetramethylglycoluril) 73. Its compact tetra-nitrogen bicyclic core represents an attractive, still largely unexplored scaffold for constructing multivalent QACs architectures. In addition, functionalized GU derivatives have attracted growing interest as biologically active molecules, highlighting the potential of the GU scaffold for medicinal chemistry 74, 75. Direct alkylation of GU backbone is problematic, so the heterocyclic linker was assembled synthetically from an amino alcohol, dimethyl carbonate, and glyoxal. Initially, a urea intermediate was prepared and subjected to condensation with glyoxal to afford the tetrahydroxyglycoluril scaffold. The obtained tetrahydroxyglycoluril was converted into a tetrachloride, which was reacted with 4-alkylaminopyridines in a final Menshutkin quaternization step to afford the target multi-QACs 13-17 (Scheme 4).
+
+
+
+Scheme 4. Synthesis of GU-based mono-QACs.
+
+
+
+2.4.5 Out-of-domain performance verification
+
+For the OOD case study, we compared human embeddings, vanilla MolFormer features, and descriptor features. These comparisons are descriptive because the set contains 17 compounds and because several historical model branches have unresolved provenance. The results should be read alongside the external Q-HERO benchmark and the audited partial-fine-tuning matrix, not as a standalone generalisation claim.
+
+We also explored zero-shot and few-shot regimes. The historical few-shot scan is not used to support a comparative conclusion because one branch yields bit-identical values for all representations and the held-out test set changes with training fraction. A repaired, fixed-test protocol would be required before making a few-shot claim.
+
+2.5 Understanding the new embeddings
+
+Representational similarity and matched prediction contrasts answer different questions. Archived CKA/probing describes geometry, whereas the new interventions in Section 2.6 manipulate supervision within a fixed algorithm. Neither a similarity score nor SHAP attribution identifies molecular antibacterial mechanisms (78).
+
+
+
+Figure 6. Conceptual information flow in the contrastive encoder. The diagram is an interpretation, not a quantitative decomposition: MolFormer supplies pretrained structural features and the final expert labels provide task-specific supervision.
+
+The archived CKA/probing table reports high alignment between MolFormer and the expert embedding (CKA 0.933 in-domain and 0.946 OOD; linear-probe R² 0.891 from MolFormer to embedding and 0.844 in reverse). These values suggest substantial preservation of the pretrained geometry. Because the generating script is absent, they are reported as archived descriptive results rather than independently regenerated evidence.
+
+Geometric similarity does not determine how a downstream model uses each representation. The archived SHAP summary has unresolved provenance: the available decomposition file reports a different aggregate embedding attribution from the manuscript, and it is not confirmed that the same encoder generated all analyses. We therefore omit numerical SHAP attribution as a basis for mechanistic or causal claims. A fully versioned pipeline is required before interpreting feature attributions.
+
+A matched expert-versus-regression encoder ablation was run on the OOD case-study data. It suggests similar mean absolute residuals (expert − regression ΔRMSE = −0.086, 95% bootstrap CI [−0.227, +0.054]) and point estimates of 2.19 versus 2.27 log2 units. This interval includes no difference and is based on 17 compounds. It supports a cautious descriptive statement of no resolved advantage in this dataset; it does not establish statistical equivalence or identify a causal mechanism.
+
+The descriptive pattern does not identify a robust subgroup advantage for either supervision source in the 17-compound case study. Any finer claim would require an a priori margin, a larger independent set, and a preregistered non-inferiority or equivalence protocol.
+
+The archived analyses describe preservation of pretrained geometry and similar downstream behaviour under some protocols. Their incomplete provenance precludes a quantitative causal decomposition. Section 2.6 supplies a stronger test of supervision content through paired interventions, while retaining the distinction between an algorithmic effect and antibacterial causality.
+
+2.6 Controlled supervision interventions and quantitative-source comparisons
+
+The partial-fine-tuning results demonstrate practical competition, but they do not isolate supervision content because the sources differ in molecule count and training objective. We therefore ran an additional frozen-MolFormer experiment with a 768→256→128 neural encoder and identical source molecules within each comparison panel. All target cations, including counterion variants, were excluded from every source. Conflicting expert labels were removed. The new evaluation cohorts comprise 104 non-conflicting in-domain salts, 405 non-conflicting Q-HERO salts after target-cation overlap removal, and the 17-compound OOD set. These stricter cohorts and the frozen-backbone architecture differ from the partial-fine-tuning experiment and are reported separately.
+
+The pooled-MIC panel contains 681 common molecules with 4,938 underlying records; the exact S. aureus panel contains 529 common molecules with 855 records. Within each panel we compare real expert labels, continuous MIC, MIC binarised at a source-training threshold targeting the expert positive prevalence, permuted expert labels, permuted continuous MIC and an untrained encoder. MIC ties prevent exact prevalence matching. Five paired initialisation seeds, one shared scaffold-disjoint source split and 80 fixed training epochs are used. Target scaffold folds and downstream decoder settings are identical across arms. The source validation partition is diagnostic and does not select a checkpoint.
+
+For the pooled panel, mean Q-HERO-405 CatBoost RMSE is 1.607 for expert labels, 1.497 for continuous MIC, 1.646 for binary MIC and 1.780 for shuffled expert labels (Table 3). The paired expert-minus-shuffled-expert difference is −0.175 log2 µM, with a 95% whole-scaffold bootstrap interval of [−0.258, −0.058]. This control shows that the real label assignment matters in this panel. Expert supervision is not measurably better than raw MolFormer: ΔRMSE = +0.005 [−0.092, +0.109]. Nor does it outperform continuous MIC: expert minus continuous MIC is +0.109 [+0.007, +0.210]. The expert-versus-binary-MIC interval includes zero (−0.039 [−0.139, +0.136]); it is not an equivalence result.
+
+On the smaller S. aureus-matched panel, the expert-label benefit does not reproduce. Mean Q-HERO RMSE is 1.785 for real expert labels, 1.761 for shuffled expert labels and 1.617 for continuous MIC. Expert minus shuffled labels is +0.025 [−0.139, +0.311], and expert minus continuous MIC is +0.169 [−0.004, +0.454]. Restricting the panel changes the selected chemical collection as well as its size; this contrast cannot identify an organism-matching effect. The result sets a clear limit: transferable expert information and practical competition do not imply a consistent benefit from every expert-trained encoder.
+
+| Common-molecule panel | Supervision | Source n | Q-HERO R² | Q-HERO RMSE |
+
+| --- | --- | --- | --- | --- |
+
+| Pooled MIC | Human labels | 681 | +0.122 ± 0.035 | 1.607 ± 0.032 |
+
+| Pooled MIC | Continuous MIC | 681 | +0.237 ± 0.052 | 1.497 ± 0.052 |
+
+| Pooled MIC | Binary MIC | 681 | +0.079 ± 0.046 | 1.646 ± 0.041 |
+
+| Pooled MIC | Shuffled human | 681 | -0.080 ± 0.129 | 1.780 ± 0.105 |
+
+| Pooled MIC | Shuffled MIC | 681 | +0.124 ± 0.054 | 1.605 ± 0.050 |
+
+| Pooled MIC | Untrained encoder | 681 | +0.055 ± 0.086 | 1.666 ± 0.074 |
+
+| S. aureus MIC | Human labels | 529 | -0.085 ± 0.090 | 1.785 ± 0.075 |
+
+| S. aureus MIC | Continuous MIC | 529 | +0.110 ± 0.017 | 1.617 ± 0.016 |
+
+| S. aureus MIC | Binary MIC | 529 | -0.018 ± 0.025 | 1.730 ± 0.022 |
+
+| S. aureus MIC | Shuffled human | 529 | -0.055 ± 0.048 | 1.761 ± 0.040 |
+
+| S. aureus MIC | Shuffled MIC | 529 | +0.051 ± 0.079 | 1.670 ± 0.069 |
+
+| S. aureus MIC | Untrained encoder | 529 | +0.043 ± 0.037 | 1.677 ± 0.032 |
+
+Table 3. New matched-molecule supervision experiment on Q-HERO-405 with a CatBoost decoder, mean ± standard deviation over five source-training seeds. Pooled MIC and exact S. aureus MIC use separate common-molecule panels. Reported seed variation is not a confidence interval across independent chemical datasets. Paired molecule- and scaffold-bootstrap contrasts, all secondary targets, and the Ridge sensitivity analysis are supplied in Supporting Information Section S7.
+
+The practical full-source comparison uses 712 expert-labelled molecules, 1,120 pooled-MIC molecules, 888 exact S. aureus-MIC molecules and 273 ILToxDB cytotoxicity molecules. Mean Q-HERO R² is 0.095, 0.246, 0.185 and 0.083, respectively (Figure 7d). These results extend the comparison to several numerical supervision definitions, including an independent cytotoxicity source, but show that expert supervision does not uniformly match the best quantitative arm in the frozen-head setting. Because source size, coverage, label definition and experimental context differ, the ranking is a practical observation rather than a causal effect of endpoint or provenance.
+
+
+
+Figure 7. Protocol dependence of expert supervision. (a) Archived partial fine-tuning yields competitive downstream representation quality on Q-HERO (three seeds). (b,c) New matched-molecule frozen-backbone interventions on pooled and exact S. aureus MIC panels; bars show 95% paired whole-scaffold bootstrap intervals conditional on five trained seeds and fixed target folds. Negative ΔRMSE favours human labels. (d) New full-source comparison has unequal source sizes and cannot isolate endpoint or provenance. Panels use different cohorts and architectures and must not be interpreted as one interchangeable leaderboard.
+
+The causal estimand is the change in external predictive loss when a supervision assignment/objective is replaced within this fixed training pipeline. Both predictions are observed for each held-out molecule under paired runs, so a paired loss contrast is sufficient; a causal forest fitted to duplicated prediction rows would add no identification. Real-versus-permuted expert labels preserve molecule identities, class counts, architecture and training budget while disrupting the structure–label relation. The five shuffled runs are diagnostic controls, not a calibrated multi-permutation hypothesis test. The experiment supplies bounded evidence about algorithmic supervision content; it does not show that experts identify membrane-disruption mechanisms or remove laboratory bias.
+
+Quantitative-source interpretation also requires care. The local QMR same-compound/same-strain audit contains 38 replicate strata over only 23 compounds and five strains: median log2 range is zero, with 94.7% within one dilution. Within-group variation across S. aureus strains has median range 1 log2 unit over 279 strata. These selectively available replicates do not establish universal assay reproducibility, but they do prevent the pooled conflict rate from being interpreted as a pure inter-laboratory error rate. Likewise, the Q-HERO/QMR/ILToxDB transfer contrasts remain confounded by source selection, chemical composition, assay context and aggregation. Human labels as robust compression of heterogeneous evidence remain an explanation to test, rather than an established cause of their performance.
+
+3. Conclusion
+
+Final human Good/Bad annotations contain activity-related information that can be learned and transferred to quantitative QAC modelling. This study establishes useful signal and practical competition under a specified partial-fine-tuning protocol, then tests their limits using matched-molecule interventions and several numerical supervision definitions.
+
+Under partial fine-tuning and downstream refitting, 740 expert-labelled molecules yield Q-HERO R² = 0.269 compared with 0.312/0.308 for 1,153 molecule-level MIC values/9,338 MIC records. This is the principal evidence that coarse human supervision can compete in representation learning. The new frozen-backbone experiment sharpens the conclusion: real expert labels outperform shuffled labels on the pooled common-molecule panel, but continuous MIC is stronger and the expert-label benefit does not reproduce on the smaller organism-matched panel. Competition is therefore protocol-dependent, and does not establish measurement replacement, statistical equivalence or a label-to-record exchange rate.
+
+Direct transfer provides complementary evidence: the expert model receives binary training targets rather than concentrations, yet its scores rank measured potency on the evaluation collections. Quantitative MIC supervision gives stronger direct ranking on Q-HERO and OOD-17. Numerical MIC calibration and ranking are distinct tasks; the archived affine recalibration is in-sample and exploratory, and the 17-compound OOD estimates remain imprecise.
+
+The defensible causal claim concerns changing supervision within a fixed computational procedure. The new real-versus-shuffled control supports this claim in one defined panel; it does not identify a biological mechanism or prove that human judgement removes assay heterogeneity. Individual annotation votes, annotation cost, prospective performance and a pre-specified non-inferiority criterion are unavailable. The results motivate testing human labels as a compact supervision signal while specifying the task, source chemistry, training procedure and transfer regime in which they are competitive.
+
+4. Experimental protocol
+
+4.1 Computational protocol, provenance and limitations
+
+Fine-tuning used MolFormer-XL with the embedding layer and lowest four encoder layers frozen (16.0 of 44.4 M parameters). Three random seeds were evaluated. All 532 evaluation structures were excluded from the fine-tuning sources. QAC-105 and Q-HERO downstream evaluations used scaffold-grouped five-fold cross-validation; OOD-17 was predicted after training on QAC-105. The quantitative training counts are reported both as 1,153 unique molecules and 9,338 records.
+
+The final expert labels are archived, whereas individual votes and adjudication records are not; no inter-rater agreement is reported. The historical QAC-105 analyses contain source overlap, while the partial-fine-tuning experiment removes all evaluation full-salt identities and the new frozen-head experiment removes evaluation cation identities including counterion variants. The latter additionally excludes conflicting target and expert labels. The two experiments therefore have different cohorts and cannot be pooled. OOD-17 is a small case study. In-sample recalibration, incomplete CKA/SHAP provenance and unavailable annotation-cost records limit calibration, mechanism and economic-efficiency claims.
+
+The new controlled experiment uses deterministic frozen MolFormer features (revision 7b12d946c181a37f6012b9dc3b002275de070314; maximum token length 202; no prepared molecule is truncated). A shared cation-Murcko scaffold split with 15% source validation and seed 1729 is used within each common-molecule panel. Source input scaling and quantitative-target scaling are fitted only on source training. Encoders are trained with AdamW (learning rate 0.001, weight decay 0.01), batch size 64, 80 epochs and five paired initialisation seeds. Binary objectives use BCE-with-logits; continuous objectives use standardised MSE. The supervision replacement includes the declared objective when binary and continuous arms are compared. Shuffling permutes labels within source training only. Downstream CatBoost uses 300 iterations, depth 5, learning rate 0.05 and fixed seed 1729; a Ridge decoder with alpha 10 and target-training feature standardisation is a prespecified sensitivity analysis. Source-validation losses are recorded without checkpoint selection. QAC-104 and Q-HERO-405 use shared five-fold cation-scaffold partitions; OOD-17 uses a decoder trained on QAC-104. Pooled MIC retains the archive’s unified numerical field across organisms, including coded censoring bounds; the S. aureus source requires an exact MIC qualifier. OOD values follow the archived conversion to log2 micromolar MIC and are a secondary small-set analysis.
+
+Paired RMSE contrasts are calculated from squared losses averaged across five trained source seeds before taking square roots. Ten thousand paired bootstrap resamples use either full-salt molecule identities or entire cation-scaffold clusters. Intervals are conditional on the fixed target folds and trained seed set; seeds and individual endpoint rows are not independent chemical datasets. No equivalence margin is imposed after seeing results. These exploratory interventions follow the archived analyses and are not a preregistered confirmatory trial. The Ridge sensitivity exhibits severe extrapolation instability in some arms, and does not establish decoder-independent gains; all Ridge results, including extreme errors, are retained in the supplementary tables and machine-readable predictions.
+
+4.2 Chemistry
+
+4.2.1 General information
+
+All starting reagents were obtained from commercial suppliers and were used without further purification. All solvents used were reagent grade and distilled prior to application. Air sensitive reactions were performed under high purity argon atmosphere. Thin-layer chromatography was performed using silica gel 60 F254 aluminum sheets under UV light. IR spectra were recorded with a Bruker ALPHA-T FT-IR spectrometer in KBr pellets. HR-ESI-MS were recorded on a Bruker microTOF II instrument (Bruker Daltonik GmbH, Bremen, Germany); external or internal calibration was performed with electrospray calibrant solution (Fluka). All melting points were measured with a Stuart SMP30 melting point apparatus and are uncorrected. 1H and 13C NMR spectra were recorded with a Bruker AM300 at ambient temperature in Dimethyl sulfoxide-d₆ (DMSO-d6) or Chloroform-d (CDCl3) solutions. The NMR, HRMS and FT-IR spectra of the newly synthesized compounds can be found in the supporting information.
+
+4.2.2 Synthesis and Characterization of Substrates and Products
+
+Synthesis of 5,5'-(pentane-1,5-diylbis(oxy))bis(2-(hydroxymethyl)-4H-pyran-4-one) A:
+
+To a solution of kojic acid (1.847 g, 13 mmol) in anhydrous DMF (25 mL) was added K2CO3 (1.794 g, 13 mmol). The suspension was stirred at 60 oC for 1 h. 1,5-Dibromopentane (1.356 g, 5.9 mmol) was added and the mixture was stirred at 80 oC for 24 h. Result of reaction was confirmed by TLC (MeOH/CHCl3 1:10). The solvent was removed under reduced pressure. Distilled water (20 mL) was added to the crude residue, and the mixture was stirred at RT for 2 h. Formed precipitates were filtrated through a glass filter, washed with acetone (20 mL), and dried under a vacuum to afford sand yellow solid product X (1.46 g, 4.1 mmol, 70% yield).
+
+C17H20O8; M. w. 352.339; Sand yellow solid; M. p. 143–145°C; 1H NMR (300 MHz, DMSO-d6): δ 8.10 (s, 2H, 2CH), 6.30 (s, 2H, 2CH), 5.69 (br s, 2H, 2OH), 4.30 (s, 4H, 2CH2), 3.83 (t, J = 6.3 Hz, 4H, 2CH2), 1.73 (p, J = 7.0 Hz, 4H, 2CH2), 1.58-1.44 (m, 2H, CH2) ppm; 13C NMR (75 MHz, DMSO-d6): δ 173.1, 167.9, 147.1, 140.1, 110.9, 68.7, 59.3, 28.2, 21.9 ppm; HRMS (ESI): calcd for C17H20O8 375.1050, found 375.1051.
+
+Synthesis of 1,1'-(((pentane-1,5-diylbis(oxy))bis(4-oxo-4H-pyran-5,2-diyl))bis(methylene))bis(4-(alkylamino)pyridin-1-ium) dichlorides 1-4:
+
+Compound A (1.33 g, 3.77 mmol) was dissolved in 25 ml of chloroform. The resulting suspension was cooled in an ice bath, and a solution of thionyl chloride (1.094 mL, 15.08 mmol) in 7 mL of CHCl3 was added dropwise under stirring. The reaction mixture was then heated under reflux with stirring for 24 hours. Progress of the reaction was monitored by TLC (MeOH:CHCl3, 1:10). Upon completion, the reaction mixture was concentrated and dried using a rotary evaporator. The residue was resuspended in 5 mL of chloroform and filtered through a Schott filter. After solvent evaporation, brown powder was obtained. The obtained brown powder (0.2 g, 0.5 mmol) and 4-alkylaminopyridine (1.1 mmol) were dissolved in 7 ml of acetonitrile. The resulting mixture was heated under reflux with stirring for 24 hours. Upon completion, the reaction was cooled to room temperature, and the solvent was evaporated under vacuum. The crude residue was washed with acetone (15 ml) and dried under a vacuum to afford light brown solid.
+
+1,1'-(((pentane-1,5-diylbis(oxy))bis(4-oxo-4H-pyran-5,2-diyl))bis(methylene))bis(4-(octylamino)pyridin-1-ium) dichloride (1):
+
+C43H62Cl2N4O6; M. w. 730.989; light brown solid (0.346 g, 0.474 mmol, 94% yield); M. p. 165–168°C; IR (neat/cm−1): 3429, 3212, 2927, 2855, 1652, 1591, 1189; 1H NMR (300 MHz, DMSO-d6): δ 9.32 (t, J = 5.7 Hz, 2H, 2NH), 8.38 (d, J = 7.4 Hz, 2H, CHpy), 8.24-8.14 (m, 4H, 2CHpy + 2CH), 7.09-6.95 (m, 4H, 2CHpy), 6.46 (s, 2H, 2CH), 5.39 (s, 4H, 2CH2), 3.80 (t, J = 6.4 Hz, 4H, 2CH2N+), 3.32-3.24 (m, 4H, 2CH2), 1.78-1.18 (m, 30H, 15CH2), 0.85 (t, J = 6.9 Hz, 6H, 2CH3) ppm; 13C NMR (75 MHz, DMSO-d6): δ 172.6, 160.3, 157.0, 147.3, 143.9, 141.5, 140.6, 114.2, 110.5, 105.5, 68.7, 55.8, 42.3, 31.1, 28.6, 28.0, 27.8, 26.2, 22.0, 21.9, 13.9 ppm; HRMS (ESI): calcd for C43H62N4O6 365.2329, found 365.2339.
+
+1,1'-(((pentane-1,5-diylbis(oxy))bis(4-oxo-4H-pyran-5,2-diyl))bis(methylene))bis(4-(nonylamino)pyridin-1-ium) dichloride (2):
+
+C45H66Cl2N4O6; M. w. 759.044; light brown solid (0.357 g, 0.47 mmol, 94% yield); M. p. 207–210°C; IR (neat/cm−1): 3432, 3211, 2926, 2855, 1653, 1591, 1190; 1H NMR (300 MHz, DMSO-d6): δ 9.33 (t, J = 5.4 Hz, 2H, 2NH), 8.38 (d, J = 7.3 Hz, 2H, CHpy), 8.24-8.14 (m, 4H, 2CHpy + 2CH), 7.010-6.96 (m, 4H, 2CHpy), 6.47 (s, 2H, 2CH), 5.40 (s, 4H, 2CH2), 3.81 (t, J = 6.3 Hz, 4H, 2CH2N+), 3.33-3.24 (m, 4H, 2CH2), 1.80-1.17 (m, 34H, 17CH2), 0.86 (t, J = 6.9 Hz, 6H, 2CH3) ppm; 13C NMR (75 MHz, DMSO-d6): δ 172.5, 160.3, 157.0, 147.2, 143.9, 141.4, 140.6, 114.2, 110.5, 105.5, 68.7, 55.8, 42.3, 31.2, 28.8, 28.6, 28.5, 28.0, 27.8, 26.2, 22.0, 21.9, 13.8 ppm; HRMS (ESI): calcd for C45H66N4O6 379.2486, found 379.2493.
+
+1,1'-(((pentane-1,5-diylbis(oxy))bis(4-oxo-4H-pyran-5,2-diyl))bis(methylene))bis(4-(decylamino)pyridin-1-ium) dichloride (3):
+
+C47H70Cl2N4O6; M. w. 787.098; light brown solid (0.342 g, 0.434 mmol, 87% yield); M. p. 169–172°C; IR (neat/cm−1): 3432, 3210, 2926, 2854, 1653, 1591, 1190; 1H NMR (300 MHz, DMSO-d6): δ 9.25 (t, J = 5.6 Hz, 2H, 2NH), 8.37 (d, J = 7.2 Hz, 2H, CHpy), 8.24-8.14 (m, 4H, 2CHpy + 2CH), 7.08-6.96 (m, 4H, 2CHpy), 6.46 (s, 2H, 2CH), 5.39 (s, 4H, 2CH2), 3.81 (t, J = 6.3 Hz, 4H, 2CH2N+), 3.32-3.24 (m, 4H, 2CH2), 1.80-1.17 (m, 38H, 19CH2), 0.85 (t, J = 6.9 Hz, 6H, 2CH3) ppm; 13C NMR (75 MHz, DMSO-d6): δ 172.5, 160.3, 157.0, 147.2, 143.9, 141.4, 140.6, 114.2, 110.5, 105.5, 68.7, 55.8, 42.3, 31.2, 28.93, 28.91, 28.6, 28.0, 27.8, 26.2, 22.0, 21.9, 13.9 ppm; HRMS (ESI): calcd for C47H70N4O6 393.2642, found 393.2633.
+
+1,1'-(((pentane-1,5-diylbis(oxy))bis(4-oxo-4H-pyran-5,2-diyl))bis(methylene))bis(4-(dodecylamino)pyridin-1-ium) dichloride (4):
+
+C51H78Cl2N4O6; M. w. 843.206; light brown solid (0.375 g, 0.445 mmol, 89% yield); M. p. 215–217°C; IR (neat/cm−1): 3429, 3211, 2925, 2853, 1654, 1591, 1191; 1H NMR (300 MHz, DMSO-d6): δ 9.32 (t, J = 5.7 Hz, 2H, 2NH), 8.38 (d, J = 7.4 Hz, 2H, CHpy), 8.24-8.14 (m, 4H, 2CHpy + 2CH), 7.10-6.95 (m, 4H, 2CHpy), 6.46 (s, 2H, 2CH), 5.40 (s, 4H, 2CH2), 3.81 (t, J = 6.2 Hz, 4H, 2CH2N+), 3.34-3.22 (m, 4H, 2CH2), 1.79-1.16 (m, 46H, 23CH2), 0.85 (t, J = 6.9 Hz, 6H, 2CH3) ppm; 13C NMR (75 MHz, DMSO-d6): δ 172.5, 160.3, 157.0, 147.2, 143.9, 141.4, 140.5, 114.2, 110.5, 105.5, 68.7, 55.8, 42.3, 31.2, 29.0, 28.9, 28.6, 28.0, 27.8, 26.2, 22.0, 21.9, 13.9 ppm; HRMS (ESI): calcd for C51H78N4O6 421.2955, found 421.2942.
+
+Synthesis of Methyl (4SR,6RS)-5,5-dicyano-2-methyl-4,6-(3-pyridine)-1,4,5,6-tetrahydropyridine-3-carboxylate B:
+
+A mixture of 3-pyridinecarboxaldehyde (6 mmol), malononitrile (3 mmol), methyl acetoacetate (3 mmol) and ammonium acetate (12 mmol, 924 mg) was refluxed in ethanol (10 ml) for 4 h. Formed precipitates were quickly filtrated through a glass filter, and dried under a vacuum to afford white solid product B (0.67 g, 1.8 mmol, 62%).
+
+C20H17N5O2; M. w. 359.39; White solid; M. p. 200–203°C; 1H NMR (300 MHz, DMSO-d6): δ = 8.81 (d, J = 8 Hz, 1H, Ar), 8.72 (dd, J = 4.8 Hz, J1 = 1.5 Hz, 1H, Ar), 8.56–8.53 (m, 2H, Ar), 8.03 (dt, J = 8 Hz, J1 = 1.7 Hz, 1H, Ar), 7.8 (s, 1H, NH), 7.68 (dt, J = 8 Hz, J1 = 1.6 Hz, 1H, Ar), 7.6 (dd, J = 8 Hz, J1 = 4.8 Hz, 1H, Ar), 7.43 (dd, J = 8 Hz, J1 = 4.8 Hz, 1H, Ar), 5.42 (s, 1H, CH), 4.95 (s, 1H, CH), 3.16 (s, 3H, OCH3), 2.36 (s, 3H, CH3) ppm.
+
+Synthesis of Methyl (4RS,6RS)-5,5-dicyano-2-methyl-4,6-(3-pyridine)-1,4,5,6-tetrahydropyridine-3-carboxylate C:
+
+Tetrahydropyridine B (1.39 mmol, 500 mg) in anhydrous DMSO (20 ml) was heated to 80-85 oC for 11 h. After heating, the mixture was concentrated under reduced pressure, water (25 ml) was added to the crude residue. Formed precipitates were filtrated through a glass filter and dried under a vacuum. Compound C was purified by recrystallization in methanol (0.38 g, 1 mmol, 76%).
+
+C20H17N5O2; M. w. 359.39; White solid; M. p. 245–248°C; 1H NMR (300 MHz, DMSO-d6): δ = 8.74-8.63 (m, 3H, Ar), 8.60 (d, J = 4.8 Hz, 1H, Ar), 8.09 (s, 1H, NH), 7.93 (d, J = 8.0 Hz, 1H, Ar), 7.80 (d, J = 7.9 Hz, 1H, Ar), 7.56 (dd, J = 8.1 Hz, J1 = 4.8 Hz, 1H, Ar), 7.47 (dd, J = 7.9 Hz, J1 = 4.8 Hz, 1H, Ar), 5.08 (s, 1H, CH), 4.67 (s, 1H, CH), 3.45 (s, 3H, OCH3), 2.52 (s, 3H, CH3) ppm; 13C NMR (75 MHz, DMSO-d6): δ 166.2, 154.7, 151.2, 150.8, 149.7, 149.4, 137.3, 136.5, 134.6, 129.5, 123.6, 123.5, 113.6, 112.9, 89.0, 53.3, 50.6, 43.4, 42.4, 19.8 ppm; HRMS (ESI): calcd for C20H18N5O2 360.1455, found 360.1458.
+
+(2'R,4'R)-3',3'-Dicyano-5'-(methoxycarbonyl)-6'-methyl-1,1''-dialkyl-1',2',3',4'-tetrahydro-[3,2':4',3''-terpyridine]-1,1''-ium dibromides 5-9:
+
+Halogenoalkane (2 mmol) was added to a solution of C (0.5 mmol, 0.200 g) in dry acetonitrile (3 mL). The mixture was stirred and heated to reflux for 24 h. Result of reaction was confirmed by TLC (ethyl acetate/petroleum ether 1:1). After solvent evaporation under reduced pressure, ethyl acetate (5 mL) was added to the reaction residue and the mixture was vigorously stirred for 1 h. Formed precipitates were quickly filtrated through a glass filter, and dried under a vacuum to afford white solid product.
+
+(2'R,4'R)-3',3'-Dicyano-5'-(methoxycarbonyl)-6'-methyl-1,1''-dioctyl-1',2',3',4'-tetrahydro-[3,2':4',3''-terpyridine]-1,1''-ium dibromide (5):
+
+C36H51Br2N5O2; M. w. 585.83; White solid (0.258 g, 0.44 mmol, 88% yield); M. p. 213-216 °C; IR (neat/cm−1): 3438, 3188, 2927, 2856, 2250, 1668, 1252; 1H NMR (300 MHz, DMSO-d6): δ 9.55 (s, 1H, NH), 9.33 (d, J = 6.1 Hz, 1H, CHpy), 9.29-9.20 (m, 2H, 2CHpy), 8.87-8.74 (m, 2H, 2CHpy), 8.50 (s, 1H, CHpy), 8.45-8.28 (m, 2H, 2CHpy), 5.46 (s, 1H, CH), 5.27 (s, 1H, CH), 4.85-4.62 (m, 4H, 2CH2N+), 3.47 (s, 3H, OCH3), 2.57 (s, 3H, CH3), 1.97-1.91 (m, 4H, 2CH2), 1.31-1.20 (m, 20H, 10CH2), 0.92-0.80 (m, 6H, 2CH3) ppm; 13C NMR (75 MHz, DMSO-d6): δ 165.6, 156.0, 146.5, 146.3, 145.3, 145.2, 144.8, 144.7, 139.2, 133.8, 128.1, 127.9, 112.3, 111.9, 87.7, 61.3, 61.1, 51.7, 50.7, 42.5, 41.9, 31.08, 31.02, 30.6, 30.5, 28.38, 28.31, 25.2, 25.1, 21.98, 21.96, 20.1, 13.8 ppm; HRMS (ESI): calcd for C36H51N5O2 292.7016, found 292.7010.
+
+(2'R,4'R)-3',3'-Dicyano-5'-(methoxycarbonyl)-6'-methyl-1,1''-dinonyl-1',2',3',4'-tetrahydro-[3,2':4',3''-terpyridine]-1,1''-ium dibromide (6):
+
+C38H55Br2N5O2; M. w. 613.89; White solid (0.264 g, 0.43 mmol, 86% yield); M. p. 214-217 °C; IR (neat/cm−1): 3430, 3186, 2927, 2855, 2251, 1668, 1253; 1H NMR (300 MHz, DMSO-d6): δ 9.55 (s, 1H, NH), 9.33 (d, J = 6.1 Hz, 1H, CHpy), 9.30-9.20 (m, 2H, 2CHpy), 8.87-8.74 (m, 2H, 2CHpy), 8.50 (s, 1H, CHpy), 8.45-8.28 (m, 2H, 2CHpy), 5.46 (s, 1H, CH), 5.28 (s, 1H, CH), 4.86-4.65 (m, 4H, 2CH2N+), 3.48 (s, 3H, OCH3), 2.58 (s, 3H, CH3), 1.97-1.91 (m, 4H, 2CH2), 1.32-1.16 (m, 24H, 12CH2), 0.92-0.81 (m, 6H, 2CH3) ppm; 13C NMR (75 MHz, DMSO-d6): δ 165.6, 156.0, 146.5, 146.3, 145.3, 145.1, 144.79, 144.70, 139.2, 133.8, 128.1, 127.9, 112.3, 111.9, 87.7, 61.3, 61.0, 51.7, 50.7, 42.4, 41.8, 31.15, 31.12, 30.6, 30.5, 28.66, 28.6, 28.5, 28.4, 28.3, 25.2, 25.1, 22.0, 21.9, 20.1, 13.8 ppm; HRMS (ESI): calcd for C38H53N5O2 306.7172, found 306.7181.
+
+(2'R,4'R)-3',3'-Dicyano-1,1''-didecyl-5'-(methoxycarbonyl)-6'-methyl-1',2',3',4'-tetrahydro-[3,2':4',3''-terpyridine]-1,1''-diium bromide (7):
+
+C40H59Br2N5O2; M. w. 641.94; White solid (0.289 g, 0.45 mmol, 90% yield); M. p. 218-221 °C; IR (neat/cm−1): 3434, 3189, 2926, 2855, 2249, 1668, 1251; 1H NMR (300 MHz, DMSO-d6): δ 9.54 (s, 1H, NH), 9.34 (d, J = 6.1 Hz, 1H, CHpy), 9.30-9.23 (m, 2H, 2CHpy), 8.88-8.76 (m, 2H, 2CHpy), 8.50 (s, 1H, CHpy), 8.46-8.32 (m, 2H, 2CHpy), 5.48 (s, 1H, CH), 5.26 (s, 1H, CH), 4.82-4.70 (m, 4H, 2CH2N+), 3.50 (s, 3H, OCH3), 2.59 (s, 3H, CH3), 1.99-1.93 (m, 4H, 2CH2), 1.36-1.19 (m, 28H, 14CH2), 0.94-0.84 (m, 6H, 2CH3) ppm; 13C NMR (75 MHz, DMSO-d6): δ 165.7, 156.1, 146.6, 146.3, 145.3, 145.2, 144.7, 139.3, 133.9, 128.1, 128.0, 112.3, 111.9, 87.7, 61.3, 61.1, 51.8, 50.8, 42.5, 41.9, 31.2, 30.6, 30.5, 28.8, 28.79, 28.76, 28.70, 28.6, 28.3, 25.2, 22.0, 20.1, 13.9 ppm; HRMS (ESI): calcd for C40H59N5O2 320.7329, found 320.7327.
+
+(2'R,4'R)-3',3'-dicyano-5'-(methoxycarbonyl)-6'-methyl-1,1''-diundecyl-1',2',3',4'-tetrahydro-[3,2':4',3''-terpyridine]-1,1''-diium bromide (8):
+
+C42H63Br2N5O2; M. w. 669.99; White solid (0.281 g, 0.42 mmol, 84% yield); M. p. 215-218 °C; IR (neat/cm−1): 3433, 3187, 2926, 2854, 2249, 1669, 1251; 1H NMR (300 MHz, DMSO-d6): δ 9.55 (s, 1H, NH), 9.33 (d, J = 6.1 Hz, 1H, CHpy), 9.29-9.20 (m, 2H, 2CHpy), 8.87-8.74 (m, 2H, 2CHpy), 8.51 (s, 1H, CHpy), 8.44-8.28 (m, 2H, 2CHpy), 5.45 (s, 1H, CH), 5.28 (s, 1H, CH), 4.85-4.64 (m, 4H, 2CH2N+), 3.47 (s, 3H, OCH3), 2.56 (s, 3H, CH3), 1.98-1.90 (m, 4H, 2CH2), 1.31-1.14 (m, 32H, 16CH2), 0.91-0.81 (m, 6H, 2CH3) ppm; 13C NMR (75 MHz, DMSO-d6): δ 165.6, 156.0, 146.5, 146.3, 145.3, 145.2, 144.8, 144.7, 139.2, 133.8, 128.1, 127.9, 112.3, 111.9, 87.7, 61.3, 61.1, 51.7, 50.7, 42.5, 41.9, 31.2, 30.6, 30.5, 28.9, 28.89, 28.83, 28.7, 28.68, 28.64, 28.3, 25.2, 25.1, 22.0, 20.1, 13.8 ppm; HRMS (ESI): calcd for C42H63N5O2 334.7485, found 334.7497.
+
+(2'R,4'R)-3',3'-dicyano-1,1''-didodecyl-5'-(methoxycarbonyl)-6'-methyl-1',2',3',4'-tetrahydro-[3,2':4',3''-terpyridine]-1,1''-diium bromide (9):
+
+C44H67Br2N5O2; M. w. 698.05; White solid (0.321 g, 0.46 mmol, 92% yield); M. p. 229-232 °C; IR (neat/cm−1): 3438, 3189, 2925, 2853, 2249, 1669, 1250; 1H NMR (300 MHz, DMSO-d6): δ 9.52 (s, 1H, NH), 9.31 (d, J = 6.1 Hz, 1H, CHpy), 8.85-8.72 (m, 2H, 2CHpy), 8.47 (s, 1H, CHpy), 8.44-8.26 (m, 2H, 2CHpy), 5.44 (s, 1H, CH), 5.24 (s, 1H, CH), 4.81-4.63 (m, 4H, 2CH2N+), 3.46 (s, 3H, OCH3), 2.56 (s, 3H, CH3), 1.96-1.90 (m, 4H, 2CH2), 1.36-1.13 (m, 36H, 18CH2), 0.85 (t, J = 6.5 Hz, 6H, 2CH3) ppm; 13C NMR (75 MHz, DMSO-d6): δ 165.6, 156.0, 146.6, 146.3, 145.3, 145.2, 144.7, 139.2, 133.9, 128.1, 127.9, 112.3, 111.9, 87.7, 61.3, 61.1, 51.7, 50.7, 42.4, 41.9, 31.2, 30.6, 30.5, 28.96, 28.91, 28.8, 28.7, 28.6, 28.3, 25.27, 25.1, 22.0, 20.1, 13.9 ppm; HRMS (ESI): calcd for C44H67N5O2 348.7642, found 348.7636.
+
+Synthesis of Ethyl 6-amino-5-cyano-2-methoxy-4-(pyridin-3-yl)-2-(trifluoromethyl)-3,4-dihydro-2H-pyran-3-carboxylate D:
+
+A mixture of 3-pyridinecarboxaldehyde (2 mmol), malononitrile (2 mmol), ethyl 4,4,4-trifluoroacetoacetate (2 mmol) and ammonium acetate (2 mmol, 154 mg) was stirred in methanol (5 мл) for 6 h. The compound D was isolated by simple filtration (0.47 g, 1.26 mmol, 63% yield).
+
+C16H16F3N3O4; M. w. 371,316; White solid; M. p. 196–199°C; 1H NMR (300 MHz, DMSO-d6): δ 8.54-8.46 (m, 2H, 2CHpy), 7.82 (d, J = 7.9 Hz, 1H, CHpy), 7.38 (t, J = 5.9 Hz, 1H, CHpy), 7.11 (s, 2H, NH2), 4.00 (d, J = 11.9 Hz, 1H, CH), 3.90 (q, J = 7.1 Hz, 2H, CH2), 3.34 (s, 3H, OCH3), 3.23 (d, J = 11.9 Hz, 1H, CH), 0.90 (t, J = 7.1 Hz, 3H, CH3) ppm; 13C NMR (75 MHz, DMSO-d6): δ 166.4, 159.3, 150.0, 149.1, 136.1, 134.6, 123.6, 121.3 (q, J = 291.1 Hz, CF3), 119.0, 96.1 (q, J = 31.9 Hz, C(CF3)), 60.9, 56.5, 52.5, 48.8, 36.3, 13.4 ppm; HRMS (ESI): calcd for C16H16F3N3O4 372.1166, found 372.1179.
+
+Synthesis of 3-(6-amino-5-cyano-3-(ethoxycarbonyl)-2-methoxy-2-(trifluoromethyl)-3,4-dihydro-2H-pyran-4-yl)-1-alkylpyridin-1-ium bromides 10-12:
+
+Halogenoalkane (2 mmol) was added to a solution of D (0.5 mmol, 0.200 g) in dry acetonitrile (3 mL). The mixture was stirred and heated to reflux for 24 h. Result of reaction was confirmed by TLC (ethyl acetate/petroleum ether 1:1). After solvent evaporation under reduced pressure, ethyl acetate (5 mL) was added to the reaction residue and the mixture was vigorously stirred for 1 h. Formed precipitates were quickly filtrated through a glass filter, and dried under a vacuum to afford white solid product.
+
+3-(6-amino-5-cyano-3-(ethoxycarbonyl)-2-methoxy-2-(trifluoromethyl)-3,4-dihydro-2H-pyran-4-yl)-1-nonylpyridin-1-ium bromide (10):
+
+C25H35BrF3N3O4; M. w. 578,471; White solid (0.257 g, 0.44 mmol, 89% yield); M. p. 178–180; IR (neat/cm−1): 3258, 3094, 2929, 2857, 2194, 1738, 1636, 1600; 1H NMR (300 MHz, DMSO-d6): δ 9.35 (s, 1H, CHpy), 9.13 (d, J = 6.0 Hz, 1H, CHpy), 8.80 (d, J = 8.1 Hz, 1H, CHpy), 8.29-8.19 (m, 1H, CHpy), 7.39 (s, 2H, NH2), 4.63 (t, J = 7.1 Hz, 2H, 2CH2N+), 4.32 (d, J = 11.9 Hz, 1H, CH), 4.06-3.82 (m, 2H, OCH2), 3.61-3.52 (m, 4H, CH + OCH3), 1.96-1.85 (m, 2H, CH2), 1.27-1.21 (m, 12H, 6CH2), 0.98 (t, J = 7.1 Hz, 3H, CH3), 0.87 (t, J = 6.3 Hz, CH3) ppm; 13C NMR (75 MHz, DMSO-d6): δ 165.9, 159.6, 145.8, 144.7, 144.6, 140.5, 128.1, 121.1 (q, J = 291.3 Hz, CF3), 118.7, 96.2 (q, J = 33.2 Hz, C(CF3)), 61.4, 60.9, 54.9, 52.7, 47.6, 36.1, 31.1, 30.6, 28.6, 28.4, 28.3, 25.0, 22.0, 13.8, 13.5 ppm; HRMS (ESI): calcd for C25H35F3N3O4 498.2574, found 498.2568.
+
+3-(6-amino-5-cyano-3-(ethoxycarbonyl)-2-methoxy-2-(trifluoromethyl)-3,4-dihydro-2H-pyran-4-yl)-1-undecylpyridin-1-ium bromide (11):
+
+C27H39BrF3N3O4; M. w. 606,525; White solid (0.242 g, 0.39 mmol, 84% yield); M. p. 162–165°C; IR (neat/cm−1): 3258, 3091, 2928, 2856, 2194, 1738, 1635, 1600; 1H NMR (300 MHz, DMSO-d6): δ 9.35 (s, 1H, CHpy), 9.14 (d, J = 6.0 Hz, 1H, CHpy), 8.80 (d, J = 8.1 Hz, 1H, CHpy), 8.24 (t, J = 7.1 Hz, 1H, CHpy), 7.37 (s, 2H, NH2), 4.63 (t, J = 7.1 Hz, 2H, 2CH2N+), 4.32 (d, J = 12.0 Hz, 1H, CH), 4.06-3.82 (m, 2H, OCH2), 3.62-3.50 (m, 4H, CH + OCH3), 1.96-1.85 (m, 2H, CH2), 1.36-1.13 (m, 16H, 8CH2), 0.98 (t, J = 7.1 Hz, 3H, CH3), 0.87 (t, J = 6.3 Hz, CH3); 13C NMR (75 MHz, DMSO-d6): δ 165.9, 159.5, 145.8, 144.7, 144.6, 140.5, 128.7, 121.1 (q, J = 290.4 Hz, CF3), 118.7, 96.2 (q, J = 32.8 Hz, C(CF3)), 61.4, 60.9, 54.9, 52.7, 47.6, 36.1, 31.2, 30.6, 28.9, 28.8, 28.7, 28.6, 28.3, 25.0, 22.0, 13.8, 13.5 ppm; HRMS (ESI): calcd for C27H39F3N3O4 526.2887, found 526.2879.
+
+3-(6-amino-5-cyano-3-(ethoxycarbonyl)-2-methoxy-2-(trifluoromethyl)-3,4-dihydro-2H-pyran-4-yl)-1-dodecylpyridin-1-ium bromide (12):
+
+C28H41BrF3N3O4; M. w. 620,552; White solid (0.251 g, 0.4 mmol, 81% yield); M. p. 175–177°C; IR (neat/cm−1): 3259, 3084, 2927, 2855, 2193, 1738, 1634, 1600; 1H NMR (300 MHz, DMSO-d6): δ 9.35 (s, 1H, CHpy), 9.13 (d, J = 6.0 Hz, 1H, CHpy), 8.80 (d, J = 8.1 Hz, 1H, CHpy), 8.29-8.18 (m, 1H, CHpy), 7.37 (s, 2H, NH2), 4.63 (t, J = 7.1 Hz, 2H, 2CH2N+), 4.32 (d, J = 12.0 Hz, 1H, CH), 4.06-3.82 (m, 2H, OCH2), 3.61-3.52 (m, 4H, CH + OCH3), 1.96-1.85 (m, 2H, CH2), 1.35-1.13 (m, 18H, 9CH2), 0.98 (t, J = 7.1 Hz, 3H, CH3), 0.88 (t, J = 6.3 Hz, CH3); 13C NMR (75 MHz, DMSO-d6): δ 166.0, 159.6, 145.8, 144.8, 144.6, 140.5, 128.1, 121.2 (q, J = 291.9 Hz, CF3), 119.0, 96.3 (q, J = 31.7 Hz, C(CF3)), 61.4, 60.9, 54.9, 52.7, 47.6, 36.1, 31.2, 30.7, 28.98, 28.95, 28.8, 28.7, 28.6, 28.3, 25.1, 22.0, 13.9, 13.5 ppm; HRMS (ESI): calcd for C28H41F3N3O4 540.3044, found 540.3022.
+
+Synthesis of ethyl (2-(2-hydroxyethoxy)ethyl)carbamate (X)
+
+A round-bottom flask equipped with a Dean–Stark apparatus was charged with diethyl carbonate (42 mmol) and 2-(2-aminoethoxy)ethan-1-ol (85 mmol). The reaction mixture was stirred at 125°C for 24 h and then heated under reflux at 150 °C for 4 days. The product was purified by column chromatography (EtOAc/MeOH, 8:1) and obtained as an orange oil in 75% yield (31.5 mmol, 5.58 g).
+
+C7H15NO4; M. w. 177.200; orange oil; 1H NMR (300 MHz, DMSO-d6) δ 7.13 – 7.03 (m, 1H, NH), 4.59 (t, J = 5.5 Hz, 1H, OH), 3.99 (q, J = 7.1 Hz, 2H, СH2), 3.50 (q, J = 5.3 Hz, 2H, CH2), 3.45 – 3.37 (m, 4H, 2CH2), 3.13 (q, J = 5.9 Hz, 2H, 2CH2), 1.16 (t, J = 7.1 Hz, 3H, CH3).
+
+1,3-bis(2-(2-hydroxyethoxy)ethyl)urea (X)
+
+Ethyl(2-(2-hydroxyethoxy)ethyl)carbamate (9 mmol) and 2-(2-aminoethoxy)ethan-1-ol (10 mmol) were placed in a round-bottom flask equipped with a Dean–Stark apparatus. The reaction mixture was stirred at 180–190 °C for 7 days. Purification by column chromatography (EtOAc/MeOH, 8:1) afforded the desired product as an orange oil in 60% yield (5.4 mmol, 1.28 g).
+
+C9H20N2O5; M. w. 236.268; orange oil; 1H NMR (300 MHz, DMSO-d6) δ 6.08 – 5.87 (m, 2H, 2NH), 4.58 (t, 2H, 2OH), 3.65 – 3.46 (m, 4H, 2CH2), 3.46 – 3.36 (m, 8H, 4CH2), 3.20 – 3.12 (m, 4H, 2CH2).
+
+1,3,4,6-tetrakis(2-(2-hydroxyethoxy)ethyl)tetrahydroimidazo[4,5-d]imidazole-2,5(1H,3H)-dione (X)
+
+1,3-Bis(2-(2-hydroxyethoxy)ethyl)urea (2.54 mmol) and a 45% aqueous solution of glyoxal (1.15 mmol in 0.5 mL of water) were placed in a round-bottom flask. The mixture was acidified to pH~1 with concentrated HCl and stirred at 90 °C for 6 h. The reaction progress was monitored by TLC (EtOAc/MeOH, 2:1). The reaction mixture was then neutralized with 25% aqueous NaOH and concentrated to dryness under reduced pressure. The resulting yellow oily crude product was purified by column chromatography (EtOAc/MeOH, 8:1) to afford the desired product in 53% yield (1.35 mmol, 0,668 g).
+
+C20H38N4O10; M. w. 494.542; light yellow oil;1H NMR (300 MHz, DMSO-d6) δ 5.54 (s, 2H, 2CH), 4.63 (t, J = 5.3 Hz, 4H, 4OH), 3.64 – 3.47 (m, 20H, 10CH2), 3.47 – 3.39 (m, 8H, 4CH2), 3.34 – 3.26 (m, 4H, 2CH2). 13C NMR (75 MHz, DMSO-d6) δ 158.41, 72.26, 69.02, 68.53, 60.19, 42.17, 25.49.
+
+1,3,4,6-tetrakis(2-(2-chloroethoxy)ethyl)tetrahydroimidazo[4,5-d]imidazole-2,5(1H,3H)-dione (X)
+
+A round-bottom flask containing the compound (0.6 mmol) in chloroform (2 ml) was placed in an ice bath. Thionyl chloride (3.36 mmol) was added dropwise to the stirred solution. The reaction mixture was then heated under reflux for 12 h. The solvent was removed under reduced pressure, and the resulting yellow oily crude product was purified by column chromatography (chloroform) to afford the desired product in 70% yield (0.42 mmol, 0.238 g).
+
+C20H34Cl4N4O6; M. w. 568.314; light yellow oil; 1H NMR (300 MHz, CDCl3) δ 5.69 (s, 2H, 2CH), 3.77 – 3.59 (m, 28H, 14CH2), 3.53 – 3.47 (m, 2H, CH2), 3.47 – 3.42 (m, 2H, CH2). 13C NMR (75 MHz, CDCl3) δ 158.87, 71.14, 70.33, 70.07, 43.25, 42.59.
+
+1,3,4,6-tetrakis(2-(2-(4-(alkylamino)-1λ4 -pyridin-1-yl)ethoxy)ethyl)tetrahydroimidazo[4,5-d]imidazole-2,5(1H,3H)-dione (13-17)
+
+1,3,4,6-Tetrakis(2-(2-chloroethoxy)ethyl)tetrahydroimidazo[4,5-d]imidazole-2,5(1H,3H)-dione and N-alkylpyridin-4-amine were placed in a round-bottom flask. Dry 1-butanol (1–2 mL) was added, and the mixture was heated under reflux for 5 days. After completion, the reaction mixture was concentrated to dryness under reduced pressure. The resulting yellow solid was purified by recrystallization from acetonitrile to afford the product.
+
+1,1',1'',1'''-((((2,5-dioxodihydroimidazo[4,5-d]imidazole-1,3,4,6(2H,5H)-tetrayl)tetrakis(ethane-2,1-diyl))tetrakis(oxy))tetrakis(ethane-2,1-diyl))tetrakis(4-(heptylamino)pyridin-1-ium) tetrachloride (13)
+
+C68H114Cl4N12O6; M. w. 1337.538; white hygroscopic solid (0.176 g, 0.13 mmol, 71% yield); IR (neat/cm−1): 3208, 3102, 3015, 2955, 2929, 2857, 1695, 1653, 1590, 1557, 1520, 1482, 1351, 1320, 1237, 1316, 1194, 1117, 1053, 905, 842, 782, 724, 664, 578, 544, 506 1H NMR (300 MHz, DMSO-d6) δ 9.19 – 8.97 (m, 4H, NH), 8.29 (d, J = 7.0 Hz, 4H, CHpy), 8.10 (d, J = 7.2 Hz, 4H, CHpy), 6.94 (dd, J = 27.7, 7.3 Hz, 8H, CHar), 5.33 (s, 2H, CHgl), 4.48 – 4.20 (m, 8H, CH2(py)), 3.79 – 3.69 (m, 8H, CH2(gl)), 3.60 – 3.37 (m, J = 29.0 Hz, 12H, CH2(alk)), 3.28 – 3.15 (m, J = 5.8 Hz, 12H, CH2(NH)), 1.63 – 1.45 (m, J = 6.9 Hz, 8H, CH2(alk)), 1.42 – 1.12 (m, 32H, CH2(alk)), 0.86 (t, J = 6.8 Hz, 12H, CH3(alk)). 13C NMR (75 MHz, DMSO-d6) δ 158.75, 157.19, 144.41, 142.04, 110.34, 105.35, 69.39, 68.68, 56.59, 42.72, 42.64, 31.67, 28.84, 28.40, 26.78, 22.51, 14.40. HRMS (ESI) m/z: [M – 4Cl-]4+ calcd for C68H114N12O64+ 298.7229, found 298.7249.
+
+1,1',1'',1'''-((((2,5-dioxodihydroimidazo[4,5-d]imidazole-1,3,4,6(2H,5H)-tetrayl)tetrakis(ethane-2,1-diyl))tetrakis(oxy))tetrakis(ethane-2,1-diyl))tetrakis(4-(octylamino)pyridin-1-ium) tetrachloride (14)
+
+C72H122Cl4N12O6; M. w. 1393.646; white hygroscopic solid (0.162 g, 0.12 mmol, 68% yield); IR (neat/cm−1): 3207, 3100, 2926, 2855, 2326, 1695, 1652, 1590, 1556, 1482, 1352, 1318, 1237, 1193, 1117, 1064, 841, 782, 723, 508; 1H NMR (300 Мгц, DMSO-d6) δ 9.16 – 9.05 (m, 4H, NH), 8.38 – 8.24 (m, 4H, CHpy), 8.10 (dd, J = 7.3, 1.7 Hz, 4H, CHpy), 6.99 (dd, J = 7.3, 2.8 Hz, 4H, CHpy), 6.89 (dd, J = 7.5, 2.8 Hz, 4H, CHpy), 5.34 (s, 2H, CHgl), 4.38 – 4.22 (m, 8H, CH2(py)), 3.85 – 3.65 (m, 8H, CH2(gl)), 3.62 – 3.37 (m, 12H, CH2(alk)), 3.28 – 3.11 (m, 12H, CH2(NH)), 1.66 – 1.46 (m, 8H, CH2(alk)), 1.40 – 1.17 (m, 40H, CH2(alk)), 0.86 (t, J = 6.3 Hz, 12H, CH3(alk)). 13C NMR (75 MHz, DMSO-d6) δ 158.77, 157.20, 144.42, 142.04, 110.37, 105.35, 69.62, 69.40, 68.69, 56.60, 42.74, 31.71, 29.16, 29.12, 28.40, 26.84, 22.55, 14.41. HRMS (ESI) m/z: [M – 4Cl-]4+ calcd for C72H122N12O64+ 312.7390, found 312.7397.
+
+1,1',1'',1'''-((((2,5-dioxodihydroimidazo[4,5-d]imidazole-1,3,4,6(2H,5H)-tetrayl)tetrakis(ethane-2,1-diyl))tetrakis(oxy))tetrakis(ethane-2,1-diyl))tetrakis(4-(nonylamino)pyridin-1-ium) tetrachloride (15)
+
+C76H130Cl4N12O6; M. w. 1449.754; white hygroscopic solid (0.190 g, 0.13 mmol, 75% yield); IR (neat/cm−1): 3206, 3100, 2926, 2855. 1695, 1653, 1590, 1558, 1520, 1352, 1320, 1237, 1195, 1118, 1054, 905, 842, 782, 723, 581, 507; 1H NMR (300 MHz, DMSO-d6) δ 9.14 (t, J = 5.3 Hz, 4H, NH), 8.31 (d, J = 7.8 Hz, 4H, CHpy), 8.12 (d, J = 6.1 Hz, 4H, CHpy), 7.01 (dd, J = 7.3, 2.6 Hz, 4H, CHar), 6.88 (dd, J = 7.5, 2.6 Hz, 4H, CHar), 5.35 (s, 2H, CHgl), 4.47 – 4.17 (m, 8H, CH2(py)), 3.86 – 3.62 (m, 8H, CH2(gl)), 3.62 – 3.36 (m, J = 19.9, 8.3 Hz, 12H, CH2(alk)), 3.27 – 3.14 (m, 12H, CH2(NH)), 1.66 – 1.43 (m, J = 6.8 Hz, 8H, CH2(alk)), 1.41 – 1.06 (m, 48H, CH2(alk)), 0.86 (t, J = 6.6 Hz, 12H, CH3(alk)). 13C NMR (75 MHz, DMSO-d6) δ 158.75, 157.18, 144.40, 142.04, 110.35, 105.36, 69.38, 68.67, 56.60, 42.73, 42.64, 31.74, 29.43, 29.20, 29.13, 28.40, 26.83, 22.56, 14.70. HRMS (ESI) m/z: [M – 4Cl-]4+ calcd for C76H130N12O64+ 326.7561, found 326.7554
+
+1,1',1'',1'''-((((2,5-dioxodihydroimidazo[4,5-d]imidazole-1,3,4,6(2H,5H)-tetrayl)tetrakis(ethane-2,1-diyl))tetrakis(oxy))tetrakis(ethane-2,1-diyl))tetrakis(4-(decylamino)pyridin-1-ium) tetrachloride (16)
+
+C80H138Cl4N12O6; M. w. 1505.862; white hygroscopic solid (0.168 g, 0.11 mmol, 81% yield); IR (neat/cm−1): 3207, 3100, 2926, 2855, 1695, 1663, 1591, 1557, 1519, 1480, 1352, 1321, 1237, 1194, 1117, 1056, 844, 786, 753, 719, 545, 507; 1H NMR (300 MHz, DMSO-d6) δ 9.18 – 9.07 (m, 4H, NH), 8.30 (d, J = 7.4 Hz, 4H, CHpy), 8.11 (d, J = 7.5 Hz, 4H, CHpy), 6.99 (d, J = 7.2 Hz, 4H, CHpy), 6.89 (d, J = 6.4 Hz, 4H, CHpy), 5.34 (s, 2H, CHgl), 4.41 – 4.26 (m, 8H, CH2(py)), 3.81 – 3.66 (m, 8H, CH2(gl)), 3.57 – 3.39 (m, 12H, CH2(alk)), 3.28 – 3.17 (m, 12H, CH2(NH)), 1.65 – 1.48 (m, 8H, CH2(alk)), 1.41 – 1.17 (m, 56H, CH2(alk)), 0.86 (t, J = 6.3 Hz, 12H, CH3(alk)). 13C NMR (75 MHz, DMSO-d6) δ 157.20, 144.43, 142.06, 110.37, 105.37, 69.40, 68.68, 56.61, 42.75, 31.77, 29.49, 29.46, 29.22, 29.18, 28.40, 26.85, 22.57, 14.42. HRMS (ESI) m/z: [M – 4Cl-]4+ calcd for C80H138N12O64+ 340.7697, found 340.7710
+
+1,1',1'',1'''-((((2,5-dioxodihydroimidazo[4,5-d]imidazole-1,3,4,6(2H,5H)-tetrayl)tetrakis(ethane-2,1-diyl))tetrakis(oxy))tetrakis(ethane-2,1-diyl))tetrakis(4-(dodecylamino)pyridin-1-ium) tetrachloride (17)
+
+C88H154Cl4N12O6; M. w. 1618.078; white hygroscopic solid (0.174 g, 0.11 mmol, 70% yield); IR (neat/cm−1): 3207, 3099, 2925, 2854, 1695, 1653, 1591, 1557, 1469, 1353, 1194, 1118, 1056, 842, 754, 622, 580, 505; 1H NMR (300 MHz, DMSO-d6) δ 9.40 – 9.18 (m, 4H, NH), 8.28 (d, J = 3.5 Hz, 4H, CHpy), 8.07 (d, J = 5.2 Hz, 4H, CHpy), 7.01 (d, J = 7.2 Hz, 4H, CHpy), 6.87 (d, J = 7.7 Hz, 4H, CHpy), 5.32 (s, 2H, CHgl), 4.44 – 4.14 (m, 8H, CH2(py)), 3.82 – 3.64 (m, 8H, CH2(gl)), 3.58 – 3.41 (m, 12H, CH2(alk)), 3.26 – 3.13 (m, 12H, CH2(NH)), 1.62 – 1.48 (m, 8H, CH2(alk)), 1.42 – 1.14 (m, 72H, CH2(alk)), 0.86 (t, J = 6.5 Hz, 12H, CH3(alk)). 13C NMR (75 MHz, DMSO-d6) δ 157.20, 144.42, 142.04, 110.38, 105.35, 69.40, 68.68, 56.60, 42.75, 31.78, 29.56, 29.51, 29.24, 29.20, 28.41, 26.87, 22.57, 14.41. HRMS (ESI) m/z: [M – 4Cl-]4+ calcd for C88H154N12O64+ 368.8040, found 368.8023
+
+
+
+4.3 Microbiological assay
+
+4.3.1 Bacterial strains
+
+Laboratory strains of the microorganisms E. coli ATCC 25922, S. aureus ATCC 43300 were obtained from the State Collection of Pathogenic Microorganisms (Obolensk, Russia).
+
+4.3.2 Identification of microorganisms
+
+Species identification of microorganisms was carried out on a MALDI-TOF Biotyper mass spectrometer (Bruker, Billerica, MA, USA) according to the standard microflex User Manual. One part of the daily bacterial culture was introduced into a 2 mL tube (Eppendorf, Hamburg, Germany) containing 300 µL of deionized water and triturated until a homogeneous suspension was obtained. Then, 900 µL of 96% ethanol was added and shaken. The tube was then centrifuged at 12,000× g for 2 min. The supernatant was discarded, and the precipitate was dried in air. After drying, the precipitate was thoroughly mixed with 30 µL of 70% formic acid, incubated for 10 min at room temperature, and then mixed with 30 µL of acetonitrile (Sigma-Aldrich, St. Louis, MO, USA) and incubated for another 10 min. This mixture was centrifuged at 12,000×g for 2 min; then, 1 µL of the supernatant was transferred to an MSP 96 Polished Steel MALDI Target Plate (Bruker Daltonik GmbH, Bremen, Germany), air-dried, and covered with 1 µL of a saturated solution of α-cyano-4-hydroxycinnamic acid (Bruker Daltonik, Bremen, Germany). The MALDI target plate was placed in a MALDI-TOF microflex LRF instrument (Bruker Daltonik, Bremen, Germany). The data acquisition settings were as follows: ion source 1 at 19.50 kV, ion source 2 at 18.22 kV, lens at 7.01 kV, and a mass range of 2000 to 20,000 Da. Spectrum registration was performed automatically using MALDI Biotyper RTC 3.1 software (Bruker Daltonik, Bremen, Germany). The obtained spectra were compared with the reference spectra of the FFL v1.0 data-base. Identification scores ≥2.0 and 1.7–1.99 indicated recognition of the species and genus levels, respectively, while scores <1.7 indicated a lack of reliable data.
+
+4.3.3 Cultivation of microorganisms
+
+Microorganisms were cultivated using agar and GRM broth. Cultivation of microorganisms was carried out for 20–24 h at a temperature of 37°C.
+
+4.3.4 MIC and MBC determination
+
+The synthesized QACs were dissolved in the DMSO/water system at a ratio of 1/9 with a final concentration of 1000 mg/L. For better dissolution, the samples were sonicated for 15 to 60 minutes at 40°C. MIC and MBC were determined by broth microdilution. General broth-dilution methodology is described in CLSI M07 (76); this citation identifies the relevant methodological standard without independently verifying all details of the archived assays.
+
+5. CRediT authorship contribution statement
+
+Egor A. Ilin: Conceptualization, Methodology, Software, Validation, Formal analysis, Investigation, Data Curation, Writing - Original Draft, Writing - Review & Editing, Visualization, Project administration; Nikita A. Frolov: Conceptualization, Methodology, Validation, Formal analysis, Investigation, Data Curation, Writing - Original Draft, Writing - Review & Editing, Visualization, Supervision, Project administration; Mary A. Seferyan: Conceptualization, Methodology, Validation, Investigation, Writing - Review & Editing; Anvar B. Valeev: Validation, Investigation, Data Curation, Writing - Original Draft, Writing - Review & Editing; Egor V. Sinikin: Validation, Investigation, Data Curation, Writing - Original Draft, Writing - Review & Editing; Taygib M. Iliyasov: Validation, Investigation, Data Curation, Writing - Original Draft, Writing - Review & Editing; Andrey D. Vinokurov: Validation, Investigation, Data Curation, Writing - Original Draft, Writing - Review & Editing, Visualization; Elena V. Detusheva: Methodology, Validation, Formal analysis, Investigation, Resources, Writing - Review & Editing; Elizabeth Son: Methodology, Validation, Formal analysis, Investigation;  Michael G. Medvedev: Conceptualization, Methodology, Formal analysis, Resources, Data Curation, Writing - Review & Editing, Visualization, Supervision, Project administration; Anatoly N. Vereshchagin: Conceptualization, Methodology, Resources, Writing - Review & Editing, Supervision, Project administration, Funding acquisition.
+
+
+
+6. Conflicts of interest
+
+The authors declare no competing financial interests.
+
+
+
+7. Data availability
+
+The curated quantitative dataset (QAC-AMR / QMR) is openly available at Zenodo, DOI 10.5281/zenodo.22286669 (CC BY 4.0). The expert Good/Bad annotations, the trained encoders and the analysis code are available at https://github.com/Yagr49/QMC-Expert.
+
+
+
+8. Acknowledgments
+
+This work was supported by the Russian Science Foundation (project №24-13-00307). Microbiological Experiments were performed at the State Research Center for Applied Microbiology and Biotechnology (SRC AMB) using the unique research facility SRC AMB within the framework of the industry research program of Rospotrebnadzor. This research was supported in part through computational resources of HPC facilities at NRU HSE.
+
+
+
+9. Appendix A. Supplementary data
+
+Supplementary data to this article can be found online at
+
+
+
+References
+
+1.Iskandar, K.; Murugaiyan, J.; Hammoudi Halat, D.; Hage, S. E.; Chibabhai, V.; Adukkadukkam, S.; Roques, C.; Molinier, L.; Salameh, P.; Van Dongen, M., Antibiotic Discovery and Resistance: The Chase and the Race. Antibiotics (Basel) 2022, 11.
+
+2.Gargate, N.; Laws, M.; Rahman, K. M., Current economic and regulatory challenges in developing antibiotics for Gram-negative bacteria. npj Antimicrobials and Resistance 2025, 3, 50.
+
+3.Lack of innovation set to undermine antibiotic performance and health gains. https://www.who.int/news/item/22-06-2022-22-06-2022-lack-of-innovation-set-to-undermine-antibiotic-performance-and-health-gains (15.04.2026),
+
+4.Melchiorri, D.; Rocke, T.; Alm, R. A.; Cameron, A. M.; Gigante, V., Addressing urgent priorities in antibiotic development: insights from WHO 2023 antibacterial clinical pipeline analyses. Lancet Microbe 2025, 6, 100992.
+
+5.Sati, H.; Carrara, E.; Savoldi, A.; Hansen, P.; Garlasco, J.; Campagnaro, E.; Boccia, S.; Castillo-Polo, J. A.; Magrini, E.; Garcia-Vello, P.; Wool, E.; Gigante, V.; Duffy, E.; Cassini, A.; Huttner, B.; Pardo, P. R.; Naghavi, M.; Mirzayev, F.; Zignol, M.; Cameron, A.; Tacconelli, E.; Aboderin, A.; Al Ghoribi, M.; Al-Salman, J.; Amir, A.; Apisarnthanarak, A.; Blaser, M.; El-Sharif, A.; Essack, S.; Harbarth, S.; Huang, X.; Kapoor, G.; Knight, G.; Muhwa, J. C.; Monnet, D. L.; Ousassa, T.; Sacsaquispe, R.; Severin, J.; Sugai, M.; Taneja, N.; Umubyeyi Nyaruhirira, A., The WHO Bacterial Priority Pathogens List 2024: a prioritisation study to guide research, development, and public health strategies against antimicrobial resistance. The Lancet Infectious Diseases 2025, 25, 1033-1043.
+
+6.Schroder, H.; Machunsky, C.; Strobach, H.; Schror, K., Nitric oxide but not prostacyclin has an autocrine function in porcine aortic endothelial cells. Advances in prostaglandin, thromboxane, and leukotriene research 1991, 21B, 671-4.
+
+7.Organization, W. H., Analysis of antibacterial agents in clinical and preclinical development: overview and analysis 2025. 2025.
+
+8.Coelho, J. R.; Carriço, J. A.; Knight, D.; Martínez, J. L.; Morrissey, I.; Oggioni, M. R.; Freitas, A. T., The use of machine learning methodologies to analyse antibiotic and biocide susceptibility in Staphylococcus aureus. PLoS One 2013, 8, e55582.
+
+9.Lin, B.; Yan, S.; Zhen, B., A machine learning method for predicting molecular antimicrobial activity. Scientific Reports 2025, 15, 6559.
+
+10.Krishnan, R.; Howard, I. S.; Comber, S.; Jha, A. N., In silico prediction of acute chemical toxicity of biocides in marine crustaceans using machine learning. Science of The Total Environment 2023, 887, 164072.
+
+11.Jukič, M.; Bren, U., Machine Learning in Antibacterial Drug Design. Frontiers in Pharmacology 2022, Volume 13 - 2022.
+
+12.Shankarnarayan, S. A.; Guthrie, J. D.; Charlebois, D. A. Machine learning for antimicrobial resistance research and drug development. In The Global Antimicrobial Resistance Epidemic-Innovative Approaches and Cutting-Edge Solutions; IntechOpen: 2022.
+
+13.Diéguez-Santana, K.; González-Díaz, H., Machine learning in antibacterial discovery and development: A bibliometric and network analysis of research hotspots and trends. Computers in Biology and Medicine 2023, 155, 106638.
+
+14.Liu, Z.; Chen, Q.; Yao, C.; Wang, Y.; Zhu, S.; Guan, J.; Miao, Y., The chemical design of antimicrobial ionic liquids guided by machine learning: a review on balancing efficacy and toxicity. Journal of Materials Chemistry B 2026, 14, 3023-3047.
+
+15.Sadaghiyanfam, S.; Kamberaj, H.; Isler, Y., Leveraging ChemBERTa and machine learning for accurate toxicity prediction of ionic liquids. Journal of the Taiwan Institute of Chemical Engineers 2025, 171, 106030.
+
+16.Krishnan, A.; Anahtar, M. N.; Valeri, J. A.; Jin, W.; Donghia, N. M.; Sieben, L.; Luttens, A.; Zhang, Y.; Modaresi, S. M.; Hennes, A.; Fromer, J.; Bandyopadhyay, P.; Chen, J. C.; Rehman, D.; Desai, R.; Edwards, P.; Lach, R. S.; Aschtgen, M.-S.; Gaborieau, M.; Gaetani, M.; Palace, S. G.; Omori, S.; Khonde, L.; Moroz, Y. S.; Blough, B.; Jin, C.; Loh, E.; Grad, Y. H.; Saei, A. A.; Coley, C. W.; Wong, F.; Collins, J. J., A generative deep learning approach to <em>de novo</em> antibiotic design. Cell 2025, 188, 5962-5979.e22.
+
+17.Olayo-Alarcon, R.; Amstalden, M. K.; Zannoni, A.; Bajramovic, M.; Sharma, C. M.; Brochado, A. R.; Rezaei, M.; Müller, C. L., Pre-trained molecular representations enable antimicrobial discovery. Nature Communications 2025, 16, 3420.
+
+18.Taha, M. M. E.; Oraibi, B.; Abdelwahab, S. I.; Sahli, K. A.; Assiri, A.; Qadri, M.; Alarifi, A.; Khardali, A.; Farasani, A.; Moshi, J. M.; Alsaadi, K. H.; Alshahrani, S.; Shubaily, H. M.; Binjomah, A. Z., Global trends and thematic evolution in antimicrobial stewardship research: a comprehensive bibliometric and network analysis (1977–2025). Journal of Hospital Infection 2026, 171, 11-26.
+
+19.Wang, X.; Rai, N.; Merchel Piovesan Pereira, B.; Eetemadi, A.; Tagkopoulos, I., Accelerated knowledge discovery from omics data by optimal experimental design. Nature Communications 2020, 11, 5026.
+
+20.Sowers, A.; Wang, G.; Xing, M.; Li, B., Advances in Antimicrobial Peptide Discovery via Machine Learning and Delivery via Nanotechnology. Microorganisms 2023, 11, 1129.
+
+21.Wang, Y.; Zhao, L.; Li, Z.; Xi, Y.; Pan, Y.; Zhao, G.; Zhang, L., A generative artificial intelligence approach for the discovery of antimicrobial peptides against multidrug-resistant bacteria. Nature Microbiology 2025, 10, 2997-3012.
+
+22.Raissi, M.; Perdikaris, P.; Karniadakis, G. E., Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations. Journal of Computational Physics 2019, 378, 686-707.
+
+23.Cuomo, S.; Di Cola, V. S.; Giampaolo, F.; Rozza, G.; Raissi, M.; Piccialli, F., Scientific Machine Learning Through Physics–Informed Neural Networks: Where we are and What’s Next. Journal of Scientific Computing 2022, 92, 88.
+
+24.Kuang, T.; Liu, P.; Ren, Z., Impact of Domain Knowledge and Multi-Modality on Intelligent Molecular Property Prediction: A Systematic Survey. Big Data Mining and Analytics 2024, 7, 858-888.
+
+25.Wahyudi, A.; Sueviriyapan, N.; Suriyapraphadilok, U., Generalizable physics-informed graph neural network for CO2 solubility prediction across amine classes. Separation and Purification Technology 2026, 385, 136395.
+
+26.Selby, D. A.; Jakhmola, R.; Sprang, M.; Großmann, G.; Raki, H.; Maani, N.; Pavliuk, D.; Ewald, J.; Vollmer, S., Visible neural networks for multi-omics integration: a critical review. Frontiers in Artificial Intelligence 2025, Volume 8 - 2025.
+
+27.Bickerton, G. R.; Paolini, G. V.; Besnard, J.; Muresan, S.; Hopkins, A. L., Quantifying the chemical beauty of drugs. Nature chemistry 2012, 4, 90-8.
+
+28.Lajiness, M. S.; Maggiora, G. M.; Shanmugasundaram, V., Assessment of the consistency of medicinal chemists in reviewing sets of compounds. J Med Chem 2004, 47, 4891-6.
+
+29.Kutchukian, P. S.; Vasilyeva, N. Y.; Xu, J.; Lindvall, M. K.; Dillon, M. P.; Glick, M.; Coley, J. D.; Brooijmans, N., Inside the Mind of a Medicinal Chemist: The Role of Human Bias in Compound Prioritization during Drug Discovery. PLOS ONE 2012, 7, e48476.
+
+30.Choung, O.-H.; Vianello, R.; Segler, M.; Stiefl, N.; Jiménez-Luna, J., Extracting medicinal chemistry intuition via preference machine learning. Nature Communications 2023, 14, 6651.
+
+31.Sundin, I.; Voronov, A.; Xiao, H.; Papadopoulos, K.; Bjerrum, E. J.; Heinonen, M.; Patronov, A.; Kaski, S.; Engkvist, O., Human-in-the-loop assisted de novo molecular design. Journal of Cheminformatics 2022, 14, 86.
+
+32.Menke, J.; Nahal, Y.; Bjerrum, E. J.; Kabeshov, M.; Kaski, S.; Engkvist, O., Metis: a python-based user interface to collect expert feedback for generative chemistry models. Journal of Cheminformatics 2024, 16, 100.
+
+33.Christiano, P. F.; Leike, J.; Brown, T.; Martic, M.; Legg, S.; Amodei, D. Deep Reinforcement Learning from Human Preferences. In Advances in Neural Information Processing Systems, 2017; Curran Associates, Inc.: 2017; Vol. 30; pp 4299-4307.
+
+34.Ouyang, L.; Wu, J.; Jiang, X.; Almeida, D.; Wainwright, C.; Mishkin, P.; Zhang, C.; Agarwal, S.; Slama, K.; Ray, A.; Schulman, J.; Hilton, J.; Kelton, F.; Miller, L.; Simens, M.; Askell, A.; Welinder, P.; Christiano, P. F.; Leike, J.; Lowe, R. Training language models to follow instructions with human feedback. In Advances in Neural Information Processing Systems, 2022; Curran Associates, Inc.: 2022; Vol. 35; pp 27730-27744.
+
+35.Georgoulis, E.; Zervou, M. A.; Pantazis, Y., Transfer learning on protein language models improves antimicrobial peptide classification. Scientific Reports 2025, 15, 37456.
+
+36.Cai, J.; Yan, J.; Un, C.; Wang, Y.; Campbell-Valois, F.-X.; Siu, S. W. I., BERT-AmPEP60: A BERT-Based Transfer Learning Approach to Predict the Minimum Inhibitory Concentrations of Antimicrobial Peptides for Escherichia coli and Staphylococcus aureus. Journal of Chemical Information and Modeling 2025, 65, 3186-3202.
+
+37.Kalliokoski, T.; Kramer, C.; Vulpetti, A.; Gedeck, P., Comparability of Mixed IC50 Data – A Statistical Analysis. PLOS ONE 2013, 8, e61007.
+
+38.Kramer, C.; Kalliokoski, T.; Gedeck, P.; Vulpetti, A., The Experimental Uncertainty of Heterogeneous Public Ki Data. Journal of Medicinal Chemistry 2012, 55, 5165-5173.
+
+39.Landrum, G. A.; Riniker, S., Combining IC50 or Ki Values from Different Sources Is a Source of Significant Noise. Journal of Chemical Information and Modeling 2024, 64, 1560-1567.
+
+40.Campisi, E.; Di Liberto, E.; Barchitta, M.; Maugeri, A.; Favara, G.; Magnano San Lio, R.; Vecchi, E.; D'Ancona, F.; Agodi, A., Evaluation of preventive interventions addressing healthcare-associated infections and antimicrobial resistance: a systematic review. Journal of Hospital Infection 2026, 171, 120-136.
+
+41.Alves, P. J.; Gryson, L.; Hajjar, J.; Lepelletier, D.; Reners, M.; Rodríguez Salazar, J.; Simon, A., Role of antiseptics in the prevention and treatment of infections in nursing homes. Journal of Hospital Infection 2023, 131, 58-69.
+
+42.Buciński, A.; Socha, A.; Wnuk, M.; Bączek, T.; Nowaczyk, A.; Krysiński, J.; Goryński, K.; Koba, M., Artificial neural networks in prediction of antifungal activity of a series of pyridine derivatives against Candida albicans. Journal of Microbiological Methods 2009, 76, 25-29.
+
+43.Wnuk, M.; Marszałł, M.; Zapęcka, A.; Nowaczyk, A.; Krysiński, J.; Romaszko, J.; Kawczak, P.; Bączek, T.; Buciński, A., Prediction of antimicrobial activity of imidazole derivatives by artificial neural networks. 2013, 8, 1-15.
+
+44.Badura, A.; Krysiński, J.; Nowaczyk, A.; Buciński, A., Prediction of the antimicrobial activity of quaternary ammonium salts against Staphylococcus aureus using artificial neural networks. Arabian Journal of Chemistry 2021, 14, 103233.
+
+45.Badura, A.; Krysiński, J.; Nowaczyk, A.; Buciński, A., Application of artificial neural networks to prediction of new substances with antimicrobial activity against Escherichia coli. Journal of Applied Microbiology 2021, 130, 40-49.
+
+46.Badura, A.; Krysiński, J.; Nowaczyk, A.; Buciński, A., Application of artificial neural networks to the prediction of antifungal activity of imidazole derivatives against Candida albicans. Chemometrics and Intelligent Laboratory Systems 2022, 222, 104501.
+
+47.Ramić, A.; Skočibušić, M.; Odžak, R.; Čipak Gašparović, A.; Milković, L.; Mikelić, A.; Sović, K.; Primožič, I.; Hrenar, T. Antimicrobial Activity of Quasi-Enantiomeric Cinchona Alkaloid Derivatives and Prediction Model Developed by Machine Learning. Antibiotics, 10, 659, 2021.
+
+48.Lorenc, A.; Badura, A.; Karolak, M.; Pałkowski, Ł.; Kubik, Ł.; Skrzypczak, A.; Buciński, A., Hybrid Machine Learning Model for Dual Prediction of Antimicrobial Activity against Staphylococcus aureus and Candida albicans. Journal of Pharmaceutical Innovation 2026, 21, 174.
+
+49.Tiihonen, A.; Cox-Vazquez, S. J.; Liang, Q.; Ragab, M.; Ren, Z.; Hartono, N. T. P.; Liu, Z.; Sun, S.; Zhou, C.; Incandela, N. C.; Limwongyut, J.; Moreland, A. S.; Jayavelu, S.; Bazan, G. C.; Buonassisi, T., Predicting Antimicrobial Activity of Conjugated Oligoelectrolyte Molecules via Machine Learning. Journal of the American Chemical Society 2021, 143, 18917-18931.
+
+50.Hodyna, D.; Kovalishyn, V.; Rogalsky, S.; Blagodatnyi, V.; Petko, K.; Metelytsia, L., Antibacterial Activity of Imidazolium-Based Ionic Liquids Investigated by QSAR Modeling and Experimental Studies. Chem Biol Drug Des 2016, 88, 422-33.
+
+51.Makarov, D. M.; Fadeeva, Y. A.; Safonova, E. A.; Shmukler, L. E., Predictive modeling of antibacterial activity of ionic liquids by machine learning methods. Computational Biology and Chemistry 2022, 101, 107775.
+
+52.Ghaemi, S.; Consylman, A.; Pan, B.; Wu, A.; Petersen, A.; Chang, G.; McDonough, D.; Forman, M.; Bezold, E. L.; Wuest, W. M.; Shehu, A.; Zhao, L.; Minbiole, K. P. C., Topology-Aware Generation and Activity-Based Filtering: A Computational-Experimental Framework for Data-Scarce Quaternary Ammonium Compound Discovery. Journal of Chemical Information and Modeling 2026, 66, 3117-3128.
+
+53.Ilin, E. A.; Frolov, N. A.; Seferyan, M. A.; Valeev, A. B.; Vinokurov, A. D.; Detusheva, E. V.; Son, E.; Medvedev, M. G.; Vereshchagin, A. N., Tackling the challenge of ML-assisted antibacterial activity prediction: One step closer to controlled quaternary ammonium compounds design via neural networks model. Bioorganic Chemistry 2025, 167, 109175.
+
+54.Ward, M.; O'Boyle, N. M., Analysis of the structural diversity of heterocycles amongst European medicines agency approved pharmaceuticals (2014–2023). RSC Medicinal Chemistry 2025, 16, 4540-4570.
+
+55.Fedorowicz, J.; Sączewski, J. Advances in the Synthesis of Biologically Active Quaternary Ammonium Compounds. International Journal of Molecular Sciences, 25, 4649, 2024.
+
+56.Ma, J.; Liu, N.; Huang, M.; Wang, L.; Han, J.; Qian, H.; Che, F., Synthesis, physicochemical and antimicrobial properties of cardanol-derived quaternary ammonium compounds (QACs) with heterocyclic polar head. Journal of Molecular Liquids 2019, 294, 111669.
+
+57.Zhou, Z.; Zhou, S.; Zhang, X.; Zeng, S.; Xu, Y.; Nie, W.; Zhou, Y.; Xu, T.; Chen, P., Quaternary Ammonium Salts: Insights into Synthesis and New Directions in Antibacterial Applications. Bioconjugate Chemistry 2023, 34, 302-325.
+
+58.Burnett, C. L.; Bergfeld, W. F.; Belsito, D. V.; Hill, R. A.; Klaassen, C. D.; Liebler, D. C.; Marks, J. G., Jr.; Shank, R. C.; Slaga, T. J.; Snyder, P. W.; Andersen, F. A., Final report of the safety assessment of Kojic acid as used in cosmetics. Int J Toxicol 2010, 29, 244s-73.
+
+59.Aati, H. Y.; Lotfy, M. M.; Al-tweel, A.; Al-enezi, B.; Abdelkader, K.; AbouZid, S. F.; Rateb, M. E.; Hassan, H. M.; Mohammed, R.; El Amir, D., Kojic acid: A River Nile-derived fungal secondary metabolite with preservative potential against Listeria monocytogenes in milk. Microbial Pathogenesis 2025, 204, 107532.
+
+60.Wu, Y.; Shi, Y. G.; Zeng, L. Y.; Pan, Y.; Huang, X. Y.; Bian, L. Q.; Zhu, Y. J.; Zhang, R. R.; Zhang, J., Evaluation of antibacterial and anti-biofilm properties of kojic acid against five food-related bacteria and related subcellular mechanisms of bacterial inactivation. Food Sci Technol Int 2019, 25, 3-15.
+
+61.Sie, C.; Ngaini, Z.; Suhaili, N.; Madiahlagan, E., Synthesis of Kojic Ester Derivatives as Potential Antibacterial Agent. Journal of Chemistry 2018, 2018, 1-7.
+
+62.Aytemir, M. D.; Özçelik, B., A study of cytotoxicity of novel chlorokojic acid derivatives with their antimicrobial and antiviral activities. European Journal of Medicinal Chemistry 2010, 45, 4089-4095.
+
+63.Emami, S.; Ghafouri, E.; Faramarzi, M. A.; Samadi, N.; Irannejad, H.; Foroumadi, A., Mannich bases of 7-piperazinylquinolones and kojic acid derivatives: Synthesis, in vitro antibacterial activity and in silico study. European Journal of Medicinal Chemistry 2013, 68, 185-191.
+
+64.Liu, X.; Xia, W.; Jiang, Q.; Xu, Y.; Yu, P., Effect of kojic acid-grafted-chitosan oligosaccharides as a novel antibacterial agent on cell membrane of gram-positive and gram-negative bacteria. Journal of Bioscience and Bioengineering 2015, 120, 335-339.
+
+65.Liu, X.; Xia, W.; Jiang, Q.; Xu, Y.; Yu, P., Synthesis, Characterization, and Antimicrobial Activity of Kojic Acid Grafted Chitosan Oligosaccharide. Journal of Agricultural and Food Chemistry 2014, 62, 297-303.
+
+66.Vereshchagin, A. N.; Frolov, N. A.; Minaeva, A. P.; Detusheva, E. V.; Derkach, Y. V.; Egorov, M. P., Synthesis and biological evaluation of novel cyanuric acid-tethered tris-pyridinium derivatives. Mendeleev Communications 2021, 31, 368-369.
+
+67.Mateeva, N. N.; Winfield, L. L.; Redda, K. K., The chemistry and pharmacology of tetrahydropyridines. Curr Med Chem 2005, 12, 551-71.
+
+68.Khan, M. M.; Faiz, F. A.; Khan, M. S., Tetrahydropyridines: a recent update for their multicomponent synthesis. RSC Advances 2026, 16, 2007-2029.
+
+69.Vereshchagin, A. N.; Iliyasov, T. M.; Karpenko, K. A.; Akchurin, R. N.; Minyaev, M. E. Tetrahydropyridines’ Stereoselective Formation, How Lockdown Assisted in the Identification of the Features of Its Mechanism. Molecules, 27, 4367, 2022.
+
+70.Tekin, K.; Hao, N.; Karagoz, S.; Ragauskas, A. J., Ethanol: A Promising Green Solvent for the Deconstruction of Lignocellulose. ChemSusChem 2018, 11, 3559-3575.
+
+71.Zheng, Z.; Dai, A.; Jin, Z.; Chi, Y. R.; Wu, J., Trifluoromethylpyridine: An Important Active Fragment for the Discovery of New Pesticides. Journal of Agricultural and Food Chemistry 2022, 70, 11019-11030.
+
+72.Wang, Y.; Xu, F.; Luo, D.; Guo, S.; He, F.; Dai, A.; Song, B.; Wu, J., Synthesis of Anthranilic Diamide Derivatives Containing Moieties of Trifluoromethylpyridine and Hydrazone as Potential Anti-Viral Agents for Plants. Journal of Agricultural and Food Chemistry 2019, 67, 13344-13352.
+
+73.Ponomarenko, O. V.; Panshina, S. Y.; Bakibaev, A. A.; Erkasov, R. S.; Kenzhebaj, M. S.; Montaeva, A. S., Glycoluril and Its Chemical Properties. EURASIAN JOURNAL OF CHEMISTRY 2023, 28.
+
+74.Kravchenko, A. N.; Baranov, V. V.; Gazieva, G. A., Synthesis of glycolurils and their analogues. Russian Chemical Reviews 2018, 87, 89.
+
+75.Galochkin, A. A.; Baranov, V. V.; Hansford, K. A.; Friberg, L. I. M.; Strel'tzova, E. D.; Lipatov, E. S.; Nelyubina, Y. V.; Kravchenko, A. N., Synthesis, Structures and Antifungal Activity of Selenoglycolurils. ChemistrySelect 2023, 8, e202300765.
+
+76.Clinical and Laboratory Standards Institute. Methods for Dilution Antimicrobial Susceptibility Tests for Bacteria That Grow Aerobically. 12th ed.; CLSI standard M07; CLSI: Wayne, PA, 2024. https://clsi.org/shop/standards/m07/.
+
+
+
+77.Choung, O.-H.; Vianello, R.; Segler, M.; Stiefl, N.; Jiménez-Luna, J. Extracting medicinal chemistry intuition via preference machine learning. Nature Communications 2023, 14, 6651. https://doi.org/10.1038/s41467-023-42242-1.
+
+78.Schölkopf, B.; Locatello, F.; Bauer, S.; Ke, N. R.; Kalchbrenner, N.; Goyal, A.; Bengio, Y. Towards Causal Representation Learning. 2021. https://arxiv.org/abs/2102.11107.
+
+79.Toukach, P. V.; Arakelyan, L. A.; Egorova, K. S. ILToxDB: A Database on Cytotoxicity of Ionic Liquids. Environmental Science & Technology Letters 2025, 12, 1631–1635. https://doi.org/10.1021/acs.estlett.5c00860.

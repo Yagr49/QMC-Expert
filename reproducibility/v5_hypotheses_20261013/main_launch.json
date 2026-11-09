@@ -1,0 +1,7 @@
+{
+  "host": "yagr@100.76.26.71",
+  "python": "/home/yagr/coma_models_check_20261012/envs/baselines/bin/python",
+  "stage": "all",
+  "service": "coma-v5-hypotheses-20261013",
+  "response": "Running as unit: coma-v5-hypotheses-20261013.service; invocation ID: e099920613314fc5b618a4eebbde3d54\n"
+}

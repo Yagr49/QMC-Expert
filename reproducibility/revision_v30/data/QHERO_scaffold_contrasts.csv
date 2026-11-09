@@ -1,0 +1,9 @@
+model,reference,metric,difference,ci_low,ci_high,bootstrap_repeats,unit
+CB_human,CB_shuffled_human,AUROC,0.10808641975308653,0.03050147129405143,0.2370445574699608,2000,paired source/decoder seeds + 29 scaffold clusters; conditional on fixed OOF fits
+CB_human,CB_shuffled_human,AUPRC,0.020720691335321062,0.0024857975540339807,0.04938165633419532,2000,paired source/decoder seeds + 29 scaffold clusters; conditional on fixed OOF fits
+CB_human,CB_quantitative,AUROC,-0.04012345679012341,-0.08764393513810377,0.026941203893520255,2000,paired source/decoder seeds + 29 scaffold clusters; conditional on fixed OOF fits
+CB_human,CB_quantitative,AUPRC,-0.014403794386506186,-0.03246147859929686,0.0035550652849555228,2000,paired source/decoder seeds + 29 scaffold clusters; conditional on fixed OOF fits
+CB_human,RF_35_descriptors,AUROC,0.11043209876543214,0.026191202263430725,0.20119455709972564,2000,paired source/decoder seeds + 29 scaffold clusters; conditional on fixed OOF fits
+CB_human,RF_35_descriptors,AUPRC,0.04602641810348862,0.005518886922485192,0.08791884588204348,2000,paired source/decoder seeds + 29 scaffold clusters; conditional on fixed OOF fits
+CB_quantitative,RF_35_descriptors,AUROC,0.15055555555555555,0.05314219899341852,0.2496204410389005,2000,paired source/decoder seeds + 29 scaffold clusters; conditional on fixed OOF fits
+CB_quantitative,RF_35_descriptors,AUPRC,0.060430212489994806,0.013691489192253731,0.10752504619973022,2000,paired source/decoder seeds + 29 scaffold clusters; conditional on fixed OOF fits

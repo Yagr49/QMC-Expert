@@ -190,7 +190,7 @@ def figure8():
         ax.set_xticks(range(len(arms)))
         ax.set_xticklabels([a[1] for a in arms], fontsize=7.2, linespacing=1.05)
         ax.tick_params(axis='x', length=0, pad=3)
-        ax.set_title(title, fontsize=9.6, pad=8, color=T.INK)
+        ax.set_title(title, fontsize=10.2, pad=8, color=T.INK)
         T.panel_letter(ax, 'ab'[OOD_PANELS.index((exp, title, arms))], x=-.09, y=1.02)
         T.despine(ax)
     axes[0].set_ylabel('Mean absolute error, log$_2$(mg/L)', fontsize=8.4)
@@ -202,17 +202,181 @@ def figure8():
                           mec=T.BAR, ms=4, label='median and interquartile range'))
     fig.legend(handles=handles, loc='lower center', bbox_to_anchor=(.5, -.03), ncol=6,
                frameon=False, fontsize=7.2, handlelength=1.5, columnspacing=1.2)
-    fig.text(.01, -.055, '67 exact compound–endpoint errors per violin, averaged within runs; '
-             'dots are the individual summaries. The IT505 E. coli MBC >500 mg/L bound is excluded.',
-             fontsize=6.4, color=T.MUTED, ha='left')
     T.save(fig, OUT, 'figure8_ood_errors_futura')
 
 
+
+
+# ----------------------------------------------------------------- Figure 2
+def figure2():
+    """Archived t-SNE markers, restyled. Geometry unchanged: all 221 marker centres per
+    panel come from revision_v20/tsne_pdf_marker_coordinates.csv."""
+    T.theme()
+    from matplotlib.patches import FancyBboxPatch as FBP
+    pts = pd.read_csv(REPRO / 'revision_v20/tsne_pdf_marker_coordinates.csv')
+    assert len(pts) == 442 and (pts.groupby('panel').size() == 221).all()
+    fig = plt.figure(figsize=(180 / 25.4, 86 / 25.4), facecolor='white')
+    rects = [[.015, .16, .405, .62], [.58, .16, .405, .62]]
+    meta = [('before', 'Before contrastive learning', 'MolFormer embeddings (768-d)', '0.007', T.PEACH),
+            ('after', 'After contrastive learning', 'Guided embeddings (256-d)', '0.107', T.MINT)]
+    for rect, (panel, title, sub, sil, tint) in zip(rects, meta):
+        ax = fig.add_axes(rect); ax.set_axis_off()
+        ax.add_patch(FBP((0, 0), 1, 1, transform=ax.transAxes,
+                         boxstyle='round,pad=0,rounding_size=0.045',
+                         fc='white', ec=T.LAV['edge'], lw=1.1, clip_on=False, zorder=0))
+        inner = fig.add_axes([rect[0] + .012, rect[1] + .02, rect[2] - .024, rect[3] - .04])
+        inner.set_axis_off()
+        d = pts[pts.panel == panel]
+        for label, col, s in [('Bad', T.PEACH, 19), ('Good', T.MINT, 23)]:
+            q = d[d.label == label]
+            art = inner.scatter(q.x_pdf, q.y_pdf, s=s, c=col['fill'], edgecolors='white',
+                                linewidths=.5, zorder=3 if label == 'Bad' else 4)
+            assert np.array_equal(np.asarray(art.get_offsets()), q[['x_pdf', 'y_pdf']].to_numpy())
+        dx, dy = np.ptp(d.x_pdf), np.ptp(d.y_pdf)
+        inner.set_xlim(d.x_pdf.min() - .05 * dx, d.x_pdf.max() + .05 * dx)
+        inner.set_ylim(d.y_pdf.min() - .16 * dy, d.y_pdf.max() + .05 * dy)
+        inner.set_aspect('equal', adjustable='datalim')
+        fig.text(rect[0] + .004, rect[1] + rect[3] + .072, title, fontsize=11.5, color=T.INK, va='bottom')
+        fig.text(rect[0] + .004, rect[1] + rect[3] + .026, sub, fontsize=8.3, color=T.MUTED, va='bottom')
+        ax.text(.965, .055, f'Silhouette = {sil}', transform=ax.transAxes, ha='right', va='bottom',
+                fontsize=9, color=T.INK, zorder=6,
+                bbox=dict(boxstyle='round,pad=0.42,rounding_size=0.8', fc=tint['tint'], ec='none'))
+    handles = [Line2D([], [], marker='o', ls='', ms=6.2, mfc=T.PEACH['fill'], mec='white', mew=.5,
+                      label='Expert label: Bad'),
+               Line2D([], [], marker='o', ls='', ms=6.2, mfc=T.MINT['fill'], mec='white', mew=.5,
+                      label='Expert label: Good')]
+    fig.legend(handles=handles, loc='lower center', bbox_to_anchor=(.5, -.005), ncol=2,
+               frameon=False, fontsize=9, handletextpad=.3, columnspacing=2.2)
+    fig.text(.985, .052, 't-SNE of the held-out fold, n = 221', ha='right', va='center',
+             fontsize=7.6, color=T.MUTED)
+    T.save(fig, OUT, 'figure2_contrastive_futura')
+
+
+# ----------------------------------------------------------------- Figure 9
+def figure9():
+    """Interpretation controls, promoted from SI Figure S35. Values unchanged:
+    revision_v26/interpretation_contrasts.csv."""
+    T.theme()
+    d = pd.read_csv(REPRO / 'revision_v26/interpretation_contrasts.csv')
+    order = [('cation', 'Cation holdout'), ('scaffold', 'Scaffold holdout'), ('full-QAC105', 'OOD-17')]
+    kinds = [('Human − shuffled', T.MINT, 'Human − shuffled human'),
+             ('Reset weights − intact', T.LAV, 'Reset weights − intact')]
+    fig, axes = plt.subplots(1, 2, figsize=(180 / 25.4, 80 / 25.4), sharex=True)
+    for ai, (exp, title) in enumerate([('compact', 'Compact encoders'), ('partial', 'Partial backbone')]):
+        ax = axes[ai]
+        ticks, labels = [], []
+        y = 0
+        for scheme, sname in order:
+            for kind, col, _ in kinds:
+                r = d[(d.experiment == exp) & (d.scheme == scheme) & (d.contrast == kind)]
+                if not len(r):
+                    continue
+                r = r.iloc[0]
+                resolved = (r.low > 0) or (r.high < 0)
+                ax.plot([r.low, r.high], [y, y], lw=1.8, color=col['edge'],
+                        solid_capstyle='round', zorder=3)
+                ax.plot([r.delta], [y], 'o', ms=5.6, mfc=col['fill'] if resolved else 'white',
+                        mec=col['edge'], mew=1.3, zorder=4)
+                ticks.append(y); labels.append(f'{sname}  ·  {kind.split(" − ")[0]}')
+                y -= 1
+            y -= .45
+        ax.axvline(0, color='#C6C4CC', ls=(0, (3, 3)), lw=.9, zorder=1)
+        ax.set_yticks(ticks); ax.set_yticklabels(labels, fontsize=7.2)
+        ax.set_ylim(min(ticks) - .8, max(ticks) + .8)
+        ax.set_xlabel('ΔRMSE, log$_2$(mg/L)', fontsize=8.4)
+        ax.set_title(title, fontsize=9.6, pad=8, color=T.INK)
+        T.panel_letter(ax, 'ab'[ai], x=-.52 if ai == 0 else -.52, y=1.02)
+        T.despine(ax, grid='x')
+    handles = [Line2D([], [], marker='o', ls='-', lw=1.8, color=c['edge'], mfc=c['fill'],
+                      mec=c['edge'], ms=5.6, label=lab) for _, c, lab in kinds]
+    handles.append(Line2D([], [], marker='o', ls='', mfc='white', mec=T.MUTED, mew=1.3, ms=5.6,
+                          label='interval includes zero'))
+    fig.legend(handles=handles, loc='lower center', bbox_to_anchor=(.5, -.06), ncol=3,
+               frameon=False, fontsize=7.4, handlelength=1.8, columnspacing=1.8)
+    T.save(fig, OUT, 'figure9_interpretation_controls_futura')
+
+
+# ----------------------------------------------------------------- Figure 10
+COMPACT_ROWS = [('human minus mic_continuous', 'Human − quantitative', T.LAV),
+                ('human minus human_shuffled', 'Human − shuffled human', T.PEACH),
+                ('human minus matched_raw', 'Human − raw MolFormer', T.GREY)]
+BACKBONE_ROWS = [('real_vs_shuffled', 'expert/intact', 'expert-shuffled/intact',
+                  'Human − shuffled human', T.PEACH),
+                 ('source_vs_pure_raw', 'expert/intact', 'raw-molformer/raw',
+                  'Human − raw MolFormer', T.GREY)]
+EVALS = [('cation', 'cation', 'Cation holdout'), ('scaffold', 'scaffold', 'Scaffold holdout'),
+         ('full-QAC105', 'cation', 'OOD-17')]
+
+
+def figure10():
+    """Every supervision contrast with its bootstrap interval, on one axis.
+
+    Compact encoders: revision_v18/analysis/contrasts.csv, clustering unit matched to the
+    holdout scheme (OOD-17 uses cation clustering, as in the source file).
+    Partial backbone: revision_v16/analysis/paired_bootstrap.csv, the frozen-source
+    (/intact) family, grouping matched the same way. The backbone human-minus-quantitative
+    contrast exists only for the directly fine-tuned variant and is not shown here.
+    """
+    T.theme()
+    comp = pd.read_csv(REPRO / 'revision_v18/analysis/contrasts.csv')
+    back = pd.read_csv(REPRO / 'revision_v16/analysis/paired_bootstrap.csv')
+    fig, axes = plt.subplots(1, 2, figsize=(180 / 25.4, 84 / 25.4), sharex=True,
+                             gridspec_kw={'width_ratios': [1, 1]})
+    for ai, (ax, title) in enumerate(zip(axes, ['Compact encoders', 'Partial backbone'])):
+        ticks, labels = [], []
+        y = 0
+        rows = COMPACT_ROWS if ai == 0 else BACKBONE_ROWS
+        for schema, unit, ename in EVALS:
+            for row in rows:
+                if ai == 0:
+                    key, lab, col = row
+                    r = comp[(comp.comparison == key) & (comp.schema == schema) & (comp.unit == unit)]
+                    if not len(r):
+                        continue
+                    r = r.iloc[0]; delta, lo, hi = r.delta_RMSE, r.ci_low, r.ci_high
+                else:
+                    key, a, b, lab, col = row
+                    r = back[(back.contrast == key) & (back.a == a) & (back.b == b)
+                             & (back.schema == schema) & (back.grouping == unit)]
+                    if not len(r):
+                        continue
+                    r = r.iloc[0]; delta, lo, hi = r.delta_RMSE_a_minus_b, r.low, r.high
+                resolved = (lo > 0) or (hi < 0)
+                ax.plot([lo, hi], [y, y], lw=1.8, color=col['edge'], solid_capstyle='round', zorder=3)
+                ax.plot([delta], [y], 'o', ms=5.6, mfc=col['fill'] if resolved else 'white',
+                        mec=col['edge'], mew=1.3, zorder=4)
+                ticks.append(y); labels.append(f'{ename}  ·  {lab.split(" − ")[1]}')
+                y -= 1
+            y -= .45
+        ax.axvline(0, color='#C6C4CC', ls=(0, (3, 3)), lw=.9, zorder=1)
+        ax.set_yticks(ticks); ax.set_yticklabels(labels, fontsize=7.0)
+        ax.set_ylim(min(ticks) - .8, max(ticks) + .8)
+        ax.set_xlabel('ΔRMSE, log$_2$(mg/L)', fontsize=8.4)
+        ax.set_title(title, fontsize=9.6, pad=8, color=T.INK)
+        if ai == 1:                      # keep panel b's labels clear of panel a
+            ax.yaxis.tick_right()
+            ax.tick_params(axis='y', length=0, pad=4)
+        T.panel_letter(ax, 'ab'[ai], x=-.62 if ai == 0 else -.03, y=1.02)
+        T.despine(ax, grid='x')
+        ax.spines['right'].set_visible(False)
+    for ax in axes:
+        ax.text(.02, .015, '\u2039 human lower error', transform=ax.transAxes,
+                fontsize=6.8, color=T.MINT['text'], va='bottom')
+        ax.text(.98, .015, 'comparator lower error \u203a', transform=ax.transAxes,
+                fontsize=6.8, color=T.MUTED, ha='right', va='bottom')
+    handles = [Line2D([], [], marker='o', ls='-', lw=1.8, color=c['edge'], mfc=c['fill'],
+                      mec=c['edge'], ms=5.6, label=lab)
+               for _, lab, c in COMPACT_ROWS]
+    handles.append(Line2D([], [], marker='o', ls='', mfc='white', mec=T.MUTED, mew=1.3, ms=5.6,
+                          label='interval includes zero'))
+    fig.legend(handles=handles, loc='lower center', bbox_to_anchor=(.5, -.07), ncol=4,
+               frameon=False, fontsize=7.4, handlelength=1.8, columnspacing=1.6)
+    T.save(fig, OUT, 'figure10_supervision_contrasts_futura')
+
+
 if __name__ == '__main__':
-    want = sys.argv[1:] or ['1', '6', '8']
-    if '1' in want:
-        figure1()
-    if '6' in want:
-        figure6()
-    if '8' in want:
-        figure8()
+    want = sys.argv[1:] or ['1', '2', '6', '8', '9', '10']
+    for k, fn in [('1', figure1), ('2', figure2), ('6', figure6),
+                  ('8', figure8), ('9', figure9), ('10', figure10)]:
+        if k in want:
+            fn()

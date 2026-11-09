@@ -1,0 +1,75 @@
+{
+  "model": "tabfm",
+  "started": 1791813666.681143,
+  "completed": true,
+  "python": "3.12.13",
+  "packages": {
+    "numpy": "2.2.0",
+    "pandas": "2.2.3",
+    "scipy": "1.17.1",
+    "scikit-learn": "1.6.0",
+    "rdkit": "2026.3.6",
+    "tabfm": "1.0.1",
+    "jax": "0.10.1",
+    "flax": "0.12.7"
+  },
+  "smoke": false,
+  "script_sha256": "201176cb299627ff78ecaad834ce82b94df0759d4481a369566239537bd48c32",
+  "protocol_sha256": "de8915b2aa6674902e3e0719b7be57491284316a3478d3d8e174a3359fc2ec1a",
+  "input_sha256": {
+    "/home/yagr/coma_revision_v14_20261011/data/endpoint_registry.csv": "8dc37da0240f9de1294d233542de4f4f7c179f2c080c39a5ef5dd4617dd4d129",
+    "/home/yagr/coma_revision_v14_20261011/scaffold_sensitivity/data/endpoint_registry.csv": "56a084f809df9cd96276cca71393fba98bf84235858219920196fb34ce310d93",
+    "/home/yagr/coma_revision_v14_20261011/representations/raw-molformer_QAC105.npy": "6529575f14764fc446c7e5f690624a60d5838ef0eebaef5028a68d3d8adede75",
+    "/home/yagr/coma_revision_v14_20261011/representations/raw-molformer_OOD17.npy": "af4d569379c1d89050b890c75413eb9a2ad8ae261f8e8134a5d4dbb6a458030c",
+    "/home/yagr/coma_revision_v14_20261011/representations/expert_seed0_QAC105.npy": "61f639a3799731398d25a521bd6dd0bd821a6995bb2c47e281e685883c797d84",
+    "/home/yagr/coma_revision_v14_20261011/representations/expert_seed0_OOD17.npy": "9b4b8d61eb53100935ef338cbc15249d832a4e043bbcad361c3aab9a767227ef",
+    "/home/yagr/coma_revision_v14_20261011/representations/quant-continuous_seed0_QAC105.npy": "b420c6c79b398d58836a9632c740645c4c8da00943b3ef93bea7f30bfd584d46",
+    "/home/yagr/coma_revision_v14_20261011/representations/quant-continuous_seed0_OOD17.npy": "8280840d0efb7765dfe95e8b02cc33a3fc4c1e6dc82d75bf1b7f4ac82da9c558",
+    "/home/yagr/coma_revision_v14_20261011/representations/quant-binary_seed0_QAC105.npy": "7946d70c56d8af95d5816e2d35f83bade1f42a360931446cff826994d1ec7599",
+    "/home/yagr/coma_revision_v14_20261011/representations/quant-binary_seed0_OOD17.npy": "d90175621c77499d7f73a415c3eb6ca13d81ba6d44ce24c46006adc80efb9fdc"
+  },
+  "target": "log2(mg/L)",
+  "OOD_exact_n": 67,
+  "OOD_censored_n": 1,
+  "source_seed": 0,
+  "external_inference_API": false,
+  "finished": 1791816602.928914,
+  "errors": [],
+  "fits": 220,
+  "model_identity": {
+    "tabfm_identity": {
+      "backend": "jax-cpu",
+      "constructor": {
+        "n_estimators": 4,
+        "random_state": 1729
+      },
+      "estimator_parameters": {
+        "batch_size": "1",
+        "cache_context": "False",
+        "cat_encoder_mode": "appearance",
+        "enable_nnls": "False",
+        "feat_shuffle_method": "random",
+        "keep_cache_on_device": "True",
+        "max_num_features": "500",
+        "max_num_rows": "None",
+        "maybe_quantize_kv_cache": "True",
+        "min_rows_for_single_val_split": "2000",
+        "n_estimators": "4",
+        "n_feature_crosses": "0",
+        "n_svd_features": "0",
+        "nnls_beta": "0.75",
+        "norm_methods": "None",
+        "num_folds_for_cv": "5",
+        "outlier_threshold": "4.0",
+        "permute_categorical": "False",
+        "random_state": "1729",
+        "total_svd_pool": "None",
+        "use_amp": "True",
+        "verbose": "False"
+      },
+      "checkpoint_snapshots": [
+        "/home/yagr/coma_models_check_20261012/runtime/hf/hub/models--google--tabfm-1.0.0-jax/snapshots/d5e74033fcf257699fab013e2cdd7edf424ff904"
+      ]
+    }
+  }
+}

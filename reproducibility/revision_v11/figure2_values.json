@@ -1,0 +1,26 @@
+{
+  "raw_R2": 0.13371274838578676,
+  "sources": [
+    {
+      "source": "expert-binary",
+      "downstream_R2": 0.2687716868018214,
+      "downstream_seed_sd": 0.020167970079862173,
+      "direct_rank": 0.3966983542077022,
+      "direct_seed_sd": 0.049720211239097825
+    },
+    {
+      "source": "quant-molecule",
+      "downstream_R2": 0.311924588783553,
+      "downstream_seed_sd": 0.06361078051739318,
+      "direct_rank": 0.5467212745866429,
+      "direct_seed_sd": 0.07127760870146573
+    },
+    {
+      "source": "quant-record",
+      "downstream_R2": 0.30793549735373826,
+      "downstream_seed_sd": 0.025930123713283206,
+      "direct_rank": 0.6119016778972264,
+      "direct_seed_sd": 0.029627432184033273
+    }
+  ]
+}

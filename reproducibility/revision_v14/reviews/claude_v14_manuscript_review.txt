@@ -1,0 +1,36 @@
+## Scientific Critique: manuscript_v14_readable.md
+
+### 1. Post-hoc Cohort Selection — Inadequately Disclosed
+
+The manuscript acknowledges in Section 4.4 that "the QAC-105/OOD-17 narrative was selected after inspecting earlier results." This is a material post-hoc decision that affects every primary claim. The disclosure is buried in the methods and absent from the Abstract and Introduction. The 17-compound OOD set and its four scaffold families were retained after inspection of earlier Q-HERO outcomes; the manuscript does not state whether alternative OOD families were considered and rejected, nor whether the scaffold-held-out sensitivity was designed before or after observing cation-held-out results. Minimum fix: move the exploratory-selection statement to the Abstract and Introduction, and provide a chronological design log distinguishing decisions made before versus after observing any target-cohort predictions.
+
+### 2. Asymmetric Comparator Provenance
+
+The matched-source arms (expert, quant-continuous, quant-binary, shuffled controls) correctly exclude all target cations from representation learning. The legacy arms (legacy-human, legacy-quantitative, legacy-raw) used encoders trained on archives that overlap the original 105 target structures. These two provenance classes are mixed in summary.csv and appear together in figures without consistent visual separation. A reader comparing legacy-raw (QAC105 pooled RMSE 1.905) with matched raw-molformer (1.858) will attribute the difference to architecture rather than data leakage. Fix: restrict all primary narrative comparisons to matched-source-excluded arms; relegate legacy arms entirely to supplementary material with an explicit leakage warning.
+
+### 3. Shuffled-Control Asymmetry Undermines the Core Claim
+
+The manuscript's central claim rests on human-minus-shuffled-human ΔRMSE = −0.120 [−0.217, −0.043] on QAC-105. However, the analogous quant-continuous-minus-quant-shuffled contrast is −0.157 [−0.242, −0.086] (contrasts.csv, QAC105 pooled), which is larger in magnitude and has a tighter interval. Binary MIC minus its shuffled control is −0.083 [−0.231, +0.046], overlapping zero. The manuscript does not discuss this asymmetry. If shuffled-label improvement is the criterion for "real signal," continuous MIC passes it more convincingly than human labels, which undermines the framing that human supervision is distinctively useful. Fix: report all three real-versus-shuffled contrasts side by side and acknowledge that the human advantage over shuffled labels is not larger than the continuous-MIC advantage.
+
+### 4. Text Embedding Claims Inconsistent with Data
+
+The manuscript states "fixed text embeddings provide no consistently resolved advantage over one-hot encoding." The contrasts.csv confirms this for QAC-105 pooled (text minus one-hot: expert = −0.015 [−0.051, +0.024]). However, for OOD-17 the raw-molformer text-minus-one-hot contrast for E. coli MBC is −0.311 [−0.658, −0.076], a nominally significant improvement, while for S. aureus MBC it is +0.123 [+0.055, +0.228], a nominally significant degradation. These endpoint-specific reversals are not discussed. Claiming uniform null results while selective endpoint contrasts reach nominal significance is misleading. Fix: report all endpoint-specific text-versus-one-hot contrasts explicitly and acknowledge the directional inconsistency.
+
+### 5. OOD Interval Interpretation Overstated
+
+The pooled OOD human-minus-continuous ΔRMSE = −0.183 [−0.415, −0.004] is presented as supporting human superiority. With only four scaffold groups, the bootstrap resamples those same four groups with replacement; the interval is entirely determined by which of the four families dominates each draw. The E. coli MIC contrast alone is −0.375 [−0.757, −0.008] (contrasts.csv), while S. aureus MIC is +0.016 [−0.212, +0.297] and S. aureus MBC is −0.053 [−0.257, +0.138]. The pooled interval's lower bound barely clears zero because one endpoint (E. coli MIC) drives it. This is not disclosed. Fix: present the four endpoint-specific OOD contrasts as the primary OOD evidence; the pooled interval should be demoted to a summary statistic with explicit acknowledgment that it is dominated by a single endpoint.
+
+### 6. Censored Endpoint Handling
+
+IT505 E. coli MBC is reported as >500 mg/L and excluded from exact-value metrics. All five human-guided predictions for this compound fall between 21–37 mg/L, an extrapolation failure of >3.7 log₂ units. The manuscript notes this but does not propagate it into any interval or sensitivity analysis. A right-censored observation at >500 mg/L provides a lower bound on error; excluding it from RMSE systematically underestimates OOD error for the human arm. Fix: include a censored-RMSE sensitivity using the bound as a minimum error contribution, or at minimum report the implied minimum absolute error for IT505 alongside the main OOD table.
+
+### 7. Annotation Provenance Gaps (H1–H7)
+
+Seven coauthor placeholders covering annotator identity, selection criteria, information visible during annotation, adjudication, and inter-rater agreement remain unfilled. Whether annotators saw the MIC/MBC values subsequently used as quantitative supervision (H4) is the single most important confound: if they did, the human-versus-continuous-MIC comparison is not a supervision-type comparison but a label-transformation comparison. This must be resolved before any claim about human annotation as an independent supervisory signal can stand. Fix: complete H4 at minimum before submission; if annotators saw numerical measurements, reframe all human-versus-quantitative comparisons accordingly.
+
+### 8. Minor but Concrete Issues
+
+- **Corresponding author placeholder** remains in the author block.
+- **Data availability DOI** (10.5281/zenodo.22286669) is unverified per D1/D2 placeholders; citing an unconfirmed DOI violates journal policy.
+- **Pooled R²** in summary.csv (e.g., expert onehot QAC105 pooled R² = 0.388) conflates endpoint variances and should not appear in any primary table; the manuscript correctly warns against it but the CSV retains it without suppression.
+- **S. aureus MBC scaffold-held-out R² = −0.017** for human supervision indicates predictions worse than the task mean; this is mentioned once but not discussed in terms of what structural features drive the failure.

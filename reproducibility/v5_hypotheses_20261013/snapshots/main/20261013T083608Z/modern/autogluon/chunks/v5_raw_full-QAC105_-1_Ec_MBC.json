@@ -1,0 +1,19 @@
+{
+  "rep": "v5_raw",
+  "schema": "full-QAC105",
+  "fold": -1,
+  "task": "Ec_MBC",
+  "completed": true,
+  "n_train": 105,
+  "n_test": 17,
+  "seconds": 115.47882413864136,
+  "model": "autogluon",
+  "info": {
+    "inner_train_n": 84,
+    "inner_val_n": 21,
+    "selected_model": "LightGBM",
+    "refitted_model": "LightGBM_FULL",
+    "selection_budget_s": 60,
+    "refit_extra_budget": true
+  }
+}
